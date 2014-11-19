@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_zscq" Class="DataOrderDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=122.115.63.123,1473;Initial Catalog=db_zscq;Persist Security Info=True;User ID=zscq" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.t_OrderOperateInfos" Member="t_OrderOperateInfos">
+    <Type Name="t_OrderOperateInfos">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Info_1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Info_2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Info_3" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Info_4" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="t_Orders_t_OrderOperateInfos" Member="t_Orders" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_Orders" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Orders" Member="t_Orders">
+    <Type Name="t_Orders">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dm_SumMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_PSMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_CouponMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_IntegralMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_MemberDiscountMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_PromotionMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_PayWay" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_PSWay" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_PSTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_PayStyle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_PayTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="i_AddressId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Address_Consignee" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_Address_PId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_CId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_AId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Address_StreetAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Address_ZipCode" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="nvc_Address_MobilePhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Address_TelPhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Address_Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="i_Invoice" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_InvoiceType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_InvoiceTitle" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Remarks" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_DealerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_AdminServer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_FOrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SOrderNumber" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_CouponRebateRules" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_RebateIntegral" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_RebatePlease" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_OrderType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Zengpin" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Association Name="t_Orders_t_OrderOperateInfos" Member="t_OrderOperateInfos" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_OrderOperateInfos" />
+      <Association Name="t_Orders_t_OrderDetails" Member="t_OrderDetails" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_OrderDetails" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ReturnGoods" Member="t_ReturnGoods">
+    <Type Name="t_ReturnGoods">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_DetailsId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Reason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_OrderDetails" Member="t_OrderDetails">
+    <Type Name="t_OrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Comment" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Integral" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Suoju" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_GuigeValue" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_GuigeContent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Orders_t_OrderDetails" Member="t_Orders" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_Orders" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_IntegralOrderDetails" Member="t_IntegralOrderDetails">
+    <Type Name="t_IntegralOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_IntegralOrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_IntegralProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_BuyNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Integral" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_IntegralProductType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_IntegralMobileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_IntegralOrder_t_IntegralOrderDetails" Member="t_IntegralOrder" ThisKey="i_IntegralOrderId" OtherKey="i_Id" Type="t_IntegralOrder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_IntegralOrderOperateNote" Member="t_IntegralOrderOperateNote">
+    <Type Name="t_IntegralOrderOperateNote">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="t_IntegralOrder_t_IntegralOrderOperateNote" Member="t_IntegralOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_IntegralOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_IntegralOrder" Member="t_IntegralOrder">
+    <Type Name="t_IntegralOrder">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="i_SumIntegral" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_PSWay" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_IntegralProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_BuyNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_AddressId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Address_Consignee" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_Address_GId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_PId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_CId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_AId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Address_StreetAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Address_ZipCode" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="nvc_Address_MobilePhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Address_TelPhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Address_Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="i_IntegralMobileId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_IntegralOrder_t_IntegralOrderDetails" Member="t_IntegralOrderDetails" ThisKey="i_Id" OtherKey="i_IntegralOrderId" Type="t_IntegralOrderDetails" />
+      <Association Name="t_IntegralOrder_t_IntegralOrderOperateNote" Member="t_IntegralOrderOperateNote" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_IntegralOrderOperateNote" />
+    </Type>
+  </Table>
+  <Function Name="dbo.pro_IntegralOrder_Delete" Method="pro_IntegralOrder_Delete">
+    <Parameter Name="i_Id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pro_IntegralOrder_Delete" Method="pro_IntegralOrder_Delete1">
+    <Parameter Name="i_Id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

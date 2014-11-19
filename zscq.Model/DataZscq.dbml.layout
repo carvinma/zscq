@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12, 9.5" name="DataZscq">
+  <DataContextMoniker Name="/DataZscqDataContext" />
+  <nestedChildShapes>
+    <classShape Id="57d52f7e-0cce-4ec1-8059-a2c3d6bf3c50" isExpanded="false" absoluteBounds="6.75, 0.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_PatentOperateNote" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0940783e-1dfe-4295-a3ef-55bc1c513f1a" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.2255859375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ec99e42c-8440-45e3-b929-b00575443393" isExpanded="false" absoluteBounds="6.75, 2.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_IntegralNote" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9b0045b-a9db-42bf-a29f-87972e2be294" absoluteBounds="6.7650000000000006, 3.2100000000000009, 1.9700000000000002, 1.2255859375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d0149fec-7578-465b-99be-01ecec4311ee" isExpanded="false" absoluteBounds="3.5, 2.125, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_TrademarkOrderOperateInfos" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9e7faab6-ffe0-4cd1-8f6c-7c918a334fc1" absoluteBounds="3.5150000005960464, 2.5850000008940697, 1.9700000000000002, 1.2255859375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0a004b0b-24dc-4b51-99e6-afc55dfeaf3b" isExpanded="false" absoluteBounds="6.75, 4.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_PatentYear" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3d166d41-472f-495c-9aba-d3196eb189a6" absoluteBounds="6.765, 5.2100000000000009, 1.9700000000000002, 0.7197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="400fdd0e-a67e-4a42-92ea-0ea789a2a791" isExpanded="false" absoluteBounds="6.75, 6.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_TradeMarkSetup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="df68eaa7-602c-4f48-b66e-0c6af3c83b5a" absoluteBounds="6.7650000000000006, 7.2100000000000009, 1.9700000000000002, 1.0569661458333333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4b4f7df3-97de-4dca-9429-f0c14e809232" isExpanded="false" absoluteBounds="0.75, 7.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_DataOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5b882c34-c0a4-40d2-9ef5-b8a2368e8306" absoluteBounds="0.76500000000000057, 8.21, 1.9700000000000002, 2.2373046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e47a38ee-6e7d-4e71-9a0e-82638c0ee479" isExpanded="false" absoluteBounds="0.75, 5.875, 2, 0.44999999925494194">
+      <DataClassMoniker Name="/DataZscqDataContext/t_PatentType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="20064dad-d25d-4b9e-81ab-23b5a721079e" absoluteBounds="0.76500000059604645, 6.33500000089407, 1.9700000000000002, 2.574544270833333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="931744fb-b84e-482a-95ad-6fcd41836e3f" isExpanded="false" absoluteBounds="3.5, 5.875, 2, 0.44999999925494194">
+      <DataClassMoniker Name="/DataZscqDataContext/t_PatentFee" />
+      <nestedChildShapes>
+        <elementListCompartment Id="01c6cf0c-4bc6-4988-8f40-459b6d80faef" absoluteBounds="3.5150000005960464, 6.33500000089407, 1.9700000000000002, 3.4176432291666665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 6.09999999962747); (3.5 : 6.09999999962747)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataZscqDataContext/t_PatentType/t_PatentType_t_PatentFee" />
+      <nodes>
+        <classShapeMoniker Id="e47a38ee-6e7d-4e71-9a0e-82638c0ee479" />
+        <classShapeMoniker Id="931744fb-b84e-482a-95ad-6fcd41836e3f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e1e64bd5-c7f4-41f3-a988-c8403cf51e2e" isExpanded="false" absoluteBounds="3.75, 8.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_IntegralMobile" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9e1fadac-58aa-445f-9d89-3ae649d6e3c3" absoluteBounds="3.7650000000000006, 9.21, 1.9700000000000002, 1.3942057291666665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="338aa9c6-504f-4f57-a4cc-74fd7e95344b" isExpanded="false" absoluteBounds="6.75, 8.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_IntegralProduct" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bd18a458-0709-40d0-bf50-410aa1ec08cc" absoluteBounds="6.7650000000000006, 9.21, 1.9700000000000002, 3.7548828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="adad0b51-b87a-4963-9237-2a4c44a02ba1" isExpanded="false" absoluteBounds="9.75, 0.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_Patent" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6e31fda2-a227-4c2e-bc87-92f8728c9c87" absoluteBounds="9.765, 1.2100000000000009, 1.9700000000000002, 9.3193359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="02a15ad9-dd14-406e-9c5a-cc9e344f9d8c" isExpanded="false" absoluteBounds="9.75, 2.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_Bank" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d3287277-4d58-4993-8567-6cc7ecc3d266" absoluteBounds="9.765, 3.21, 1.9700000000000002, 1.7314453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1d6363a3-92d6-4abd-a937-5656c6c48b49" isExpanded="false" absoluteBounds="0.75, 3.875, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_PatentOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c7487453-dcab-477e-81a6-0f745a00c96e" absoluteBounds="0.76500000059604645, 4.33500000089407, 1.9700000000000002, 5.2724609375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="98372114-6e6e-4add-b476-861356123055" isExpanded="false" absoluteBounds="3.5, 0.875, 2, 0.45000000000000018">
+      <DataClassMoniker Name="/DataZscqDataContext/t_TrademarkOrderDetails" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9fe75b10-4bdf-4c58-b539-9feeae22809d" absoluteBounds="3.5150000005960464, 1.3350000008940697, 1.9700000000000002, 1.9000651041666665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f1dd5422-6b1b-438f-81da-e67cdd5537fd" isExpanded="false" absoluteBounds="9.75, 4.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_Nationality" />
+      <nestedChildShapes>
+        <elementListCompartment Id="71f577d5-d48e-4d90-b08d-0323e0ae67a6" absoluteBounds="9.765, 5.21, 1.9700000000000002, 3.2490234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="24851d65-4432-4da3-a511-6e097dca5941" isExpanded="false" absoluteBounds="0.75, 1.5, 2, 0.45000000000000018">
+      <DataClassMoniker Name="/DataZscqDataContext/t_TrademarkOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d096d213-1963-4ac8-8526-27b1efa99adf" absoluteBounds="0.76500000059604645, 1.9600000008940697, 1.9700000000000002, 5.9469401041666661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75000000159655 : 1.95); (3.49999999840345 : 2.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataZscqDataContext/t_TrademarkOrder/t_TrademarkOrder_t_TrademarkOrderOperateInfos" />
+      <nodes>
+        <classShapeMoniker Id="24851d65-4432-4da3-a511-6e097dca5941" />
+        <classShapeMoniker Id="d0149fec-7578-465b-99be-01ecec4311ee" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75000000159655 : 1.5); (3.49999999840345 : 1.325)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataZscqDataContext/t_TrademarkOrder/t_TrademarkOrder_t_TrademarkOrderDetails" />
+      <nodes>
+        <classShapeMoniker Id="24851d65-4432-4da3-a511-6e097dca5941" />
+        <classShapeMoniker Id="98372114-6e6e-4add-b476-861356123055" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="695e4914-aa0a-4b24-a0a5-a2f0bc70812a" isExpanded="false" absoluteBounds="9.75, 6.75, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_Trademark" />
+      <nestedChildShapes>
+        <elementListCompartment Id="168cb392-a321-426b-809e-d0cf61234d81" absoluteBounds="9.765, 7.21, 1.9700000000000002, 8.4762369791666661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a7f603c0-340c-4ca1-a683-5fec82ab6278" isExpanded="false" absoluteBounds="3.5, 3.875, 2, 0.44999999999999929">
+      <DataClassMoniker Name="/DataZscqDataContext/t_PatentOrderInfo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="781ba1f4-4b64-4d07-95f1-0a01569456a6" absoluteBounds="3.5149999999999997, 4.335, 1.9700000000000002, 4.2607421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.1); (3.5 : 4.1)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DataZscqDataContext/t_PatentOrder/t_PatentOrder_t_PatentOrderInfo" />
+      <nodes>
+        <classShapeMoniker Id="1d6363a3-92d6-4abd-a937-5656c6c48b49" />
+        <classShapeMoniker Id="a7f603c0-340c-4ca1-a683-5fec82ab6278" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

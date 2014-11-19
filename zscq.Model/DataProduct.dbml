@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_dskl" Class="DataProductDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=122.115.63.123,1473;Initial Catalog=db_zscq;Persist Security Info=True;User ID=zscq" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.t_Advisory" Member="t_Advisory">
+    <Type Name="t_Advisory">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_AdvisoryContent" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Type" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="i_Replay" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_ReplayContent" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_ReplayTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_GroupBuy" Member="t_GroupBuy">
+    <Type Name="t_GroupBuy">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_GroupBuyType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Head" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_Product" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_LockStock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_ShopPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Min" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Buys" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Orderby" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_BeginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dt_EndTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="i_Show" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Recommend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_RecommendPic" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Pic" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_JJ" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nvc_PageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_PageKeywords" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_PageDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Matching" Member="t_Matching">
+    <Type Name="t_Matching">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_MatchingId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_BrandAdv" Member="t_BrandAdv">
+    <Type Name="t_BrandAdv">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_BrandId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_LinkAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_ImgAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_OrderbyNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ProductGuige" Member="t_ProductGuige">
+    <Type Name="t_ProductGuige">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Orderby" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ProductCategory" Member="t_ProductCategory">
+    <Type Name="t_ProductCategory">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Parent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Orderby" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Recommend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_PageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_PageKeywords" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_PageDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_Floor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_FirstCategory" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_CategoryLevel" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ProductType" Member="t_ProductType">
+    <Type Name="t_ProductType">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_GuigeType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ProductGuigeType" Member="t_ProductGuigeType">
+    <Type Name="t_ProductGuigeType">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Remarks" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Agent" Member="t_Agent">
+    <Type Name="t_Agent">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_PId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_CId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_AId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_DetailedAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_ContactName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_EMail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nt_OtherInfo" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="nvc_NameHead" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ProductGuigeContent" Member="t_ProductGuigeContent">
+    <Type Name="t_ProductGuigeContent">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductGuigeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Picmain" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="nvc_Pics" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ProductScreening" Member="t_ProductScreening">
+    <Type Name="t_ProductScreening">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_OrderbyNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Recommend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ProductAttribute" Member="t_ProductAttribute">
+    <Type Name="t_ProductAttribute">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Value" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ProductGuigeValue" Member="t_ProductGuigeValue">
+    <Type Name="t_ProductGuigeValue">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Guige1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Guige2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Guige3" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Stock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_LockStock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_StockChangeNote" Member="t_StockChangeNote">
+    <Type Name="t_StockChangeNote">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_FromProductName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="i_FromProductId" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="i_Stock_2" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Stock_3" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_FromPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_FromTotalPrice" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="nvc_FromOrderNumber" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="dt_FromTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_FromStoreName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_GetTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="i_FromSupplierId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nvc_FromSupplierName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Agent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_ChangeTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Info_1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Info_2" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Info_3" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_StoreRoom" Member="t_StoreRoom">
+    <Type Name="t_StoreRoom">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_No" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_PurchaseOrder" Member="t_PurchaseOrder">
+    <Type Name="t_PurchaseOrder">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_StoreRoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_SupplierId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_SupplierPhone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SupplierFax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SupplierLinkMan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_PayWay" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_PSWay" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Address" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_OrderRemark" Type="System.String" DbType="NVarChar(249)" CanBeNull="true" />
+      <Column Name="dt_GoodsTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot1Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot1Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot2Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot2Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot3Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot3Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot4Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot4Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="i_BuySum" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalDPrice" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="i_OrderType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_StockTyle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_InStockNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="t_PurchaseOrder_t_PurchaseOrderDetails" Member="t_PurchaseOrderDetails" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_PurchaseOrderDetails" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_MemberReturnGoodsOrderDetails" Member="t_ERP_MemberReturnGoodsOrderDetails">
+    <Type Name="t_ERP_MemberReturnGoodsOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_MemberReturnGoodsOrder" Member="t_ERP_MemberReturnGoodsOrder">
+    <Type Name="t_ERP_MemberReturnGoodsOrder">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_StoreRoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Address_Consignee" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_Address_PId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_CId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_AId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Address_StreetAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Address_MobilePhone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_ReturnReason" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="i_SumNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_SumMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Foot1Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot1Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot2Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot2Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot3Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot3Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot4Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot4Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_InStockNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_SupplierReturnGoodsOrder" Member="t_ERP_SupplierReturnGoodsOrder">
+    <Type Name="t_ERP_SupplierReturnGoodsOrder">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_StoreRoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_SupplierId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_SupplierPhone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SupplierFax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SupplierLinkMan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_PayWay" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_PSWay" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Address" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_SumNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_SumMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot1Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot1Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot2Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot2Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot3Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot3Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot4Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot4Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_OutStockNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_MobilizeOrder" Member="t_ERP_MobilizeOrder">
+    <Type Name="t_ERP_MobilizeOrder">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_OutStoreRoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_InStoreRoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_MobilizeReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_SumNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_SumMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot1Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot1Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot2Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot2Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot3Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot3Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot4Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot4Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_OutStockNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_InStockNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_LossOrder" Member="t_ERP_LossOrder">
+    <Type Name="t_ERP_LossOrder">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_StoreRoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_LossReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_SumNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_SumMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot1Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot1Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot2Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot2Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot3Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot3Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot4Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot4Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_OutStockNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_CheckOrderDetails" Member="t_ERP_CheckOrderDetails">
+    <Type Name="t_ERP_CheckOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Stock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_CheckStock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Reason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_CheckOrder" Member="t_ERP_CheckOrder">
+    <Type Name="t_ERP_CheckOrder">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_StoreRoomId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_SumNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_SumMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot1Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot1Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Foot2Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot2Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot3Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot3Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Foot4Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dt_Foot4Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_SalesRules" Member="t_SalesRules">
+    <Type Name="t_SalesRules">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_Scope" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nt_SId" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_BuyType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_BuyMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_SubType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_SubMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dt_BeginTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dt_EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_Zengpin" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Product" Member="t_Product">
+    <Type Name="t_Product">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="nvc_No" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_StyleNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dm_Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_ShopPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_CostPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Category" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_BrandId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Buys" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Views" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Collections" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Show" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_New" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_TJ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Hot" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Like" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Recommend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Jifen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Promotion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_PromotionPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dt_PromotionBeginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="dt_PromotionEndTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_PromotionPic" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_Activity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nt_ProducParam" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="nt_ProductDetails" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="nvc_Picmain" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="nvc_Pics" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nvc_PageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_PageKeywords" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_PageDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="i_Stock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_LockStock" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_StockWarning" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Supplier" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_ProductAttribute" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nvc_TNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_JNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_XiangGui" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Categorystr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="i_Zengpin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_ProductGuige" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Comment" Member="t_Comment">
+    <Type Name="t_Comment">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_CommentContent" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_YouDian" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="nvc_QueDian" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="nvc_BigPic" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="nvc_SmallPic" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Fraction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_PurchaseOrderDetails" Member="t_PurchaseOrderDetails">
+    <Type Name="t_PurchaseOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_CostPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_SNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_PurchaseOrder_t_PurchaseOrderDetails" Member="t_PurchaseOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_PurchaseOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_LossOrderDetails" Member="t_ERP_LossOrderDetails">
+    <Type Name="t_ERP_LossOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_SNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_SupplierReturnGoodsOrderDetails" Member="t_ERP_SupplierReturnGoodsOrderDetails">
+    <Type Name="t_ERP_SupplierReturnGoodsOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_SNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_ERP_MobilizeOrderDetails" Member="t_ERP_MobilizeOrderDetails">
+    <Type Name="t_ERP_MobilizeOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_ProductId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalPrice" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_OutSNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_InSNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Brand" Member="t_Brand">
+    <Type Name="t_Brand">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Logo" Type="System.String" DbType="NVarChar(300)" CanBeNull="true" />
+      <Column Name="nvc_Scope" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_ProductCategory" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_Infomation" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="i_SupplierId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Orderby" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Recommend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_PageTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_PageKeywords" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="nvc_PageDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_Floor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_BrandType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_Webrecommend" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
