@@ -1,0 +1,171 @@
+<table id="DataList1" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;">
+	<tr>
+		<td>
+        <table border="0"; cellspacing='1' cellpadding='3' style="width:100%;height:100%;border-width:0px">
+          <tr align="center">
+                <th colspan="2" align="center" style="font-size:20px;">
+                 商标信息注册
+                </th>
+            </tr>         
+          
+            <tr>
+                <th colspan="2" align="center">
+                 联系人信息
+                </th>
+            </tr> 
+              <tr>
+                <td align="right" style="width:200px;border-width:0px">交费类型：</td>  
+                <td>委托交费</td>
+            </tr>
+            <tr>
+                <td align="right" style="width:200px;border-width:0px">联系人姓名：</td>  
+                <td>左尚亮</td>
+            </tr>
+                 <tr>
+                <td align="right">身份证号码：</td>  
+                <td>41150219901112903x(<font style="color:Red;">只有个人注册才有身份证号码</font>)</td>
+            </tr>
+            <tr>
+                <td align="right">
+                    联系人电话：
+                </td>
+                <td>
+                  
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    联系人传真：
+                </td>
+                <td>
+                4456
+                </td>
+            </tr> 
+            <tr>
+                <td align="right">
+                 联系人地址：
+                </td>
+                <td>
+                    dddd
+                </td>
+            </tr> 
+             
+         
+            
+            <tr align="center">
+                <th colspan="2">
+                  本代理组织信息
+                </th>
+            </tr> 
+            <tr>
+                <td align="right">联系人：</td>
+                <td>&nbsp;  知识产权</td>
+            </tr>
+            <tr>
+                <td align="right">
+                    电话：
+                </td>
+                <td>
+                   010-123654
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    传真：
+                </td>
+                <td>
+                    010-5421365
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    代理组织名称(中文)：
+                </td>
+                <td>
+                     知识产权
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                   代理组织名称(英文)：
+                </td>
+                <td>
+                   ZHISHICANQUAN
+                </td>
+            </tr>
+               <tr align="center">
+                <th colspan="2">
+              录入的商标信息
+                </th>
+            </tr> 
+       
+            <tr>
+                <td align="right">
+                商标注册号：
+                </td>
+                <td>
+                   PTM12
+                </td>
+            </tr>
+            <tr>
+                <td align="right">
+                   类别：
+                </td>
+                <td>
+                  中国个人
+                </td>
+            </tr>
+               <tr>
+                <td align="right">商标描述类型：</td>
+                <td> 文字与图形商标</td>
+            </tr>  
+            <tr>
+                <td align="right">商标描述：</td>
+                <td> 请填写所申请的商标文字</td>
+            </tr> 
+         
+              <tr style='display:none;'>
+                <td align="right">请在此处上传图例：</td>
+                <td> 
+                <img src="" width="200px" height="180px" />
+                </td>
+            </tr>  
+            <tr>                                                                                         
+                <td align="right">注册人姓名：</td>
+                <td> 左尚亮</td>
+            </tr>  
+             <tr>
+                <td align="right">注册人地址：</td>
+                <td>  粉红色</td>
+            </tr> 
+               
+             <tr>
+                <td align="right">邮政编码：</td>
+                <td>  456546</td>
+            </tr> 
+               
+             <tr>
+                <td align="right">注册商标有效期限：</td>
+                <td>2023-09-18</td>
+            </tr>     <tr>
+                <td align="right">交费类型：</td>
+                <td>代理缴费</td>
+            </tr> 
+              <tr align="center">
+                <th colspan="2" style="font-size:20px;">
+            商标代理委托书
+                </th>
+            </tr> 
+            
+                  <tr style="height:50px;">
+                <td align="right">客户签字：</td>
+                <td>  </td>
+            </tr>   
+                    <tr style="height:100px;">
+                <td align="right">客户盖章：</td>
+                <td>  </td>
+            </tr>   
+        </table>
+        </td>
+	</tr>
+</table>

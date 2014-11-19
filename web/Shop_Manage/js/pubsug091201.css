@@ -1,0 +1,21 @@
+BODY {
+	MARGIN: 0px auto
+}
+#key {
+	DISPLAY: inline
+}
+.suggest_key UL {
+	BORDER-RIGHT: #000 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #000 1px solid; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: #000 1px solid; PADDING-TOP: 0px; BORDER-BOTTOM: #000 1px solid; LIST-STYLE-TYPE: none
+}
+.suggest_key LI {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FONT-SIZE: 12px; PADDING-BOTTOM: 2px; LINE-HEIGHT: 16px; PADDING-TOP: 2px
+}
+.suggest_key SPAN {
+	MARGIN-TOP: 0px; FONT-SIZE: 12px; FLOAT: right; COLOR: #008000; _MARGIN-TOP: -18px
+}
+.select_key {
+	BACKGROUND: #36c; COLOR: #fff
+}
+.select_key SPAN {
+	MARGIN-TOP: 0px; FONT-SIZE: 12px; FLOAT: right; COLOR: #fff; _MARGIN-TOP: -18px
+}

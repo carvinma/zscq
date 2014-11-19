@@ -1,0 +1,24 @@
+﻿TD {
+	FONT-FAMILY: 宋体; FONT-SIZE: 9pt
+}
+BODY {
+	BACKGROUND-COLOR: #ffffff
+}
+UNKNOWN {
+	BACKGROUND: #93ce00; bgcolor: "#93CE00"
+}
+A:link {
+	COLOR: #807a7a; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #807a7a; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #807a7a; TEXT-DECORATION: none
+}
+A:hover {
+	POSITION: relative; COLOR: #336699; TOP: 0px; RIGHT: 0px; TEXT-DECORATION: none
+}
+INPUT {
+	FONT-SIZE: 9pt
+}

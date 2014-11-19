@@ -1,0 +1,22 @@
+﻿.order_steps{
+	width: 603px;
+	height: 18px;
+	margin: 20px auto 0;
+	background: url(../images/probuy_staus.gif) left top no-repeat;
+}
+.order_step1{
+	background-position: left top;
+}
+.order_step2{
+	background-position: left -38px;
+}
+.order_step3{
+	background-position: left -76px;
+}
+
+.buypro_buttons input.buypro_bt_suborder{
+	width: 122px;
+	height: 40px;
+	background: url(../images/sp_bts_submit.gif) left top no-repeat;
+	border:none;
+}

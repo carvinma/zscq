@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PayGo.aspx.cs" Inherits="PayGo" %>

@@ -1,0 +1,11 @@
+
+/*主要部分--兑换首页*/
+#focus_change {width:1001px; height:350px; overflow:hidden; position:relative;}
+#focus_change ul {height:350px; position:absolute;}
+#focus_change ul li {float:left; width:1001px; height:350px; overflow:hidden; position:relative; background:#000;}
+#focus_change ul li div {position:absolute; overflow:hidden;}
+/*1,2,3,4,5数字CSS*/
+#focus_change .btnBg {position:absolute; width:1001px; height:40px; left:0; bottom:0;}
+#focus_change .btn {position:absolute; width:170px; height:24px; right:0; bottom:8px; padding-left:10px;}
+#focus_change .btn span {display:inline-block; color:#f8ffff;  _display:inline; _zoom:1; width:24px; height:24px; line-height:24px; text-align:center; font-size:20px; font-family:"Microsoft YaHei",SimHei; margin-right:10px; cursor:pointer;}
+#focus_change .btn span.on { color:#c42f33;}

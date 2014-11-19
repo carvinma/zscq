@@ -1,0 +1,89 @@
+
+
+UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+
+
+
+.danpin_colLef {
+	Z-INDEX: 6; WIDTH: 500px; FLOAT: left; HEIGHT: auto; margin-top:30px;
+}
+.danpinLeft {
+	POSITION: relative; MARGIN-TOP: -23px; WIDTH: 72px; DISPLAY: inline; FLOAT: left; HEIGHT: auto
+}
+.smallImg {
+	WIDTH: 72px; DISPLAY: inline; FLOAT: left
+}
+.smallImg {
+	WIDTH: 72px; DISPLAY: inline; FLOAT: left
+}
+.smallImg LI {
+	BORDER-BOTTOM: #b4b4b4 1px solid; BORDER-LEFT: #b4b4b4 1px solid; MARGIN-TOP: 10px; WIDTH: 70px; HEIGHT: 70px; OVERFLOW: hidden; BORDER-TOP: #b4b4b4 1px solid; BORDER-RIGHT: #b4b4b4 1px solid
+}
+.smallImg LI SPAN {
+	BORDER-BOTTOM: #fff 1px solid; BORDER-LEFT: #fff 1px solid; WIDTH: 68px; DISPLAY: inline-block; HEIGHT: 68px; BORDER-TOP: #fff 1px solid; BORDER-RIGHT: #fff 1px solid
+}
+.smallImg #onlickImg {
+	BORDER-BOTTOM: #e57339 1px solid; BORDER-LEFT: #e57339 1px solid; BORDER-TOP: #e57339 1px solid; BORDER-RIGHT: #e57339 1px solid
+}
+.smallImg #onlickImg SPAN {
+	BORDER-BOTTOM: #e57339 1px solid; BORDER-LEFT: #e57339 1px solid; WIDTH: 68px; DISPLAY: inline-block; HEIGHT: 68px; BORDER-TOP: #e57339 1px solid; BORDER-RIGHT: #e57339 1px solid
+}
+.smallImg #imageMenu {
+	HEIGHT: 415px; OVERFLOW: hidden;
+}
+.smallImgUp {
+	CURSOR: pointer
+}
+.smallImgUp {
+	WIDTH: 72px; HEIGHT: 5px; OVERFLOW: hidden
+}
+.upper {
+	BACKGROUND-IMAGE: url(../images/sprite.png); BACKGROUND-COLOR: transparent; BACKGROUND-POSITION: -3270px 0px
+}
+.upHover {
+	BACKGROUND-IMAGE: url(../images/sprite.png); BACKGROUND-COLOR: transparent; BACKGROUND-POSITION: 0px -125px
+}
+.downer {
+	BACKGROUND-IMAGE: url(../images/sprite.png); BACKGROUND-COLOR: transparent; BACKGROUND-POSITION: -1927px 0px
+}
+.downHover {
+	BACKGROUND-IMAGE: url(../images/sprite.png); BACKGROUND-COLOR: transparent; BACKGROUND-POSITION: 0px -136px
+}
+#imageMenu LI IMG {
+	CURSOR: pointer
+}
+.smallImgDown {
+	WIDTH: 72px; HEIGHT: 5px; OVERFLOW: hidden
+}
+.smallImgDown {
+	MARGIN-TOP: 7px
+}
+.smallImgDown {
+	CURSOR: pointer
+}
+.blank5 {
+	DISPLAY: block; HEIGHT: 5px; CLEAR: both; FONT-SIZE: 1px; OVERFLOW: hidden
+}
+.qwbox {
+	POSITION: relative; PADDING-BOTTOM: 1px; MARGIN-TOP: -8px; PADDING-LEFT: 1px; WIDTH: 400px; PADDING-RIGHT: 1px; DISPLAY: inline; BACKGROUND: #fff; FLOAT: left; HEIGHT: 400px; MARGIN-LEFT: 20px; PADDING-TOP: 1px
+}
+.qwbox .qwsmall {
+	Z-INDEX: 2; POSITION: relative; TEXT-ALIGN: center; BACKGROUND: #fff
+}
+.qwbox .qwsmall .qwmark {
+	Z-INDEX: 2; BORDER-BOTTOM: #999 1px solid; POSITION: absolute; FILTER: alpha(opacity:50); BORDER-LEFT: #999 1px solid; WIDTH: 200px; DISPLAY: none; BACKGROUND: #ffffff; HEIGHT: 200px; BORDER-TOP: #999 1px solid; TOP: 0px; BORDER-RIGHT: #999 1px solid; LEFT: 0px; opacity: 0.5
+}
+.qwbox .qwbig {
+	Z-INDEX: 100; POSITION: absolute; DISPLAY: none; TOP: 0px; LEFT: 225px
+}
+.qwboxbig {
+	Z-INDEX: 9999; BORDER-BOTTOM: #cccccc 1px solid; POSITION: absolute; BORDER-LEFT: #cccccc 1px solid; BACKGROUND-COLOR: #fff; WIDTH: 400px; DISPLAY: none; HEIGHT: 400px; OVERFLOW: hidden; BORDER-TOP: #cccccc 1px solid; TOP: 0px; BORDER-RIGHT: #cccccc 1px solid; LEFT: 418px
+}
+#qw_bk {
+	BORDER-BOTTOM: #e57339 1px solid; BORDER-LEFT: #e57339 1px solid; BORDER-TOP: #e57339 1px solid; BORDER-RIGHT: #e57339 1px solid
+}
+#qw_bk SPAN {
+	BORDER-BOTTOM: #e57339 1px solid; BORDER-LEFT: #e57339 1px solid; BORDER-TOP: #e57339 1px solid; BORDER-RIGHT: #e57339 1px solid
+}

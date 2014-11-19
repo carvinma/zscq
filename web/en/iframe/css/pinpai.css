@@ -1,0 +1,41 @@
+#caidai_body
+{
+	position:absolute; z-index:100; width:100%; top:172px; left:0px;
+}
+#container
+{
+	position:relative;
+	margin:0 auto;
+	width:1000px;
+	text-align:left;
+}
+
+.clear {
+	CLEAR: both
+}
+.top_bg {background:url(../images/yanzhipu_pinpai_bg.jpg);}
+
+A.curr:link {
+	PADDING: 4px; BACKGROUND: #a70326 0px 0px;  COLOR: #FFFFFF; LINE-HEIGHT: 25px
+}
+A.curr:visited {
+	PADDING: 4px; BACKGROUND: #a70326 0px 0px;  COLOR: #FFFFFF; LINE-HEIGHT: 25px
+}
+
+a.acwoman:link,a.acwoman:visited{ font-size:12px; color:#510917;}
+
+a.acwoman:hover{ font-size:12px; color:#510917;}
+
+.yanzhipu_zhutui {background:url(../images/yanzhipu_zhutui.jpg);}
+
+.yanzhipu_jinxuan {background:url(../images/woman_jinxuan_bg.jpg);}
+.yanzhipu_jinxuan1 {background:url(../images/woman_jinxuan_bg1.jpg);}
+.yanzhipu_guanzhu {background:url(../images/yanzhipu_guanzhu.jpg);}
+
+.yanzhipu_paihang {background:url(../images/yanzhipu_paihang.jpg);}
+.yanzhipu_paihang2 {background:url(../images/yanzhipu_paihang2.jpg);}
+.line1 {background:url(../images/line1.jpg);}
+
+.dot1 {
+	BORDER-BOTTOM: #cccccc 1px dotted
+}

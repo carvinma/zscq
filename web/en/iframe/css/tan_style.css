@@ -1,0 +1,81 @@
+@charset "gb2312";
+/* CSS Document */
+
+*{margin:0;padding:0;font-size:12px;list-style:none;color:#585858;}
+img{border:none;}
+a{text-decoration:none;color:#000;}
+.red{color:#f00;}
+/*弹出框 登录*/
+.tan_registerwarp{width:393px;height:auto;overflow:hidden;margin:20px auto;}
+.tan_registertop{width:393px;height:29px;background:url(../images/tan_topbg.jpg);}
+.tan_registercenter{width:393px;height:auto;overflow:hidden;background:url(../images/tan_centerbg.jpg) repeat-y;}
+.tan_registerbottom{width:393px;height:20px;background:url(../images/tan_bottombg.jpg);}
+.tan_tit{width:330px;height:29px;text-indent:20px;line-height:29px;color:#fff;font-weight:600;float:left;}
+.tan_guanbi{width:35px;height:29px;float:left;}
+.tan_an{width:35px;height:24px;background:url(../images/tan_guanbi.jpg) no-repeat;border:none;cursor:pointer;}
+.tan_registercon{width:370px;height:auto;overflow:hidden;margin:9px 9px 0 9px;}
+.tan_titlebox{width:370px;height:29px; position:relative;bottom:-1px;}
+.tan_titlebox a{float:left;width:120px;height:29px;text-align:center;line-height:29px;background:url(../images/tan_tit02.jpg) no-repeat;margin-right:5px;}
+.tan_titlebox #tanlogin0{background:url(../images/tan_tit01.jpg);}
+.tan_contant{width:368px;height:auto;overflow:hidden;border:1px solid #B77D96;background:#FFF6FB url(../images/tan_conbg.jpg) repeat-x;}
+.tan_tablebox{margin:0 auto;}
+.tan_selectname{width:80px;height:20px;}
+.tan_wbk{width:150px;height:18px;line-height:18px;background:#FAFFBD;border:1px solid #ccc;}
+.tan_yz{width:50px;background:#fff;}
+.tan_loginbarbox{width:62px;height:36px;float:left;}
+.tan_loginbar{width:62px;height:36px;text-align:center;line-height:36px;background:url(../images/tan_loginbar.jpg);border:none;color:#fff;}
+.tan_text{height:36px;line-height:36px;text-indent:24px;float:left;}
+
+/*登录成功*/
+.tan_logincgbox{width:220px;height:62px;background:url(../images/tan_logincgbg.png);padding-left:52px;margin:20px auto;color:#009900;line-height:62px;font-weight:600; font-size:14px;}
+
+/*修改地址*/
+.tan_adresswarp575{width:575px;}
+.tan_adresstop{width:575px;background:url(../images/tan_adresstopbg.jpg);}
+.tan_adresscenter{width:575px;background:url(../images/tan_adresscenbg.jpg);}
+.tan_adressbot{width:575px;background:url(../images/tan_adressbotbg.jpg);}
+.tan_tit505{width:515px;}
+.tan_adresscon{width:525px;height:auto;overflow:hidden;padding-left:20px;}
+.tan_addwbk{width:220px;background:#fff;}
+.tan_adyanzheng{color:#555;}
+.tan_addtextarea{width:220px;border:1px solid #ccc;}
+.tan_adrbar01{width:58px;height:26px;text-align:center;line-height:25px;color:#fff;background:url(../images/tan_adbar01.png);border:none;cursor:pointer;}
+.tan_adrbar02{background:url(../images/tan_adbar02.png);color:#000;}
+.xinghaored{font-size:14px;color:#f00;margin-right:8px;}
+
+/*到货通知*/
+.tan_daohuotitbox{background:#FFFFD5;border:1px solid #FFC600;text-indent:24px;line-height:29px;width:368px;color:#FF6600;}
+.tan_daohuocon{border:none;margin-top:10px;}
+
+/*发表咨询*/
+.tan_addtextarea_zixun{width:250px;}
+.tan_zixuntext{color:#ccc;}
+
+/*迷你购物车*/
+.tan_gouwucon{width:240px;margin:10px auto;}
+.tan_gouwutitle{height:31px;background:url(../images/tan_ico01.png) no-repeat left;text-indent:45px;line-height:31px;}
+.tan_gouwutitle strong{color:#860242;}
+.tan_gouwutext{height:31px;line-height:31px;text-align:center;}
+.tan_gouwubar01{width:94px;height:26px;background:url(../images/shopcarbutton.jpg);text-align:center;line-height:26px;border:none;cursor:pointer;}
+.tan_gouwubar02{width:82px;background:url(../images/tan_gouwubar02.png);color:#860242;}
+
+.tan_shoucangtitle{width:200px;margin-left:20px;}
+
+/*订单查询*/
+.tan_dingdantitle{background:url(../images/tan_ico02.png) no-repeat left;}
+.tan_dingdancon{width:270px;margin:10px auto;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

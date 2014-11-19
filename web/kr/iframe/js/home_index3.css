@@ -1,0 +1,42 @@
+
+.flash {
+	Z-INDEX: 0; POSITION: relative; WIDTH: 758px; HEIGHT: 335px
+}
+.flash .flashpic {
+	HEIGHT: 335px
+}
+.flash .flashnav {
+	Z-INDEX: 1; POSITION: absolute; WIDTH: auto; FLOAT: right; HEIGHT: 20px; TOP: 308px; RIGHT: 10px
+}
+.flash .flashnav UL LI {
+	WIDTH: 20px; FLOAT: left; HEIGHT: 20px; MARGIN-RIGHT: 5px
+}
+.flash .flashnav UL LI A 
+{
+	TEXT-ALIGN: center; 
+	LINE-HEIGHT: 16px; 
+	MARGIN: 2px; 
+	WIDTH: 16px; 
+	BACKGROUND: #fff; 
+	FLOAT: left; 
+	HEIGHT: 16px; 
+	COLOR: #f00;
+	font-weight:bold;
+	TEXT-DECORATION: none;
+}
+.flash .flashnav UL LI A:hover 
+{
+	BACKGROUND: #a70328;
+	COLOR: #fff;
+}
+.flash .flashnav .select A 
+{
+	LINE-HEIGHT: 16px; 
+	WIDTH: 16px; 
+	BACKGROUND: #a70328; 
+	FLOAT: left; 
+	HEIGHT: 16px; 
+	COLOR: #fff;
+	font-weight:bold;
+	TEXT-DECORATION: none;
+}

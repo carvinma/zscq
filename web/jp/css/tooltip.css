@@ -1,0 +1,211 @@
+﻿/*=========================
+	Tooltip
+==========================*/
+#tooltip{
+	display: none;
+	left: -1000px;
+	padding: 0px 0 0 0;
+	position: absolute;
+	top: -1000px;
+	width: 166px;	
+	z-index: 9999; /*absolute top of everything*/
+}
+
+#tooltipShim{
+	left: -1000px;
+	position: absolute;
+	top: -1000px;
+	width: 160px;	
+	z-index: 9998;
+	
+	opacity:0.0;
+	filter:alpha(opacity=0);
+	-moz-opacity: 0.0;
+	-khtml-opacity: 0.0;
+}
+
+#tooltip .tooltipHead{
+	background: url(../images/bg_standard_tooltip.png) no-repeat top left;
+	height: 14px;
+	width: 166px;	
+	
+	_background:none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/bg_standard_tooltip.png", sizingMethod="crop");
+}
+
+#tooltip .tooltipContent{
+	background: url(../images/bg_standard_tooltip_repeat.gif) repeat-y top left;	
+	color: #008c9a;
+	font-size: 1.1em;
+	font-weight: bold;
+	line-height: 1.27em;
+	padding: 0 12px 6px 12px; 
+	text-align: center;
+	width: 142px;	
+}
+
+#tooltip .tooltipFoot{
+	background: url(../images/bg_standard_tooltip_foot.png) no-repeat top left;
+	height: 18px;
+	position: relative;
+	width: 166px;	
+	
+	_background:none;
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/bg_standard_tooltip_foot.png", sizingMethod="crop");
+  }
+
+#tooltip .tooltipTip{
+	background: url(../images/bg_standard_tooltip_tip.png) no-repeat top left;
+	bottom: 0px;
+	height: 10px;
+	left: 76px;
+	position: absolute;
+	width: 14px;	
+	
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/bg_standard_tooltip_tip.png", sizingMethod="crop");
+}
+
+#tooltip .tooltipContent .letter{
+	color: #000;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 3.64em;
+	line-height: 1.05em;
+}
+
+#tooltip .tooltipContent .productCount{
+	color: #666;
+	font-weight: normal;
+}
+/*=========================
+	Initial Reset
+==========================*/
+body, html, form, p, ul, li, ol, h1, h2, h3, h4, h5, h6{
+	margin: 0;
+	padding: 0;
+}
+
+body, html{
+	height:100%;
+	width: 100%;
+}
+
+img{
+	border:none;
+	margin: 0;
+	padding: 0;	
+}
+
+body{
+	background: #fff;
+	color: #000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 62.5%;
+}
+
+body.iframe{
+	background: transparent;	
+}
+
+a{
+    color:#008c9a;
+	text-decoration: none;	
+}
+
+a:hover{
+	text-decoration: underline;	
+}
+/*=========================
+	Main Content
+==========================*/
+#mainContent{
+	margin: 0 auto;
+	position: relative;
+	width: 955px;	
+}
+
+#mainContent h1{
+	clear: both;
+	color: #008c9a;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 2.4em;
+	font-weight: normal;
+	line-height: 1.08em;	
+}
+
+#mainContent h2{
+	clear: both;
+	color: #008c9a;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 2.4em;
+	font-weight: normal;
+	line-height: 1.08em;	
+}
+
+#mainContent h3{
+	clear: both;
+	color: #000;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1.8em;
+	font-weight: normal;
+	line-height: 1.11em;	
+}
+
+#mainContent h4{
+	clear: both;
+	color: #008c9a;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-size: 1.4em;
+	font-weight: bold;
+	line-height: 1.14em;	
+}
+
+#mainContent h5{
+	clear: both;
+	color: #008c9a;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 1.17em;	
+}
+
+#mainContent h5 a, #mainContent h4 a, #mainContent h2 a{
+	color: #008c9a;
+}
+
+#mainContent a:hover.noUnderline{
+	text-decoration: none;
+}
+
+#rightContentColumn .ageWrapper{
+	background-image: url(/Standard.Website/Images/Common/bg_text_field_44x30.gif);
+	width: 26px;
+}
+
+#rightContentColumn .ageWrapper input{
+	width: 24px;	
+}
+
+#rightContentColumn .naturopathRequest .textareaWrapper textarea{
+	margin: 0 0 0 81px;
+	width: 500px;	
+}
+
+.printButtonRegion 
+{
+    position:absolute;
+    top: 3px;
+    right: 5px;
+}
+
+.printButtonRegion a.print{
+	color: #000000;
+    display: block;    
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 14px;
+    line-height: 1.18em;
+    margin-top: 6px;
+    padding: 0 0 0 20px;
+}
+

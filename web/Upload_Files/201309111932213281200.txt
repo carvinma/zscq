@@ -1,0 +1,169 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using zscq.DAL;
+using zscq.Model;
+
+public partial class Login : System.Web.UI.Page
+{
+    dal_Member DALM = new dal_Member();
+    dal_Adv DALA = new dal_Adv();
+    public string unvalue = "输入用户名";
+    public string pageflag = "";
+    public string Login_Adv = "";
+    public string TitleOrKeyword = "";
+    public string ShopName = "环球汇通";
+    public string ShopKeywords = "";
+    public string ShopDescription = "";
+    private string _typeid = "43";
+    public string _Adv = "";
+    dal_Adv DALADV = new dal_Adv();
+    public void Bind_Page_Title()
+    {
+        dal_SystemSetup DALSS = new dal_SystemSetup();
+        t_SystemSetup t = DALSS.SystemSetup_Select();
+        if (t.nvc_ShopName != null && t.nvc_ShopName != "")
+        {
+            ShopName = t.nvc_ShopName;
+        }
+        if (t.nvc_ShopKeywords != null && t.nvc_ShopKeywords != "")
+        {
+            ShopKeywords = t.nvc_ShopKeywords;
+        }
+        if (t.nvc_ShopDescription != null && t.nvc_ShopDescription != "")
+        {
+            ShopDescription = t.nvc_ShopDescription;
+        }
+    }
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        t_Adv adv = DALADV.Adv_Select_TypeId(int.Parse(_typeid)).FirstOrDefault();
+        if (adv != null)
+        {
+            _Adv = adv.nvc_ImageAddress;
+        }
+        if (Request["flag"] != null && Request["flag"].ToString() != "")
+        {
+            if (Request["flag"].ToString() == "zl")
+            {
+                if (Request["esc"] != null)//退出登录 清楚cookies
+                {
+                    if (Request.Cookies["hqhtshop"]["hqht_zl_uid"] != null) { Response.Cookies["hqhtshop"]["hqht_zl_uid"] = ""; }
+                }
+                pageflag = "images/login2.gif";
+                Hf_PageFlag.Value = "zl";
+                TitleOrKeyword = "<title>" + "用户登录_" + "专利系统_" + ShopName + "</title><meta name=\"Keywords\" content=\"" + ShopKeywords + "\"/><meta name=\"Description\" content=\"" + ShopDescription + "\"/>";
+            }
+            else if (Request["flag"].ToString() == "sb")
+            {
+                if (Request["esc"] != null)
+                {
+                    if (Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null) { Response.Cookies["hqhtshop"]["hqht_sb_uid"] = ""; }
+                }
+                pageflag = "images/sb_login2.gif";
+                Hf_PageFlag.Value = "sb";
+                TitleOrKeyword = "<title>" + "用户登录_" + "商标系统_" + ShopName + "</title><meta name=\"Keywords\" content=\"" + ShopKeywords + "\"/><meta name=\"Description\" content=\"" + ShopDescription + "\"/>";
+            }
+            else
+            {
+                Response.Redirect("index.aspx");
+            }
+            //=============
+            if (Request["href"] != null && Request["href"].ToString() != "")
+            {
+                Hf_Href.Value = Request["href"].ToString();
+            }
+            //==========
+        }
+        else
+        {
+            Response.Redirect("index.aspx");
+        }
+        Bind_Page_Title();
+        Bind_Page_Login();
+    }
+    //void Bind_Page_Adv()
+    //{
+    //    var iquery = DALA.Adv_Select_TypeId(100);//登陆页面广告 449*291
+    //    foreach (var q in iquery.Take(1))
+    //    {
+    //        string w = q.i_ImageWidth != 0 ? " width=\"" + q.i_ImageWidth + "\"" : " ";
+    //        Login_Adv = "<a href=\"" + q.nvc_LinkAddress + "\" target=\"" + q.nvc_OpenWay + "\" title=\"" + q.nvc_LinkWord + "\"><img class=\"window_show\" alt=\"" + q.nvc_LinkWord + "\" src=\"" + q.nvc_ImageAddress + "\"" + w + " height=\"291\" /></a>";
+    //    }
+    //}
+    void Bind_Page_Login()
+    {
+        if (Request.Cookies["hqhtshop"] != null)
+        {
+            if (Request.Cookies["hqhtshop"]["hqht_zl_uid"] != null && Request.Cookies["hqhtshop"]["hqht_zl_uid"] != "")
+            {
+                if (Request.Cookies["hqhtshop"]["hqht_zl_uname"] != null && Request.Cookies["hqhtshop"]["hqht_zl_uname"] != "")
+                {
+                    if (Request.Cookies["hqhtshop"]["hqht_zl_unum"] != null && Request.Cookies["hqhtshop"]["hqht_zl_unum"] != "")
+                    {
+                        unvalue = System.Web.HttpUtility.UrlDecode(Request.Cookies["hqhtshop"]["hqht_zl_uname"], System.Text.Encoding.GetEncoding("gb2312"));
+                        int userId = Convert.ToInt32(Request.Cookies["hqhtshop"]["hqht_zl_uid"]);
+                        string unumber = System.Web.HttpUtility.UrlDecode(Request.Cookies["hqhtshop"]["hqht_zl_unum"], System.Text.Encoding.GetEncoding("gb2312"));
+
+                        t_Member model = DALM.Member_Select_Id(userId);
+                        if (model != null)
+                        {
+                            if (model.nvc_Name == unvalue && model.nvc_UserNum == unumber && model.i_MemberType == 1)
+                            {
+                                if (Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null)
+                                {
+                                    Response.Cookies["hqhtshop"]["hqht_sb_uid"] = "";
+                                    Response.Cookies["hqhtshop"]["hqht_sb_uname"] = "";
+                                    Response.Cookies["hqhtshop"]["hqht_sb_unum"] = "";
+                                }
+                                if (string.IsNullOrWhiteSpace(Hf_Href.Value))
+                                {
+                                    Response.Redirect(Hf_Href.Value.Trim());
+                                }
+                                else
+                                {
+                                    Response.Redirect("User_PatentCount.aspx");
+                                }
+                            }
+                        }
+
+                    }
+                }
+                Response.Redirect("index.aspx");
+            }
+
+            if (Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
+            {
+                if (Request.Cookies["hqhtshop"]["hqht_sb_uname"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uname"] != "")
+                {
+                    if (Request.Cookies["hqhtshop"]["hqht_sb_unum"] != null && Request.Cookies["hqhtshop"]["hqht_sb_unum"] != "")
+                    {
+                        unvalue = System.Web.HttpUtility.UrlDecode(Request.Cookies["hqhtshop"]["hqht_sb_uname"], System.Text.Encoding.GetEncoding("gb2312"));
+                        int userId = Convert.ToInt32(Request.Cookies["hqhtshop"]["hqht_sb_uid"]);
+                        string unumber = System.Web.HttpUtility.UrlDecode(Request.Cookies["hqhtshop"]["hqht_sb_unum"], System.Text.Encoding.GetEncoding("gb2312"));
+                        t_Member model = DALM.Member_Select_Id(userId);
+                        if (model != null)
+                        {
+                            if (model.nvc_Name == unvalue && model.nvc_UserNum == unumber && model.i_MemberType == 1)
+                            {
+                                
+                                if (string.IsNullOrWhiteSpace(Hf_Href.Value))
+                                {
+                                    Response.Redirect(Hf_Href.Value.Trim());
+                                }
+                                else
+                                {
+                                    Response.Redirect("user_sbjs.aspx");
+                                }
+                            }
+                        }
+                    }
+                }
+                Response.Redirect("index.aspx");
+            }
+        }
+    }
+}

@@ -1,0 +1,219 @@
+
+/* ============================================= 旗舰店 ============================================= */
+.shop_banner{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	margin-top: 10px;
+}
+.shop_listbox{
+	width: 100%;
+	overflow: hidden;
+}
+.shop_list{
+	width: 110%;
+	overflow: hidden;
+}
+.shop_pro{
+	position: relative;
+	float: left;
+	width: 320px;
+	height: 260px;
+	margin: 10px 10px 0px 0;
+}
+.shop_pro_pic{
+	width: 320px;
+	height: 260px;
+}
+.shop_pro_pic img{
+	width: 320px;
+	height: 260px;
+}
+.shop_pro_info{
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+	height: 55px;
+	background: url(../images/bd_titbg.png) left top repeat;
+	overflow: hidden;
+}
+.shop_pro_tit, .shop_pro_price{
+	float: left;
+	width: 220px;
+	height: 25px;
+	line-height: 25px;
+	padding-left: 10px;
+}
+.shop_pro_buy{
+	float: right;
+	width: 65px;
+	height: auto;
+	margin-top: 18px;
+	padding-right: 10px;
+}
+.shop_pro_tit a{
+	color: #0547a0;
+}
+.shop_pro_price{
+	font-size: 18px;
+	font-weight:700;
+	color: #e60012;
+	font-family: arial;
+}
+
+/* ================================ 实体店品牌 ================================*/
+.realshop{
+	width: 100%;
+	margin-top: 10px;
+	overflow: hidden;
+}
+.realshop_left{
+	float: left;
+	width: 187px;
+	height: auto;
+	border: 2px solid #c7c7c7;
+}
+.realshop_menu{
+	width: 187px;
+	overflow: hidden;
+}
+.realshop_menu dt{
+	float: left;
+	width: 100%;
+	height: 46px;
+	overflow: hidden;
+}
+.realshop_menu dd{
+	float: left;
+	width: 183px;
+	height: auto;
+	padding: 2px;
+	overflow: hidden;
+}
+.realshop_menu dd li{
+	float: left;
+	width: 100%;
+	height: 47px;
+	line-height: 47px;
+	text-align: center;
+	margin-bottom: 1px;
+}
+.realshop_menu dd li a{
+	display: block;
+	width: 100%;
+	height: 47px;
+	line-height: 47px;
+	text-align: center;
+	background: url(../images/cleft_itembg.jpg) left -48px no-repeat;
+
+	font-size: 16px;
+	font-weight: 750;
+	color: #666;
+}
+.realshop_menu dd li a:hover , .realshop_menu dd li a.on{
+	background-position: left top;
+	text-decoration: none;
+}
+
+.realshop_right{
+	float: right;
+	width: 770px;
+	height: auto;
+	overflow: hidden;
+}
+.realshop_floor{
+	width: 740px;
+	height: auto;
+	padding: 10px 15px 40px;
+	margin-bottom: 10px;
+	background:#f2f1ed url(../images/shop2_bg.jpg) left bottom repeat-x;
+}
+.realshop_ftit{
+	width: 100%;
+	height: 25px;
+	line-height: 25px;
+	border-bottom: 1px solid #d7d3cb;
+	padding-bottom: 5px;
+	font-size: 14px;
+}
+.realshop_ftit strong{
+	font-size: 20px;
+	font-weight: 700;
+	font-family: arial;
+	margin-right: 5px;
+}
+
+.realshop_flist{
+	width: 100%;
+	overflow: hidden;
+}
+.realshop_flist ul{
+	width: 110%;
+	padding: 0 10px;
+	overflow: hidden;
+}
+.realshop_flist li{
+	float: left;
+	width: 105px;
+	height: 75px;
+	margin: 15px 18px 0 0;
+}
+
+
+/* ============================================ 品牌楼层 ============================================ */
+.realshop_floorbd{
+	float: left;
+	position: relative;
+	width: 740px;
+	height: auto;
+	padding: 15px 15px 45px;
+	margin-bottom: 10px;
+	background:#f2f1ed url(../images/realshop_bg.jpg) left bottom repeat-x;
+}
+.realshop_bdpic{
+	float: left;
+	width: 360px;
+	height: 250px;
+	margin-right: 15px;
+}
+.realshop_bdbox{
+	float: left;
+	width: 360px;
+	height: auto;
+}
+.realshop_bdlist{
+	width: 100%;
+	height: 220px;
+	overflow: hidden;
+}
+.realshop_bdlist dl{
+	float: left;
+	width: 100%;
+	margin-top: 8px;
+	line-height: 25px;
+}
+.realshop_bdlist dt{
+	width: 100%;
+	color: #454343;
+	font-weight: 700;
+}
+.realshop_bdlist dd{
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.realshop_bdlist dd a{
+	float: left;
+	margin-right: 20px;
+	font-size: 12px;
+	color: #555;
+}
+.realshop_bdshow{
+	position: absolute;
+	right: 28px;
+	bottom: -4px;
+	_bottom: -5px;
+	width: 70px;
+	height: 26px;
+	cursor: pointer;
+}
