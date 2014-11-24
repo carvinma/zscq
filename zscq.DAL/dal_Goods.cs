@@ -71,7 +71,7 @@ namespace zscq.DAL
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public t_GoodsMainCategory GoodsMainCategory_Select_Id(int id)
+        public t_GoodsMainCategory MainCategory_Select_Id(int id)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace zscq.DAL
         /// 获取全部商品大类
         /// </summary>
         /// <returns></returns>
-        public IQueryable<t_GoodsMainCategory> GoodsMainCategory_SelectAll()
+        public IQueryable<t_GoodsMainCategory> MainCategory_SelectAll()
         {
             var query = from q in mark.t_GoodsMainCategory orderby q.CategoryCode ascending select q;
             return query;
@@ -98,7 +98,7 @@ namespace zscq.DAL
         /// <param name="startIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public IQueryable GoodsMainCategory_SelectPage(int startIndex, int pageSize, string name, ref int count)
+        public IQueryable MainCategory_SelectPage(int startIndex, int pageSize, string name, ref int count)
         {
             var iquery = from q in mark.t_GoodsMainCategory select q;
             if (name != "")
@@ -113,7 +113,7 @@ namespace zscq.DAL
         /// 获取全部商品大类加入dropdownlist
         /// </summary>
         /// <param name="ddl"></param>
-        public void GoodsMainCategory_Bind_DDL(DropDownList ddl)
+        public void MainCategory_Bind_DDL(DropDownList ddl)
         {
             ddl.Items.Clear();
             ListItem item = new ListItem("请选择", "0");
