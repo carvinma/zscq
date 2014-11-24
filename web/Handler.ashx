@@ -84,6 +84,18 @@ public class Handler : HandlerCode, IHttpHandler, IRequiresSessionState
                     case "selniandu":
                         selniandu(context);
                         break;
+                    case "selprov":
+                        SelProv(context);
+                        break;
+                    case "selcity":
+                        SelCity(context);
+                        break;
+                    case "selarea":
+                        SelArea(context);
+                        break;
+                    case "delete":
+                        DelApplyByID(context);
+                        break;
                     default:
                         context.Response.Write("未知的类型");
                         break;
