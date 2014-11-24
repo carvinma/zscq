@@ -97,6 +97,7 @@
     <Compile Include="dal_EMail.cs" />
     <Compile Include="dal_EmailModel.cs" />
     <Compile Include="dal_FriendLink.cs" />
+    <Compile Include="dal_Goods.cs" />
     <Compile Include="dal_Help.cs" />
     <Compile Include="dal_HelpType.cs" />
     <Compile Include="dal_IntegralMobile.cs" />
