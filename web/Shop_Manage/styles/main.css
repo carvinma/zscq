@@ -4,7 +4,10 @@ $Id: main.css 13991 2008-01-17 06:17:23Z maruitao $
 .inputs400text{width:400px;height:18px;line-height:18px;}
 .inputs400text:hover{width:400px;height:18px;line-height:18px;border:solid 2px #eb8a3d;}
 
-.inputs200text{width:200px;height:18px;line-height:18px;}
+.inputs200text{width:430px;
+height:137px;
+line-height:18px;
+}
 .inputs200text:hover{width:200px;height:18px;line-height:18px;border:solid 2px #eb8a3d;}
 
 .inputs100text{width:100px;height:18px;line-height:18px;}
@@ -13,7 +16,9 @@ $Id: main.css 13991 2008-01-17 06:17:23Z maruitao $
 .inputs80text{width:80px;height:18px;line-height:18px;}
 .inputs80text:hover{width:80px;height:18px;line-height:18px;border:solid 2px #eb8a3d;}
 
-.inputs60text{width:60px;height:18px;line-height:18px;}
+.inputs60text{width:189px;
+height:18px;line-height:18px;
+}
 .inputs60text:hover{width:60px;height:18px;line-height:18px;border:solid 2px #eb8a3d;}
 
 .inputstext{height:18px;line-height:18px;}

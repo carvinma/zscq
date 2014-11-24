@@ -137,6 +137,49 @@
             <%} %>
           </ul>
         </li>
+        <li class="explode" key="zl_5" name="menu">&nbsp;商标申请系统
+          <ul>
+            <%if (flag[50][0].ToString() == "1")
+              { %>
+            <li class="explode menu-item1" key="zl_5_1" name="menu1">&nbsp;商品类别管理
+              <ul>
+                <%if (flag[50][0].ToString() == "1")
+                  { %><li class="menu-item">&nbsp;<a href="NewManage/Goods_MainCategoryList.aspx" target="main">添加商大类</a></li><%} %>
+                <%if (flag[50][0].ToString() == "1")
+                  { %><li class="menu-item">&nbsp;<a href="NewManage/Goods_SubCategoryList.aspx" target="main">添加商品小类</a></li>
+                  <li class="menu-item">&nbsp;<a href="NewManage/Goods_ShopList.aspx" target="main">添加商品</a></li>
+                  <%} %>
+              </ul>
+            </li>
+            <%} if (flag[51][0].ToString() == "1")
+              {%>
+            <li class="explode menu-item1" key="zl_2_2" name="menu1">&nbsp;商标信息管理
+              <ul>
+                <%if (flag[21][0].ToString() == "1")
+                  { %><li class="menu-item">&nbsp;<a href="Shop_M_Trademark.aspx" target="main">商标列表</a></li><%} %>
+                <%if (flag[21][1].ToString() == "1")
+                  { %><li class="menu-item">&nbsp;<a href="Shop_A_Trademark.aspx" target="main">商标添加</a></li>
+                  <li class="menu-item">&nbsp;<a href="Shop_Apl_Trademark.aspx" target="main">导入商标</a></li><%} %>
+              </ul>
+            </li>
+            <%} if (flag[52][0].ToString() == "1")
+              {%>
+            <li class="explode menu-item1" key="zl_2_3" name="menu1">&nbsp;商标订单管理
+              <ul>
+                <%if (flag[22][0].ToString() == "1")
+                  { %>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=0" target="main">全部订单</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=1" target="main">待付款订单</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=2" target="main">已付款订单</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=3" target="main">已审核</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=4" target="main">已完成订单</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=5" target="main">无效订单</a></li>
+                <%} %>
+              </ul>
+            </li>
+            <%} %>
+          </ul>
+        </li>
         <li class="explode" key="zl_3" name="menu">&nbsp;积分商城系统
           <ul>
             <%if (flag[33][0].ToString() == "1" || flag[79][0].ToString() == "1")
