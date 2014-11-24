@@ -95,7 +95,9 @@
     <Compile Include="bll_Member.cs" />
     <Compile Include="bll_MemberGrade.cs" />
     <Compile Include="bll_Message.cs" />
+    <Compile Include="bll_Trademark.cs" />
     <Compile Include="bll_UserIntegralNote.cs" />
+    <Compile Include="PinYinConverter.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
