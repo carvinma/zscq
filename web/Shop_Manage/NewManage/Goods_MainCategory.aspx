@@ -46,7 +46,7 @@
                         onbeforepaste="clipboardData.setData( 'text',clipboardData.getData( 'text').replace(/[^\d]/g, ''))"
                         onkeypress="event.returnValue=IsDigit();" class="inputs100text" value="" 
                         runat="server" onblur="checknull('txtCategoryCode','ftxtCategoryCode')" />
-                        &nbsp;<fontcolor="#FF0000">*</font>&nbsp;
+                        &nbsp;<font color="#FF0000">*</font>&nbsp;
                         <font id="ftxtCategoryCode" class="alertfont" style="display:none;">
                         <img alt="警告" src="../images/caozuo_3.jpg" width="15" />请填写类别代码</font>
                 </td>
@@ -59,7 +59,7 @@
                  <input name="txtCategoryRemark" runat="server" id="txtCategoryRemark" type="text" value="" maxlength="200" 
                  class="inputs200text" onblur="checknull('txtCategoryRemark','ftxtCategoryRemark')"/>
                    &nbsp;<font color="#FF0000">*</font>&nbsp;<font id="ftxtCategoryRemark" class="alertfont" style="display:none;"><img alt="警告" src="../images/caozuo_3.jpg"
-                                    width="15" />类别说明</font>
+                                    width="15" />请填写类别说明</font>
                   </td>
             </tr>
             <tr>

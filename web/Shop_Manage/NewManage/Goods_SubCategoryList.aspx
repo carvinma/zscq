@@ -201,7 +201,7 @@
 
                         <tr>
 
-                            <td width="25%" align="right"><img alt="" width="30" src="images/caozuo_3.jpg" /></td>
+                            <td width="25%" align="right"><img alt="" width="30" src="../images/caozuo_3.jpg" /></td>
 
                             <td width="75%" align="left" style="font-size: 14px;">&nbsp;请选中您要删除的记录</td>
 

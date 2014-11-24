@@ -61,9 +61,12 @@ public partial class Shop_Manage_NewManage_Goods_Shop : System.Web.UI.Page
     private void BindShop(int id)
     {
         var model = goods.Goods_Select_Id(id);
-        this.DropDownList2.SelectedValue = model.DetailCategoryID.ToString();
         var main= goods.DetailCategory_Select_Id(model.DetailCategoryID);
         this.DropDownList1.SelectedValue = main.MainCategoryID.ToString();
+        DropDownList1_SelectedIndexChanged(null,null);
+        this.DropDownList2.SelectedValue = model.DetailCategoryID.ToString();
+        
+        
 
         this.txtCategoryCode.Value = model.GoodsCode;
         this.txtCategoryRemark.Value = model.GoodsRemark;
@@ -84,14 +87,14 @@ public partial class Shop_Manage_NewManage_Goods_Shop : System.Web.UI.Page
                 goods.Goods_Update(model);
                 Manager.AddLog(0, "商品管理", "修改商品" + model.GoodsRemark);
                 string twourl = System.Web.HttpUtility.UrlEncode("NewManage/Goods_ShopList.aspx?PageNo=" + Hidden1.Value + "&Keyword=" + Hidden2.Value, System.Text.Encoding.GetEncoding("gb2312"));
-                Response.Redirect("../shop_manageok.aspx?hrefname=商品小类&hreftype=2&href1=NewManage/Goods_Shop.aspx&href2=" + twourl);
+                Response.Redirect("../shop_manageok.aspx?hrefname=商品hreftype=2&href1=NewManage/Goods_Shop.aspx&href2=" + twourl);
             }
             else
             {
                 goods.Goods_Add(model);
                 Manager.AddLog(0, "商品管理", "添加商品" + model.GoodsRemark);
                 string twourl = System.Web.HttpUtility.UrlEncode("NewManage/Goods_ShopList.aspx", System.Text.Encoding.GetEncoding("gb2312"));
-                Response.Redirect("../shop_manageok.aspx?hrefname=商品小类&hreftype=1&href1=NewManage/Goods_Shop.aspx&href2=" + twourl);
+                Response.Redirect("../shop_manageok.aspx?hrefname=商品&hreftype=1&href1=NewManage/Goods_Shop.aspx&href2=" + twourl);
             }
         }
     }
