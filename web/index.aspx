@@ -112,7 +112,7 @@
           <tr>
             <td width="37" height="105">&nbsp; </td>
             <td width="330" valign="top"><a href="Login.aspx?flag=zl&pageurl2=<%=url %>"><img src="images/zhuanli_banner.gif" width="249" height="105" /></a> </td>
-            <td width="328" valign="top"><a href="Login.aspx?flag=sb&pageurl2=<%=url %>"><img src="images/shangbiao_banner.gif" width="249" height="105" /></a> </td>
+            <td width="328" valign="top"><a href="aBrand/BrandInfo.aspx"><img src="images/shangbiao_banner.gif" width="249" height="105" /></a> </td>
             <td width="306" valign="top"><a href="jifen.aspx"><img src="images/jifen_banner.gif" width="249" height="105" /></a> </td>
           </tr>
         </table>
