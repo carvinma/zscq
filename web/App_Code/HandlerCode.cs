@@ -27,12 +27,67 @@ public class HandlerCode
     dal_Nationality DALN = new dal_Nationality();
     dal_PatentType DALPT = new dal_PatentType();
     dal_PatentFee DALPF = new dal_PatentFee();
+    dal_Address Darea = new dal_Address();
+    dal_Apply apply = new dal_Apply();
     public HandlerCode()
     {
         //
         //TODO: 在此处添加构造函数逻辑
         //
     }
+    #region 商标
+
+    public void DelApplyByID(HttpContext context)
+    {
+        int iResult = 0;
+        if (context.Request["id"] != null && context.Request["id"].ToString() != "")
+        {
+            iResult=apply.Apply_Del(int.Parse(context.Request["id"]));
+        }
+        context.Response.Write(iResult);
+    }
+
+    #region 省市区
+    public void SelProv(HttpContext context)
+    {
+        var iquery = Darea.Province_SelectAll();
+        StringBuilder sb = new StringBuilder();
+        sb.Append("<option value=\"\">请选择：</option>");
+        foreach (var v in iquery)
+        {
+           sb.Append("<option value=\"" + v.i_ID + "\">" + v.provinceName + "</option>");
+        }
+        context.Response.Write(sb);
+    }
+    public void SelCity(HttpContext context)
+    {
+        int provinceid = Convert.ToInt32(context.Request["provinceid"]);
+        var iquery = Darea.City_Select_ProvinceId(provinceid);
+        StringBuilder sb = new StringBuilder();
+        sb.Append("<option value=\"\">请选择：</option>");
+        foreach (var v in iquery)
+        {
+            sb.Append("<option value=\"" + v.i_ID + "\">" + v.cityName + "</option>");
+        }
+        context.Response.Write(sb);
+    }
+    public void SelArea(HttpContext context)
+    {
+        int cityid = Convert.ToInt32(context.Request["cityid"]);
+        var iquery = Darea.Area_Select_CityId(cityid);
+        StringBuilder sb = new StringBuilder();
+        sb.Append("<option value=\"\">请选择：</option>");
+        foreach (var v in iquery)
+        {
+            sb.Append("<option value=\"" + v.i_ID + "\">" + v.areaName + "</option>");
+        }
+        context.Response.Write(sb);
+    }
+    #endregion
+
+    #endregion
+
+    #region
     public void selshouquanguo(HttpContext context)//专利授权国
     {
         var iquery = DALN.Nationality_SelectAll();
@@ -305,6 +360,7 @@ public class HandlerCode
         int r_uType = Convert.ToInt32(context.Request["uType"]);
         int r_uGuoJi = Convert.ToInt32(context.Request["uGuoJi"]);
         string r_uEmail = context.Request["uEmail"].ToString();
+        string r_uPhone = context.Request["uPhone"].ToString();
         string r_cookies_uid = "";
         if (StringHelper.CheckSqlKeyWord(r_uName) == false && StringHelper.CheckJsAndHtmlKeyWord(r_uName) == false)
         {
@@ -326,6 +382,7 @@ public class HandlerCode
             rModel.i_Grade = 1;
             rModel.nvc_Power = "1,1,1,1";
             rModel.nvc_MobilePhone = "";
+            rModel.nvc_TelPhone = r_uPhone;
             rModel.i_ReceiveEmail = 1;
             switch (r_pageFlag)
             {
@@ -1215,5 +1272,5 @@ public class HandlerCode
 
 
     }
-
+    #endregion
 }
