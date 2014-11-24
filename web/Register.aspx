@@ -35,7 +35,7 @@
           <table width="700" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td height="36">&nbsp;</td>
-              <td align="center" style="line-height: 21px; font-size: 14px; font-weight: bold;">环球汇通用户注册协议</td>
+              <td align="center" style="line-height: 21px; font-size: 14px; font-weight: bold;">知财管理用户注册协议</td>
               <td>&nbsp;</td>
             </tr>
             <tr>
@@ -109,21 +109,22 @@
                   <td width="404" align="left" valign="top">
                     <table width="398" height="207" border="0" cellpadding="0" cellspacing="0">
                       <tr>
-                        <td width="72" height="32" class="font14">用户昵称： </td>
+                        <td width="72" height="30" class="font14">用户昵称： </td>
                         <td width="200" align="left">
                           <input type="text" name="textfield" id="txt_username" style="width: 187px; line-height: 20px; height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="50" onblur="validateName()" />
                         </td>
                         <td width="126" align="left" class="font12ac5" id="td_username"></td>
                       </tr>
                       <tr>
-                        <td height="32" class="font14">会员类型： </td>
+                        <td height="30" class="font14">会员类型： </td>
                         <td colspan="2" align="left"><span style="line-height: 21px;">
                           <input type="radio" name="radio" id="rd_type1" value="radio" checked="checked" /><%=radioinfo1 %>&nbsp;
                           <input type="radio" name="radio" id="rd_type2" value="radio" /><%=radioinfo2 %>&nbsp;
-                          <input type="radio" name="radio" id="rd_type3" value="radio" /><%=radioinfo3 %> </span></td>
+                          <div style="visibility:hidden;float:right">
+                          <input type="radio" name="radio" id="rd_type3" value="radio" /><%=radioinfo3 %> </div></span></td>
                       </tr>
                       <tr>
-                        <td height="32" class="font14">所属国籍： </td>
+                        <td height="30" class="font14">所属国籍： </td>
                         <td colspan="2" align="left">
                           <asp:DropDownList ID="Drp_GuoJi" runat="server" Style="border: 1px solid #ebebeb; font-size: 12px; font-weight: bold; width: 189px; height: 24px; background-color: #dedede;">
                             <asp:ListItem Value="0">选择国籍</asp:ListItem>
@@ -131,35 +132,40 @@
                         </td>
                       </tr>
                       <tr>
-                        <td height="32" class="font14">电子邮箱： </td>
+                        <td height="30" class="font14">电子邮箱： </td>
                         <td colspan="2" align="left">
                           <input type="text" name="textfield2" id="txt_email" style="width: 187px; height: 20px; line-height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="50" />
                         </td>
                       </tr>
+                       <tr>
+                        <td height="30" class="font14">联系电话： </td>
+                        <td align="left">
+                          <input type="text" name="textfield" id="txt_phone" style="width: 187px; height: 20px; line-height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="50" />
+                        </td>
+                        <td align="left" class="font12ac5">商标请过申程中的紧急联系方式</td>
+                      </tr>
                       <tr>
-                        <td height="32" class="font14">用户密码： </td>
+                        <td height="30" class="font14">用户密码： </td>
                         <td align="left">
                           <input type="password" name="textfield" id="txt_pwd" style="width: 187px; height: 20px; line-height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="50" />
                         </td>
                         <td align="left" class="font12ac5"></td>
                       </tr>
                       <tr>
-                        <td height="32" class="font14">确认密码： </td>
+                        <td height="30" class="font14">确认密码： </td>
                         <td align="left">
                           <input type="password" name="textfield" id="txt_okpwd" style="width: 187px; height: 20px; line-height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="50" />
                         </td>
                         <td align="left"></td>
                       </tr>
+                      
                       <tr>
-                        <td height="8" colspan="3"></td>
-                      </tr>
-                      <tr>
-                        <td height="32">&nbsp; </td>
+                        <td height="30">&nbsp; </td>
                         <td colspan="2" align="left">
                           <table width="315" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td width="160" height="30" align="left"><img src="images/reg.gif" width="147" height="24" border="0" onclick="user_register()" style="cursor: pointer" /> </td>
-                              <td width="155" align="left"><a href="javascript:openBg(1);showdiv('1');" class="ac5">《环球汇通用户注册协议》</a> </td>
+                              <td width="155" align="left"><a href="javascript:openBg(1);showdiv('1');" class="ac5">《知财管理用户注册协议》</a> </td>
                             </tr>
                           </table>
                         </td>
@@ -241,5 +247,12 @@
   function hidediv() {
     $("#show").hide();
     $("#bg").hide();
-  }
+}
+$("#Drp_GuoJi").change(function () {
+
+    if ($("#Drp_GuoJi option:selected").text() != "中国") {
+        alert("中国大陆以外客户，请直接联系我们!");
+    }
+    
+})
 </script>
