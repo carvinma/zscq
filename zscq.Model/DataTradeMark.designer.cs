@@ -33,6 +33,15 @@ namespace zscq.Model
     partial void Insertt_Apply(t_Apply instance);
     partial void Updatet_Apply(t_Apply instance);
     partial void Deletet_Apply(t_Apply instance);
+    partial void Insertt_GoodsMainCategory(t_GoodsMainCategory instance);
+    partial void Updatet_GoodsMainCategory(t_GoodsMainCategory instance);
+    partial void Deletet_GoodsMainCategory(t_GoodsMainCategory instance);
+    partial void Insertt_GoodsDetailCategory(t_GoodsDetailCategory instance);
+    partial void Updatet_GoodsDetailCategory(t_GoodsDetailCategory instance);
+    partial void Deletet_GoodsDetailCategory(t_GoodsDetailCategory instance);
+    partial void Insertt_Goods(t_Goods instance);
+    partial void Updatet_Goods(t_Goods instance);
+    partial void Deletet_Goods(t_Goods instance);
     #endregion
 		
 		public DataTradeMarkDataContext() : 
@@ -70,6 +79,30 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<t_Apply>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_GoodsMainCategory> t_GoodsMainCategory
+		{
+			get
+			{
+				return this.GetTable<t_GoodsMainCategory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_GoodsDetailCategory> t_GoodsDetailCategory
+		{
+			get
+			{
+				return this.GetTable<t_GoodsDetailCategory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Goods> t_Goods
+		{
+			get
+			{
+				return this.GetTable<t_Goods>();
 			}
 		}
 	}
@@ -543,6 +576,384 @@ namespace zscq.Model
 					this._AddTime = value;
 					this.SendPropertyChanged("AddTime");
 					this.OnAddTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_GoodsMainCategory")]
+	public partial class t_GoodsMainCategory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private string _CategoryCode;
+		
+		private string _CategoryRemark;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnCategoryCodeChanging(string value);
+    partial void OnCategoryCodeChanged();
+    partial void OnCategoryRemarkChanging(string value);
+    partial void OnCategoryRemarkChanged();
+    #endregion
+		
+		public t_GoodsMainCategory()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryCode", DbType="NVarChar(50)")]
+		public string CategoryCode
+		{
+			get
+			{
+				return this._CategoryCode;
+			}
+			set
+			{
+				if ((this._CategoryCode != value))
+				{
+					this.OnCategoryCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryCode = value;
+					this.SendPropertyChanged("CategoryCode");
+					this.OnCategoryCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryRemark", DbType="NVarChar(500)")]
+		public string CategoryRemark
+		{
+			get
+			{
+				return this._CategoryRemark;
+			}
+			set
+			{
+				if ((this._CategoryRemark != value))
+				{
+					this.OnCategoryRemarkChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryRemark = value;
+					this.SendPropertyChanged("CategoryRemark");
+					this.OnCategoryRemarkChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_GoodsDetailCategory")]
+	public partial class t_GoodsDetailCategory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private int _MainCategoryID;
+		
+		private string _CategoryCode;
+		
+		private string _CategoryRemark;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnMainCategoryIDChanging(int value);
+    partial void OnMainCategoryIDChanged();
+    partial void OnCategoryCodeChanging(string value);
+    partial void OnCategoryCodeChanged();
+    partial void OnCategoryRemarkChanging(string value);
+    partial void OnCategoryRemarkChanged();
+    #endregion
+		
+		public t_GoodsDetailCategory()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainCategoryID", DbType="Int NOT NULL")]
+		public int MainCategoryID
+		{
+			get
+			{
+				return this._MainCategoryID;
+			}
+			set
+			{
+				if ((this._MainCategoryID != value))
+				{
+					this.OnMainCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._MainCategoryID = value;
+					this.SendPropertyChanged("MainCategoryID");
+					this.OnMainCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryCode", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string CategoryCode
+		{
+			get
+			{
+				return this._CategoryCode;
+			}
+			set
+			{
+				if ((this._CategoryCode != value))
+				{
+					this.OnCategoryCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryCode = value;
+					this.SendPropertyChanged("CategoryCode");
+					this.OnCategoryCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryRemark", DbType="NVarChar(500)")]
+		public string CategoryRemark
+		{
+			get
+			{
+				return this._CategoryRemark;
+			}
+			set
+			{
+				if ((this._CategoryRemark != value))
+				{
+					this.OnCategoryRemarkChanging(value);
+					this.SendPropertyChanging();
+					this._CategoryRemark = value;
+					this.SendPropertyChanged("CategoryRemark");
+					this.OnCategoryRemarkChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Goods")]
+	public partial class t_Goods : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private int _DetailCategoryID;
+		
+		private string _GoodsCode;
+		
+		private string _GoodsRemark;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnDetailCategoryIDChanging(int value);
+    partial void OnDetailCategoryIDChanged();
+    partial void OnGoodsCodeChanging(string value);
+    partial void OnGoodsCodeChanged();
+    partial void OnGoodsRemarkChanging(string value);
+    partial void OnGoodsRemarkChanged();
+    #endregion
+		
+		public t_Goods()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DetailCategoryID", DbType="Int NOT NULL")]
+		public int DetailCategoryID
+		{
+			get
+			{
+				return this._DetailCategoryID;
+			}
+			set
+			{
+				if ((this._DetailCategoryID != value))
+				{
+					this.OnDetailCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._DetailCategoryID = value;
+					this.SendPropertyChanged("DetailCategoryID");
+					this.OnDetailCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GoodsCode", DbType="NVarChar(50)")]
+		public string GoodsCode
+		{
+			get
+			{
+				return this._GoodsCode;
+			}
+			set
+			{
+				if ((this._GoodsCode != value))
+				{
+					this.OnGoodsCodeChanging(value);
+					this.SendPropertyChanging();
+					this._GoodsCode = value;
+					this.SendPropertyChanged("GoodsCode");
+					this.OnGoodsCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GoodsRemark", DbType="NVarChar(500)")]
+		public string GoodsRemark
+		{
+			get
+			{
+				return this._GoodsRemark;
+			}
+			set
+			{
+				if ((this._GoodsRemark != value))
+				{
+					this.OnGoodsRemarkChanging(value);
+					this.SendPropertyChanging();
+					this._GoodsRemark = value;
+					this.SendPropertyChanged("GoodsRemark");
+					this.OnGoodsRemarkChanged();
 				}
 			}
 		}
