@@ -105,6 +105,7 @@ function user_register() {
   var uEmail = $("#txt_email").val();
   var uPwd = $("#txt_pwd").val();
   var uPwdOk = $("#txt_okpwd").val();
+  var uPhone = $("#txt_phone").val();
   if (uName == "") {
     alert("请输入用户名");
     $("#txt_username").focus();
@@ -124,7 +125,12 @@ function user_register() {
     alert("请选择国籍");
     $("#Drp_GuoJi").focus();
     return false;
-  }
+}
+if (uPhone == "") {
+    alert("请输入联系电话");
+    $("#txt_phone").focus();
+    return false;
+}
   if (uEmail == "") {
     alert("请输入邮箱");
     $("#txt_email").focus();
@@ -134,7 +140,12 @@ function user_register() {
     alert("请输入有效的邮箱地址");
     $("#txt_email").focus();
     return false;
-  }
+}
+else if (checkPhone(uPhone) == false) {
+    alert("请输入正确的联系电话");
+    $("#txt_phone").focus();
+    return false;
+}
   else if (uPwd == "") {
     alert("请输入密码");
     $("#txt_pwd").focus();
@@ -155,7 +166,7 @@ function user_register() {
           type: "POST",
           url: "Handler.ashx",
           contentType: "application/x-www-form-urlencoded; charset=utf-8",
-          data: "flag=register&uName=" + uName + "&uPwd=" + uPwdOk + "&uType=" + uType + "&uGuoJi=" + uGuoJi + "&uEmail=" + uEmail + "&pageFlag=" + pageFlag + "&r=" + rand,
+          data: "flag=register&uName=" + uName + "&uPwd=" + uPwdOk + "&uType=" + uType + "&uGuoJi=" + uGuoJi + "&uEmail=" + uEmail +"&uPhone="+uPhone+ "&pageFlag=" + pageFlag + "&r=" + rand,
           success: function (data) {
               var v = data.toString().split(';;;;;')[0];
               var v2 = data.toString().split(';;;;;')[1];
@@ -205,6 +216,16 @@ function user_register() {
           }
       });
   }
+}
+
+//验证联系电话
+function checkPhone(phone) {
+    var isMobile = /^1[3|4|5|8][0-9]\d{4,8}$/;
+    var isPhone = /^((0\d{2,3})-)?(\d{7,8})(-(\d{3,}))?$/;
+    if (!isMobile.test(phone) && !isPhone.test(phone)) {
+        return false;
+    }
+    return true;
 }
 //邮箱验证
 function checkEmail(email) {
