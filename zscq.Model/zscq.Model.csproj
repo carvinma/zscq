@@ -79,6 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataMember.cs">
+      <DependentUpon>DataMember.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DataMember.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,6 +96,17 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataProduct.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataSystem.cs">
+      <DependentUpon>DataSystem.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataTradeMark.cs">
+      <DependentUpon>DataTradeMark.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataTradeMark.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataTradeMark.dbml</DependentUpon>
     </Compile>
     <Compile Include="DataView.designer.cs">
       <AutoGen>True</AutoGen>
@@ -121,6 +135,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="DataTradeMark.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataTradeMark.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DataZscq.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataZscq.designer.cs</LastGenOutput>
@@ -205,6 +224,11 @@
   <ItemGroup>
     <None Include="DataZscq.dbml.layout">
       <DependentUpon>DataZscq.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataTradeMark.dbml.layout">
+      <DependentUpon>DataTradeMark.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

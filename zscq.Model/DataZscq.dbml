@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="DataZscqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=zscq" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.t_PatentOperateNote" Member="t_PatentOperateNote">
     <Type Name="t_PatentOperateNote">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

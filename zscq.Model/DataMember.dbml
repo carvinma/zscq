@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_zscq" Class="DataMemberDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=122.115.63.123,1473;Initial Catalog=db_zscq;Persist Security Info=True;User ID=zscq" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.t_Collection" Member="t_Collection">
     <Type Name="t_Collection">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
