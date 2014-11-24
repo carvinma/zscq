@@ -85,6 +85,7 @@
     <Compile Include="dal_Adv.cs" />
     <Compile Include="dal_Advisory.cs" />
     <Compile Include="dal_AdvType.cs" />
+    <Compile Include="dal_Apply.cs" />
     <Compile Include="dal_Bank.cs" />
     <Compile Include="dal_Brand.cs" />
     <Compile Include="dal_Collection.cs" />
