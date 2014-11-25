@@ -1,9 +1,163 @@
-﻿function showDelDailog(id) {
+﻿
+function showGoods() {
+
+    var html1 = '<div class="popbox" id="p_popbox">' +
+      '<div class="mainhelp">' +
+        '<div class="mainhelp_main">' +
+          '<ul>' +
+            '<li>商品/服务关键字：' +
+              '<input type="text" class="input1" id="searchkey1">' +
+            '</li>' +
+            ' <li>类别：' +
+              '<select class="select1" id="searchsort1">' +
+                '<option>全部</option>' +
+  '<option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option>              </select>' +
+           '</li>' +
+            '<li>' +
+              '<input type="button" value="查询" class="input2" onclick="searchdetail()">' +
+            '</li>' +
+          '</ul>' +
+        '</div>' +
+        '<div class="mainhelp_foot">' +
+          '<table border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0"><tbody><tr>' +
+           '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</th>' +
+              '<th width="920" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">说明</th></tr>';
+
+    var html2 = '<div class="msg-div">' +
+            '<p>给卖家留言：</p><div class="field"><textarea id="message" name="message"></textarea></div>' +
+            '</div>';
+    $.ajax({
+        type: "POST",
+        url: "Handler.ashx",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data: "flag=maincategory",
+        dataType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                html1 = html1 + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showsort(01)">' + data[i].CategoryCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].CategoryRemark + '</td></tr>';
+            }
+            html1 = html1 + '</tbody></table></div></div></div>';
+            jboxShow(html1, html2);
+        }
+    });
+    //     $.ajax({
+    //         url: "goods_details.php",
+    //         type: "POST",
+    //         data: { key: key, sort: sort },
+    //         dataType: "json",
+    //         success: function (data) {//如果调用php成功
+    //             //显示提示信息
+
+    //             $("#notice_search").next('p').remove();
+    //             $("#notice_search").after('<p>您的关键字为<span style="color: #f00;">' + key + '</span>，所查到的结果共有<span style="color: #f00;">' + data.length + '</span>条</p>');
+
+    //             //显示查询结果
+    //             $("#search_row").next("table").remove();
+
+    //             $("#search_row").after('<table class="main_lei" ><tr id="search_rowtr"><th width="100"><input type="checkbox" onclick="doSelect_search()" id="selectall_search" /></th><th width="100">类别</th><th width="400">类似群号</th><th width="100">商品编号</th><th width="600">商品名称</th></tr></table>');
+
+    //             if (data.length == 0) {
+    //                 $("#search_rowtr").after('<tr><td colspan="5" style="color:red;">没有相关数据，请确认您输入的关键字是否正确！<td></tr>');
+    //             } else {
+    //                 for (var i = 0; i < data.length; i++) {
+
+    //                     var j = data[i]['pid'].substr(0, 2);
+    //                     var quyu = i % 2;
+    //                     if (quyu == 1) {
+    //                         $("#search_rowtr").after('<tr><td><input type="checkbox" name="chkItem_search" value="' + data[i]['id'] + '"  /></td><td>' + j + '</td><td>' + data[i]['pid'] + ' </td><td>' + data[i]['sid'] + '</td><td>' + data[i]['name'] + '</td></tr>');
+    //                     } else {
+    //                         $("#search_rowtr").after('<tr class="changebg"><td><input type="checkbox" name="chkItem_search" value="' + data[i]['id'] + '"  /></td><td>' + j + '</td><td>' + data[i]['pid'] + ' </td><td>' + data[i]['sid'] + '</td><td>' + data[i]['name'] + '</td></tr>');
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     });
+
+
+}
+function jboxShow(html1, html2) {
+
+    var data = {};
+    var states = {};
+    states.state1 = {
+        content: html1,
+        buttons: { '取消': 0 },
+        submit: function (v, h, f) {
+            if (v == 0) {
+                return true; // close the window
+            }
+            else {
+                h.find('.errorBlock').hide('fast', function () { $(this).remove(); });
+
+                data.amount = f.amount; //或 h.find('#amount').val();
+                if (data.amount == '' || parseInt(data.amount) < 1) {
+                    $('<div class="errorBlock" style="display: none;">请输入购买数量！</div>').prependTo(h).show('fast');
+                    return false;
+                }
+                data.address = f.address;
+                if (data.address == '') {
+                    $('<div class="errorBlock" style="display: none;">请输入收货地址！</div>').prependTo(h).show('fast');
+                    return false;
+                }
+
+                $.jBox.nextState(); //go forward
+                // 或 $.jBox.goToState('state2')
+            }
+
+            return false;
+        }
+    };
+    states.state2 = {
+        content: html2,
+        buttons: { '上一步': -1, '提交': 1, '取消': 0 },
+        buttonsFocus: 1, // focus on the second button
+        submit: function (v, o, f) {
+            if (v == 0) {
+                return true; // close the window
+            } else if (v == -1) {
+                $.jBox.prevState() //go back
+                // 或 $.jBox.goToState('state1');
+            }
+            else {
+                data.message = f.message;
+
+                // do ajax request here
+                $.jBox.nextState('<div class="msg-div">正在提交...</div>');
+                // 或 $.jBox.goToState('state3', '<div class="msg-div">正在提交...</div>')
+
+                // asume that the ajax is done, than show the result
+                var msg = [];
+                msg.push('<div class="msg-div">');
+                msg.push('<p>下面是提交的数据</p>');
+                for (var p in data) {
+                    msg.push('<p>' + p + ':' + data[p] + '</p>');
+                }
+                msg.push('</div>');
+                window.setTimeout(function () { $.jBox.nextState(msg.join('')); }, 2000);
+            }
+
+            return false;
+        }
+    };
+    states.state3 = {
+        content: '',
+        buttons: {} // no buttons
+    };
+    states.state4 = {
+        content: '',
+        buttons: { '确定': 0 }
+    };
+    //$.jBox.open(states, '选择分类', '80%', '80%');
+    $.jBox.open(states, '提交订单', '80%', 550, { top: 20 });
+}
+
+function showDelDailog(id) {
     $.jBox.confirm("确定要删除该申请人吗？<div style='display:none'>"+id+"</div>", "提示", submit);
 }
 var submit = function (v, h, f) {
     if (v == "ok") {
         var id = h.find("div:hidden").html();
+        $.jBox.tip("正在删除数据...", 'loading');
         //eval($("#" + id).next("a").attr("href"));
         $.ajax({
             type: "POST",
@@ -12,7 +166,7 @@ var submit = function (v, h, f) {
             data: "flag=delete&id=" + id,
             success: function (data) {
                 if (data == "1") {
-                    jBox.tip("删除成功！", 'info');
+                    jBox.tip("删除成功！", 'success');
                     $("#btnQuery").click();
                 }
                 else {

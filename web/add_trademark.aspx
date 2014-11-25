@@ -18,6 +18,9 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/trademark.css" />
     <script src="js/tooltips.js" type="text/javascript"></script>
+    <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+    <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         var tmptoCity, tmptoCityCode;
         $(function () {
@@ -430,7 +433,7 @@
                                                                             <strong>商标类别</strong>:
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="t_daoqi0" type="text" runat="server" class="font12000" readonly="readonly" />
+                                                                            <input id="t_daoqi0" type="text" runat="server" class="font12000" onclick="showGoods()"/>
                                                                         </td>
                                                                         <td valign="middle">
                                                                             &nbsp;

@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
+using System.IO;
 using zscq.DAL;
 using zscq.Model;
 using zscq.BLL;
@@ -29,6 +32,7 @@ public class HandlerCode
     dal_PatentFee DALPF = new dal_PatentFee();
     dal_Address Darea = new dal_Address();
     dal_Apply apply = new dal_Apply();
+    dal_Goods goods = new dal_Goods();
     public HandlerCode()
     {
         //
@@ -37,6 +41,36 @@ public class HandlerCode
     }
     #region 商标
 
+    public void GetMainCategory(HttpContext context)
+    {
+        var lstGoods= goods.MainCategory_SelectAll().ToList();
+        //JavaScriptSerializer jss = new JavaScriptSerializer();
+       // string JsonStr = jss.Serialize(p);
+        string JsonStr = string.Empty;
+        DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstGoods.GetType());
+        using (MemoryStream ms = new MemoryStream())
+        {
+            serializer.WriteObject(ms, lstGoods);
+            JsonStr= Encoding.UTF8.GetString(ms.ToArray());
+        }
+
+        context.Response.Write(JsonStr);
+    }
+    public void GetDetailCategory(HttpContext context)
+    {
+        var lstGoods = goods.MainCategory_SelectAll();
+        //JavaScriptSerializer jss = new JavaScriptSerializer();
+        // string JsonStr = jss.Serialize(p);
+        string JsonStr = string.Empty;
+        DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstGoods.GetType());
+        using (MemoryStream ms = new MemoryStream())
+        {
+            serializer.WriteObject(ms, lstGoods);
+            JsonStr = Encoding.UTF8.GetString(ms.ToArray());
+        }
+
+        context.Response.Write(JsonStr);
+    }
     public void DelApplyByID(HttpContext context)
     {
         int iResult = 0;

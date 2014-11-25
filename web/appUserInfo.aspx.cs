@@ -109,7 +109,8 @@ public partial class appUserInfo : System.Web.UI.Page
     }
     protected void AspNetPager1_PageChanged(object sender, EventArgs e)
     {
-        BindList();
+        if (!string.IsNullOrEmpty(HiddenApplyType.Text))
+            BindList(int.Parse(HiddenApplyType.Text));
     }
     public string GetProvinceName(object provincedId)
     {
@@ -141,6 +142,7 @@ public partial class appUserInfo : System.Web.UI.Page
 
     protected void btnQuery_Click(object sender, EventArgs e)
     {
+        AspNetPager1.CurrentPageIndex = 1;
         if (!string.IsNullOrEmpty(HiddenApplyType.Text))
             BindList(int.Parse(HiddenApplyType.Text));
     }

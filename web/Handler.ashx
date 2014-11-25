@@ -96,6 +96,12 @@ public class Handler : HandlerCode, IHttpHandler, IRequiresSessionState
                     case "delete":
                         DelApplyByID(context);
                         break;
+                    case "maincategory":
+                        GetMainCategory(context);
+                        break;
+                    case "detailcategory":
+                        GetDetailCategory(context);
+                        break;
                     default:
                         context.Response.Write("未知的类型");
                         break;
