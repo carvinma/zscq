@@ -101,6 +101,12 @@ public class Handler : HandlerCode, IHttpHandler, IRequiresSessionState
                         break;
                     case "detailcategory":
                         GetDetailCategory(context);
+                        break;                        
+                    case "goods":
+                        GetGoodsByDetailCategoryID(context);
+                        break;
+                    case "searchgoodsdetail":
+                        SearchGoodsDetail(context);
                         break;
                     default:
                         context.Response.Write("未知的类型");

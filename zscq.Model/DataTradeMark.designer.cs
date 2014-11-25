@@ -105,6 +105,14 @@ namespace zscq.Model
 				return this.GetTable<t_Goods>();
 			}
 		}
+		
+		public System.Data.Linq.Table<t_GoodsSearch> t_GoodsSearch
+		{
+			get
+			{
+				return this.GetTable<t_GoodsSearch>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Apply")]
@@ -975,6 +983,123 @@ namespace zscq.Model
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class t_GoodsSearch
+	{
+		
+		private int _id;
+		
+		private string _DetailCategoryCode;
+		
+		private string _GoodsCode;
+		
+		private string _GoodsRemark;
+		
+		private string _MainCategoryCode;
+		
+		private int _MainCategoryID;
+		
+		public t_GoodsSearch()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DetailCategoryCode", CanBeNull=false)]
+		public string DetailCategoryCode
+		{
+			get
+			{
+				return this._DetailCategoryCode;
+			}
+			set
+			{
+				if ((this._DetailCategoryCode != value))
+				{
+					this._DetailCategoryCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GoodsCode", CanBeNull=false)]
+		public string GoodsCode
+		{
+			get
+			{
+				return this._GoodsCode;
+			}
+			set
+			{
+				if ((this._GoodsCode != value))
+				{
+					this._GoodsCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GoodsRemark", CanBeNull=false)]
+		public string GoodsRemark
+		{
+			get
+			{
+				return this._GoodsRemark;
+			}
+			set
+			{
+				if ((this._GoodsRemark != value))
+				{
+					this._GoodsRemark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainCategoryCode", CanBeNull=false)]
+		public string MainCategoryCode
+		{
+			get
+			{
+				return this._MainCategoryCode;
+			}
+			set
+			{
+				if ((this._MainCategoryCode != value))
+				{
+					this._MainCategoryCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainCategoryID")]
+		public int MainCategoryID
+		{
+			get
+			{
+				return this._MainCategoryID;
+			}
+			set
+			{
+				if ((this._MainCategoryID != value))
+				{
+					this._MainCategoryID = value;
+				}
 			}
 		}
 	}

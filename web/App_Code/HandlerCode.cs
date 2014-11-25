@@ -58,19 +58,55 @@ public class HandlerCode
     }
     public void GetDetailCategory(HttpContext context)
     {
-        var lstGoods = goods.MainCategory_SelectAll();
-        //JavaScriptSerializer jss = new JavaScriptSerializer();
-        // string JsonStr = jss.Serialize(p);
         string JsonStr = string.Empty;
-        DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstGoods.GetType());
-        using (MemoryStream ms = new MemoryStream())
+        if (context.Request["id"] != null && context.Request["id"].ToString() != "")
         {
-            serializer.WriteObject(ms, lstGoods);
-            JsonStr = Encoding.UTF8.GetString(ms.ToArray());
+            var lstGoods = goods.DetailCategory_Select_MainCategoryId(int.Parse(context.Request["id"])).ToList();
+          
+            DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstGoods.GetType());
+            using (MemoryStream ms = new MemoryStream())
+            {
+                serializer.WriteObject(ms, lstGoods);
+                JsonStr = Encoding.UTF8.GetString(ms.ToArray());
+            }
         }
-
         context.Response.Write(JsonStr);
     }
+
+    public void GetGoodsByDetailCategoryID(HttpContext context)
+    {
+        string JsonStr = string.Empty;
+        if (context.Request["id"] != null && context.Request["id"].ToString() != "")
+        {
+            var lstGoods = goods.Goods_Select_DetailCategoryId(int.Parse(context.Request["id"])).ToList();
+
+            DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstGoods.GetType());
+            using (MemoryStream ms = new MemoryStream())
+            {
+                serializer.WriteObject(ms, lstGoods);
+                JsonStr = Encoding.UTF8.GetString(ms.ToArray());
+            }
+        }
+        context.Response.Write(JsonStr);
+    }
+    public void SearchGoodsDetail(HttpContext context)
+    {
+        string JsonStr = string.Empty;
+        if (context.Request["key"] != null && context.Request["key"].ToString() != "" 
+            && context.Request["maincategoryid"] != null && context.Request["maincategoryid"].ToString() != "")
+        {
+            var lstGoods = goods.Goods_SearchDetail(context.Request["key"].ToString(), int.Parse(context.Request["maincategoryid"].ToString())).ToList();
+
+            DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstGoods.GetType());
+            using (MemoryStream ms = new MemoryStream())
+            {
+                serializer.WriteObject(ms, lstGoods);
+                JsonStr = Encoding.UTF8.GetString(ms.ToArray());
+            }
+        }
+        context.Response.Write(JsonStr);
+    }
+
     public void DelApplyByID(HttpContext context)
     {
         int iResult = 0;

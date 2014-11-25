@@ -373,6 +373,33 @@ namespace zscq.DAL
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
         }
         /// <summary>
+        /// 获取商品
+        /// </summary>
+        /// <param name="key">商品名称</param>
+        /// <param name="maincategoryid">大类ID</param>
+        /// <returns></returns>
+        public IQueryable<t_GoodsSearch> Goods_SearchDetail(string key,int maincategoryid)
+        {
+            var iquery = from a in mark.t_Goods
+                         join b in mark.t_GoodsDetailCategory on a.DetailCategoryID equals b.i_Id
+                         join c in mark.t_GoodsMainCategory on b.MainCategoryID equals c.i_Id
+                         where a.GoodsRemark.Contains(key) orderby a.GoodsCode ascending
+                         select new t_GoodsSearch
+                         {
+                             id = a.i_Id,
+                             GoodsCode = a.GoodsCode,
+                             GoodsRemark = a.GoodsRemark,
+                             DetailCategoryCode = b.CategoryCode,
+                             MainCategoryCode = c.CategoryCode,
+                             MainCategoryID=c.i_Id
+                         };
+            if (maincategoryid > 0)
+            {
+                iquery = from i in iquery where i.MainCategoryID.Equals(maincategoryid) select i;
+            }
+            return iquery;
+        }
+        /// <summary>
         /// 获取指定商品小类的商品
         /// </summary>
         /// <param name="ddl"></param>

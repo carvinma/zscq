@@ -1,31 +1,67 @@
 ﻿
-function showGoods() {
-
-    var html1 = '<div class="popbox" id="p_popbox">' +
+var htmlCommon1 = '<div class="popbox" id="p_popbox">' +
       '<div class="mainhelp">' +
-        '<div class="mainhelp_main">' +
-          '<ul>' +
+        '<div>';
+var htmlCommon2 = '</div><div class="mainhelp_foot">';
+ var htmltable= '<table border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0"><tbody><tr>' +
+           '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</th>' +
+              '<th width="920" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">说明</th></tr>';
+var htmlCommon3 = '</tbody></table></div></div></div>';
+
+var htmlddl1 = '<div class="mainhelp_main"><ul>' +
             '<li>商品/服务关键字：' +
               '<input type="text" class="input1" id="searchkey1">' +
             '</li>' +
             ' <li>类别：' +
               '<select class="select1" id="searchsort1">' +
-                '<option>全部</option>' +
-  '<option>01</option><option>02</option><option>03</option><option>04</option><option>05</option><option>06</option><option>07</option><option>08</option><option>09</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option><option>32</option><option>33</option><option>34</option><option>35</option><option>36</option><option>37</option><option>38</option><option>39</option><option>40</option><option>41</option><option>42</option><option>43</option><option>44</option><option>45</option>              </select>' +
+                '<option val="-1">全部</option>';
+
+var htmlddl2 = '</select>' +
            '</li>' +
             '<li>' +
               '<input type="button" value="查询" class="input2" onclick="searchdetail()">' +
             '</li>' +
-          '</ul>' +
-        '</div>' +
-        '<div class="mainhelp_foot">' +
-          '<table border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0"><tbody><tr>' +
-           '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</th>' +
-              '<th width="920" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">说明</th></tr>';
+          '</ul></div>';
 
-    var html2 = '<div class="msg-div">' +
-            '<p>给卖家留言：</p><div class="field"><textarea id="message" name="message"></textarea></div>' +
-            '</div>';
+function searchdetail() {
+    var key = $("#searchkey1").val();
+    //var sort = ($("#searchsort1 option:selected").text());
+    var sort =$("#searchsort1 option:selected").attr("val");
+    //判断用户是否输入，自动去除空格
+    key = key.replace(/[ ]/g, "");
+    if (key == '') {
+        return false;
+    }
+    var htmltable = '<table border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0"><tbody><tr>' +
+           '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><input type="checkbox" onclick="doSelect()" id="selectall"></th>' +
+           '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</th>' +
+           '<th width="300" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类似群号</th>' +
+           '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品编号</th>' +
+           '<th width="600" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</th></tr>';
+    $.ajax({
+        url: "Handler.ashx",
+        type: "POST",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data: "flag=searchgoodsdetail&key=" + key + "&maincategoryid=" + sort,
+        dataType: "json",
+        success: function (data) {
+            
+            var html = '';
+            var tmp = '';
+            for (var i = 0; i < data.length; i++) {
+                tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chkItem" value="' + data[i].id + '"></td><td align="center" bgcolor="#FFFFFF">' + data[i].MainCategoryCode + '</td><td align="center" bgcolor="#FFFFFF">' + data[i].DetailCategoryCode + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSelectGoods(' + "'" + data[i].id + "')" + '"' + ">" + data[i].GoodsCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].GoodsRemark + '</td></tr>';
+            }
+            if(tmp=='')
+                tmp = '<tr><td align="center" bgcolor="#FFFFFF" colspan="5" style="color:red;">没有相关数据，请确认您输入的关键字是否正确！<td></tr>';
+            var resultHtml = '<div class="nowstyle"><p> 您的关键字为<span style="color: #f00;">' + key + '</span>，所查到的结果共有<span style="color: #f00;">' + data.length + '</span> 条</p></div>';
+            html = htmlCommon1 + resultHtml + htmlCommon2 + htmltable + tmp + htmlCommon3;
+            $.jBox.goToState('state3', html);
+        }
+    });
+}
+function showGoods() {
+    var html1 = '';
+    var html2 = '';
     $.ajax({
         type: "POST",
         url: "Handler.ashx",
@@ -33,47 +69,69 @@ function showGoods() {
         data: "flag=maincategory",
         dataType: "json",
         success: function (data) {
+            var tmphtml = '';
+            var htmlddl = '';
             for (var i = 0; i < data.length; i++) {
-                html1 = html1 + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showsort(01)">' + data[i].CategoryCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].CategoryRemark + '</td></tr>';
+                htmlddl = htmlddl + '<option val="' + data[i].i_Id + '">' + data[i].CategoryCode + '</option>';
+                tmphtml = tmphtml + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSort(' + "'" + data[i].i_Id + "','" + data[i].CategoryCode + "','" + data[i].CategoryRemark + "')" + '"' + ">" + data[i].CategoryCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].CategoryRemark + '</td></tr>';
             }
-            html1 = html1 + '</tbody></table></div></div></div>';
+            html1 = htmlCommon1 + htmlddl1 + htmlddl + htmlddl2 + htmlCommon2 + htmltable + tmphtml + htmlCommon3;
             jboxShow(html1, html2);
         }
     });
-    //     $.ajax({
-    //         url: "goods_details.php",
-    //         type: "POST",
-    //         data: { key: key, sort: sort },
-    //         dataType: "json",
-    //         success: function (data) {//如果调用php成功
-    //             //显示提示信息
+}
+function showSort(maminid, maincode, mainremark) {
+    var selectedHtml = '<div class="nowstyle"><p> 当前类别为:<br><span>【' + maincode + '】' + mainremark + '</span> </p></div>';
+    var html = '';
+    //var tmp = '';
+    $.ajax({
+        type: "POST",
+        url: "Handler.ashx",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data: "flag=detailcategory&id=" + maminid,
+        dataType: "json",
+        success: function (data) {
+            var msg = [];
+            for (var i = 0; i < data.length; i++) {
+                //tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSelectGoods(' + "'" + data[i].i_Id + "')" + '"' + ">" + data[i].CategoryCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].CategoryRemark + '</td></tr>';
+                msg.push('<tr><td height="32" align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSelectGoods(');
+                msg.push("'"); msg.push(data[i].i_Id); msg.push("',");
+                msg.push("'"); msg.push(data[i].CategoryCode); msg.push("',");
+                msg.push("'"); msg.push(data[i].CategoryRemark); msg.push("',");
+                msg.push("'"); msg.push(maincode); msg.push("',");
+                msg.push("'"); msg.push(mainremark); msg.push("'");
+                msg.push(')">'); msg.push(data[i].CategoryCode); msg.push('</a></td>');
+                msg.push('<td align="center" bgcolor="#FFFFFF">'); msg.push(data[i].CategoryRemark); msg.push('</td></tr>')
+            }
 
-    //             $("#notice_search").next('p').remove();
-    //             $("#notice_search").after('<p>您的关键字为<span style="color: #f00;">' + key + '</span>，所查到的结果共有<span style="color: #f00;">' + data.length + '</span>条</p>');
+            html = htmlCommon1 + selectedHtml + htmlCommon2 + htmltable + msg.join('') + htmlCommon3;
+            $.jBox.goToState('state2', html);
+        }
+    });
 
-    //             //显示查询结果
-    //             $("#search_row").next("table").remove();
-
-    //             $("#search_row").after('<table class="main_lei" ><tr id="search_rowtr"><th width="100"><input type="checkbox" onclick="doSelect_search()" id="selectall_search" /></th><th width="100">类别</th><th width="400">类似群号</th><th width="100">商品编号</th><th width="600">商品名称</th></tr></table>');
-
-    //             if (data.length == 0) {
-    //                 $("#search_rowtr").after('<tr><td colspan="5" style="color:red;">没有相关数据，请确认您输入的关键字是否正确！<td></tr>');
-    //             } else {
-    //                 for (var i = 0; i < data.length; i++) {
-
-    //                     var j = data[i]['pid'].substr(0, 2);
-    //                     var quyu = i % 2;
-    //                     if (quyu == 1) {
-    //                         $("#search_rowtr").after('<tr><td><input type="checkbox" name="chkItem_search" value="' + data[i]['id'] + '"  /></td><td>' + j + '</td><td>' + data[i]['pid'] + ' </td><td>' + data[i]['sid'] + '</td><td>' + data[i]['name'] + '</td></tr>');
-    //                     } else {
-    //                         $("#search_rowtr").after('<tr class="changebg"><td><input type="checkbox" name="chkItem_search" value="' + data[i]['id'] + '"  /></td><td>' + j + '</td><td>' + data[i]['pid'] + ' </td><td>' + data[i]['sid'] + '</td><td>' + data[i]['name'] + '</td></tr>');
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     });
-
-
+}
+function showSelectGoods(detailid, detailcode, detailremark, maincode, mainremark) {
+    var htmltable = '<table border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0"><tbody><tr>' +
+           '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><input type="checkbox" onclick="doSelect()" id="selectall"></th>' +
+           '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">编号</th>' +
+           '<th width="880" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</th></tr>';
+    var selectedHtml = '<div class="nowstyle"><p> 当前类别为:<br><span>【' + maincode + '】' + mainremark + '</span> </p>' + '<p> 当前类别为:<br><span>【' + detailcode + '】' + detailremark + '</span> </p></div>';
+    var html = '';
+    var tmp = '';
+    $.ajax({
+        type: "POST",
+        url: "Handler.ashx",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data: "flag=goods&id=" + detailid,
+        dataType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chkItem" value="' + data[i].i_Id + '"></td><td height="32" align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSelectGoods(' + "'" + data[i].i_Id + "')" + '"' + ">" + data[i].GoodsCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].GoodsRemark + '</td></tr>';
+            }
+            html = htmlCommon1 + selectedHtml+htmlCommon2 + htmltable + tmp + htmlCommon3;
+            $.jBox.goToState('state3', html, { title: '商品名称' });
+        }
+    });
 }
 function jboxShow(html1, html2) {
 
@@ -88,7 +146,6 @@ function jboxShow(html1, html2) {
             }
             else {
                 h.find('.errorBlock').hide('fast', function () { $(this).remove(); });
-
                 data.amount = f.amount; //或 h.find('#amount').val();
                 if (data.amount == '' || parseInt(data.amount) < 1) {
                     $('<div class="errorBlock" style="display: none;">请输入购买数量！</div>').prependTo(h).show('fast');
@@ -101,7 +158,7 @@ function jboxShow(html1, html2) {
                 }
 
                 $.jBox.nextState(); //go forward
-                // 或 $.jBox.goToState('state2')
+                // 或 $.jBox.goToState('state2','ddddddd')
             }
 
             return false;
@@ -109,7 +166,7 @@ function jboxShow(html1, html2) {
     };
     states.state2 = {
         content: html2,
-        buttons: { '上一步': -1, '提交': 1, '取消': 0 },
+        buttons: { '返回上一级': -1, '取消': 0 },
         buttonsFocus: 1, // focus on the second button
         submit: function (v, o, f) {
             if (v == 0) {
@@ -124,7 +181,6 @@ function jboxShow(html1, html2) {
                 // do ajax request here
                 $.jBox.nextState('<div class="msg-div">正在提交...</div>');
                 // 或 $.jBox.goToState('state3', '<div class="msg-div">正在提交...</div>')
-
                 // asume that the ajax is done, than show the result
                 var msg = [];
                 msg.push('<div class="msg-div">');
@@ -141,16 +197,33 @@ function jboxShow(html1, html2) {
     };
     states.state3 = {
         content: '',
-        buttons: {} // no buttons
+        buttons: { '返回上一级': -1,'添加所选商品':1 ,'取消': 0}, // no buttons
+         submit: function (v, o, f) {
+            if (v == 0) {
+                return true; // close the window
+            } else if (v == -1) {
+                $.jBox.prevState() //go back 或 $.jBox.goToState('state1');
+            }
+            return false;
+        }
     };
-    states.state4 = {
-        content: '',
-        buttons: { '确定': 0 }
-    };
+    
     //$.jBox.open(states, '选择分类', '80%', '80%');
-    $.jBox.open(states, '提交订单', '80%', 550, { top: 20 });
+    $.jBox.open(states, '选择分类', '80%', 550, { top: 20 });
 }
 
+//全选+全不选
+function doSelect() {
+    var state = $("#selectall").is(':checked');
+    var arr = document.getElementsByName("chkItem");
+    for (var i = 0; i < arr.length; i++) {
+        if (state == false) {
+            arr[i].checked = false;
+        } else {
+            arr[i].checked = true;
+        }
+    }
+}
 function showDelDailog(id) {
     $.jBox.confirm("确定要删除该申请人吗？<div style='display:none'>"+id+"</div>", "提示", submit);
 }

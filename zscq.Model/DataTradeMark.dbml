@@ -46,4 +46,14 @@
       <Column Name="GoodsRemark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="" Member="t_GoodsSearch">
+    <Type Name="t_GoodsSearch">
+      <Column Member="id" Type="System.Int32" CanBeNull="false" />
+      <Column Member="DetailCategoryCode" Type="System.String" CanBeNull="false" />
+      <Column Member="GoodsCode" Type="System.String" CanBeNull="false" />
+      <Column Member="GoodsRemark" Type="System.String" CanBeNull="false" />
+      <Column Member="MainCategoryCode" Type="System.String" CanBeNull="false" />
+      <Column Member="MainCategoryID" Type="System.Int32" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>
