@@ -70,7 +70,14 @@ namespace zscq.DAL
                 return 0;
             }
         }
-
+        /// <summary>
+        /// 获取全部申请人
+        /// </summary>
+        /// <returns></returns>
+        public IQueryable<t_Apply> Apply_SelectAll(int MemberID)
+        {
+            return mark.t_Apply.Where(p => p.MemberID == MemberID).OrderByDescending(p => p.i_Id);
+        }
         public IQueryable<t_Apply> Apply_SelectPage(int pageindex, int pagesize, int type, string keyword, int MemberID, ref int count)
         {
             var iquery = mark.t_Apply.Where(p => p.MemberID == MemberID);
