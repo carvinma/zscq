@@ -1172,7 +1172,7 @@ namespace zscq.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainFees", DbType="Decimal(18,0)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainFees", DbType="Decimal(18,2)")]
 		public System.Nullable<decimal> MainFees
 		{
 			get
@@ -1212,7 +1212,7 @@ namespace zscq.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceedFees", DbType="Decimal(18,0)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceedFees", DbType="Decimal(18,2)")]
 		public System.Nullable<decimal> ExceedFees
 		{
 			get

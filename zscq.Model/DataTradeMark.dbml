@@ -59,9 +59,9 @@
   <Table Name="dbo.t_GoodsCategoryFees" Member="t_GoodsCategoryFees">
     <Type Name="t_GoodsCategoryFees">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MainFees" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="MainFees" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="ItemNum" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExceedFees" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ExceedFees" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
