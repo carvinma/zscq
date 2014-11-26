@@ -153,6 +153,17 @@
             </li>
             <%} if (flag[51][0].ToString() == "1")
               {%>
+            <li class="explode menu-item1" key="zl_2_2" name="menu1">&nbsp;费用设置
+              <ul>
+                <%if (flag[21][0].ToString() == "1")
+                  { %><li class="menu-item">&nbsp;<a href="Shop_M_Trademark.aspx" target="main">申请类别费用</a></li><%} %>
+                <%if (flag[21][1].ToString() == "1")
+                  { %><li class="menu-item">&nbsp;<a href="Shop_A_Trademark.aspx" target="main">商标添加</a></li>
+                  <li class="menu-item">&nbsp;<a href="Shop_Apl_Trademark.aspx" target="main">导入商标</a></li><%} %>
+              </ul>
+            </li>
+            <%} if (flag[51][0].ToString() == "1")
+              {%>
             <li class="explode menu-item1" key="zl_2_2" name="menu1">&nbsp;商标信息管理
               <ul>
                 <%if (flag[21][0].ToString() == "1")

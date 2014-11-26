@@ -107,6 +107,25 @@ public class HandlerCode
         context.Response.Write(JsonStr);
     }
 
+    //拼音下拉选择常用申请人
+    public void GetApplyByUserID(HttpContext context)
+    {
+        string JsonStr = string.Empty;
+        if (context.Request["userid"] != null && context.Request["userid"].ToString() != ""
+            && context.Request["applytype"] != null && context.Request["applytype"].ToString()!="")
+        {
+            int userid = int.Parse(context.Request["userid"].ToString());
+            int applytype = int.Parse(context.Request["applytype"].ToString());
+            var lstApplys = apply.Apply_SelectAll(userid).Where(p=>p.ApplyType==applytype).ToList();
+            DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstApplys.GetType());
+            using (MemoryStream ms = new MemoryStream())
+            {
+                serializer.WriteObject(ms, lstApplys);
+                JsonStr = Encoding.UTF8.GetString(ms.ToArray());
+            }
+        }
+        context.Response.Write(JsonStr);
+    }
     public void DelApplyByID(HttpContext context)
     {
         int iResult = 0;

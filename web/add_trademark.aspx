@@ -20,10 +20,12 @@
     <script src="js/tooltips.js" type="text/javascript"></script>
     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+    <script src="js/js.js" type="text/javascript"></script>
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         var tmptoCity, tmptoCityCode;
         $(function () {
+            InitProCityArea();
             $("#txt_applyname").focus(function () {
                 tmptoCity = $("#txt_applyname").val();
                 $("#txt_applyname").val('');
@@ -42,10 +44,35 @@
                 if (window.event.keyCode == 13) {
                     event.returnValue = false;
                     event.cancel = true;
-                } 
+                }
             });
-           
-            $("#txt_applyname").suggest(citys, { hot_list: commoncitys, dataContainer: '#applyname_3word', attachObject: "#suggest" });
+
+            $('input[type=radio][name="person"]').change(function () {
+                var applyType = $('input:radio[name="person"]:checked').val();
+                var userid = $('#Hi_MemberId').val();
+                if (userid > 0) {
+                    GetApplysDDL(userid, applyType);
+                }
+            });
+
+
+            $("#chkSound").click(function () {
+                var state = $(this).is(':checked');
+                if (state == false) {
+                    $("#soundfiles").hide();
+                } else {
+                    $("#soundfiles").show();
+                }
+            });
+
+            //            var userid = $('#Hi_MemberId').val();
+            //            if (userid > 0) {
+            //                var applyType = $("#RdoCorp").attr("checked") == true ? 0 : 1;
+            //                alert($("#RdoPeople").attr("checked"));
+            //                //alert(applyType);
+            //                GetApplysDDL(userid, applyType);
+            //            }
+            //$("#txt_applyname").suggest(citys, { hot_list: commoncitys, dataContainer: '#applyname_3word', attachObject: "#suggest" });
         });
     </script>
     <style type="text/css">
@@ -213,8 +240,8 @@
                                                                             <strong>选择申请人类别</strong>：
                                                                         </td>
                                                                         <td>
-                                                                            <input id="Radio5" type="radio" name="person" />自然人&nbsp;&nbsp;&nbsp;&nbsp;<input
-                                                                                id="Radio6" type="radio" name="person" />企业单位
+                                                                            <input id="RdoPeople" type="radio" name="person" value="1" />自然人&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            <input id="RdoCorp" type="radio" name="person" value="0" />企业单位
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -222,11 +249,12 @@
                                                                             <strong>申请人名称：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                            <input type="text" id="txt_applyname" class="font12000" maxlength="50" runat="server"
-                                                                                clientidmode="Static" />
-                                                                            <span style="color: Red;" id="sb_num1">*</span>
+                                                                            <input runat="server" id="txt_applyname" type="text" 
+                                                                            onblur="check_ApplyUser('name_div')" name="" value="" placeholder="" 
+                                                                            class="font12000" maxlength="50" clientidmode="Static" autocomplete="off"/>
+                                                                            <span style="color: Red;">*</span>  <span class="status error" id="name_div_error"></span>
                                                                             <input type="hidden" name="applyname_3word" runat="server" clientidmode="Static"
-                                                                                id="applyname_3word" value="CAN" />
+                                                                                id="applyname_3word" value="CAN" /><br />
                                                                             <div id="suggest" class="ac_results" style="width: 173px;">
                                                                             </div>
                                                                         </td>
@@ -237,7 +265,7 @@
                                                                         </td>
                                                                         <td align="left">
                                                                             <asp:FileUpload ID="FileUpload5" runat="server" Width="200px" />
-                                                                            &nbsp;
+                                                                            &nbsp;<a id="aBusinessLicense" href='' title='点击查看' target='_blank' style="display:none">营业执照副本已上传</a>
                                                                             <div>
                                                                                 <span style="color: Red;">请将营业执照副本盖公章后扫描为彩色上传，格式为pdf，大小不超过2M</span></div>
                                                                         </td>
@@ -247,19 +275,31 @@
                                                                             <strong>申请人行政区划：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                            <input type="text" name="s6" runat="server" id="Sb_Regname" onblur="checkOk('Sb_Regname');Checksbzhenshu(0);"
-                                                                                class="font12000 tooltip" tips="请与商标注册证书内容一致" maxlength="50" /><span style="color: Red;"
-                                                                                    id="Sb_Regname1">*</span><span></span>
+                                                                         <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
+                                  <option value="">请选择：</option></select>
+                                  <select id="live_city" name="live_city" onchange="SelArea(this.value);">
+                                  <option value="">请选择：</option></select>
+                                  <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
+                                  <option value="">请选择：</option></select>
+                                    <span style="color: Red;">*</span>
+                                   <span class="status error" id="area_div_error"></span>
+                                    <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />
+                                    <input type="hidden" runat="server" id="Hi_city" clientidmode="Static" />
+                                    <input type="hidden" runat="server" id="Hi_country" clientidmode="Static" />
+
+                                                                          
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td height="46" align="right">
+                                                                        <td height="32" align="right">
                                                                             <strong>申请人地址：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                            <textarea cols="20" rows="2" type="text" name="s6" id="Sb_Reg_Address" style="width: 295px;
-                                                                                height: 40px;" onblur="checkOk('Sb_Reg_Address');" class="font12000 tooltip"
-                                                                                maxlength="250" runat="server"></textarea><span style="color: Red;" id="Sb_Reg_Address1">*</span><span></span>
+                                                                           <span class="fl selected-address" id="areaNameTxt"></span>
+                                                                            <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" style="ime-mode: disabled;" id="txt_address" maxlength="50" type="text" 
+                                                                               name="" value=""/>
+                                                                               <span style="color: Red;">*</span> 
+                                                                                <span class="status error" id="address_div_error"></span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -267,10 +307,10 @@
                                                                             <strong>联系人：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                            <input type="text" name="s6" id="Sb_Reg_youbian" onblur="checkOk('Sb_Reg_youbian');"
-                                                                                class="font12000 tooltip" maxlength="10" tips="只能输入数字" runat="server" onkeyup="this.value=this.value.replace(/\D/g,'')"
-                                                                                onafterpaste="this.value=this.value.replace(/\D/g,'')" /><span style="color: Red;"
-                                                                                    id="Sb_Reg_youbian1">*</span><span></span>
+                                                                            <input type="text" name="s6" id="txt_ContactPerson" onblur="check_ApplyUser('ContactPerson_div')"
+                                                                                class="font12000 tooltip" maxlength="50" runat="server"/>
+                                                                                <span style="color: Red;">*</span>
+                                                                                <span class="status error" id="ContactPerson_div_error"></span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -278,8 +318,9 @@
                                                                             <strong>联系电话：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                            <input type="text" name="s6" runat="server" id="Sb_passTime" onblur="checkOk('Sb_passTime');" /><span
-                                                                                style="color: Red;" id="Sb_passTime1">*</span><span></span>
+                                                                             <input runat="server" id="txt_phone" onblur="check_ApplyUser('phone_div')" class="font12000" type="text" name="" value="" placeholder="" maxlength="20" />
+                                                                             <span style="color: Red;">*</span>
+                                                                             <span class="status error" id="phone_div_error"></span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -287,17 +328,18 @@
                                                                             <strong>传真（含地区号）：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                            <input id="t_daoqi" type="text" runat="server" class="font12000" readonly="readonly" />
+                                                                        <input runat="server" id="txt_fax" onblur="check_ApplyUser('fax_div')" class="font12000" type="text" name="" value="" placeholder="" maxlength="20" />
+                                                                          <span class="status error" id="fax_div_error"></span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr id="sbmiaoshu">
                                                                         <td height="32" align="right">
                                                                             <strong>邮政编码：</strong>
                                                                         </td>
-                                                                        <td align="left" style="text-li: left;">
-                                                                            <input type="text" name="s6" id="Sb_miaosu" class="font12000" maxlength="50" runat="server"
-                                                                                onblur="checkOk('Sb_miaosu');" onclick="value='';focus()" style="width: 300px;" /><span
-                                                                                    style="color: Red;" id="Sb_miaosu1">*</span>
+                                                                        <td align="left" style="text-li:left;">
+                                                                         <input class="font12000"  onblur="check_ApplyUser('postcode_div')" runat="server" onkeypress="event.returnValue=IsDigit();" style="ime-mode: disabled;" id="txt_postcode" maxlength="6" type="text" name="" value="" placeholder=""/>
+                                                                         <span style="color: Red;">*</span>
+                                                                         <span class="status error" id="postcode_div_error"></span>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -340,7 +382,7 @@
                                                                         <td valign="middle">
                                                                             &nbsp;
                                                                         </td>
-                                                                        <td width="200" valign="middle">
+                                                                        <td width="429" valign="middle">
                                                                             &nbsp;
                                                                         </td>
                                                                     </tr>
@@ -375,13 +417,13 @@
                                                                             <strong><span>声音商标</span></strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="Checkbox1" type="checkbox" />
+                                                                            <input id="chkSound" type="checkbox" />
                                                                         </td>
                                                                         <td valign="middle">
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td height="32" align="right" valign="middle">
+                                                                    <tr id="soundfiles" style="display:none">
+                                                                        <td height="32" align="right"  valign="middle" >
                                                                             <strong>声音文件</strong>：
                                                                         </td>
                                                                         <td valign="middle">
@@ -389,8 +431,7 @@
                                                                             <div>
                                                                                 <span style="color: Red;">样本格式为mp3或wav，大小不超过5M</span></div>
                                                                         </td>
-                                                                        <td width="429" valign="middle">
-                                                                            &nbsp;
+                                                                        <td valign="middle">
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -398,7 +439,7 @@
                                                                             <strong>商标说明</strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <textarea cols="20" rows="2" type="text" name="s6" id="txt_address" style="width: 300px;
+                                                                            <textarea cols="20" rows="2" type="text" name="s6" id="txt_remark" style="width: 293px;
                                                                                 height: 180px;" class="font12000" maxlength="250" runat="server"></textarea>
                                                                         </td>
                                                                         <td valign="middle">
@@ -430,21 +471,44 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td align="right" valign="middle">
-                                                                            <strong>商标类别</strong>:
+                                                                            <strong>商标类别</strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="t_daoqi0" type="text" runat="server" class="font12000" onclick="showGoods()"/>
+                                                                            <input id="sortarr" type="text" runat="server" readonly="readonly" class="font12000" onclick="showGoods()"/>
                                                                         </td>
                                                                         <td valign="middle">
                                                                             &nbsp;
                                                                         </td>
                                                                     </tr>
+                                                                    <tr>
+                                                                        <td align="right" valign="middle">
+                                                                            &nbsp;</td>
+                                                                        <td valign="middle">
+                                                                            &nbsp;</td>
+                                                                        <td valign="middle">
+                                                                            &nbsp;</td>
+                                                                    </tr>
                                                                 </table>
                                                             </td>
                                                         </tr>
+                                                        <tr><td align="center"></td>
+                                                        </tr>
+                                                        <tr><td align="center">
+                                                           <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0" id="th_table">
+                                                            <tr id="th_box">
+                                                             <td width="58" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">序号</td>
+                                                              <td width="78" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</td>
+                                                              <td width="108" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类似群</td>
+                                                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品编码</td>
+                                                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</td>
+                                                               <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
+                                                            </tr>
+                                                           </table>
+                                                        </td>
+                                                        </tr>
                                                         <tr>
                                                             <td align="left">
-                                                                &nbsp;
+                                                                
                                                             </td>
                                                         </tr>
                                                     </table>

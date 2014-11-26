@@ -23,6 +23,135 @@ var htmlddl2 = '</select>' +
             '</li>' +
           '</ul></div>';
 
+//删除已经选择的商品的js
+function del_onegoods(startnum) {
+    var strval = new Array();
+    //获取以下数组的长度
+    $("tr[classname='arr_goods']").each(function (i) {
+        // strval.push($(this).val());
+        strval[i] = new Array();
+        strval[i].push($(this).attr("val"));
+        strval[i].push($(this).find("td:eq(1)").text());
+        strval[i].push($(this).find("td:eq(2)").text());
+        strval[i].push($(this).find("td:eq(3)").text());
+        strval[i].push($(this).find("td:eq(4)").text());
+    });
+//    var arr = new Array();
+//    for (var i = 0; i < strval.length; i++) {
+//        var j = parseInt(i) + parseInt(1);
+//        arr[i] = new Array();
+//        for (var k = 0; k < 4; k++) {
+//            arr[i].push($("#" + k + j + "").text());
+//        }
+//    }
+    //数组重构
+    var arr = strval.reverse();
+    var starticn = parseInt(startnum) - parseInt(1);
+    var brr = new Array();
+    arr.splice(starticn, 1);
+    //清空table重新添加内容
+    $("#th_table tr:gt(0)").remove();
+    for (var m = 0; m < arr.length; m++) {
+        var n = parseInt(m) + parseInt(1);
+        //$("#th_box").after('<tr classname="arr_goods" name="arr_goods[]" id="arr_goods' + n + '"><td id="4' + n + '">' + n + '</td><td id="3' + n + '"><input type="hidden" name="hid_sort[]" classname="hid_classsort" value="' + arr[m][3] + '">' + arr[m][3] + '</td><td id="2' + n + '"><input type="hidden" name="hid_group[]" value="' + arr[m][2] + '">' + arr[m][2] + '</td><td id="1' + n + '"><input type="hidden" name="hid_goods[]" value="' + arr[m][1] + '">' + arr[m][1] + '</td><td id="0' + n + '"><input type="hidden" name="hid_goodsname[]" classname="' + sel_sortid + '"  value="' + arr[m][0] + '">' + arr[m][0] + '</td><td><a href="javascript:;" style="color:red;" onclick="del_onegoods(' + n + ')">删除</a></td></tr>');
+        $("#th_box").after('<tr classname="arr_goods"  name="arr_goods[]" val="' + arr[m][0] + '" id="arr_goods' + n + '"><td height="25" align="center" bgcolor="#FFFFFF" id="4' + n + '">' + n + '</td><td height="25" align="center" bgcolor="#FFFFFF" id="3' + n + '"><input type="hidden" name="hid_sort[]" classname="hid_classsort" value="' + arr[m][1] + '">' + arr[m][1] + '</td><td height="25" align="center" bgcolor="#FFFFFF" id="2' + n + '"><input type="hidden" name="hid_group[]" value="' + arr[m][2] + '">' + arr[m][2] + '</td><td height="25" align="center" bgcolor="#FFFFFF" id="1' + n + '"><input type="hidden" name="hid_goods[]" value="' + arr[m][3] + '">' + arr[m][3] + '</td><td height="25" align="center" bgcolor="#FFFFFF" id="0' + n + '"><input type="hidden" name="hid_goodsname[]" classname="sel_sortid"  value="' + arr[m][4] + '">' + arr[m][4] + '</td><td height="25" align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(' + n + ')">删除</a></td></tr>');
+    }
+
+    //更改分类
+    var sortarr = $("#sortarr").val();
+    var s_arr = sortarr.split(",");
+
+    var p_arr = new Array();
+    //获取以下数组的长度
+    $("tr[classname='arr_goods']").each(function () {
+
+        p_arr.push($(this).val());
+
+    });
+    if (p_arr.length > 0) {
+        var mrr = new Array();
+        for (var i = 0; i < p_arr.length; i++) {
+            var j = parseInt(i) + parseInt(1);
+            if ($.inArray($("#" + 3 + j + "").text(), mrr) == -1) {
+                mrr.push($("#" + 3 + j + "").text());
+            }
+        }
+        mrr.sort();
+        var qarr = mrr.join(",");
+        $("#sortarr").val(qarr);
+    } else {
+        $("#sortarr").val('');
+    }
+    //更改商品数量的js
+   // var startnum = $("#numcount").val();
+ //   var endnum = parseInt(startnum) - parseInt(1);
+  //  $("#numcount").val(endnum); //统计选择商品的数量
+}
+
+//获取选中数据的value值
+function addgoods() {
+    var strval = new Array();
+    $("input[name='chkItem']:checked").each(function () {
+        //strval.push($(this).val());
+        strval.push([$(this).val(), $(this).parent().next().html(), $(this).parent().next().next().html()]);
+    });
+    if (strval.length == 0) {
+        return false;
+    }
+    //获取选中的商品服务所有的分类和类似群
+    var sel_sortid = $("#sel_sortid").text();
+    var sel_groupid = $("#sel_groupid").text();
+
+    //获取已经选择分类
+    var sortarr = $("#sortarr").val();
+    if (sortarr == '') {
+        $("#sortarr").val(sel_sortid);
+    }
+    else {
+        var parr = new Array();
+        parr = sortarr.split(",");
+        //判断是否已经存在选择的类
+        var state = 0;
+        for (var i = 0; i < parr.length; i++) {
+            if (parr[i] == sel_sortid) {
+                state = 1;
+                break;
+            }
+        }
+        if (state == 0) {
+            parr.push(sel_sortid);
+        }
+        //排序
+        parr.sort();
+        var qarr = parr.join(",");
+        $("#sortarr").val(qarr);
+    }
+    //获取已经选择的商品服务的sid
+    var arr_goods = new Array();
+    //获取以下数组的长度
+    $("tr[classname='arr_goods']").each(function () {
+        //arr_goods.push($(this).val());
+        //alert($(this).attr("val"));
+        arr_goods.push($(this).attr("val"));
+    });
+    var endnum = $("tr[classname='arr_goods']").length;
+    $.each(strval, function (i, n) {
+        if ($.inArray(n[0], arr_goods) == '-1') {
+            endnum = endnum + parseInt(1);
+            $("#th_box").after('<tr classname="arr_goods" name="arr_goods[]" val="' + n[0] + '" id="arr_goods' +
+      endnum + '"><td height="25" align="center" bgcolor="#FFFFFF" id="4' + endnum + '">' + endnum + '</td><td align="center" bgcolor="#FFFFFF" id="3' + endnum
+      + '"><input type="hidden" classname="hid_classsort" name="hid_sort[]" value="' +
+      sel_sortid + '">' + sel_sortid +
+      '</td><td align="center" bgcolor="#FFFFFF" id="2' + endnum + '"><input type="hidden" name="hid_group[]" value="' +
+       sel_groupid + '">' + sel_groupid +
+       '</td><td align="center" bgcolor="#FFFFFF" id="1' + endnum + '"><input type="hidden" name="hid_goods[]" value="'
+       + n[1] + '">' + n[1] + '</td><td align="center" bgcolor="#FFFFFF" id="0' + endnum + '"><input type="hidden" name="hid_goodsname[]" classname="'
+       + sel_sortid + '" value="' + n[2] + '">'
+       + n[2] + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(' + endnum + ')">删除</a></td></tr>');
+        }
+    });
+}
+var returnPostion = 0; //当搜索商品时返回上一级的标志
 function searchdetail() {
     var key = $("#searchkey1").val();
     //var sort = ($("#searchsort1 option:selected").text());
@@ -32,6 +161,7 @@ function searchdetail() {
     if (key == '') {
         return false;
     }
+    returnPostion = 1;
     var htmltable = '<table border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0"><tbody><tr>' +
            '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><input type="checkbox" onclick="doSelect()" id="selectall"></th>' +
            '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</th>' +
@@ -76,6 +206,7 @@ function showGoods() {
                 tmphtml = tmphtml + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSort(' + "'" + data[i].i_Id + "','" + data[i].CategoryCode + "','" + data[i].CategoryRemark + "')" + '"' + ">" + data[i].CategoryCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].CategoryRemark + '</td></tr>';
             }
             html1 = htmlCommon1 + htmlddl1 + htmlddl + htmlddl2 + htmlCommon2 + htmltable + tmphtml + htmlCommon3;
+            returnPostion = 0;
             jboxShow(html1, html2);
         }
     });
@@ -115,7 +246,7 @@ function showSelectGoods(detailid, detailcode, detailremark, maincode, mainremar
            '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><input type="checkbox" onclick="doSelect()" id="selectall"></th>' +
            '<th width="100" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">编号</th>' +
            '<th width="880" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</th></tr>';
-    var selectedHtml = '<div class="nowstyle"><p> 当前类别为:<br><span>【' + maincode + '】' + mainremark + '</span> </p>' + '<p> 当前类别为:<br><span>【' + detailcode + '】' + detailremark + '</span> </p></div>';
+    var selectedHtml = '<div class="nowstyle"><p> 当前类别为:<br><span>【<span id="sel_sortid">' + maincode + '</span>】' + mainremark + '</span> </p>' + '<p> 当前类别为:<br><span>【<span id="sel_groupid">' + detailcode + '</span>】' + detailremark + '</span> </p></div>';
     var html = '';
     var tmp = '';
     $.ajax({
@@ -126,7 +257,7 @@ function showSelectGoods(detailid, detailcode, detailremark, maincode, mainremar
         dataType: "json",
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
-                tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chkItem" value="' + data[i].i_Id + '"></td><td height="32" align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSelectGoods(' + "'" + data[i].i_Id + "')" + '"' + ">" + data[i].GoodsCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].GoodsRemark + '</td></tr>';
+                tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chkItem" value="' + data[i].i_Id + '"></td><td height="32" align="center" bgcolor="#FFFFFF">'+ data[i].GoodsCode + '</td><td align="center" bgcolor="#FFFFFF">' + data[i].GoodsRemark + '</td></tr>';
             }
             html = htmlCommon1 + selectedHtml+htmlCommon2 + htmltable + tmp + htmlCommon3;
             $.jBox.goToState('state3', html, { title: '商品名称' });
@@ -139,7 +270,7 @@ function jboxShow(html1, html2) {
     var states = {};
     states.state1 = {
         content: html1,
-        buttons: { '取消': 0 },
+        buttons: { },
         submit: function (v, h, f) {
             if (v == 0) {
                 return true; // close the window
@@ -191,18 +322,25 @@ function jboxShow(html1, html2) {
                 msg.push('</div>');
                 window.setTimeout(function () { $.jBox.nextState(msg.join('')); }, 2000);
             }
-
             return false;
         }
     };
     states.state3 = {
         content: '',
-        buttons: { '返回上一级': -1,'添加所选商品':1 ,'取消': 0}, // no buttons
-         submit: function (v, o, f) {
+        buttons: { '返回上一级': -1, '添加所选商品': 1, '取消': 0 }, // no buttons
+        submit: function (v, o, f) {
             if (v == 0) {
                 return true; // close the window
             } else if (v == -1) {
-                $.jBox.prevState() //go back 或 $.jBox.goToState('state1');
+                if (returnPostion == 1) {
+                    $.jBox.goToState('state1');
+                    returnPostion = 0
+                }
+                else $.jBox.prevState();
+            }
+            else if (v == 1) {
+                addgoods();
+                return true;
             }
             return false;
         }
@@ -231,7 +369,6 @@ var submit = function (v, h, f) {
     if (v == "ok") {
         var id = h.find("div:hidden").html();
         $.jBox.tip("正在删除数据...", 'loading');
-        //eval($("#" + id).next("a").attr("href"));
         $.ajax({
             type: "POST",
             url: "Handler.ashx",
@@ -250,360 +387,57 @@ var submit = function (v, h, f) {
     }
     return true;
 };
-
-//$("#txt_applyname").suggest(citys, { hot_list: commoncitys, dataContainer: '#fromCity_3word', attachObject: "#suggest" });
-
-//初始化常用机场城市
-var commoncitys = new Array();
-
-commoncitys[0] = new Array('SZX', '深圳', 'SHENZHEN', 'SZ');
-
-commoncitys[1] = new Array('PEK', '北京', 'BEIJING', 'BJ');
-
-commoncitys[2] = new Array('SHA', '上海', 'SHANGHAI', 'SH');
-
-commoncitys[3] = new Array('CAN', '广州', 'GUANGZHOU', 'GZ');
-
-commoncitys[4] = new Array('CTU', '成都', 'CHENGDU', 'CD');
-
-commoncitys[5] = new Array('HGH', '杭州', 'HANGZHOU', 'HZ');
-
-commoncitys[6] = new Array('CSX', '长沙', 'CHANGSHA', 'CS');
-
-commoncitys[7] = new Array('CKG', '重庆', 'CHONGQING', 'CQ');
-
-commoncitys[8] = new Array('KMG', '昆明', 'KUNMING', 'KM');
-
-commoncitys[9] = new Array('XIY', '西安', 'XIAN', 'XA');
-
-commoncitys[10] = new Array('WUH', '武汉', 'WUHAN', 'WH');
-
-commoncitys[11] = new Array('NKG', '南京', 'NANJING', 'NJ');
-
-commoncitys[12] = new Array('TAO', '青岛', 'QINGDAO', 'QD');
-
-commoncitys[13] = new Array('SYX', '三亚', 'SANYA', 'SY');
-
-commoncitys[14] = new Array('XMN', '厦门', 'XIAMEN', 'XM');
-
-
-//初始化所有国内机场城市
-var citys = new Array();
-// A
-
-citys[0] = new Array('SHA', '上海', 'SHANGHAI', 'SH');
-
-citys[1] = new Array('HYN', '黄岩', 'HUANGYAN', 'HY');
-
-citys[2] = new Array('HGH', '杭州', 'HANGZHOU', 'HZ');
-
-citys[3] = new Array('YIW', '义乌', 'YIWU', 'YW');
-
-citys[4] = new Array('JUZ', '衢州', 'JUZHOU', 'QZ');
-
-citys[5] = new Array('HSN', '舟山(普陀山)', 'ZHOUSHAN', 'ZS');
-
-citys[6] = new Array('WNZ', '温州', 'WENZHOU', 'WZ');
-
-citys[7] = new Array('NGB', '宁波', 'NINGBO', 'NB');
-
-citys[8] = new Array('LNJ', '临沧', 'LINCANG', 'LC');
-
-citys[9] = new Array('ZAT', '昭通', 'ZHAOTONG', 'ZT');
-
-citys[10] = new Array('SYM', '思茅', 'SIMAO', 'SM');
-
-citys[11] = new Array('LUM', '芒市', 'MANSHI', 'MS');
-
-citys[12] = new Array('BSD', '保山', 'BAOSHAN', 'BS');
-
-citys[13] = new Array('KMG', '昆明', 'KUNMING', 'KM');
-
-citys[14] = new Array('JHG', '西双版纳', 'XISHUANGBANNA', 'XSBN');
-
-citys[15] = new Array('DLU', '大理', 'DALI', 'DL');
-
-citys[16] = new Array('DIG', '迪庆', 'DIQING', 'DQ');
-
-citys[17] = new Array('LJG', '丽江', 'LIJIANG', 'LJ');
-
-citys[18] = new Array('LXA', '拉萨', 'LASA', 'LS');
-
-citys[19] = new Array('TCG', '塔城', 'TACHENG', 'TC');
-
-citys[20] = new Array('IQM', '且末', 'QIEMO', 'QM');
-
-citys[21] = new Array('KCA', '库车', 'KUCHE', 'KC');
-
-citys[22] = new Array('HTN', '和田', 'HETAN', 'HT');
-
-citys[23] = new Array('HMI', '哈密', 'HAMI', 'HM');
-
-citys[24] = new Array('FYN', '富蕴', 'FUYUN', 'FY');
-
-citys[25] = new Array('AKU', '阿克苏', 'AGESU', 'AKS');
-
-citys[26] = new Array('URC', '乌鲁木齐', 'WULUMUQI', 'WLMQ');
-
-citys[27] = new Array('KHG', '喀什', 'KASHI', 'KS');
-
-citys[28] = new Array('KRL', '库尔勒', 'KUERLE', 'KEL');
-
-citys[29] = new Array('KRY', '克拉玛依', 'KELAMAYI', 'KLMY');
-
-citys[30] = new Array('AAT', '阿勒泰', 'ALETAI', 'ALT');
-
-citys[31] = new Array('YIN', '伊宁', 'YINING', 'YN');
-
-citys[32] = new Array('TSN', '天津', 'TIANJIN', 'TJ');
-
-citys[33] = new Array('AKA', '安康', 'ANKANG', 'AK');
-
-citys[34] = new Array('ENY', '延安', 'YANAN', 'YA');
-
-citys[35] = new Array('HZG', '汉中', 'HANZHONG', 'HZ');
-
-citys[36] = new Array('XIY', '西安', 'XIAN', 'XA');
-
-citys[37] = new Array('UYN', '榆林', 'YULIN', 'YL');
-
-citys[38] = new Array('CIH', '长治', 'CHANGZHI', 'CZ');
-
-citys[39] = new Array('TYN', '太原', 'TAIYUAN', 'TY');
-
-citys[40] = new Array('DAT', '大同', 'DATONG', 'DT');
-
-citys[41] = new Array('YCU', '运城', 'YUNCHENG', 'YC');
-
-citys[42] = new Array('TNA', '济南', 'JINAN', 'JN');
-
-citys[43] = new Array('YNT', '烟台', 'YANTAI', 'YT');
-
-citys[44] = new Array('JNG', '济宁', 'JINING', 'JL');
-
-citys[45] = new Array('DOY', '东营', 'DONGYING', 'DY');
-
-citys[46] = new Array('LYI', '临沂', 'LINYI', 'LY');
-
-citys[47] = new Array('WEF', '潍坊', 'WEIFANG', 'WF');
-
-citys[48] = new Array('TAO', '青岛', 'QINGDAO', 'QD');
-
-citys[49] = new Array('WEH', '威海', 'WEIHAI', 'WH');
-
-citys[50] = new Array('GHN', '广汉', 'GUANGHAN', 'GH');
-
-citys[51] = new Array('DAX', '达县', 'DAXIAN', 'DX');
-
-citys[52] = new Array('CTU', '成都', 'CHENGDU', 'CD');
-
-citys[53] = new Array('MIG', '绵阳', 'MIANYANG', 'MY');
-
-citys[54] = new Array('YBP', '宜宾', 'YIBIN', 'YB');
-
-citys[55] = new Array('LZO', '泸州', 'LUZHOU', 'LZ');
-
-citys[56] = new Array('XIC', '西昌', 'XICHANG', 'XC');
-
-citys[57] = new Array('NAO', '南充', 'NANCHONG', 'NC');
-
-citys[58] = new Array('PZI', '攀枝花', 'PANZHIHUA', 'PZH');
-
-citys[59] = new Array('GOQ', '格尔木', 'GELANMU', 'GEM');
-
-citys[60] = new Array('XNN', '西宁', 'XINING', 'XN');
-
-citys[61] = new Array('ZHY', '中卫', 'ZHONGWEI', 'null');
-
-citys[62] = new Array('INC', '银川', 'YINCHUAN', 'YC');
-
-citys[63] = new Array('XIL', '锡林浩特', 'XILINHAOTE', 'XLHT');
-
-citys[64] = new Array('HLH', '乌兰浩特', 'WULANHAOTE', 'WLHT');
-
-citys[65] = new Array('WUA', '乌海', 'WUHAI', 'WH');
-
-citys[66] = new Array('TGO', '通辽', 'TONGLIAO', 'TL');
-
-citys[67] = new Array('HET', '呼和浩特', 'HUHEHAOTE', 'HHHT');
-
-citys[68] = new Array('DSN', '鄂尔多斯', 'EERDUOSI', 'EEDS');
-
-citys[69] = new Array('NZH', '满洲里', 'MANZHOULI', 'MZL');
-
-citys[70] = new Array('HLD', '海拉尔', 'HAILAER', 'HLE');
-
-citys[71] = new Array('CIF', '赤峰', 'CHIFENG', 'CF');
-
-citys[72] = new Array('BAV', '包头', 'BAOTOU', 'BT');
-
-citys[73] = new Array('CHG', '朝阳', 'CHAOYANG', 'CY');
-
-citys[74] = new Array('SHE', '沈阳', 'SHENYANG', 'SY');
-
-citys[75] = new Array('DLC', '大连', 'DALIAN', 'DL');
-
-citys[76] = new Array('DDG', '丹东', 'DANDONG', 'DD');
-
-citys[77] = new Array('JNZ', '锦州', 'JINZHOU', 'JZ');
-
-citys[78] = new Array('AOG', '鞍山', 'ANSHAN', 'AS');
-
-citys[79] = new Array('KHN', '南昌', 'NANCHANG', 'NC');
-
-citys[80] = new Array('JDZ', '景德镇', 'JINDEZHEN', 'JDZ');
-
-citys[81] = new Array('JIU', '九江', 'JIUJIANG', 'JJ');
-
-citys[82] = new Array('KOW', '赣州', 'GANZHOU', 'GZ');
-
-citys[83] = new Array('JGS', '井冈山', 'JINGGANGSHAN', 'JGS');
-
-citys[84] = new Array('KNC', '吉安', 'JIAN', 'JA');
-
-citys[85] = new Array('LYG', '连云港', 'LIANYUNGANG', 'LYG');
-
-citys[86] = new Array('SZV', '苏州', 'SUZHOU', 'SZ');
-
-citys[87] = new Array('YNZ', '盐城', 'YANCHENG', 'YC');
-
-citys[88] = new Array('XUZ', '徐州', 'XUZHOU', 'XZ');
-
-citys[89] = new Array('NKG', '南京', 'NANJING', 'NJ');
-
-citys[90] = new Array('NTG', '南通', 'NANTONG', 'NT');
-
-citys[91] = new Array('CZX', '常州', 'CHANGZHOU', 'CZ');
-
-citys[92] = new Array('WUX', '无锡', 'WUXI', 'WX');
-
-citys[93] = new Array('TNH', '通化', 'TONGHUA', 'TH');
-
-citys[94] = new Array('JIL', '吉林', 'JILIN', 'JL');
-
-citys[95] = new Array('CGQ', '长春', 'CHANGCHUN', 'CC');
-
-citys[96] = new Array('YNJ', '延吉', 'YANJI', 'YJ');
-
-citys[97] = new Array('HJJ', '芷江', 'ZHIJIANG', 'ZJ');
-
-citys[98] = new Array('DYG', '张家界', 'ZHANGJIAJIE', 'ZJJ');
-
-citys[99] = new Array('CGD', '常德', 'CHANGDE', 'CD');
-
-citys[100] = new Array('CSX', '长沙', 'CHANGSHA', 'CS');
-
-citys[101] = new Array('HNY', '衡阳', 'HENGYANG', 'HY');
-
-citys[102] = new Array('OHE', '漠河', 'MOHE', 'MH');
-
-citys[103] = new Array('HRB', '哈尔滨', 'HAERBIN', 'HRB');
-
-citys[104] = new Array('HEK', '黑河', 'HEIHE', 'HH');
-
-citys[105] = new Array('NDG', '齐齐哈尔', 'QIQIHAER', 'QQHE');
-
-citys[106] = new Array('JMU', '佳木斯', 'JIAMUSI', 'JMS');
-
-citys[107] = new Array('MDG', '牡丹江', 'MUDANJIANG', 'MDJ');
-
-citys[108] = new Array('LYA', '洛阳', 'LUOYANG', 'LY');
-
-citys[109] = new Array('NNY', '南阳', 'NANYANG', 'NY');
-
-citys[110] = new Array('CGO', '郑州', 'ZHENGZHOU', 'ZZ');
-
-citys[111] = new Array('SJW', '石家庄', 'SHIJIAZHUANG', 'SJZ');
-
-citys[112] = new Array('SHP', '秦皇岛', 'QINHUANGDAO', 'QHD');
-
-citys[113] = new Array('HDN', '邯郸', 'HANDAN', 'HD');
-
-citys[114] = new Array('SHS', '沙市', 'SHASHI', 'SS');
-
-citys[115] = new Array('WUH', '武汉', 'WUHAN', 'WH');
-
-citys[116] = new Array('XFN', '襄樊', 'XIANGFAN', 'XF');
-
-citys[117] = new Array('ENH', '恩施', 'ENSHI', 'ES');
-
-citys[118] = new Array('YIH', '宜昌', 'YICHANG', 'YC');
-
-citys[119] = new Array('HAK', '海口', 'HAIKOU', 'HK');
-
-citys[120] = new Array('SYX', '三亚', 'SANYA', 'SY');
-
-citys[121] = new Array('XYI', '兴义', 'XINGYI', 'XY');
-
-citys[122] = new Array('KWE', '贵阳', 'GUIYANG', 'GY');
-
-citys[123] = new Array('TEN', '铜仁', 'TONGREN', 'TR');
-
-citys[124] = new Array('ZYI', '遵义', 'ZUNYI', 'ZY');
-
-citys[125] = new Array('BHY', '北海', 'BEIHAI', 'BH');
-
-citys[126] = new Array('KWL', '桂林', 'GUILIN', 'GL');
-
-citys[127] = new Array('LZH', '柳州', 'LIUZHOU', 'LZ');
-
-citys[128] = new Array('NNG', '南宁', 'NANNING', 'NN');
-
-citys[129] = new Array('BAS', '百色', 'BAISE', 'BS');
-
-citys[130] = new Array('WUZ', '梧州', 'WUZHOU', 'WZ');
-
-citys[131] = new Array('THQ', '天水', 'TIANSHUI', 'null');
-
-citys[132] = new Array('IQN', '庆阳', 'QINGYANG', 'QY');
-
-citys[133] = new Array('CHW', '酒泉', 'JIUQUAN', 'JQ');
-
-citys[134] = new Array('JGN', '嘉峪关', 'JIAYUGUAN', 'JYG');
-
-citys[135] = new Array('DNH', '敦煌', 'DUNHUANG', 'DH');
-
-citys[136] = new Array('LHW', '兰州', 'LANZHOU', 'LZ');
-
-citys[137] = new Array('ZHA', '湛江', 'ZHANJIANG', 'ZJ');
-
-citys[138] = new Array('MXZ', '梅州', 'MEIZHOU', 'MZ');
-
-citys[139] = new Array('ZUH', '珠海', 'ZHUHAI', 'ZH');
-
-citys[140] = new Array('SWA', '汕头', 'SHANTOU', 'ST');
-
-citys[141] = new Array('SZX', '深圳', 'SHENZHEN', 'SZ');
-
-citys[142] = new Array('CAN', '广州', 'GUANGZHOU', 'GZ');
-
-citys[143] = new Array('XMN', '厦门', 'XIAMEN', 'XM');
-
-citys[144] = new Array('WUS', '武夷山', 'WUYISHAN', 'WYS');
-
-citys[145] = new Array('QHU', '泉州', 'QUANZHOU', 'QZ');
-
-citys[146] = new Array('LIC', '连城', 'LIANCHENG', 'LC');
-
-citys[147] = new Array('JJN', '晋江', 'JINJIANG', 'JJ');
-
-citys[148] = new Array('FOC', '福州', 'FUZHOU', 'FZ');
-
-citys[149] = new Array('WXN', '万县', 'WANXIAN', 'WX');
-
-citys[150] = new Array('CKG', '重庆', 'CHONGQING', 'CQ');
-
-citys[151] = new Array('TXN', '黄山', 'HUANGSHAN', 'HS');
-
-citys[152] = new Array('BFU', '蚌埠', 'BENGBU', 'BB');
-
-citys[153] = new Array('FUG', '阜阳', 'FUYANG', 'FY');
-
-citys[154] = new Array('HFE', '合肥', 'HEFEI', 'HF');
-
-citys[155] = new Array('AQG', '安庆', 'ANQING', 'AQ');
-
-citys[156] = new Array('PEK', '北京', 'BEIJING', 'BJ');
+//常用申请联系人
+function GetApplysDDL(userid, applytype) {
+    $.ajax({
+        type: "POST",
+        url: "Handler.ashx",
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data: "flag=applysddl&userid=" + userid + "&applytype=" + applytype,
+        dataType: "json",
+        success: function (data) {
+            var applys = new Array();
+            var commonapplys = new Array();
+            for (var i = 0; i < data.length; i++) {
+                if (i <= 9)
+                    commonapplys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin);
+                applys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin, data[i].MainQualificationPath, data[i].provinceID, data[i].cityID, data[i].areaID, data[i].Address, data[i].PhoneNo, data[i].FaxNo, data[i].PostCode);
+            }
+
+            $("#txt_applyname").suggest(applys, { hot_list: commonapplys, dataContainer: '#applyname_3word', attachObject: "#suggest", onSelect: function () { DisplaySelectedApplyInfo(applys); } });
+        }
+    });
+}
+
+// for add_trademark.aspx 当选中常用申请人时，给页面赋值
+function DisplaySelectedApplyInfo(applys) {
+    var selectapplyid = $("#applyname_3word").val();
+     var findArray=new Array();
+     for(var i=0;i<applys.length;i++) {
+        if(applys[i][0]==selectapplyid)
+        {
+            findArray = applys[i];
+           break;
+        }
+   }
+   //alert(findArray[0]);
+   //
+   if (findArray[4] != null && findArray[4] != "")
+       $("#aBusinessLicense").attr("href", findArray[4]).show();
+   else {
+       $("#aBusinessLicense").attr("href", "");
+       $("#aBusinessLicense").hide();
+   }
+   $("#live_prov").val(findArray[5]).attr("selected", "selected");
+   SelCity(findArray[5], findArray[6]);
+   //$("#live_city").val(findArray[6]).attr("selected", "selected");
+   SelArea(findArray[6], findArray[7]);
+   //$("#live_country").val(findArray[7]);
+   $("#txt_address").val(findArray[8]);
+   $("#txt_phone").val(findArray[9]);
+   $("#txt_fax").val(findArray[10]);
+   $("#txt_postcode").val(findArray[11]);
+}
 
 /**
 * 验证申请人消息提示
@@ -751,7 +585,22 @@ function check_ApplyUser(divId) {
                 errorFlag = true;
                 errorMessage = "手机号码格式不正确";
             }
-        } 
+        }
+    }
+    else if (divId == "ContactPerson_div") {
+        value = $("#txt_ContactPerson").val();
+        if (isEmpty(value)) {
+            errorFlag = true;
+            errorMessage = "请您填写联系人名称";
+        }
+        if (value.length > 50) {
+            errorFlag = true;
+            errorMessage = "联系人名称不能大于50位";
+        }
+        if (!is_forbid(value)) {
+            errorFlag = true;
+            errorMessage = "联系人名称中含有非法字符";
+        }
     }
     if (errorFlag) {
         $("#" + divId + "_error").html(errorMessage);
@@ -775,10 +624,12 @@ function getUrlParam(name) {
 * @param value
 */
 function isEmpty(value) {
+  
     if (value == null || value == "" || value == "undefined" || value == undefined || value == "null") {
         return true;
     }
     else {
+        value = value.toString();
         value = value.replace(/\s/g, "");
         if (value == "") {
             return true;
@@ -952,12 +803,13 @@ function SelProv() {
 }
 
 
-function SelCity(val) {
+function SelCity(val,cityid) {
     var provinceName = isEmpty(val) ? "" : $("#live_prov").find("option:selected").text();
-    $("#areaNameTxt").html(provinceName);
+    $("#areaNameTxt").html(provinceName); 
     $("#live_country").html("<option selected=\"\" value=\"\">请选择：</option>");
     var provinceId = $("#live_prov").find("option:selected").val();
     $("#Hi_prov").val(provinceId);
+
     $.ajax({
         type: "POST",
         url: "Handler.ashx",
@@ -965,6 +817,8 @@ function SelCity(val) {
         data: "flag=selcity&provinceid="+val,
         success: function (data) {
             $("#live_city").html(data);
+            if(cityid!=null)
+               $("#live_city").val(cityid).attr("selected", "selected");
             if (val == null || val == "") {
                 $("#live_city").html("<option selected=\"\" value=\"\">请选择：</option>");
                 $("#live_country").html("<option selected=\"\" value=\"\">请选择：</option>");
@@ -984,7 +838,7 @@ function SelCity(val) {
 * @return   string  返回的option
 */
 
-function SelArea(val) {
+function SelArea(val,areaid) {
     var provinceName = $("#live_prov").find("option:selected").text();
     var cityName = isEmpty(val) ? "" : $("#live_city").find("option:selected").text().replace("市辖区", "").replace("县", "");
     $("#areaNameTxt").text(trimAll(provinceName) + trimAll(cityName));
@@ -997,6 +851,10 @@ function SelArea(val) {
         data: "flag=selarea&cityid=" + val,
         success: function (data) {
             $("#live_country").html(data);
+            if (areaid != null) {
+                $("#live_country").val(areaid).attr("selected", "selected");
+                SetAddress(areaid);
+            }
             if (val == null || val == "") {
                 $("#live_country").html("<option selected=\"\" value=\"\">请选择：</option>");
                 return;

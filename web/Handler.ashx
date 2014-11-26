@@ -108,6 +108,9 @@ public class Handler : HandlerCode, IHttpHandler, IRequiresSessionState
                     case "searchgoodsdetail":
                         SearchGoodsDetail(context);
                         break;
+                    case "applysddl":
+                        GetApplyByUserID(context);
+                        break;
                     default:
                         context.Response.Write("未知的类型");
                         break;

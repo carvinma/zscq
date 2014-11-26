@@ -418,5 +418,39 @@ namespace zscq.DAL
         }
         #endregion
 
+        #region 商品类别费用设置
+
+        public t_GoodsCategoryFees CategoryFees_Select_One()
+        {
+            try
+            {
+                var model = mark.t_GoodsCategoryFees.First();
+                return model;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public int CategoryFees_Update(t_GoodsCategoryFees m)
+        {
+            try
+            {
+                var t = mark.t_GoodsCategoryFees.Single(a => a.i_Id == m.i_Id);
+                t.MainFees = m.MainFees;
+                t.ItemNum = m.ItemNum;
+                t.ExceedFees = m.ExceedFees;
+                t.UpdateTime = DateTime.Now;
+                mark.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        } 
+        #endregion
+
     }
 }
