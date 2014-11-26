@@ -48,12 +48,21 @@
   </Table>
   <Table Name="" Member="t_GoodsSearch">
     <Type Name="t_GoodsSearch">
-      <Column Member="id" Type="System.Int32" CanBeNull="false" />
-      <Column Member="DetailCategoryCode" Type="System.String" CanBeNull="false" />
-      <Column Member="GoodsCode" Type="System.String" CanBeNull="false" />
-      <Column Member="GoodsRemark" Type="System.String" CanBeNull="false" />
-      <Column Member="MainCategoryCode" Type="System.String" CanBeNull="false" />
-      <Column Member="MainCategoryID" Type="System.Int32" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" CanBeNull="false" />
+      <Column Name="DetailCategoryCode" Type="System.String" CanBeNull="false" />
+      <Column Name="GoodsCode" Type="System.String" CanBeNull="false" />
+      <Column Name="GoodsRemark" Type="System.String" CanBeNull="false" />
+      <Column Name="MainCategoryCode" Type="System.String" CanBeNull="false" />
+      <Column Name="MainCategoryID" Type="System.Int32" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_GoodsCategoryFees" Member="t_GoodsCategoryFees">
+    <Type Name="t_GoodsCategoryFees">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MainFees" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ItemNum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExceedFees" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
