@@ -32,6 +32,21 @@
     
     <script src="../js/jquery-1.4.4.js" type="text/javascript"></script>
       <script type="text/javascript">
+          $(function () {
+              $(".numberinput").bind("input propertychange", function () {
+                  var obj = $(this).val();
+                  obj = obj.replace(/[^\d.]/g, ""); //清除“数字”和“.”以外的字符
+                  obj = obj.replace(/^\./g, ""); //验证第一个字符是数字而不是.
+                  obj = obj.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的.
+                  obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+                  $(this).val(obj);
+              }).bind("paste", function () { //CTR+V事件处理 
+                  var obj = $(this).val();
+                  obj = obj.replace(/[^\d.]/g, "").replace(/^\./g, "").replace(/\.{2,}/g, ".");
+                  obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+                  $(this).val(obj);
+              }).css("ime-mode", "disabled");
+          });
           function IsDigit() {
               return (((event.keyCode >= 48) && (event.keyCode <= 57)) || ((event.keyCode >= 96) &&
 (event.keyCode <= 105)) || event.keyCode == 8 || event.keyCode == 46);
@@ -46,6 +61,7 @@
                 - 商品申请大类费用 </span>
         <div style="clear: both">
         </div>
+    <asp:HiddenField ID="HiddenID" runat="server" />
     </h1>
 
     <script type="text/javascript" src="../js/fucties.js"></script>
@@ -53,11 +69,11 @@
     <script type="text/javascript" src="../js/listtb.js"></script>
 
     <div class="form-div">
-        每个大类费用：<input type="text" id="txtMainFees" maxlength="8" onkeydown="event.returnValue=IsDigit()" onkeyup="this.value = this.value.replace(/\D/g, '')" style="ime-mode: disabled;"  size="15" value="" runat="server" />元
+        每个大类费用：<input type="text" id="txtMainFees" maxlength="8" class="numberinput"  size="15" value="" runat="server" />元
         每个大类可包含
-        <input type="text" id="txtItemNum" maxlength="8" onkeydown="event.returnValue=IsDigit()" onkeyup="this.value = this.value.replace(/\D/g, '')" style="ime-mode: disabled;" size="15" runat="server" />
+        <input type="text" id="txtItemNum" maxlength="10" onkeydown="event.returnValue=IsDigit()" onkeyup="this.value = this.value.replace(/\D/g, '')" style="ime-mode: disabled;" size="15" runat="server" />
           商品项目，超出的项目的，每多一项加收
-          <input type="text" id="txtExceedFees" maxlength="8" onkeydown="event.returnValue=IsDigit()" onkeyup="this.value = this.value.replace(/\D/g, '')" style="ime-mode: disabled;"  size="15" runat="server" />元
+          <input type="text" id="txtExceedFees" class="numberinput" maxlength="10" size="15" runat="server" />元
         &nbsp;
         <asp:Button ID="btnOK" runat="server" Text="确定" CssClass="button" 
             onclick="btnOK_Click" />
@@ -105,6 +121,7 @@
     </script>
     <div id="div_a" runat="server">
     </div></form>
+   <asp:Label ID="lblmsg" runat="server" Text=""></asp:Label>
 </body>
 </html>
 <script type="text/javascript" src="../js/ss.js"></script>

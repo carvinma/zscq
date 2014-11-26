@@ -440,7 +440,7 @@
                                                                         </td>
                                                                         <td valign="middle">
                                                                             <textarea cols="20" rows="2" type="text" name="s6" id="txt_remark" style="width: 293px;
-                                                                                height: 180px;" class="font12000" maxlength="250" runat="server"></textarea>
+                                                                                height: 180px;" class="font12000" maxlength="180" runat="server"></textarea>
                                                                         </td>
                                                                         <td valign="middle">
                                                                             <div>

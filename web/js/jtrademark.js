@@ -874,3 +874,26 @@ function SetAddress(val) {
     $("#Hi_country").val(countyId);
     $("#areaNameTxt").text(trimAll(provinceName) + trimAll(cityName) + trimAll(countyName));
 }
+
+
+$("textarea[maxlength]").bind("input propertychange", function () {
+    if ($(this).val().length > $(this).attr("maxlength"))
+        $(this).val($(this).val().substring(0, $(this).attr("maxlength")));
+});
+$(".numberinput").bind("input propertychange", function () {
+    var obj = $(this).val();
+    obj = obj.replace(/[^\d.]/g, ""); //清除“数字”和“.”以外的字符
+    obj = obj.replace(/^\./g, ""); //验证第一个字符是数字而不是.
+    obj = obj.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的.
+    obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+    $(this).val(obj);
+}).bind("paste", function () { //CTR+V事件处理 
+    var obj = $(this).val();
+    obj = obj.replace(/[^\d.]/g, "").replace(/^\./g, "").replace(/\.{2,}/g, ".");
+    obj = obj.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+    $(this).val(obj);
+}).css("ime-mode", "disabled");
+
+$(".intinput").bind("input propertychange paste", function () {
+    $(this).val($(this).val().replace(/[^\d]/g, ''));
+}).css("ime-mode", "disabled");
