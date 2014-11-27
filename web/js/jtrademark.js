@@ -35,6 +35,8 @@ function del_onegoods(startnum) {
         strval[i].push($(this).find("td:eq(2)").text());
         strval[i].push($(this).find("td:eq(3)").text());
         strval[i].push($(this).find("td:eq(4)").text());
+        if (startnum != $(this).find("td:eq(0)").text())
+            goodscalc.add($(this).find("td:eq(1)").text(), 1);
     });
 //    var arr = new Array();
 //    for (var i = 0; i < strval.length; i++) {
@@ -82,6 +84,7 @@ function del_onegoods(startnum) {
     } else {
         $("#sortarr").val('');
     }
+    goodscalc.toChangeDisplay();
     //更改商品数量的js
    // var startnum = $("#numcount").val();
  //   var endnum = parseInt(startnum) - parseInt(1);
@@ -133,11 +136,13 @@ function addgoods() {
         //arr_goods.push($(this).val());
         //alert($(this).attr("val"));
         arr_goods.push($(this).attr("val"));
+        goodscalc.add($(this).find("td:eq(1)").text(), 1);
     });
     var endnum = $("tr[classname='arr_goods']").length;
     $.each(strval, function (i, n) {
         if ($.inArray(n[0], arr_goods) == '-1') {
             endnum = endnum + parseInt(1);
+            goodscalc.add(sel_sortid, 1);
             $("#th_box").after('<tr classname="arr_goods" name="arr_goods[]" val="' + n[0] + '" id="arr_goods' +
       endnum + '"><td height="25" align="center" bgcolor="#FFFFFF" id="4' + endnum + '">' + endnum + '</td><td align="center" bgcolor="#FFFFFF" id="3' + endnum
       + '"><input type="hidden" classname="hid_classsort" name="hid_sort[]" value="' +
@@ -150,6 +155,40 @@ function addgoods() {
        + n[2] + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(' + endnum + ')">删除</a></td></tr>');
         }
     });
+    goodscalc.toChangeDisplay();
+}
+var goodscalc = {
+    v: new Array(),
+    add: function (key, value) { if (!this.v[key]) this.v[key] = 0; this.v[key] += value; },
+    del: function (key, value) { if (!this.v[key]) this.v[key] = 0; this.v[key] -= value; },
+    toString: function () {
+        var s = '';
+        for (var k in this.v)
+        { s += k + '=' + this.v[k]; }
+        return s;
+    },
+    toChangeDisplay: function () {
+        var html = ""; var MainFees = $("#hi_MainFees").val();
+        var ItemNum = $("#hi_ItemNum").val(); var ExceedFees = $("#hi_ExceedFees").val();
+        var sum = 0; var totalgoods = 0;
+        for (var k in this.v) {
+            totalgoods+=this.v[k];
+            if (this.v[k] > ItemNum) {
+                var cost = parseFloat(MainFees) + (parseFloat(this.v[k]) - parseFloat(ItemNum)) * parseFloat(ExceedFees);
+                sum += cost;
+                html += "<p>类别【" + k + "】" + "共选择" + this.v[k] + "个商品项目，超出" + this.v[k] - ItemNum + "个，费用是：" + cost + "元</p><br/>";
+            }
+            else {
+                sum += parseFloat(MainFees);
+                html += "<p>类别【" + k + "】" + "共选择" + this.v[k] + "个商品项目，费用是：" + MainFees + "元</p><br/>";
+            }
+        }
+        if (sum > 0) {
+            html += "<p>共选择" + totalgoods + "个商品项目，费用" + sum + "元</p><br/>";
+        }
+        $("#goodsCalcInfo").html(html);
+        this.v = [];
+    }
 }
 var returnPostion = 0; //当搜索商品时返回上一级的标志
 function searchdetail() {

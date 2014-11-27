@@ -96,6 +96,11 @@
     <input id="hi_usertype" type="hidden" runat="server" />
     <input id="hi_zhitifiles" type="hidden" runat="server" />
     <input id="hi_sbid" type="hidden" runat="server" value="0" />
+
+    <input id="hi_MainFees" type="hidden" runat="server" value="0" />
+    <input id="hi_ItemNum" type="hidden" runat="server" value="0" />
+    <input id="hi_ExceedFees" type="hidden" runat="server" value="0" />
+
     <uc4:zscqtop2 ID="zscqtop21" runat="server" />
     <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -485,13 +490,13 @@
                                                                             &nbsp;</td>
                                                                         <td valign="middle">
                                                                             &nbsp;</td>
-                                                                        <td valign="middle">
+                              f                                          <td valign="middle">
                                                                             &nbsp;</td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
                                                         </tr>
-                                                        <tr><td align="center"></td>
+                                                        <tr><td align="center"><div id="goodsCalcInfo"></div></td>
                                                         </tr>
                                                         <tr><td align="center">
                                                            <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0" id="th_table">

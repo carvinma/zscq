@@ -15,6 +15,10 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         if (!IsPostBack)
         {
             Bind_Page_Member();
+             t_GoodsCategoryFees fees= goods.CategoryFees_Select_One();
+            hi_MainFees.Value = fees.MainFees.Value.ToString();
+            hi_ItemNum.Value = fees.ItemNum.Value.ToString();
+            hi_ExceedFees.Value = fees.ExceedFees.Value.ToString();
         }
     }
     public void Bind_Page_Member()//绑定ID和用户名
