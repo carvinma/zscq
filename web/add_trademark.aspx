@@ -15,12 +15,15 @@
     <script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
     <script src="js/jtrademark.js" type="text/javascript"></script>
     <script src="js/j.suggest.js" type="text/javascript"></script>
+    <script src="js/swfobject.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/trademark.css" />
     <script src="js/tooltips.js" type="text/javascript"></script>
     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
     <script src="js/js.js" type="text/javascript"></script>
+    <script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
+
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         var tmptoCity, tmptoCityCode;
@@ -64,15 +67,49 @@
                     $("#soundfiles").show();
                 }
             });
-
-            //            var userid = $('#Hi_MemberId').val();
-            //            if (userid > 0) {
-            //                var applyType = $("#RdoCorp").attr("checked") == true ? 0 : 1;
-            //                alert($("#RdoPeople").attr("checked"));
-            //                //alert(applyType);
-            //                GetApplysDDL(userid, applyType);
-            //            }
-            //$("#txt_applyname").suggest(citys, { hot_list: commoncitys, dataContainer: '#applyname_3word', attachObject: "#suggest" });
+ 
+            $("#addpicture,#addpicture2").uploadify({
+                'swf': 'js/SWF/uploadify.swf',
+                'uploader': 'Handler.ashx?flag=uploadimage',
+                //'buttonImg': "images/aboutus1s.gif",
+                'buttionClass':'',
+                'buttonText': '选择图片',
+                'queueID': 'fileQueue',
+                'width': '80',
+                'height': '32',
+                'overrideEvents' : ['onDialogClose'],
+                'fileTypeDesc': '选择图片(*.gif *.jpg *.png)',
+                'fileTypeExts': '*.jpg;*.jpge;*.gif;*.png',
+                'auto': true,
+                'multi': false,
+                'fileSizeLimit':'500KB',
+                'queueSizeLimit' : 1,
+                'onUploadSuccess': function (file, data, response) {
+                    $.jBox.closeTip();
+                    $('#Image1').attr('src', 'UploadImages/' + data);
+                    //$('#Image1').show();
+                },
+                'onSelect': function (file) {
+                    $.jBox.tip("正在上传图片，请稍后...", 'loading');
+                },
+                //返回一个错误，选择文件的时候触发
+             'onSelectError':function(file, errorCode, errorMsg){
+            switch(errorCode) {
+                case -100:
+                    alert("上传的文件数量已经超出系统限制的"+$('#addpicture').uploadify('settings','queueSizeLimit')+"个文件！");
+                    break;
+                case -110:
+                    alert("文件 ["+file.name+"] 大小超出系统限制的"+$('#addpicture').uploadify('settings','fileSizeLimit')+"大小！");
+                    break;
+                case -120:
+                    alert("文件 ["+file.name+"] 大小异常！");
+                    break;
+                case -130:
+                    alert("文件 ["+file.name+"] 类型不正确！");
+                    break;
+            }
+        },
+            });
         });
     </script>
     <style type="text/css">
@@ -490,7 +527,7 @@
                                                                             &nbsp;</td>
                                                                         <td valign="middle">
                                                                             &nbsp;</td>
-                              f                                          <td valign="middle">
+                                                                        <td valign="middle">
                                                                             &nbsp;</td>
                                                                     </tr>
                                                                 </table>
@@ -548,7 +585,13 @@
                                                                             图样1
                                                                         </td>
                                                                         <td>
-                                                                            <asp:FileUpload ID="FileUpload3" runat="server" Width="200px" /><div id="sb_namenum1">
+                                         <p>                             
+
+    <div id="addpicture">  
+                </div>  
+   </p> 
+                                                            
+                                                                            &nbsp;<div id="sb_namenum1">
                                                                                 <span style="color: Red;">格式为.jpg.gif.png,不大于500K</span></div>
                                                                         </td>
                                                                         <td>
@@ -564,7 +607,8 @@
                                                                             &nbsp;
                                                                         </td>
                                                                     </tr>
-                                                        </tr>
+
+                                                       
                                                         <tr>
                                                             <td style="height: 50px; width: 260px;" align="center">
                                                                 <asp:Image ID="Image2" runat="server" Width="150px" Height="150px" />
@@ -572,7 +616,8 @@
                                                                 图样2
                                                             </td>
                                                             <td>
-                                                                <asp:FileUpload ID="FileUpload4" runat="server" Width="200px" /><span style="color: Red;">
+                                                            <div id="addpicture2">  </div>  
+                                                                 <span style="color: Red;">
                                                                     <br />
                                                                     格式为.jpg.gif.png,不大于500K</span>
                                                             </td>
@@ -583,7 +628,8 @@
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                </td>
+                                                    </td></tr>
+                                              </td>
                                             </tr>
                                         </table>
                                         <table width="689" border="0" cellspacing="0" cellpadding="0">

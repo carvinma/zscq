@@ -111,6 +111,9 @@ public class Handler : HandlerCode, IHttpHandler, IRequiresSessionState
                     case "applysddl":
                         GetApplyByUserID(context);
                         break;
+                    case "uploadimage":
+                        UploadImg(context);
+                        break;
                     default:
                         context.Response.Write("未知的类型");
                         break;
