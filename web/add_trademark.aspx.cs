@@ -32,4 +32,34 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
             Response.Redirect("Login.aspx?flag=sb&pageurl=" + HttpUtility.UrlEncode(Request.Url.ToString()));
         }
     }
+    protected void btnPreview_Click(object sender, EventArgs e)
+    {
+        txt_applyname.Value.Trim();
+        Hi_prov.Value.Trim();
+        Hi_city.Value.Trim();
+        Hi_country.Value.Trim();
+        txt_address.Value.Trim();
+        txt_ContactPerson.Value.Trim();
+        txt_phone.Value.Trim();
+        txt_fax.Value.Trim();
+        txt_postcode.Value.Trim();
+        txt_remark.Value.Trim();
+
+        sortarr.Value.Trim();//商标类别
+
+         //Radio3DNo.Checked
+        //chkSound.Checked
+    }
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void btnCancle_Click(object sender, EventArgs e)
+    {
+
+    }
 }

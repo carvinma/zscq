@@ -433,9 +433,9 @@
                                                                             <strong><span>是否三维标志</span></strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="Radio1" name="rdo3D" checked="checked" type="radio" />
+                                                                            <input id="Radio3DNo" name="rdo3D" runat="server" checked="checked" type="radio" />
                                                                             否&nbsp;&nbsp;
-                                                                            <input id="Radio3" name="rdo3D" type="radio" />
+                                                                            <input id="Radio3DYES" name="rdo3D" runat="server" type="radio" />
                                                                             是
                                                                         </td>
                                                                         <td valign="middle">
@@ -446,9 +446,9 @@
                                                                             <strong><span>是否颜色组合</span></strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="Radio2" name="rdoColor" checked="checked" type="radio" />
+                                                                            <input id="rdoColorNO" name="rdoColor" runat="server" checked="checked" type="radio" />
                                                                             否&nbsp;&nbsp;
-                                                                            <input id="Radio4" name="rdoColor" type="radio" />
+                                                                            <input id="rdoColorYes" name="rdoColor" runat="server"  type="radio" />
                                                                             是
                                                                         </td>
                                                                         <td valign="middle">
@@ -459,7 +459,7 @@
                                                                             <strong><span>声音商标</span></strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="chkSound" type="checkbox" />
+                                                                            <input id="chkSound" runat="server" type="checkbox" />
                                                                         </td>
                                                                         <td valign="middle">
                                                                         </td>
@@ -652,17 +652,20 @@
                                                                 <table width="400" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
                                                                         <td width="100">
-                                                                            <asp:Button ID="Button2" CssClass="BtnShow" runat="server" Text="预  览" />
+                                                                            <asp:Button ID="btnPreview" CssClass="BtnShow" runat="server" Text="预  览" 
+                                                                                onclick="btnPreview_Click" />
                                                                         </td>
                                                                         <td width="100">
-                                                                            <asp:Button ID="Button5" CssClass="BtnShow" runat="server" Text="保  存" />
+                                                                            <asp:Button ID="btnSave" CssClass="BtnShow" runat="server" Text="保  存" 
+                                                                                onclick="btnSave_Click" />
                                                                         </td>
                                                                         <td width="100">
-                                                                            <asp:Button ID="Button3" UseSubmitBehavior="false" CssClass="BtnShow" runat="server"
-                                                                                Text="确认提交" />
+                                                                            <asp:Button ID="btnSubmit" UseSubmitBehavior="false" CssClass="BtnShow" runat="server"
+                                                                                Text="确认提交" onclick="btnSubmit_Click" />
                                                                         </td>
                                                                         <td width="100">
-                                                                            <asp:Button ID="Button4" CssClass="BtnShow" runat="server" Text="放弃提交" />
+                                                                            <asp:Button ID="btnCancle" CssClass="BtnShow" runat="server" Text="放弃提交" 
+                                                                                onclick="btnCancle_Click" />
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -693,84 +696,7 @@
     </table>
     <div id="div_a" runat="server">
     </div>
-    <script src="../js/jquery-1.8.0.js" type="text/javascript"></script>
     <script src="js/CheckTrademark.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        function ClientValidatePhone() {
-            var id = $("#Hi_MemberId").val();
-            var lname = $("#c_Phone").val();
-            var rand = Math.floor(Math.random() * 1000000);
-            if (lname != "") {
-                $.ajax({
-                    type: "post",
-                    async: false,
-                    url: "Handler.ashx",
-                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                    data: "flag=phone&membertype=2&uName=" + lname + "&memberId=" + id + "&n=" + rand,
-                    success: function (msg) {
-                        if (msg == "1") {
-                            alert("该手机号码已注册！");
-                            $("#c_Phone").focus();
-                        }
-                        else {
-                            $("#c_Phone1").html("<img  src='images/tOk.gif' />");
-                        }
-                    }
-                });
-            }
-            else {
-                $("#c_Phone1").html("<img  src='images/tError.gif' />");
-            }
-        }
-
-
-        function Jiaofei() {
-            if ($("#dd_jiaofeitype").val() == "1") {
-                $("#dailifei").hide();
-                $("#nodaili").show();
-                $("#weituo").hide();
-            }
-            if ($("#dd_jiaofeitype").val() == "2") {
-                $("#dailifei").show();
-                $("#nodaili").hide();
-                $("#weituo").show();
-            }
-        }
-        function checkOk(obj) {
-            if ($("#" + obj).val() != "") {
-                $("#" + obj + "1").html("<img  src='images/tOk.gif' />");
-            }
-            else {
-                $("#" + obj + "1").html("<img  src='images/tError.gif' />");
-            }
-        }
-        function Usercheck() {
-            if ($("#cb_user").attr("checked") == "checked") {
-                var u_mid = $("#Hi_MemberId").val();
-                $.ajax({
-                    type: "POST",
-                    url: "Shop_Manage/Shop_A_Trademark.ashx",
-                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                    data: "memberId=" + u_mid,
-                    success: function (msg) {
-                        if (msg == "no") {
-                            alert("该会员信息不完整！");
-                        }
-                        else {
-                            $("#Sb_Regname ").val(msg.split('_')[0]);
-                            $("#Sb_Reg_Address").val(msg.split('_')[1]);
-                            $("#Sb_Reg_youbian").val(msg.split('_')[2]);
-                        }
-                    }
-                });
-            }
-            else {
-                $("#Sb_Regname ").val("");
-                $("#Sb_Reg_youbian").val("");
-                $("#Sb_Reg_Address").val("");
-            }
-        }
-    </script>
     <uc2:zscqfoot ID="zscqfoot1" runat="server" />
     </form>
 </body>
