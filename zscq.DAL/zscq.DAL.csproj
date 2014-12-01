@@ -88,6 +88,7 @@
     <Compile Include="dal_Apply.cs" />
     <Compile Include="dal_Bank.cs" />
     <Compile Include="dal_Brand.cs" />
+    <Compile Include="dal_CaseNoOrder.cs" />
     <Compile Include="dal_Collection.cs" />
     <Compile Include="dal_Comment.cs" />
     <Compile Include="dal_Coupon.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="dal_AdvIndex.cs" />
     <Compile Include="dal_CouponTimeLength.cs" />
     <Compile Include="dal_UserLog.cs" />
+    <Compile Include="dal_NewTrademark.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">

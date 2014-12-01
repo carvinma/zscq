@@ -45,6 +45,12 @@ namespace zscq.Model
     partial void Insertt_GoodsCategoryFees(t_GoodsCategoryFees instance);
     partial void Updatet_GoodsCategoryFees(t_GoodsCategoryFees instance);
     partial void Deletet_GoodsCategoryFees(t_GoodsCategoryFees instance);
+    partial void Insertt_CaseNoOrder(t_CaseNoOrder instance);
+    partial void Updatet_CaseNoOrder(t_CaseNoOrder instance);
+    partial void Deletet_CaseNoOrder(t_CaseNoOrder instance);
+    partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
+    partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
+    partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     #endregion
 		
 		public DataTradeMarkDataContext() : 
@@ -122,6 +128,22 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<t_GoodsCategoryFees>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_CaseNoOrder> t_CaseNoOrder
+		{
+			get
+			{
+				return this.GetTable<t_CaseNoOrder>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_NewTradeMarkInfo> t_NewTradeMarkInfo
+		{
+			get
+			{
+				return this.GetTable<t_NewTradeMarkInfo>();
 			}
 		}
 	}
@@ -1248,6 +1270,802 @@ namespace zscq.Model
 					this._UpdateTime = value;
 					this.SendPropertyChanged("UpdateTime");
 					this.OnUpdateTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_CaseNoOrder")]
+	public partial class t_CaseNoOrder : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_id;
+		
+		private System.DateTime _SystemDate;
+		
+		private System.Nullable<int> _OrderNo;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_idChanging(int value);
+    partial void Oni_idChanged();
+    partial void OnSystemDateChanging(System.DateTime value);
+    partial void OnSystemDateChanged();
+    partial void OnOrderNoChanging(System.Nullable<int> value);
+    partial void OnOrderNoChanged();
+    #endregion
+		
+		public t_CaseNoOrder()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_id
+		{
+			get
+			{
+				return this._i_id;
+			}
+			set
+			{
+				if ((this._i_id != value))
+				{
+					this.Oni_idChanging(value);
+					this.SendPropertyChanging();
+					this._i_id = value;
+					this.SendPropertyChanged("i_id");
+					this.Oni_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SystemDate", DbType="Date NOT NULL")]
+		public System.DateTime SystemDate
+		{
+			get
+			{
+				return this._SystemDate;
+			}
+			set
+			{
+				if ((this._SystemDate != value))
+				{
+					this.OnSystemDateChanging(value);
+					this.SendPropertyChanging();
+					this._SystemDate = value;
+					this.SendPropertyChanged("SystemDate");
+					this.OnSystemDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderNo", DbType="Int")]
+		public System.Nullable<int> OrderNo
+		{
+			get
+			{
+				return this._OrderNo;
+			}
+			set
+			{
+				if ((this._OrderNo != value))
+				{
+					this.OnOrderNoChanging(value);
+					this.SendPropertyChanging();
+					this._OrderNo = value;
+					this.SendPropertyChanged("OrderNo");
+					this.OnOrderNoChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkInfo")]
+	public partial class t_NewTradeMarkInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private int _i_MemberId;
+		
+		private int _ApplyType;
+		
+		private string _ApplyName;
+		
+		private System.Nullable<int> _CardNoType;
+		
+		private string _CardNo;
+		
+		private string _CardNoPDF;
+		
+		private string _Businesslicense;
+		
+		private System.Nullable<int> _ProvinceId;
+		
+		private System.Nullable<int> _CityId;
+		
+		private System.Nullable<int> _AreaId;
+		
+		private string _Address;
+		
+		private string _ContactPerson;
+		
+		private string _Phone;
+		
+		private string _Fax;
+		
+		private string _PostCode;
+		
+		private string _CaseNo;
+		
+		private System.Nullable<bool> _Is3D;
+		
+		private System.Nullable<bool> _IsColor;
+		
+		private System.Nullable<bool> _IsSound;
+		
+		private string _TrademarkRemark;
+		
+		private string _TrademarkType;
+		
+		private string _TrademarkGoods;
+		
+		private string _TrademarkPattern1;
+		
+		private string _TrademarkPattern2;
+		
+		private System.Nullable<System.DateTime> _InputTime;
+		
+		private System.Nullable<bool> _IsSubmit;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void Oni_MemberIdChanging(int value);
+    partial void Oni_MemberIdChanged();
+    partial void OnApplyTypeChanging(int value);
+    partial void OnApplyTypeChanged();
+    partial void OnApplyNameChanging(string value);
+    partial void OnApplyNameChanged();
+    partial void OnCardNoTypeChanging(System.Nullable<int> value);
+    partial void OnCardNoTypeChanged();
+    partial void OnCardNoChanging(string value);
+    partial void OnCardNoChanged();
+    partial void OnCardNoPDFChanging(string value);
+    partial void OnCardNoPDFChanged();
+    partial void OnBusinesslicenseChanging(string value);
+    partial void OnBusinesslicenseChanged();
+    partial void OnProvinceIdChanging(System.Nullable<int> value);
+    partial void OnProvinceIdChanged();
+    partial void OnCityIdChanging(System.Nullable<int> value);
+    partial void OnCityIdChanged();
+    partial void OnAreaIdChanging(System.Nullable<int> value);
+    partial void OnAreaIdChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnContactPersonChanging(string value);
+    partial void OnContactPersonChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnFaxChanging(string value);
+    partial void OnFaxChanged();
+    partial void OnPostCodeChanging(string value);
+    partial void OnPostCodeChanged();
+    partial void OnCaseNoChanging(string value);
+    partial void OnCaseNoChanged();
+    partial void OnIs3DChanging(System.Nullable<bool> value);
+    partial void OnIs3DChanged();
+    partial void OnIsColorChanging(System.Nullable<bool> value);
+    partial void OnIsColorChanged();
+    partial void OnIsSoundChanging(System.Nullable<bool> value);
+    partial void OnIsSoundChanged();
+    partial void OnTrademarkRemarkChanging(string value);
+    partial void OnTrademarkRemarkChanged();
+    partial void OnTrademarkTypeChanging(string value);
+    partial void OnTrademarkTypeChanged();
+    partial void OnTrademarkGoodsChanging(string value);
+    partial void OnTrademarkGoodsChanged();
+    partial void OnTrademarkPattern1Changing(string value);
+    partial void OnTrademarkPattern1Changed();
+    partial void OnTrademarkPattern2Changing(string value);
+    partial void OnTrademarkPattern2Changed();
+    partial void OnInputTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnInputTimeChanged();
+    partial void OnIsSubmitChanging(System.Nullable<bool> value);
+    partial void OnIsSubmitChanged();
+    #endregion
+		
+		public t_NewTradeMarkInfo()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
+		public int i_MemberId
+		{
+			get
+			{
+				return this._i_MemberId;
+			}
+			set
+			{
+				if ((this._i_MemberId != value))
+				{
+					this.Oni_MemberIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_MemberId = value;
+					this.SendPropertyChanged("i_MemberId");
+					this.Oni_MemberIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyType", DbType="Int NOT NULL")]
+		public int ApplyType
+		{
+			get
+			{
+				return this._ApplyType;
+			}
+			set
+			{
+				if ((this._ApplyType != value))
+				{
+					this.OnApplyTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ApplyType = value;
+					this.SendPropertyChanged("ApplyType");
+					this.OnApplyTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ApplyName
+		{
+			get
+			{
+				return this._ApplyName;
+			}
+			set
+			{
+				if ((this._ApplyName != value))
+				{
+					this.OnApplyNameChanging(value);
+					this.SendPropertyChanging();
+					this._ApplyName = value;
+					this.SendPropertyChanged("ApplyName");
+					this.OnApplyNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNoType", DbType="Int")]
+		public System.Nullable<int> CardNoType
+		{
+			get
+			{
+				return this._CardNoType;
+			}
+			set
+			{
+				if ((this._CardNoType != value))
+				{
+					this.OnCardNoTypeChanging(value);
+					this.SendPropertyChanging();
+					this._CardNoType = value;
+					this.SendPropertyChanged("CardNoType");
+					this.OnCardNoTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNo", DbType="NVarChar(50)")]
+		public string CardNo
+		{
+			get
+			{
+				return this._CardNo;
+			}
+			set
+			{
+				if ((this._CardNo != value))
+				{
+					this.OnCardNoChanging(value);
+					this.SendPropertyChanging();
+					this._CardNo = value;
+					this.SendPropertyChanged("CardNo");
+					this.OnCardNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNoPDF", DbType="NVarChar(100)")]
+		public string CardNoPDF
+		{
+			get
+			{
+				return this._CardNoPDF;
+			}
+			set
+			{
+				if ((this._CardNoPDF != value))
+				{
+					this.OnCardNoPDFChanging(value);
+					this.SendPropertyChanging();
+					this._CardNoPDF = value;
+					this.SendPropertyChanged("CardNoPDF");
+					this.OnCardNoPDFChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Businesslicense", DbType="NVarChar(100)")]
+		public string Businesslicense
+		{
+			get
+			{
+				return this._Businesslicense;
+			}
+			set
+			{
+				if ((this._Businesslicense != value))
+				{
+					this.OnBusinesslicenseChanging(value);
+					this.SendPropertyChanging();
+					this._Businesslicense = value;
+					this.SendPropertyChanged("Businesslicense");
+					this.OnBusinesslicenseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProvinceId", DbType="Int")]
+		public System.Nullable<int> ProvinceId
+		{
+			get
+			{
+				return this._ProvinceId;
+			}
+			set
+			{
+				if ((this._ProvinceId != value))
+				{
+					this.OnProvinceIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProvinceId = value;
+					this.SendPropertyChanged("ProvinceId");
+					this.OnProvinceIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityId", DbType="Int")]
+		public System.Nullable<int> CityId
+		{
+			get
+			{
+				return this._CityId;
+			}
+			set
+			{
+				if ((this._CityId != value))
+				{
+					this.OnCityIdChanging(value);
+					this.SendPropertyChanging();
+					this._CityId = value;
+					this.SendPropertyChanged("CityId");
+					this.OnCityIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AreaId", DbType="Int")]
+		public System.Nullable<int> AreaId
+		{
+			get
+			{
+				return this._AreaId;
+			}
+			set
+			{
+				if ((this._AreaId != value))
+				{
+					this.OnAreaIdChanging(value);
+					this.SendPropertyChanging();
+					this._AreaId = value;
+					this.SendPropertyChanged("AreaId");
+					this.OnAreaIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactPerson", DbType="NVarChar(50)")]
+		public string ContactPerson
+		{
+			get
+			{
+				return this._ContactPerson;
+			}
+			set
+			{
+				if ((this._ContactPerson != value))
+				{
+					this.OnContactPersonChanging(value);
+					this.SendPropertyChanging();
+					this._ContactPerson = value;
+					this.SendPropertyChanged("ContactPerson");
+					this.OnContactPersonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fax", DbType="NVarChar(50)")]
+		public string Fax
+		{
+			get
+			{
+				return this._Fax;
+			}
+			set
+			{
+				if ((this._Fax != value))
+				{
+					this.OnFaxChanging(value);
+					this.SendPropertyChanging();
+					this._Fax = value;
+					this.SendPropertyChanged("Fax");
+					this.OnFaxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostCode", DbType="NVarChar(50)")]
+		public string PostCode
+		{
+			get
+			{
+				return this._PostCode;
+			}
+			set
+			{
+				if ((this._PostCode != value))
+				{
+					this.OnPostCodeChanging(value);
+					this.SendPropertyChanging();
+					this._PostCode = value;
+					this.SendPropertyChanged("PostCode");
+					this.OnPostCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseNo", DbType="NVarChar(50)")]
+		public string CaseNo
+		{
+			get
+			{
+				return this._CaseNo;
+			}
+			set
+			{
+				if ((this._CaseNo != value))
+				{
+					this.OnCaseNoChanging(value);
+					this.SendPropertyChanging();
+					this._CaseNo = value;
+					this.SendPropertyChanged("CaseNo");
+					this.OnCaseNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Is3D", DbType="Bit")]
+		public System.Nullable<bool> Is3D
+		{
+			get
+			{
+				return this._Is3D;
+			}
+			set
+			{
+				if ((this._Is3D != value))
+				{
+					this.OnIs3DChanging(value);
+					this.SendPropertyChanging();
+					this._Is3D = value;
+					this.SendPropertyChanged("Is3D");
+					this.OnIs3DChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsColor", DbType="Bit")]
+		public System.Nullable<bool> IsColor
+		{
+			get
+			{
+				return this._IsColor;
+			}
+			set
+			{
+				if ((this._IsColor != value))
+				{
+					this.OnIsColorChanging(value);
+					this.SendPropertyChanging();
+					this._IsColor = value;
+					this.SendPropertyChanged("IsColor");
+					this.OnIsColorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSound", DbType="Bit")]
+		public System.Nullable<bool> IsSound
+		{
+			get
+			{
+				return this._IsSound;
+			}
+			set
+			{
+				if ((this._IsSound != value))
+				{
+					this.OnIsSoundChanging(value);
+					this.SendPropertyChanging();
+					this._IsSound = value;
+					this.SendPropertyChanged("IsSound");
+					this.OnIsSoundChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRemark", DbType="NVarChar(200)")]
+		public string TrademarkRemark
+		{
+			get
+			{
+				return this._TrademarkRemark;
+			}
+			set
+			{
+				if ((this._TrademarkRemark != value))
+				{
+					this.OnTrademarkRemarkChanging(value);
+					this.SendPropertyChanging();
+					this._TrademarkRemark = value;
+					this.SendPropertyChanged("TrademarkRemark");
+					this.OnTrademarkRemarkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkType", DbType="NVarChar(200)")]
+		public string TrademarkType
+		{
+			get
+			{
+				return this._TrademarkType;
+			}
+			set
+			{
+				if ((this._TrademarkType != value))
+				{
+					this.OnTrademarkTypeChanging(value);
+					this.SendPropertyChanging();
+					this._TrademarkType = value;
+					this.SendPropertyChanged("TrademarkType");
+					this.OnTrademarkTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkGoods", DbType="NVarChar(800)")]
+		public string TrademarkGoods
+		{
+			get
+			{
+				return this._TrademarkGoods;
+			}
+			set
+			{
+				if ((this._TrademarkGoods != value))
+				{
+					this.OnTrademarkGoodsChanging(value);
+					this.SendPropertyChanging();
+					this._TrademarkGoods = value;
+					this.SendPropertyChanged("TrademarkGoods");
+					this.OnTrademarkGoodsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkPattern1", DbType="NVarChar(100)")]
+		public string TrademarkPattern1
+		{
+			get
+			{
+				return this._TrademarkPattern1;
+			}
+			set
+			{
+				if ((this._TrademarkPattern1 != value))
+				{
+					this.OnTrademarkPattern1Changing(value);
+					this.SendPropertyChanging();
+					this._TrademarkPattern1 = value;
+					this.SendPropertyChanged("TrademarkPattern1");
+					this.OnTrademarkPattern1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkPattern2", DbType="NVarChar(100)")]
+		public string TrademarkPattern2
+		{
+			get
+			{
+				return this._TrademarkPattern2;
+			}
+			set
+			{
+				if ((this._TrademarkPattern2 != value))
+				{
+					this.OnTrademarkPattern2Changing(value);
+					this.SendPropertyChanging();
+					this._TrademarkPattern2 = value;
+					this.SendPropertyChanged("TrademarkPattern2");
+					this.OnTrademarkPattern2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InputTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> InputTime
+		{
+			get
+			{
+				return this._InputTime;
+			}
+			set
+			{
+				if ((this._InputTime != value))
+				{
+					this.OnInputTimeChanging(value);
+					this.SendPropertyChanging();
+					this._InputTime = value;
+					this.SendPropertyChanged("InputTime");
+					this.OnInputTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSubmit", DbType="Bit")]
+		public System.Nullable<bool> IsSubmit
+		{
+			get
+			{
+				return this._IsSubmit;
+			}
+			set
+			{
+				if ((this._IsSubmit != value))
+				{
+					this.OnIsSubmitChanging(value);
+					this.SendPropertyChanging();
+					this._IsSubmit = value;
+					this.SendPropertyChanged("IsSubmit");
+					this.OnIsSubmitChanged();
 				}
 			}
 		}

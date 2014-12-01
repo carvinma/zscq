@@ -85,10 +85,6 @@ function del_onegoods(startnum) {
         $("#sortarr").val('');
     }
     goodscalc.toChangeDisplay();
-    //更改商品数量的js
-   // var startnum = $("#numcount").val();
- //   var endnum = parseInt(startnum) - parseInt(1);
-  //  $("#numcount").val(endnum); //统计选择商品的数量
 }
 
 //获取选中数据的value值
@@ -440,7 +436,8 @@ function GetApplysDDL(userid, applytype) {
             for (var i = 0; i < data.length; i++) {
                 if (i <= 9)
                     commonapplys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin);
-                applys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin, data[i].MainQualificationPath, data[i].provinceID, data[i].cityID, data[i].areaID, data[i].Address, data[i].PhoneNo, data[i].FaxNo, data[i].PostCode);
+                applys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin, data[i].MainQualificationPath, data[i].provinceID, data[i].cityID, data[i].areaID, data[i].Address,
+                 data[i].PhoneNo, data[i].FaxNo, data[i].PostCode, data[i].ApplyCardNo, data[i].CardNoPath);
             }
 
             $("#txt_applyname").suggest(applys, { hot_list: commonapplys, dataContainer: '#applyname_3word', attachObject: "#suggest", onSelect: function () { DisplaySelectedApplyInfo(applys); } });
@@ -461,11 +458,13 @@ function DisplaySelectedApplyInfo(applys) {
    }
    //alert(findArray[0]);
    //
-   if (findArray[4] != null && findArray[4] != "")
+   if (findArray[4] != null && findArray[4] != "") {
        $("#aBusinessLicense").attr("href", findArray[4]).show();
+       $("#upBusinessLinces").val(findArray[4]);
+   }
    else {
-       $("#aBusinessLicense").attr("href", "");
-       $("#aBusinessLicense").hide();
+       $("#aBusinessLicense").attr("href", "").hide();
+       $("#upBusinessLinces").val("");
    }
    $("#live_prov").val(findArray[5]).attr("selected", "selected");
    SelCity(findArray[5], findArray[6]);
@@ -476,13 +475,65 @@ function DisplaySelectedApplyInfo(applys) {
    $("#txt_phone").val(findArray[9]);
    $("#txt_fax").val(findArray[10]);
    $("#txt_postcode").val(findArray[11]);
+   $("#txt_applyCardNo").val(findArray[12]);
+   if (findArray[13] != null && findArray[13] != "") {
+       $("#aCardNoPdf").attr("href", findArray[13]).show();
+       $("#hiUpCardNo").val(findArray[13]);
+   }
+   else {
+       $("#aCardNoPdf").attr("href", "").hide();
+       $("#hiUpCardNo").val("");
+   }
+   $("#name_div_error").hide();
+   $("#Hi_city").val(findArray[6]);
+   $("#Hi_country").val(findArray[7]);
+}
+
+/*商标信息添加验证
+*/
+
+function addmarkCheck_data() {
+
+    //获取以下选择商品的ID
+    var goodsids = new Array();
+    $("tr[classname='arr_goods']").each(function () {
+        goodsids.push($(this).attr("val"));
+    });
+     $("#sortGoods").val(goodsids.join(','));
+    var obj = $('input:radio[name="person"]:checked').val();
+    if (obj == "" || obj == null) {
+        alert("请选择申请人类别");
+        return false;
+    }
+    if (!$(".appusertype").is(":hidden")) { //当申请人为自然人时，需要上传
+        if (!check_ApplyUser("cardno_div")) {
+            return false;
+        }
+        if ($("#hiUpCardNo").val() == "") {
+            alert("请上传身份证扫描件");
+            return false;
+        }
+    }
+    if ($("#upBusinessLinces").val() == "") {
+        alert("请上传营业执照");
+        return false;
+    }
+    if ($("#upPattern1").val() == null || $("#upPattern1").val() == "") {
+        alert("请上传商标图样1");
+        return false;
+    }
+    if (check_ApplyUser("name_div") && check_ApplyUser("address_div")
+    && check_ApplyUser("ContactPerson_div") && check_ApplyUser("phone_div")
+    && check_ApplyUser("postcode_div")
+    && check_ApplyUser("remark_div") && check_ApplyUser("sortarr_div"))
+        return true;
+    
+    return false;
 }
 
 /**
 * 验证申请人消息提示
 * 
-* @param divId
-* @param value
 */
 function submitCheck_ApplyUser() {
     if (check_ApplyUser("name_div") && check_ApplyUser("cardno_div") && check_ApplyUser("phone_div")
@@ -496,7 +547,7 @@ function check_ApplyUser(divId) {
     var errorMessage = null;
     var value = null;
     if (divId == "name_div") {
-        value = $("#txt_applyname").val();
+        value = $("#txt_applyname").val().replace('中文/拼音','');
         if (isEmpty(value)) {
             errorFlag = true;
             errorMessage = "请您填写申请人名称";
@@ -641,6 +692,21 @@ function check_ApplyUser(divId) {
             errorMessage = "联系人名称中含有非法字符";
         }
     }
+    else if (divId == "remark_div") {
+        value = $("#txt_remark").val();
+        if (isEmpty(value)) {
+            errorFlag = true;
+            errorMessage = "请您填写商标说明";
+        }
+    }
+    else if (divId == "sortarr_div") {
+        value = $("#sortarr").val();
+        if (isEmpty(value)) {
+            errorFlag = true;
+            errorMessage = "请您选择商标类别";
+        }
+    }
+
     if (errorFlag) {
         $("#" + divId + "_error").html(errorMessage);
         $("#" + divId).addClass("message");
@@ -882,7 +948,7 @@ function SelArea(val,areaid) {
     var cityName = isEmpty(val) ? "" : $("#live_city").find("option:selected").text().replace("市辖区", "").replace("县", "");
     $("#areaNameTxt").text(trimAll(provinceName) + trimAll(cityName));
     var cityId = $("#live_city").find("option:selected").val();
-    $("#Hi_city").val(cityId);
+    //$("#Hi_city").val(cityId);
     $.ajax({
         type: "POST",
         url: "Handler.ashx",

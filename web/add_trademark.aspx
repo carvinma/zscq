@@ -29,6 +29,11 @@
         var tmptoCity, tmptoCityCode;
         $(function () {
             InitProCityArea();
+            var userid = $('#Hi_MemberId').val();
+            if (userid > 0) {
+                GetApplysDDL(userid, "0"); //初始化企业单位申请人
+            }
+
             $("#txt_applyname").focus(function () {
                 tmptoCity = $("#txt_applyname").val();
                 $("#txt_applyname").val('');
@@ -52,9 +57,15 @@
 
             $('input[type=radio][name="person"]').change(function () {
                 var applyType = $('input:radio[name="person"]:checked').val();
-                var userid = $('#Hi_MemberId').val();
+                //var userid = $('#Hi_MemberId').val();
                 if (userid > 0) {
                     GetApplysDDL(userid, applyType);
+                }
+                if (applyType == "1") { //当申请人为自然人时，显示身份证信息
+                    $(".appusertype").show();
+                }
+                else {
+                    $(".appusertype").hide();
                 }
             });
 
@@ -67,48 +78,219 @@
                     $("#soundfiles").show();
                 }
             });
- 
-            $("#addpicture,#addpicture2").uploadify({
+
+            $("#upCardNoPdf").uploadify({
                 'swf': 'js/SWF/uploadify.swf',
                 'uploader': 'Handler.ashx?flag=uploadimage',
                 //'buttonImg': "images/aboutus1s.gif",
-                'buttionClass':'',
+                'buttionClass': '',
+                'buttonText': '浏览文件',
+                'queueID': 'fileQueue',
+                'width': '80',
+                'height': '22',
+                'overrideEvents': ['onDialogClose'],
+                'fileTypeDesc': '选择文件(*pdf)',
+                'fileTypeExts': '*.pdf',
+                'auto': true,
+                'multi': false,
+                'fileSizeLimit': '1MB',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {
+                    $.jBox.closeTip();
+                    $("#aCardNoPdf").show();
+                    $("#hiUpCardNo").val(data);
+                },
+                'onSelect': function (file) {
+                    $.jBox.tip("正在上传文件，请稍后...", 'loading');
+                },
+                //返回一个错误，选择文件的时候触发
+                'onSelectError': function (file, errorCode, errorMsg) {
+                    switch (errorCode) {
+                        case -100:
+                            alert("上传的文件数量已经超出系统限制的" + $('#upCardNoPdf').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                            break;
+                        case -110:
+                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upCardNoPdf').uploadify('settings', 'fileSizeLimit') + "大小！");
+                            break;
+                        case -120:
+                            alert("文件 [" + file.name + "] 大小异常！");
+                            break;
+                        case -130:
+                            alert("文件 [" + file.name + "] 类型不正确！");
+                            break;
+                    }
+                }
+            });
+
+            $("#upBusinessLicense").uploadify({
+                'swf': 'js/SWF/uploadify.swf',
+                'uploader': 'Handler.ashx?flag=uploadimage',
+                //'buttonImg': "images/aboutus1s.gif",
+                'buttionClass': '',
+                'buttonText': '浏览文件',
+                'queueID': 'fileQueue',
+                'width': '80',
+                'height': '22',
+                'overrideEvents': ['onDialogClose'],
+                'fileTypeDesc': '选择文件(*pdf)',
+                'fileTypeExts': '*.pdf',
+                'auto': true,
+                'multi': false,
+                'fileSizeLimit': '2MB',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {
+                    $.jBox.closeTip();
+                    $("#aBusinessLicense").show();
+                    $("#upBusinessLinces").val(data);
+                },
+                'onSelect': function (file) {
+                    $.jBox.tip("正在上传文件，请稍后...", 'loading');
+                },
+                //返回一个错误，选择文件的时候触发
+                'onSelectError': function (file, errorCode, errorMsg) {
+                    switch (errorCode) {
+                        case -100:
+                            alert("上传的文件数量已经超出系统限制的" + $('#upBusinessLicense').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                            break;
+                        case -110:
+                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upBusinessLicense').uploadify('settings', 'fileSizeLimit') + "大小！");
+                            break;
+                        case -120:
+                            alert("文件 [" + file.name + "] 大小异常！");
+                            break;
+                        case -130:
+                            alert("文件 [" + file.name + "] 类型不正确！");
+                            break;
+                    }
+                }
+            });
+
+            $("#upWav").uploadify({
+                'swf': 'js/SWF/uploadify.swf',
+                'uploader': 'Handler.ashx?flag=uploadimage',
+                //'buttonImg': "images/aboutus1s.gif",
+                'buttionClass': '',
+                'buttonText': '选择文件',
+                'queueID': 'fileQueue',
+                'width': '80',
+                'height': '32',
+                'overrideEvents': ['onDialogClose'],
+                'fileTypeDesc': '选择文件(*.mp3 *.wav)',
+                'fileTypeExts': '*.mp3;*.wav',
+                'auto': true,
+                'multi': false,
+                'fileSizeLimit': '5MB',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {
+                    $.jBox.closeTip();
+                    $("#upSound").val(data);
+                },
+                'onSelect': function (file) {
+                    $.jBox.tip("正在上传文件，请稍后...", 'loading');
+                },
+                //返回一个错误，选择文件的时候触发
+                'onSelectError': function (file, errorCode, errorMsg) {
+                    switch (errorCode) {
+                        case -100:
+                            alert("上传的文件数量已经超出系统限制的" + $('#upWav').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                            break;
+                        case -110:
+                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upWav').uploadify('settings', 'fileSizeLimit') + "大小！");
+                            break;
+                        case -120:
+                            alert("文件 [" + file.name + "] 大小异常！");
+                            break;
+                        case -130:
+                            alert("文件 [" + file.name + "] 类型不正确！");
+                            break;
+                    }
+                }
+            });
+
+            $("#addpicture").uploadify({
+                'swf': 'js/SWF/uploadify.swf',
+                'uploader': 'Handler.ashx?flag=uploadimage',
+                //'buttonImg': "images/aboutus1s.gif",
+                'buttionClass': '',
                 'buttonText': '选择图片',
                 'queueID': 'fileQueue',
                 'width': '80',
                 'height': '32',
-                'overrideEvents' : ['onDialogClose'],
-                'fileTypeDesc': '选择图片(*.gif *.jpg *.png)',
+                'overrideEvents': ['onDialogClose'],
+                'fileTypeDesc': '选择图片(*.gif;*.jpg;*.png)',
                 'fileTypeExts': '*.jpg;*.jpge;*.gif;*.png',
                 'auto': true,
                 'multi': false,
-                'fileSizeLimit':'500KB',
-                'queueSizeLimit' : 1,
+                'fileSizeLimit': '500KB',
+                'queueSizeLimit': 1,
                 'onUploadSuccess': function (file, data, response) {
                     $.jBox.closeTip();
-                    $('#Image1').attr('src', 'UploadImages/' + data);
-                    //$('#Image1').show();
+                    $('#Image1').attr('src', 'UploadTemp/' + data);
+                    $("#upPattern1").val(data);
                 },
                 'onSelect': function (file) {
                     $.jBox.tip("正在上传图片，请稍后...", 'loading');
                 },
                 //返回一个错误，选择文件的时候触发
-             'onSelectError':function(file, errorCode, errorMsg){
-            switch(errorCode) {
-                case -100:
-                    alert("上传的文件数量已经超出系统限制的"+$('#addpicture').uploadify('settings','queueSizeLimit')+"个文件！");
-                    break;
-                case -110:
-                    alert("文件 ["+file.name+"] 大小超出系统限制的"+$('#addpicture').uploadify('settings','fileSizeLimit')+"大小！");
-                    break;
-                case -120:
-                    alert("文件 ["+file.name+"] 大小异常！");
-                    break;
-                case -130:
-                    alert("文件 ["+file.name+"] 类型不正确！");
-                    break;
-            }
-        },
+                'onSelectError': function (file, errorCode, errorMsg) {
+                    switch (errorCode) {
+                        case -100:
+                            alert("上传的文件数量已经超出系统限制的" + $('#addpicture').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                            break;
+                        case -110:
+                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#addpicture').uploadify('settings', 'fileSizeLimit') + "大小！");
+                            break;
+                        case -120:
+                            alert("文件 [" + file.name + "] 大小异常！");
+                            break;
+                        case -130:
+                            alert("文件 [" + file.name + "] 类型不正确！");
+                            break;
+                    }
+                }
+            });
+
+            $("#addpicture2").uploadify({
+                'swf': 'js/SWF/uploadify.swf',
+                'uploader': 'Handler.ashx?flag=uploadimage',
+                //'buttonImg': "images/aboutus1s.gif",
+                'buttionClass': '',
+                'buttonText': '选择图片',
+                'queueID': 'fileQueue',
+                'width': '80',
+                'height': '32',
+                'overrideEvents': ['onDialogClose'],
+                'fileTypeDesc': '选择图片',
+                'fileTypeExts': '*.jpg;*.jpge;*.gif;*.png',
+                'auto': true,
+                'multi': false,
+                'fileSizeLimit': '500KB',
+                'queueSizeLimit': 1,
+                'onUploadSuccess': function (file, data, response) {
+                    $.jBox.closeTip();
+                    $('#Image2').attr('src', 'UploadTemp/' + data);
+                    $("#upPattern2").val(data);
+                },
+                'onSelect': function (file) {
+                    $.jBox.tip("正在上传图片，请稍后...", 'loading');
+                },
+                //返回一个错误，选择文件的时候触发
+                'onSelectError': function (file, errorCode, errorMsg) {
+                    switch (errorCode) {
+                        case -100:
+                            alert("上传的文件数量已经超出系统限制的" + $('#addpicture2').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                            break;
+                        case -110:
+                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#addpicture2').uploadify('settings', 'fileSizeLimit') + "大小！");
+                            break;
+                        case -120:
+                            alert("文件 [" + file.name + "] 大小异常！");
+                            break;
+                        case -130:
+                            alert("文件 [" + file.name + "] 类型不正确！");
+                            break;
+                    }
+                }
             });
         });
     </script>
@@ -137,7 +319,11 @@
     <input id="hi_MainFees" type="hidden" runat="server" value="0" />
     <input id="hi_ItemNum" type="hidden" runat="server" value="0" />
     <input id="hi_ExceedFees" type="hidden" runat="server" value="0" />
-
+     <input type="hidden" runat="server"  id="hiUpCardNo" value="" />
+     <input type="hidden" runat="server"  id="upBusinessLinces" value="" />
+      <input type="hidden" runat="server"  id="upSound" />
+      <input type="hidden" runat="server"  id="upPattern1" />
+       <input type="hidden" runat="server"  id="upPattern2" />
     <uc4:zscqtop2 ID="zscqtop21" runat="server" />
     <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -282,8 +468,9 @@
                                                                             <strong>选择申请人类别</strong>：
                                                                         </td>
                                                                         <td>
-                                                                            <input id="RdoPeople" type="radio" name="person" value="1" />自然人&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                            <input id="RdoCorp" type="radio" name="person" value="0" />企业单位
+                                                                            <input id="RdoPeople" type="radio" name="person" value="1" runat="server" />自然人&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            <input id="RdoCorp" type="radio" name="person" value="0" runat="server" 
+                                                                                checked="true" />企业单位
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -301,13 +488,51 @@
                                                                             </div>
                                                                         </td>
                                                                     </tr>
+                                                                    <tr style="display:none" class="appusertype">
+                                                                        <td width="180" height="32" align="right">
+                                                                            <strong>身份证件名称：</strong></td>
+                                                                        <td align="left">
+                                                                             <select id="Select1" name="live_prov" onchange="">
+                                                                             <option value="0">身份证：</option></select>
+                                                                     </td>
+                                                                    </tr>
+                                                                    <tr style="display:none" class="appusertype">
+                                                                        <td width="180" height="32" align="right">
+                                                                            <strong>身分证件号码：</strong></td>
+                                                                        <td align="left">
+                                                                            <input class="font12000" onblur="check_ApplyUser('cardno_div')" runat="server" 
+                                                                                style="ime-mode: disabled;" id="txt_applyCardNo" maxlength="20" type="text" 
+                                                                               name="" value=""/>
+                                                                                <span style="color: Red;">*</span>
+                                                                                  <span class="status error" id="cardno_div_error"></span>
+                                                                               </td>
+                                                                    </tr>
+                                                                    <tr style="display:none" class="appusertype">
+                                                                        <td width="180" height="32" align="right">
+                                                                            <strong>身份证件扫描件：</strong></td>
+                                                                        <td align="left">
+                                                                            <table><tr><td> <div id="upCardNoPdf"></div></td>
+                                                                           <td>
+                                                                             <span id="aCardNoPdf"  style="display:none">份证件扫已上传</span>
+                                                                           </td>
+                                                                           </tr></table>
+                                                                          
+                                                                            <div>
+                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span></div>
+                                                                                </td>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td height="32" align="right">
                                                                             <strong><span>营业执照副本（中文）</span>：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                            <asp:FileUpload ID="FileUpload5" runat="server" Width="200px" />
-                                                                            &nbsp;<a id="aBusinessLicense" href='' title='点击查看' target='_blank' style="display:none">营业执照副本已上传</a>
+                                                                           <%-- <asp:FileUpload ID="FileUpload5" runat="server" Width="200px" />--%>
+                                                                           <table><tr><td> <div id="upBusinessLicense"></div></td>
+                                                                           <td>
+                                                                             <span id="aBusinessLicense"  style="display:none">营业执照副本已上传</span>
+                                                                           </td>
+                                                                           </tr></table>
+                                                                          
                                                                             <div>
                                                                                 <span style="color: Red;">请将营业执照副本盖公章后扫描为彩色上传，格式为pdf，大小不超过2M</span></div>
                                                                         </td>
@@ -433,7 +658,7 @@
                                                                             <strong><span>是否三维标志</span></strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="Radio3DNo" name="rdo3D" runat="server" checked="checked" type="radio" />
+                                                                            <input id="Radio3DNo" name="rdo3D" runat="server" checked="true" type="radio" />
                                                                             否&nbsp;&nbsp;
                                                                             <input id="Radio3DYES" name="rdo3D" runat="server" type="radio" />
                                                                             是
@@ -446,7 +671,7 @@
                                                                             <strong><span>是否颜色组合</span></strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="rdoColorNO" name="rdoColor" runat="server" checked="checked" type="radio" />
+                                                                            <input id="rdoColorNO" name="rdoColor" runat="server" checked="true" type="radio" />
                                                                             否&nbsp;&nbsp;
                                                                             <input id="rdoColorYes" name="rdoColor" runat="server"  type="radio" />
                                                                             是
@@ -469,7 +694,7 @@
                                                                             <strong>声音文件</strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <asp:FileUpload ID="FileUpload6" runat="server" Width="200px" />
+                                                                           <div id="upWav"></div>
                                                                             <div>
                                                                                 <span style="color: Red;">样本格式为mp3或wav，大小不超过5M</span></div>
                                                                         </td>
@@ -482,7 +707,7 @@
                                                                         </td>
                                                                         <td valign="middle">
                                                                             <textarea cols="20" rows="2" type="text" name="s6" id="txt_remark" style="width: 293px;
-                                                                                height: 180px;" class="font12000" maxlength="180" runat="server"></textarea>
+                                                                                height: 180px;" class="font12000" maxlength="180" runat="server"  onblur="check_ApplyUser('remark_div')" ></textarea>
                                                                         </td>
                                                                         <td valign="middle">
                                                                             <div>
@@ -497,6 +722,8 @@
                                                                                     申请商标注册的，应说明商标使用方式</p>
                                                                                 <br />
                                                                                 (4)商标为外文或者包含外文的，应当说明含义
+                                                                               <br />
+                                                                                <span class="status error" id="remark_div_error"></span>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -516,10 +743,11 @@
                                                                             <strong>商标类别</strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="sortarr" type="text" runat="server" readonly="readonly" class="font12000" onclick="showGoods()"/>
+                                                                            <input id="sortarr" type="text" runat="server" readonly="readonly" class="font12000" onblur="check_ApplyUser('sortarr_div')" onclick="showGoods()"/>
+                                                                             <input type="hidden" id="sortGoods" runat="server"/>
                                                                         </td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;
+                                                                        <td valign="left">
+                                                                            <span class="status error" id="sortarr_div_error"></span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -587,9 +815,8 @@
                                                                         <td>
                                          <p>                             
 
-    <div id="addpicture">  
-                </div>  
-   </p> 
+                                            <div id="addpicture">  </div>  
+                                           </p> 
                                                             
                                                                             &nbsp;<div id="sb_namenum1">
                                                                                 <span style="color: Red;">格式为.jpg.gif.png,不大于500K</span></div>
@@ -657,11 +884,11 @@
                                                                         </td>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnSave" CssClass="BtnShow" runat="server" Text="保  存" 
-                                                                                onclick="btnSave_Click" />
-                                                                        </td>
+                                                                                onclick="btnSave_Click"  OnClientClick="return addmarkCheck_data()"/>
+                                                                        </td> 
                                                                         <td width="100">
-                                                                            <asp:Button ID="btnSubmit" UseSubmitBehavior="false" CssClass="BtnShow" runat="server"
-                                                                                Text="确认提交" onclick="btnSubmit_Click" />
+                                                                            <asp:Button ID="btnSubmit" CssClass="BtnShow" runat="server"
+                                                                                Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkCheck_data()"/>
                                                                         </td>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnCancle" CssClass="BtnShow" runat="server" Text="放弃提交" 

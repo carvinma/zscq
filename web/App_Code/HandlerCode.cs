@@ -146,7 +146,7 @@ public class HandlerCode
         //string somekey = context.Request["someKey"];
         //string other = context.Request["someOtherKey"];
         //获取文件的保存路径
-        string uploadPath = HttpContext.Current.Server.MapPath("UploadImages" + "\\");
+        string uploadPath = HttpContext.Current.Server.MapPath("UploadTemp\\");
         //判断上传的文件是否为空
         if (file != null)
         {
@@ -155,31 +155,17 @@ public class HandlerCode
                 Directory.CreateDirectory(uploadPath);
             }
             //保存文件
-            file.SaveAs(uploadPath + file.FileName);
-            context.Response.Write(file.FileName);
+            string fileNameExt = System.IO.Path.GetExtension(file.FileName).ToLower();
+
+            
+            string toFileName = DateTime.Now.ToString("yyyyMMddHHmmssff") + new Random().Next(100) + fileNameExt;//fileup.FileName;
+            file.SaveAs(uploadPath + toFileName);
+            context.Response.Write(toFileName);
         }
         else
         {
             context.Response.Write("0");
         }  
-
-        //string filePath = AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
-        //if (!System.IO.Directory.Exists(filePath))
-        //{
-        //    System.IO.Directory.CreateDirectory(filePath);
-        //}
-        //string fileName = "";
-        //if (Request.Files.Count > 0)
-        //{
-        //    for (int i = 0; i < Request.Files.Count; i++)
-        //    {
-        //        fileName = Request.Files[i].FileName;
-        //        fileName = fileName.Substring(fileName.LastIndexOf('.'));
-        //        fileName = DateTime.Now.ToString("yyyyMMddHHmmssfff") + fileName;
-        //        Request.Files[i].SaveAs(filePath + fileName);
-        //    }
-        //}
-        //return JavaScript(fileName);
     }
 
     #region 省市区
