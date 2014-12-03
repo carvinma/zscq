@@ -44,21 +44,21 @@ public partial class trademark_list : System.Web.UI.Page
         if (!IsPostBack)
         {
             Dictionary<string, int?> dic = new Dictionary<string, int?>();
-            dic.Add("全部",null);
+            dic.Add("全部", null);
             for (int i = 0; i <= 1; i++)
             {
                 string key = EnumManager.GetDescription(typeof(ApplyUserTypeEnum), i);
                 if (!string.IsNullOrEmpty(key))
                     dic.Add(key, i);
             }
-             
+
             this.ddlApplyType.DataSource = dic;
             this.ddlApplyType.DataTextField = "Key";
             this.ddlApplyType.DataValueField = "Value";
             this.ddlApplyType.DataBind();
 
             IList<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkStatuslist;
-            tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName="全部", StatusValue=null });
+            tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
             this.ddlTradeMarkStatus.DataSource = tradeMarkStatuslist;
             this.ddlTradeMarkStatus.DataTextField = "StatusName";
             this.ddlTradeMarkStatus.DataValueField = "StatusValue";
@@ -98,7 +98,7 @@ public partial class trademark_list : System.Web.UI.Page
             Hi_orderby4.Value = Request.QueryString["sbstatus"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbstatus"].ToString();//BY CHY
         }
-         
+
         //if (Request.QueryString["jiaofeistate"] != null && Request.QueryString["jiaofeistate"] != "")
         //{
         //    jiaofeistate = int.Parse(Request.QueryString["jiaofeistate"].ToString()); //统计页面传递过来的値 缴费状态    
@@ -115,8 +115,8 @@ public partial class trademark_list : System.Web.UI.Page
         //{
         //    sb_type = Request.QueryString["sb_type"].ToString(); //检索页面传递过来的値 
         //}
-        
-         
+
+
     }
     public string GetApplyTypeName(object applyType)
     {
@@ -245,7 +245,14 @@ public partial class trademark_list : System.Web.UI.Page
             int Ccount = 0;
             int PageSize = AspNetPager1.PageSize;
             int pageCurrent = AspNetPager1.CurrentPageIndex;
-            this.Rp_sb_list.DataSource =mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, applyType, ByCaseNo, ByName, Bytype, ByStatus, qCaseNo, qName, qStatus, ref Ccount);
+            this.qCaseNo = this.txtCaseNo.Text.Trim();
+            this.qName = this.txtApplyUser.Text.Trim();
+            if (!string.IsNullOrEmpty(this.ddlApplyType.SelectedValue))
+                this.applyType = int.Parse(this.ddlApplyType.SelectedValue);
+            if (!string.IsNullOrEmpty(this.ddlTradeMarkStatus.SelectedValue))
+                this.qStatus = int.Parse(this.ddlTradeMarkStatus.SelectedValue);
+
+            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, applyType, ByCaseNo, ByName, Bytype, ByStatus, qCaseNo, qName, qStatus, ref Ccount);
             this.Rp_sb_list.DataBind();
             AspNetPager1.RecordCount = Ccount;
             AspNetPager1.PageSize = PageSize;
@@ -258,29 +265,15 @@ public partial class trademark_list : System.Web.UI.Page
         {
             switch (HF_ORDERBY.Value.Split('_')[1])
             {
-                case "1": Sbtype = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "2": Sbjiaofeitype = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "3": SbregName = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "4": Sbnum = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "5": Sbjiaofei = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "6": Sbtime = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "7": Stime = HF_ORDERBY.Value.Split('_')[0]; break;
+                case "1": ByCaseNo = HF_ORDERBY.Value.Split('_')[0]; break;
+                case "2": ByName = HF_ORDERBY.Value.Split('_')[0]; break;
+                case "3": applyType = int.Parse(HF_ORDERBY.Value.Split('_')[0]); break;
+                case "4": ByStatus = HF_ORDERBY.Value.Split('_')[0]; break;
             }
         }
         Bind_Rpt_Trademark();
     }
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-        if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
-        {
-            Response.Redirect("User_TrademarkOrderAdd.aspx");
-        }
-        else
-        {
-            div_a.InnerHtml = "<script>alert('请选择缴费商标！');</script>";
 
-        }
-    }
     public string ZTFileImg(object zhuti, object sbid)
     {
         string aa = "<a href='user_sbzl.aspx'>未上传</a>";
@@ -346,7 +339,7 @@ public partial class trademark_list : System.Web.UI.Page
         return namestr;
     }
 
-    
+
     public string GetSBtypeAndName(string country, string typeid)//获得商标类型
     {
         string typename = "";
@@ -383,7 +376,7 @@ public partial class trademark_list : System.Web.UI.Page
         return typename;
 
     }
-    
+
     private void toExecl(GridView GVId)
     {
         DateTime dt = DateTime.Now;
@@ -403,18 +396,7 @@ public partial class trademark_list : System.Web.UI.Page
         Response.Flush();
         Response.End();
     }
-    protected void ImageButton4_Click(object sender, ImageClickEventArgs e)
-    {
-        if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
-        {
-            Response.Redirect("User_Trademarkzixing.aspx");
-        }
-        else
-        {
-            div_a.InnerHtml = "<script>alert('请选择缴费商标！');</script>";
 
-        }
-    }
     protected void ImageButton5_Click(object sender, ImageClickEventArgs e)
     {
         if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
@@ -484,7 +466,7 @@ public partial class trademark_list : System.Web.UI.Page
         }
         return cname;
     }
-    
+
     protected void btnQuery_Click(object sender, EventArgs e)
     {
         this.qCaseNo = this.txtCaseNo.Text.Trim();
