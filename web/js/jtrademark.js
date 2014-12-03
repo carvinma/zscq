@@ -188,9 +188,10 @@ var goodscalc = {
 }
 var returnPostion = 0; //当搜索商品时返回上一级的标志
 function searchdetail() {
+    
     var key = $("#searchkey1").val();
     //var sort = ($("#searchsort1 option:selected").text());
-    var sort =$("#searchsort1 option:selected").attr("val");
+    var sort = $("#searchsort1 option:selected").attr("val");
     //判断用户是否输入，自动去除空格
     key = key.replace(/[ ]/g, "");
     if (key == '') {
@@ -210,13 +211,13 @@ function searchdetail() {
         data: "flag=searchgoodsdetail&key=" + key + "&maincategoryid=" + sort,
         dataType: "json",
         success: function (data) {
-            
+            alert(data);
             var html = '';
             var tmp = '';
             for (var i = 0; i < data.length; i++) {
                 tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chkItem" value="' + data[i].id + '"></td><td align="center" bgcolor="#FFFFFF">' + data[i].MainCategoryCode + '</td><td align="center" bgcolor="#FFFFFF">' + data[i].DetailCategoryCode + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSelectGoods(' + "'" + data[i].id + "')" + '"' + ">" + data[i].GoodsCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].GoodsRemark + '</td></tr>';
             }
-            if(tmp=='')
+            if (tmp == '')
                 tmp = '<tr><td align="center" bgcolor="#FFFFFF" colspan="5" style="color:red;">没有相关数据，请确认您输入的关键字是否正确！<td></tr>';
             var resultHtml = '<div class="nowstyle"><p> 您的关键字为<span style="color: #f00;">' + key + '</span>，所查到的结果共有<span style="color: #f00;">' + data.length + '</span> 条</p></div>';
             html = htmlCommon1 + resultHtml + htmlCommon2 + htmltable + tmp + htmlCommon3;
@@ -423,6 +424,7 @@ var submit = function (v, h, f) {
     return true;
 };
 //常用申请联系人
+var applys = [];
 function GetApplysDDL(userid, applytype) {
     $.ajax({
         type: "POST",
@@ -431,16 +433,18 @@ function GetApplysDDL(userid, applytype) {
         data: "flag=applysddl&userid=" + userid + "&applytype=" + applytype,
         dataType: "json",
         success: function (data) {
-            var applys = new Array();
+            var newapplys = [];
             var commonapplys = new Array();
             for (var i = 0; i < data.length; i++) {
                 if (i <= 9)
                     commonapplys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin);
-                applys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin, data[i].MainQualificationPath, data[i].provinceID, data[i].cityID, data[i].areaID, data[i].Address,
+                newapplys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin, data[i].MainQualificationPath, data[i].provinceID, data[i].cityID, data[i].areaID, data[i].Address,
                  data[i].PhoneNo, data[i].FaxNo, data[i].PostCode, data[i].ApplyCardNo, data[i].CardNoPath);
             }
-
-            $("#txt_applyname").suggest(applys, { hot_list: commonapplys, dataContainer: '#applyname_3word', attachObject: "#suggest", onSelect: function () { DisplaySelectedApplyInfo(applys); } });
+            applys = newapplys;
+            $("#txt_applyname").suggest(newapplys, { hot_list: commonapplys, dataContainer: '#applyname_3word',
+                attachObject: "#suggest", onSelect: function () { DisplaySelectedApplyInfo(applys); }
+            });
         }
     });
 }
@@ -448,6 +452,7 @@ function GetApplysDDL(userid, applytype) {
 // for add_trademark.aspx 当选中常用申请人时，给页面赋值
 function DisplaySelectedApplyInfo(applys) {
     var selectapplyid = $("#applyname_3word").val();
+ 
      var findArray=new Array();
      for(var i=0;i<applys.length;i++) {
         if(applys[i][0]==selectapplyid)

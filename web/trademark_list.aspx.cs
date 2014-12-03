@@ -43,8 +43,21 @@ public partial class trademark_list : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-           // this.ddlApplyType.DataSource = EnumManager.GetDescription(ApplyUserTypeEnum, 0);
-            
+            Dictionary<String, int?> dic = new Dictionary<String, int?>();
+            string s = "È«²¿";
+            dic.Add(s,-1);
+            for (int i = 0; i <= 1; i++)
+            {
+                string key = EnumManager.GetDescription(typeof(ApplyUserTypeEnum), i);
+                if (!string.IsNullOrEmpty(key))
+                    dic.Add(key, i);
+            }
+             
+            this.ddlApplyType.DataSource = dic;
+            this.ddlApplyType.DataTextField = "Key";
+            this.ddlApplyType.DataValueField = "Value";
+            this.ddlApplyType.DataBind();
+
             this.ddlTradeMarkStatus.DataSource = BaseDataUtil.tradeMarkStatuslist;
             this.ddlTradeMarkStatus.DataTextField = "StatusName";
             this.ddlTradeMarkStatus.DataValueField = "StatusValue";
@@ -74,13 +87,13 @@ public partial class trademark_list : System.Web.UI.Page
         }
         if (Request.QueryString["sbtype"] != null && Request.QueryString["sbtype"] != "")
         {
-            this.SbregName = Request.QueryString["sbtype"].ToString().Split('_')[0];
+            this.Bytype = Request.QueryString["sbtype"].ToString().Split('_')[0];
             Hi_orderby3.Value = Request.QueryString["sbtype"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbtype"].ToString();//BY CHY
         }
         if (Request.QueryString["sbstatus"] != null && Request.QueryString["sbstatus"] != "")
         {
-            this.Sbnum = Request.QueryString["sbstatus"].ToString().Split('_')[0];
+            this.ByStatus = Request.QueryString["sbstatus"].ToString().Split('_')[0];
             Hi_orderby4.Value = Request.QueryString["sbstatus"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbstatus"].ToString();//BY CHY
         }
@@ -103,6 +116,16 @@ public partial class trademark_list : System.Web.UI.Page
         //}
         
          
+    }
+    public string GetApplyTypeName(object applyType)
+    {
+        return EnumManager.GetDescription(typeof(ApplyUserTypeEnum), applyType);
+    }
+    public string GetApplyStatus(object applyStatus)
+    {
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
     }
     public string Geturl(string url)
     {
@@ -226,17 +249,6 @@ public partial class trademark_list : System.Web.UI.Page
             AspNetPager1.RecordCount = Ccount;
             AspNetPager1.PageSize = PageSize;
             AspNetPager1.CurrentPageIndex = pageCurrent;
-        }
-    }
-    public bool BoolFileImg(object fileurl)
-    {
-        if (fileurl != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
     protected void AspNetPager1_PageChanged(object sender, EventArgs e)
@@ -370,14 +382,7 @@ public partial class trademark_list : System.Web.UI.Page
         return typename;
 
     }
-    protected void Button2_Click(object sender, EventArgs e)
-    {
-
-    }
-    public override void VerifyRenderingInServerForm(Control control)
-    {
-
-    }
+    
     private void toExecl(GridView GVId)
     {
         DateTime dt = DateTime.Now;
@@ -477,5 +482,13 @@ public partial class trademark_list : System.Web.UI.Page
             cname = "time6";
         }
         return cname;
+    }
+    
+    protected void btnQuery_Click(object sender, EventArgs e)
+    {
+        this.qCaseNo = this.txtCaseNo.Text.Trim();
+        this.qName = this.txtApplyUser.Text.Trim();
+        //this.applyType = this.ddlApplyType.SelectedValue;
+        //this.qStatus = this.ddlTradeMarkStatus.SelectedValue;
     }
 }

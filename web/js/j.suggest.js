@@ -168,7 +168,6 @@
 	        }
 
 	        function selectCurrentResult() {
-
 	            $currentResult = getCurrentResult();
 	            if ($currentResult) {
 

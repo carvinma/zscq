@@ -12,7 +12,7 @@ namespace zscq.BLL
     /// </summary>
     public enum ApplyUserTypeEnum
     {
-        [Description("企业单位")]
+        [Description("法人或其他组织")]
         CreateTradeAccount = 0,
         [Description("自然人")] 
         SubmitTradeAccount = 1,

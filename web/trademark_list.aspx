@@ -14,6 +14,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
+     <script src="js/jtrademark.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <%--  <link href="css/pager.css" rel="stylesheet" type="text/css" />--%>
     <script type="text/javascript">
@@ -258,33 +259,34 @@
                                                     <table width="689" border="0" cellspacing="0" cellpadding="0">
                                                         <tr>
                                                             <td height="29" align="right" nowrap="nowrap">
-                                                                案件号
+                                                                <strong>案件号</strong>
                                                             </td>
                                                             <td align="left">
-                                                                <asp:TextBox ID="TextBox2" runat="server" Width="100px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtCaseNo" runat="server" Width="70px" Height="18px"></asp:TextBox>
                                                             </td>
-                                                            <td align="center" nowrap="nowrap" class="style1">
-                                                                申请人
+                                                            <td align="center" nowrap="nowrap">
+                                                                <strong>申请人</strong>
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="TextBox1" runat="server" Width="83px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtApplyUser" runat="server" Width="70px"></asp:TextBox>
                                                             </td>
                                                             <td width="30" align="center" nowrap="nowrap">
-                                                                类别
+                                                                <strong>类别</strong>
                                                             </td>
-                                                            <td width="114">
+                                                            <td>
                                                                 <asp:DropDownList ID="ddlApplyType" runat="server">
                                                                 </asp:DropDownList>
                                                             </td>
                                                             <td width="30" align="center" nowrap="nowrap">
-                                                                状态
+                                                                <strong>状态</strong>
                                                             </td>
                                                             <td width="114">
                                                                 <asp:DropDownList ID="ddlTradeMarkStatus" runat="server">
                                                                 </asp:DropDownList>
                                                             </td>
                                                             <td width="80" align="center">
-                                                                <asp:Button ID="Button3" CssClass="BtnShow" runat="server" Text="查 询" />
+                                                                <asp:Button ID="btnQuery" CssClass="BtnShow" runat="server" Text="查 询" 
+                                                                    onclick="btnQuery_Click" />
                                                             </td>
                                                             <td width="1">
                                                             </td>
@@ -309,8 +311,8 @@
                                                                         <td width="12">
                                                                         </td>
                                                                         <td align="left">
-                                                                            <span>案件号</span><a href="user_sblb.aspx?sbcaseno=desc_1" title="倒序" id="daoxu4">↑</a><a
-                                                                                href="user_sblb.aspx?sbcaseno=asc_1" title="正序" id="zhengxu4" style="display: none;">↓</a>
+                                                                            <span>案件号</span><a href="trademark_list.aspx?sbcaseno=desc_1" title="倒序" id="daoxu1">↑</a><a
+                                                                                href="trademark_list.aspx?sbcaseno=asc_1" title="正序" id="zhengxu1" style="display: none;">↓</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -321,13 +323,13 @@
                                                                         <td width="6">
                                                                         </td>
                                                                         <td width="60" align="center">
-                                                                              <span>申请人</span><a href="user_sblb.aspx?sbname=desc_2" title="倒序" id="A1">↑</a><a
-                                                                                href="user_sblb.aspx?sbname=asc_2" title="正序" id="A2" style="display: none;">↓</a>
+                                                                              <span>申请人</span><a href="trademark_list.aspx?sbname=desc_2" title="倒序" id="daoxu2">↑</a><a
+                                                                                href="trademark_list.aspx?sbname=asc_2" title="正序" id="zhengxu2" style="display: none;">↓</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td width="96" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                            <td width="55" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                图样
                                                             </td>
                                                             <td width="49" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
@@ -336,8 +338,8 @@
                                                                         <td width="6">
                                                                         </td>
                                                                         <td width="44" align="left">
-                                                                            <span>类别</span><a href="user_sblb.aspx?sbtype=desc_3" title="倒序" id="daoxu1">↑</a><a
-                                                                                href='user_sblb.aspx?sbtype=asc_3' title="正序" id="zhengxu1" style="display: none;">↓</a>
+                                                                            <span>类别</span><a href="trademark_list.aspx?sbtype=desc_3" title="倒序" id="daoxu3">↑</a><a
+                                                                                href='trademark_list.aspx?sbtype=asc_3' title="正序" id="zhengxu3" style="display: none;">↓</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -348,50 +350,50 @@
                                                             <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                委托书
                                                             </td>
-                                                            <td width="46" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                            <td width="66" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 <table width="46" height="42" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
                                                                         <td width="46" align="left">
-                                                                            <span>状态</span><a href="user_sblb.aspx?sbstatus=desc_4" title="倒序" id="daoxu6">↑</a>
-                                                                            <a href="user_sblb.aspx?sbstatus=asc_4" title="正序" id="zhengxu6" style="display: none;">
+                                                                            <span>状态</span><a href="trademark_list.aspx?sbstatus=desc_4" title="倒序" id="daoxu4">↑</a>
+                                                                            <a href="trademark_list.aspx?sbstatus=asc_4" title="正序" id="zhengxu4" style="display: none;">
                                                                                 ↓</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
                                                             <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                选择
+                                                               <input type="checkbox" onclick="doSelect()" id="selectall"/>
                                                             </td>
                                                         </tr>
                                                         <asp:Repeater ID="Rp_sb_list" runat="server">
                                                             <ItemTemplate>
                                                                 <tr>
-                                                                    <td height="42" align="center" bgcolor="#FFFFFF">
+                                                                    <td height="35" align="center" bgcolor="#FFFFFF">
                                                                         <a href="user_sbck.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t">
                                                                             <%# Eval("CaseNo")%></a>
                                                                     </td>
-                                                                    <td height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                    <td align="center" bgcolor="#FFFFFF">
                                                                         <%# Eval("ApplyName")%>
                                                                     </td>
-                                                                    <td height="42" align="center" bgcolor="#FFFFFF">
+                                                                    <td align="center" bgcolor="#FFFFFF">
                                                                         <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                        <%# Eval("ApplyType")%>
+                                                                        <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                                     </td>
-                                                                    <td align="center" bgcolor="#FFFFFF">
-                                                                       <%# (Eval("ApplyBook")!=null&& string.IsNullOrEmpty(Eval("ApplyBook").ToString())==false)?"已上传":"<p><a href='FileLoad/cn/商标注册申请书 .doc'>下载</a></p><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>" %>
+                                                                    <td align="center" bgcolor="#FFFFFF"  class="font12b4e">
+                                                                       <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false) ? "已上传" : "<a href='FileLoad/cn/商标注册申请书 .doc'>下载</a><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>"%>
+                                                                    </td>
+                                                                    
+                                                                    <td align="center" bgcolor="#FFFFFF"  class="font12b4e">
+                                                                    <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false) ? "已上传" : "<a href='FileLoad/cn/商标申请代理委托书 .doc'>下载</a><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>"%>
                                                                     </td>
                                                                     
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                    <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false) ? "已上传" : "<p><a href='FileLoad/cn/商标申请代理委托书 .doc'>下载</a></p><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>"%>
-                                                                    </td>
-                                                                    
-                                                                    <td align="center" bgcolor="#FFFFFF">
-                                                                        <%# Eval("Status")%>
+                                                                        <%# GetApplyStatus(Eval("Status"))%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                        <input name="inputPageid" onchange="Selbox(this)" type="checkbox" 
+                                                                        <input name="chkItem" type="checkbox" 
                                                                             value="<%#Eval("i_Id")%>" id="cb_<%#Eval("i_Id")%>" />
                                                                     </td>
                                                                 </tr>
@@ -405,7 +407,7 @@
                                                     &nbsp;
                                                 </td>
                                             </tr>
-                                            <%# Eval("i_Id") %>
+                                            <%# Eval("CaseNo")%>
                                             <tr>
                                                 <td align="center">
                                                     <table>
