@@ -374,7 +374,7 @@
                                                                         <%# Eval("ApplyName")%>
                                                                     </td>
                                                                     <td height="42" align="center" bgcolor="#FFFFFF">
-                                                                        <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="" />
+                                                                        <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                         <%# Eval("ApplyType")%>
