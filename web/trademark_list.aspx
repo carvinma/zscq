@@ -368,30 +368,30 @@
                                                                 <tr>
                                                                     <td height="42" align="center" bgcolor="#FFFFFF">
                                                                         <a href="user_sbck.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t">
-                                                                            <%# Eval("i_Id") %></a>
+                                                                            <%# Eval("CaseNo")%></a>
                                                                     </td>
                                                                     <td height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                         <%# Eval("ApplyName")%>
                                                                     </td>
                                                                     <td height="42" align="center" bgcolor="#FFFFFF">
-                                                                        <img alt="" src="<%# Eval("TrademarkPattern1") %>" />
+                                                                        <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="" />
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                         <%# Eval("ApplyType")%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                       <%#  string.IsNullOrEmpty(Eval("ApplyBook").ToString())==false?"已上传":"<p><a href='FileLoad/cn/商标注册申请书 .doc'>下载</a></p><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>" %>
+                                                                       <%# (Eval("ApplyBook")!=null&& string.IsNullOrEmpty(Eval("ApplyBook").ToString())==false)?"已上传":"<p><a href='FileLoad/cn/商标注册申请书 .doc'>下载</a></p><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>" %>
                                                                     </td>
                                                                     
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                    <%# string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false ? "已上传" : "<p><a href='FileLoad/cn/商标申请代理委托书 .doc'>下载</a></p><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>"%>
+                                                                    <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false) ? "已上传" : "<p><a href='FileLoad/cn/商标申请代理委托书 .doc'>下载</a></p><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>"%>
                                                                     </td>
                                                                     
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                        <%# Eval("i_ShengDays")%>
+                                                                        <%# Eval("Status")%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                        <input name="inputPageid" onchange="Selbox(this)" type="checkbox" <%# SetChecked(Eval("i_State").ToString(),Eval("i_IsPayState").ToString(),Eval("i_XujiaoStates").ToString()) %>
+                                                                        <input name="inputPageid" onchange="Selbox(this)" type="checkbox" 
                                                                             value="<%#Eval("i_Id")%>" id="cb_<%#Eval("i_Id")%>" />
                                                                     </td>
                                                                 </tr>
