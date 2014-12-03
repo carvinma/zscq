@@ -48,6 +48,9 @@ namespace zscq.Model
     partial void Insertt_CaseNoOrder(t_CaseNoOrder instance);
     partial void Updatet_CaseNoOrder(t_CaseNoOrder instance);
     partial void Deletet_CaseNoOrder(t_CaseNoOrder instance);
+    partial void Insertt_NewTradeMarkStatus(t_NewTradeMarkStatus instance);
+    partial void Updatet_NewTradeMarkStatus(t_NewTradeMarkStatus instance);
+    partial void Deletet_NewTradeMarkStatus(t_NewTradeMarkStatus instance);
     partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
@@ -136,6 +139,14 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<t_CaseNoOrder>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_NewTradeMarkStatus> t_NewTradeMarkStatus
+		{
+			get
+			{
+				return this.GetTable<t_NewTradeMarkStatus>();
 			}
 		}
 		
@@ -1405,6 +1416,140 @@ namespace zscq.Model
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkStatus")]
+	public partial class t_NewTradeMarkStatus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private System.Nullable<int> _StatusType;
+		
+		private string _StatusName;
+		
+		private System.Nullable<int> _StatusValue;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnStatusTypeChanging(System.Nullable<int> value);
+    partial void OnStatusTypeChanged();
+    partial void OnStatusNameChanging(string value);
+    partial void OnStatusNameChanged();
+    partial void OnStatusValueChanging(System.Nullable<int> value);
+    partial void OnStatusValueChanged();
+    #endregion
+		
+		public t_NewTradeMarkStatus()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusType", DbType="Int")]
+		public System.Nullable<int> StatusType
+		{
+			get
+			{
+				return this._StatusType;
+			}
+			set
+			{
+				if ((this._StatusType != value))
+				{
+					this.OnStatusTypeChanging(value);
+					this.SendPropertyChanging();
+					this._StatusType = value;
+					this.SendPropertyChanged("StatusType");
+					this.OnStatusTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusName", DbType="VarChar(50)")]
+		public string StatusName
+		{
+			get
+			{
+				return this._StatusName;
+			}
+			set
+			{
+				if ((this._StatusName != value))
+				{
+					this.OnStatusNameChanging(value);
+					this.SendPropertyChanging();
+					this._StatusName = value;
+					this.SendPropertyChanged("StatusName");
+					this.OnStatusNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusValue", DbType="Int")]
+		public System.Nullable<int> StatusValue
+		{
+			get
+			{
+				return this._StatusValue;
+			}
+			set
+			{
+				if ((this._StatusValue != value))
+				{
+					this.OnStatusValueChanging(value);
+					this.SendPropertyChanging();
+					this._StatusValue = value;
+					this.SendPropertyChanged("StatusValue");
+					this.OnStatusValueChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkInfo")]
 	public partial class t_NewTradeMarkInfo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1461,9 +1606,17 @@ namespace zscq.Model
 		
 		private string _TrademarkPattern2;
 		
+		private string _ApplyBook;
+		
+		private string _AgentBook;
+		
 		private System.Nullable<System.DateTime> _InputTime;
 		
 		private System.Nullable<bool> _IsSubmit;
+		
+		private System.Nullable<int> _Status;
+		
+		private System.Nullable<int> _AdminStatus;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -1519,10 +1672,18 @@ namespace zscq.Model
     partial void OnTrademarkPattern1Changed();
     partial void OnTrademarkPattern2Changing(string value);
     partial void OnTrademarkPattern2Changed();
+    partial void OnApplyBookChanging(string value);
+    partial void OnApplyBookChanged();
+    partial void OnAgentBookChanging(string value);
+    partial void OnAgentBookChanged();
     partial void OnInputTimeChanging(System.Nullable<System.DateTime> value);
     partial void OnInputTimeChanged();
     partial void OnIsSubmitChanging(System.Nullable<bool> value);
     partial void OnIsSubmitChanged();
+    partial void OnStatusChanging(System.Nullable<int> value);
+    partial void OnStatusChanged();
+    partial void OnAdminStatusChanging(System.Nullable<int> value);
+    partial void OnAdminStatusChanged();
     #endregion
 		
 		public t_NewTradeMarkInfo()
@@ -2030,6 +2191,46 @@ namespace zscq.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyBook", DbType="NVarChar(100)")]
+		public string ApplyBook
+		{
+			get
+			{
+				return this._ApplyBook;
+			}
+			set
+			{
+				if ((this._ApplyBook != value))
+				{
+					this.OnApplyBookChanging(value);
+					this.SendPropertyChanging();
+					this._ApplyBook = value;
+					this.SendPropertyChanged("ApplyBook");
+					this.OnApplyBookChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AgentBook", DbType="NVarChar(100)")]
+		public string AgentBook
+		{
+			get
+			{
+				return this._AgentBook;
+			}
+			set
+			{
+				if ((this._AgentBook != value))
+				{
+					this.OnAgentBookChanging(value);
+					this.SendPropertyChanging();
+					this._AgentBook = value;
+					this.SendPropertyChanged("AgentBook");
+					this.OnAgentBookChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InputTime", DbType="DateTime")]
 		public System.Nullable<System.DateTime> InputTime
 		{
@@ -2066,6 +2267,46 @@ namespace zscq.Model
 					this._IsSubmit = value;
 					this.SendPropertyChanged("IsSubmit");
 					this.OnIsSubmitChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminStatus", DbType="Int")]
+		public System.Nullable<int> AdminStatus
+		{
+			get
+			{
+				return this._AdminStatus;
+			}
+			set
+			{
+				if ((this._AdminStatus != value))
+				{
+					this.OnAdminStatusChanging(value);
+					this.SendPropertyChanging();
+					this._AdminStatus = value;
+					this.SendPropertyChanged("AdminStatus");
+					this.OnAdminStatusChanged();
 				}
 			}
 		}
