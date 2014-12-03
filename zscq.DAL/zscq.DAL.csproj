@@ -152,6 +152,8 @@
     <Compile Include="dal_CouponTimeLength.cs" />
     <Compile Include="dal_UserLog.cs" />
     <Compile Include="dal_NewTrademark.cs" />
+    <Compile Include="QueryableExtensions.cs" />
+    <Compile Include="WhereIfExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">

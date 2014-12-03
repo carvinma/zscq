@@ -74,7 +74,111 @@ namespace zscq.DAL
                 return 0;
             }
         }
-        
+
+         /// <summary>
+        /// 前台商标分页获取
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public IQueryable<t_NewTradeMarkInfo> Trademark_web_SelectPage(int PageIndex, int PageSize,
+            int userid, int? applyType,
+            string ByCaseNo, string ByName, string Bytype, string ByStatus, 
+            string qCaseNo,string qName, int? qStatus, ref int count)
+        {
+            Expression<Func<t_NewTradeMarkInfo, bool>> WhereExpr = PredicateExtensions.True<t_NewTradeMarkInfo>();
+            WhereExpr = WhereExpr.And(a => a.i_MemberId == userid);
+            if (applyType.HasValue)
+                WhereExpr = WhereExpr.And(a => a.ApplyType == applyType.Value);
+            if(!string.IsNullOrEmpty(qCaseNo))
+                WhereExpr = WhereExpr.And(a => a.CaseNo.Contains(qCaseNo));
+            if (!string.IsNullOrEmpty(qName))
+                WhereExpr = WhereExpr.And(a => a.ApplyName.Contains(qName));
+            if (qStatus.HasValue)
+                WhereExpr = WhereExpr.And(a => a.Status == qStatus.Value);
+
+            var sortedList = mark.t_NewTradeMarkInfo.Where(WhereExpr);
+            if (!string.IsNullOrEmpty(ByCaseNo))
+            {
+                sortedList=ByCaseNo == "desc" ? sortedList.OrderByDescending(p => p.CaseNo):sortedList.OrderBy(p => p.CaseNo);
+            }
+            if (!string.IsNullOrEmpty(ByName))
+            {
+                sortedList=ByName == "desc" ? sortedList.OrderByDescending(p => p.ApplyName):sortedList.OrderBy(p => p.ApplyName);
+            }
+            if (!string.IsNullOrEmpty(Bytype))
+            {
+                sortedList=Bytype == "desc" ? sortedList.OrderByDescending(p => p.ApplyType):sortedList.OrderBy(p => p.ApplyType);
+            }
+            if (!string.IsNullOrEmpty(ByStatus))
+            {
+                sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.Status) : sortedList.OrderBy(p => p.Status);
+            }
+            count = sortedList.Count();
+            return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+        }
+
+        #region 商标状态管理
+
+        public IQueryable<t_NewTradeMarkStatus> rademarkStatus_Select_All()
+        {
+             //var query = from q in dsdc.t_Province orderby q.provinceID ascending select q;
+           // return query;
+            return mark.t_NewTradeMarkStatus.OrderBy(p => p.StatusValue);
+        }
+        public int TrademarkStatus_Add(t_NewTradeMarkStatus model)
+        {
+            try
+            {
+                mark.t_NewTradeMarkStatus.InsertOnSubmit(model);
+                mark.SubmitChanges();
+                return model.i_Id;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public int TrademarkStatus_Del(int id)
+        {
+            try
+            {
+                var Trademark = mark.t_NewTradeMarkStatus.SingleOrDefault(b => b.i_Id == id);
+                if (Trademark != null)
+                {
+                    mark.t_NewTradeMarkStatus.DeleteOnSubmit(Trademark);
+                    mark.SubmitChanges();
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+       
+        public int TrademarkStatus_Update(t_NewTradeMarkStatus m)
+        {
+            try
+            {
+                var t = mark.t_NewTradeMarkStatus.Single(a => a.i_Id == m.i_Id);
+                t.StatusName = m.StatusName;
+                t.StatusValue = m.StatusValue;
+                mark.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        #endregion
         /// <summary>
         /// 根据id返回一条商标信息
         /// </summary>
