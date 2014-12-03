@@ -8,6 +8,9 @@
         myTimer.Elapsed += new System.Timers.ElapsedEventHandler(myTimer_Elapsed);
         myTimer.Enabled = true;
         myTimer.AutoReset = true;
+        
+        zscq.BLL.BaseDataUtil data = new zscq.BLL.BaseDataUtil();
+        data.InitData(); //初始化商标下拉框状态
     }
     void myTimer_Elapsed(object source, System.Timers.ElapsedEventArgs e)
     {

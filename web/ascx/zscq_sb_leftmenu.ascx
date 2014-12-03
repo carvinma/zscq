@@ -126,8 +126,8 @@
                                                <%-- <a href="user_sblb.aspx" <% if (myurl == "user_sblb" || myurl == "user_sbck"|| myurl == "user_sbupdate"|| myurl == "user_trademarkzixing" ){ %>class="ac7" <%}else{%>class="" <%} %>>·全部商标信息</a>--%>
                                                    <a href="javascript:void(0)" class="menuchild">·全部商标信息</a> 
                                                      <table style="display:none">
-                                                      <tr><td width="10" height="22"></td><td>·商标申请案</td></tr>
-                                                      <tr><td width="10" height="22"></td><td>·商标续展案</td></tr>
+                                                      <tr><td width="10" height="22"></td><td> <a href="trademark_list.aspx">·商标申请案</a></td></tr>
+                                                      <tr><td width="10" height="22"></td><td> <a href="trademark_list.aspx">·商标续展案</a></td></tr>
                                                      </table>
                                             </td>
                                         </tr>
@@ -180,8 +180,8 @@
                                     <%--<a href="user_sbdd.aspx" <% if (myurl == "user_sbdd" ||  myurl == "user_sbddck"||  myurl == "user_trademarkorderok" ||myurl == "user_trademarkorderadd"){ %>class="font12bd44147" <%}else{%>class="" <%} %>>·我的商标订单</a>--%>
                                     <a href="javascript:void(0)"  class="menuchild">·我的商标订单</a>
                                     <table style="display:none">
-                                    <tr><td width="10" height="22"></td><td>·商标申请案订单</td></tr>
-                                     <tr><td width="10" height="22"></td><td>·商标续展案订单</td></tr>
+                                    <tr><td width="10" height="22"></td><td>  <a href="trademark_list.aspx">·商标申请案订单</a></td></tr>
+                                     <tr><td width="10" height="22"></td><td> <a href="user_sbtj.aspx">·商标续展案订单</a></td></tr>
                                     </table>
                                 </td>
                                 <td style="border-bottom: 1px solid #d3d3d3;">&nbsp;
