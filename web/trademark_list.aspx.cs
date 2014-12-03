@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -43,9 +43,8 @@ public partial class trademark_list : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            Dictionary<String, int?> dic = new Dictionary<String, int?>();
-            string s = "È«²¿";
-            dic.Add(s,-1);
+            Dictionary<string, int?> dic = new Dictionary<string, int?>();
+            dic.Add("å…¨éƒ¨",null);
             for (int i = 0; i <= 1; i++)
             {
                 string key = EnumManager.GetDescription(typeof(ApplyUserTypeEnum), i);
@@ -58,7 +57,9 @@ public partial class trademark_list : System.Web.UI.Page
             this.ddlApplyType.DataValueField = "Value";
             this.ddlApplyType.DataBind();
 
-            this.ddlTradeMarkStatus.DataSource = BaseDataUtil.tradeMarkStatuslist;
+            IList<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkStatuslist;
+            tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName="å…¨éƒ¨", StatusValue=null });
+            this.ddlTradeMarkStatus.DataSource = tradeMarkStatuslist;
             this.ddlTradeMarkStatus.DataTextField = "StatusName";
             this.ddlTradeMarkStatus.DataValueField = "StatusValue";
             this.ddlTradeMarkStatus.DataBind();
@@ -100,19 +101,19 @@ public partial class trademark_list : System.Web.UI.Page
          
         //if (Request.QueryString["jiaofeistate"] != null && Request.QueryString["jiaofeistate"] != "")
         //{
-        //    jiaofeistate = int.Parse(Request.QueryString["jiaofeistate"].ToString()); //Í³¼ÆÒ³Ãæ´«µİ¹ıÀ´µÄ‚ ½É·Ñ×´Ì¬    
+        //    jiaofeistate = int.Parse(Request.QueryString["jiaofeistate"].ToString()); //ç»Ÿè®¡é¡µé¢ä¼ é€’è¿‡æ¥çš„å€¤ ç¼´è´¹çŠ¶æ€    
         //}
         //if (Request.QueryString["isjiaofei"] != null && Request.QueryString["isjiaofei"] != "")
         //{
-        //    isjiaofei = int.Parse(Request.QueryString["isjiaofei"].ToString()); //Í³¼ÆÒ³Ãæ´«µİ¹ıÀ´µÄ‚ ÊÇ·ñ½É·Ñ     
+        //    isjiaofei = int.Parse(Request.QueryString["isjiaofei"].ToString()); //ç»Ÿè®¡é¡µé¢ä¼ é€’è¿‡æ¥çš„å€¤ æ˜¯å¦ç¼´è´¹     
         //}
         //if (Request.QueryString["sb_num"] != null && Request.QueryString["sb_num"] != "")
         //{
-        //    sb_num = Request.QueryString["sb_num"].ToString(); //¼ìË÷Ò³Ãæ´«µİ¹ıÀ´µÄ‚
+        //    sb_num = Request.QueryString["sb_num"].ToString(); //æ£€ç´¢é¡µé¢ä¼ é€’è¿‡æ¥çš„å€¤
         //}
         //if (Request.QueryString["sb_type"] != null && Request.QueryString["sb_type"] != "")
         //{
-        //    sb_type = Request.QueryString["sb_type"].ToString(); //¼ìË÷Ò³Ãæ´«µİ¹ıÀ´µÄ‚ 
+        //    sb_type = Request.QueryString["sb_type"].ToString(); //æ£€ç´¢é¡µé¢ä¼ é€’è¿‡æ¥çš„å€¤ 
         //}
         
          
@@ -157,7 +158,7 @@ public partial class trademark_list : System.Web.UI.Page
         string xiaoji = "0.00";
         string bizhong = "";
         t_Trademark model = DALT.Trademark_Select_Id(int.Parse(sbid));
-        t_TradeMarkSetup model1 = DALTS.TrademarkSetup_Select();//´úÀí·ÑÓÃ
+        t_TradeMarkSetup model1 = DALTS.TrademarkSetup_Select();//ä»£ç†è´¹ç”¨
         if (model != null)
         {
             if (model1 != null)
@@ -168,10 +169,10 @@ public partial class trademark_list : System.Web.UI.Page
                     t_Nationality na = DALN.Nationality_Select_Id(m.i_GuoJiId);
                     if (na != null)
                     {
-                        if (na.nvc_Name == "ÖĞ¹ú")
+                        if (na.nvc_Name == "ä¸­å›½")
                         {
                             bizhong = na.nvc_JFBizhong;
-                            #region Î¯ÍĞ½É·Ñ
+                            #region å§”æ‰˜ç¼´è´¹
                             if (model.i_JiaoFeiType == 2)
                             {
                                 string totalmoney = (model1.dm_TMDaiLi + model1.dm_TrademarkMoney).ToString("0.00");
@@ -180,7 +181,7 @@ public partial class trademark_list : System.Web.UI.Page
                             }
                             if (model.i_JiaoFeiType == 1)
                             {
-                                //#region ×ÔĞĞ½É·Ñ
+                                //#region è‡ªè¡Œç¼´è´¹
                                 //xiaoji = bizhong + ":" + (model1.dm_TrademarkMoney).ToString("0.00");
                                 //#endregion
                             }
@@ -197,7 +198,7 @@ public partial class trademark_list : System.Web.UI.Page
                                     huilv = nafee.dm_Exchange;
                                 }
                             }
-                            #region  Î¯ÍĞ½É·Ñ
+                            #region  å§”æ‰˜ç¼´è´¹
                             string totalmoney = (model1.dm_TMDaiLi + model1.dm_TrademarkMoney).ToString("0.00");
                             string totalmoneyGY = ((model1.dm_TMDaiLi + model1.dm_TrademarkMoney) * huilv).ToString("0.00");
                             string shangbiao = (model1.dm_TrademarkMoney).ToString("0.00");
@@ -207,7 +208,7 @@ public partial class trademark_list : System.Web.UI.Page
                             // xiaoji = totalmoney;
                             #endregion
 
-                            //#region  ×ÔĞĞ½É·Ñ
+                            //#region  è‡ªè¡Œç¼´è´¹
                             //string totalmoney1 = (model1.dm_TrademarkMoney).ToString("0.00");
                             //string totalmoneyGY1 = ((model1.dm_TrademarkMoney) / huilv).ToString("0.00");
 
@@ -222,14 +223,14 @@ public partial class trademark_list : System.Web.UI.Page
         return xiaoji;
     }
     /// <summary>
-    /// ×´Ì¬ÅĞ¶Ï
+    /// çŠ¶æ€åˆ¤æ–­
     /// </summary>
     public string SetChecked(string state, string isjiaofei, string XujiaoStates)
     {
         string str = "";
         //if (state == "1")
         //{
-        if (isjiaofei == "1" || XujiaoStates == "1")//1Ìá½»¶©µ¥ ´ú½É·Ñ£¬2 ÒÑ½»·Ñ  4£¬È¡Ïû
+        if (isjiaofei == "1" || XujiaoStates == "1")//1æäº¤è®¢å• ä»£ç¼´è´¹ï¼Œ2 å·²äº¤è´¹  4ï¼Œå–æ¶ˆ
         {
             str = "disabled='disabled'";
         }
@@ -237,7 +238,7 @@ public partial class trademark_list : System.Web.UI.Page
         return str;
     }
 
-    private void Bind_Rpt_Trademark()//°ó¶¨ÁĞ±í
+    private void Bind_Rpt_Trademark()//ç»‘å®šåˆ—è¡¨
     {
         if (UserId != 0)
         {
@@ -276,13 +277,13 @@ public partial class trademark_list : System.Web.UI.Page
         }
         else
         {
-            div_a.InnerHtml = "<script>alert('ÇëÑ¡Ôñ½É·ÑÉÌ±ê£¡');</script>";
+            div_a.InnerHtml = "<script>alert('è¯·é€‰æ‹©ç¼´è´¹å•†æ ‡ï¼');</script>";
 
         }
     }
     public string ZTFileImg(object zhuti, object sbid)
     {
-        string aa = "<a href='user_sbzl.aspx'>Î´ÉÏ´«</a>";
+        string aa = "<a href='user_sbzl.aspx'>æœªä¸Šä¼ </a>";
         var m = DALM.Member_Select_Id(UserId);
         if (m != null)
         {
@@ -290,22 +291,22 @@ public partial class trademark_list : System.Web.UI.Page
             {
                 if (zhuti != null && zhuti != "")
                 {
-                    return "<a href='" + zhuti + "' target='_blank'><img src='" + zhuti + "'  width='20' title='Ö÷Ìå×Ê¸ñÖ¤Ã÷ÎÄ¼ş' border='0'/></a>";
+                    return "<a href='" + zhuti + "' target='_blank'><img src='" + zhuti + "'  width='20' title='ä¸»ä½“èµ„æ ¼è¯æ˜æ–‡ä»¶' border='0'/></a>";
                 }
                 else
                 {
-                    return "<a href='user_sbupdate.aspx?t_r_id=" + sbid + "' target='_blank'>Î´ÉÏ´«</a>";
+                    return "<a href='user_sbupdate.aspx?t_r_id=" + sbid + "' target='_blank'>æœªä¸Šä¼ </a>";
                 }
             }
             else
             {
                 if (!string.IsNullOrWhiteSpace(m.nvc_ZhuTiFile))
                 {
-                    return "<a href='" + m.nvc_ZhuTiFile + "'  target='_blank'><img src='" + m.nvc_ZhuTiFile + "'  width='20' title='Ö÷Ìå×Ê¸ñÖ¤Ã÷ÎÄ¼ş' border='0'/></a>";
+                    return "<a href='" + m.nvc_ZhuTiFile + "'  target='_blank'><img src='" + m.nvc_ZhuTiFile + "'  width='20' title='ä¸»ä½“èµ„æ ¼è¯æ˜æ–‡ä»¶' border='0'/></a>";
                 }
                 else
                 {
-                    return "<a href='user_sbzl.aspx'>Î´ÉÏ´«</a>";
+                    return "<a href='user_sbzl.aspx'>æœªä¸Šä¼ </a>";
                 }
             }
         }
@@ -325,58 +326,58 @@ public partial class trademark_list : System.Web.UI.Page
                     var m = DALM.Member_Select_Id(UserId);
                     if (m != null && !string.IsNullOrWhiteSpace(m.nvc_ZhuTiFile))
                     {
-                        namestr = "ÒÑÉÏ´«";
+                        namestr = "å·²ä¸Šä¼ ";
                     }
                     else
                     {
-                        namestr = "Î´ÉÏ´«";
+                        namestr = "æœªä¸Šä¼ ";
                     }
                 }
                 else
                 {
-                    namestr = "ÒÑÉÏ´«";
+                    namestr = "å·²ä¸Šä¼ ";
                 }
             }
         }
         else
         {
-            namestr = "Î´ÉÏ´«";
+            namestr = "æœªä¸Šä¼ ";
         }
         return namestr;
     }
 
     
-    public string GetSBtypeAndName(string country, string typeid)//»ñµÃÉÌ±êÀàĞÍ
+    public string GetSBtypeAndName(string country, string typeid)//è·å¾—å•†æ ‡ç±»å‹
     {
         string typename = "";
         if (country == "1")
         {
             if (typeid == "1")
             {
-                typename = "ÖĞ¹ú¸öÈË";
+                typename = "ä¸­å›½ä¸ªäºº";
             }
             if (typeid == "2")
             {
-                typename = "ÖĞ¹úÆóÒµ";
+                typename = "ä¸­å›½ä¼ä¸š";
             }
             if (typeid == "3")
             {
-                typename = "ÖĞ¹ú´úÀí»ú¹¹";
+                typename = "ä¸­å›½ä»£ç†æœºæ„";
             }
         }
         if (country == "2")
         {
             if (typeid == "1")
             {
-                typename = "Íâ¹ú¸öÈË";
+                typename = "å¤–å›½ä¸ªäºº";
             }
             if (typeid == "2")
             {
-                typename = "Íâ¹úÆóÒµ";
+                typename = "å¤–å›½ä¼ä¸š";
             }
             if (typeid == "3")
             {
-                typename = "Íâ¹ú´úÀí»ú¹¹";
+                typename = "å¤–å›½ä»£ç†æœºæ„";
             }
         }
         return typename;
@@ -389,10 +390,10 @@ public partial class trademark_list : System.Web.UI.Page
         Response.Clear();
         Response.Buffer = true;
         Response.Charset = "GB2312";
-        Response.AppendHeader("Content-Disposition", "attachment;filename=" + dt.ToString("yyyyMMddHHmmss") + ".xls"); //ÕâÀïµÄFileName.xls¿ÉÒÔÓÃ±äÁ¿¶¯Ì¬Ìæ»»
-        // Èç¹ûÉèÖÃÎª GetEncoding("GB2312");µ¼³öµÄÎÄ¼ş½«»á³öÏÖÂÒÂë£¡£¡£¡
+        Response.AppendHeader("Content-Disposition", "attachment;filename=" + dt.ToString("yyyyMMddHHmmss") + ".xls"); //è¿™é‡Œçš„FileName.xlså¯ä»¥ç”¨å˜é‡åŠ¨æ€æ›¿æ¢
+        // å¦‚æœè®¾ç½®ä¸º GetEncoding("GB2312");å¯¼å‡ºçš„æ–‡ä»¶å°†ä¼šå‡ºç°ä¹±ç ï¼ï¼ï¼
         Response.ContentEncoding = System.Text.Encoding.UTF8;
-        Response.ContentType = "application/ms-excel";//ÉèÖÃÊä³öÎÄ¼şÀàĞÍÎªexcelÎÄ¼ş¡£
+        Response.ContentType = "application/ms-excel";//è®¾ç½®è¾“å‡ºæ–‡ä»¶ç±»å‹ä¸ºexcelæ–‡ä»¶ã€‚
         Response.Write("<meta http-equiv=Content-Type content=text/html;charset=UTF-8>");
         this.EnableViewState = false;
         System.IO.StringWriter oStringWriter = new System.IO.StringWriter();
@@ -410,7 +411,7 @@ public partial class trademark_list : System.Web.UI.Page
         }
         else
         {
-            div_a.InnerHtml = "<script>alert('ÇëÑ¡Ôñ½É·ÑÉÌ±ê£¡');</script>";
+            div_a.InnerHtml = "<script>alert('è¯·é€‰æ‹©ç¼´è´¹å•†æ ‡ï¼');</script>";
 
         }
     }
@@ -424,7 +425,7 @@ public partial class trademark_list : System.Web.UI.Page
             {
                 if (model.nvc_Power != null && model.nvc_Power != "")
                 {
-                    booldelete = model.nvc_Power.Split(',')[3] == "1" ? true : false;//É¾³ı  
+                    booldelete = model.nvc_Power.Split(',')[3] == "1" ? true : false;//åˆ é™¤  
 
                 }
             }
@@ -446,11 +447,11 @@ public partial class trademark_list : System.Web.UI.Page
                 }
             }
             Bind_Rpt_Trademark();
-            div_html.InnerHtml = "<script>alert('É¾³ı³É¹¦')</script>";
+            div_html.InnerHtml = "<script>alert('åˆ é™¤æˆåŠŸ')</script>";
         }
         else
         {
-            div_html.InnerHtml = "<script>alert('ÇëÑ¡ÔñÒªÉ¾³ıµÄÉÌ±ê')</script>";
+            div_html.InnerHtml = "<script>alert('è¯·é€‰æ‹©è¦åˆ é™¤çš„å•†æ ‡')</script>";
         }
     }
 
