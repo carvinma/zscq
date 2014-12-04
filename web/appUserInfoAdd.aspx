@@ -11,11 +11,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=7" />
 
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
   <script src="js/js.js" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link href="css/pager.css" rel="stylesheet" type="text/css" />
     <script src="js/jtrademark.js" type="text/javascript"></script>
+     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+    <script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
   <script type="text/javascript">
 
       $(function () {
@@ -42,6 +45,92 @@
                   $(this).addClass('active');
               }
           });
+
+          $("#upZhuTiZiGePdf").uploadify({
+              'swf': 'js/SWF/uploadify.swf',
+              'uploader': 'Handler.ashx?flag=uploadimage',
+              //'buttonImg': "images/aboutus1s.gif",
+              'buttionClass': '',
+              'buttonText': '浏览文件',
+              'queueID': 'fileQueue',
+              'width': '80',
+              'height': '22',
+              'overrideEvents': ['onDialogClose'],
+              'fileTypeDesc': '选择文件(*pdf)',
+              'fileTypeExts': '*.pdf',
+              'auto': true,
+              'multi': false,
+              'fileSizeLimit': '1MB',
+              'queueSizeLimit': 1,
+              'onUploadSuccess': function (file, data, response) {
+                  $.jBox.closeTip();
+                  $("#aZhuTiZiGePdf").show();
+                  $("#hiUpZhuTiZiGe").val(data);
+              },
+              'onSelect': function (file) {
+                  $.jBox.tip("正在上传文件，请稍后...", 'loading');
+              },
+              //返回一个错误，选择文件的时候触发
+              'onSelectError': function (file, errorCode, errorMsg) {
+                  switch (errorCode) {
+                      case -100:
+                          alert("上传的文件数量已经超出系统限制的" + $('#upZhuTiZiGePdf').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                          break;
+                      case -110:
+                          alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upZhuTiZiGePdf').uploadify('settings', 'fileSizeLimit') + "大小！");
+                          break;
+                      case -120:
+                          alert("文件 [" + file.name + "] 大小异常！");
+                          break;
+                      case -130:
+                          alert("文件 [" + file.name + "] 类型不正确！");
+                          break;
+                  }
+              }
+          });
+
+          $("#upCardNoPdf").uploadify({
+              'swf': 'js/SWF/uploadify.swf',
+              'uploader': 'Handler.ashx?flag=uploadimage',
+              //'buttonImg': "images/aboutus1s.gif",
+              'buttionClass': '',
+              'buttonText': '浏览文件',
+              'queueID': 'fileQueue',
+              'width': '80',
+              'height': '22',
+              'overrideEvents': ['onDialogClose'],
+              'fileTypeDesc': '选择文件(*pdf)',
+              'fileTypeExts': '*.pdf',
+              'auto': true,
+              'multi': false,
+              'fileSizeLimit': '1MB',
+              'queueSizeLimit': 1,
+              'onUploadSuccess': function (file, data, response) {
+                  $.jBox.closeTip();
+                  $("#aCardNoPdf").show();
+                  $("#hiUpCardNo").val(data);
+              },
+              'onSelect': function (file) {
+                  $.jBox.tip("正在上传文件，请稍后...", 'loading');
+              },
+              //返回一个错误，选择文件的时候触发
+              'onSelectError': function (file, errorCode, errorMsg) {
+                  switch (errorCode) {
+                      case -100:
+                          alert("上传的文件数量已经超出系统限制的" + $('#upCardNoPdf').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                          break;
+                      case -110:
+                          alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upCardNoPdf').uploadify('settings', 'fileSizeLimit') + "大小！");
+                          break;
+                      case -120:
+                          alert("文件 [" + file.name + "] 大小异常！");
+                          break;
+                      case -130:
+                          alert("文件 [" + file.name + "] 类型不正确！");
+                          break;
+                  }
+              }
+          });
       });
   </script>
 </head>
@@ -53,6 +142,8 @@
   <input type="hidden" runat="server" id="Hi_AddressId" value="0" />
   <input type="hidden" runat="server" id="Hi_Mr" value="0" />
   <input type="hidden" runat="server" id="Hi_ApplyType" clientidmode="Static" value="0" />
+<input type="hidden" runat="server"  id="hiUpCardNo" value="" />
+<input type="hidden" runat="server"  id="HiUpZhuTiZiGe" value="" />
   <uc4:zscqtop2 ID="zscqtop21" runat="server" />
   <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
   <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
@@ -197,17 +288,31 @@
                             </tr>
                             <tr>
                               <td height="32" align="right"><strong>主体资格证明：</strong> </td>
-                              <td align="left">
-                                  <asp:FileUpload ID="FileUpload1" runat="server" Width="200px"/>
-                                  <div id="sb_namenum1"><span style="color:Red;">格式为.jpg.gif.png.PDF,不大于500K</span></div> </td>
+                             <td align="left">
+                                                                            <table><tr><td> <div id="upZhuTiZiGePdf"></div></td>
+                                                                           <td>
+                                                                             <span id="aZhuTiZiGePdf"  style="display:none">主题资格证明已上传</span>
+                                                                           </td>
+                                                                           </tr></table>
+                                                                          
+                                                                            <div>
+                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span></div>
+                                                                                </td>
                             </tr>
                             <tr style="display:none" class="appusertype">
                               <td height="32" align="right"><strong>身份证证件证明：</strong></td>
                               <td align="left">
-                                  <asp:FileUpload ID="FileUpload2" runat="server" Width="200px" />
-                                  <div id="Div1"><span style="color:Red;">格式为.jpg.gif.png.PDF,不大于500K</span></div> </td>
+                                                                            <table><tr><td> <div id="upCardNoPdf"></div></td>
+                                                                           <td>
+                                                                             <span id="aCardNoPdf"  style="display:none">身份证件扫已上传</span>
+                                                                           </td>
+                                                                           </tr></table>
+                                                                          
+                                                                            <div>
+                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span></div>
+                                                                                </td>
                             </tr>
-                            <tr>
+                              <tr>
                               <td height="32" align="right">&nbsp; </td>
                               <td align="left" valign="top">
                                 <table width="415" border="0" cellspacing="0" cellpadding="0">

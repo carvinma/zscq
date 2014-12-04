@@ -513,7 +513,7 @@
                                                                         <td align="left">
                                                                             <table><tr><td> <div id="upCardNoPdf"></div></td>
                                                                            <td>
-                                                                             <span id="aCardNoPdf"  style="display:none">份证件扫已上传</span>
+                                                                             <span id="aCardNoPdf"  style="display:none">身份证件扫已上传</span>
                                                                            </td>
                                                                            </tr></table>
                                                                           

@@ -128,6 +128,11 @@ public partial class appUserInfoAdd : System.Web.UI.Page
     }
     protected void Bt_AddAddress_Click(object sender, ImageClickEventArgs e)
     {
+        string filePath = "File_Zscq/File_ShangBiao/";
+        if (!System.IO.Directory.Exists(Server.MapPath(filePath)))
+        {
+            System.IO.Directory.CreateDirectory(Server.MapPath(filePath));
+        }
         t_Apply model = new t_Apply();
         model.MemberID = int.Parse(Hi_MemberId.Value);
         model.ApplyType = int.Parse(Hi_ApplyType.Value);
@@ -154,37 +159,60 @@ public partial class appUserInfoAdd : System.Web.UI.Page
             model.QQ = int.Parse(txt_qq.Value.Trim());
 
         #region 文件上传
-        if (FileUpload1.HasFile)
+        //if (FileUpload1.HasFile)
+        //{
+        //    string urlname = "";
+        //    int i = UpfileLoad(FileUpload1, "File_Zscq/File_ShangBiao/", "SBCYLXRZT", ref urlname);//主体资格证明
+        //    if (i == 1) 
+        //    {
+        //        div_a.InnerHtml = "<script>alert('文件大小不能超过 500KB');location.href='" + url + "';</script>";
+        //        return;
+        //    }
+        //    if (i == 2)
+        //    {
+        //        div_a.InnerHtml = "<script>alert('文件格式仅限(.jpg  .png  .gif .pdf)!');location.href='" + url + "';</script>";
+        //        return;
+        //    }
+        //   model.MainQualificationPath= urlname;
+        //}
+        //if (FileUpload2.HasFile)
+        //{
+        //    string urlname = "";
+        //    int i = UpfileLoad(FileUpload2, "File_Zscq/File_ShangBiao/", "SBCYLXRSF", ref urlname);
+        //    if (i == 1)
+        //    {
+        //        div_a.InnerHtml = "<script>alert('文件大小不能超过 500KB');location.href='" + url + "';</script>";
+        //        return;
+        //    }
+        //    if (i == 2)
+        //    {
+        //        div_a.InnerHtml = "<script>alert('文件格式仅限(.jpg  .png  .gif .pdf)!');location.href='" + url + "';</script>";
+        //        return;
+        //    }
+        //    model.CardNoPath = urlname;
+        //}
+        string fileName = this.HiUpZhuTiZiGe.Value;//主体资格证明
+        if (fileName.Contains("File_ShangBiao"))
         {
-            string urlname = "";
-            int i = UpfileLoad(FileUpload1, "File_Zscq/File_ShangBiao/", "SBCYLXRZT", ref urlname);//主体资格证明
-            if (i == 1) 
-            {
-                div_a.InnerHtml = "<script>alert('文件大小不能超过 500KB');location.href='" + url + "';</script>";
-                return;
-            }
-            if (i == 2)
-            {
-                div_a.InnerHtml = "<script>alert('文件格式仅限(.jpg  .png  .gif .pdf)!');location.href='" + url + "';</script>";
-                return;
-            }
-           model.MainQualificationPath= urlname;
+            model.MainQualificationPath = fileName;
         }
-        if (FileUpload2.HasFile)
+        else
         {
-            string urlname = "";
-            int i = UpfileLoad(FileUpload2, "File_Zscq/File_ShangBiao/", "SBCYLXRSF", ref urlname);
-            if (i == 1)
-            {
-                div_a.InnerHtml = "<script>alert('文件大小不能超过 500KB');location.href='" + url + "';</script>";
-                return;
-            }
-            if (i == 2)
-            {
-                div_a.InnerHtml = "<script>alert('文件格式仅限(.jpg  .png  .gif .pdf)!');location.href='" + url + "';</script>";
-                return;
-            }
-            model.CardNoPath = urlname;
+            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+               HttpContext.Current.Server.MapPath(filePath + fileName));
+            model.MainQualificationPath = filePath + fileName;
+        }
+
+        fileName = this.hiUpCardNo.Value;//身份证
+        if (fileName.Contains("File_ShangBiao"))
+        {
+            model.CardNoPath = fileName;
+        }
+        else
+        {
+            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+               HttpContext.Current.Server.MapPath(filePath + fileName));
+            model.CardNoPath = filePath + fileName;
         }
         #endregion
 
