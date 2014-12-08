@@ -1596,6 +1596,8 @@ namespace zscq.Model
 		
 		private System.Nullable<bool> _IsSound;
 		
+		private string _SoundFile;
+		
 		private string _TrademarkRemark;
 		
 		private string _TrademarkType;
@@ -1662,6 +1664,8 @@ namespace zscq.Model
     partial void OnIsColorChanged();
     partial void OnIsSoundChanging(System.Nullable<bool> value);
     partial void OnIsSoundChanged();
+    partial void OnSoundFileChanging(string value);
+    partial void OnSoundFileChanged();
     partial void OnTrademarkRemarkChanging(string value);
     partial void OnTrademarkRemarkChanged();
     partial void OnTrademarkTypeChanging(string value);
@@ -2087,6 +2091,26 @@ namespace zscq.Model
 					this._IsSound = value;
 					this.SendPropertyChanged("IsSound");
 					this.OnIsSoundChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoundFile", DbType="NVarChar(200)")]
+		public string SoundFile
+		{
+			get
+			{
+				return this._SoundFile;
+			}
+			set
+			{
+				if ((this._SoundFile != value))
+				{
+					this.OnSoundFileChanging(value);
+					this.SendPropertyChanging();
+					this._SoundFile = value;
+					this.SendPropertyChanged("SoundFile");
+					this.OnSoundFileChanged();
 				}
 			}
 		}
