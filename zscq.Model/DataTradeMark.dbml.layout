@@ -50,10 +50,10 @@
         <elementListCompartment Id="5459da4a-a8fe-4b19-8d60-60b61c68182e" absoluteBounds="0.88999999999999968, 3.46, 1.9700000000000002, 0.97730509440104174" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="27e3d7e6-ec94-46e8-ba98-8d1420d08a55" isExpanded="false" absoluteBounds="0.875, 2.375, 2, 0.45">
+    <classShape Id="aa2a4963-8c40-43ac-8938-1d916ba86cf8" isExpanded="false" absoluteBounds="0.875, 2.5, 2, 0.45">
       <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkInfo" />
       <nestedChildShapes>
-        <elementListCompartment Id="1dadf870-90b0-4d89-8709-5951edfc6339" absoluteBounds="0.88999999999999968, 2.835, 1.9700000000000002, 6.151540120442708" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e71aeff5-fcd6-4efe-9482-62c213cd075c" absoluteBounds="0.88999999999999968, 2.96, 1.9700000000000002, 7.0755106608072911" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

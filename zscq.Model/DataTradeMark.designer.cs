@@ -1598,6 +1598,10 @@ namespace zscq.Model
 		
 		private string _SoundFile;
 		
+		private System.Nullable<int> _TrademarkDescribeType;
+		
+		private string _TrademarkDescribe;
+		
 		private string _TrademarkRemark;
 		
 		private string _TrademarkType;
@@ -1615,6 +1619,12 @@ namespace zscq.Model
 		private System.Nullable<System.DateTime> _InputTime;
 		
 		private System.Nullable<bool> _IsSubmit;
+		
+		private System.Nullable<bool> _IsShow;
+		
+		private System.Nullable<bool> _IsReceiveEmail;
+		
+		private string _Remark;
 		
 		private System.Nullable<int> _Status;
 		
@@ -1666,6 +1676,10 @@ namespace zscq.Model
     partial void OnIsSoundChanged();
     partial void OnSoundFileChanging(string value);
     partial void OnSoundFileChanged();
+    partial void OnTrademarkDescribeTypeChanging(System.Nullable<int> value);
+    partial void OnTrademarkDescribeTypeChanged();
+    partial void OnTrademarkDescribeChanging(string value);
+    partial void OnTrademarkDescribeChanged();
     partial void OnTrademarkRemarkChanging(string value);
     partial void OnTrademarkRemarkChanged();
     partial void OnTrademarkTypeChanging(string value);
@@ -1684,6 +1698,12 @@ namespace zscq.Model
     partial void OnInputTimeChanged();
     partial void OnIsSubmitChanging(System.Nullable<bool> value);
     partial void OnIsSubmitChanged();
+    partial void OnIsShowChanging(System.Nullable<bool> value);
+    partial void OnIsShowChanged();
+    partial void OnIsReceiveEmailChanging(System.Nullable<bool> value);
+    partial void OnIsReceiveEmailChanged();
+    partial void OnRemarkChanging(string value);
+    partial void OnRemarkChanged();
     partial void OnStatusChanging(System.Nullable<int> value);
     partial void OnStatusChanged();
     partial void OnAdminStatusChanging(System.Nullable<int> value);
@@ -2115,6 +2135,46 @@ namespace zscq.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribeType", DbType="Int")]
+		public System.Nullable<int> TrademarkDescribeType
+		{
+			get
+			{
+				return this._TrademarkDescribeType;
+			}
+			set
+			{
+				if ((this._TrademarkDescribeType != value))
+				{
+					this.OnTrademarkDescribeTypeChanging(value);
+					this.SendPropertyChanging();
+					this._TrademarkDescribeType = value;
+					this.SendPropertyChanged("TrademarkDescribeType");
+					this.OnTrademarkDescribeTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribe", DbType="NVarChar(200)")]
+		public string TrademarkDescribe
+		{
+			get
+			{
+				return this._TrademarkDescribe;
+			}
+			set
+			{
+				if ((this._TrademarkDescribe != value))
+				{
+					this.OnTrademarkDescribeChanging(value);
+					this.SendPropertyChanging();
+					this._TrademarkDescribe = value;
+					this.SendPropertyChanged("TrademarkDescribe");
+					this.OnTrademarkDescribeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRemark", DbType="NVarChar(200)")]
 		public string TrademarkRemark
 		{
@@ -2291,6 +2351,66 @@ namespace zscq.Model
 					this._IsSubmit = value;
 					this.SendPropertyChanged("IsSubmit");
 					this.OnIsSubmitChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsShow", DbType="Bit")]
+		public System.Nullable<bool> IsShow
+		{
+			get
+			{
+				return this._IsShow;
+			}
+			set
+			{
+				if ((this._IsShow != value))
+				{
+					this.OnIsShowChanging(value);
+					this.SendPropertyChanging();
+					this._IsShow = value;
+					this.SendPropertyChanged("IsShow");
+					this.OnIsShowChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsReceiveEmail", DbType="Bit")]
+		public System.Nullable<bool> IsReceiveEmail
+		{
+			get
+			{
+				return this._IsReceiveEmail;
+			}
+			set
+			{
+				if ((this._IsReceiveEmail != value))
+				{
+					this.OnIsReceiveEmailChanging(value);
+					this.SendPropertyChanging();
+					this._IsReceiveEmail = value;
+					this.SendPropertyChanged("IsReceiveEmail");
+					this.OnIsReceiveEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="NVarChar(500)")]
+		public string Remark
+		{
+			get
+			{
+				return this._Remark;
+			}
+			set
+			{
+				if ((this._Remark != value))
+				{
+					this.OnRemarkChanging(value);
+					this.SendPropertyChanging();
+					this._Remark = value;
+					this.SendPropertyChanged("Remark");
+					this.OnRemarkChanged();
 				}
 			}
 		}

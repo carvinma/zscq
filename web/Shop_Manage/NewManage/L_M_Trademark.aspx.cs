@@ -37,17 +37,22 @@ public partial class L_M_Trademark : System.Web.UI.Page
     public int sbdays = 0;
     public string statime = "";
     public string endtime = "";
-    public string bianhao = "";
-    public string username = "";
-    public string uname = "";
-    public string ubianhao = "";
-    public string stime = "";
-    public string ptime = "";
-    public string shangbiaotype = "";
+
+    public string caseno = "";
+    public string applyno = "";
+    public string memberno = "";
+    public string applyuser = "";
+    public string membername = "";
+    public string trademarktype = "";
+    public string timelimit = "";
+    public string timeadd = "";
+    public string status = "";
+
     public int jiaofeitypezt = -1;
- public string jiaofei = "";
- public string dizhi = "";
+
  public string zhuangtai = "";
+
+ public string returnurl = "";
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -71,7 +76,6 @@ public partial class L_M_Trademark : System.Web.UI.Page
         hi_true.Value = pageupdate ? "1" : "0";//鼠标移动修改
         if (!IsPostBack)
         {
-            Bind_Drp_PGuoJiaType();
             Bind_Page_value();
             Bind_Rpt_Product(ye);
             Bind_Page_Info();
@@ -129,106 +133,57 @@ public partial class L_M_Trademark : System.Web.UI.Page
         }
         if (Request.QueryString["ye"] != null && Request.QueryString["ye"] != "")
         {
-            ye = int.Parse(Request.QueryString["ye"].ToString()); 
+            ye = int.Parse(Request.QueryString["ye"].ToString());
         }
-        if (Request.QueryString["Keyword"] != null && Request.QueryString["Keyword"] != "")
+
+        #region 排序参数
+    
+        if (Request.QueryString["caseno"] != null && Request.QueryString["caseno"] != "")
         {
-            this.hw_name.Value = Request.QueryString["Keyword"].ToString();
+            caseno = Request.QueryString["caseno"].ToString();
+            this.hi_CaseNo.Value = caseno;
         }
-        if (Request.QueryString["SType"] != null && Request.QueryString["SType"] != "" )
+        if (Request.QueryString["applyno"] != null && Request.QueryString["applyno"] != "")
         {
-            this.DDL_SType.SelectedValue = Request.QueryString["SType"].ToString();
+            this.applyno = Request.QueryString["applyno"].ToString();
+            hi_applyno.Value = applyno;
         }
-        if (Request.QueryString["jiaofeitype"] != null && Request.QueryString["jiaofeitype"] != "")
+        if (Request.QueryString["applyuser"] != null && Request.QueryString["applyuser"] != "")
         {
-            this.ddl_jiaofei.SelectedValue = Request.QueryString["jiaofeitype"].ToString();
+            this.applyuser = Request.QueryString["applyuser"].ToString();
+            hi_applyuser.Value = applyuser;
         }
-        if (Request.QueryString["jiaofeitypezt"] != null && Request.QueryString["jiaofeitypezt"] != "")
+        if (Request.QueryString["memberno"] != null && Request.QueryString["memberno"] != "")
         {
-            this.ddl_jiaofeizt.SelectedValue = Request.QueryString["jiaofeitypezt"].ToString();
+            this.memberno = Request.QueryString["memberno"].ToString();
+            hi_memberno.Value = applyno;
         }
-        if (Request.QueryString["guoji"] != null && Request.QueryString["guoji"] != "")
+        if (Request.QueryString["membername"] != null && Request.QueryString["membername"] != "")
         {
-            this.DDL_guoji.SelectedValue = Request.QueryString["guoji"].ToString();
-            //Bind_DDL_Brand();
+            this.membername = Request.QueryString["membername"].ToString();
+            hi_membername.Value = membername;
         }
-        if (Request.QueryString["regtype"] != null && Request.QueryString["regtype"] != "")
+        if (Request.QueryString["trademarktype"] != null && Request.QueryString["trademarktype"] != "")
         {
-            this.DDl_regtype.SelectedValue = Request.QueryString["regtype"].ToString();
+            this.trademarktype = Request.QueryString["trademarktype"].ToString();
+            hi_trademarktype.Value = trademarktype;
         }
-        if (Request.QueryString["state"] != null && Request.QueryString["state"] != "")
+        if (Request.QueryString["timelimit"] != null && Request.QueryString["timelimit"] != "")
         {
-            this.DDL_state.SelectedValue = Request.QueryString["state"].ToString();
+            this.timelimit = Request.QueryString["timelimit"].ToString();
+            hi_timelimit.Value = timelimit;
         }
-        if (Request.QueryString["sb_day"] != null && Request.QueryString["sb_day"] != "")
+        if (Request.QueryString["timeadd"] != null && Request.QueryString["timeadd"] != "")
         {
-            sbdays =int.Parse( Request.QueryString["sb_day"].ToString());
-            ddl_sheng.SelectedValue = Request.QueryString["sb_day"].ToString();
+            this.timeadd = Request.QueryString["timeadd"].ToString();
+            hi_timeadd.Value = timeadd;
         }
-        if (Request.QueryString["statime"] != null && Request.QueryString["statime"] != "")
+        if (Request.QueryString["status"] != null && Request.QueryString["status"] != "")
         {
-            stime= Request.QueryString["statime"].ToString();
-            hot_start_date.Value = Request.QueryString["statime"].ToString();
+            this.status = Request.QueryString["status"].ToString();
+            hi_status.Value = status;
         }
-        if (Request.QueryString["endtime"] != null && Request.QueryString["endtime"] != "")
-        {
-            endtime=Request.QueryString["endtime"].ToString();
-            hot_end_date.Value = Request.QueryString["endtime"].ToString();
-        }
-        if (Request.QueryString["usertype"] != null && Request.QueryString["usertype"] != "")
-        {
-            this.DDL_usertype.SelectedValue = Request.QueryString["usertype"].ToString();
-        }
-        if (Request.QueryString["bianhao"] != null && Request.QueryString["bianhao"] != "")
-        {
-            bianhao = Request.QueryString["bianhao"].ToString();
-            bianhao1.Value = bianhao;
-        }
-        if (Request.QueryString["username"] != null && Request.QueryString["username"] != "")
-        {
-            this.username = Request.QueryString["username"].ToString();
-            username1.Value = username;
-        }
-        if (Request.QueryString["ubianhao"] != null && Request.QueryString["ubianhao"] != "")
-        {
-            this.ubianhao = Request.QueryString["ubianhao"].ToString();
-            ubianhao1.Value = ubianhao;
-        }
-        if (Request.QueryString["uname"] != null && Request.QueryString["uname"] != "")
-        {
-            this.uname = Request.QueryString["uname"].ToString();
-            uname1.Value = username;
-        }
-        if (Request.QueryString["stime"] != null && Request.QueryString["stime"] != "")
-        {
-            this.stime = Request.QueryString["stime"].ToString();
-            stime1.Value = stime;
-        }
-        if (Request.QueryString["ptime"] != null && Request.QueryString["ptime"] != "")
-        {
-            this.ptime = Request.QueryString["ptime"].ToString();
-            ptime1.Value = ptime;
-        }
-        if (Request.QueryString["shangbiaotype"] != null && Request.QueryString["shangbiaotype"] != "")
-        {
-            this.shangbiaotype = Request.QueryString["shangbiaotype"].ToString();
-            shangbiaotype1.Value = shangbiaotype;
-        }
-        if (Request.QueryString["jiaofei"] != null && Request.QueryString["jiaofei"] != "")
-        {
-            this.jiaofei = Request.QueryString["jiaofei"].ToString();
-            jiaofei1.Value = jiaofei;
-        }
-        if (Request.QueryString["dizhi"] != null && Request.QueryString["dizhi"] != "")
-        {
-            this.dizhi = Request.QueryString["dizhi"].ToString();
-            shangbiaotype1.Value = dizhi;
-        }
-        if (Request.QueryString["zhuangtai"] != null && Request.QueryString["zhuangtai"] != "")
-        {
-            this.zhuangtai = Request.QueryString["zhuangtai"].ToString();
-            zhuangtai1.Value = zhuangtai;
-        }
+        #endregion
     }
     protected void aspPage_PageChanged(object sender, EventArgs e)
     {
@@ -267,42 +222,6 @@ public partial class L_M_Trademark : System.Web.UI.Page
         }
         return aa;
     }
-    public string GetSBtypeAndName(string country,string typeid)//获得商标类型
-    {
-        string typename = "";
-        if (country == "1")
-        {
-            if (typeid == "1")
-            {
-                typename = "中国个人";
-            }
-            if (typeid == "2")
-            {
-                typename = "中国企业";
-            }
-            if (typeid == "3")
-            {
-                typename = "中国代理机构";
-            }
-        }
-        if (country == "2")
-        {
-            if (typeid == "1")
-            {
-                typename = "外国个人";
-            }
-            if (typeid == "2")
-            {
-                typename = "外国企业";
-            }
-            if (typeid == "3")
-            {
-                typename = "外国代理机构";
-            }
-        }
-        return typename;
-    
-    }
     public bool BoolFileImg(object fileurl)
     {
         if (fileurl != null)
@@ -317,39 +236,39 @@ public partial class L_M_Trademark : System.Web.UI.Page
    
     private void Bind_Rpt_Product(int pageCurrent)//绑定列表
     {
-        ye = pageCurrent;
-        int Ccount = 0;
-        int PageSize = 20;
-        Keyword = hw_name.Value;
-        if (DDL_SType.SelectedValue == "4")
-        { 
-            t_DataOrder dd = DALD.DataOrder_Select_num(hw_name.Value);
-            if (dd != null)
-            {
-                if (dd.i_DataId != 0)
-                {
-                    Keyword = dd.i_DataId.ToString();
-                }
-            }
-            else
-            {
-                Keyword ="0";
-            }
-        }
-        SType = int.Parse(DDL_SType.SelectedValue);
-       usertype = int.Parse(DDL_usertype.SelectedValue);
-       state = int.Parse(DDL_state.SelectedValue);
-       statime = hot_start_date.Value;
-       endtime = hot_end_date.Value;
-       jiaofeitypezt = Convert.ToInt32(ddl_jiaofeizt.SelectedValue);
-       this.rep_brand.DataSource = DALT.Trademark_SelectPage(pageCurrent, PageSize, userid, SType, Keyword, Convert.ToInt32(ddl_jiaofei.SelectedValue), Convert.ToInt32(DDL_guoji.SelectedValue), usertype, Convert.ToInt32(DDl_regtype.SelectedValue), state, bianhao, shangbiaotype, jiaofei, dizhi, username, stime, ptime, zhuangtai, Convert.ToInt32(ddl_sheng.SelectedValue), statime, endtime, uname, ubianhao,jiaofeitypezt, ref Ccount);
-        this.rep_brand.DataBind();
-        aspPage.RecordCount = Ccount;
-        aspPage.PageSize = PageSize;
-        aspPage.CurrentPageIndex = pageCurrent;
-        Lb_sum.Text = "共" + Ccount + "条";
-        Lb_ye.Text = "共" + aspPage.PageCount + "页";
-        text_pageindex.Value = pageCurrent.ToString();
+       // ye = pageCurrent;
+       // int Ccount = 0;
+       // int PageSize = 20;
+       // Keyword = hw_name.Value;
+       // if (DDL_SType.SelectedValue == "4")
+       // { 
+       //     t_DataOrder dd = DALD.DataOrder_Select_num(hw_name.Value);
+       //     if (dd != null)
+       //     {
+       //         if (dd.i_DataId != 0)
+       //         {
+       //             Keyword = dd.i_DataId.ToString();
+       //         }
+       //     }
+       //     else
+       //     {
+       //         Keyword ="0";
+       //     }
+       // }
+       // SType = int.Parse(DDL_SType.SelectedValue);
+       //usertype = int.Parse(DDL_usertype.SelectedValue);
+       //state = int.Parse(DDL_state.SelectedValue);
+       //statime = hot_start_date.Value;
+       //endtime = hot_end_date.Value;
+       //jiaofeitypezt = Convert.ToInt32(ddl_jiaofeizt.SelectedValue);
+       //this.rep_brand.DataSource = DALT.Trademark_SelectPage(pageCurrent, PageSize, userid, SType, Keyword, Convert.ToInt32(ddl_jiaofei.SelectedValue), Convert.ToInt32(DDL_guoji.SelectedValue), usertype, Convert.ToInt32(DDl_regtype.SelectedValue), state, bianhao, shangbiaotype, jiaofei, dizhi, username, stime, ptime, zhuangtai, Convert.ToInt32(ddl_sheng.SelectedValue), statime, endtime, uname, ubianhao,jiaofeitypezt, ref Ccount);
+       // this.rep_brand.DataBind();
+       // aspPage.RecordCount = Ccount;
+       // aspPage.PageSize = PageSize;
+       // aspPage.CurrentPageIndex = pageCurrent;
+       // Lb_sum.Text = "共" + Ccount + "条";
+       // Lb_ye.Text = "共" + aspPage.PageCount + "页";
+        //text_pageindex.Value = pageCurrent.ToString();
     }
    
     protected void Button1_Click(object sender, EventArgs e)
@@ -369,85 +288,13 @@ public partial class L_M_Trademark : System.Web.UI.Page
         Bind_Rpt_Product(aspPage.CurrentPageIndex);
         HiddenDel.Value = "del";
     }
-    protected void But_search_Click(object sender, EventArgs e)
-    {
-        Bind_Rpt_Product(1);
-        if (DDL_SType.SelectedValue == "4")
-        {
-            string sname = hw_name.Value;
-            var iqurey = DALD.DataOrder_Select_Bynum(sname,0);
-            reptlist.DataSource = iqurey;
-            reptlist.DataBind();
-           
-        }
-        if (DDL_SType.SelectedValue == "2")
-        {
-            string sname = hw_name.Value;
-            t_Trademark t = DALT.Trademark_Select_No(sname);
-            if (t != null)
-            {
-                if (t.i_Id != null)
-                {
-                    var iqurey = DALD.DataOrder_Select_Bynum("",t.i_Id);
-                    reptlist.DataSource = iqurey;
-                    reptlist.DataBind();
-                }
-            }
-
-        }
-      
-    }
-    protected void Button2_Click(object sender, EventArgs e)
-    {
-        int Ccount = 0;
-        Keyword = hw_name.Value;
-        SType = int.Parse(DDL_SType.SelectedValue);
-        usertype = int.Parse(DDL_usertype.SelectedValue);
-        state = int.Parse(DDL_state.SelectedValue);
-        statime = hot_start_date.Value;
-        endtime = hot_end_date.Value;
-        sbdays = Convert.ToInt32(ddl_sheng.SelectedValue);
-        jiaofeitypezt = Convert.ToInt32(ddl_jiaofeizt.SelectedValue);
-        GridView1.DataSource = DALT.Trademark_SelectPage(1, 100000000, userid, SType, Keyword, Convert.ToInt32(ddl_jiaofei.SelectedValue), Convert.ToInt32(DDL_guoji.SelectedValue), usertype, Convert.ToInt32(DDl_regtype.SelectedValue), state, bianhao, shangbiaotype, jiaofei, dizhi, username, stime, ptime, zhuangtai, Convert.ToInt32(ddl_sheng.SelectedValue), statime, endtime, uname, ubianhao,jiaofeitypezt, ref Ccount);
-        GridView1.DataBind();
-        toExecl(GridView1);
-        GridView1.DataSource = null;
-        GridView1.DataBind();
-        Manager.AddLog(0, "商标管理", "导出数据");
-    }
+    
     public override void VerifyRenderingInServerForm(Control control)
     {
 
     }
-    void Bind_Drp_PGuoJiaType()// 绑定国籍
-    {
-        DDL_guoji.Items.Clear();
-        ListItem item = new ListItem("请选择国籍", "0");
-        DDL_guoji.Items.Add(item);
-        var iquery = DALN.Nationality_SelectAll();
-        foreach (var q in iquery)
-        {
-            ListItem li = new ListItem(q.nvc_Name, q.i_Id.ToString());
-            DDL_guoji.Items.Add(li);
-        }
-    }
-    private void toExecl(GridView GVId)
-    {
-        DateTime dt = DateTime.Now;
-        Response.Clear();
-        Response.Buffer = true;
-        Response.Charset = "gb2312";
-        Response.AppendHeader("Content-Disposition", "attachment;filename=" + dt.ToString("yyyyMMddHHmmss") + ".xls"); //这里的FileName.xls可以用变量动态替换
-        // 如果设置为 GetEncoding("GB2312");导出的文件将会出现乱码！！！
-        Response.ContentEncoding = System.Text.Encoding.UTF8;
-        Response.ContentType = "application/ms-excel";//设置输出文件类型为excel文件。
-        System.IO.StringWriter oStringWriter = new System.IO.StringWriter();
-        System.Web.UI.HtmlTextWriter oHtmlTextWriter = new System.Web.UI.HtmlTextWriter(oStringWriter);
-        GVId.RenderControl(oHtmlTextWriter);
-        Response.Output.Write(oStringWriter.ToString());
-        Response.Flush();
-        Response.End();
-    }
+    
+    
     protected void rep_brand_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         DataZscqDataContext dzdc = new DataZscqDataContext();
@@ -490,16 +337,16 @@ public partial class L_M_Trademark : System.Web.UI.Page
     {
         try
         {
-            int pageindex = Convert.ToInt32(text_pageindex.Value);
-            if (pageindex < 1 || pageindex > aspPage.PageCount)
-            {
-                div_a.InnerHtml = "<script>alert('页索引超出范围！')</script>";
-                return;
-            }
-            else
-            {
-                Bind_Rpt_Product(pageindex);
-            }
+            //int pageindex = Convert.ToInt32(text_pageindex.Value);
+            //if (pageindex < 1 || pageindex > aspPage.PageCount)
+            //{
+            //    div_a.InnerHtml = "<script>alert('页索引超出范围！')</script>";
+            //    return;
+            //}
+            //else
+            //{
+            //    Bind_Rpt_Product(pageindex);
+            //}
         }
         catch { }
     }
