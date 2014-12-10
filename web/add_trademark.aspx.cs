@@ -114,6 +114,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
             fileName = this.upSound.Value;//声音
             System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
                    HttpContext.Current.Server.MapPath(filePath + fileName));
+            model.SoundFile = filePath + fileName;
         }
         model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Trim();
