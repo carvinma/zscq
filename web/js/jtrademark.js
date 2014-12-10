@@ -172,7 +172,7 @@ var goodscalc = {
             if (this.v[k] > ItemNum) {
                 var cost = parseFloat(MainFees) + (parseFloat(this.v[k]) - parseFloat(ItemNum)) * parseFloat(ExceedFees);
                 sum += cost;
-                html += "<p>类别【" + k + "】" + "共选择" + this.v[k] + "个商品项目，超出" + this.v[k] - ItemNum + "个，费用是：" + cost + "元</p><br/>";
+                html += "<p>类别【" + k + "】" + "共选择" + this.v[k] + "个商品项目，超出" + (this.v[k] - ItemNum) + "个，费用是：" + cost + "元</p><br/>";
             }
             else {
                 sum += parseFloat(MainFees);
