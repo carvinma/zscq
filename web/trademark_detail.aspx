@@ -33,6 +33,19 @@
             });
         });
     </script>
+    <style type="text/css">
+
+ p.MsoNormal
+	{margin-bottom:.0001pt;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:10.5pt;
+	font-family:"Times New Roman","serif";
+	        margin-left: 0cm;
+            margin-right: 0cm;
+            margin-top: 0cm;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -56,13 +69,369 @@
 					</ul>
 					<div class="ui-tabs-panel">
 						<div class="content reset">
-						1
+						 <table width="689" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td height="115" align="center" valign="top">
+                          <table width="689" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td width="639" height="28" align="left" valign="bottom" style="border-bottom: 1px solid #d34245;">
+                                <table width="114" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="10" height="20">&nbsp; </td>
+                                    <td width="98" align="center" class="font12bt">申请人信息 </td>
+                                    <td width="6"></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="18" align="left"></td>
+                            </tr>
+                            <tr>
+                              <td height="115" align="left" valign="top">
+                                <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="260" height="32" align="right"><strong>申请人名称：</strong> </td>
+                                    <td align="left">
+                                      <%=model.ApplyName %>
+                                    </td>
+                                  </tr>
+                                  <% if (model.ApplyType == 1)
+                                     { %>
+                                  <tr>
+                                    <td height="32" align="right"><strong>身份证件名称：</strong> </td>
+                                    <td align="left">
+                                      身份证
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td height="32" align="right"><strong>身份证件号码：</strong> </td>
+                                    <td align="left"><%=model.CardNo%>
+                                    </td>
+                                  </tr>
+                                 
+                                  <tr>
+                                    <td height="32" align="right"><strong>身份证明文件（扫描件）：</strong> </td>
+                                    <td align="left">
+                                      <%=model.CardNoPDF%>
+                                    </td>
+                                  </tr>
+                                  <%} %>
+                                  <tr>
+                                    <td height="32" align="right"><strong>营业执照副本（扫描件）：</strong> </td>
+                                    <td align="left">
+                                      <%=model.Businesslicense %>
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <td height="32" align="right"><strong>申请人行政区划：</strong> </td>
+                                    <td align="left">
+                                      <%=division%>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td height="32" align="right"><strong>申请人地址：</strong> </td>
+                                    <td align="left">
+                                      <%=model.Address%>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td height="32" align="right"><strong>邮政编码：</strong> </td>
+                                    <td align="left"><%=model.PostCode%>
+                                    </td>
+                                  </tr>
+                                     <tr>
+                                    <td height="32" align="right"><strong>联系人：</strong> </td>
+                                    <td align="left">
+                                      <%=model.ContactPerson%>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td height="32" align="right"><strong>联系电话：</strong> </td>
+                                    <td align="left">
+                                      <%=model.Phone%> </td>
+                                  </tr>
+                                  </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" align="left">&nbsp; </td>
+                            </tr>
+                          </table>
+                          <table width="689" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                <table width="156" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="10" height="20">&nbsp; </td>
+                                    <td width="140" align="center" class="font12bt">商标信息（第一部分） </td>
+                                    <td width="6"></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="18" align="left"></td>
+                            </tr>
+                            <tr>
+                              <td height="115" align="left" valign="top">
+                                <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                
+                                     <tr id="dailifei">                                   
+                                    <td width="260" height="32" align="right" ><strong>商标类别：</strong>
+                                    </td>  
+                                     <td> 
+                                        <%=model.TrademarkType %> 
+                                    </td>                                  
+                                    </tr>
+                                     <tr>
+                                    <td width="260" height="32" align="right" ><strong>商标图样：</strong>
+                                    </td>  
+                                    <td> 
+                                     </td>  
+                                    </tr>
+                                      
+                                      <tr>
+                                    <td width="260" height="32" align="right" ><strong>商标说明：</strong>
+                                    </td>  
+                                    <td> 
+                                       <%=model.TrademarkRemark %>
+                                    </td>                                  
+                                    </tr>
+                                    
+                                      <tr>
+                                    <td width="260" align="right" height="32"><strong>是否三维商标：</strong></td>
+                                    <td>
+                                        <%=model.Is3D==true ? "是":"否" %>
+                                    </td>                                    
+                                    </tr>   
+                                      <tr>
+                                    <td width="260" align="right" height="32">
+                                      <strong> 是否颜色组合商标： </strong>
+                                          </td><td> <%=model.IsColor==true ? "是":"否" %></td>                                    
+                                    </tr>   
+                                    
+                                      <tr>
+                                    <td width="260" align="right" height="32">
+                                            <strong>是否声音商标：</strong> 
+                                          </td><td><%=model.IsSound==true ? "是":"否" %></td>                                    
+                                    </tr>   
+                                       <% if (model.IsSound == true) { %>
+                                      <tr style=''>
+                                    <td width="260" align="right" height="32"><strong>声音文件：</strong></td>
+                                    <td><%=model.SoundFile%></td>                                    
+                                    </tr>   
+                                    <%} %>
+                                  <tr>
+                                    <td align="left">&nbsp; </td>
+                                  </tr>
+                                </table>
+                                                      
+                                <table width="689" border="0" cellspacing="0" cellpadding="0" id="disanfang" runat="server">
+                            <tr>
+                              <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                <table width="156" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="10" height="20">&nbsp;</td>
+                                    <td width="140" align="center" class="font12bt">商标信息（第二部分）</td>
+                                    <td width="6"></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="18" align="left"></td>
+                            </tr>
+                            <tr>
+                              <td height="115" align="left" valign="top">
+                                <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>商标申请日：</strong></td>
+                                    <td width="429" valign="middle">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>初审公告日：</strong></td>
+                                    <td width="429" valign="middle">
+                                       
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>注册公告日：</strong></td>
+                                    <td width="429" valign="middle">
+                                     
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><strong></strong></td>
+                                    <td width="429" valign="middle">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">&nbsp;</td>
+                                    <td width="429" valign="middle">
+                                        &nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><b><span>续展期限日：</span></b></td>
+                                    <td width="429" valign="middle">
+                                        &nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><b><span>所剩天数：</span></b></td>
+                                    <td width="429" valign="middle">
+                                        &nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><b><span>最近状态：</span></b></td>
+                                    <td width="429" valign="middle">
+                                        <%=status%></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left">&nbsp;</td>
+                            </tr>
+                          </table>
+                          
+                                <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                      <table width="114" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                          <td width="10" height="20">&nbsp; </td>
+                                          <td width="98" align="center" class="font12bt">其它信息 </td>
+                                          <td width="6"></td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td height="18" align="left"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="115" align="left" valign="top">
+                                      <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong><span>商标注册申请书</span>：<br />
+                                          </strong></td>
+                                          <td width="429" align="left">
+                                            <%=model.AgentBook%>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>商标申请委托书：<br />
+                                          </strong></td>
+                                          <td width="429" align="left">
+                                            <%=model.AgentBook%>
+                                          </td>
+                                        </tr>
+                                       
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>商标续展申请书：</strong> </td>
+                                          <td align="left" width="429">
+                                           
+                                          </td>
+                                        </tr>
+                                        
+                                                                     
+                                        <tr>
+                                          <td height="32" align="right"><strong>商标续展委托书：</strong> </td>
+                                          <td align="left">
+                                            
+                                          </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                          <td height="32" align="right"><strong>备注：</strong></td>
+                                          <td align="left">
+                                              &nbsp;</td>
+                                        </tr>
+                                        </table>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td align="left">&nbsp; </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left">&nbsp; </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
 						</div>
 					</div>
-					<div class="ui-tabs-panel ui-tabs-hide">
-						<div class="content reset">
-							2
-						</div>
+					<div class="ui-tabs-panel">
+						<table width="689" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                          <td height="115" align="center" valign="top">
+                            <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="639" height="20" align="left" valign="top" >
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td height="18" align="left"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="115" align="left" valign="top">
+                                      <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>① 商标注册待审中：
+                                          </strong></td>
+                                          <td width="429" align="left">
+                                            
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>② 初步审定:
+                                          </strong></td>
+                                          <td width="429" align="left">
+                                            
+                                          </td>
+                                        </tr>
+                                       
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>③ 已驳回：</strong> </td>
+                                          <td align="left" width="429">
+                                            
+                                          </td>
+                                        </tr>
+                           
+                                        <tr>
+                                          <td height="32" align="right"><strong>④ 视为撤回：</strong> </td>
+                                          <td align="left">
+                                            
+                                          </td>
+                                        </tr>
+                                       
+                                        <tr>
+                                          <td height="32" align="right"><strong>⑤ 已注册：</strong></td>
+                                          <td align="left">
+                                              &nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                          <td height="32" align="right"><span>⑥第</span><span lang="EN-US">1</span><span>次续展期限</span><span 
+                                                  lang="EN-US"> XXX<span>&nbsp; </span></span><span>已完成</span></td>
+                                          <td align="left">
+                                              &nbsp;</td>
+                                        </tr>
+                                        </table>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td align="left">&nbsp; </td>
+                                  </tr>
+                                </table>
+                          </td>
+                         </tr>
+                        </table>
 					</div>
 					 
 					<div class="ui-tabs-panel ui-tabs-hide" id="Div1">
