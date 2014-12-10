@@ -149,7 +149,7 @@
                                                <tr><td width="10" height="22"></td><td>
                                                  <a href="add_trademark.aspx" <% if (myurl == "user_sbjs" ){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标申请案</a></td></tr>
                                                <tr><td width="10" height="22" ></td><td>
-                                                <a href="add_trademark.aspx" <% if (myurl == "add_trademark" ){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标续展案</a></td></tr>
+                                                <a href="add_trademark_renewal.aspx" <% if (myurl == "add_trademark" ){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标续展案</a></td></tr>
                                                </table>
                                               <%--  <a href="user_sbadd1.aspx" <% if (myurl == "user_sbadd" ||myurl == "user_sbadd1"||myurl == "user_sbadd2"||myurl == "user_sbaddok"){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标信息</a>--%>
                                             </td>
