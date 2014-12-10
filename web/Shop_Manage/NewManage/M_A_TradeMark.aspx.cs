@@ -53,6 +53,7 @@ public partial class M_A_TradeMark : System.Web.UI.Page
         {
             //Bind_Drp_PGuoJiaType();
             Bind_Page_Info();
+            this.lblCaseNo.Text= caseNo.GetTodayMaxCaseNo();
 
             t_GoodsCategoryFees fees = goods.CategoryFees_Select_One();
             hi_MainFees.Value = fees.MainFees.Value.ToString();
@@ -129,7 +130,7 @@ public partial class M_A_TradeMark : System.Web.UI.Page
         model.Fax = txt_fax.Value.Trim();
         model.PostCode = txt_postcode.Value.Trim();
         //日期+本日的序号，6位+3位，例如：141016001
-        model.CaseNo = caseNo.GetTodayMaxCaseNo();
+        model.CaseNo = this.lblCaseNo.Text; 
         model.Is3D = Radio3DNo.Checked ? false : true;
         model.IsColor = rdoColorNO.Checked ? false : true;
         model.IsSound = chkSound.Checked ? true : false;
@@ -159,7 +160,69 @@ public partial class M_A_TradeMark : System.Web.UI.Page
                    HttpContext.Current.Server.MapPath(filePath + fileName));
             model.TrademarkPattern2 = filePath + fileName;
         }
+        int type=0;
+        if(this.RadioButton2.Checked) type=1;
+        else if(this.RadioButton3.Checked) type=2;
+        model.TrademarkDescribeType = type;
+        model.TrademarkDescribe = t_SBmiaosu.Value.Trim();
+
+        model.IsShow = cb_Show.Checked ? true : false;
+        model.IsReceiveEmail = cb_ReceiveEmail.Checked ? true : false;
+        model.Remark = t_Remark.Text.Trim();
+
         return model;
+    }
+
+    private void InitPaymodel(int id)
+    {
+        try
+        {
+            t_DataOrder model = new t_DataOrder();
+            string data = HI_ATT.Value;
+             
+                int Id = id;
+                if (data != "")
+                {
+                    string[] liststr = data.Split('|');
+                    for (int i = 0; i < liststr.Length - 1; i++)
+                    {
+                        string[] lname = liststr[i].Split('_');
+                        if (lname[0].ToString() != "")
+                        {
+                            model.i_OrderType = 2;//商标
+                            model.i_DataId = Id;//商标id
+                            model.nvc_OrderNum = lname[0].ToString();
+                            if (lname[1].ToString() != "")
+                            {
+                                model.dt_AddOrderTime = DateTime.Parse(lname[1].ToString());
+                            }
+                            if (lname[2].ToString() != "")
+                            {
+                                model.dt_ShouKuanTime = DateTime.Parse(lname[2].ToString());
+                            }
+                            if (lname[3].ToString() != "")
+                            {
+                                model.dt_JiaoFeiTime = DateTime.Parse(lname[3].ToString());
+                            }
+                            if (lname[4].ToString() != "")
+                            {
+                                model.dt_SendInfoTime = DateTime.Parse(lname[4].ToString());
+                            }
+                            if (lname[5].ToString() != "")
+                            {
+                                model.dt_KaiJuTime = DateTime.Parse(lname[5].ToString());
+                            }
+                            model.nvc_Info1 = lname[6].ToString();
+                            model.nvc_Info2 = lname[7].ToString();
+                            model.dt_Addtime = DateTime.Now;
+                            dal_DataOrder DALDO = new dal_DataOrder();
+                            int ss = DALDO.DataOrder_Add(model);
+                            //Response.Redirect(Request.Url.ToString());
+                        }
+                    }
+            }
+        }
+        catch { }
     }
     protected void btOK_Click(object sender, EventArgs e)
     {
@@ -168,9 +231,8 @@ public partial class M_A_TradeMark : System.Web.UI.Page
         {
             model.IsSubmit = true;
             mark.Trademark_Add(model);
+            InitPaymodel(model.i_Id);
         }
     }
-     
-     
 
 }
