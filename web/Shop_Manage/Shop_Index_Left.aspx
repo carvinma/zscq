@@ -170,6 +170,16 @@
                   <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=1" target="main">商标续展状态</a></li>
               </ul>
             </li>
+              <li class="explode menu-item1" key="zl_2_2" name="menu1">&nbsp;商标管理
+              <ul>
+                  <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=0" target="main">综合查询</a></li> 
+                  <li class="menu-item">&nbsp;<a href="NewManage/M_A_TradeMark.aspx?type=1" target="main">申请列表</a></li>
+                  <li class="menu-item">&nbsp;<a href="NewManage/M_A_TradeMark.aspx?type=1" target="main">申请添加</a></li>
+                  <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=1" target="main">续展列表</a></li>
+                  <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=1" target="main">续展添加</a></li>
+                  <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=1" target="main">案件统计</a></li>
+              </ul>
+            </li>
             <%} if (flag[52][0].ToString() == "1")
               {%>
             <li class="explode menu-item1" key="zl_2_3" name="menu1">&nbsp;商标订单管理
