@@ -203,9 +203,10 @@ h1 .action-span1 {
   color: #9D7250;
 }
 
-.list-div input, list-div img {
+ list-div img {
   vertical-align: middle;
-	}
+    width: 297px;
+}
 
 .list-div .footer {
   background: #F4FAFB;
