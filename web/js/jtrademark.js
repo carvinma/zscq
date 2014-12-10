@@ -535,6 +535,44 @@ function addmarkCheck_data() {
     
     return false;
 }
+/*商标续展添加验证
+*/
+function addmarkRenewalCheck_data() {
+    var obj = $('input:radio[name="person"]:checked').val();
+    if (obj == "" || obj == null) {
+        alert("请选择注册人类别");
+        return false;
+    }
+    if (!$(".appusertype").is(":hidden")) { //当注册人为自然人时，需要上传
+        if (!check_ApplyUser("cardno_div")) {
+            return false;
+        }
+        if ($("#hiUpCardNo").val() == "") {
+            alert("请上传身份证扫描件");
+            return false;
+        }
+    }
+    if ($("#upBusinessLinces").val() == "") {
+        alert("请上传营业执照");
+        return false;
+    }
+    if ($("#upRegisteCertificate").val() == "") {
+        alert("请上传商标注册证书");
+        return false;
+    }
+    
+    if ($("#upPattern1").val() == null || $("#upPattern1").val() == "") {
+        alert("请上传商标图样");
+        return false;
+    }
+    if (check_ApplyUser("name_div") && check_ApplyUser("address_div")
+    && check_ApplyUser("ContactPerson_div") && check_ApplyUser("phone_div")
+    && check_ApplyUser("postcode_div")
+    && check_ApplyUser("sortarr_div") && check_ApplyUser("regno_div") && check_ApplyUser("regdate_div"))
+        return true;
+
+    return false;
+}
 
 /**
 * 验证申请人消息提示
@@ -708,7 +746,21 @@ function check_ApplyUser(divId) {
         value = $("#sortarr").val();
         if (isEmpty(value)) {
             errorFlag = true;
-            errorMessage = "请您选择商标类别";
+            errorMessage = "请您输入商标类别";
+        }
+    }
+    else if (divId == "regno_div") {
+        value = $("#txt_RegNo").val();
+        if (isEmpty(value)) {
+            errorFlag = true;
+            errorMessage = "请您输入注册号或申请号";
+        }
+    }
+    else if (divId == "regdate_div") {
+        value = $("#txt_RegNoticeDate").val();
+        if (isEmpty(value)) {
+            errorFlag = true;
+            errorMessage = "请您输入注册公告日";
         }
     }
 

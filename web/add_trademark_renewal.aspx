@@ -13,6 +13,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
     <script src="js/jtrademark.js" type="text/javascript"></script>
     <script src="js/j.suggest.js" type="text/javascript"></script>
     <script src="js/swfobject.js" type="text/javascript"></script>
@@ -165,7 +166,7 @@
                 }
             });
 
-            $("#upWav").uploadify({
+            $("#upfileRegisteCertificate").uploadify({
                 'swf': 'js/SWF/uploadify.swf',
                 'uploader': 'Handler.ashx?flag=uploadimage',
                 //'buttonImg': "images/aboutus1s.gif",
@@ -175,15 +176,16 @@
                 'width': '80',
                 'height': '32',
                 'overrideEvents': ['onDialogClose'],
-                'fileTypeDesc': '选择文件(*.mp3 *.wav)',
-                'fileTypeExts': '*.mp3;*.wav',
+                'fileTypeDesc': '浏览文件(*pdf)',
+                'fileTypeExts': '*.pdf',
                 'auto': true,
                 'multi': false,
-                'fileSizeLimit': '5MB',
+                'fileSizeLimit': '2MB',
                 'queueSizeLimit': 1,
                 'onUploadSuccess': function (file, data, response) {
                     $.jBox.closeTip();
-                    $("#upSound").val(data);
+                    $("#aRegisteCertificate").show();
+                    $("#upRegisteCertificate").val(data);
                 },
                 'onSelect': function (file) {
                     $.jBox.tip("正在上传文件，请稍后...", 'loading');
@@ -192,10 +194,10 @@
                 'onSelectError': function (file, errorCode, errorMsg) {
                     switch (errorCode) {
                         case -100:
-                            alert("上传的文件数量已经超出系统限制的" + $('#upWav').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                            alert("上传的文件数量已经超出系统限制的" + $('#upRegisteCertificate').uploadify('settings', 'queueSizeLimit') + "个文件！");
                             break;
                         case -110:
-                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upWav').uploadify('settings', 'fileSizeLimit') + "大小！");
+                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upRegisteCertificate').uploadify('settings', 'fileSizeLimit') + "大小！");
                             break;
                         case -120:
                             alert("文件 [" + file.name + "] 大小异常！");
@@ -249,50 +251,27 @@
                     }
                 }
             });
-
-            $("#addpicture2").uploadify({
-                'swf': 'js/SWF/uploadify.swf',
-                'uploader': 'Handler.ashx?flag=uploadimage',
-                //'buttonImg': "images/aboutus1s.gif",
-                'buttionClass': '',
-                'buttonText': '选择图片',
-                'queueID': 'fileQueue',
-                'width': '80',
-                'height': '32',
-                'overrideEvents': ['onDialogClose'],
-                'fileTypeDesc': '选择图片',
-                'fileTypeExts': '*.jpg;*.jpge;*.gif;*.png',
-                'auto': true,
-                'multi': false,
-                'fileSizeLimit': '500KB',
-                'queueSizeLimit': 1,
-                'onUploadSuccess': function (file, data, response) {
-                    $.jBox.closeTip();
-                    $('#Image2').attr('src', 'UploadTemp/' + data);
-                    $("#upPattern2").val(data);
-                },
-                'onSelect': function (file) {
-                    $.jBox.tip("正在上传图片，请稍后...", 'loading');
-                },
-                //返回一个错误，选择文件的时候触发
-                'onSelectError': function (file, errorCode, errorMsg) {
-                    switch (errorCode) {
-                        case -100:
-                            alert("上传的文件数量已经超出系统限制的" + $('#addpicture2').uploadify('settings', 'queueSizeLimit') + "个文件！");
-                            break;
-                        case -110:
-                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#addpicture2').uploadify('settings', 'fileSizeLimit') + "大小！");
-                            break;
-                        case -120:
-                            alert("文件 [" + file.name + "] 大小异常！");
-                            break;
-                        case -130:
-                            alert("文件 [" + file.name + "] 类型不正确！");
-                            break;
-                    }
-                }
-            });
         });
+
+        function miaoshutype() {
+            var rb1 = document.getElementById("RadioButton1");
+            var rb2 = document.getElementById("RadioButton2");
+            var rb3 = document.getElementById("RadioButton3");
+            if (rb1.checked) {
+                $("#Sb_miaosu").val("请填写所申请的商标文字");
+                $("#Sb_miaosu").disabled = false;
+                $("#sbmiaoshu").show();
+            }
+            if (rb2.checked) {
+                $("#sbmiaoshu").hide();
+                $("#Sb_miaosu").val("");
+            }
+            if (rb3.checked) {
+                $("#Sb_miaosu").val("请填写所申请的商标文字");
+                $("#Sb_miaosu").disabled = false;
+                $("#sbmiaoshu").show();
+            }
+        }
     </script>
     <style type="text/css">
         p.MsoNormal
@@ -321,7 +300,7 @@
     <input id="hi_ExceedFees" type="hidden" runat="server" value="0" />
      <input type="hidden" runat="server"  id="hiUpCardNo" value="" />
      <input type="hidden" runat="server"  id="upBusinessLinces" value="" />
-      <input type="hidden" runat="server"  id="upSound" />
+      <input type="hidden" runat="server"  id="upRegisteCertificate" />
       <input type="hidden" runat="server"  id="upPattern1" />
        <input type="hidden" runat="server"  id="upPattern2" />
     <uc4:zscqtop2 ID="zscqtop21" runat="server" />
@@ -359,7 +338,7 @@
                                     </td>
                                     <td align="left">
                                         <a href="index.aspx">首页</a>&nbsp;&gt;&gt;&nbsp;会员中心&nbsp;&gt;&gt;&nbsp;服务中心&nbsp;&gt;&gt;&nbsp;我的商标&nbsp;&gt;&gt;&nbsp;添加商标信息&nbsp;
-                                        &gt;&gt; 添加商标申请案
+                                        &gt;&gt; 添加商标续展案
                                     </td>
                                 </tr>
                             </table>
@@ -461,7 +440,7 @@
                                                                 <table width="689" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
                                                                         <td align="right">
-                                                                            <strong>选择申请人类别</strong>：
+                                                                            <strong>选择注册人类别</strong>：
                                                                         </td>
                                                                         <td>
                                                                             <input id="RdoPeople" type="radio" name="person" value="1" runat="server" />自然人&nbsp;&nbsp;&nbsp;&nbsp;
@@ -475,11 +454,11 @@
                                                                         </td>
                                                                         <td align="left">
                                                                             <input runat="server" id="txt_applyname" type="text" 
-                                                                            onblur="check_ApplyUser('name_div')" name="" value="" placeholder="" 
-                                                                            class="font12000" maxlength="50" clientidmode="Static" autocomplete="off"/>
+                                                                            onblur="check_ApplyUser('name_div')" tips="请与商标注册证书一致"  placeholder="" 
+                                                                            class="font12000 tooltip" maxlength="50" clientidmode="Static" autocomplete="off"/>
                                                                             <span style="color: Red;">*</span>  <span class="status error" id="name_div_error"></span>
                                                                             <input type="hidden" name="applyname_3word" runat="server" clientidmode="Static"
-                                                                                id="applyname_3word" value="CAN" /><span>与商标注册证书一致</span><br />
+                                                                                id="applyname_3word" value="CAN" /><br />
                                                                             <div id="suggest" class="ac_results" style="width: 173px;">
                                                                             </div>
                                                                         </td>
@@ -559,10 +538,11 @@
                                                                         </td>
                                                                         <td align="left">
                                                                            <span class="fl selected-address" id="areaNameTxt"></span>
-                                                                            <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" style="ime-mode: disabled;" id="txt_address" maxlength="50" type="text" 
+                                                                            <input class="font12000 tooltip" onblur="check_ApplyUser('address_div')" 
+                                                                            runat="server" id="txt_address" maxlength="50" type="text" tips="请与证明文件中的地址一致"
                                                                                name="" value=""/>
                                                                                <span style="color: Red;">*</span> 
-                                                                                <span class="status error" id="address_div_error"><span>与证明文件中的地址一致</span></span></td>
+                                                                                <span class="status error" id="address_div_error"><span></span></span></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td height="32" align="right">
@@ -594,7 +574,7 @@
                                                                           <span class="status error" id="fax_div_error"></span>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr id="sbmiaoshu">
+                                                                    <tr>
                                                                         <td height="32" align="right">
                                                                             <strong>邮政编码：</strong>
                                                                         </td>
@@ -652,31 +632,36 @@
                                                                         <td height="32" width="360" align="right" valign="middle">
                                                                             <strong>注册号/申请号：</strong></td>
                                                                         <td valign="middle">
-                                                                         <input class="font12000"  onblur="check_ApplyUser('postcode_div')" runat="server" 
-                                                                                onkeypress="event.returnValue=IsDigit();" style="ime-mode: disabled;" 
-                                                                                id="txt_postcode0" maxlength="6" type="text" name="" value="" placeholder=""/></td>
+                                                                         <input class="font12000 tooltip"  onblur="check_ApplyUser('regno_div')" runat="server" 
+                                                                                style="ime-mode: disabled;" tips="请与商标注册证书一致"
+                                                                                id="txt_RegNo" maxlength="20" type="text"   value="" placeholder=""/></td>
                                                                         <td width="429" valign="middle">
                                                                           <span style="color: Red;">*</span>
-                                                                            <span>与商标注册证书一致</span></td>
+                                                                            <span class="status error" id="regno_div_error"></span>
+                                                                            </td>
+
                                                                     </tr>
                                                                     <tr>
                                                                         <td  height="32" align="right" valign="middle">
                                                                             <strong>商标类别：</strong>
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="sortarr" type="text" runat="server" readonly="readonly" class="font12000" onblur="check_ApplyUser('sortarr_div')" onclick="showGoods()"/>
+                                                                            <input id="sortarr" type="text" runat="server" class="font12000"  style="ime-mode: disabled;" 
+                                                                             onblur="check_ApplyUser('sortarr_div')"/>
                                                                              <input type="hidden" id="sortGoods" runat="server"/>
+                                                                             <div><span style="color: Red;">多个商标类别，以逗号分隔</span></div>
                                                                         </td>
-                                                                        <td valign="left">
+                                                                        <td valign="middle">
+                                                                         <span style="color: Red;">*</span>
                                                                             <span class="status error" id="sortarr_div_error"></span>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td  height="32" align="right" valign="middle">
-                                                                            <strong>商标详情：</strong></td>
+                                                                            <strong>商标描述类型：</strong></td>
                                                                         <td valign="middle">
                                                                             <asp:RadioButton ID="RadioButton1" runat="server" GroupName="aa" 
-                                                                                onclick="miaoshutype();" />
+                                                                                onclick="miaoshutype();" Checked="True" />
                                                                             文字商标<asp:RadioButton ID="RadioButton2" runat="server" GroupName="aa" 
                                                                                 onclick="miaoshutype();" />
                                                                             图形商标<asp:RadioButton ID="RadioButton3" runat="server" GroupName="aa" 
@@ -685,33 +670,51 @@
                                                                         <td valign="middle">
                                                                             &nbsp;</td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td  height="32" align="right" valign="middle">
-                                                                            &nbsp;</td>
-                                                                        <td valign="middle">
-                                                                             <input type="text" runat="server" id="t_SBmiaosu" class="font12000" maxlength="100" /></td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;</td>
+                                                                    <tr id="sbmiaoshu">
+                                                                        <td height="32" align="right" valign="middle">
+                                                                           <strong> 商标描述：</strong></td>
+                                                                        <td valign="middle" colspan="2">
+                                                                        <input type="text" name="s6" id="Sb_miaosu" class="font12000" maxlength="50" runat="server" onblur="checkOk('Sb_miaosu');"  value="请填写所申请的商标文字" onClick="value='';focus()" style="width:300px;"/> <span style="color: Red;" id="Sb_miaosu1">*</span>
+                                                                        </td>
+                                                                         
                                                                     </tr>
                                                                     <tr>
                                                                         <td  height="32" align="right" valign="middle">
                                                                             <strong>商标注册证书：</strong></td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;</td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;</td>
+                                                                        <td colspan="2" valign="middle">
+                                                                            <div id="upfileRegisteCertificate"></div>
+                                                                             <span id="aRegisteCertificate"  style="display:none">商标注册证书已上传</span>
+                                                                             <div>
+                                                                                <span style="color: Red;">请将商标注册证书扫描为彩色上传，格式为pdf，大小不超过2M</span>
+                                                                                </div>
+                                                                         </td>
+                                                                        
                                                                     </tr>
                                                                     <tr>
                                                                         <td  height="32" align="right" valign="middle">
                                                                             <strong>商标申请日：</strong></td>
                                                                         <td valign="middle">
-                                                                            &nbsp;</td>
+                                                                            <input type="text" name="s6" runat="server" id="txt_applydate" onblur="checkOk('txt_applydate');"  
+                                                                            class="font12000" readonly="readonly" style="background-image:url(images/user_js_date.gif); 
+                                                                                background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});daoqidate();"/></td>
                                                                         <td valign="middle">
                                                                             &nbsp;</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td  height="32" align="right" valign="middle">
                                                                              <strong>注册公告日：</strong></td>
+                                                                        <td valign="middle">
+                                                                           <input type="text" name="s6" runat="server" id="txt_RegNoticeDate"  
+                                                                             onblur="check_ApplyUser('regdate_div')" readonly="readonly"
+                                                                           class="font12000" maxlength="50" style="background-image:url(images/user_js_date.gif); background-repeat:no-repeat; background-position:right;" 
+                                                                           onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});daoqidate();"/>
+                                                                           </td>
+                                                                        <td valign="middle">
+                                                                            <span class="status error" id="regdate_div_error"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                             &nbsp;</td>
                                                                         <td valign="middle">
                                                                             &nbsp;</td>
                                                                         <td valign="middle">
@@ -720,8 +723,9 @@
                                                                     <tr>
                                                                         <td  height="32" align="right" valign="middle">
                                                                              <strong>续展期限日：</strong></td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;</td>
+                                                                         <td valign="middle">
+                                                                        <input type="text" runat="server" id="txt_RenewalDate" class="font12000" readonly="readonly" />
+                                                                        </td>
                                                                         <td valign="middle">
                                                                             &nbsp;</td>
                                                                     </tr>
@@ -731,7 +735,7 @@
                                                                         <td valign="middle">
                                                                             <textarea cols="20" rows="2" type="text" name="s7" id="txt_remark" style="width: 293px;
                                                                                 height: 180px;" class="font12000" maxlength="180" runat="server"  
-                                                                                onblur="check_ApplyUser('remark_div')" ></textarea></td>
+                                                                                ></textarea></td>
                                                                         <td valign="middle">
                                                                            <div>
                                                                                 <p>
@@ -840,11 +844,11 @@
                                                                         </td>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnSave" CssClass="BtnShow" runat="server" Text="保  存" 
-                                                                                onclick="btnSave_Click"  OnClientClick="return addmarkCheck_data()"/>
+                                                                                onclick="btnSave_Click"  OnClientClick="return addmarkRenewalCheck_data()"/>
                                                                         </td> 
                                                                         <td width="100">
                                                                             <asp:Button ID="btnSubmit" CssClass="BtnShow" runat="server"
-                                                                                Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkCheck_data()"/>
+                                                                                Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkRenewalCheck_data()"/>
                                                                         </td>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnCancle" CssClass="BtnShow" runat="server" Text="放弃提交" 

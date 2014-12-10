@@ -17,7 +17,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         if (!IsPostBack)
         {
             Bind_Page_Member();
-             t_GoodsCategoryFees fees= goods.CategoryFees_Select_One();
+            t_GoodsCategoryFees fees = goods.CategoryFees_Select_One();
             hi_MainFees.Value = fees.MainFees.Value.ToString();
             hi_ItemNum.Value = fees.ItemNum.Value.ToString();
             hi_ExceedFees.Value = fees.ExceedFees.Value.ToString();
@@ -49,12 +49,12 @@ public partial class add_trademark_renewal : System.Web.UI.Page
 
         sortarr.Value.Trim();//商标类别
 
-         //Radio3DNo.Checked
+        //Radio3DNo.Checked
         //chkSound.Checked
     }
     private t_NewTradeMarkInfo InitModel()
     {
-        string filePath ="File_Zscq/File_ShangBiao/";
+        string filePath = "File_Zscq/File_ShangBiao/";
         if (!System.IO.Directory.Exists(Server.MapPath(filePath)))
         {
             System.IO.Directory.CreateDirectory(Server.MapPath(filePath));
@@ -62,6 +62,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
 
         t_NewTradeMarkInfo model = new t_NewTradeMarkInfo();
         model.i_MemberId = int.Parse(Hi_MemberId.Value);
+        model.i_Type = 1;
         model.ApplyName = txt_applyname.Value.Trim();
         model.ApplyType = this.RdoPeople.Checked ? 1 : 0;
         string fileName = string.Empty;
@@ -84,7 +85,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         fileName = this.upBusinessLinces.Value;//营业执照
         if (fileName.Contains("File_ShangBiao"))
         {
-            model.Businesslicense =fileName;
+            model.Businesslicense = fileName;
         }
         else
         {
@@ -92,7 +93,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                     HttpContext.Current.Server.MapPath(filePath + fileName));
             model.Businesslicense = filePath + fileName;
         }
-       
+
         model.ProvinceId = int.Parse(Hi_prov.Value);
         int cityid, areaid;
         if (int.TryParse(Hi_city.Value, out cityid))
@@ -106,32 +107,32 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         model.PostCode = txt_postcode.Value.Trim();
         //日期+本日的序号，6位+3位，例如：141016001
         model.CaseNo = caseNo.GetTodayMaxCaseNo();
-        model.Is3D = Radio3DNo.Checked ? false : true;
-        model.IsColor = rdoColorNO.Checked ? false : true;
-        model.IsSound = chkSound.Checked ? true : false;
-        if (!string.IsNullOrEmpty(this.upSound.Value))
+        model.RegisteredNo = txt_RegNo.Value.Trim();
+        int desctype = 0;
+        if (RadioButton2.Checked) desctype = 1;
+        if (RadioButton3.Checked) desctype = 2;
+        model.TrademarkDescribeType = desctype;
+        model.TrademarkDescribe = Sb_miaosu.Value.Trim();
+        if (!string.IsNullOrEmpty(txt_applydate.Value))
+            model.ApplyDate = DateTime.Parse(txt_applydate.Value);
+        model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
+        if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
+            model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
+        if (!string.IsNullOrEmpty(this.upRegisteCertificate.Value))
         {
-            fileName = this.upSound.Value;//声音
+            fileName = this.upRegisteCertificate.Value;//注册证书
             System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
                    HttpContext.Current.Server.MapPath(filePath + fileName));
-            model.SoundFile = filePath + fileName;
+            model.TrademarkRegBook = filePath + fileName;
         }
         model.TrademarkRemark = txt_remark.Value.Trim();
-        model.TrademarkType = sortarr.Value.Trim();
+        model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
         model.TrademarkGoods = sortGoods.Value.Trim();
-        fileName = this.upPattern1.Value;//图样1
+        fileName = this.upPattern1.Value;//图样
         System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
                HttpContext.Current.Server.MapPath(filePath + fileName));
         model.TrademarkPattern1 = filePath + fileName;
-
-
-        if (!string.IsNullOrEmpty(this.upPattern2.Value))
-        {
-            fileName = this.upPattern2.Value;//图样2
-            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-                   HttpContext.Current.Server.MapPath(filePath + fileName));
-            model.TrademarkPattern2 = filePath + fileName;
-        }
+        model.Remark = txt_remark.Value.Trim();
         return model;
     }
     protected void btnSave_Click(object sender, EventArgs e)
@@ -142,9 +143,9 @@ public partial class add_trademark_renewal : System.Web.UI.Page
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-         var model= InitModel();
-         model.IsSubmit = true;
-         mark.Trademark_Add(model);
+        var model = InitModel();
+        model.IsSubmit = true;
+        mark.Trademark_Add(model);
     }
     protected void btnCancle_Click(object sender, EventArgs e)
     {

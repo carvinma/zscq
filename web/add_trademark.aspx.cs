@@ -62,6 +62,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
 
         t_NewTradeMarkInfo model = new t_NewTradeMarkInfo();
         model.i_MemberId = int.Parse(Hi_MemberId.Value);
+        model.i_Type = 0;
         model.ApplyName = txt_applyname.Value.Trim();
         model.ApplyType = this.RdoPeople.Checked ? 1 : 0;
         string fileName = string.Empty;
