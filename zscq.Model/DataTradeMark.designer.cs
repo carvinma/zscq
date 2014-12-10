@@ -1560,6 +1560,8 @@ namespace zscq.Model
 		
 		private int _i_MemberId;
 		
+		private System.Nullable<int> _i_Type;
+		
 		private int _ApplyType;
 		
 		private string _ApplyName;
@@ -1598,6 +1600,14 @@ namespace zscq.Model
 		
 		private string _SoundFile;
 		
+		private string _RegisteredNo;
+		
+		private System.Nullable<System.DateTime> _ApplyDate;
+		
+		private System.Nullable<System.DateTime> _RegNoticeDate;
+		
+		private System.Nullable<System.DateTime> _RenewalDate;
+		
 		private System.Nullable<int> _TrademarkDescribeType;
 		
 		private string _TrademarkDescribe;
@@ -1611,6 +1621,8 @@ namespace zscq.Model
 		private string _TrademarkPattern1;
 		
 		private string _TrademarkPattern2;
+		
+		private string _TrademarkRegBook;
 		
 		private string _ApplyBook;
 		
@@ -1638,6 +1650,8 @@ namespace zscq.Model
     partial void Oni_IdChanged();
     partial void Oni_MemberIdChanging(int value);
     partial void Oni_MemberIdChanged();
+    partial void Oni_TypeChanging(System.Nullable<int> value);
+    partial void Oni_TypeChanged();
     partial void OnApplyTypeChanging(int value);
     partial void OnApplyTypeChanged();
     partial void OnApplyNameChanging(string value);
@@ -1676,6 +1690,14 @@ namespace zscq.Model
     partial void OnIsSoundChanged();
     partial void OnSoundFileChanging(string value);
     partial void OnSoundFileChanged();
+    partial void OnRegisteredNoChanging(string value);
+    partial void OnRegisteredNoChanged();
+    partial void OnApplyDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnApplyDateChanged();
+    partial void OnRegNoticeDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnRegNoticeDateChanged();
+    partial void OnRenewalDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnRenewalDateChanged();
     partial void OnTrademarkDescribeTypeChanging(System.Nullable<int> value);
     partial void OnTrademarkDescribeTypeChanged();
     partial void OnTrademarkDescribeChanging(string value);
@@ -1690,6 +1712,8 @@ namespace zscq.Model
     partial void OnTrademarkPattern1Changed();
     partial void OnTrademarkPattern2Changing(string value);
     partial void OnTrademarkPattern2Changed();
+    partial void OnTrademarkRegBookChanging(string value);
+    partial void OnTrademarkRegBookChanged();
     partial void OnApplyBookChanging(string value);
     partial void OnApplyBookChanged();
     partial void OnAgentBookChanging(string value);
@@ -1751,6 +1775,26 @@ namespace zscq.Model
 					this._i_MemberId = value;
 					this.SendPropertyChanged("i_MemberId");
 					this.Oni_MemberIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Type", DbType="Int")]
+		public System.Nullable<int> i_Type
+		{
+			get
+			{
+				return this._i_Type;
+			}
+			set
+			{
+				if ((this._i_Type != value))
+				{
+					this.Oni_TypeChanging(value);
+					this.SendPropertyChanging();
+					this._i_Type = value;
+					this.SendPropertyChanged("i_Type");
+					this.Oni_TypeChanged();
 				}
 			}
 		}
@@ -2135,6 +2179,86 @@ namespace zscq.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredNo", DbType="NVarChar(50)")]
+		public string RegisteredNo
+		{
+			get
+			{
+				return this._RegisteredNo;
+			}
+			set
+			{
+				if ((this._RegisteredNo != value))
+				{
+					this.OnRegisteredNoChanging(value);
+					this.SendPropertyChanging();
+					this._RegisteredNo = value;
+					this.SendPropertyChanged("RegisteredNo");
+					this.OnRegisteredNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ApplyDate
+		{
+			get
+			{
+				return this._ApplyDate;
+			}
+			set
+			{
+				if ((this._ApplyDate != value))
+				{
+					this.OnApplyDateChanging(value);
+					this.SendPropertyChanging();
+					this._ApplyDate = value;
+					this.SendPropertyChanged("ApplyDate");
+					this.OnApplyDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegNoticeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RegNoticeDate
+		{
+			get
+			{
+				return this._RegNoticeDate;
+			}
+			set
+			{
+				if ((this._RegNoticeDate != value))
+				{
+					this.OnRegNoticeDateChanging(value);
+					this.SendPropertyChanging();
+					this._RegNoticeDate = value;
+					this.SendPropertyChanged("RegNoticeDate");
+					this.OnRegNoticeDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RenewalDate
+		{
+			get
+			{
+				return this._RenewalDate;
+			}
+			set
+			{
+				if ((this._RenewalDate != value))
+				{
+					this.OnRenewalDateChanging(value);
+					this.SendPropertyChanging();
+					this._RenewalDate = value;
+					this.SendPropertyChanged("RenewalDate");
+					this.OnRenewalDateChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribeType", DbType="Int")]
 		public System.Nullable<int> TrademarkDescribeType
 		{
@@ -2271,6 +2395,26 @@ namespace zscq.Model
 					this._TrademarkPattern2 = value;
 					this.SendPropertyChanged("TrademarkPattern2");
 					this.OnTrademarkPattern2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRegBook", DbType="NVarChar(100)")]
+		public string TrademarkRegBook
+		{
+			get
+			{
+				return this._TrademarkRegBook;
+			}
+			set
+			{
+				if ((this._TrademarkRegBook != value))
+				{
+					this.OnTrademarkRegBookChanging(value);
+					this.SendPropertyChanging();
+					this._TrademarkRegBook = value;
+					this.SendPropertyChanged("TrademarkRegBook");
+					this.OnTrademarkRegBookChanged();
 				}
 			}
 		}
