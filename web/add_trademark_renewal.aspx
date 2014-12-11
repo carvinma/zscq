@@ -251,6 +251,43 @@
                     }
                 }
             });
+            $(".chkregdate").live("click", function () {
+                var regdate = $(this).parent().prev().find("span").text().replace('年', '-').replace('月', '-');
+                if ($(this).is(":checked")) {
+                    var flag = true;
+                    var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
+                    $("#tbdate tr").each(function () {
+                        var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                        if (new Date(tmpdate) > new Date(regdate)) {
+                            flag = false;
+                            return;
+                        }
+                    });
+                    if (flag) {
+                        var d = new Date(regdate);
+                        d.setYear(d.getFullYear() + parseInt(10));
+                        var month = d.getMonth() + 1;
+                        if (parseInt(month) < 10)
+                            month = "0" + month;
+                        var day = d.getDate();
+                        if (parseInt(day) < 10)
+                            day = "0" + day;
+                        var ndate = (d.getFullYear()) + "-" + month + "-" + day;
+                        $("#txt_RenewalDate").val(ndate);
+                        $("#tbdate").append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day));
+                    }
+                }
+                else {
+                    $("#tbdate tr").each(function () {
+                        var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                        if (new Date(tmpdate) > new Date(regdate)) {
+                            $(this).remove();
+                        }
+                    });
+                    $("#txt_RenewalDate").val(regdate);
+                }
+                recordRegnoticeDate();
+            });
         });
 
         function miaoshutype() {
@@ -271,6 +308,36 @@
                 $("#Sb_miaosu").disabled = false;
                 $("#sbmiaoshu").show();
             }
+        }
+        function recordRegnoticeDate() {
+            var s = '';
+            $("#tbdate tr").each(function () {
+                var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                var chked = $(this).find("input[type='checkbox']").is(':checked') ? "1" : "0";
+                s += tmpdate + "_" + chked + "|"
+            });
+            $("#hi_RegNoticeDate").val(s);
+         }
+        function calcRegnoticeDate() {
+           var regdate =$dp.cal.getNewDateStr();
+           var tbdate = $("#tbdate");
+           tbdate.empty();
+            var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
+//          
+           var d = new Date(regdate);
+           d.setYear(d.getFullYear() + parseInt(10));
+           d.setDate(d.getDate() - parseInt(1));
+           
+           var month = d.getMonth() + 1;
+           if (parseInt(month) < 10)
+               month = "0" + month;
+           var day = d.getDate();
+           if (parseInt(day) < 10)
+               day = "0" + day;
+           var ndate = (d.getFullYear()) + "-" + month + "-" + day;
+           $("#txt_RenewalDate").val(ndate);
+           tbdate.append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day));
+           $("#hi_RegNoticeDate").val(ndate +"_"+"0"+ "|");
         }
     </script>
     <style type="text/css">
@@ -295,6 +362,7 @@
     <input id="hi_zhitifiles" type="hidden" runat="server" />
     <input id="hi_sbid" type="hidden" runat="server" value="0" />
 
+     <input id="hi_RegNoticeDate" type="hidden" runat="server" value="0" />
     <input id="hi_MainFees" type="hidden" runat="server" value="0" />
     <input id="hi_ItemNum" type="hidden" runat="server" value="0" />
     <input id="hi_ExceedFees" type="hidden" runat="server" value="0" />
@@ -696,7 +764,7 @@
                                                                         <td valign="middle">
                                                                             <input type="text" name="s6" runat="server" id="txt_applydate" onblur="checkOk('txt_applydate');"  
                                                                             class="font12000" readonly="readonly" style="background-image:url(images/user_js_date.gif); 
-                                                                                background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});daoqidate();"/></td>
+                                                                                background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/></td>
                                                                         <td valign="middle">
                                                                             &nbsp;</td>
                                                                     </tr>
@@ -704,10 +772,10 @@
                                                                         <td  height="32" align="right" valign="middle">
                                                                              <strong>注册公告日：</strong></td>
                                                                         <td valign="middle">
-                                                                           <input type="text" name="s6" runat="server" id="txt_RegNoticeDate"  
-                                                                             onblur="check_ApplyUser('regdate_div')" readonly="readonly"
+                                                                           <input type="text" runat="server" id="txt_RegNoticeDate"  
+                                                                             onblur="check_ApplyUser('regdate_div')"  
                                                                            class="font12000" maxlength="50" style="background-image:url(images/user_js_date.gif); background-repeat:no-repeat; background-position:right;" 
-                                                                           onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});daoqidate();"/>
+                                                                           onclick="WdatePicker({el:'txt_RegNoticeDate',dateFmt:'yyyy-MM-dd',onpicked:calcRegnoticeDate});"/>
                                                                            </td>
                                                                         <td valign="middle">
                                                                             <span class="status error" id="regdate_div_error"></span></td>
@@ -715,10 +783,12 @@
                                                                     <tr>
                                                                         <td  height="32" align="right" valign="middle">
                                                                              &nbsp;</td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;</td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;</td>
+                                                                        <td colspan="2" valign="middle">
+                                                                        <table id="tbdate">
+                                                                        
+                                                                        </table>
+                                                                        </td>
+                                                                        
                                                                     </tr>
                                                                     <tr>
                                                                         <td  height="32" align="right" valign="middle">

@@ -197,6 +197,26 @@ namespace zscq.DAL
             }
         }
 
+        #region 商标续展-注册公告日
+
+        public int TrademarkRenewalDate_Add(List<t_NewTradeMarkRenewalInfo> list, int TrademarkId)
+        {
+            try
+            {
+                var tmplist = mark.t_NewTradeMarkRenewalInfo.Where(p => p.TradeMarkId == TrademarkId).ToList();
+                mark.t_NewTradeMarkRenewalInfo.DeleteAllOnSubmit(tmplist);
+                mark.t_NewTradeMarkRenewalInfo.InsertAllOnSubmit(list);
+                mark.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        #endregion
+
         #region
         //#region
        

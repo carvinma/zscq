@@ -133,19 +133,46 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                HttpContext.Current.Server.MapPath(filePath + fileName));
         model.TrademarkPattern1 = filePath + fileName;
         model.Remark = txt_remark.Value.Trim();
+       
         return model;
+    }
+    private void addRegNoticeData(int trademarkid)
+    {
+        //续展日期
+        string xzDate = hi_RegNoticeDate.Value.Trim();
+        if (!string.IsNullOrEmpty(xzDate))
+        {
+            List<t_NewTradeMarkRenewalInfo> list = new List<t_NewTradeMarkRenewalInfo>();
+            string[] liststr = xzDate.Split('|');
+            for (int i = 0; i < liststr.Length - 1; i++)
+            {
+                t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
+                string[] RenewalDate = liststr[i].Split('_');
+                renewalModel.TradeMarkId = trademarkid;
+                renewalModel.RenewalDate = DateTime.Parse(RenewalDate[0]);
+                renewalModel.IsFinish = RenewalDate[1]=="1" ?true:false ;
+                list.Add(renewalModel);
+            }
+            if (list.Count > 0)
+            {
+                mark.TrademarkRenewalDate_Add(list, trademarkid);
+            }
+
+        }
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
         var model = InitModel();
         model.IsSubmit = false;
         mark.Trademark_Add(model);
+        addRegNoticeData(model.i_Id);
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
         model.IsSubmit = true;
         mark.Trademark_Add(model);
+        addRegNoticeData(model.i_Id);
     }
     protected void btnCancle_Click(object sender, EventArgs e)
     {
