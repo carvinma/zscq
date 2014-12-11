@@ -54,6 +54,9 @@ namespace zscq.Model
     partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
+    partial void Insertt_NewTradeMarkRenewalInfo(t_NewTradeMarkRenewalInfo instance);
+    partial void Updatet_NewTradeMarkRenewalInfo(t_NewTradeMarkRenewalInfo instance);
+    partial void Deletet_NewTradeMarkRenewalInfo(t_NewTradeMarkRenewalInfo instance);
     #endregion
 		
 		public DataTradeMarkDataContext() : 
@@ -155,6 +158,14 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<t_NewTradeMarkInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_NewTradeMarkRenewalInfo> t_NewTradeMarkRenewalInfo
+		{
+			get
+			{
+				return this.GetTable<t_NewTradeMarkRenewalInfo>();
 			}
 		}
 	}
@@ -2595,6 +2606,116 @@ namespace zscq.Model
 					this._AdminStatus = value;
 					this.SendPropertyChanged("AdminStatus");
 					this.OnAdminStatusChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkRenewalInfo")]
+	public partial class t_NewTradeMarkRenewalInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private System.Nullable<System.DateTime> _RenewalDate;
+		
+		private System.Nullable<bool> _IsFinish;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnRenewalDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnRenewalDateChanged();
+    partial void OnIsFinishChanging(System.Nullable<bool> value);
+    partial void OnIsFinishChanged();
+    #endregion
+		
+		public t_NewTradeMarkRenewalInfo()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalDate", DbType="Date")]
+		public System.Nullable<System.DateTime> RenewalDate
+		{
+			get
+			{
+				return this._RenewalDate;
+			}
+			set
+			{
+				if ((this._RenewalDate != value))
+				{
+					this.OnRenewalDateChanging(value);
+					this.SendPropertyChanging();
+					this._RenewalDate = value;
+					this.SendPropertyChanged("RenewalDate");
+					this.OnRenewalDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsFinish", DbType="Bit")]
+		public System.Nullable<bool> IsFinish
+		{
+			get
+			{
+				return this._IsFinish;
+			}
+			set
+			{
+				if ((this._IsFinish != value))
+				{
+					this.OnIsFinishChanging(value);
+					this.SendPropertyChanging();
+					this._IsFinish = value;
+					this.SendPropertyChanged("IsFinish");
+					this.OnIsFinishChanged();
 				}
 			}
 		}

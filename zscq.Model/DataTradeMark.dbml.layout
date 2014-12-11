@@ -38,10 +38,10 @@
         <elementListCompartment Id="1d80d86a-8f34-4e01-b958-9f8307892ffe" absoluteBounds="5.765, 1.335, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="5fd15f50-d810-49c0-baff-cf4cc64299e9" isExpanded="false" absoluteBounds="3.375, 2.5, 2, 0.45">
+    <classShape Id="5fd15f50-d810-49c0-baff-cf4cc64299e9" isExpanded="false" absoluteBounds="5.75, 2.375, 2, 0.45">
       <DataClassMoniker Name="/DataTradeMarkDataContext/t_CaseNoOrder" />
       <nestedChildShapes>
-        <elementListCompartment Id="b7cd3041-cf09-4925-9a0f-22792ff525de" absoluteBounds="3.39, 2.96, 1.9700000000000002, 0.792510986328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b7cd3041-cf09-4925-9a0f-22792ff525de" absoluteBounds="5.7650000000000006, 2.835, 1.9700000000000002, 0.792510986328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="73a791c2-080e-43e7-ba86-fdd339cf8aca" isExpanded="false" absoluteBounds="0.875, 3, 2, 0.45">
@@ -54,6 +54,12 @@
       <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkInfo" />
       <nestedChildShapes>
         <elementListCompartment Id="fba08c5a-2040-4f03-bfa7-c1c3d5227703" absoluteBounds="0.88999999999999968, 2.96, 1.9700000000000002, 8.1842753092447911" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5a74c5a1-fa30-49d9-b52e-1380298a4466" isExpanded="false" absoluteBounds="3.25, 2.5, 2, 0.45">
+      <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkRenewalInfo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="88a17ad5-3feb-45f6-b732-7a38cf65132b" absoluteBounds="3.265, 2.96, 1.9700000000000002, 0.792510986328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
