@@ -2639,6 +2639,8 @@ namespace zscq.Model
 		
 		private int _i_Id;
 		
+		private int _TradeMarkId;
+		
 		private System.Nullable<System.DateTime> _RenewalDate;
 		
 		private System.Nullable<bool> _IsFinish;
@@ -2649,6 +2651,8 @@ namespace zscq.Model
     partial void OnCreated();
     partial void Oni_IdChanging(int value);
     partial void Oni_IdChanged();
+    partial void OnTradeMarkIdChanging(int value);
+    partial void OnTradeMarkIdChanged();
     partial void OnRenewalDateChanging(System.Nullable<System.DateTime> value);
     partial void OnRenewalDateChanged();
     partial void OnIsFinishChanging(System.Nullable<bool> value);
@@ -2676,6 +2680,26 @@ namespace zscq.Model
 					this._i_Id = value;
 					this.SendPropertyChanged("i_Id");
 					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeMarkId", DbType="Int NOT NULL")]
+		public int TradeMarkId
+		{
+			get
+			{
+				return this._TradeMarkId;
+			}
+			set
+			{
+				if ((this._TradeMarkId != value))
+				{
+					this.OnTradeMarkIdChanging(value);
+					this.SendPropertyChanging();
+					this._TradeMarkId = value;
+					this.SendPropertyChanged("TradeMarkId");
+					this.OnTradeMarkIdChanged();
 				}
 			}
 		}
