@@ -89,148 +89,70 @@
                     <input type="text" runat="server" id="txt_UserName" class="inputs200text" maxlength="20"/>
                     </td>
                 </tr>
-                <tr>
-                    <td height="26" align="right">会员国籍：</td>
-                    <td height="26">
-                    <asp:DropDownList ID="Drp_GuoJiId" runat="server">
-                    </asp:DropDownList>
-                    </td>
-                </tr>
-            </table>
+                </table>
         </div>
         <br />
         <div class="list-div" id="Div2">
             <table cellspacing='1' cellpadding='3'>
                 <tr>
                     <th colspan="2">
-                         专利信息
+                         注册人信息
                     </th>
                 </tr>
                 <tr>
-                    <td height="26" width="200" align="right">账单号：</td>
+                    <td height="26" width="200" align="right">申请人名称：</td>
                     <td height="26">
                     <input type="text" runat="server" id="Txt_BillNumber" class="inputs200text" maxlength="20" />
                     </td>
                 </tr>
                 <tr>
-                    <td height="26" width="200" align="right">专利号：</td>
+                    <td height="26" width="200" align="right">行政区划：</td>
                     <td height="26">
-                    <input type="text" runat="server" id="txt_Number" class="inputs200text" maxlength="20" />
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_Number" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[\s\S]{1,18}">
-                </asp:RegularExpressionValidator>
-                    </td>
+                    &nbsp;</td>
                 </tr>
                 <tr>
-                    <td height="26" align="right">专利名称：</td>
+                    <td height="26" align="right">地址：</td>
                     <td height="26">
                     <input type="text" runat="server" id="txt_Name" class="inputs400text" maxlength="100" />
                     </td>
                 </tr>
-                <tr>
-                    <td height="26" align="right" valign="top">专利授权国：</td>
-                    <td height="26">
-                    <asp:DropDownList ID="Drp_AuthorizeNationalityId" runat="server" AutoPostBack="true" 
-                            onselectedindexchanged="Drp_AuthorizeNationalityId_SelectedIndexChanged" >
-                    </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="26" align="right">专利类型：</td>
-                    <td height="26">
-                    <asp:DropDownList ID="Drp_PatentType" runat="server">
-                    </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">专利申请日：</td>
-                    <td>     
-                    <input type="text" runat="server" id="txt_AuthorizeIsNationalityDate" class="inputs80text"   readonly="readonly" />
-                    <input name="selbtn1" type="button" id="Button1" onclick="new Calendar().show(form.txt_AuthorizeIsNationalityDate);" class="inputcalendarbutton" /> 
-                    --
-                    <input type="text" runat="server" id="txt_AuthorizeIsNationalityDate2" class="inputs80text"   readonly="readonly" />
-                    <input name="selbtn1" type="button" id="Button6" onclick="new Calendar().show(form.txt_AuthorizeIsNationalityDate2);" class="inputcalendarbutton" /> 
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">专利授权日：</td>
-                    <td>     
-                    <input type="text" runat="server" id="txt_AuthorizeIsAuthorizeDate" readonly="readonly"
-                             class="inputs80text" />
-                        <input name="selbtn1" type="button" id="dt_AuthorizeIsAuthorizeDate" onclick="new Calendar().show(form.txt_AuthorizeIsAuthorizeDate);" class="inputcalendarbutton" />       
-                        --
-                        <input type="text" runat="server" id="txt_AuthorizeIsAuthorizeDate2" readonly="readonly"
-                             class="inputs80text" />
-                        <input name="selbtn1" type="button" id="Button7" onclick="new Calendar().show(form.txt_AuthorizeIsAuthorizeDate2);" class="inputcalendarbutton" />                       
-                    </td>
-                </tr>
-                <tr>
-                    <td width="200" height="26" align="right">权利要求项：</td>
-                    <td height="26">
-                    <input type="text" runat="server" id="txt_yaoqiuxiang" class="inputs60text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="26" align="right">专利权人：</td>
-                    <td height="26">
-                    <input type="text" runat="server" id="txt_PatentHolder" class="inputs200text" maxlength="20"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="26" align="right">专利权人国籍：</td>
-                    <td height="26">
-                        <asp:DropDownList ID="Drp_PatentHolderNationalityId" runat="server">
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="26" align="right">发明人：</td>
-                    <td height="26">
-                    <input type="text" runat="server" id="txt_PatentInventor" class="inputs200text" maxlength="20"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">该项专利范围：</td>
-                    <td>                        
-                        <asp:DropDownList ID="Drp_PatentScope" runat="server">
-                        <asp:ListItem Value="0">选择专利范围</asp:ListItem>
-                        <asp:ListItem Value="国内">国内</asp:ListItem>
-                        <asp:ListItem Value="国外">国外</asp:ListItem>
-                        <asp:ListItem Value="国内&国外">国内&国外</asp:ListItem>
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-            </table>
+                </table>
         </div>
         <br />
         <div class="list-div" id="Div6">
             <table cellspacing='1' cellpadding='3'>
                 <tr>
                     <th colspan="2">
-                        专利状态
+                        商标信息
                     </th>
                 </tr>
                 <tr>
-                    <td align="right" valign="top">专利有效维持期限起始日：</td>
+                    <td align="right" valign="top">案件分类：</td>
                     <td>     
-                    <input type="text" runat="server" id="txt_AnnualFeeDateStart" readonly="readonly" 
-                             class="inputs80text"  /><input name="selbtn1" type="button"
-                            id="Button2" onclick="new Calendar().show(form.txt_AnnualFeeDateStart);" class="inputcalendarbutton" />
-                            --
-                             <input type="text" runat="server" id="txt_AnnualFeeDateStart2" readonly="readonly" 
-                             class="inputs80text"  /><input name="selbtn1" type="button"
-                            id="Button8" onclick="new Calendar().show(form.txt_AnnualFeeDateStart2);" class="inputcalendarbutton" />
+                        <asp:DropDownList ID="Drp_PatentHolderNationalityId" runat="server">
+                        </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" valign="top">专利有效维持期限终止日：</td>
+                    <td align="right" valign="top">案件号：</td>
                     <td>     
-                     <input type="text" runat="server" id="txt_AnnualFeeDateEnd" class="inputs80text" readonly="readonly" />
-                     <input name="selbtn1" type="button"
-                            id="Button13" onclick="new Calendar().show(form.txt_AnnualFeeDateEnd);" class="inputcalendarbutton" />
+                    <input type="text" runat="server" id="Txt_BillNumber0" class="inputs200text" 
+                            maxlength="20" /></td>
+                </tr>
+                <tr>
+                    <td align="right" valign="top">申请号：</td>
+                    <td>     
+                    
                     </td>
                 </tr>
                 <tr>
-                    <td width="200" align="right" valign="top">专利有效维持年限：</td>
+                    <td align="right" valign="top">商标类别：</td>
+                    <td>     
+                    <input type="text" runat="server" id="Txt_BillNumber2" class="inputs200text" 
+                            maxlength="20" /></td>
+                </tr>
+                <tr>
+                    <td width="200" align="right" valign="top">商标说明：</td>
                     <td>     
                     <input type="text" runat="server" id="txt_AnnualFeeYear" class="inputs60text" maxlength="2" />  
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_AnnualFeeYear" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[0-9]{1,2}">
@@ -238,7 +160,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" valign="top">专利剩余有效维持年限：</td>
+                    <td align="right" valign="top">是否三维商标：</td>
                     <td>     
                     <input type="text" runat="server" id="txt_AnnualFeeRestYear" class="inputs60text" maxlength="2" />   
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_AnnualFeeRestYear" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[0-9]{1,2}">
@@ -246,7 +168,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" valign="top">专利于该授权国的年费缴费状态：</td>
+                    <td align="right" valign="top">是否颜色组合商标：</td>
                     <td>     
                         <asp:DropDownList ID="Drp_AnnualFeeStatus" runat="server">
                         <asp:ListItem Value="0">请选择</asp:ListItem>
@@ -267,60 +189,67 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" valign="top">专利已缴纳年度：</td>
+                    <td align="right" valign="top">是否声音商标：</td>
                     <td>     
                     <input type="text" runat="server" id="txt_AnnualFeePaymentYear" class="inputs60text" maxlength="10"  />  
                     </td>
                 </tr>
-                <tr>
-                    <td align="right" valign="top">上一次年费缴纳期限日：</td>
-                    <td>     
-                    <input type="text" runat="server" id="txt_AnnualFeePrevYear" readonly="readonly"
-                             class="inputs80text"  /><input name="selbtn1" type="button"
-                            id="Button5" onclick="new Calendar().show(form.txt_AnnualFeePrevYear);" class="inputcalendarbutton" />
-                            --
-                            <input type="text" runat="server" id="txt_AnnualFeePrevYear2" readonly="readonly"
-                             class="inputs80text"  /><input name="selbtn1" type="button"
-                            id="Button9" onclick="new Calendar().show(form.txt_AnnualFeePrevYear2);" class="inputcalendarbutton" />
-                    </td>
-                </tr>
-            </table>
+                </table>
         </div>
          <br />
         <div class="list-div" id="Div3">
             <table cellspacing='1' cellpadding='3'>
                 <tr>
                     <th colspan="2">
-                      专利优先权信息
+                        商标日期
                     </th>
                 </tr>
                 <tr>
-                    <td width="200" height="26" align="right" valign="top">优先权申请号：</td>
+                    <td width="200" height="26" align="right" valign="top">商标申请日：</td>
                     <td height="26">
                     <input type="text" runat="server" id="txt_PriorityNumber" class="inputs200text" maxlength="20" />
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_PriorityNumber" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[\d\w]{1,18}">
                 </asp:RegularExpressionValidator>
+                 <input type="text" runat="server" id="Text1" class="inputs80text" readonly="readonly" />
+                     <input name="selbtn1" type="button"
+                            id="Button1" onclick="new Calendar().show(form.txt_AnnualFeeDateEnd);" class="inputcalendarbutton" />
                     </td>
                 </tr>
                 <tr>
-                    <td height="26" align="right" valign="top">优先权国：</td>
+                    <td height="26" align="right" valign="top">初审公告日：</td>
                     <td>     
-                        <asp:DropDownList ID="Drp_PriorityNationalityId" runat="server">
-                        <asp:ListItem Value="0">选择国家</asp:ListItem>
-                        </asp:DropDownList>                   
+                       <input type="text" runat="server" id="txt_AnnualFeeDateEnd" class="inputs80text" readonly="readonly" />
+                     <input name="selbtn1" type="button"
+                            id="Button13" onclick="new Calendar().show(form.txt_AnnualFeeDateEnd);" class="inputcalendarbutton" />                 
                     </td>
                 </tr>
                 <tr>
-                    <td height="26" align="right" valign="top">优先权申请日：</td>
+                    <td height="26" align="right" valign="top">注册公告日：</td>
                     <td>        
                         <input type="text" runat="server" id="txt_PriorityDate" readonly="readonly"
                              class="inputs80text" />
                         <input name="selbtn1" type="button" id="dt_PriorityDate" onclick="new Calendar().show(form.txt_PriorityDate);" class="inputcalendarbutton" />            
                         --                        
                         <input type="text" runat="server" id="txt_PriorityDate2" readonly="readonly"
-                             class="inputs80text" />
-                        <input name="selbtn1" type="button" id="Button10" onclick="new Calendar().show(form.txt_PriorityDate2);" class="inputcalendarbutton" />        
+                             class="inputs80text" /><input name="selbtn1" type="button" id="Button10" onclick="new Calendar().show(form.txt_PriorityDate2);" class="inputcalendarbutton" />        
                     </td>
+                </tr>
+                <tr>
+                    <td height="26" align="right" valign="top">续展期限日：</td>
+                    <td>        
+                          <input type="text" runat="server" id="txt_AnnualFeePrevYear" readonly="readonly"
+                             class="inputs80text"  />
+                             <input name="selbtn1" type="button"
+                            id="Button5" onclick="new Calendar().show(form.txt_AnnualFeePrevYear);" class="inputcalendarbutton" />
+                            --
+                            <input type="text" runat="server" id="txt_AnnualFeePrevYear2" readonly="readonly"
+                             class="inputs80text"  /><input name="selbtn1" type="button"
+                            id="Button9" onclick="new Calendar().show(form.txt_AnnualFeePrevYear2);" class="inputcalendarbutton" /></td>
+                </tr>
+                <tr>
+                    <td height="26" align="right" valign="top">所剩天数：</td>
+                    <td>        
+                    <input type="text" runat="server" id="txt_yaoqiuxiang" class="inputs60text" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/></td>
                 </tr>
             </table>
         </div>
@@ -329,27 +258,25 @@
             <table cellspacing='1' cellpadding='3'>
                 <tr>
                     <th colspan="2">
-                        专利PCT信息
+                        商标状态
                     </th>
                 </tr>
                 <tr>
-                    <td width="200" height="26" align="right">PCT申请号：</td>
+                    <td width="200" height="26" align="right">最近状态：</td>
                     <td height="26">
+                                            <asp:DropDownList ID="DropDownList1" runat="server">
+                        </asp:DropDownList>
+                    
                     <input type="text" runat="server" id="txt_PtcNumber" class="inputs200text" maxlength="20" />
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_PtcNumber" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[\d\w]{1,18}">
                 </asp:RegularExpressionValidator>   
                     </td>
                 </tr>
                 <tr>
-                    <td height="26" align="right">PCT申请日：</td>
+                    <td height="26" align="right">商标状态：</td>
                     <td height="26">
-                    <input type="text" runat="server" id="txt_PtcDate" readonly="readonly"
-                             class="inputs80text" /><input name="selbtn1" type="button"
-                            id="dt_PtcDate" onclick="new Calendar().show(form.txt_PtcDate);" class="inputcalendarbutton" />
-                            --
-                    <input type="text" runat="server" id="txt_PtcDate2" readonly="readonly"
-                             class="inputs80text" /><input name="selbtn1" type="button"
-                            id="Button11" onclick="new Calendar().show(form.txt_PtcDate2);" class="inputcalendarbutton" />        
+                        <asp:DropDownList ID="Drp_PatentHolderNationalityId0" runat="server">
+                        </asp:DropDownList>
                     </td>
                 </tr>
             </table>
@@ -359,69 +286,18 @@
             <table cellspacing='1' cellpadding='3'>
                 <tr>
                     <th colspan="2">
-                        缴费信息
+                        帐单信息
                     </th>
                 </tr>
                 <tr>
-                    <td width="200" align="right" valign="top">缴费期限日：</td>
+                    <td width="200" align="right" valign="top">账单号：</td>
                     <td>     
-                    <input type="text" runat="server" id="txt_AnnualFeeNextYear" class="inputs80text" readonly="readonly"/>
-                    <input name="selbtn1" type="button"
-                            id="Button4" onclick="new Calendar().show(form.txt_AnnualFeeNextYear);" class="inputcalendarbutton" />
-                   --                             
-                   <input type="text" runat="server" id="txt_AnnualFeeNextYear2" class="inputs80text" readonly="readonly"/>
-                    <input name="selbtn1" type="button"
-                            id="Button12" onclick="new Calendar().show(form.txt_AnnualFeeNextYear2);" class="inputcalendarbutton" />
- 
-                    </td>
+                    
+                    <input type="text" runat="server" id="Txt_BillNumber1" class="inputs200text" 
+                            maxlength="20" /></td>
                 </tr>
-                <tr>
-                    <td align="right" valign="top">距缴费期限所剩天数：</td>
-                    <td>     
-                    <input type="text" runat="server" id="txt_AnnualFeeRestDay" class="inputs60text" maxlength="5" />   
-                    <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_AnnualFeeRestDay" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[0-9]{1,5}">
-                </asp:RegularExpressionValidator> --%>                                             
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">待缴年度：</td>
-                    <td>     
-                    <input type="text" runat="server" id="txt_AnnualFeeNotPaymentYear" class="inputs60text" maxlength="10"/>                           
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <br />
-        <div class="list-div" id="Div7">
-            <table cellspacing='1' cellpadding='3'>
-                <tr>
-                    <th colspan="2">
-                        第三方信息
-                    </th>
-                </tr>
-               <tr>
-                    <td width="200" align="right" valign="top">案卷号：</td>
-                    <td>     
-                        <input type="text" runat="server" id="txt_anjuanhao" class="inputs200text" maxlength="20" />
-                         <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_anjuanhao" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[\d\w]{1,18}">
-                </asp:RegularExpressionValidator>                                    </td>
-                </tr>
-                <tr>
-                    <td width="200" align="right" valign="top">联系人：</td>
-                    <td>     
-                        <input type="text" runat="server" id="txt_linkman" class="inputs200text" maxlength="20" />                                           </td>
-                </tr>
-                <tr>
-                    <td width="200" align="right" valign="top">地址：</td>
-                    <td>     
-                        <input type="text" runat="server" id="txt_address" class="inputs200text" maxlength="100" />                                         </td>
-                </tr>
-                <tr>
-                    <td width="200" align="right" valign="top">电话：</td>
-                    <td>     
-                        <input type="text" runat="server" id="txt_phone" class="inputs200text" maxlength="20" />                                         </td>
-                </tr>
-            </table>
+                
+                </table>
         </div>
         <br />
         <div style="width: 100%; position: fixed; left: 0; bottom: 0px; height: 30px;background: #dfeef5;"><%if ((pageadd && hd_id.Value == "0") || (pageupdate && hd_id.Value != "0"))
