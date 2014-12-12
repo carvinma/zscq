@@ -56,15 +56,6 @@
       <Column Name="MainCategoryID" Type="System.Int32" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.t_GoodsCategoryFees" Member="t_GoodsCategoryFees">
-    <Type Name="t_GoodsCategoryFees">
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MainFees" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="ItemNum" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExceedFees" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.t_CaseNoOrder" Member="t_CaseNoOrder">
     <Type Name="t_CaseNoOrder">
       <Column Name="i_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -133,6 +124,22 @@
       <Column Name="TradeMarkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RenewalDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="IsFinish" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_GoodsCategoryFees" Member="t_GoodsCategoryFees">
+    <Type Name="t_GoodsCategoryFees">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MainFees" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ItemNum" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExceedFees" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="UpdateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_NewTradeMarkRenewalDesc" Member="t_NewTradeMarkRenewalDesc">
+    <Type Name="t_NewTradeMarkRenewalDesc">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WriteSample" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
