@@ -419,6 +419,18 @@ namespace zscq.DAL
         #endregion
 
         #region 商品类别费用设置
+        public IList<t_GoodsCategoryFees> CategoryFees_Select_All()
+        {
+            try
+            {
+                var model = mark.t_GoodsCategoryFees.ToList();
+                return model;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public t_GoodsCategoryFees CategoryFees_Select_One()
         {
