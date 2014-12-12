@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Goods_CategoryFees.aspx.cs" Inherits="Shop_Manage_NewManage_Goods_CategoryFees" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TradeMarkWriteSample.aspx.cs" Inherits="Shop_Manage_NewManage_TradeMarkWriteSample" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -58,10 +58,10 @@
     <h1>
         <span class="action-span"></span> <span class="action-span1">
             <a href="../Shop_Index_Main.aspx">费用设置</a> </span><span id="search_id" class="action-span1">
-                - 商标申请大类费用 </span>
+                - 商标描述填写示例 </span>
         <div style="clear: both">
         </div>
-    <asp:HiddenField ID="HiddenID" runat="server" /> <asp:HiddenField ID="HiddenRenewalID" runat="server" />
+    <asp:HiddenField ID="HiddenID" runat="server" /> 
     </h1>
 
     <script type="text/javascript" src="../js/fucties.js"></script>
@@ -69,18 +69,12 @@
     <script type="text/javascript" src="../js/listtb.js"></script>
 
     <div class="form-div">
-        <span id="search_id0" class="action-span1">
-                商标申请：</span>每个大类费用<input type="text" id="txtMainFees" maxlength="8" class="numberinput"  size="15" value="" runat="server" />元
-        每个大类可包含
-        <input type="text" id="txtItemNum" maxlength="10" onkeydown="event.returnValue=IsDigit()" onkeyup="this.value = this.value.replace(/\D/g, '')" style="ime-mode: disabled;" size="15" runat="server" />
-          商品项目，超出的项目的，每多一项加收
-          <input type="text" id="txtExceedFees" class="numberinput" maxlength="10" size="15" runat="server" />元
-        &nbsp;
+       <table width="100%"><tr><td align="center">
+                商标描述填写示例
+                <input type="text" id="txtSample" maxlength="100" value="" runat="server" 
+                    size="40" />
+       </td></tr></table>
         </div>
-    <div class="form-div" id="listDiv">
-        <span id="search_id1" class="action-span1">
-                商标续展：每个大类费用<input type="text" id="txtRenewalFees" maxlength="8" 
-            class="numberinput"  size="15" value="" runat="server" /></span></div>
     <input type="hidden" id="HiddenDel" value="" runat="server" />
      <div class="form-div" id="Div1">
      <table width="100%"><tr><td align="center">

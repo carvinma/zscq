@@ -17,10 +17,10 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         if (!IsPostBack)
         {
             Bind_Page_Member();
-            t_GoodsCategoryFees fees = goods.CategoryFees_Select_One();
-            hi_MainFees.Value = fees.MainFees.Value.ToString();
-            hi_ItemNum.Value = fees.ItemNum.Value.ToString();
-            hi_ExceedFees.Value = fees.ExceedFees.Value.ToString();
+            
+            hi_MainFees.Value = goods.CategoryFees_Select_All().First(p => p.i_Type == 1).MainFees.ToString();//续展每个大类费用
+            hi_tradeMarkdesc.Value= mark.TrademarkRenewalWriteSample();
+            this.Sb_miaosu.Value = hi_tradeMarkdesc.Value;
         }
     }
     public void Bind_Page_Member()//绑定ID和用户名
@@ -127,7 +127,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         }
         model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
-        model.TrademarkGoods = sortGoods.Value.Trim();
+        //model.TrademarkGoods = sortGoods.Value.Trim();
         fileName = this.upPattern1.Value;//图样
         System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
                HttpContext.Current.Server.MapPath(filePath + fileName));

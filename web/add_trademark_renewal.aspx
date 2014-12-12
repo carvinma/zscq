@@ -291,11 +291,13 @@
         });
 
         function miaoshutype() {
+
+            var description = $("#hi_tradeMarkdesc").val();
             var rb1 = document.getElementById("RadioButton1");
             var rb2 = document.getElementById("RadioButton2");
             var rb3 = document.getElementById("RadioButton3");
             if (rb1.checked) {
-                $("#Sb_miaosu").val("请填写所申请的商标文字");
+                $("#Sb_miaosu").val(description);
                 $("#Sb_miaosu").disabled = false;
                 $("#sbmiaoshu").show();
             }
@@ -304,7 +306,7 @@
                 $("#Sb_miaosu").val("");
             }
             if (rb3.checked) {
-                $("#Sb_miaosu").val("请填写所申请的商标文字");
+                $("#Sb_miaosu").val(description);
                 $("#Sb_miaosu").disabled = false;
                 $("#sbmiaoshu").show();
             }
@@ -338,7 +340,19 @@
            $("#txt_RenewalDate").val(ndate);
            tbdate.append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day));
            $("#hi_RegNoticeDate").val(ndate +"_"+"0"+ "|");
-        }
+       }
+       function calcsortarr() {
+           var goodstype = $("#sortarr").val();
+           if (!isEmpty(goodstype)) {
+               var parr = new Array();
+               parr = goodstype.replace(/，/g, ',').split(",");
+               $("#lbltotalCost").text("包含" + parr.length + "类，共计规费:" + (parr.length * parseFloat($("#hi_MainFees").val())) + "元");
+               $("#lbltotalCost").show();
+           }
+           else {
+               $("#lbltotalCost").hide();
+           }
+       }
     </script>
     <style type="text/css">
         p.MsoNormal
@@ -362,6 +376,7 @@
     <input id="hi_zhitifiles" type="hidden" runat="server" />
     <input id="hi_sbid" type="hidden" runat="server" value="0" />
 
+     <input id="hi_tradeMarkdesc" type="hidden" runat="server" value="0" />
      <input id="hi_RegNoticeDate" type="hidden" runat="server" value="0" />
     <input id="hi_MainFees" type="hidden" runat="server" value="0" />
     <input id="hi_ItemNum" type="hidden" runat="server" value="0" />
@@ -715,13 +730,14 @@
                                                                         </td>
                                                                         <td valign="middle">
                                                                             <input id="sortarr" type="text" runat="server" class="font12000"  style="ime-mode: disabled;" 
-                                                                             onblur="check_ApplyUser('sortarr_div')"/>
+                                                                             onblur="check_ApplyUser('sortarr_div');calcsortarr();"/>
                                                                              <input type="hidden" id="sortGoods" runat="server"/>
                                                                              <div><span style="color: Red;">多个商标类别，以逗号分隔</span></div>
                                                                         </td>
                                                                         <td valign="middle">
                                                                          <span style="color: Red;">*</span>
                                                                             <span class="status error" id="sortarr_div_error"></span>
+                                                                             <asp:Label ID="lbltotalCost" style="display:none" runat="server" Text="Label"></asp:Label>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -742,7 +758,8 @@
                                                                         <td height="32" align="right" valign="middle">
                                                                            <strong> 商标描述：</strong></td>
                                                                         <td valign="middle" colspan="2">
-                                                                        <input type="text" name="s6" id="Sb_miaosu" class="font12000" maxlength="50" runat="server" onblur="checkOk('Sb_miaosu');"  value="请填写所申请的商标文字" onClick="value='';focus()" style="width:300px;"/> <span style="color: Red;" id="Sb_miaosu1">*</span>
+                                                                        <input type="text" name="s6" id="Sb_miaosu" class="font12000" maxlength="50" runat="server" 
+                                                                        onblur="checkOk('Sb_miaosu');"  onclick="value='';focus()" style="width:300px;"/> <span style="color: Red;" id="Sb_miaosu1">*</span>
                                                                         </td>
                                                                          
                                                                     </tr>
