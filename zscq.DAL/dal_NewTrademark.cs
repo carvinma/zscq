@@ -15,7 +15,7 @@ namespace zscq.DAL
     public class dal_NewTrademark
     {
         DataTradeMarkDataContext mark = new DataTradeMarkDataContext();
-        DataViewDataContext dvdc = new DataViewDataContext();
+       // DataViewDataContext dvdc = new DataViewDataContext();
 
         /// 插入数据
         /// </summary>
@@ -197,8 +197,14 @@ namespace zscq.DAL
             }
         }
 
-        #region 商标续展-注册公告日
+        #region 商标续展
 
+        /// <summary>
+        /// 注册公告日
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="TrademarkId"></param>
+        /// <returns></returns>
         public int TrademarkRenewalDate_Add(List<t_NewTradeMarkRenewalInfo> list, int TrademarkId)
         {
             try
@@ -215,6 +221,28 @@ namespace zscq.DAL
             }
         }
 
+        /// <summary>
+        /// 商标描述填写示例的获取
+        /// </summary>
+        /// <returns></returns>
+        public string TrademarkRenewalWriteSample()
+        {
+           return  mark.t_NewTradeMarkRenewalDesc.First().WriteSample;
+        }
+        public int TrademarkRenewalWriteSample_Update(string writeSample)
+        {
+            try
+            {
+                var t = mark.t_NewTradeMarkRenewalDesc.First();
+                t.WriteSample = writeSample;
+                mark.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         #endregion
 
         #region
