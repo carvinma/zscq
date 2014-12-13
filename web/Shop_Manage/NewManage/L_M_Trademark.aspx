@@ -79,7 +79,7 @@
             var timeadd = $("#hi_timeadd");
             var status = $("#hi_status");
 
-            if (caseNo.val() == "asc") {
+            if (caseNo.val() == "desc") {
                 $("#casenoAsc").hide();
                 $("#casenoDesc").show();
             }
@@ -87,7 +87,7 @@
                 $("#casenoAsc").show();
                 $("#casenoDesc").hide();
             }
-            if (applyno.val() == "asc") {
+            if (applyno.val() == "desc") {
                 $("#applynoAsc").hide();
                 $("#applynoDesc").show();
             }
@@ -96,7 +96,7 @@
                 $("#applynoDesc").hide();
             }
 
-            if (applyuser.val() == "asc") {
+            if (applyuser.val() == "desc") {
                 $("#applyuserAsc").hide();
                 $("#applyuserDesc").show();
             }
@@ -105,7 +105,7 @@
                 $("#applyuserDesc").hide();
             }
 
-            if (memberno.val() == "asc") {
+            if (memberno.val() == "desc") {
                 $("#membernoAsc").hide();
                 $("#membernoDesc").show();
             }
@@ -113,7 +113,7 @@
                 $("#membernoAsc").show();
                 $("#membernoDesc").hide();
             }
-            if (membername.val() == "asc") {
+            if (membername.val() == "desc") {
                 $("#membernameAsc").hide();
                 $("#membernameDesc").show();
             }
@@ -121,7 +121,7 @@
                 $("#membernameAsc").show();
                 $("#membernameDesc").hide();
             }
-            if (trademarktype.val() == "asc") {
+            if (trademarktype.val() == "desc") {
                 $("#trademarktypeAsc").hide();
                 $("#trademarktypeDesc").show();
             }
@@ -130,7 +130,7 @@
                 $("#trademarktypeDesc").hide();
             }
 
-            if (timelimit.val() == "asc") {
+            if (timelimit.val() == "desc") {
                 $("#timelimitAsc").hide();
                 $("#timelimitDesc").show();
             }
@@ -138,7 +138,7 @@
                 $("#timelimitAsc").show();
                 $("#timelimitDesc").hide();
             }
-            if (timeadd.val() == "asc") {
+            if (timeadd.val() == "desc") {
                 $("#timeaddAsc").hide();
                 $("#timeaddDesc").show();
             }
@@ -147,7 +147,7 @@
                 $("#timeaddDesc").hide();
             }
 
-            if (status.val() == "asc") {
+            if (status.val() == "desc") {
                 $("#statusAsc").hide();
                 $("#statusDesc").show();
             }
@@ -198,55 +198,55 @@
                 </th>
                 <th width="10%" align="center">
                     案件号 <a href="L_M_Trademark.aspx?<%=returnurl %>&caseno=desc"
-                        title="倒序" id="casenoAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                        title="倒序" id="casenoAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&caseno=asc"
                             title="正序" id="casenoDesc" style="display: none;"><span class="sp2"></span></a>
                 </th>
                 <th width="9%">
                     申请号<a href="L_M_Trademark.aspx?<%=returnurl %>&applyno=desc"
-                        title="倒序" id="applynoAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                        title="倒序" id="applynoAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&applyno=asc"
                             title="正序" id="applynoDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="8%">
                     申请人<a href="L_M_Trademark.aspx?<%=returnurl %>&applyuser=desc"
-                        title="倒序" id="applyuserAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                        title="倒序" id="applyuserAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&applyuser=asc"
                             title="正序" id="applyuserDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="7%">
                     会员编号<a href="L_M_Trademark.aspx?<%=returnurl %>&memberno=desc"
-                        title="倒序" id="membernoAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                        title="倒序" id="membernoAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&memberno=asc"
                             title="正序" id="membernoDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="10%">
                     会员名称<a href="L_M_Trademark.aspx?<%=returnurl %>&membername=desc"
-                        title="倒序" id="membernameAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                        title="倒序" id="membernameAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&membername=asc"
                             title="正序" id="membernameDesc"><span class="sp2"></span></a>
                 </th>
-                <th width="10%">
+                <th width="6%">
                     图样
                 </th>
                 <th width="5%">
                     类别<a href="L_M_Trademark.aspx?<%=returnurl %>&trademarktype=desc"
-                        title="倒序" id="trademarktypeAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                        title="倒序" id="trademarktypeAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&trademarktype=asc"
                             title="正序" id="trademarktypeDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="6%">
                     期限日
                     <a href="L_M_Trademark.aspx?<%=returnurl %>&timelimit=desc"
-                        title="倒序" id="timelimitAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                        title="倒序" id="timelimitAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&timelimit=asc"
                             title="正序" id="timelimitDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="6%">
-                    添加时间<a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=desc"
-                        title="倒序" id="timeaddAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                    案件分类<%--<a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=desc"
+                        title="倒序" id="timeaddAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=asc"
-                            title="正序"><span class="sp2" id="timeaddDesc"></span></a>
+                            title="正序"><span class="sp2" id="timeaddDesc"></span></a>--%>
                 </th>
                 <th width="8%">
                     商标详情
@@ -257,7 +257,7 @@
                  <th width="8%">
                     状态
                     <a href="L_M_Trademark.aspx?<%=returnurl %>&status=desc"
-                        title="倒序" id="statusAsc"><span class="sp1"></span></a>&nbsp;&nbsp;
+                        title="倒序" id="statusAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&status=asc"
                             title="正序"><span class="sp2" id="statusDesc"></span></a>
                 </th>
@@ -270,23 +270,21 @@
                         </td>
                         
                         <td align="center">
-                            <% if (pageupdate)
-                               { %>
-                            <a href="Shop_A_Trademark.aspx?id=<%#Eval("i_Id")%>">
-                                <%# Eval("nvc_SBRegNum")%>
+                           <%#BoolFileImg(Eval("ApplyBook")) ? "<a href='" + Eval("ApplyBook") + "' title='申请书'>商标申请书</a>" : "未上传"%>
+                            <br />
+                            <%#BoolFileImg(Eval("AgentBook")) ? "<a href='" + Eval("AgentBook") + "' title='委托书'>商标委托书</a>" : "未上传"%>
+                        </td>
+                        <td align="center"> 
+                            <a href="M_A_TradeMark.aspx?id=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType %>&regtype=<%= DDl_regtype.SelectedValue %>&usertype=<%= usertype %>&state=<%=state %>&jiaofeitype=<%= ddl_jiaofei.SelectedValue %>&guoji=<%= DDL_guoji.SelectedValue %>&statime=<%=statime %>&endtime=<%=endtime %>&Orderby=<%= Hi_Orderby.Value %>&Orderby2=<%= Hi_Orderby2.Value %>&userid=<%=userid %>">
+                                <%# Eval("CaseNo")%>
                             </a>
-                            <%}
-                               else
-                               { %><%# Eval("nvc_SBRegNum")%><%} %>
+                            
                         </td>
                         <td align="center">
-                            <%#  Eval("nvc_SBType")%>
-                        </td>
-                        <td align="center">
-                            <%#Eval("i_JiaoFeiType").ToString() == "1" ?"自行缴费" :"委托缴费"%>
+                            <%#Eval("RegisteredNo")%>
                         </td>
                         <td align="center" style="color: #FF0000">
-                            <%# Eval("nvc_SBRegName")%>
+                            <%# Eval("ApplyName")%>
                         </td>
                         <td align="center" style="color: #FF0000">
                             <%# Eval("nvc_UserNum")%>
@@ -294,21 +292,17 @@
                         <td align="center" style="color: #FF0000">
                             <%# Eval("nvc_Name")%>
                         </td>
-                        <%--                         
-                          <td align="center" style="color: #FF0000"><%# Eval("nvc_SBRegAddress")%></td>  --%>
-                        <td align="center" style="display: none;">
-                            <asp:Button ID="Isshenghe" runat="server" CommandName='state' CommandArgument='<%# Eval("i_Id") %>'
-                                CssClass='<%#Eval("i_State").ToString() == "1" ? "inputicoyesbutton" : "inputiconobutton"%>' />
+                        <td align="center">
+                             <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                         </td>
                         <td align="center">
-                            <%# Eval("i_IsPayState").ToString() == "0" ? "未处理" : Eval("i_IsPayState").ToString() == "1" ? "已提交订单" : Eval("i_IsPayState").ToString() == "2" ? "已缴费(下次缴费时间:" + Eval("nvc_SbDaoqiTime") + ")" : "无效"%>
+                            <%# Eval("TrademarkType")%>
                         </td>
                         <td align="center">
-                            <%# Eval("dt_AddTime")%>
+                            <%#string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%>
                         </td>
-                        <%--   <td align="center"><%#Eval("i_State").ToString() == "1" ? Eval("dt_PassTime")+"<font style='color:red;'>(有效期"+Eval("nvc_SbDaoqiTime")+")</font>" :(Eval("i_State").ToString() == "2"?"未通过":"未审核")%></td>--%>
                         <td align="center">
-                          <%# Eval("dt_AddTime")%>
+                          <%# Eval("i_Type").ToString() == "0" ? "申请":"续展"%>
                         </td>
                         <td align="center">
                               <a href="Shop_M_TrademarkInfo.aspx?id=<%#Eval("i_Id")%>"
@@ -319,7 +313,9 @@
                                 class="ac5t">委托书下载</a> <a href="../user_World_sb.aspx?id=<%#Eval("i_Id")%>&type=3"
                                     target="_blank" class="ac5t">申请书下载</a>
                         </td>
-                        <td></td>
+                        <td>
+                           <%# GetApplyStatus(Eval("Status"))%>
+                        </td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
@@ -328,9 +324,9 @@
             <tr align="left">
                 <td bgcolor="#FFFFFF" height="23">
                     <input name="checkall" id="checkall" type="checkbox" onclick="SelAll(this)" />&nbsp;<%if (pagedel)
-                                                                                                          {%><input type="button" id="Button1" runat="server" value="删除" onclick="xwshow()"
-                                                                                                              class="button" /><%} if (pagechu)
-                                                                                                          {%> <%} %>
+                    {%><input type="button" id="Button1" runat="server" value="删除" onclick="xwshow()"
+                        class="button" /><%} if (pagechu)
+                    {%> <%} %>
                 </td>
             </tr>
         </table>
@@ -461,7 +457,7 @@
                                 温馨提示
                             </td>
                             <td width="34" background="../images/ts_bg.jpg">
-                                <img alt="取消" src="images/dingdan2.gif" width="34" height="27" style="cursor: hand;"
+                                <img alt="取消" src="../images/dingdan2.gif" width="34" height="27" style="cursor: hand;"
                                     onclick="divoperation(2,'1')" />
                             </td>
                         </tr>

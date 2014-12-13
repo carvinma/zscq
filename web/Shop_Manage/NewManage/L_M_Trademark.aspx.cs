@@ -25,7 +25,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
     dal_Member DALM=new dal_Member ();
     dal_Nationality DALN = new dal_Nationality();
 
-    //dal_NewTrademark mark = new dal_NewTrademark();
+    dal_NewTrademark dalmark = new dal_NewTrademark();
     DataTradeMarkDataContext mark = new DataTradeMarkDataContext();
     public int SType = 0;
     public int usertype = 0;
@@ -98,52 +98,52 @@ public partial class L_M_Trademark : System.Web.UI.Page
         }
 
         #region 排序参数
-    
-        //if (Request.QueryString["caseno"] != null && Request.QueryString["caseno"] != "")
-        //{
-        //    caseno = Request.QueryString["caseno"].ToString();
-        //    this.hi_CaseNo.Value = caseno;
-        //}
-        //if (Request.QueryString["applyno"] != null && Request.QueryString["applyno"] != "")
-        //{
-        //    this.applyno = Request.QueryString["applyno"].ToString();
-        //    hi_applyno.Value = applyno;
-        //}
-        //if (Request.QueryString["applyuser"] != null && Request.QueryString["applyuser"] != "")
-        //{
-        //    this.applyuser = Request.QueryString["applyuser"].ToString();
-        //    hi_applyuser.Value = applyuser;
-        //}
-        //if (Request.QueryString["memberno"] != null && Request.QueryString["memberno"] != "")
-        //{
-        //    this.memberno = Request.QueryString["memberno"].ToString();
-        //    hi_memberno.Value = memberno;
-        //}
-        //if (Request.QueryString["membername"] != null && Request.QueryString["membername"] != "")
-        //{
-        //    this.membername = Request.QueryString["membername"].ToString();
-        //    hi_membername.Value = membername;
-        //}
-        //if (Request.QueryString["trademarktype"] != null && Request.QueryString["trademarktype"] != "")
-        //{
-        //    this.trademarktype = Request.QueryString["trademarktype"].ToString();
-        //    hi_trademarktype.Value = trademarktype;
-        //}
-        //if (Request.QueryString["timelimit"] != null && Request.QueryString["timelimit"] != "")
-        //{
-        //    this.timelimit = Request.QueryString["timelimit"].ToString();
-        //    hi_timelimit.Value = timelimit;
-        //}
-        //if (Request.QueryString["timeadd"] != null && Request.QueryString["timeadd"] != "")
-        //{
-        //    this.timeadd = Request.QueryString["timeadd"].ToString();
-        //    hi_timeadd.Value = timeadd;
-        //}
-        //if (Request.QueryString["status"] != null && Request.QueryString["status"] != "")
-        //{
-        //    this.status = Request.QueryString["status"].ToString();
-        //    hi_status.Value = status;
-        //}
+
+        if (Request.QueryString["caseno"] != null && Request.QueryString["caseno"] != "")
+        {
+            caseno = Request.QueryString["caseno"].ToString();
+            this.hi_CaseNo.Value = caseno;
+        }
+        if (Request.QueryString["applyno"] != null && Request.QueryString["applyno"] != "")
+        {
+            this.applyno = Request.QueryString["applyno"].ToString();
+            hi_applyno.Value = applyno;
+        }
+        if (Request.QueryString["applyuser"] != null && Request.QueryString["applyuser"] != "")
+        {
+            this.applyuser = Request.QueryString["applyuser"].ToString();
+            hi_applyuser.Value = applyuser;
+        }
+        if (Request.QueryString["memberno"] != null && Request.QueryString["memberno"] != "")
+        {
+            this.memberno = Request.QueryString["memberno"].ToString();
+            hi_memberno.Value = memberno;
+        }
+        if (Request.QueryString["membername"] != null && Request.QueryString["membername"] != "")
+        {
+            this.membername = Request.QueryString["membername"].ToString();
+            hi_membername.Value = membername;
+        }
+        if (Request.QueryString["trademarktype"] != null && Request.QueryString["trademarktype"] != "")
+        {
+            this.trademarktype = Request.QueryString["trademarktype"].ToString();
+            hi_trademarktype.Value = trademarktype;
+        }
+        if (Request.QueryString["timelimit"] != null && Request.QueryString["timelimit"] != "")
+        {
+            this.timelimit = Request.QueryString["timelimit"].ToString();
+            hi_timelimit.Value = timelimit;
+        }
+        if (Request.QueryString["timeadd"] != null && Request.QueryString["timeadd"] != "")
+        {
+            this.timeadd = Request.QueryString["timeadd"].ToString();
+            hi_timeadd.Value = timeadd;
+        }
+        if (Request.QueryString["status"] != null && Request.QueryString["status"] != "")
+        {
+            this.status = Request.QueryString["status"].ToString();
+            hi_status.Value = status;
+        }
         #endregion
     }
     protected void aspPage_PageChanged(object sender, EventArgs e)
@@ -151,8 +151,13 @@ public partial class L_M_Trademark : System.Web.UI.Page
         Bind_Rpt_Product(((Wuqi.Webdiyer.AspNetPager)sender).CurrentPageIndex);
         ye = ((Wuqi.Webdiyer.AspNetPager)sender).CurrentPageIndex;
     }
-  
 
+    public string GetApplyStatus(object applyStatus)
+    {
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
+    }
     public string ZTFileImg(object Uid,object zhuti, object sbid)
     {
         string aa = "未上传";
@@ -327,9 +332,9 @@ public partial class L_M_Trademark : System.Web.UI.Page
                 caseno = Request.QueryString["caseno"].ToString();
                 this.hi_CaseNo.Value = caseno;
                 if(caseno=="asc")
-                    iquery = from i in iquery orderby i.CardNo ascending select i;
+                    iquery = from i in iquery orderby i.CaseNo ascending select i;
                 else
-                    iquery = from i in iquery orderby i.CardNo descending select i;
+                    iquery = from i in iquery orderby i.CaseNo descending select i;
             }
             if (Request.QueryString["applyno"] != null && Request.QueryString["applyno"] != "")
             {
@@ -422,7 +427,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
             {
                 if (IDList[i] != "")
                 {
-                    DALT.Trademark_Del(int.Parse(IDList[i]));
+                    dalmark.Trademark_Del(int.Parse(IDList[i]));
                     Manager.AddLog(0, "商标管理", "删除商标");
                 }
             }

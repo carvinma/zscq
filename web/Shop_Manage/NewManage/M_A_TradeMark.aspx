@@ -425,7 +425,7 @@
 
        <input type="hidden" runat="server" id="HI_ATT" value="" />
         <h1>
-            <span class="action-span"><a href="Shop_M_Trademark.aspx?<%=returnurl %>">申请列表</a></span> <span class="action-span1"><a
+            <span class="action-span"><a href="L_M_Trademark.aspx?<%=returnurl %>">申请列表</a></span> <span class="action-span1"><a
                     href="../Shop_Index_Main.aspx">管理中心</a> </span><span id="search_id" class="action-span1"> - <%=PageType%></span>
             <div style="clear: both">
             </div>
