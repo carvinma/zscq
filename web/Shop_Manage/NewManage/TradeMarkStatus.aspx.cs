@@ -19,7 +19,12 @@ public partial class Shop_Manage_NewManage_TradeMarkStatus : System.Web.UI.Page
         div_a.InnerHtml = "";
         if (Request.QueryString["type"] == "0")
         { statusType = 0; }
-        else statusType = 1;
+        else if (Request.QueryString["type"] == "1")
+        {
+            statusType = 1;
+        }
+        else
+        { statusType = 2; }
      
         if (Request.Cookies["zscqmanage"] == null)
         {
@@ -40,7 +45,18 @@ public partial class Shop_Manage_NewManage_TradeMarkStatus : System.Web.UI.Page
     {
         try
         {
-            dgEdit.DataSource = statusType == 0 ? BaseDataUtil.tradeMarkStatuslist : BaseDataUtil.tradeMarkRenewedStatuslist;
+            if(statusType == 0)
+            {
+                dgEdit.DataSource = BaseDataUtil.tradeMarkApplyStatuslist; 
+            }
+            else if (statusType == 1)
+            {
+                dgEdit.DataSource = BaseDataUtil.tradeMarkRenewedStatuslist;
+            }
+            else
+            {
+                dgEdit.DataSource = BaseDataUtil.tradeMarkStatuslist;
+            }
             dgEdit.DataBind();
         }
         catch (Exception error)
@@ -82,11 +98,15 @@ public partial class Shop_Manage_NewManage_TradeMarkStatus : System.Web.UI.Page
             this.txtValue.Value = "";
             if (statusType == 0)
             {
-                BaseDataUtil.tradeMarkStatuslist.Add(model);
+                BaseDataUtil.tradeMarkApplyStatuslist.Add(model);
+            }
+            else if (statusType == 1)
+            {
+                BaseDataUtil.tradeMarkRenewedStatuslist.Add(model);
             }
             else
             {
-                BaseDataUtil.tradeMarkRenewedStatuslist.Add(model);
+                BaseDataUtil.tradeMarkStatuslist.Add(model);
             }
             DataGridDataBind();
         }
@@ -119,7 +139,7 @@ public partial class Shop_Manage_NewManage_TradeMarkStatus : System.Web.UI.Page
             int index = 0;
             if (statusType == 0)
             {
-                foreach (var p in BaseDataUtil.tradeMarkStatuslist)
+                foreach (var p in BaseDataUtil.tradeMarkApplyStatuslist)
                 {
                     if (p.i_Id == model.i_Id)
                     {
@@ -127,8 +147,8 @@ public partial class Shop_Manage_NewManage_TradeMarkStatus : System.Web.UI.Page
                     }
                     index++;
                 }
-                BaseDataUtil.tradeMarkStatuslist.RemoveAt(index);
-                BaseDataUtil.tradeMarkStatuslist.Insert(index, model);
+                BaseDataUtil.tradeMarkApplyStatuslist.RemoveAt(index);
+                BaseDataUtil.tradeMarkApplyStatuslist.Insert(index, model);
             }
             else
             {
@@ -165,7 +185,7 @@ public partial class Shop_Manage_NewManage_TradeMarkStatus : System.Web.UI.Page
         {
             if (statusType == 0)
             {
-                BaseDataUtil.tradeMarkStatuslist.Remove(BaseDataUtil.tradeMarkStatuslist.First(p => p.i_Id == id));
+                BaseDataUtil.tradeMarkApplyStatuslist.Remove(BaseDataUtil.tradeMarkApplyStatuslist.First(p => p.i_Id == id));
             }
             else
             {

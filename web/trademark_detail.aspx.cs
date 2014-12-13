@@ -58,7 +58,7 @@ public partial class trademark_detail : System.Web.UI.Page
             division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
         }
         if (model.Status != null)
-            status = BaseDataUtil.tradeMarkStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
+            status = BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
 
         if (!string.IsNullOrEmpty(model.ApplyBook))
             model.ApplyBook = "<a href='" + model.ApplyBook + "' title='点击查看' target='_blank'>申请书已上传</a>";

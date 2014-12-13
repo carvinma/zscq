@@ -57,7 +57,7 @@ public partial class trademark_list : System.Web.UI.Page
             this.ddlApplyType.DataValueField = "Value";
             this.ddlApplyType.DataBind();
 
-            IList<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkStatuslist;
+            IList<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkApplyStatuslist;
             tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
             this.ddlTradeMarkStatus.DataSource = tradeMarkStatuslist;
             this.ddlTradeMarkStatus.DataTextField = "StatusName";
@@ -125,7 +125,7 @@ public partial class trademark_list : System.Web.UI.Page
     public string GetApplyStatus(object applyStatus)
     {
         if (applyStatus != null)
-            return BaseDataUtil.tradeMarkStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+            return BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
         return string.Empty;
     }
     public string Geturl(string url)

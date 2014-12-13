@@ -166,8 +166,9 @@
               {%>
             <li class="explode menu-item1" key="zl_2_2" name="menu1">&nbsp;商标状态管理
               <ul>
-                  <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=0" target="main">商标状态</a></li> 
+                  <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=0" target="main">商标申请状态</a></li> 
                   <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=1" target="main">商标续展状态</a></li>
+                  <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=2" target="main">商标状态</a></li>
               </ul>
             </li>
               <li class="explode menu-item1" key="zl_2_2" name="menu1">&nbsp;商标管理
