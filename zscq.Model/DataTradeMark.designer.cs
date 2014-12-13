@@ -48,9 +48,6 @@ namespace zscq.Model
     partial void Insertt_NewTradeMarkStatus(t_NewTradeMarkStatus instance);
     partial void Updatet_NewTradeMarkStatus(t_NewTradeMarkStatus instance);
     partial void Deletet_NewTradeMarkStatus(t_NewTradeMarkStatus instance);
-    partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
-    partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
-    partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Insertt_NewTradeMarkRenewalInfo(t_NewTradeMarkRenewalInfo instance);
     partial void Updatet_NewTradeMarkRenewalInfo(t_NewTradeMarkRenewalInfo instance);
     partial void Deletet_NewTradeMarkRenewalInfo(t_NewTradeMarkRenewalInfo instance);
@@ -60,6 +57,9 @@ namespace zscq.Model
     partial void Insertt_NewTradeMarkRenewalDesc(t_NewTradeMarkRenewalDesc instance);
     partial void Updatet_NewTradeMarkRenewalDesc(t_NewTradeMarkRenewalDesc instance);
     partial void Deletet_NewTradeMarkRenewalDesc(t_NewTradeMarkRenewalDesc instance);
+    partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
+    partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
+    partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     #endregion
 		
 		public DataTradeMarkDataContext() : 
@@ -148,14 +148,6 @@ namespace zscq.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<t_NewTradeMarkInfo> t_NewTradeMarkInfo
-		{
-			get
-			{
-				return this.GetTable<t_NewTradeMarkInfo>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_NewTradeMarkRenewalInfo> t_NewTradeMarkRenewalInfo
 		{
 			get
@@ -177,6 +169,22 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<t_NewTradeMarkRenewalDesc>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_NewTradeMarkInfo> t_NewTradeMarkInfo
+		{
+			get
+			{
+				return this.GetTable<t_NewTradeMarkInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_NewTradeMark> vw_NewTradeMark
+		{
+			get
+			{
+				return this.GetTable<vw_NewTradeMark>();
 			}
 		}
 	}
@@ -1414,6 +1422,408 @@ namespace zscq.Model
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkRenewalInfo")]
+	public partial class t_NewTradeMarkRenewalInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private int _TradeMarkId;
+		
+		private System.Nullable<System.DateTime> _RenewalDate;
+		
+		private System.Nullable<bool> _IsFinish;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnTradeMarkIdChanging(int value);
+    partial void OnTradeMarkIdChanged();
+    partial void OnRenewalDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnRenewalDateChanged();
+    partial void OnIsFinishChanging(System.Nullable<bool> value);
+    partial void OnIsFinishChanged();
+    #endregion
+		
+		public t_NewTradeMarkRenewalInfo()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeMarkId", DbType="Int NOT NULL")]
+		public int TradeMarkId
+		{
+			get
+			{
+				return this._TradeMarkId;
+			}
+			set
+			{
+				if ((this._TradeMarkId != value))
+				{
+					this.OnTradeMarkIdChanging(value);
+					this.SendPropertyChanging();
+					this._TradeMarkId = value;
+					this.SendPropertyChanged("TradeMarkId");
+					this.OnTradeMarkIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalDate", DbType="Date")]
+		public System.Nullable<System.DateTime> RenewalDate
+		{
+			get
+			{
+				return this._RenewalDate;
+			}
+			set
+			{
+				if ((this._RenewalDate != value))
+				{
+					this.OnRenewalDateChanging(value);
+					this.SendPropertyChanging();
+					this._RenewalDate = value;
+					this.SendPropertyChanged("RenewalDate");
+					this.OnRenewalDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsFinish", DbType="Bit")]
+		public System.Nullable<bool> IsFinish
+		{
+			get
+			{
+				return this._IsFinish;
+			}
+			set
+			{
+				if ((this._IsFinish != value))
+				{
+					this.OnIsFinishChanging(value);
+					this.SendPropertyChanging();
+					this._IsFinish = value;
+					this.SendPropertyChanged("IsFinish");
+					this.OnIsFinishChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_GoodsCategoryFees")]
+	public partial class t_GoodsCategoryFees : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private System.Nullable<int> _i_Type;
+		
+		private System.Nullable<decimal> _MainFees;
+		
+		private System.Nullable<int> _ItemNum;
+		
+		private System.Nullable<decimal> _ExceedFees;
+		
+		private System.Nullable<System.DateTime> _UpdateTime;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void Oni_TypeChanging(System.Nullable<int> value);
+    partial void Oni_TypeChanged();
+    partial void OnMainFeesChanging(System.Nullable<decimal> value);
+    partial void OnMainFeesChanged();
+    partial void OnItemNumChanging(System.Nullable<int> value);
+    partial void OnItemNumChanged();
+    partial void OnExceedFeesChanging(System.Nullable<decimal> value);
+    partial void OnExceedFeesChanged();
+    partial void OnUpdateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdateTimeChanged();
+    #endregion
+		
+		public t_GoodsCategoryFees()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Type", DbType="Int")]
+		public System.Nullable<int> i_Type
+		{
+			get
+			{
+				return this._i_Type;
+			}
+			set
+			{
+				if ((this._i_Type != value))
+				{
+					this.Oni_TypeChanging(value);
+					this.SendPropertyChanging();
+					this._i_Type = value;
+					this.SendPropertyChanged("i_Type");
+					this.Oni_TypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainFees", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> MainFees
+		{
+			get
+			{
+				return this._MainFees;
+			}
+			set
+			{
+				if ((this._MainFees != value))
+				{
+					this.OnMainFeesChanging(value);
+					this.SendPropertyChanging();
+					this._MainFees = value;
+					this.SendPropertyChanged("MainFees");
+					this.OnMainFeesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemNum", DbType="Int")]
+		public System.Nullable<int> ItemNum
+		{
+			get
+			{
+				return this._ItemNum;
+			}
+			set
+			{
+				if ((this._ItemNum != value))
+				{
+					this.OnItemNumChanging(value);
+					this.SendPropertyChanging();
+					this._ItemNum = value;
+					this.SendPropertyChanged("ItemNum");
+					this.OnItemNumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceedFees", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> ExceedFees
+		{
+			get
+			{
+				return this._ExceedFees;
+			}
+			set
+			{
+				if ((this._ExceedFees != value))
+				{
+					this.OnExceedFeesChanging(value);
+					this.SendPropertyChanging();
+					this._ExceedFees = value;
+					this.SendPropertyChanged("ExceedFees");
+					this.OnExceedFeesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdateTime
+		{
+			get
+			{
+				return this._UpdateTime;
+			}
+			set
+			{
+				if ((this._UpdateTime != value))
+				{
+					this.OnUpdateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._UpdateTime = value;
+					this.SendPropertyChanged("UpdateTime");
+					this.OnUpdateTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkRenewalDesc")]
+	public partial class t_NewTradeMarkRenewalDesc : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private string _WriteSample;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnWriteSampleChanging(string value);
+    partial void OnWriteSampleChanged();
+    #endregion
+		
+		public t_NewTradeMarkRenewalDesc()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WriteSample", DbType="NVarChar(100)")]
+		public string WriteSample
+		{
+			get
+			{
+				return this._WriteSample;
+			}
+			set
+			{
+				if ((this._WriteSample != value))
+				{
+					this.OnWriteSampleChanging(value);
+					this.SendPropertyChanging();
+					this._WriteSample = value;
+					this.SendPropertyChanged("WriteSample");
+					this.OnWriteSampleChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkInfo")]
 	public partial class t_NewTradeMarkInfo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1467,6 +1877,8 @@ namespace zscq.Model
 		private string _RegisteredNo;
 		
 		private System.Nullable<System.DateTime> _ApplyDate;
+		
+		private System.Nullable<System.DateTime> _PublicPreliminaryDate;
 		
 		private System.Nullable<System.DateTime> _RegNoticeDate;
 		
@@ -1558,6 +1970,8 @@ namespace zscq.Model
     partial void OnRegisteredNoChanged();
     partial void OnApplyDateChanging(System.Nullable<System.DateTime> value);
     partial void OnApplyDateChanged();
+    partial void OnPublicPreliminaryDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnPublicPreliminaryDateChanged();
     partial void OnRegNoticeDateChanging(System.Nullable<System.DateTime> value);
     partial void OnRegNoticeDateChanged();
     partial void OnRenewalDateChanging(System.Nullable<System.DateTime> value);
@@ -2083,6 +2497,26 @@ namespace zscq.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicPreliminaryDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PublicPreliminaryDate
+		{
+			get
+			{
+				return this._PublicPreliminaryDate;
+			}
+			set
+			{
+				if ((this._PublicPreliminaryDate != value))
+				{
+					this.OnPublicPreliminaryDateChanging(value);
+					this.SendPropertyChanging();
+					this._PublicPreliminaryDate = value;
+					this.SendPropertyChanged("PublicPreliminaryDate");
+					this.OnPublicPreliminaryDateChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegNoticeDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> RegNoticeDate
 		{
@@ -2484,182 +2918,109 @@ namespace zscq.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkRenewalInfo")]
-	public partial class t_NewTradeMarkRenewalInfo : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_NewTradeMark")]
+	public partial class vw_NewTradeMark
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _i_Id;
 		
-		private int _TradeMarkId;
-		
-		private System.Nullable<System.DateTime> _RenewalDate;
-		
-		private System.Nullable<bool> _IsFinish;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oni_IdChanging(int value);
-    partial void Oni_IdChanged();
-    partial void OnTradeMarkIdChanging(int value);
-    partial void OnTradeMarkIdChanged();
-    partial void OnRenewalDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnRenewalDateChanged();
-    partial void OnIsFinishChanging(System.Nullable<bool> value);
-    partial void OnIsFinishChanged();
-    #endregion
-		
-		public t_NewTradeMarkRenewalInfo()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int i_Id
-		{
-			get
-			{
-				return this._i_Id;
-			}
-			set
-			{
-				if ((this._i_Id != value))
-				{
-					this.Oni_IdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Id = value;
-					this.SendPropertyChanged("i_Id");
-					this.Oni_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeMarkId", DbType="Int NOT NULL")]
-		public int TradeMarkId
-		{
-			get
-			{
-				return this._TradeMarkId;
-			}
-			set
-			{
-				if ((this._TradeMarkId != value))
-				{
-					this.OnTradeMarkIdChanging(value);
-					this.SendPropertyChanging();
-					this._TradeMarkId = value;
-					this.SendPropertyChanged("TradeMarkId");
-					this.OnTradeMarkIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalDate", DbType="Date")]
-		public System.Nullable<System.DateTime> RenewalDate
-		{
-			get
-			{
-				return this._RenewalDate;
-			}
-			set
-			{
-				if ((this._RenewalDate != value))
-				{
-					this.OnRenewalDateChanging(value);
-					this.SendPropertyChanging();
-					this._RenewalDate = value;
-					this.SendPropertyChanged("RenewalDate");
-					this.OnRenewalDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsFinish", DbType="Bit")]
-		public System.Nullable<bool> IsFinish
-		{
-			get
-			{
-				return this._IsFinish;
-			}
-			set
-			{
-				if ((this._IsFinish != value))
-				{
-					this.OnIsFinishChanging(value);
-					this.SendPropertyChanging();
-					this._IsFinish = value;
-					this.SendPropertyChanged("IsFinish");
-					this.OnIsFinishChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_GoodsCategoryFees")]
-	public partial class t_GoodsCategoryFees : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _i_Id;
+		private int _i_MemberId;
 		
 		private System.Nullable<int> _i_Type;
 		
-		private System.Nullable<decimal> _MainFees;
+		private int _ApplyType;
 		
-		private System.Nullable<int> _ItemNum;
+		private string _ApplyName;
 		
-		private System.Nullable<decimal> _ExceedFees;
+		private System.Nullable<int> _CardNoType;
 		
-		private System.Nullable<System.DateTime> _UpdateTime;
+		private string _CardNo;
 		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oni_IdChanging(int value);
-    partial void Oni_IdChanged();
-    partial void Oni_TypeChanging(System.Nullable<int> value);
-    partial void Oni_TypeChanged();
-    partial void OnMainFeesChanging(System.Nullable<decimal> value);
-    partial void OnMainFeesChanged();
-    partial void OnItemNumChanging(System.Nullable<int> value);
-    partial void OnItemNumChanged();
-    partial void OnExceedFeesChanging(System.Nullable<decimal> value);
-    partial void OnExceedFeesChanged();
-    partial void OnUpdateTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdateTimeChanged();
-    #endregion
+		private string _CardNoPDF;
 		
-		public t_GoodsCategoryFees()
+		private string _Businesslicense;
+		
+		private System.Nullable<int> _ProvinceId;
+		
+		private System.Nullable<int> _CityId;
+		
+		private System.Nullable<int> _AreaId;
+		
+		private string _Address;
+		
+		private string _ContactPerson;
+		
+		private string _Phone;
+		
+		private string _Fax;
+		
+		private string _PostCode;
+		
+		private string _CaseNo;
+		
+		private System.Nullable<bool> _Is3D;
+		
+		private System.Nullable<bool> _IsColor;
+		
+		private System.Nullable<bool> _IsSound;
+		
+		private string _SoundFile;
+		
+		private string _RegisteredNo;
+		
+		private System.Nullable<System.DateTime> _ApplyDate;
+		
+		private System.Nullable<System.DateTime> _PublicPreliminaryDate;
+		
+		private System.Nullable<System.DateTime> _RegNoticeDate;
+		
+		private System.Nullable<System.DateTime> _RenewalDate;
+		
+		private System.Nullable<int> _TrademarkDescribeType;
+		
+		private string _TrademarkDescribe;
+		
+		private string _TrademarkRemark;
+		
+		private string _TrademarkType;
+		
+		private string _TrademarkGoods;
+		
+		private string _TrademarkPattern1;
+		
+		private string _TrademarkPattern2;
+		
+		private string _TrademarkRegBook;
+		
+		private string _ApplyBook;
+		
+		private string _AgentBook;
+		
+		private System.Nullable<System.DateTime> _InputTime;
+		
+		private System.Nullable<bool> _IsSubmit;
+		
+		private System.Nullable<bool> _IsShow;
+		
+		private System.Nullable<bool> _IsReceiveEmail;
+		
+		private string _Remark;
+		
+		private System.Nullable<int> _Status;
+		
+		private System.Nullable<int> _AdminStatus;
+		
+		private string _nvc_UserNum;
+		
+		private string _nvc_Name;
+		
+		private string _nvc_OrderNum;
+		
+		public vw_NewTradeMark()
 		{
-			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", DbType="Int NOT NULL")]
 		public int i_Id
 		{
 			get
@@ -2670,11 +3031,23 @@ namespace zscq.Model
 			{
 				if ((this._i_Id != value))
 				{
-					this.Oni_IdChanging(value);
-					this.SendPropertyChanging();
 					this._i_Id = value;
-					this.SendPropertyChanged("i_Id");
-					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
+		public int i_MemberId
+		{
+			get
+			{
+				return this._i_MemberId;
+			}
+			set
+			{
+				if ((this._i_MemberId != value))
+				{
+					this._i_MemberId = value;
 				}
 			}
 		}
@@ -2690,198 +3063,712 @@ namespace zscq.Model
 			{
 				if ((this._i_Type != value))
 				{
-					this.Oni_TypeChanging(value);
-					this.SendPropertyChanging();
 					this._i_Type = value;
-					this.SendPropertyChanged("i_Type");
-					this.Oni_TypeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainFees", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> MainFees
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyType", DbType="Int NOT NULL")]
+		public int ApplyType
 		{
 			get
 			{
-				return this._MainFees;
+				return this._ApplyType;
 			}
 			set
 			{
-				if ((this._MainFees != value))
+				if ((this._ApplyType != value))
 				{
-					this.OnMainFeesChanging(value);
-					this.SendPropertyChanging();
-					this._MainFees = value;
-					this.SendPropertyChanged("MainFees");
-					this.OnMainFeesChanged();
+					this._ApplyType = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ItemNum", DbType="Int")]
-		public System.Nullable<int> ItemNum
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ApplyName
 		{
 			get
 			{
-				return this._ItemNum;
+				return this._ApplyName;
 			}
 			set
 			{
-				if ((this._ItemNum != value))
+				if ((this._ApplyName != value))
 				{
-					this.OnItemNumChanging(value);
-					this.SendPropertyChanging();
-					this._ItemNum = value;
-					this.SendPropertyChanged("ItemNum");
-					this.OnItemNumChanged();
+					this._ApplyName = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceedFees", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> ExceedFees
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNoType", DbType="Int")]
+		public System.Nullable<int> CardNoType
 		{
 			get
 			{
-				return this._ExceedFees;
+				return this._CardNoType;
 			}
 			set
 			{
-				if ((this._ExceedFees != value))
+				if ((this._CardNoType != value))
 				{
-					this.OnExceedFeesChanging(value);
-					this.SendPropertyChanging();
-					this._ExceedFees = value;
-					this.SendPropertyChanged("ExceedFees");
-					this.OnExceedFeesChanged();
+					this._CardNoType = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdateTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UpdateTime
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNo", DbType="NVarChar(50)")]
+		public string CardNo
 		{
 			get
 			{
-				return this._UpdateTime;
+				return this._CardNo;
 			}
 			set
 			{
-				if ((this._UpdateTime != value))
+				if ((this._CardNo != value))
 				{
-					this.OnUpdateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._UpdateTime = value;
-					this.SendPropertyChanged("UpdateTime");
-					this.OnUpdateTimeChanged();
+					this._CardNo = value;
 				}
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkRenewalDesc")]
-	public partial class t_NewTradeMarkRenewalDesc : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _i_Id;
-		
-		private string _WriteSample;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oni_IdChanging(int value);
-    partial void Oni_IdChanged();
-    partial void OnWriteSampleChanging(string value);
-    partial void OnWriteSampleChanged();
-    #endregion
-		
-		public t_NewTradeMarkRenewalDesc()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int i_Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNoPDF", DbType="NVarChar(100)")]
+		public string CardNoPDF
 		{
 			get
 			{
-				return this._i_Id;
+				return this._CardNoPDF;
 			}
 			set
 			{
-				if ((this._i_Id != value))
+				if ((this._CardNoPDF != value))
 				{
-					this.Oni_IdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Id = value;
-					this.SendPropertyChanged("i_Id");
-					this.Oni_IdChanged();
+					this._CardNoPDF = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WriteSample", DbType="NVarChar(100)")]
-		public string WriteSample
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Businesslicense", DbType="NVarChar(100)")]
+		public string Businesslicense
 		{
 			get
 			{
-				return this._WriteSample;
+				return this._Businesslicense;
 			}
 			set
 			{
-				if ((this._WriteSample != value))
+				if ((this._Businesslicense != value))
 				{
-					this.OnWriteSampleChanging(value);
-					this.SendPropertyChanging();
-					this._WriteSample = value;
-					this.SendPropertyChanged("WriteSample");
-					this.OnWriteSampleChanged();
+					this._Businesslicense = value;
 				}
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProvinceId", DbType="Int")]
+		public System.Nullable<int> ProvinceId
 		{
-			if ((this.PropertyChanging != null))
+			get
 			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
+				return this._ProvinceId;
+			}
+			set
+			{
+				if ((this._ProvinceId != value))
+				{
+					this._ProvinceId = value;
+				}
 			}
 		}
 		
-		protected virtual void SendPropertyChanged(String propertyName)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityId", DbType="Int")]
+		public System.Nullable<int> CityId
 		{
-			if ((this.PropertyChanged != null))
+			get
 			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this._CityId;
+			}
+			set
+			{
+				if ((this._CityId != value))
+				{
+					this._CityId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AreaId", DbType="Int")]
+		public System.Nullable<int> AreaId
+		{
+			get
+			{
+				return this._AreaId;
+			}
+			set
+			{
+				if ((this._AreaId != value))
+				{
+					this._AreaId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this._Address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactPerson", DbType="NVarChar(50)")]
+		public string ContactPerson
+		{
+			get
+			{
+				return this._ContactPerson;
+			}
+			set
+			{
+				if ((this._ContactPerson != value))
+				{
+					this._ContactPerson = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this._Phone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fax", DbType="NVarChar(50)")]
+		public string Fax
+		{
+			get
+			{
+				return this._Fax;
+			}
+			set
+			{
+				if ((this._Fax != value))
+				{
+					this._Fax = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostCode", DbType="NVarChar(50)")]
+		public string PostCode
+		{
+			get
+			{
+				return this._PostCode;
+			}
+			set
+			{
+				if ((this._PostCode != value))
+				{
+					this._PostCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseNo", DbType="NVarChar(50)")]
+		public string CaseNo
+		{
+			get
+			{
+				return this._CaseNo;
+			}
+			set
+			{
+				if ((this._CaseNo != value))
+				{
+					this._CaseNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Is3D", DbType="Bit")]
+		public System.Nullable<bool> Is3D
+		{
+			get
+			{
+				return this._Is3D;
+			}
+			set
+			{
+				if ((this._Is3D != value))
+				{
+					this._Is3D = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsColor", DbType="Bit")]
+		public System.Nullable<bool> IsColor
+		{
+			get
+			{
+				return this._IsColor;
+			}
+			set
+			{
+				if ((this._IsColor != value))
+				{
+					this._IsColor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSound", DbType="Bit")]
+		public System.Nullable<bool> IsSound
+		{
+			get
+			{
+				return this._IsSound;
+			}
+			set
+			{
+				if ((this._IsSound != value))
+				{
+					this._IsSound = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoundFile", DbType="NVarChar(200)")]
+		public string SoundFile
+		{
+			get
+			{
+				return this._SoundFile;
+			}
+			set
+			{
+				if ((this._SoundFile != value))
+				{
+					this._SoundFile = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredNo", DbType="NVarChar(50)")]
+		public string RegisteredNo
+		{
+			get
+			{
+				return this._RegisteredNo;
+			}
+			set
+			{
+				if ((this._RegisteredNo != value))
+				{
+					this._RegisteredNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ApplyDate
+		{
+			get
+			{
+				return this._ApplyDate;
+			}
+			set
+			{
+				if ((this._ApplyDate != value))
+				{
+					this._ApplyDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicPreliminaryDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PublicPreliminaryDate
+		{
+			get
+			{
+				return this._PublicPreliminaryDate;
+			}
+			set
+			{
+				if ((this._PublicPreliminaryDate != value))
+				{
+					this._PublicPreliminaryDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegNoticeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RegNoticeDate
+		{
+			get
+			{
+				return this._RegNoticeDate;
+			}
+			set
+			{
+				if ((this._RegNoticeDate != value))
+				{
+					this._RegNoticeDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RenewalDate
+		{
+			get
+			{
+				return this._RenewalDate;
+			}
+			set
+			{
+				if ((this._RenewalDate != value))
+				{
+					this._RenewalDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribeType", DbType="Int")]
+		public System.Nullable<int> TrademarkDescribeType
+		{
+			get
+			{
+				return this._TrademarkDescribeType;
+			}
+			set
+			{
+				if ((this._TrademarkDescribeType != value))
+				{
+					this._TrademarkDescribeType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribe", DbType="NVarChar(200)")]
+		public string TrademarkDescribe
+		{
+			get
+			{
+				return this._TrademarkDescribe;
+			}
+			set
+			{
+				if ((this._TrademarkDescribe != value))
+				{
+					this._TrademarkDescribe = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRemark", DbType="NVarChar(200)")]
+		public string TrademarkRemark
+		{
+			get
+			{
+				return this._TrademarkRemark;
+			}
+			set
+			{
+				if ((this._TrademarkRemark != value))
+				{
+					this._TrademarkRemark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkType", DbType="NVarChar(200)")]
+		public string TrademarkType
+		{
+			get
+			{
+				return this._TrademarkType;
+			}
+			set
+			{
+				if ((this._TrademarkType != value))
+				{
+					this._TrademarkType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkGoods", DbType="NVarChar(800)")]
+		public string TrademarkGoods
+		{
+			get
+			{
+				return this._TrademarkGoods;
+			}
+			set
+			{
+				if ((this._TrademarkGoods != value))
+				{
+					this._TrademarkGoods = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkPattern1", DbType="NVarChar(100)")]
+		public string TrademarkPattern1
+		{
+			get
+			{
+				return this._TrademarkPattern1;
+			}
+			set
+			{
+				if ((this._TrademarkPattern1 != value))
+				{
+					this._TrademarkPattern1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkPattern2", DbType="NVarChar(100)")]
+		public string TrademarkPattern2
+		{
+			get
+			{
+				return this._TrademarkPattern2;
+			}
+			set
+			{
+				if ((this._TrademarkPattern2 != value))
+				{
+					this._TrademarkPattern2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRegBook", DbType="NVarChar(100)")]
+		public string TrademarkRegBook
+		{
+			get
+			{
+				return this._TrademarkRegBook;
+			}
+			set
+			{
+				if ((this._TrademarkRegBook != value))
+				{
+					this._TrademarkRegBook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyBook", DbType="NVarChar(100)")]
+		public string ApplyBook
+		{
+			get
+			{
+				return this._ApplyBook;
+			}
+			set
+			{
+				if ((this._ApplyBook != value))
+				{
+					this._ApplyBook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AgentBook", DbType="NVarChar(100)")]
+		public string AgentBook
+		{
+			get
+			{
+				return this._AgentBook;
+			}
+			set
+			{
+				if ((this._AgentBook != value))
+				{
+					this._AgentBook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InputTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> InputTime
+		{
+			get
+			{
+				return this._InputTime;
+			}
+			set
+			{
+				if ((this._InputTime != value))
+				{
+					this._InputTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSubmit", DbType="Bit")]
+		public System.Nullable<bool> IsSubmit
+		{
+			get
+			{
+				return this._IsSubmit;
+			}
+			set
+			{
+				if ((this._IsSubmit != value))
+				{
+					this._IsSubmit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsShow", DbType="Bit")]
+		public System.Nullable<bool> IsShow
+		{
+			get
+			{
+				return this._IsShow;
+			}
+			set
+			{
+				if ((this._IsShow != value))
+				{
+					this._IsShow = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsReceiveEmail", DbType="Bit")]
+		public System.Nullable<bool> IsReceiveEmail
+		{
+			get
+			{
+				return this._IsReceiveEmail;
+			}
+			set
+			{
+				if ((this._IsReceiveEmail != value))
+				{
+					this._IsReceiveEmail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="NVarChar(500)")]
+		public string Remark
+		{
+			get
+			{
+				return this._Remark;
+			}
+			set
+			{
+				if ((this._Remark != value))
+				{
+					this._Remark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminStatus", DbType="Int")]
+		public System.Nullable<int> AdminStatus
+		{
+			get
+			{
+				return this._AdminStatus;
+			}
+			set
+			{
+				if ((this._AdminStatus != value))
+				{
+					this._AdminStatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_UserNum", DbType="NVarChar(50)")]
+		public string nvc_UserNum
+		{
+			get
+			{
+				return this._nvc_UserNum;
+			}
+			set
+			{
+				if ((this._nvc_UserNum != value))
+				{
+					this._nvc_UserNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Name", DbType="NVarChar(150)")]
+		public string nvc_Name
+		{
+			get
+			{
+				return this._nvc_Name;
+			}
+			set
+			{
+				if ((this._nvc_Name != value))
+				{
+					this._nvc_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_OrderNum", DbType="NVarChar(50)")]
+		public string nvc_OrderNum
+		{
+			get
+			{
+				return this._nvc_OrderNum;
+			}
+			set
+			{
+				if ((this._nvc_OrderNum != value))
+				{
+					this._nvc_OrderNum = value;
+				}
 			}
 		}
 	}

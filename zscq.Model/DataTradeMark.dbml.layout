@@ -44,12 +44,6 @@
         <elementListCompartment Id="5459da4a-a8fe-4b19-8d60-60b61c68182e" absoluteBounds="0.88999999999999968, 3.46, 1.9700000000000002, 0.97730509440104174" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="97f67304-6a19-4b3c-b84e-f2880e5c3580" isExpanded="false" absoluteBounds="0.875, 2.5, 2, 0.45">
-      <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkInfo" />
-      <nestedChildShapes>
-        <elementListCompartment Id="fba08c5a-2040-4f03-bfa7-c1c3d5227703" absoluteBounds="0.88999999999999968, 2.96, 1.9700000000000002, 8.1842753092447911" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="98fdc002-46ca-41e7-86d6-c7e4ad450cd8" isExpanded="false" absoluteBounds="3.25, 2.625, 2, 0.45">
       <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkRenewalInfo" />
       <nestedChildShapes>
@@ -66,6 +60,18 @@
       <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkRenewalDesc" />
       <nestedChildShapes>
         <elementListCompartment Id="55994df6-4e2f-4270-b9d0-787a5136c206" absoluteBounds="3.2649999999999997, 3.585, 1.9700000000000002, 0.60771687825520826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="db41f1ca-feb9-48f5-88f9-5a48fb15dbdb" isExpanded="false" absoluteBounds="0.875, 2.5, 2, 0.45">
+      <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkInfo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="98a804a0-8f39-4d92-aa7d-28e8521ac938" absoluteBounds="0.88999999999999968, 2.96, 1.9700000000000002, 8.3690694173177071" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="85d6859c-a117-4d6c-9561-b7b49663f18d" isExpanded="false" absoluteBounds="5.75, 3, 2, 0.45">
+      <DataClassMoniker Name="/DataTradeMarkDataContext/vw_NewTradeMark" />
+      <nestedChildShapes>
+        <elementListCompartment Id="17e80197-e10b-432a-81e3-c20dd6291015" absoluteBounds="5.765, 3.46, 1.9700000000000002, 8.9234517415364571" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
