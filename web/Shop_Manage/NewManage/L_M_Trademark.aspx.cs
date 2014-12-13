@@ -418,6 +418,11 @@ public partial class L_M_Trademark : System.Web.UI.Page
         }
     }
 
+    /// <summary>
+    /// 删除
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     protected void Button1_Click(object sender, EventArgs e)
     {
         if (Request.Form["inputPageid"] != null)

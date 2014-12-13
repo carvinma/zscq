@@ -1001,7 +1001,21 @@
                 2
 			</div>
             <div class="ui-tabs-panel ui-tabs-hide">
-                3
+                <form id="questionform" name="TourExForm" novalidate="novalidate">
+                <table width="90%"><tr><td valign="middle" align="right"><b>留言内容：</b></td>
+                     <td align="left"> <textarea name="Questions" id="Questions" class="area" maxlength='200'
+                                    style="height:80px;width:100%" ></textarea>
+                      </td>
+                      <td align="center" width="150px"> <p style="padding: 6px 0;">
+                         <input name="submit1" id="submit1" type="submit" class="subBtn" value="提交"/></p>
+                      <p  style="padding: 6px 0;">字数必须小于200字</p>
+                      </td>
+                     </tr>
+                    </table>
+								<div class="btn">
+								
+								</div>
+			   </form>
 			</div>
         </div>
     <div id="div_a" runat="server"></div>

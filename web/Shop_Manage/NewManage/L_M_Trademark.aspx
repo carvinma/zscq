@@ -275,10 +275,9 @@
                             <%#BoolFileImg(Eval("AgentBook")) ? "<a href='" + Eval("AgentBook") + "' title='委托书'>商标委托书</a>" : "未上传"%>
                         </td>
                         <td align="center"> 
-                            <a href="M_A_TradeMark.aspx?id=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType %>&regtype=<%= DDl_regtype.SelectedValue %>&usertype=<%= usertype %>&state=<%=state %>&jiaofeitype=<%= ddl_jiaofei.SelectedValue %>&guoji=<%= DDL_guoji.SelectedValue %>&statime=<%=statime %>&endtime=<%=endtime %>&Orderby=<%= Hi_Orderby.Value %>&Orderby2=<%= Hi_Orderby2.Value %>&userid=<%=userid %>">
+                            <a href="M_A_TradeMark.aspx?id=<%#Eval("i_Id")%>">
                                 <%# Eval("CaseNo")%>
                             </a>
-                            
                         </td>
                         <td align="center">
                             <%#Eval("RegisteredNo")%>
