@@ -24,6 +24,9 @@ public partial class L_M_Trademark : System.Web.UI.Page
     dal_Trademark DALT = new dal_Trademark();
     dal_Member DALM=new dal_Member ();
     dal_Nationality DALN = new dal_Nationality();
+
+    //dal_NewTrademark mark = new dal_NewTrademark();
+    DataTradeMarkDataContext mark = new DataTradeMarkDataContext();
     public int SType = 0;
     public int usertype = 0;
     public string Keyword = "";
@@ -78,53 +81,11 @@ public partial class L_M_Trademark : System.Web.UI.Page
         {
             Bind_Page_value();
             Bind_Rpt_Product(ye);
-            Bind_Page_Info();
         }
     }
 
   
-    private string MakeFelgefu(int count)
-    {
-        string Returnwords = string.Empty;
-        if (count == 0)
-        {
-            Returnwords = "|—";
-        }
-        else
-        {
-            for (int i = 0; i < count; i++)
-            {
-                Returnwords += "&nbsp;&nbsp;&nbsp;&nbsp;";
-            }
-            Returnwords += "|—";
-        }
-        return Returnwords;
-    }
-     private void Bind_Page_Info()// 绑定商标详细数据
-    {
-                
-            var  iquery = DALT.Trademark_SelectAllByUser();
-            var mem = from i in DALM.WebPostClass_SelectAll() where i.i_MemberType == 2 select i;
-            if (mem.Count() > 0)
-            {
-                usercount = mem.Count().ToString();
-            }
-            var iquery1 = from i in iquery where i.i_JiaoFeiType == 2 select i;
-            if (iquery1.Count() > 0)
-            {
-                weituocount = iquery1.Count().ToString();
-            }
-            var iquery3 = from i in iquery where i.i_JiaoFeiType == 1 select i;
-            if (iquery3.Count() > 0)
-            {
-                zixingjiaofei = iquery3.Count().ToString();
-            }
-            var iquery2 = from i in iquery1 where i.i_IsPayState== 1 select i;
-            if (iquery2.Count() > 0)
-            {
-                weituoJiaofeiOKcount = iquery2.Count().ToString();
-            }
-        }
+     
     public void Bind_Page_value()
     {
         if (Request.QueryString["userid"] != null && Request.QueryString["userid"] != "")
@@ -138,56 +99,57 @@ public partial class L_M_Trademark : System.Web.UI.Page
 
         #region 排序参数
     
-        if (Request.QueryString["caseno"] != null && Request.QueryString["caseno"] != "")
-        {
-            caseno = Request.QueryString["caseno"].ToString();
-            this.hi_CaseNo.Value = caseno;
-        }
-        if (Request.QueryString["applyno"] != null && Request.QueryString["applyno"] != "")
-        {
-            this.applyno = Request.QueryString["applyno"].ToString();
-            hi_applyno.Value = applyno;
-        }
-        if (Request.QueryString["applyuser"] != null && Request.QueryString["applyuser"] != "")
-        {
-            this.applyuser = Request.QueryString["applyuser"].ToString();
-            hi_applyuser.Value = applyuser;
-        }
-        if (Request.QueryString["memberno"] != null && Request.QueryString["memberno"] != "")
-        {
-            this.memberno = Request.QueryString["memberno"].ToString();
-            hi_memberno.Value = applyno;
-        }
-        if (Request.QueryString["membername"] != null && Request.QueryString["membername"] != "")
-        {
-            this.membername = Request.QueryString["membername"].ToString();
-            hi_membername.Value = membername;
-        }
-        if (Request.QueryString["trademarktype"] != null && Request.QueryString["trademarktype"] != "")
-        {
-            this.trademarktype = Request.QueryString["trademarktype"].ToString();
-            hi_trademarktype.Value = trademarktype;
-        }
-        if (Request.QueryString["timelimit"] != null && Request.QueryString["timelimit"] != "")
-        {
-            this.timelimit = Request.QueryString["timelimit"].ToString();
-            hi_timelimit.Value = timelimit;
-        }
-        if (Request.QueryString["timeadd"] != null && Request.QueryString["timeadd"] != "")
-        {
-            this.timeadd = Request.QueryString["timeadd"].ToString();
-            hi_timeadd.Value = timeadd;
-        }
-        if (Request.QueryString["status"] != null && Request.QueryString["status"] != "")
-        {
-            this.status = Request.QueryString["status"].ToString();
-            hi_status.Value = status;
-        }
+        //if (Request.QueryString["caseno"] != null && Request.QueryString["caseno"] != "")
+        //{
+        //    caseno = Request.QueryString["caseno"].ToString();
+        //    this.hi_CaseNo.Value = caseno;
+        //}
+        //if (Request.QueryString["applyno"] != null && Request.QueryString["applyno"] != "")
+        //{
+        //    this.applyno = Request.QueryString["applyno"].ToString();
+        //    hi_applyno.Value = applyno;
+        //}
+        //if (Request.QueryString["applyuser"] != null && Request.QueryString["applyuser"] != "")
+        //{
+        //    this.applyuser = Request.QueryString["applyuser"].ToString();
+        //    hi_applyuser.Value = applyuser;
+        //}
+        //if (Request.QueryString["memberno"] != null && Request.QueryString["memberno"] != "")
+        //{
+        //    this.memberno = Request.QueryString["memberno"].ToString();
+        //    hi_memberno.Value = memberno;
+        //}
+        //if (Request.QueryString["membername"] != null && Request.QueryString["membername"] != "")
+        //{
+        //    this.membername = Request.QueryString["membername"].ToString();
+        //    hi_membername.Value = membername;
+        //}
+        //if (Request.QueryString["trademarktype"] != null && Request.QueryString["trademarktype"] != "")
+        //{
+        //    this.trademarktype = Request.QueryString["trademarktype"].ToString();
+        //    hi_trademarktype.Value = trademarktype;
+        //}
+        //if (Request.QueryString["timelimit"] != null && Request.QueryString["timelimit"] != "")
+        //{
+        //    this.timelimit = Request.QueryString["timelimit"].ToString();
+        //    hi_timelimit.Value = timelimit;
+        //}
+        //if (Request.QueryString["timeadd"] != null && Request.QueryString["timeadd"] != "")
+        //{
+        //    this.timeadd = Request.QueryString["timeadd"].ToString();
+        //    hi_timeadd.Value = timeadd;
+        //}
+        //if (Request.QueryString["status"] != null && Request.QueryString["status"] != "")
+        //{
+        //    this.status = Request.QueryString["status"].ToString();
+        //    hi_status.Value = status;
+        //}
         #endregion
     }
     protected void aspPage_PageChanged(object sender, EventArgs e)
     {
         Bind_Rpt_Product(((Wuqi.Webdiyer.AspNetPager)sender).CurrentPageIndex);
+        ye = ((Wuqi.Webdiyer.AspNetPager)sender).CurrentPageIndex;
     }
   
 
@@ -236,41 +198,221 @@ public partial class L_M_Trademark : System.Web.UI.Page
    
     private void Bind_Rpt_Product(int pageCurrent)//绑定列表
     {
-       // ye = pageCurrent;
-       // int Ccount = 0;
-       // int PageSize = 20;
-       // Keyword = hw_name.Value;
-       // if (DDL_SType.SelectedValue == "4")
-       // { 
-       //     t_DataOrder dd = DALD.DataOrder_Select_num(hw_name.Value);
-       //     if (dd != null)
-       //     {
-       //         if (dd.i_DataId != 0)
-       //         {
-       //             Keyword = dd.i_DataId.ToString();
-       //         }
-       //     }
-       //     else
-       //     {
-       //         Keyword ="0";
-       //     }
-       // }
-       // SType = int.Parse(DDL_SType.SelectedValue);
-       //usertype = int.Parse(DDL_usertype.SelectedValue);
-       //state = int.Parse(DDL_state.SelectedValue);
-       //statime = hot_start_date.Value;
-       //endtime = hot_end_date.Value;
-       //jiaofeitypezt = Convert.ToInt32(ddl_jiaofeizt.SelectedValue);
-       //this.rep_brand.DataSource = DALT.Trademark_SelectPage(pageCurrent, PageSize, userid, SType, Keyword, Convert.ToInt32(ddl_jiaofei.SelectedValue), Convert.ToInt32(DDL_guoji.SelectedValue), usertype, Convert.ToInt32(DDl_regtype.SelectedValue), state, bianhao, shangbiaotype, jiaofei, dizhi, username, stime, ptime, zhuangtai, Convert.ToInt32(ddl_sheng.SelectedValue), statime, endtime, uname, ubianhao,jiaofeitypezt, ref Ccount);
-       // this.rep_brand.DataBind();
-       // aspPage.RecordCount = Ccount;
-       // aspPage.PageSize = PageSize;
-       // aspPage.CurrentPageIndex = pageCurrent;
-       // Lb_sum.Text = "共" + Ccount + "条";
-       // Lb_ye.Text = "共" + aspPage.PageCount + "页";
-        //text_pageindex.Value = pageCurrent.ToString();
+        ye = pageCurrent;
+        int Ccount = 0;
+        int PageSize = 20;
+
+        this.rep_brand.DataSource =Patent_SelectPage(pageCurrent, PageSize, ref Ccount);
+        this.rep_brand.DataBind();
+        aspPage.RecordCount = Ccount;
+        aspPage.PageSize = PageSize;
+        aspPage.CurrentPageIndex = pageCurrent;
+        Lb_sum.Text = "共" + Ccount + "条";
+        Lb_ye.Text = "共" + aspPage.PageCount + "页";
     }
-   
+
+
+    /// <summary>
+    /// 查询分页
+    /// </summary>
+    /// <param name="pageindex"></param>
+    /// <param name="pagesiz"></param>
+    /// <param name="count"></param>
+    /// <returns></returns>
+    private IQueryable<vw_NewTradeMark> Patent_SelectPage(int pageindex, int pagesiz, ref int count)
+    {
+        try
+        {
+            var iquery = from i in mark.vw_NewTradeMark select i;
+            #region 查询参数
+            
+            if (Request["qnvc_UserNum"] != null)
+            {
+                iquery = from i in iquery where i.nvc_UserNum.Contains(Request["qnvc_UserNum"]) select i;
+            }
+            if (Request["qnvc_UserName"] != null)
+            {
+                iquery = from i in iquery where i.nvc_Name.Contains(Request["qnvc_UserName"]) select i;
+            }
+            if (Request["qapplyName"] != null)
+            {
+                iquery = from i in iquery where i.ApplyName.Contains(Request["qapplyName"]) select i;
+            }
+            if (Request["qProvinceId"] != null)
+            {
+                iquery = from i in iquery where i.ProvinceId == Convert.ToInt32(Request["qProvinceId"]) select i;
+            }
+            if (Request["qCityId"] != null)
+            {
+                iquery = from i in iquery where i.CityId == Convert.ToInt32(Request["qCityId"].Trim()) select i;
+            }
+            if (Request["qAreaId"] != null)
+            {
+                iquery = from i in iquery where i.AreaId == Convert.ToInt32(Request["qAreaId"]) select i;
+            }
+            if (Request["qaddress"] != null)
+            {
+                iquery = from i in iquery where i.Address.Contains(Request["qaddress"]) select i;
+            }
+            if (Request["qi_Type"] != null)
+            {
+                iquery = from i in iquery where i.i_Type == Convert.ToInt32(Request["qi_Type"]) select i;
+            }
+            if (Request["qCaseNo"] != null)
+            {
+                iquery = from i in iquery where i.CaseNo.Contains(Request["qCaseNo"]) select i;
+            }
+            if (Request["qRegisteredNo"] != null)
+            {
+                iquery = from i in iquery where i.RegisteredNo.Contains(Request["qRegisteredNo"]) select i;
+            }
+            if (Request["qTrademarkType"] != null)
+            {
+                iquery = from i in iquery where i.TrademarkType.Contains(Request["qTrademarkType"]) select i;
+            }
+            if (Request["TrademarkRemark"] != null)
+            {
+                iquery = from i in iquery where i.TrademarkRemark.Contains(Request["TrademarkRemark"]) select i;
+            }
+            if (Request["qIs3D"] != null)
+            {
+                iquery = from i in iquery where i.Is3D == (Request["qIs3D"]=="1" ?true:false) select i;
+            }
+            if (Request["qIsColor"] != null)
+            {
+                iquery = from i in iquery where i.IsColor == (Request["qIsColor"] == "1" ? true : false) select i;
+            }
+            if (Request["qIsSound"] != null)
+            {
+                iquery = from i in iquery where i.IsSound == (Request["qIsSound"] == "1" ? true : false) select i;
+            }
+            if (Request["qApplyDate"] != null)
+            {
+                iquery = from i in iquery where i.ApplyDate == Convert.ToDateTime(Request["qApplyDate"]) select i;
+            }
+            if (Request["qPublicPreliminaryDate"] != null)
+            {
+                iquery = from i in iquery where i.PublicPreliminaryDate == Convert.ToDateTime(Request["qPublicPreliminaryDate"]) select i;
+            }
+            if (Request["qRegNoticeDate"] != null)
+            {
+                iquery = from i in iquery where i.RegNoticeDate >= Convert.ToDateTime(Request["qRegNoticeDate"]) && i.RegNoticeDate <= Convert.ToDateTime(Request["qRegNoticeDate2"]) select i;
+            }
+            if (Request["qRenewalDate"] != null)
+            {
+                iquery = from i in iquery where i.RenewalDate >= Convert.ToDateTime(Request["qRenewalDate"]) && i.RenewalDate <= Convert.ToDateTime(Request["qRenewalDate2"]) select i;
+            }
+            //if (Request["qrestDays"] != null)
+            //{
+            //    iquery = from i in iquery where i.i_AnnualFeeYear == Convert.ToInt32(Request["qrestDays"]) select i;
+            //}
+            if (Request["qStatus"] != null)
+            {
+                iquery = from i in iquery where i.Status == Convert.ToInt32(Request["qStatus"]) select i;
+            }
+            if (Request["qAdminStatus"] != null)
+            {
+                iquery = from i in iquery where i.AdminStatus == Convert.ToInt32(Request["qAdminStatus"]) select i;
+            }            
+            if (Request["qnvc_OrderNumber"] != null)
+            {
+                iquery = from i in iquery where i.nvc_OrderNum.Contains(Request["qnvc_OrderNumber"]) select i;
+            }
+            #endregion
+
+            #region 排序参数
+
+            if (Request.QueryString["caseno"] != null && Request.QueryString["caseno"] != "")
+            {
+                caseno = Request.QueryString["caseno"].ToString();
+                this.hi_CaseNo.Value = caseno;
+                if(caseno=="asc")
+                    iquery = from i in iquery orderby i.CardNo ascending select i;
+                else
+                    iquery = from i in iquery orderby i.CardNo descending select i;
+            }
+            if (Request.QueryString["applyno"] != null && Request.QueryString["applyno"] != "")
+            {
+                this.applyno = Request.QueryString["applyno"].ToString();
+                hi_applyno.Value = applyno;
+                if (applyno == "asc")
+                    iquery = from i in iquery orderby i.RegisteredNo ascending select i;
+                else
+                    iquery = from i in iquery orderby i.RegisteredNo descending select i;
+            }
+            if (Request.QueryString["applyuser"] != null && Request.QueryString["applyuser"] != "")
+            {
+                this.applyuser = Request.QueryString["applyuser"].ToString();
+                hi_applyuser.Value = applyuser;
+                if (applyuser == "asc")
+                    iquery = from i in iquery orderby i.ApplyName ascending select i;
+                else
+                    iquery = from i in iquery orderby i.ApplyName descending select i;
+            }
+            if (Request.QueryString["memberno"] != null && Request.QueryString["memberno"] != "")
+            {
+                this.memberno = Request.QueryString["memberno"].ToString();
+                hi_memberno.Value = memberno;
+                if (memberno == "asc")
+                    iquery = from i in iquery orderby i.nvc_UserNum ascending select i;
+                else
+                    iquery = from i in iquery orderby i.nvc_UserNum descending select i;
+            }
+            if (Request.QueryString["membername"] != null && Request.QueryString["membername"] != "")
+            {
+                this.membername = Request.QueryString["membername"].ToString();
+                hi_membername.Value = membername;
+                if (membername == "asc")
+                    iquery = from i in iquery orderby i.nvc_Name ascending select i;
+                else
+                    iquery = from i in iquery orderby i.nvc_Name descending select i;
+            }
+            if (Request.QueryString["trademarktype"] != null && Request.QueryString["trademarktype"] != "")
+            {
+                this.trademarktype = Request.QueryString["trademarktype"].ToString();
+                hi_trademarktype.Value = trademarktype;
+                if (trademarktype == "asc")
+                    iquery = from i in iquery orderby i.TrademarkType ascending select i;
+                else
+                    iquery = from i in iquery orderby i.TrademarkType descending select i;
+            }
+            if (Request.QueryString["timelimit"] != null && Request.QueryString["timelimit"] != "")
+            {
+                this.timelimit = Request.QueryString["timelimit"].ToString();
+                hi_timelimit.Value = timelimit;
+                if (timelimit == "asc")
+                    iquery = from i in iquery orderby i.RenewalDate ascending select i;
+                else
+                    iquery = from i in iquery orderby i.RenewalDate descending select i;
+            }
+            if (Request.QueryString["timeadd"] != null && Request.QueryString["timeadd"] != "")
+            {
+                this.timeadd = Request.QueryString["timeadd"].ToString();
+                hi_timeadd.Value = timeadd;
+                if (timeadd == "asc")
+                    iquery = from i in iquery orderby i.InputTime ascending select i;
+                else
+                    iquery = from i in iquery orderby i.InputTime descending select i;
+            }
+            if (Request.QueryString["status"] != null && Request.QueryString["status"] != "")
+            {
+                this.status = Request.QueryString["status"].ToString();
+                hi_status.Value = status;
+                if (status == "asc")
+                    iquery = from i in iquery orderby i.Status ascending select i;
+                else
+                    iquery = from i in iquery orderby i.Status descending select i;
+            }
+            #endregion
+            count = iquery.Count();
+            return iquery.Skip((pageindex - 1) * pagesiz).Take(pagesiz);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     protected void Button1_Click(object sender, EventArgs e)
     {
         if (Request.Form["inputPageid"] != null)
@@ -288,12 +430,6 @@ public partial class L_M_Trademark : System.Web.UI.Page
         Bind_Rpt_Product(aspPage.CurrentPageIndex);
         HiddenDel.Value = "del";
     }
-    
-    public override void VerifyRenderingInServerForm(Control control)
-    {
-
-    }
-    
     
     protected void rep_brand_ItemCommand(object source, RepeaterCommandEventArgs e)
     {

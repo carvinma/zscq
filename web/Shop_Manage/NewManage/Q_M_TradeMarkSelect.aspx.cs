@@ -21,7 +21,7 @@ public partial class Q_M_TradeMarkSelect : System.Web.UI.Page
     dal_PatentOrder DALPO = new dal_PatentOrder();
     dal_PatentOrderInfo DALPOI = new dal_PatentOrderInfo();
     dal_DataOrder DALDO = new dal_DataOrder();
-    public string PageType = "查询专利";
+    public string PageType = "查询商标";
     public StringBuilder img_color = new StringBuilder();
     public string returnurl = "";
     protected void Page_Load(object sender, EventArgs e)
@@ -54,7 +54,8 @@ public partial class Q_M_TradeMarkSelect : System.Web.UI.Page
     void Bind_Drp()// 绑定状态
     {
         Drp_Status.Items.Clear();
-        IList<t_NewTradeMarkStatus> tradeMarkapplyStatuslist = BaseDataUtil.tradeMarkApplyStatuslist;
+        List<t_NewTradeMarkStatus> tradeMarkapplyStatuslist;
+        tradeMarkapplyStatuslist = BaseDataUtil.tradeMarkApplyStatuslist.ToList();
         tradeMarkapplyStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
         if (this.Drp_CaseType.SelectedValue == "-1")
         {
@@ -62,22 +63,21 @@ public partial class Q_M_TradeMarkSelect : System.Web.UI.Page
             {
                 tradeMarkapplyStatuslist.Add(item);
             }
-            this.Drp_Status.DataSource = tradeMarkapplyStatuslist;
         }
 
         else if (this.Drp_CaseType.SelectedValue == "1")
         {
             tradeMarkapplyStatuslist.Clear();
-            tradeMarkapplyStatuslist = BaseDataUtil.tradeMarkRenewedStatuslist;
+            tradeMarkapplyStatuslist = BaseDataUtil.tradeMarkRenewedStatuslist.ToList();
             tradeMarkapplyStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
         }
-        this.Drp_Status.DataSource = BaseDataUtil.tradeMarkRenewedStatuslist;
+        this.Drp_Status.DataSource = tradeMarkapplyStatuslist;
         this.Drp_Status.DataTextField = "StatusName";
         this.Drp_Status.DataValueField = "StatusValue";
         this.Drp_Status.DataBind();
 
         Drp_AdminStatus.Items.Clear();
-        IList<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkApplyStatuslist;
+        List<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkStatuslist.ToList();
         tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
         this.Drp_AdminStatus.DataSource = tradeMarkStatuslist;
         this.Drp_AdminStatus.DataTextField = "StatusName";
@@ -90,95 +90,104 @@ public partial class Q_M_TradeMarkSelect : System.Web.UI.Page
         string sqlwhere = "";
         if (!string.IsNullOrEmpty(txt_UserNum.Value))
         {
-            sqlwhere += "&nvc_UserNum=" + txt_UserNum.Value.Trim();
+            sqlwhere += "&qnvc_UserNum=" + txt_UserNum.Value.Trim();
         }
         if (!string.IsNullOrEmpty(txt_UserName.Value))
         {
-            sqlwhere += "&nvc_UserName=" + txt_UserName.Value.Trim();
+            sqlwhere += "&qnvc_UserName=" + txt_UserName.Value.Trim();
         }
         if (!string.IsNullOrEmpty(Txt_applyName.Value))
         {
-            sqlwhere += "&applyName=" + Txt_applyName.Value.Trim();
+            sqlwhere += "&qapplyName=" + Txt_applyName.Value.Trim();
         }
-       
-        //if (txt_Number.Value != "")
-        //{
-        //    sqlwhere += "&nvc_Number=" + txt_Number.Value;
-        //}
+
+        if (!string.IsNullOrEmpty(Hi_prov.Value))
+        {
+            sqlwhere += "&qProvinceId=" + Hi_prov.Value;
+        }
+        if (!string.IsNullOrEmpty(Hi_city.Value))
+        {
+            sqlwhere += "&qCityId=" + Hi_city.Value;
+        }
+        if (!string.IsNullOrEmpty(Hi_country.Value))
+        {
+            sqlwhere += "&qAreaId=" + Hi_country.Value;
+        }
+
         if (!string.IsNullOrEmpty(this.txt_address.Value))
         {
-            sqlwhere += "&address=" + txt_address.Value.Trim();
+            sqlwhere += "&qaddress=" + txt_address.Value.Trim();
         }
         
         if (this.Drp_CaseType.SelectedValue != "-1")
         {
-            sqlwhere += "&i_Type=" + Drp_CaseType.SelectedValue;
+            sqlwhere += "&qi_Type=" + Drp_CaseType.SelectedValue;
         }
         if (!string.IsNullOrEmpty(this.txt_caseNo.Value))
         {
-            sqlwhere += "&CaseNo=" + txt_caseNo.Value.Trim();
+            sqlwhere += "&qCaseNo=" + txt_caseNo.Value.Trim();
         }
         if (!string.IsNullOrEmpty(txt_applyNo.Value))
         {
-            sqlwhere += "&RegisteredNo=" + txt_applyNo.Value.Trim();
+            sqlwhere += "&qRegisteredNo=" + txt_applyNo.Value.Trim();
         }
         if (!string.IsNullOrEmpty(txt_traceMarkType.Value))
         {
-            sqlwhere += "&TrademarkType=" + txt_traceMarkType.Value.Trim();
+            sqlwhere += "&qTrademarkType=" + txt_traceMarkType.Value.Trim();
         }
         if (!string.IsNullOrEmpty(txt_traceMarkRemark.Value))
         {
-            sqlwhere += "&TrademarkRemark=" + txt_traceMarkRemark.Value.Trim();
+            sqlwhere += "&qTrademarkRemark=" + txt_traceMarkRemark.Value.Trim();
         }
         if (Drp_3D.SelectedValue != "-1")
         {
-            sqlwhere += "&Is3D=" + Drp_3D.SelectedValue;
+            sqlwhere += "&qIs3D=" + Drp_3D.SelectedValue;
         }
         if (Drp_Color.SelectedValue != "-1")
         {
-            sqlwhere += "&IsColor=" + Drp_Color.SelectedValue;
+            sqlwhere += "&qIsColor=" + Drp_Color.SelectedValue;
         }
         if (Drp_Sound.SelectedValue != "-1")
         {
-            sqlwhere += "&IsSound=" + Drp_Sound.SelectedValue;
+            sqlwhere += "&qIsSound=" + Drp_Sound.SelectedValue;
         }
         if (!string.IsNullOrEmpty(txt_ApplyDate.Value))
         {
-            sqlwhere += "&ApplyDate=" + txt_ApplyDate.Value.Trim();
+            sqlwhere += "&qApplyDate=" + txt_ApplyDate.Value.Trim();
         }
         if (!string.IsNullOrEmpty(txt_PublicPreliminaryDate.Value))
         {
-            sqlwhere += "&PublicPreliminaryDate=" + txt_PublicPreliminaryDate.Value.Trim();
+            sqlwhere += "&qPublicPreliminaryDate=" + txt_PublicPreliminaryDate.Value.Trim();
         }
 
         if (txt_RegNoticeDateBegin.Value != "" && txt_RegNoticeDateEnd.Value != "")
         {
-            sqlwhere += "&RegNoticeDate=" + txt_RegNoticeDateBegin.Value.Trim();
-            sqlwhere += "&RegNoticeDate2=" + txt_RegNoticeDateEnd.Value.Trim();
+            sqlwhere += "&qRegNoticeDate=" + txt_RegNoticeDateBegin.Value.Trim();
+            sqlwhere += "&qRegNoticeDate2=" + txt_RegNoticeDateEnd.Value.Trim();
         }
 
         if (txt_RenewalDateBegin.Value != "" && txt_RenewalDateEnd.Value != "")
         {
-            sqlwhere += "&RenewalDate=" + txt_RenewalDateBegin.Value.Trim();
-            sqlwhere += "&RenewalDate2=" + txt_RenewalDateEnd.Value.Trim();
+            sqlwhere += "&qRenewalDate=" + txt_RenewalDateBegin.Value.Trim();
+            sqlwhere += "&qRenewalDate2=" + txt_RenewalDateEnd.Value.Trim();
         }
 
         if (!string.IsNullOrEmpty(txt_restDays.Value))
         {
-            sqlwhere += "&restDays=" + txt_restDays.Value;
+            sqlwhere += "&qrestDays=" + txt_restDays.Value;
         }
         if (!string.IsNullOrEmpty(Drp_Status.SelectedValue))
         {
-            sqlwhere += "&Status=" + Drp_Status.SelectedValue;
+            sqlwhere += "&qStatus=" + Drp_Status.SelectedValue;
         }
         if (!string.IsNullOrEmpty(Drp_AdminStatus.SelectedValue))
         {
-            sqlwhere += "&AdminStatus=" + Drp_AdminStatus.SelectedValue;
+            sqlwhere += "&qAdminStatus=" + Drp_AdminStatus.SelectedValue;
         }
 
         if (!string.IsNullOrEmpty(txt_AccountNo.Value))
         {
-            sqlwhere += "&nvc_OrderNumber=" + txt_AccountNo.Value.Trim();
+            sqlwhere += "&qnvc_OrderNumber=" + txt_AccountNo.Value.Trim();
         }
         Response.Redirect("L_M_Trademark.aspx?sqlwhere=true" + sqlwhere);
     }

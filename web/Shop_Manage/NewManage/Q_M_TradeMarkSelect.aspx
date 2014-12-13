@@ -9,6 +9,14 @@
     <script type="text/javascript" src="../js/Calendar.js"></script>
     <script src="../js/jquery-1.4.4.js" type="text/javascript"></script>
     <script src="../../js/jtrademark.js" type="text/javascript"></script>
+     <script type="text/javascript">
+        $(function () {
+            InitProCityArea();
+            $(".intinput").bind("input propertychange paste", function () {
+                $(this).val($(this).val().replace(/[^\d]/g, ''));
+            }).css("ime-mode", "disabled");
+            });
+       </script>
     <style type="text/css">
     .alertfont
     {
@@ -192,8 +200,7 @@
                 <tr>
                     <td align="right" valign="top">是否颜色组合商标：</td>
                     <td>     
-                        &nbsp;&nbsp;     
-                        <asp:DropDownList ID="Drp_Color" runat="server">
+                        &nbsp;<asp:DropDownList ID="Drp_Color" runat="server">
                             <asp:ListItem Value="-1">全部</asp:ListItem>
                             <asp:ListItem Value="0">否</asp:ListItem>
                             <asp:ListItem Value="1">是</asp:ListItem>
@@ -226,7 +233,7 @@
                         <input type="text" runat="server" id="txt_ApplyDate" class="inputs80text" 
                             readonly="readonly" />
                      <input name="selbtn1" type="button"
-                            id="Button1" onclick="new Calendar().show(form.txt_PublicPreliminaryDate);" class="inputcalendarbutton" />
+                            id="Button1" onclick="new Calendar().show(form.txt_ApplyDate);" class="inputcalendarbutton" />
                     </td>
                 </tr>
                 <tr>
@@ -235,7 +242,7 @@
                        <input type="text" runat="server" id="txt_PublicPreliminaryDate" 
                             class="inputs80text" readonly="readonly" />
                      <input name="selbtn1" type="button"
-                            id="Button13" onclick="new Calendar().show(form.txt_AnnualFeeDateEnd);" class="inputcalendarbutton" />                 
+                            id="Button13" onclick="new Calendar().show(form.txt_PublicPreliminaryDate);" class="inputcalendarbutton" />                 
                     </td>
                 </tr>
                 <tr>
@@ -243,10 +250,10 @@
                     <td>        
                         <input type="text" runat="server" id="txt_RegNoticeDateBegin" readonly="readonly"
                              class="inputs80text" />
-                        <input name="selbtn1" type="button" id="dt_PriorityDate" onclick="new Calendar().show(form.txt_RegNoticeDateEnd);" class="inputcalendarbutton" />            
+                        <input name="selbtn1" type="button" id="dt_PriorityDate" onclick="new Calendar().show(form.txt_RegNoticeDateBegin);" class="inputcalendarbutton" />            
                         --                        
                         <input type="text" runat="server" id="txt_RegNoticeDateEnd" readonly="readonly"
-                             class="inputs80text" /><input name="selbtn1" type="button" id="Button10" onclick="new Calendar().show(form.txt_RenewalDateBegin);" class="inputcalendarbutton" />        
+                             class="inputs80text" /><input name="selbtn1" type="button" id="Button10" onclick="new Calendar().show(form.txt_RegNoticeDateEnd);" class="inputcalendarbutton" />        
                     </td>
                 </tr>
                 <tr>
@@ -255,7 +262,7 @@
                           <input type="text" runat="server" id="txt_RenewalDateBegin" readonly="readonly"
                              class="inputs80text"  />
                              <input name="selbtn1" type="button"
-                            id="Button5" onclick="new Calendar().show(form.txt_RenewalDateEnd);" class="inputcalendarbutton" />
+                            id="Button5" onclick="new Calendar().show(form.txt_RenewalDateBegin);" class="inputcalendarbutton" />
                             --
                             <input type="text" runat="server" id="txt_RenewalDateEnd" readonly="readonly"
                              class="inputs80text"  /><input name="selbtn1" type="button"
@@ -279,7 +286,7 @@
                 <tr>
                     <td width="200" height="26" align="right">最近状态：</td>
                     <td height="26">
-                                            <asp:DropDownList ID="Drp_Status" runat="server">
+                        <asp:DropDownList ID="Drp_Status" runat="server">
                         </asp:DropDownList>
                     
                     &nbsp;</td>
