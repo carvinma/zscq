@@ -115,7 +115,12 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         model.TrademarkDescribe = Sb_miaosu.Value.Trim();
         if (!string.IsNullOrEmpty(txt_applydate.Value))
             model.ApplyDate = DateTime.Parse(txt_applydate.Value);
-        model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
+        if (!string.IsNullOrEmpty(txt_RegNoticeDate.Value))
+        {
+            model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
+            TimeSpan ts = DateTime.Today - DateTime.Parse(txt_RegNoticeDate.Value);
+            model.RestDays = ts.Days; //剩于天数
+        }
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
             model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
         if (!string.IsNullOrEmpty(this.upRegisteCertificate.Value))
