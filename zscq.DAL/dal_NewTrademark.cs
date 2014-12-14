@@ -75,6 +75,24 @@ namespace zscq.DAL
             }
         }
 
+        /// <summary>
+        /// 根据id返回一条商标信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public t_NewTradeMarkInfo Trademark_Select_Id(int id)
+        {
+            try
+            {
+                t_NewTradeMarkInfo m = (from a in mark.t_NewTradeMarkInfo where (a.i_Id == id) select a).FirstOrDefault();
+                return m;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
          /// <summary>
         /// 前台商标分页获取
         /// </summary>
@@ -189,24 +207,26 @@ namespace zscq.DAL
             return iquery;
         }
 
-        #endregion
-        /// <summary>
-        /// 根据id返回一条商标信息
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public t_NewTradeMarkInfo Trademark_Select_Id(int id)
+        public int trademarkStatusdateSumbit(t_NewTradeMarkStatusDate model)
         {
             try
             {
-                t_NewTradeMarkInfo m = (from a in mark.t_NewTradeMarkInfo where (a.i_Id == id) select a).FirstOrDefault();
-                return m;
+                var find = mark.t_NewTradeMarkStatusDate.Where(p => p.TradeMarkId == model.TradeMarkId && p.TradeMarkStatusId == model.TradeMarkStatusId);
+                if (find == null)
+                {
+                    mark.t_NewTradeMarkStatusDate.InsertOnSubmit(model);
+                    mark.SubmitChanges();
+                }
+                else
+                {
+                    find.First().TradeMarkDate = model.TradeMarkDate;
+                    mark.SubmitChanges();
+                }
+                return 1;
             }
-            catch
-            {
-                return null;
-            }
+            catch { return 0; }
         }
+        #endregion
 
         #region 商标续展
 
