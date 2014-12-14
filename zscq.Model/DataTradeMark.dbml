@@ -194,4 +194,12 @@
       <Column Name="nvc_OrderNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.t_NewTradeMarkStatusDate" Member="t_NewTradeMarkStatusDate">
+    <Type Name="t_NewTradeMarkStatusDate">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TradeMarkId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TradeMarkStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TradeMarkDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

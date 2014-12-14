@@ -74,5 +74,11 @@
         <elementListCompartment Id="17e80197-e10b-432a-81e3-c20dd6291015" absoluteBounds="5.765, 3.46, 1.9700000000000002, 8.9234517415364571" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="14e4d2a4-3a16-414e-b7c6-bdafdf3197e3" isExpanded="false" absoluteBounds="0.875, 3.625, 2, 0.45">
+      <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkStatusDate" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9127850f-6eb8-4168-9bbd-0ff06f9e8587" absoluteBounds="0.89000000000000012, 4.085, 1.9700000000000002, 0.97730509440104174" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

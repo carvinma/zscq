@@ -60,6 +60,9 @@ namespace zscq.Model
     partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
+    partial void Insertt_NewTradeMarkStatusDate(t_NewTradeMarkStatusDate instance);
+    partial void Updatet_NewTradeMarkStatusDate(t_NewTradeMarkStatusDate instance);
+    partial void Deletet_NewTradeMarkStatusDate(t_NewTradeMarkStatusDate instance);
     #endregion
 		
 		public DataTradeMarkDataContext() : 
@@ -185,6 +188,14 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<vw_NewTradeMark>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_NewTradeMarkStatusDate> t_NewTradeMarkStatusDate
+		{
+			get
+			{
+				return this.GetTable<t_NewTradeMarkStatusDate>();
 			}
 		}
 	}
@@ -3769,6 +3780,140 @@ namespace zscq.Model
 				{
 					this._nvc_OrderNum = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkStatusDate")]
+	public partial class t_NewTradeMarkStatusDate : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private System.Nullable<int> _TradeMarkId;
+		
+		private System.Nullable<int> _TradeMarkStatusId;
+		
+		private System.Nullable<System.DateTime> _TradeMarkDate;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnTradeMarkIdChanging(System.Nullable<int> value);
+    partial void OnTradeMarkIdChanged();
+    partial void OnTradeMarkStatusIdChanging(System.Nullable<int> value);
+    partial void OnTradeMarkStatusIdChanged();
+    partial void OnTradeMarkDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnTradeMarkDateChanged();
+    #endregion
+		
+		public t_NewTradeMarkStatusDate()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeMarkId", DbType="Int")]
+		public System.Nullable<int> TradeMarkId
+		{
+			get
+			{
+				return this._TradeMarkId;
+			}
+			set
+			{
+				if ((this._TradeMarkId != value))
+				{
+					this.OnTradeMarkIdChanging(value);
+					this.SendPropertyChanging();
+					this._TradeMarkId = value;
+					this.SendPropertyChanged("TradeMarkId");
+					this.OnTradeMarkIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeMarkStatusId", DbType="Int")]
+		public System.Nullable<int> TradeMarkStatusId
+		{
+			get
+			{
+				return this._TradeMarkStatusId;
+			}
+			set
+			{
+				if ((this._TradeMarkStatusId != value))
+				{
+					this.OnTradeMarkStatusIdChanging(value);
+					this.SendPropertyChanging();
+					this._TradeMarkStatusId = value;
+					this.SendPropertyChanged("TradeMarkStatusId");
+					this.OnTradeMarkStatusIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeMarkDate", DbType="Date")]
+		public System.Nullable<System.DateTime> TradeMarkDate
+		{
+			get
+			{
+				return this._TradeMarkDate;
+			}
+			set
+			{
+				if ((this._TradeMarkDate != value))
+				{
+					this.OnTradeMarkDateChanging(value);
+					this.SendPropertyChanging();
+					this._TradeMarkDate = value;
+					this.SendPropertyChanged("TradeMarkDate");
+					this.OnTradeMarkDateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
