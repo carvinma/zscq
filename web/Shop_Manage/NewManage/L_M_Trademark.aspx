@@ -160,6 +160,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    
     <input type="hidden" runat="server" id="hi_true" value="0" />
     <input type="hidden" runat="server" id="Hi_Orderby" value="i_Id" />
     <input type="hidden" runat="server" id="Hi_Orderby2" value="desc" />
@@ -173,7 +174,7 @@
     <input type="hidden" id="hi_timelimit" runat="server" value="0" />
     <input type="hidden" id="hi_timeadd" runat="server" value="0" />
     <input type="hidden" id="hi_status" runat="server" value="0" />
-
+  
     <input type="hidden" id="ubianhao1" runat="server" value="0" />
     <h1>
         <%if (pageadd)

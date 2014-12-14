@@ -307,10 +307,10 @@ public partial class L_M_Trademark : System.Web.UI.Page
             {
                 iquery = from i in iquery where i.RenewalDate >= Convert.ToDateTime(Request["qRenewalDate"]) && i.RenewalDate <= Convert.ToDateTime(Request["qRenewalDate2"]) select i;
             }
-            //if (Request["qrestDays"] != null)
-            //{
-            //    iquery = from i in iquery where i.i_AnnualFeeYear == Convert.ToInt32(Request["qrestDays"]) select i;
-            //}
+            if (Request["qrestDays"] != null)
+            {
+                iquery = from i in iquery where i.RestDays == Convert.ToInt32(Request["qrestDays"]) select i;
+            }
             if (Request["qStatus"] != null)
             {
                 iquery = from i in iquery where i.Status == Convert.ToInt32(Request["qStatus"]) select i;
