@@ -178,6 +178,17 @@ namespace zscq.DAL
             }
         }
 
+        /// <summary>
+        /// 查询该商标下的商标状态日期
+        /// </summary>
+        /// <param name="trademarkid"></param>
+        /// <returns></returns>
+        public IQueryable<t_NewTradeMarkStatusDate> trademarkStatusdate_Select_id(int trademarkid)
+        { 
+            var iquery = from i in mark.t_NewTradeMarkStatusDate where i.TradeMarkId == trademarkid select i;
+            return iquery;
+        }
+
         #endregion
         /// <summary>
         /// 根据id返回一条商标信息
