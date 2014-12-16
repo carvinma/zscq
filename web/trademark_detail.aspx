@@ -2,6 +2,7 @@
 <%@ Register Src="ascx/zscqfoot.ascx" TagName="zscqfoot" TagPrefix="uc2" %>
 <%@ Register Src="ascx/zscqadv.ascx" TagName="zscqadv" TagPrefix="uc3" %>
 <%@ Register Src="ascx/zscqtop2.ascx" TagName="zscqtop2" TagPrefix="uc4" %>
+<%@ Register Src="ascx/zscq_sb_leftmenu.ascx" TagName="zscq_sb_leftmenu" TagPrefix="uc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -59,8 +60,10 @@
 
   <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto; background-color: #fff;">
     <tr>
+    <td width="260" height="618" align="left" valign="top" style="background-image: url(images/server2.gif);">
+        <uc1:zscq_sb_leftmenu ID="zscq_sb_leftmenu1" runat="server" />
+      </td>
       <td align="left" valign="top">
-       
         <div class="infoMain">
 					<ul class="ui-tabs-nav clearfix">
 						<li class="ui-tabs-selected"><a href="javascript:;">商标信息</a></li>
@@ -73,6 +76,13 @@
                       <tr>
                         <td height="115" align="center" valign="top">
                           <table width="689" border="0" cellspacing="0" cellpadding="0">
+                          <tr><td height="10">
+                           </td></tr>
+                           <tr><td height="28" align="right">
+                           <a href="user_sbupdate.aspx?t_r_id=<%=trademarkId %>">
+                           <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a> &nbsp;
+                           <a href="trademark_list.aspx"><img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a> 
+                           </td></tr>
                             <tr>
                               <td width="639" height="28" align="left" valign="bottom" style="border-bottom: 1px solid #d34245;">
                                 <table width="114" border="0" cellspacing="0" cellpadding="0">
@@ -189,7 +199,10 @@
                                     <td width="260" height="32" align="right" ><strong>商标图样：</strong>
                                     </td>  
                                     <td> 
-                                     </td>  
+                                      <%=model.TrademarkPattern1%>
+                                        &nbsp;&nbsp;&nbsp;
+                                      <img alt="" height="150px" width="150px" src="<%=model.TrademarkPattern2%>" />
+                                       </td>  
                                     </tr>
                                       
                                       <tr>
@@ -249,39 +262,14 @@
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><strong>商标申请日：</strong></td>
                                     <td width="429" valign="middle">
+                                    <%= string.Format("{0:yyyy-MM-dd}", model.ApplyDate)%>
                                     </td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><strong>初审公告日：</strong></td>
                                     <td width="429" valign="middle">
-                                       
+                                        <%= string.Format("{0:yyyy-MM-dd}", model.PublicPreliminaryDate)%>
                                     </td>
-                                  </tr>
-                                  <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>注册公告日：</strong></td>
-                                    <td width="429" valign="middle">
-                                     
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong></strong></td>
-                                    <td width="429" valign="middle">
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td width="260" height="32" align="right" valign="middle">&nbsp;</td>
-                                    <td width="429" valign="middle">
-                                        &nbsp;</td>
-                                  </tr>
-                                  <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><b><span>续展期限日：</span></b></td>
-                                    <td width="429" valign="middle">
-                                        &nbsp;</td>
-                                  </tr>
-                                  <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><b><span>所剩天数：</span></b></td>
-                                    <td width="429" valign="middle">
-                                        &nbsp;</td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><b><span>最近状态：</span></b></td>
@@ -318,7 +306,7 @@
                                           <td width="260" height="32" align="right"><strong><span>商标注册申请书</span>：<br />
                                           </strong></td>
                                           <td width="429" align="left">
-                                            <%=model.AgentBook%>
+                                            <%=model.ApplyBook%>
                                           </td>
                                         </tr>
                                         <tr>
@@ -330,24 +318,11 @@
                                         </tr>
                                        
                                         <tr>
-                                          <td width="260" height="32" align="right"><strong>商标续展申请书：</strong> </td>
-                                          <td align="left" width="429">
-                                           
-                                          </td>
-                                        </tr>
-                                        
-                                                                     
-                                        <tr>
-                                          <td height="32" align="right"><strong>商标续展委托书：</strong> </td>
-                                          <td align="left">
-                                            
-                                          </td>
-                                        </tr>
-                                        
-                                        <tr>
                                           <td height="32" align="right"><strong>备注：</strong></td>
                                           <td align="left">
-                                              &nbsp;</td>
+                                          <div id="test" style="width:300px;height:80px;border:#eee solid 1px;overflow:auto;">
+                                             <%=model.Remark%>
+                                          </div></td>
                                         </tr>
                                         </table>
                                     </td>
@@ -367,73 +342,22 @@
                     </table>
 						</div>
 					</div>
-					<div class="ui-tabs-panel">
-						<table width="689" border="0" cellspacing="0" cellpadding="0">
-                          <tr>
-                          <td height="115" align="center" valign="top">
-                            <table width="689" border="0" cellspacing="0" cellpadding="0">
-                                  <tr>
-                                    <td width="639" height="20" align="left" valign="top" >
+					<div class="ui-tabs-panel ui-tabs-hide">
+                     <table cellspacing='1' cellpadding='3' id="Table1" width="669px">
+                        <asp:Repeater ID="RptAdminStatus" runat="server" >
+                            <ItemTemplate>
+                                <tr>
+                                <td width="260" align="right">
+                                 <strong> <%# Container.ItemIndex + 1%>、<%# Eval("StatusName")%>：<strong>
+                                </td>
+                                    <td align="left">
+                                      <%# string.Format("{0:yyyy-MM-dd}", Eval("TradeMarkDate"))%>
                                     </td>
-                                  </tr>
-                                  <tr>
-                                    <td height="18" align="left"></td>
-                                  </tr>
-                                  <tr>
-                                    <td height="115" align="left" valign="top">
-                                      <table width="689" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                          <td width="260" height="32" align="right"><strong>① 商标注册待审中：
-                                          </strong></td>
-                                          <td width="429" align="left">
-                                            
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td width="260" height="32" align="right"><strong>② 初步审定:
-                                          </strong></td>
-                                          <td width="429" align="left">
-                                            
-                                          </td>
-                                        </tr>
-                                       
-                                        <tr>
-                                          <td width="260" height="32" align="right"><strong>③ 已驳回：</strong> </td>
-                                          <td align="left" width="429">
-                                            
-                                          </td>
-                                        </tr>
-                           
-                                        <tr>
-                                          <td height="32" align="right"><strong>④ 视为撤回：</strong> </td>
-                                          <td align="left">
-                                            
-                                          </td>
-                                        </tr>
-                                       
-                                        <tr>
-                                          <td height="32" align="right"><strong>⑤ 已注册：</strong></td>
-                                          <td align="left">
-                                              &nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                          <td height="32" align="right"><span>⑥第</span><span lang="EN-US">1</span><span>次续展期限</span><span 
-                                                  lang="EN-US"> XXX<span>&nbsp; </span></span><span>已完成</span></td>
-                                          <td align="left">
-                                              &nbsp;</td>
-                                        </tr>
-                                        </table>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td align="left">&nbsp; </td>
-                                  </tr>
-                                </table>
-                          </td>
-                         </tr>
-                        </table>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </table>
 					</div>
-					 
 					<div class="ui-tabs-panel ui-tabs-hide" id="Div1">
                      3
 				    </div>

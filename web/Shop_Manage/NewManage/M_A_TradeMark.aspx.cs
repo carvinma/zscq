@@ -65,11 +65,12 @@ public partial class M_A_TradeMark : System.Web.UI.Page
 
     public void Bind_Admin_Status()
     {
-        int id = 0;
+        //int id = int.Parse(hi_TradeMarkId.Value);//编辑
+        int id = 0; //添加
         var adminstatusDate= mark.trademarkStatusdate_Select_id(id).ToList() ;
             var result = from a in BaseDataUtil.tradeMarkStatuslist
                             join b in adminstatusDate
-                            on a.i_Id equals b.TradeMarkId into  temp
+                            on a.i_Id equals b.TradeMarkStatusId into temp
                             from t in temp.DefaultIfEmpty()
                             select new 
                             {

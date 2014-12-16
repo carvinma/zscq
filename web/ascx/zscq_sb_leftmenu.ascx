@@ -87,7 +87,7 @@
                         
                     </td>
                 </tr>
-                <tr id="faq1" <% if (myurl == "add_trademark" || myurl == "add_trademark_renewal" ||myurl == "trademark_list" ||myurl == "user_sblb" || myurl == "user_trademarkorderok" || myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_sbdd" || myurl == "user_sbddck" || myurl == "user_sbly" || myurl == "user_trademarkorderadd" || myurl == "user_sbjf"||myurl == "user_sbsetintegral"|| myurl == "user_sbcoupon"|| myurl == "user_trademarkzixing" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
+                <tr id="faq1" <% if (myurl == "trademark_detail" || myurl == "add_trademark" || myurl == "add_trademark_renewal" ||myurl == "trademark_list" ||myurl == "user_sblb" || myurl == "user_trademarkorderok" || myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_sbdd" || myurl == "user_sbddck" || myurl == "user_sbly" || myurl == "user_trademarkorderadd" || myurl == "user_sbjf"||myurl == "user_sbsetintegral"|| myurl == "user_sbcoupon"|| myurl == "user_trademarkzixing" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
                     <td align="left" valign="top">&nbsp;
                         
                     </td>
@@ -125,11 +125,11 @@
                                             <td width="127" height="22" align="left">
                                                <%-- <a href="user_sblb.aspx" <% if (myurl == "user_sblb" || myurl == "user_sbck"|| myurl == "user_sbupdate"|| myurl == "user_trademarkzixing" ){ %>class="ac7" <%}else{%>class="" <%} %>>·全部商标信息</a>--%>
                                                    <a href="javascript:void(0)" class="menuchild">·全部商标信息</a> 
-                                                     <table  <% if (myurl == "trademark_list" ||myurl == "trademarkrenewal_list" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
+                                                     <table  <% if (myurl == "trademark_list" ||myurl == "trademarkrenewal_list" || myurl == "trademark_detail") {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
                                                       <tr><td width="10" height="22"></td>
-                                                      <td> <a href="trademark_list.aspx" <% if (myurl == "trademark_list" ){ %>class="ac7" <%}else{%>class="" <%} %>>·商标申请案</a></td></tr>
+                                                      <td> <a href="trademark_list.aspx" <% if (myurl == "trademark_list" || myurl == "trademark_detail"){ %>class="ac7" <%}else{%>class="" <%} %>>·商标申请案</a></td></tr>
                                                       <tr><td width="10" height="22"></td><td>
-                                                       <a href="trademarkrenewal_list.aspx"  <% if (myurl == "trademarkrenewal_list" ){ %>class="ac7" <%}else{%>class="" <%} %>>·商标续展案</a></td></tr>
+                                                       <a href="trademarkrenewal_list.aspx"  <% if (myurl == "trademarkrenewal_list" || myurl == "trademark_detail"){ %>class="ac7" <%}else{%>class="" <%} %>>·商标续展案</a></td></tr>
                                                      </table>
                                             </td>
                                         </tr>

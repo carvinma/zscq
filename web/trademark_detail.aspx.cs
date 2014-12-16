@@ -17,6 +17,7 @@ public partial class trademark_detail : System.Web.UI.Page
     public t_NewTradeMarkInfo model = new t_NewTradeMarkInfo();
     public string division = string.Empty;
     public string status = string.Empty;
+    public int trademarkId;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
@@ -38,16 +39,35 @@ public partial class trademark_detail : System.Web.UI.Page
 
     public void Bind_Page_Type()// 绑定页面信息
     {
-
         if (Request.QueryString["t_r_id"] != null && Request.QueryString["t_r_id"].ToString() != "")
         {
-            int trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
+            trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
             Bind_Page_Info(trademarkId);
+            Bind_TradeMarkStatus();
         }
         else
         {
             Response.Redirect("trademark_list.aspx");
         }
+
+    }
+    private void Bind_TradeMarkStatus()
+    { 
+        var adminstatusDate = mark.trademarkStatusdate_Select_id(trademarkId).ToList();
+            var result = from a in BaseDataUtil.tradeMarkStatuslist
+                            join b in adminstatusDate
+                            on a.i_Id equals b.TradeMarkStatusId into  temp
+                            from t in temp.DefaultIfEmpty()
+                            select new 
+                            {
+                                i_Id = t==null? 0:t.i_Id,
+                                TradeMarkStatusId = a.i_Id,
+                                TradeMarkStatusValue=a.StatusValue,
+                                StatusName=a.StatusName,
+                                TradeMarkDate = t==null? null: t.TradeMarkDate,
+                            }; 
+        RptAdminStatus.DataSource=result;
+        RptAdminStatus.DataBind();
 
     }
     private void Bind_Page_Info(int trademarkId)// 绑定商标详细数据
