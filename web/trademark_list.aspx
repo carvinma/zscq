@@ -383,11 +383,13 @@
                                                                         <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF"  class="font12b4e">
-                                                                       <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false) ? "已上传" : "<a href='FileLoad/cn/商标注册申请书.doc'>下载</a><br /><a href='FileLoad/cn/商标注册申请书.doc'>上传</a>"%>
+                                                                       <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
+                                                                     ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                                                     </td>
                                                                     
                                                                     <td align="center" bgcolor="#FFFFFF"  class="font12b4e">
-                                                                    <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false) ? "已上传" : "<a href='FileLoad/cn/商标申请代理委托书 .doc'>下载</a><br /><a href='FileLoad/cn/商标申请代理委托书.doc'>上传</a>"%>
+                                                                    <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
+                                                                        ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                                                     </td>
                                                                     
                                                                     <td align="center" bgcolor="#FFFFFF">
