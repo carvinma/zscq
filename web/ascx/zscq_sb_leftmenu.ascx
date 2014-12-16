@@ -87,7 +87,7 @@
                         
                     </td>
                 </tr>
-                <tr id="faq1" <%   if (myurl == "user_sblb" || myurl == "user_trademarkorderok" || myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_sbdd" || myurl == "user_sbddck" || myurl == "user_sbly" || myurl == "user_trademarkorderadd" || myurl == "user_sbjf"||myurl == "user_sbsetintegral"|| myurl == "user_sbcoupon"|| myurl == "user_trademarkzixing" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
+                <tr id="faq1" <% if (myurl == "trademark_list" ||myurl == "user_sblb" || myurl == "user_trademarkorderok" || myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_sbdd" || myurl == "user_sbddck" || myurl == "user_sbly" || myurl == "user_trademarkorderadd" || myurl == "user_sbjf"||myurl == "user_sbsetintegral"|| myurl == "user_sbcoupon"|| myurl == "user_trademarkzixing" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
                     <td align="left" valign="top">&nbsp;
                         
                     </td>
@@ -125,9 +125,11 @@
                                             <td width="127" height="22" align="left">
                                                <%-- <a href="user_sblb.aspx" <% if (myurl == "user_sblb" || myurl == "user_sbck"|| myurl == "user_sbupdate"|| myurl == "user_trademarkzixing" ){ %>class="ac7" <%}else{%>class="" <%} %>>·全部商标信息</a>--%>
                                                    <a href="javascript:void(0)" class="menuchild">·全部商标信息</a> 
-                                                     <table style="display:none">
-                                                      <tr><td width="10" height="22"></td><td> <a href="trademark_list.aspx">·商标申请案</a></td></tr>
-                                                      <tr><td width="10" height="22"></td><td> <a href="trademark_list.aspx">·商标续展案</a></td></tr>
+                                                     <table  <% if (myurl == "trademark_list" ||myurl == "trademarkrenewal_list" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
+                                                      <tr><td width="10" height="22"></td>
+                                                      <td> <a href="trademark_list.aspx" <% if (myurl == "trademark_list" ){ %>class="ac7" <%}else{%>class="" <%} %>>·商标申请案</a></td></tr>
+                                                      <tr><td width="10" height="22"></td><td>
+                                                       <a href="trademarkrenewal_list.aspx"  <% if (myurl == "trademarkrenewal_list" ){ %>class="ac7" <%}else{%>class="" <%} %>>·商标续展案</a></td></tr>
                                                      </table>
                                             </td>
                                         </tr>
@@ -180,8 +182,8 @@
                                     <%--<a href="user_sbdd.aspx" <% if (myurl == "user_sbdd" ||  myurl == "user_sbddck"||  myurl == "user_trademarkorderok" ||myurl == "user_trademarkorderadd"){ %>class="font12bd44147" <%}else{%>class="" <%} %>>·我的商标订单</a>--%>
                                     <a href="javascript:void(0)"  class="menuchild">·我的商标订单</a>
                                     <table style="display:none">
-                                    <tr><td width="10" height="22"></td><td>  <a href="trademark_list.aspx">·商标申请案订单</a></td></tr>
-                                     <tr><td width="10" height="22"></td><td> <a href="user_sbtj.aspx">·商标续展案订单</a></td></tr>
+                                    <tr><td width="10" height="30"></td><td>  <a href="trademark_list.aspx">·商标申请案订单</a></td></tr>
+                                     <tr><td width="10" height="30"></td><td> <a href="user_sbtj.aspx">·商标续展案订单</a></td></tr>
                                     </table>
                                 </td>
                                 <td style="border-bottom: 1px solid #d3d3d3;">&nbsp;
@@ -365,13 +367,12 @@
 </table>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".menuchild").live("click", function () {
+        //        $(".menuchild").live("click", function () {
+        //            $(this).next().toggle();
+        //        });
+        $(".menuchild").click(function () {
             $(this).next().toggle();
         });
-//        $(".menuchild").click(function () {
-//            alert(1);
-//            $(this).next().toggle();
-//        });
     });
 
     function switchTag1(tag, content, k) {
@@ -383,6 +384,7 @@
         }
     }
     function txt_roll(str) {
+        alert(2);
         if (document.getElementById(str).style.display == "") {
             document.getElementById(str).style.display = "none";
             document.getElementById(str + "_td").setAttribute("bgColor", "#949293");
