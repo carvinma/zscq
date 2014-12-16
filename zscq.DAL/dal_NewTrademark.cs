@@ -199,11 +199,22 @@ namespace zscq.DAL
         /// <summary>
         /// 查询该商标下的商标状态日期
         /// </summary>
-        /// <param name="trademarkid"></param>
+        /// <param name="trademarkid">ID</param>
         /// <returns></returns>
         public IQueryable<t_NewTradeMarkStatusDate> trademarkStatusdate_Select_id(int trademarkid)
         { 
             var iquery = from i in mark.t_NewTradeMarkStatusDate where i.TradeMarkId == trademarkid select i;
+            return iquery;
+        }
+
+        /// <summary>
+        /// 查询商标留言
+        /// </summary>
+        /// <param name="trademarkid">商标ID</param>
+        /// <returns></returns>
+        public IQueryable<t_NewTradeMarkMessage> trademarkMessage_Select_id(int trademarkid)
+        {
+            var iquery = from i in mark.t_NewTradeMarkMessage where i.TradeMarkId == trademarkid select i;
             return iquery;
         }
 
