@@ -212,7 +212,7 @@ namespace zscq.DAL
             try
             {
                 var find = mark.t_NewTradeMarkStatusDate.Where(p => p.TradeMarkId == model.TradeMarkId && p.TradeMarkStatusId == model.TradeMarkStatusId);
-                if (find == null)
+                if (find == null || find.Count()==0)
                 {
                     mark.t_NewTradeMarkStatusDate.InsertOnSubmit(model);
                     mark.SubmitChanges();
