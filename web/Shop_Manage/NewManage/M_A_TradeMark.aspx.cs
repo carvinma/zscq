@@ -53,6 +53,7 @@ public partial class M_A_TradeMark : System.Web.UI.Page
         {
             //Bind_Drp_PGuoJiaType();
             Bind_Page_Info();
+            Bind_Admin_Status();
             this.lblCaseNo.Text= caseNo.GetTodayMaxCaseNo();
 
             t_GoodsCategoryFees fees = goods.CategoryFees_Select_One();
@@ -62,7 +63,25 @@ public partial class M_A_TradeMark : System.Web.UI.Page
         }
     }
 
-  
+    public void Bind_Admin_Status()
+    {
+        int id = 0;
+        var adminstatusDate= mark.trademarkStatusdate_Select_id(id).ToList() ;
+            var result = from a in BaseDataUtil.tradeMarkStatuslist
+                            join b in adminstatusDate
+                            on a.i_Id equals b.TradeMarkId into  temp
+                            from t in temp.DefaultIfEmpty()
+                            select new 
+                            {
+                                i_Id = t==null? 0:t.i_Id,
+                                TradeMarkStatusId = a.i_Id,
+                                TradeMarkStatusValue=a.StatusValue,
+                                StatusName=a.StatusName,
+                                TradeMarkDate = t==null? null: t.TradeMarkDate,
+                            }; 
+        RptAdminStatus.DataSource=result;
+        RptAdminStatus.DataBind();
+    }
     public void Bind_Page_Info()
     {
         if (Request.QueryString["id"] != null)
@@ -229,9 +248,11 @@ public partial class M_A_TradeMark : System.Web.UI.Page
         var model = InitModel();
         if (model != null)
         {
+            model.i_Type = 0;
             model.IsSubmit = true;
             mark.Trademark_Add(model);
             InitPaymodel(model.i_Id);
+            hi_TradeMarkId.Value = model.i_Id.ToString();
         }
     }
 

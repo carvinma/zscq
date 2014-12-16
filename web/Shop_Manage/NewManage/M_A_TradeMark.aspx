@@ -404,12 +404,15 @@
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
+    
+      <input type="hidden" id="hi_RegNoticeDate" runat="server" value="0" />
+      <input type="hidden" id="hi_TradeMarkId" runat="server" value="0" />
+
             <input type="hidden" id="hd_id" runat="server" value="0" />
             <input type="hidden" id="hd_userId" runat="server" value="0" />
              <input type="hidden" id="hi_n_a" runat="server" value="" />
 
               <input type="hidden" id="Hi_MemberId" runat="server" value="" />
-    <input id="hi_guoji" type="hidden" runat="server" value="0" />
     <input id="hi_usertype" type="hidden" runat="server" />
     <input id="hi_zhitifiles" type="hidden" runat="server" />
     <input id="hi_sbid" type="hidden" runat="server" value="0" />
@@ -677,7 +680,8 @@
                                                                                     <td height="32" align="right">
                                                                                         <strong>商标描述类型：</strong></td>
                                                                                     <td valign="middle">
-                                                                                          <asp:RadioButton ID="RadioButton1" runat="server" onclick="miaoshutype();" GroupName="aa"/>文字商标<asp:RadioButton ID="RadioButton2"
+                                                                                          <asp:RadioButton ID="RadioButton1" runat="server" onclick="miaoshutype();" 
+                                                                                              GroupName="aa" Checked="True"/>文字商标<asp:RadioButton ID="RadioButton2"
                                         runat="server" GroupName="aa" onclick="miaoshutype();" />图形商标<asp:RadioButton ID="RadioButton3" runat="server" GroupName="aa" onclick="miaoshutype();" />文字与图形商标</td>
                                                                                     <td valign="middle">
                                                                                         &nbsp;</td>
@@ -833,6 +837,35 @@
                                                                 </td></tr>
                                                                 </table>
                             </td>
+                            </tr>
+                            <tr>
+                            <td colspan="2">  <table  width="689" border="0" cellspacing="0" cellpadding="0">
+                                                                           <tr> <th> 商标信息第二部分</th>
+                                                                          </tr>
+                                                                           <tr> 
+                                                                           <td >
+                                                                           <table>
+                                                                           <tr><td height="32" width="276" align="right"><strong>商标申请日：</strong></td>
+                                                                           <td><span id="spApplydate"> </span></td></tr>
+                                                                           <tr><td height="32" width="276" align="right"><strong>初审公告日：</strong></td>
+                                                                           <td><span id="spPublicPreliminaryDate"> </span></td></tr>
+                                                                           <tr><td height="32" width="276" align="right"><strong>注册公告日：</strong></td>
+                                                                           <td><span id="spRegNoticeDate"> </span></td></tr>
+                                                                           <tr><td height="32" width="276" align="right">&nbsp;</td>
+                                                                           <td> <table id="tbdate"></table>
+                                                                           </td></tr>
+                                                                           <tr><td height="32" width="276" align="right"><strong>续展期限日：</strong></td>
+                                                                           <td><span id="spRenewalDate"> </span></td></tr>
+                                                                           <tr><td height="32" width="276" align="right"><strong>所剩天数：</strong></td>
+                                                                           <td  height="32"><span id="spRestDays"> </span> </td></tr>
+                                                                           <tr><td height="32" width="276" align="right"><strong>最近状态：</strong></td>
+                                                                           <td  height="32"><span id="spStatus"> </span></td></tr>
+                                                                           </table>
+                                                                           </td>
+                                                              
+                                                                          </tr>
+                                                                     </table>
+                                                                      </td>
                             </tr>
                             <tr>
                             <td colspan="2">
@@ -997,9 +1030,36 @@
                                           <%-- <asp:Button ID="Btn_Update" runat="server" Text="修改" CssClass="button" CommandName='<%#Eval("i_Id") %>'  OnCommand='Edit'/>--%>
                     </div>    
         </div>
-        	<div class="ui-tabs-panel ui-tabs-hide">
-                2
-			</div>
+        	<div class="ui-tabs-panel">
+             <div class="list-div" id="Div3" style="width:689px">
+           
+                       <table cellspacing='1' cellpadding='3' id="Table1" width="669px">
+                        <tr>
+                            <th width="10%" align="right">商标状态</th>
+                            <th width="10%">发生时间</th>
+                            <th width="5%">操作</th>
+                        </tr>
+                        <asp:Repeater ID="RptAdminStatus" runat="server" >
+                            <ItemTemplate>
+                                <tr>
+                                    <td align="right">
+                                      <%# Eval("StatusName")%>
+                                    </td>
+                                    <td align="center">
+                                        <input type="text" id='dt_statustime<%#Eval("TradeMarkStatusId") %>' class="inputs110text" 
+                                         value='<%# Eval("TradeMarkDate")==null? "": Convert.ToDateTime(Eval("TradeMarkDate")).ToShortDateString() %>'  
+                                         readonly="readonly"  style="background-image: url(../../images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                         onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/>
+                                    </td>
+                                     <td align="center">
+                                      <input id="Btn_Update" type="button" class="inputicoeditbutton" onclick="AdminStatusEdit(<%#Eval("TradeMarkStatusId") %>,<%#Eval("TradeMarkStatusValue") %>)" />
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </table>
+                      </div>
+            </div>
             <div class="ui-tabs-panel ui-tabs-hide">
                 <form id="questionform" name="TourExForm" novalidate="novalidate">
                 <table width="90%"><tr><td valign="middle" align="right"><b>留言内容：</b></td>
@@ -1155,7 +1215,7 @@
         var datastr = data1 + "|" + data2 + "|" + data3 + "|" + data4 + "|" + data5 + "|" + data6 + "|" + data7 + "|" + data8;
         $.ajax({
             type: "POST",
-            url: "Shop_A_DataOrder.ashx",
+            url: "../Shop_A_DataOrder.ashx",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             data: "flag=dataOrder&id=" + obj + "&data=" + datastr,
             success: function (msg) {
@@ -1168,6 +1228,68 @@
                 }
             }
         });
+    }
+
+    function AdminStatusEdit(obj,statusvalue) {
+        var data1 = $("#dt_statustime" + obj).val();
+        var  tradeMarkId= $("#hi_TradeMarkId").val();
+        if (tradeMarkId!="0") {
+            $.ajax({
+                type: "POST",
+                url: "M_A_TradeMark.ashx",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                data: "flag=adminstatusDate&TradeMarkStatusId=" + obj + "&TradeMarkId=" + tradeMarkId + "&TradeMarkStatusValue=" + statusvalue + "&data=" + data1,
+                success: function (msg) {
+
+                    if (msg == "ok") {
+                        alert("保存成功！");
+
+                        if (statusvalue == 0)//商标注册待审中 X年X月X日 →商标申请日
+                        {
+                            $("#spApplydate").text(data1);
+                        }
+                        else if (statusvalue == 1)//初步审定 X年X月X日 →初审公告日
+                        {
+                            $("#spPublicPreliminaryDate").text(data1);
+                        }
+                        else if (statusvalue == 4)//已注册 X年X月X日 →注册公告日 当状态为“已注册”时，此案件自动转到商标续展列表中，不在商标申请列表中显示
+                        {
+                            calcRegnoticeDate(data1);
+                            $("#spRegNoticeDate").text(data1);
+                           
+                        }
+                    }
+                    if (msg == "0") {
+                        alert("保存失败！");
+                    }
+                }
+            });
+        }
+    }
+
+    function calcRegnoticeDate(vdate) {
+        var regdate = vdate;
+        var tbdate = $("#tbdate");
+        tbdate.empty();
+        var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
+        //          
+        var d = new Date(regdate);
+        d.setYear(d.getFullYear() + parseInt(10));
+        d.setDate(d.getDate() - parseInt(1));
+
+        var month = d.getMonth() + 1;
+        if (parseInt(month) < 10)
+            month = "0" + month;
+        var day = d.getDate();
+        if (parseInt(day) < 10)
+            day = "0" + day;
+        var ndate = (d.getFullYear()) + "-" + month + "-" + day;
+        $("#spRenewalDate").text(ndate);
+        tbdate.append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day));
+        $("#hi_RegNoticeDate").val(ndate + "_" + "0" + "|");
+        var today = new Date();
+        $("#spRestDays").text(Math.ceil((d-today) / (24 * 60 * 60 * 1000)) + "天"); //剩于天数
+        $("#spStatus").text();
     }
 </script>
 <script type="text/javascript">
