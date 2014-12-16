@@ -358,8 +358,50 @@
                         </asp:Repeater>
                     </table>
 					</div>
-					<div class="ui-tabs-panel ui-tabs-hide" id="Div1">
-                     3
+					<div class="ui-tabs-panel ui-tabs-hide">
+                    
+                      <table cellspacing='1' cellpadding='3' id="Table2" width="669px">
+                        <asp:Repeater ID="RptMessage" runat="server" >
+                            <ItemTemplate>
+                              <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                  <td height="21" align="center" valign="top" style="line-height: 21px;">
+                                    <table width="630" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td width="15" height="15">&nbsp; </td>
+                                        <td width="808" align="left" valign="top">
+                                          <table width="630" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                              <td width="807" height="28" align="left"><strong><%# string.Format("{0:yyyy-MM-dd}",Eval("AddTime"))%></strong></td>
+                                            </tr>
+                                            <tr>
+                                              <td width="807" height="28" align="left" valign="top" style="line-height: 21px;"><strong></strong>
+                                                <%#Eval("Message")%>
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </td>
+                                        <td width="28">&nbsp; </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td height="26" align="left" style="background-image: url(images/faq2.gif);">&nbsp; </td>
+                                </tr>
+                              </table>
+                            </ItemTemplate>
+                        <%--    <tr>
+                            <td width="100" align="center">
+                           <div class="item">
+                            <dl class="question clearfix">
+                                <dt><b>留言内容</b></dt>
+                                <dd><span><%# string.Format("{0:yyyy-MM-dd HH:mm}",Eval("AddTime"))%></span><%# Eval("Message")%></dd>
+                            </dl>
+                            </div>
+                          </td></tr>--%>
+                        </asp:Repeater>
+                    </table>
 				    </div>
 				</div>
   

@@ -44,6 +44,7 @@ public partial class trademark_detail : System.Web.UI.Page
             trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
             Bind_Page_Info(trademarkId);
             Bind_TradeMarkStatus();
+            Bind_Message();
         }
         else
         {
@@ -51,6 +52,18 @@ public partial class trademark_detail : System.Web.UI.Page
         }
 
     }
+
+    /// <summary>
+    /// 商标留言
+    /// </summary>
+    private void Bind_Message()
+    {
+       this.RptMessage.DataSource=  mark.trademarkMessage_Select_id(trademarkId).ToList();
+       this.RptMessage.DataBind();
+    }
+    /// <summary>
+    /// 商标状态
+    /// </summary>
     private void Bind_TradeMarkStatus()
     { 
         var adminstatusDate = mark.trademarkStatusdate_Select_id(trademarkId).ToList();
