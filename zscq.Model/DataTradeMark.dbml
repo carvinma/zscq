@@ -206,8 +206,8 @@
       <Column Name="RestDays" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.t_NewTradeMakMessage" Member="t_NewTradeMakMessage">
-    <Type Name="t_NewTradeMakMessage">
+  <Table Name="dbo.t_NewTradeMarkMessage" Member="t_NewTradeMarkMessage">
+    <Type Name="t_NewTradeMarkMessage">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TradeMarkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="subject" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />

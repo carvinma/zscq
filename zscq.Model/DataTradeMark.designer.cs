@@ -63,9 +63,9 @@ namespace zscq.Model
     partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
-    partial void Insertt_NewTradeMakMessage(t_NewTradeMakMessage instance);
-    partial void Updatet_NewTradeMakMessage(t_NewTradeMakMessage instance);
-    partial void Deletet_NewTradeMakMessage(t_NewTradeMakMessage instance);
+    partial void Insertt_NewTradeMarkMessage(t_NewTradeMarkMessage instance);
+    partial void Updatet_NewTradeMarkMessage(t_NewTradeMarkMessage instance);
+    partial void Deletet_NewTradeMarkMessage(t_NewTradeMarkMessage instance);
     #endregion
 		
 		public DataTradeMarkDataContext() : 
@@ -202,11 +202,11 @@ namespace zscq.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<t_NewTradeMakMessage> t_NewTradeMakMessage
+		public System.Data.Linq.Table<t_NewTradeMarkMessage> t_NewTradeMarkMessage
 		{
 			get
 			{
-				return this.GetTable<t_NewTradeMakMessage>();
+				return this.GetTable<t_NewTradeMarkMessage>();
 			}
 		}
 	}
@@ -4019,8 +4019,8 @@ namespace zscq.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMakMessage")]
-	public partial class t_NewTradeMakMessage : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkMessage")]
+	public partial class t_NewTradeMarkMessage : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -4047,7 +4047,7 @@ namespace zscq.Model
     partial void OnMessageChanged();
     #endregion
 		
-		public t_NewTradeMakMessage()
+		public t_NewTradeMarkMessage()
 		{
 			OnCreated();
 		}
