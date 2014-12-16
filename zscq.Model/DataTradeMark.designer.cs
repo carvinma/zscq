@@ -4033,6 +4033,8 @@ namespace zscq.Model
 		
 		private string _Message;
 		
+		private System.Nullable<System.DateTime> _AddTime;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4045,6 +4047,8 @@ namespace zscq.Model
     partial void OnsubjectChanged();
     partial void OnMessageChanging(string value);
     partial void OnMessageChanged();
+    partial void OnAddTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnAddTimeChanged();
     #endregion
 		
 		public t_NewTradeMarkMessage()
@@ -4128,6 +4132,26 @@ namespace zscq.Model
 					this._Message = value;
 					this.SendPropertyChanged("Message");
 					this.OnMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> AddTime
+		{
+			get
+			{
+				return this._AddTime;
+			}
+			set
+			{
+				if ((this._AddTime != value))
+				{
+					this.OnAddTimeChanging(value);
+					this.SendPropertyChanging();
+					this._AddTime = value;
+					this.SendPropertyChanged("AddTime");
+					this.OnAddTimeChanged();
 				}
 			}
 		}
