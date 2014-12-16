@@ -153,6 +153,71 @@ function addgoods() {
     });
     goodscalc.toChangeDisplay();
 }
+//编辑时重新显示商品
+function editgoods(sel_sortid, sel_groupid) {
+    var strval = new Array();
+    $("input[name='chkItem']:checked").each(function () {
+        //strval.push($(this).val());
+        strval.push([$(this).val(), $(this).parent().next().html(), $(this).parent().next().next().html()]);
+    });
+    if (strval.length == 0) {
+        return false;
+    }
+    //获取选中的商品服务所有的分类和类似群
+    var sel_groupid = $("#sel_groupid").text();
+
+    //获取已经选择分类
+    var sortarr = $("#sortarr").val();
+    if (sortarr == '') {
+        $("#sortarr").val(sel_sortid);
+    }
+    else {
+        var parr = new Array();
+        parr = sortarr.split(",");
+        //判断是否已经存在选择的类
+        var state = 0;
+        for (var i = 0; i < parr.length; i++) {
+            if (parr[i] == sel_sortid) {
+                state = 1;
+                break;
+            }
+        }
+        if (state == 0) {
+            parr.push(sel_sortid);
+        }
+        //排序
+        parr.sort();
+        var qarr = parr.join(",");
+        $("#sortarr").val(qarr);
+    }
+    //获取已经选择的商品服务的sid
+    var arr_goods = new Array();
+    //获取以下数组的长度
+    $("tr[classname='arr_goods']").each(function () {
+        //arr_goods.push($(this).val());
+        //alert($(this).attr("val"));
+        arr_goods.push($(this).attr("val"));
+        goodscalc.add($(this).find("td:eq(1)").text(), 1);
+    });
+    var endnum = $("tr[classname='arr_goods']").length;
+    $.each(strval, function (i, n) {
+        if ($.inArray(n[0], arr_goods) == '-1') {
+            endnum = endnum + parseInt(1);
+            goodscalc.add(sel_sortid, 1);
+            $("#th_box").after('<tr classname="arr_goods" name="arr_goods[]" val="' + n[0] + '" id="arr_goods' +
+      endnum + '"><td height="25" align="center" bgcolor="#FFFFFF" id="4' + endnum + '">' + endnum + '</td><td align="center" bgcolor="#FFFFFF" id="3' + endnum
+      + '"><input type="hidden" classname="hid_classsort" name="hid_sort[]" value="' +
+      sel_sortid + '">' + sel_sortid +
+      '</td><td align="center" bgcolor="#FFFFFF" id="2' + endnum + '"><input type="hidden" name="hid_group[]" value="' +
+       sel_groupid + '">' + sel_groupid +
+       '</td><td align="center" bgcolor="#FFFFFF" id="1' + endnum + '"><input type="hidden" name="hid_goods[]" value="'
+       + n[1] + '">' + n[1] + '</td><td align="center" bgcolor="#FFFFFF" id="0' + endnum + '"><input type="hidden" name="hid_goodsname[]" classname="'
+       + sel_sortid + '" value="' + n[2] + '">'
+       + n[2] + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(' + endnum + ')">删除</a></td></tr>');
+        }
+    });
+    goodscalc.toChangeDisplay();
+}
 var goodscalc = {
     v: new Array(),
     add: function (key, value) { if (!this.v[key]) this.v[key] = 0; this.v[key] += value; },
@@ -947,12 +1012,20 @@ function checkLength(txtObj) {
     }
     return valLength;
 }
+//编辑时初始化行政区划
+function EditProCityArea(proviceid,cityid, areaid) {
+    $("#areaNameTxt").text("");
+    SelProv(proviceid,cityid,areaid);
+   // SelCity(proviceid, cityid);
+   // SelArea(cityid, areaid);
+}
 
+//添加时初始化行政区划
 function InitProCityArea() {
     $("#areaNameTxt").text("");
     SelProv();
 }
-function SelProv() {
+function SelProv(proviceid, cityid, areaid) {
     $.ajax({
         type: "POST",
         url: "Handler.ashx",
@@ -960,12 +1033,16 @@ function SelProv() {
         data: "flag=selprov",
         success: function (date) {
             $("#live_prov").html(date);
+            if (!isEmpty(proviceid)) {
+                $("#live_prov").val(proviceid).attr("selected", "selected");
+                SelCity(proviceid, cityid, areaid);
+            }
         }
     });
 }
 
 
-function SelCity(val,cityid) {
+function SelCity(val, cityid, areaid) {
     var provinceName = isEmpty(val) ? "" : $("#live_prov").find("option:selected").text();
     $("#areaNameTxt").html(provinceName); 
     $("#live_country").html("<option selected=\"\" value=\"\">请选择：</option>");
@@ -976,11 +1053,15 @@ function SelCity(val,cityid) {
         type: "POST",
         url: "Handler.ashx",
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data: "flag=selcity&provinceid="+val,
+        data: "flag=selcity&provinceid=" + val,
         success: function (data) {
             $("#live_city").html(data);
-            if(cityid!=null)
-               $("#live_city").val(cityid).attr("selected", "selected");
+            if (!isEmpty(cityid)) {
+                $("#live_city").val(cityid).attr("selected", "selected");
+                if (!isEmpty(areaid)) {
+                    SelArea(cityid, areaid);
+                }
+            }
             if (val == null || val == "") {
                 $("#live_city").html("<option selected=\"\" value=\"\">请选择：</option>");
                 $("#live_country").html("<option selected=\"\" value=\"\">请选择：</option>");
@@ -1029,7 +1110,6 @@ function SetAddress(val) {
     var provinceName = $("#live_prov").find("option:selected").text();
     var cityName = $("#live_city").find("option:selected").text().replace("市辖区", "").replace("县", "");
     var countyName = isEmpty(val) ? "" : $("#live_country").find("option:selected").text();
-    
 //    var provinceId = $("#live_prov").find("option:selected").val();
 //    var cityId = $("#live_city").find("option:selected").val();
     var countyId = $("#live_country").find("option:selected").val();

@@ -79,7 +79,7 @@
                           <tr><td height="10">
                            </td></tr>
                            <tr><td height="28" align="right">
-                           <a href="add_trademark.aspx?t_r_id=<%=trademarkId %>">
+                           <a href="edit_trademark.aspx?t_r_id=<%=trademarkId %>">
                            <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a> &nbsp;
                            <a href="trademark_list.aspx"><img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a> 
                            </td></tr>

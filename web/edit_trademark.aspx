@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="add_trademark.aspx.cs" Inherits="aBrand_add_trademark" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="edit_trademark.aspx.cs" Inherits="aBrand_edit_trademark" %>
 
 <%@ Register Src="ascx/zscqfoot.ascx" TagName="zscqfoot" TagPrefix="uc2" %>
 <%@ Register Src="ascx/zscqadv.ascx" TagName="zscqadv" TagPrefix="uc3" %>
@@ -791,6 +791,18 @@
                                                               <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</td>
                                                                <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
                                                             </tr>
+                                                              <asp:Repeater ID="Rpt_goods" runat="server">
+                                                               <ItemTemplate>
+                                                               <tr classname="arr_goods" name="arr_goods[]" val="2" id="arr_goods1">
+                                                               <td height="25" align="center" bgcolor="#FFFFFF" id="41"><%# Container.ItemIndex + 1%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="31"><input type="hidden" classname="hid_classsort" name="hid_sort[]" value="01">01</td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="21"><input type="hidden" name="hid_group[]" value="0101">0101</td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="11"><input type="hidden" name="hid_goods[]" value="010061">010061</td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="01"><input type="hidden" name="hid_goodsname[]" classname="01" value="氨">氨</td>
+                                                               <td align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(1)">删除</a></td>
+                                                               </tr>
+                                                                </ItemTemplate>
+                                                                </asp:Repeater>
                                                            </table>
                                                         </td>
                                                         </tr>

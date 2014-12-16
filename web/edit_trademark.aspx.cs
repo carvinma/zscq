@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
 
-public partial class aBrand_add_trademark : System.Web.UI.Page
+public partial class aBrand_edit_trademark : System.Web.UI.Page
 {
     private dal_Goods goods = new dal_Goods();
     private dal_NewTrademark mark = new dal_NewTrademark();
@@ -88,6 +88,12 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         {
             Image2.ImageUrl = model.TrademarkPattern2;
             upPattern2.Value = model.TrademarkPattern2;
+        }
+        if (!string.IsNullOrEmpty(model.TrademarkType) && !string.IsNullOrEmpty(model.TrademarkGoods))
+        {
+            string[] good = model.TrademarkGoods.Split(',');
+            //good.Contains
+            //goods.Goods_SearchDetail(
         }
     }
     #endregion
