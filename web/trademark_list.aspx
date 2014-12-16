@@ -49,37 +49,38 @@
             }
         }
     </script>
-    <script language="javascript">
-        function switchTag1(tag, content, k) {
-            for (i = 1; i < 3; i++) {
-                if (i == k)
-                { document.getElementById(tag + i).className = "font12bt"; document.getElementById(content + i).className = ""; }
-                else
-                { document.getElementById(tag + i).className = "font12bs"; document.getElementById(content + i).className = "h_lsit_none"; }
-            }
-        }
-        var rollFlag = 0;
+   <script language="javascript">
+       function switchTag1(tag, content, k) {
+           for (i = 1; i < 3; i++) {
+               if (i == k)
+               { document.getElementById(tag + i).className = "font12bt"; document.getElementById(content + i).className = ""; }
+               else
+               { document.getElementById(tag + i).className = "font12bs"; document.getElementById(content + i).className = "h_lsit_none"; }
+           }
+       }
+       var rollFlag = 0;
 
-        function txt_roll(str) {
-            sub_num = str.substring(str.length - 2);
-            sub_str = str.substring(0, str.length - 2);
+       function txt_roll(str) {
+           sub_num = str.substring(str.length - 2);
+           sub_str = str.substring(0, str.length - 2);
 
-            if (document.all[str].style.display == "") {
-                document.all[str].style.display = "none";
-                rollFlag = 0;
-                return;
-            }
-            else {
-                if (rollFlag != 0) {
-                    //document.all[sub_str+rollFlag].style.display="none";
-                    document.all[str].style.display = "";
-                }
+           if (document.all[str].style.display == "") {
+               document.all[str].style.display = "none";
+               rollFlag = 0;
+               return;
+           }
+           else {
+               if (rollFlag != 0) {
+                   //document.all[sub_str+rollFlag].style.display="none";
+                   document.all[str].style.display = "";
+               }
 
-                document.all[str].style.display = "";
-                rollFlag = sub_num;
-            }
-        }
-    </script>
+               document.all[str].style.display = "";
+               rollFlag = sub_num;
+           }
+
+       }
+  </script>
     <style type="text/css">
         .time0
         {

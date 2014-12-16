@@ -57,7 +57,7 @@ public partial class trademark_list : System.Web.UI.Page
             this.ddlApplyType.DataValueField = "Value";
             this.ddlApplyType.DataBind();
 
-            IList<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkApplyStatuslist;
+            IList<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkApplyStatuslist.ToList();
             tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
             this.ddlTradeMarkStatus.DataSource = tradeMarkStatuslist;
             this.ddlTradeMarkStatus.DataTextField = "StatusName";

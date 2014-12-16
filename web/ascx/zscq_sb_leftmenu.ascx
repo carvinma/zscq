@@ -87,7 +87,7 @@
                         
                     </td>
                 </tr>
-                <tr id="faq1" <% if (myurl == "trademark_list" ||myurl == "user_sblb" || myurl == "user_trademarkorderok" || myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_sbdd" || myurl == "user_sbddck" || myurl == "user_sbly" || myurl == "user_trademarkorderadd" || myurl == "user_sbjf"||myurl == "user_sbsetintegral"|| myurl == "user_sbcoupon"|| myurl == "user_trademarkzixing" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
+                <tr id="faq1" <% if (myurl == "add_trademark" || myurl == "add_trademark_renewal" ||myurl == "trademark_list" ||myurl == "user_sblb" || myurl == "user_trademarkorderok" || myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_sbdd" || myurl == "user_sbddck" || myurl == "user_sbly" || myurl == "user_trademarkorderadd" || myurl == "user_sbjf"||myurl == "user_sbsetintegral"|| myurl == "user_sbcoupon"|| myurl == "user_trademarkzixing" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
                     <td align="left" valign="top">&nbsp;
                         
                     </td>
@@ -147,11 +147,11 @@
                                             </td>
                                             <td width="127" height="22" align="left">
                                                <a href="javascript:void(0)" class="menuchild">·添加商标信息</a> 
-                                               <table style="display:none">
+                                               <table <% if (myurl == "add_trademark" ||myurl == "add_trademark_renewal" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
                                                <tr><td width="10" height="22"></td><td>
-                                                 <a href="add_trademark.aspx" <% if (myurl == "user_sbjs" ){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标申请案</a></td></tr>
+                                                 <a href="add_trademark.aspx" <% if (myurl == "add_trademark" ){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标申请案</a></td></tr>
                                                <tr><td width="10" height="22" ></td><td>
-                                                <a href="add_trademark_renewal.aspx" <% if (myurl == "add_trademark" ){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标续展案</a></td></tr>
+                                                <a href="add_trademark_renewal.aspx" <% if (myurl == "add_trademark_renewal" ){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标续展案</a></td></tr>
                                                </table>
                                               <%--  <a href="user_sbadd1.aspx" <% if (myurl == "user_sbadd" ||myurl == "user_sbadd1"||myurl == "user_sbadd2"||myurl == "user_sbaddok"){ %>class="ac7" <%}else{%>class="" <%} %>>·添加商标信息</a>--%>
                                             </td>
@@ -384,7 +384,6 @@
         }
     }
     function txt_roll(str) {
-        alert(2);
         if (document.getElementById(str).style.display == "") {
             document.getElementById(str).style.display = "none";
             document.getElementById(str + "_td").setAttribute("bgColor", "#949293");

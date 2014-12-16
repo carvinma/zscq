@@ -47,15 +47,15 @@ public partial class Shop_Manage_NewManage_TradeMarkStatus : System.Web.UI.Page
         {
             if(statusType == 0)
             {
-                dgEdit.DataSource = BaseDataUtil.tradeMarkApplyStatuslist; 
+                dgEdit.DataSource = BaseDataUtil.tradeMarkApplyStatuslist.ToList(); 
             }
             else if (statusType == 1)
             {
-                dgEdit.DataSource = BaseDataUtil.tradeMarkRenewedStatuslist;
+                dgEdit.DataSource = BaseDataUtil.tradeMarkRenewedStatuslist.ToList();
             }
             else
             {
-                dgEdit.DataSource = BaseDataUtil.tradeMarkStatuslist;
+                dgEdit.DataSource = BaseDataUtil.tradeMarkStatuslist.ToList();
             }
             dgEdit.DataBind();
         }
