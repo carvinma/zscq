@@ -114,6 +114,12 @@ public class Handler : HandlerCode, IHttpHandler, IRequiresSessionState
                     case "uploadimage":
                         UploadImg(context);
                         break;
+                    case "marklistdelete":
+                        DelTradeMarkListByIds(context);
+                        break;
+                    case "marklistsubmit":
+                        SubmitTradeMarkListByIds(context);
+                        break;
                     default:
                         context.Response.Write("未知的类型");
                         break;

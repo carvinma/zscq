@@ -43,15 +43,15 @@ public class HandlerCode
 
     public void GetMainCategory(HttpContext context)
     {
-        var lstGoods= goods.MainCategory_SelectAll().ToList();
+        var lstGoods = goods.MainCategory_SelectAll().ToList();
         //JavaScriptSerializer jss = new JavaScriptSerializer();
-       // string JsonStr = jss.Serialize(p);
+        // string JsonStr = jss.Serialize(p);
         string JsonStr = string.Empty;
         DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstGoods.GetType());
         using (MemoryStream ms = new MemoryStream())
         {
             serializer.WriteObject(ms, lstGoods);
-            JsonStr= Encoding.UTF8.GetString(ms.ToArray());
+            JsonStr = Encoding.UTF8.GetString(ms.ToArray());
         }
 
         context.Response.Write(JsonStr);
@@ -62,7 +62,7 @@ public class HandlerCode
         if (context.Request["id"] != null && context.Request["id"].ToString() != "")
         {
             var lstGoods = goods.DetailCategory_Select_MainCategoryId(int.Parse(context.Request["id"])).ToList();
-          
+
             DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstGoods.GetType());
             using (MemoryStream ms = new MemoryStream())
             {
@@ -92,7 +92,7 @@ public class HandlerCode
     public void SearchGoodsDetail(HttpContext context)
     {
         string JsonStr = string.Empty;
-        if (context.Request["key"] != null && context.Request["key"].ToString() != "" 
+        if (context.Request["key"] != null && context.Request["key"].ToString() != ""
             && context.Request["maincategoryid"] != null && context.Request["maincategoryid"].ToString() != "")
         {
             var lstGoods = goods.Goods_SearchDetail(context.Request["key"].ToString(), int.Parse(context.Request["maincategoryid"].ToString())).ToList();
@@ -112,11 +112,11 @@ public class HandlerCode
     {
         string JsonStr = string.Empty;
         if (context.Request["userid"] != null && context.Request["userid"].ToString() != ""
-            && context.Request["applytype"] != null && context.Request["applytype"].ToString()!="")
+            && context.Request["applytype"] != null && context.Request["applytype"].ToString() != "")
         {
             int userid = int.Parse(context.Request["userid"].ToString());
             int applytype = int.Parse(context.Request["applytype"].ToString());
-            var lstApplys = apply.Apply_SelectAll(userid).Where(p=>p.ApplyType==applytype).ToList();
+            var lstApplys = apply.Apply_SelectAll(userid).Where(p => p.ApplyType == applytype).ToList();
             DataContractJsonSerializer serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(lstApplys.GetType());
             using (MemoryStream ms = new MemoryStream())
             {
@@ -131,11 +131,70 @@ public class HandlerCode
         int iResult = 0;
         if (context.Request["id"] != null && context.Request["id"].ToString() != "")
         {
-            iResult=apply.Apply_Del(int.Parse(context.Request["id"]));
+            iResult = apply.Apply_Del(int.Parse(context.Request["id"]));
         }
         context.Response.Write(iResult);
     }
 
+    public void DelTradeMarkListByIds(HttpContext context)
+    {
+        int iResult = 0;
+        try
+        {
+            if (context.Request["ids"] != null && context.Request["ids"].ToString() != "")
+            {
+                string[] ids = context.Request["ids"].Split(',');
+
+                using (DataTradeMarkDataContext mark = new DataTradeMarkDataContext())
+                {
+                    var find = mark.t_NewTradeMarkInfo.Where(p => ids.Contains(p.i_Id.ToString()));
+                    mark.t_NewTradeMarkInfo.DeleteAllOnSubmit(find);
+                    mark.SubmitChanges();
+                    iResult = 1;
+                }
+            }
+        }
+        catch
+        {
+            iResult = 0;
+        }
+        finally
+        {
+            context.Response.Write(iResult);
+        }
+    }
+
+    public void SubmitTradeMarkListByIds(HttpContext context)
+    {
+        int iResult = 0;
+        try
+        {
+            if (context.Request["ids"] != null && context.Request["ids"].ToString() != "")
+            {
+                string[] ids = context.Request["ids"].Split(',');
+
+                using (DataTradeMarkDataContext mark = new DataTradeMarkDataContext())
+                {
+                    var find = mark.t_NewTradeMarkInfo.Where(p => ids.Contains(p.i_Id.ToString()));
+
+                    foreach (var item in find)
+                    {
+                        item.Status=1;
+                    }
+                    mark.SubmitChanges();
+                    iResult = 1;
+                }
+            }
+        }
+        catch
+        {
+            iResult = 0;
+        }
+        finally
+        {
+            context.Response.Write(iResult);
+        }
+    }
     public void UploadImg(HttpContext context)
     {
 
@@ -157,7 +216,7 @@ public class HandlerCode
             //保存文件
             string fileNameExt = System.IO.Path.GetExtension(file.FileName).ToLower();
 
-            
+
             string toFileName = DateTime.Now.ToString("yyyyMMddHHmmssff") + new Random().Next(100) + fileNameExt;//fileup.FileName;
             file.SaveAs(uploadPath + toFileName);
             context.Response.Write(toFileName);
@@ -165,7 +224,7 @@ public class HandlerCode
         else
         {
             context.Response.Write("0");
-        }  
+        }
     }
 
     #region 省市区
@@ -176,7 +235,7 @@ public class HandlerCode
         sb.Append("<option value=\"\">请选择：</option>");
         foreach (var v in iquery)
         {
-           sb.Append("<option value=\"" + v.i_ID + "\">" + v.provinceName + "</option>");
+            sb.Append("<option value=\"" + v.i_ID + "\">" + v.provinceName + "</option>");
         }
         context.Response.Write(sb);
     }
@@ -745,7 +804,7 @@ public class HandlerCode
             }
         }
         //context.Response.Write(SB_pids.ToString());
-        
+
     }
     public void sbjiaofei(HttpContext context)
     {

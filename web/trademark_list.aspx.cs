@@ -474,4 +474,22 @@ public partial class trademark_list : System.Web.UI.Page
         //this.applyType = this.ddlApplyType.SelectedValue;
         //this.qStatus = this.ddlTradeMarkStatus.SelectedValue;
     }
+    protected void btnExcel_Click(object sender, EventArgs e)
+    {
+        if (Request.Form["chkItem"] != null)
+        {
+            string[] IDList = Request.Form["chkItem"].ToString().Split(',');
+            for (int i = 0; i < IDList.Length; i++)
+            {
+               // t_Member user = userdal.Member_Select_Id(int.Parse(IDList[i]));
+               // string username = user.nvc_Name != null ? user.nvc_Name : "异常";
+            }
+        }
+
+        //GridView1.DataSource = DALT.Trademark_web_SelectPage(pageCurrent, 100000, UserId, Sbtype, Sbjiaofeitype, SbregName, Sbnum, Sbjiaofei, Sbtime, Stime, isjiaofei, jiaofeistate, sb_num, sb_type, sb_regname, int.Parse(sb_guoji), sb_passtime, c_anjuanhao, uname, uaddress, utel, ref Ccount);
+        GridView1.DataBind();
+        toExecl(GridView1);
+        GridView1.DataSource = null;
+        GridView1.DataBind();
+    }
 }

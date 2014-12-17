@@ -14,7 +14,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
-     <script src="js/jtrademark.js" type="text/javascript"></script>
+    <script src="js/jtrademark.js" type="text/javascript"></script>
+    <script src="js/TrademarkList.js" type="text/javascript"></script>
+     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+    <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
+
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <%--  <link href="css/pager.css" rel="stylesheet" type="text/css" />--%>
     <script type="text/javascript">
@@ -186,11 +191,7 @@
             position: absolute;
             top: 0px;
         }
-        .style1
-        {
-            width: 36px;
-        }
-    </style>
+        </style>
 </head>
 <body id="index">
     <form id="form1" runat="server">
@@ -396,7 +397,7 @@
                                                                         <%# GetApplyStatus(Eval("Status"))%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                        <input name="chkItem" type="checkbox" 
+                                                                        <input name="chkItem" type="checkbox" status="<%#Eval("Status")%>"
                                                                             value="<%#Eval("i_Id")%>" id="cb_<%#Eval("i_Id")%>" />
                                                                     </td>
                                                                 </tr>
@@ -416,27 +417,23 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <asp:Button ID="btnSave" CssClass="BtnShow" runat="server" Text="提交订单"  
-                                                                    OnClientClick="return addmarkCheck_data()" />
+                                                              <a href="javascript:void(0)"  onclick="SubmitTrademarkListDailog()" class="BtnShowhref" style="width:73px">提交订单</a>                                                               <%# Eval("ApplyName")%>
+                                                            </td>
+                                                            
+                                                            <td>
+                                                                <asp:Button ID="btnExcel" CssClass="BtnShow" runat="server" Text="导出"  
+                                                                    OnClientClick="return addmarkCheck_data()" onclick="btnExcel_Click" />
                                                             </td>
                                                             <td>
-                                                                &nbsp;
-                                                            </td>
-                                                            <td>
-                                                                <asp:Button ID="Button1" CssClass="BtnShow" runat="server" Text="导出"  
-                                                                    OnClientClick="return addmarkCheck_data()" />
-                                                                <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/images/sballdaochu.jpg"
-                                                                    OnClientClick=""   />
-                                                            </td>
-                                                            <td>
-                                                                <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="images/user_zl_del.jpg"
-                                                                    OnClientClick="javascript:return confirm('您确认要执行此操作吗?')" />
+                                                              <a href="javascript:void(0)"  onclick="DelTrademarkListDailog()" class="BtnShowhref" style="width:73px">删 除</a>
+                                                                <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <%# Eval("ApplyName")%>
+                                            <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
+                                                                     ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                             <tr>
                                                 <td align="left">
                                                     &nbsp;
@@ -459,7 +456,87 @@
                                             </tr>
                                             <tr>
                                                 <td align="left">
-                                                    &nbsp;
+   <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px">
+    <Columns>
+      <asp:BoundField DataField="CaseNo" HeaderText="案件号" />
+      <asp:TemplateField HeaderText="申请人类别">
+        <ItemTemplate>
+          <%# GetApplyTypeName(Eval("ApplyType"))%>
+        </ItemTemplate>
+      </asp:TemplateField>
+         <asp:BoundField DataField="ApplyName" HeaderText="申请人名称" />
+       <asp:TemplateField HeaderText="身份证件">
+        <ItemTemplate>
+          身份证
+        </ItemTemplate>
+      </asp:TemplateField>
+        <asp:BoundField DataField="CardNo" HeaderText="身分证件号码" /> 
+          <asp:TemplateField HeaderText="身份证件扫描件">
+        <ItemTemplate>
+          <%# Eval("CardNoPDF") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+         </asp:TemplateField>
+          <asp:TemplateField HeaderText="营业执照副本">
+        <ItemTemplate>
+          <%# Eval("Businesslicense") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+          <asp:TemplateField HeaderText="申请人行政区划">
+        <ItemTemplate>
+          <%# Eval("nvc_WeituoFile")!=null?"已上传":"未上传"  %>
+        </ItemTemplate>
+      </asp:TemplateField>
+      
+      <asp:BoundField DataField="Address" HeaderText="申请人地址" />
+      <asp:BoundField DataField="ContactPerson" HeaderText="联系人" />
+      <asp:BoundField DataField="Phone" HeaderText="联系电话" />
+       <asp:BoundField DataField="Fax" HeaderText="传真" />
+        <asp:BoundField DataField="PostCode" HeaderText="邮编" />
+      <asp:TemplateField HeaderText="三维标志">
+        <ItemTemplate>
+          <%# bool.Parse(Eval("Is3D").ToString()) == true? "是" : "否"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+      <asp:TemplateField HeaderText="颜色组合">
+        <ItemTemplate>
+          <%# bool.Parse(Eval("IsColor").ToString()) == true ? "是" : "否"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+      <asp:TemplateField HeaderText="声音商标">
+        <ItemTemplate>
+          <%# bool.Parse(Eval("IsSound").ToString()) == true ? "是" : "否"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+        <asp:TemplateField HeaderText="声音文件">
+        <ItemTemplate>
+          <%# Eval("SoundFile") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+
+      <asp:BoundField DataField="TrademarkRemark" HeaderText="商标说明" />
+      <asp:BoundField DataField="TrademarkType" HeaderText="商标类别" />
+
+        <asp:BoundField DataField="ApplyDate" DataFormatString="{0:yyyy-MM-dd}" HeaderText="商标申请日" />      
+        <asp:BoundField DataField="PublicPreliminaryDate"  DataFormatString="{0:yyyy-MM-dd}" HeaderText="初审公告日" />   
+      <asp:TemplateField HeaderText="最近状态">
+        <ItemTemplate>
+          <%# GetApplyStatus(Eval("Status"))%>
+        </ItemTemplate>
+      </asp:TemplateField>
+
+      <asp:TemplateField HeaderText="注册申请书">
+        <ItemTemplate>
+         <%# Eval("ApplyBook") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+
+      <asp:TemplateField HeaderText="申请委托书">
+        <ItemTemplate>
+           <%# Eval("AgentBook") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+      </Columns>
+  </asp:GridView>
                                                 </td>
                                             </tr>
                                         </table>

@@ -50,6 +50,8 @@
             margin-right: 0cm;
             margin-top: 0cm;
         }
+        
+        .table-b table td{border:1px solid #F00}
     </style>
 </head>
 <body>
@@ -89,35 +91,47 @@
                              <script type="text/javascript">
                                  function printPage() {
                                      var newWin = window.open();
+                                     $("#printGoods").show();
                                      var titleHTML = document.getElementById("printTbl").innerHTML;
+                                     titleHTML = titleHTML.replace('商品详情', '');
                                      newWin.document.write(titleHTML);
+                                     $("#printGoods").hide();
                                      newWin.document.location.reload();
                                      newWin.print();
                                  } 
                               </script>
                               </td>
                             <td><a href="edit_trademark.aspx?t_r_id=<%=trademarkId %>">
-                           <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a></td>
+                             <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a></td>
                             <td> <a href="trademark_list.aspx"><img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>
                             </tr></table>
                            
                            </td></tr>
+                          </table>
+                          <table width="689" border="0" cellspacing="0" cellpadding="0" id="printTbl">
                             <tr>
-                              <td width="639" height="28" align="left" valign="bottom" style="border-bottom: 1px solid #d34245;">
-                                <table width="114" border="0" cellspacing="0" cellpadding="0">
+                              <td>
+                                <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                    <table width="114" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td width="10" height="20">&nbsp; </td>
-                                    <td width="98" align="center" class="font12bt">申请人信息 </td>
+                                    <td width="98" align="center" class="font12bt">申请人信息</td>
                                     <td width="6"></td>
                                   </tr>
                                 </table>
-                              </td>
+                                    </td>
+                                    </tr>
+                                    </table>
+                                  
+                             </td>
                             </tr>
-                            <tr>
+                             <tr>
                               <td height="18" align="left"></td>
                             </tr>
                             <tr>
-                              <td height="115" align="left" valign="top">
+                              <td align="left" valign="top">
                                 <table width="689" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td width="260" height="32" align="right"><strong>申请人名称：</strong> </td>
@@ -181,23 +195,26 @@
                                     <td align="left">
                                       <%=model.Phone%> </td>
                                   </tr>
+                                  <tr>
+                                  <td height="18"></td><td></td></tr>
                                   </table>
                               </td>
                             </tr>
                             <tr>
-                              <td height="30" align="left">&nbsp; </td>
-                            </tr>
-                          </table>
-                          <table width="689" border="0" cellspacing="0" cellpadding="0" id="printTbl">
-                            <tr>
-                              <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
-                                <table width="156" border="0" cellspacing="0" cellpadding="0">
+                              <td>
+                               <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                <table width="186" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td width="10" height="20">&nbsp; </td>
-                                    <td width="140" align="center" class="font12bt">商标信息（第一部分） </td>
+                                    <td width="160" align="center" class="font12bt">商标信息（第一部分）</td>
                                     <td width="6"></td>
                                   </tr>
                                 </table>
+                                 </td>
+                                    </tr>
+                                    </table>
                               </td>
                             </tr>
                             <tr>
@@ -213,14 +230,22 @@
                                      <td> 
                                         <%=model.TrademarkType %> 
                                         &nbsp;<a href="javascript:void(0)" onclick="editTradeMarkshowGoods();">商品详情</a>
-                                         <table id="tbl_goods" style="display:none" width="689" border="0" cellspacing="0" cellpadding="0" bgcolor="#d0d0d0"><tr><td>
-                                         <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0" id="th_table">
+                                        
+                                    </td>
+                                     </tr>
+                                    <tr id="printGoods" style="display:none">
+                                     <td width="260" height="32" align="right" ><strong>商品详情：</strong>
+                                    </td>  
+                                     <td>
+                                      <table id="tbl_goods" width="429" border="0" cellspacing="0" cellpadding="0" bgcolor="#d0d0d0">
+                                      <tr><td>
+                                         <table width="429" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0" class="table-b" id="th_table">
                                                             <tr id="th_box">
-                                                             <td width="58" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">序号</td>
-                                                              <td width="78" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</td>
-                                                              <td width="108" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类似群</td>
-                                                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品编码</td>
-                                                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</td>
+                                                             <td width="50" height="20" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">序号</td>
+                                                              <td width="50"  align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</td>
+                                                              <td width="80" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类似群</td>
+                                                              <td width="80" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品编码</td>
+                                                              <td align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</td>
                                                             </tr>
                                                               <asp:Repeater ID="Rpt_goods" runat="server">
                                                                <ItemTemplate>
@@ -239,9 +264,11 @@
                                                                 </asp:Repeater>
                                                            </table>
 
-                                                           </td></tr></table>
-                                    </td>                                  
-                                    </tr>
+                                        </td></tr>
+                                       </table>
+                                    </td>
+                                    </tr>                                  
+                                   
                                      <tr>
                                     <td width="260" height="32" align="right" ><strong>商标图样：</strong>
                                     </td>  
@@ -291,10 +318,10 @@
                                 <table width="689" border="0" cellspacing="0" cellpadding="0" id="disanfang" runat="server">
                             <tr>
                               <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
-                                <table width="156" border="0" cellspacing="0" cellpadding="0">
+                                <table width="186" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td width="10" height="20">&nbsp;</td>
-                                    <td width="140" align="center" class="font12bt">商标信息（第二部分）</td>
+                                    <td width="160" align="center" class="font12bt">商标信息（第二部分）</td>
                                     <td width="6"></td>
                                   </tr>
                                 </table>
