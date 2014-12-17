@@ -257,21 +257,31 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.IsSubmit = false;
-        if (Request.QueryString["t_r_id"] != null && Request.QueryString["t_r_id"].ToString() != "")
+        model.Status = 0;
+
+        if (mark.Trademark_Submit() > 0)
         {
-            mark.Trademark_Submit();
+            UserLog.AddUserLog(model.i_Id, "商标系统", "更新商标内容");
+            Response.Redirect("trademark_list.aspx");
         }
         else
         {
-            mark.Trademark_Add(model);
+            div_a.InnerHtml = "<script>alert('信息更新失败!');<script>";
         }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.IsSubmit = true;
-        mark.Trademark_Add(model);
+        model.Status = 1;
+        if (mark.Trademark_Submit() > 0)
+        {
+            UserLog.AddUserLog(model.i_Id, "商标系统", "更新商标内容");
+            Response.Redirect("trademark_list.aspx");
+        }
+        else
+        {
+            div_a.InnerHtml = "<script>alert('信息更新失败!');<script>";
+        }
     }
     protected void btnCancle_Click(object sender, EventArgs e)
     {

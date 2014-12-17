@@ -206,14 +206,31 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.IsSubmit = false;
-        mark.Trademark_Add(model);
+        model.Status = 0;
+        if (mark.Trademark_Add(model) > 0)
+        {
+
+            UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
+            Response.Redirect("trademark_list.aspx");
+        }
+        else
+        {
+            div_a.InnerHtml = "<script>alert('信息添加失败!');<script>";
+        }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.IsSubmit = true;
-        mark.Trademark_Add(model);
+        model.Status = 1;
+        if (mark.Trademark_Add(model) > 0)
+        {
+            UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
+            Response.Redirect("trademark_list.aspx");
+        }
+        else
+        {
+            div_a.InnerHtml = "<script>alert('信息添加失败!');<script>";
+        }
     }
     protected void btnCancle_Click(object sender, EventArgs e)
     {
