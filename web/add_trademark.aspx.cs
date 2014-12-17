@@ -43,8 +43,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     private void Bind_Page_EditInfo(int trademarkId)// 绑定商标详细数据
     {
         var model = mark.Trademark_Select_Id(trademarkId);
-        if (model.ApplyType == 0) RdoPeople.Checked = true;
-        else RdoCorp.Checked = true;
+        if (model.ApplyType == 0) this.RdoCorp.Checked = true;
+        else  this.RdoPeople.Checked = true;
         txt_applyname.Value = model.ApplyName;
         txt_applyCardNo.Value = model.CardNo;
         if (!string.IsNullOrEmpty(model.CardNoPDF))

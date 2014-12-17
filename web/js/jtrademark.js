@@ -154,67 +154,10 @@ function addgoods() {
     goodscalc.toChangeDisplay();
 }
 //编辑时重新显示商品
-function editgoods(sel_sortid, sel_groupid) {
-    var strval = new Array();
-    $("input[name='chkItem']:checked").each(function () {
-        //strval.push($(this).val());
-        strval.push([$(this).val(), $(this).parent().next().html(), $(this).parent().next().next().html()]);
-    });
-    if (strval.length == 0) {
-        return false;
-    }
-    //获取选中的商品服务所有的分类和类似群
-    var sel_groupid = $("#sel_groupid").text();
-
-    //获取已经选择分类
-    var sortarr = $("#sortarr").val();
-    if (sortarr == '') {
-        $("#sortarr").val(sel_sortid);
-    }
-    else {
-        var parr = new Array();
-        parr = sortarr.split(",");
-        //判断是否已经存在选择的类
-        var state = 0;
-        for (var i = 0; i < parr.length; i++) {
-            if (parr[i] == sel_sortid) {
-                state = 1;
-                break;
-            }
-        }
-        if (state == 0) {
-            parr.push(sel_sortid);
-        }
-        //排序
-        parr.sort();
-        var qarr = parr.join(",");
-        $("#sortarr").val(qarr);
-    }
-    //获取已经选择的商品服务的sid
+function editgoods() {
     var arr_goods = new Array();
-    //获取以下数组的长度
     $("tr[classname='arr_goods']").each(function () {
-        //arr_goods.push($(this).val());
-        //alert($(this).attr("val"));
-        arr_goods.push($(this).attr("val"));
         goodscalc.add($(this).find("td:eq(1)").text(), 1);
-    });
-    var endnum = $("tr[classname='arr_goods']").length;
-    $.each(strval, function (i, n) {
-        if ($.inArray(n[0], arr_goods) == '-1') {
-            endnum = endnum + parseInt(1);
-            goodscalc.add(sel_sortid, 1);
-            $("#th_box").after('<tr classname="arr_goods" name="arr_goods[]" val="' + n[0] + '" id="arr_goods' +
-      endnum + '"><td height="25" align="center" bgcolor="#FFFFFF" id="4' + endnum + '">' + endnum + '</td><td align="center" bgcolor="#FFFFFF" id="3' + endnum
-      + '"><input type="hidden" classname="hid_classsort" name="hid_sort[]" value="' +
-      sel_sortid + '">' + sel_sortid +
-      '</td><td align="center" bgcolor="#FFFFFF" id="2' + endnum + '"><input type="hidden" name="hid_group[]" value="' +
-       sel_groupid + '">' + sel_groupid +
-       '</td><td align="center" bgcolor="#FFFFFF" id="1' + endnum + '"><input type="hidden" name="hid_goods[]" value="'
-       + n[1] + '">' + n[1] + '</td><td align="center" bgcolor="#FFFFFF" id="0' + endnum + '"><input type="hidden" name="hid_goodsname[]" classname="'
-       + sel_sortid + '" value="' + n[2] + '">'
-       + n[2] + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(' + endnum + ')">删除</a></td></tr>');
-        }
     });
     goodscalc.toChangeDisplay();
 }
@@ -1086,7 +1029,7 @@ function SelArea(val,areaid) {
     var cityName = isEmpty(val) ? "" : $("#live_city").find("option:selected").text().replace("市辖区", "").replace("县", "");
     $("#areaNameTxt").text(trimAll(provinceName) + trimAll(cityName));
     var cityId = $("#live_city").find("option:selected").val();
-    //$("#Hi_city").val(cityId);
+    $("#Hi_city").val(cityId);
     $.ajax({
         type: "POST",
         url: "Handler.ashx",

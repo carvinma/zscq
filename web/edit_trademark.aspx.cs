@@ -12,6 +12,7 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     private dal_Goods goods = new dal_Goods();
     private dal_NewTrademark mark = new dal_NewTrademark();
     private dal_CaseNoOrder caseNo = new dal_CaseNoOrder();
+    public int goodsItemCount;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -30,7 +31,7 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         {
             int trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
             Bind_Page_EditInfo(trademarkId);
-           // Bind_TradeMarkStatus();
+            // Bind_TradeMarkStatus();
         }
         else
         {
@@ -43,8 +44,16 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     private void Bind_Page_EditInfo(int trademarkId)// 绑定商标详细数据
     {
         var model = mark.Trademark_Select_Id(trademarkId);
-        if (model.ApplyType == 0) RdoPeople.Checked = true;
-        else RdoCorp.Checked = true;
+        if (model.ApplyType == 0)
+        {
+            this.RdoPeople.Checked = false;
+            this.RdoCorp.Checked = true;
+        }
+        else
+        {
+            this.RdoPeople.Checked = true;
+            this.RdoCorp.Checked = false;
+        }
         txt_applyname.Value = model.ApplyName;
         txt_applyCardNo.Value = model.CardNo;
         if (!string.IsNullOrEmpty(model.CardNoPDF))
@@ -91,9 +100,15 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         }
         if (!string.IsNullOrEmpty(model.TrademarkType) && !string.IsNullOrEmpty(model.TrademarkGoods))
         {
-            string[] good = model.TrademarkGoods.Split(',');
-            //good.Contains
-            //goods.Goods_SearchDetail(
+            //根据商品ID查找商品的信息
+            string[] goodIds = model.TrademarkGoods.Split(',');
+            var result = goods.Goods_Select_MultipleId(goodIds);
+            if (result != null && result.Count() > 0)
+            {
+                goodsItemCount = result.Count();
+                this.Rpt_goods.DataSource = result;
+                this.Rpt_goods.DataBind();
+            }
         }
     }
     #endregion
@@ -134,7 +149,16 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
             System.IO.Directory.CreateDirectory(Server.MapPath(filePath));
         }
 
-        t_NewTradeMarkInfo model = new t_NewTradeMarkInfo();
+        t_NewTradeMarkInfo model;
+        if (Request.QueryString["t_r_id"] != null && Request.QueryString["t_r_id"].ToString() != "")
+        {
+            int trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
+            model = mark.Trademark_Select_Id(trademarkId);
+        }
+        else
+        {
+            model = new t_NewTradeMarkInfo();
+        }
         model.i_MemberId = int.Parse(Hi_MemberId.Value);
         model.i_Type = 0;
         model.ApplyName = txt_applyname.Value.Trim();
@@ -187,25 +211,46 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         if (!string.IsNullOrEmpty(this.upSound.Value))
         {
             fileName = this.upSound.Value;//声音
-            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-                   HttpContext.Current.Server.MapPath(filePath + fileName));
-            model.SoundFile = filePath + fileName;
+            if (fileName.Contains("File_ShangBiao"))
+            {
+                model.SoundFile = fileName;
+            }
+            else
+            {
+                System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+                       HttpContext.Current.Server.MapPath(filePath + fileName));
+                model.SoundFile = filePath + fileName;
+            }
         }
         model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Trim();
         model.TrademarkGoods = sortGoods.Value.Trim();
         fileName = this.upPattern1.Value;//图样1
-        System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-               HttpContext.Current.Server.MapPath(filePath + fileName));
-        model.TrademarkPattern1 = filePath + fileName;
+        if (fileName.Contains("File_ShangBiao"))
+        {
+            model.TrademarkPattern1 = fileName;
+        }
+        else
+        {
+            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+                   HttpContext.Current.Server.MapPath(filePath + fileName));
+            model.TrademarkPattern1 = filePath + fileName;
+        }
 
 
         if (!string.IsNullOrEmpty(this.upPattern2.Value))
         {
             fileName = this.upPattern2.Value;//图样2
-            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-                   HttpContext.Current.Server.MapPath(filePath + fileName));
-            model.TrademarkPattern2 = filePath + fileName;
+            if (fileName.Contains("File_ShangBiao"))
+            {
+                model.TrademarkPattern2 = fileName;
+            }
+            else
+            {
+                System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+                       HttpContext.Current.Server.MapPath(filePath + fileName));
+                model.TrademarkPattern2 = filePath + fileName;
+            }
         }
         return model;
     }
@@ -213,7 +258,14 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     {
         var model = InitModel();
         model.IsSubmit = false;
-        mark.Trademark_Add(model);
+        if (Request.QueryString["t_r_id"] != null && Request.QueryString["t_r_id"].ToString() != "")
+        {
+            mark.Trademark_Submit();
+        }
+        else
+        {
+            mark.Trademark_Add(model);
+        }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {

@@ -793,13 +793,18 @@
                                                             </tr>
                                                               <asp:Repeater ID="Rpt_goods" runat="server">
                                                                <ItemTemplate>
-                                                               <tr classname="arr_goods" name="arr_goods[]" val="2" id="arr_goods1">
-                                                               <td height="25" align="center" bgcolor="#FFFFFF" id="41"><%# Container.ItemIndex + 1%></td>
-                                                               <td align="center" bgcolor="#FFFFFF" id="31"><input type="hidden" classname="hid_classsort" name="hid_sort[]" value="01">01</td>
-                                                               <td align="center" bgcolor="#FFFFFF" id="21"><input type="hidden" name="hid_group[]" value="0101">0101</td>
-                                                               <td align="center" bgcolor="#FFFFFF" id="11"><input type="hidden" name="hid_goods[]" value="010061">010061</td>
-                                                               <td align="center" bgcolor="#FFFFFF" id="01"><input type="hidden" name="hid_goodsname[]" classname="01" value="氨">氨</td>
-                                                               <td align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(1)">删除</a></td>
+                                                               <tr classname="arr_goods" name="arr_goods[]" val="<%# Eval("id")%>" id="arr_goods<%# goodsItemCount- Container.ItemIndex%>">
+                                                               <td height="25" align="center" bgcolor="#FFFFFF" id="4<%# goodsItemCount- Container.ItemIndex%>"><%# goodsItemCount- Container.ItemIndex%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="3<%# goodsItemCount- Container.ItemIndex%>">
+                                                                <input type="hidden" classname="hid_classsort" name="hid_sort[]" value='<%# Eval("MainCategoryCode")%>'><%# Eval("MainCategoryCode")%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="2<%# goodsItemCount- Container.ItemIndex%>">
+                                                               <input type="hidden" name="hid_group[]" value='<%# Eval("DetailCategoryCode")%>'><%# Eval("DetailCategoryCode")%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="1<%# goodsItemCount- Container.ItemIndex%>">
+                                                               <input type="hidden" name="hid_goods[]" value='<%# Eval("GoodsCode")%>'><%# Eval("GoodsCode")%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="0<%# goodsItemCount- Container.ItemIndex%>">
+                                                               <input type="hidden" name="hid_goodsname[]" classname="<%#Eval("MainCategoryCode")%>" value='<%#Eval("GoodsRemark")%>'><%# Eval("GoodsRemark")%></td>
+                                                               <td align="center" bgcolor="#FFFFFF">
+                                                               <a href="javascript:;" style="color:red;" onclick="del_onegoods(<%# goodsItemCount- Container.ItemIndex%>)">删除</a></td>
                                                                </tr>
                                                                 </ItemTemplate>
                                                                 </asp:Repeater>

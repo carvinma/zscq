@@ -332,6 +332,36 @@ namespace zscq.DAL
             }
         }
         /// <summary>
+        /// 精准单条件根据多个ID获取商品
+        /// </summary>
+        /// <param name="AId"></param>
+        /// <returns></returns>
+        public IQueryable<t_GoodsSearch> Goods_Select_MultipleId(string[] goodIds)
+        {
+            try
+            {
+                var iquery = from a in mark.t_Goods
+                             join b in mark.t_GoodsDetailCategory on a.DetailCategoryID equals b.i_Id
+                             join c in mark.t_GoodsMainCategory on b.MainCategoryID equals c.i_Id
+                             where goodIds.Contains(a.i_Id.ToString())
+                             orderby a.GoodsCode ascending
+                             select new t_GoodsSearch
+                             {
+                                 id = a.i_Id,
+                                 GoodsCode = a.GoodsCode,
+                                 GoodsRemark = a.GoodsRemark,
+                                 DetailCategoryCode = b.CategoryCode,
+                                 MainCategoryCode = c.CategoryCode,
+                                 MainCategoryID = c.i_Id
+                             };
+                return iquery;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        /// <summary>
         /// 获取商品小类ID获取全部商品
         /// </summary>
         /// <returns></returns>
