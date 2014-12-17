@@ -488,7 +488,7 @@
                                                                         <td>
                                                                             <input id="RdoPeople" type="radio" name="person" value="1" runat="server" />自然人&nbsp;&nbsp;&nbsp;&nbsp;
                                                                             <input id="RdoCorp" type="radio" name="person" value="0" runat="server" 
-                                                                                checked="true" />企业单位
+                                                                                checked="true" />法人或其他组织
                                                                         </td>
                                                                     </tr>
                                                                     <tr>

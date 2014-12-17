@@ -250,7 +250,6 @@ public partial class M_A_TradeMark : System.Web.UI.Page
         if (model != null)
         {
             model.i_Type = 0;
-            model.IsSubmit = true;
             mark.Trademark_Add(model);
             InitPaymodel(model.i_Id);
             hi_TradeMarkId.Value = model.i_Id.ToString();

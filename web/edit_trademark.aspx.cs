@@ -285,6 +285,6 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     }
     protected void btnCancle_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("trademark_list.aspx");
     }
 }

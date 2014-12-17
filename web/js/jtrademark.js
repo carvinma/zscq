@@ -406,6 +406,17 @@ function doSelect() {
         }
     }
 }
+
+var cancleadd = function (v, h, f) {
+    if (v == "ok") {
+        window.location.href = "trademark_list.aspx";
+    }
+    return true;
+};
+function cancleSumbit() {
+    $.jBox.confirm("是否确定放弃提交？", "提示", cancleadd);
+}
+
 function showDelDailog(id) {
     $.jBox.confirm("确定要删除该申请人吗？<div style='display:none'>"+id+"</div>", "提示", submit);
 }

@@ -488,8 +488,7 @@
                                                                         <td>
                                                                             <input id="RdoPeople" type="radio" name="person" value="1" runat="server" />自然人&nbsp;&nbsp;&nbsp;&nbsp;
                                                                             <input id="RdoCorp" type="radio" name="person" value="0" runat="server" 
-                                                                                checked="true" />企业单位
-                                                                        </td>
+                                                                                checked="true" />法人或其他组织</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td width="180" height="32" align="right">
@@ -910,8 +909,7 @@
                                                                                 Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkCheck_data()"/>
                                                                         </td>
                                                                         <td width="100">
-                                                                            <asp:Button ID="btnCancle" CssClass="BtnShow" runat="server" Text="放弃提交" 
-                                                                                onclick="btnCancle_Click" />
+                                                                         <a  href="javascript:void(0)" id="linkDel" class="BtnShowhref"  onclick="cancleSumbit()">放弃提交</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>

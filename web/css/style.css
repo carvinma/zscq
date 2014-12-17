@@ -196,17 +196,22 @@ a.ac10:hover { font-size: 12px; color: #d44147; text-decoration: underline; }
 .divshow { display: none; margin-top: 10px; z-index: 11001; position: absolute; top: 0px; }
  
 .BtnShow{background: url(../images/btnbg.gif) no-repeat 0 0;border: none;color: #FFF;cursor: pointer;height: 27px;width: 90px;font-weight: bold; }
-.BtnShowhref {
+a.BtnShowhref {
 border-radius: 3px;
 color: #FFF;
 display: block;
 height: 27px;
 line-height: 27px;
-padding: 0 15px;
+padding: 0 0px;
+margin:0px;
 text-align: center;
 font-weight: bold; 
 background:#D34245;
+text-decoration:none;
 }
+
+a.BtnShowhref:hover { text-decoration: none;color: #FFF; }
+
 .message .error {
 height: 26px;
 padding-left: 6px;
