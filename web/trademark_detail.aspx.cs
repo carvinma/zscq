@@ -18,6 +18,7 @@ public partial class trademark_detail : System.Web.UI.Page
     public string division = string.Empty;
     public string status = string.Empty;
     public int trademarkId;
+    public int goodsItemCount;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
@@ -121,5 +122,19 @@ public partial class trademark_detail : System.Web.UI.Page
             model.TrademarkPattern1 = "<img alt='' height='150px'  width='150px' src='" + model.TrademarkPattern1 + "' />";
         else
             model.TrademarkPattern1 = "未上传";
+
+        if (!string.IsNullOrEmpty(model.TrademarkType) && !string.IsNullOrEmpty(model.TrademarkGoods))
+        {
+            //根据商品ID查找商品的信息
+            dal_Goods goods = new dal_Goods();
+            string[] goodIds = model.TrademarkGoods.Split(',');
+            var result = goods.Goods_Select_MultipleId(goodIds);
+            if (result != null && result.Count() > 0)
+            {
+                goodsItemCount = result.Count();
+                this.Rpt_goods.DataSource = result;
+                this.Rpt_goods.DataBind();
+            }
+        }
     }
 }

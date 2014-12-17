@@ -916,7 +916,7 @@
                                                                     <tr>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnPreview" CssClass="BtnShow" runat="server" Text="预  览" 
-                                                                                onclick="btnPreview_Click" />
+                                                                                onclick="btnPreview_Click" Visible="false" />
                                                                         </td>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnSave" CssClass="BtnShow" runat="server" Text="保  存" 

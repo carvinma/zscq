@@ -394,6 +394,10 @@ function jboxShow(html1, html2) {
     $.jBox.open(states, '选择分类', '80%', 550, { top: 20 });
 }
 
+function editTradeMarkshowGoods() {
+    $.jBox('id:tbl_goods', { title: "商品详情", width: '80%', height: 550 });
+}
+
 //全选+全不选
 function doSelect() {
     var state = $("#selectall").is(':checked');

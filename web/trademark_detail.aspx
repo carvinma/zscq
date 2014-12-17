@@ -12,6 +12,10 @@
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link href="css/trademark.css" rel="stylesheet" type="text/css" />
+    <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+    <script src="js/jtrademark.js" type="text/javascript"></script>
+    <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(document).ready(function () {
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
@@ -79,9 +83,24 @@
                           <tr><td height="10">
                            </td></tr>
                            <tr><td height="28" align="right">
-                           <a href="edit_trademark.aspx?t_r_id=<%=trademarkId %>">
-                           <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a> &nbsp;
-                           <a href="trademark_list.aspx"><img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a> 
+                            <table style="width:100px">
+                            <tr><td>
+                            <a href="javascript:void(0)"  onclick="printPage()" class="BtnShowhref" style="width:73px">打 印</a>
+                             <script type="text/javascript">
+                                 function printPage() {
+                                     var newWin = window.open();
+                                     var titleHTML = document.getElementById("printTbl").innerHTML;
+                                     newWin.document.write(titleHTML);
+                                     newWin.document.location.reload();
+                                     newWin.print();
+                                 } 
+                              </script>
+                              </td>
+                            <td><a href="edit_trademark.aspx?t_r_id=<%=trademarkId %>">
+                           <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a></td>
+                            <td> <a href="trademark_list.aspx"><img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>
+                            </tr></table>
+                           
                            </td></tr>
                             <tr>
                               <td width="639" height="28" align="left" valign="bottom" style="border-bottom: 1px solid #d34245;">
@@ -169,7 +188,7 @@
                               <td height="30" align="left">&nbsp; </td>
                             </tr>
                           </table>
-                          <table width="689" border="0" cellspacing="0" cellpadding="0">
+                          <table width="689" border="0" cellspacing="0" cellpadding="0" id="printTbl">
                             <tr>
                               <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
                                 <table width="156" border="0" cellspacing="0" cellpadding="0">
@@ -193,6 +212,34 @@
                                     </td>  
                                      <td> 
                                         <%=model.TrademarkType %> 
+                                        &nbsp;<a href="javascript:void(0)" onclick="editTradeMarkshowGoods();">商品详情</a>
+                                         <table id="tbl_goods" style="display:none" width="689" border="0" cellspacing="0" cellpadding="0" bgcolor="#d0d0d0"><tr><td>
+                                         <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0" id="th_table">
+                                                            <tr id="th_box">
+                                                             <td width="58" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">序号</td>
+                                                              <td width="78" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</td>
+                                                              <td width="108" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类似群</td>
+                                                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品编码</td>
+                                                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</td>
+                                                            </tr>
+                                                              <asp:Repeater ID="Rpt_goods" runat="server">
+                                                               <ItemTemplate>
+                                                               <tr classname="arr_goods" name="arr_goods[]" val="<%# Eval("id")%>" id="arr_goods<%# goodsItemCount- Container.ItemIndex%>">
+                                                               <td height="25" align="center" bgcolor="#FFFFFF" id="4<%# goodsItemCount- Container.ItemIndex%>"><%# goodsItemCount- Container.ItemIndex%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="3<%# goodsItemCount- Container.ItemIndex%>">
+                                                                <input type="hidden" classname="hid_classsort" name="hid_sort[]" value='<%# Eval("MainCategoryCode")%>'><%# Eval("MainCategoryCode")%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="2<%# goodsItemCount- Container.ItemIndex%>">
+                                                               <input type="hidden" name="hid_group[]" value='<%# Eval("DetailCategoryCode")%>'><%# Eval("DetailCategoryCode")%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="1<%# goodsItemCount- Container.ItemIndex%>">
+                                                               <input type="hidden" name="hid_goods[]" value='<%# Eval("GoodsCode")%>'><%# Eval("GoodsCode")%></td>
+                                                               <td align="center" bgcolor="#FFFFFF" id="0<%# goodsItemCount- Container.ItemIndex%>">
+                                                               <input type="hidden" name="hid_goodsname[]" classname="<%#Eval("MainCategoryCode")%>" value='<%#Eval("GoodsRemark")%>'><%# Eval("GoodsRemark")%></td>
+                                                               </tr>
+                                                                </ItemTemplate>
+                                                                </asp:Repeater>
+                                                           </table>
+
+                                                           </td></tr></table>
                                     </td>                                  
                                     </tr>
                                      <tr>
