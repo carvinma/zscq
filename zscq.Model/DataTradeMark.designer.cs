@@ -60,12 +60,12 @@ namespace zscq.Model
     partial void Insertt_NewTradeMarkStatusDate(t_NewTradeMarkStatusDate instance);
     partial void Updatet_NewTradeMarkStatusDate(t_NewTradeMarkStatusDate instance);
     partial void Deletet_NewTradeMarkStatusDate(t_NewTradeMarkStatusDate instance);
-    partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
-    partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
-    partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     partial void Insertt_NewTradeMarkMessage(t_NewTradeMarkMessage instance);
     partial void Updatet_NewTradeMarkMessage(t_NewTradeMarkMessage instance);
     partial void Deletet_NewTradeMarkMessage(t_NewTradeMarkMessage instance);
+    partial void Insertt_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
+    partial void Updatet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
+    partial void Deletet_NewTradeMarkInfo(t_NewTradeMarkInfo instance);
     #endregion
 		
 		public DataTradeMarkDataContext() : 
@@ -194,19 +194,19 @@ namespace zscq.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<t_NewTradeMarkInfo> t_NewTradeMarkInfo
-		{
-			get
-			{
-				return this.GetTable<t_NewTradeMarkInfo>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_NewTradeMarkMessage> t_NewTradeMarkMessage
 		{
 			get
 			{
 				return this.GetTable<t_NewTradeMarkMessage>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_NewTradeMarkInfo> t_NewTradeMarkInfo
+		{
+			get
+			{
+				return this.GetTable<t_NewTradeMarkInfo>();
 			}
 		}
 	}
@@ -2853,6 +2853,164 @@ namespace zscq.Model
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkMessage")]
+	public partial class t_NewTradeMarkMessage : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private int _TradeMarkId;
+		
+		private string _subject;
+		
+		private string _Message;
+		
+		private System.Nullable<System.DateTime> _AddTime;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void OnTradeMarkIdChanging(int value);
+    partial void OnTradeMarkIdChanged();
+    partial void OnsubjectChanging(string value);
+    partial void OnsubjectChanged();
+    partial void OnMessageChanging(string value);
+    partial void OnMessageChanged();
+    partial void OnAddTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnAddTimeChanged();
+    #endregion
+		
+		public t_NewTradeMarkMessage()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeMarkId", DbType="Int NOT NULL")]
+		public int TradeMarkId
+		{
+			get
+			{
+				return this._TradeMarkId;
+			}
+			set
+			{
+				if ((this._TradeMarkId != value))
+				{
+					this.OnTradeMarkIdChanging(value);
+					this.SendPropertyChanging();
+					this._TradeMarkId = value;
+					this.SendPropertyChanged("TradeMarkId");
+					this.OnTradeMarkIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subject", DbType="NVarChar(50)")]
+		public string subject
+		{
+			get
+			{
+				return this._subject;
+			}
+			set
+			{
+				if ((this._subject != value))
+				{
+					this.OnsubjectChanging(value);
+					this.SendPropertyChanging();
+					this._subject = value;
+					this.SendPropertyChanged("subject");
+					this.OnsubjectChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="NVarChar(500)")]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this.OnMessageChanging(value);
+					this.SendPropertyChanging();
+					this._Message = value;
+					this.SendPropertyChanged("Message");
+					this.OnMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> AddTime
+		{
+			get
+			{
+				return this._AddTime;
+			}
+			set
+			{
+				if ((this._AddTime != value))
+				{
+					this.OnAddTimeChanging(value);
+					this.SendPropertyChanging();
+					this._AddTime = value;
+					this.SendPropertyChanged("AddTime");
+					this.OnAddTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkInfo")]
 	public partial class t_NewTradeMarkInfo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2938,8 +3096,6 @@ namespace zscq.Model
 		private string _RenewalAgentBook;
 		
 		private System.Nullable<System.DateTime> _InputTime;
-		
-		private System.Nullable<bool> _IsSubmit;
 		
 		private System.Nullable<bool> _IsShow;
 		
@@ -3037,8 +3193,6 @@ namespace zscq.Model
     partial void OnRenewalAgentBookChanged();
     partial void OnInputTimeChanging(System.Nullable<System.DateTime> value);
     partial void OnInputTimeChanged();
-    partial void OnIsSubmitChanging(System.Nullable<bool> value);
-    partial void OnIsSubmitChanged();
     partial void OnIsShowChanging(System.Nullable<bool> value);
     partial void OnIsShowChanged();
     partial void OnIsReceiveEmailChanging(System.Nullable<bool> value);
@@ -3858,26 +4012,6 @@ namespace zscq.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSubmit", DbType="Bit")]
-		public System.Nullable<bool> IsSubmit
-		{
-			get
-			{
-				return this._IsSubmit;
-			}
-			set
-			{
-				if ((this._IsSubmit != value))
-				{
-					this.OnIsSubmitChanging(value);
-					this.SendPropertyChanging();
-					this._IsSubmit = value;
-					this.SendPropertyChanged("IsSubmit");
-					this.OnIsSubmitChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsShow", DbType="Bit")]
 		public System.Nullable<bool> IsShow
 		{
@@ -3994,164 +4128,6 @@ namespace zscq.Model
 					this._RestDays = value;
 					this.SendPropertyChanged("RestDays");
 					this.OnRestDaysChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkMessage")]
-	public partial class t_NewTradeMarkMessage : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _i_Id;
-		
-		private int _TradeMarkId;
-		
-		private string _subject;
-		
-		private string _Message;
-		
-		private System.Nullable<System.DateTime> _AddTime;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oni_IdChanging(int value);
-    partial void Oni_IdChanged();
-    partial void OnTradeMarkIdChanging(int value);
-    partial void OnTradeMarkIdChanged();
-    partial void OnsubjectChanging(string value);
-    partial void OnsubjectChanged();
-    partial void OnMessageChanging(string value);
-    partial void OnMessageChanged();
-    partial void OnAddTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnAddTimeChanged();
-    #endregion
-		
-		public t_NewTradeMarkMessage()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int i_Id
-		{
-			get
-			{
-				return this._i_Id;
-			}
-			set
-			{
-				if ((this._i_Id != value))
-				{
-					this.Oni_IdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Id = value;
-					this.SendPropertyChanged("i_Id");
-					this.Oni_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TradeMarkId", DbType="Int NOT NULL")]
-		public int TradeMarkId
-		{
-			get
-			{
-				return this._TradeMarkId;
-			}
-			set
-			{
-				if ((this._TradeMarkId != value))
-				{
-					this.OnTradeMarkIdChanging(value);
-					this.SendPropertyChanging();
-					this._TradeMarkId = value;
-					this.SendPropertyChanged("TradeMarkId");
-					this.OnTradeMarkIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subject", DbType="NVarChar(50)")]
-		public string subject
-		{
-			get
-			{
-				return this._subject;
-			}
-			set
-			{
-				if ((this._subject != value))
-				{
-					this.OnsubjectChanging(value);
-					this.SendPropertyChanging();
-					this._subject = value;
-					this.SendPropertyChanged("subject");
-					this.OnsubjectChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="NVarChar(500)")]
-		public string Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				if ((this._Message != value))
-				{
-					this.OnMessageChanging(value);
-					this.SendPropertyChanging();
-					this._Message = value;
-					this.SendPropertyChanged("Message");
-					this.OnMessageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AddTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> AddTime
-		{
-			get
-			{
-				return this._AddTime;
-			}
-			set
-			{
-				if ((this._AddTime != value))
-				{
-					this.OnAddTimeChanging(value);
-					this.SendPropertyChanging();
-					this._AddTime = value;
-					this.SendPropertyChanged("AddTime");
-					this.OnAddTimeChanged();
 				}
 			}
 		}
