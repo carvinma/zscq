@@ -280,7 +280,7 @@
                               <ItemTemplate>
                                 <tr>
                                   <td height="42" align="center" bgcolor="#FFFFFF">
-                                   <a href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t"><%# Eval("CaseNo")%></a>
+                                   <a href="trademarkrenewal_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t"><%# Eval("CaseNo")%></a>
                                    </td>
                                   <td height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                      <%# Eval("RegisteredNo")%>
