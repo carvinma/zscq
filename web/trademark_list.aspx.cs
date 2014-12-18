@@ -98,25 +98,6 @@ public partial class trademark_list : System.Web.UI.Page
             Hi_orderby4.Value = Request.QueryString["sbstatus"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbstatus"].ToString();//BY CHY
         }
-
-        //if (Request.QueryString["jiaofeistate"] != null && Request.QueryString["jiaofeistate"] != "")
-        //{
-        //    jiaofeistate = int.Parse(Request.QueryString["jiaofeistate"].ToString()); //统计页面传递过来的値 缴费状态    
-        //}
-        //if (Request.QueryString["isjiaofei"] != null && Request.QueryString["isjiaofei"] != "")
-        //{
-        //    isjiaofei = int.Parse(Request.QueryString["isjiaofei"].ToString()); //统计页面传递过来的値 是否缴费     
-        //}
-        //if (Request.QueryString["sb_num"] != null && Request.QueryString["sb_num"] != "")
-        //{
-        //    sb_num = Request.QueryString["sb_num"].ToString(); //检索页面传递过来的値
-        //}
-        //if (Request.QueryString["sb_type"] != null && Request.QueryString["sb_type"] != "")
-        //{
-        //    sb_type = Request.QueryString["sb_type"].ToString(); //检索页面传递过来的値 
-        //}
-
-
     }
     public string GetApplyTypeName(object applyType)
     {
@@ -183,7 +164,7 @@ public partial class trademark_list : System.Web.UI.Page
             if (!string.IsNullOrEmpty(this.ddlTradeMarkStatus.SelectedValue))
                 this.qStatus = int.Parse(this.ddlTradeMarkStatus.SelectedValue);
 
-            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, applyType, ByCaseNo, ByName, Bytype, ByStatus, qCaseNo, qName, qStatus, ref Ccount);
+            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId,0, applyType, ByCaseNo, ByName, Bytype, ByStatus, qCaseNo, qName, qStatus, ref Ccount);
             this.Rp_sb_list.DataBind();
             AspNetPager1.RecordCount = Ccount;
             AspNetPager1.PageSize = PageSize;

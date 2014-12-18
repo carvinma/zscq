@@ -469,57 +469,6 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         Response.Flush();
         Response.End();
     }
-    protected void ImageButton4_Click(object sender, ImageClickEventArgs e)
-    {
-        if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
-        {
-            Response.Redirect("User_Trademarkzixing.aspx");
-        }
-        else
-        {
-            div_a.InnerHtml = "<script>alert('请选择缴费商标！');</script>";
-
-        }
-    }
-    protected void ImageButton5_Click(object sender, ImageClickEventArgs e)
-    {
-        if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
-        {
-            bool booldelete = true;
-            t_Member model = DALM.Member_Select_Id(UserId);
-            if (model != null)
-            {
-                if (model.nvc_Power != null && model.nvc_Power != "")
-                {
-                    booldelete = model.nvc_Power.Split(',')[3] == "1" ? true : false;//删除  
-
-                }
-            }
-            if (booldelete == false)
-            {
-                Response.Redirect("user_pageinfo.aspx");
-            }
-
-            int uId_sb = Convert.ToInt32(Request.Cookies["hqhtshop"]["hqht_sb_uid"]);
-
-            string patentid = Request.Cookies["hqht_Trademarktidstr"].Value;
-            string[] arr_pid = patentid.Split('|');
-            for (var i = 0; i < arr_pid.Length; i++)
-            {
-                if (arr_pid[i] != "")
-                {
-                    int pid = Convert.ToInt32(arr_pid[i].Split(',')[0]);
-                    DALT.Trademark_Del(pid);
-                }
-            }
-            Bind_Rpt_Trademark();
-            div_html.InnerHtml = "<script>alert('删除成功')</script>";
-        }
-        else
-        {
-            div_html.InnerHtml = "<script>alert('请选择要删除的商标')</script>";
-        }
-    }
 
     public string GetCurrentClassName(int days)
     {
@@ -549,11 +498,5 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
             cname = "time6";
         }
         return cname;
-    }
-
-
-    public string GetApplyTypeName(object applyType)
-    {
-        return EnumManager.GetDescription(typeof(ApplyUserTypeEnum), applyType);
-    }
+    }    
 }

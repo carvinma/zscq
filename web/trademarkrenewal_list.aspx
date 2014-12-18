@@ -134,6 +134,66 @@
     <tr>
       <td width="260" height="618" align="left" valign="top" style="background-image: url(images/server2.gif);">
         <uc1:zscq_sb_leftmenu ID="zscq_sb_leftmenu1" runat="server" />
+
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px">
+    <Columns>
+      <asp:BoundField DataField="nvc_UserNum" HeaderText="客户编号" />
+      <asp:TemplateField HeaderText="用户类型">
+        <ItemTemplate>
+          <%# GetSBtypeAndName(Eval("i_GuoJiId").ToString(), Eval("i_UserTypeId").ToString())%>
+        </ItemTemplate>
+      </asp:TemplateField>
+       <asp:TemplateField HeaderText="商标注册证书">
+        <ItemTemplate>
+          <%# Eval("nvc_SBFile")!=null?"已上传":"未上传"  %>
+        </ItemTemplate>
+      </asp:TemplateField>
+          <asp:TemplateField HeaderText="主体资格证明">
+        <ItemTemplate>
+          <%#SBZTFile(Eval("i_Id"))%>
+        </ItemTemplate>
+      </asp:TemplateField>
+        <asp:TemplateField HeaderText="商标续展申请书">
+        <ItemTemplate>
+          <%# Eval("nvc_ShenQingShu") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+          <asp:TemplateField HeaderText="商标续展委托书">
+        <ItemTemplate>
+          <%# Eval("nvc_WeituoFile")!=null?"已上传":"未上传"  %>
+        </ItemTemplate>
+      </asp:TemplateField>
+      <asp:BoundField DataField="nvc_SBRegNum" HeaderText="商标注册号" />
+      <asp:BoundField DataField="nvc_SBType" HeaderText="商标类别" />
+      <asp:BoundField DataField="nvc_SBRegName" HeaderText="商标注册人名称" />
+      <asp:BoundField DataField="nvc_SBRegEnName" HeaderText="注册人英文名称" />     
+      <asp:BoundField DataField="nvc_SBRegAddress" HeaderText="商标注册人详细地址" />
+      <asp:BoundField DataField="nvc_SBRegEnAddress" HeaderText="商标注册人英文地址" />
+      <asp:TemplateField HeaderText="审核状态">
+        <ItemTemplate>
+          <%#Eval("i_State").ToString() == "1" ?"审核通过<font style='color:red;'>(有效期"+Eval("nvc_SbDaoqiTime")+"</font>)" :(Eval("i_State").ToString() == "2"?"未通过":"未审核")%>
+        </ItemTemplate>
+      </asp:TemplateField>
+      <asp:BoundField DataField="nvc_SBPostcode" HeaderText="邮编" />
+      <asp:BoundField DataField="dt_AddTime" HeaderText="添加时间" />
+        <asp:BoundField DataField="nvc_SbRegTime" HeaderText="商标注册日" />      
+             <asp:BoundField DataField="nvc_SbDaoqiTime" HeaderText="到期时间" />   
+      <asp:BoundField DataField="i_ShengDays" HeaderText="剩余天数" />
+      <asp:TemplateField HeaderText="商标描述类型">
+        <ItemTemplate>
+         <%#Eval("i_MiaoShuType").ToString() == "1" ? "文字商标" : Eval("i_MiaoShuType").ToString() == "2" ? "图形商标" : "文字与图形商标"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+
+      <asp:BoundField DataField="nvc_SBDescribe" HeaderText="商标描述" />
+      <asp:TemplateField HeaderText="商标缴费类型">
+        <ItemTemplate>
+          <%#Eval("i_JiaoFeiType").ToString() == "1" ?"自行缴费" :"委托缴费"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+      </Columns>
+  </asp:GridView>
+
       </td>
       <td align="left" valign="top">
         <table width="741" border="0" cellspacing="0" cellpadding="0">
@@ -362,65 +422,6 @@
         </td>
       </tr>
     </table>
-
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px">
-    <Columns>
-      <asp:BoundField DataField="nvc_UserNum" HeaderText="客户编号" />
-      <asp:TemplateField HeaderText="用户类型">
-        <ItemTemplate>
-          <%# GetSBtypeAndName(Eval("i_GuoJiId").ToString(), Eval("i_UserTypeId").ToString())%>
-        </ItemTemplate>
-      </asp:TemplateField>
-       <asp:TemplateField HeaderText="商标注册证书">
-        <ItemTemplate>
-          <%# Eval("nvc_SBFile")!=null?"已上传":"未上传"  %>
-        </ItemTemplate>
-      </asp:TemplateField>
-          <asp:TemplateField HeaderText="主体资格证明">
-        <ItemTemplate>
-          <%#SBZTFile(Eval("i_Id"))%>
-        </ItemTemplate>
-      </asp:TemplateField>
-        <asp:TemplateField HeaderText="商标续展申请书">
-        <ItemTemplate>
-          <%# Eval("nvc_ShenQingShu") != null ? "已上传" : "未上传"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-          <asp:TemplateField HeaderText="商标续展委托书">
-        <ItemTemplate>
-          <%# Eval("nvc_WeituoFile")!=null?"已上传":"未上传"  %>
-        </ItemTemplate>
-      </asp:TemplateField>
-      <asp:BoundField DataField="nvc_SBRegNum" HeaderText="商标注册号" />
-      <asp:BoundField DataField="nvc_SBType" HeaderText="商标类别" />
-      <asp:BoundField DataField="nvc_SBRegName" HeaderText="商标注册人名称" />
-      <asp:BoundField DataField="nvc_SBRegEnName" HeaderText="注册人英文名称" />     
-      <asp:BoundField DataField="nvc_SBRegAddress" HeaderText="商标注册人详细地址" />
-      <asp:BoundField DataField="nvc_SBRegEnAddress" HeaderText="商标注册人英文地址" />
-      <asp:TemplateField HeaderText="审核状态">
-        <ItemTemplate>
-          <%#Eval("i_State").ToString() == "1" ?"审核通过<font style='color:red;'>(有效期"+Eval("nvc_SbDaoqiTime")+"</font>)" :(Eval("i_State").ToString() == "2"?"未通过":"未审核")%>
-        </ItemTemplate>
-      </asp:TemplateField>
-      <asp:BoundField DataField="nvc_SBPostcode" HeaderText="邮编" />
-      <asp:BoundField DataField="dt_AddTime" HeaderText="添加时间" />
-        <asp:BoundField DataField="nvc_SbRegTime" HeaderText="商标注册日" />      
-             <asp:BoundField DataField="nvc_SbDaoqiTime" HeaderText="到期时间" />   
-      <asp:BoundField DataField="i_ShengDays" HeaderText="剩余天数" />
-      <asp:TemplateField HeaderText="商标描述类型">
-        <ItemTemplate>
-         <%#Eval("i_MiaoShuType").ToString() == "1" ? "文字商标" : Eval("i_MiaoShuType").ToString() == "2" ? "图形商标" : "文字与图形商标"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-
-      <asp:BoundField DataField="nvc_SBDescribe" HeaderText="商标描述" />
-      <asp:TemplateField HeaderText="商标缴费类型">
-        <ItemTemplate>
-          <%#Eval("i_JiaoFeiType").ToString() == "1" ?"自行缴费" :"委托缴费"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-      </Columns>
-  </asp:GridView>
 
   </div>
   <script type="text/javascript">

@@ -111,12 +111,13 @@ namespace zscq.DAL
         /// <param name="pageSize"></param>
         /// <returns></returns>
         public IQueryable<t_NewTradeMarkInfo> Trademark_web_SelectPage(int PageIndex, int PageSize,
-            int userid, int? applyType,
+            int userid, int i_type, int? applyType,
             string ByCaseNo, string ByName, string Bytype, string ByStatus, 
             string qCaseNo,string qName, int? qStatus, ref int count)
         {
             Expression<Func<t_NewTradeMarkInfo, bool>> WhereExpr = PredicateExtensions.True<t_NewTradeMarkInfo>();
             WhereExpr = WhereExpr.And(a => a.i_MemberId == userid);
+            WhereExpr = WhereExpr.And(a => a.i_Type == i_type);
             if (applyType.HasValue)
                 WhereExpr = WhereExpr.And(a => a.ApplyType == applyType.Value);
             if(!string.IsNullOrEmpty(qCaseNo))
