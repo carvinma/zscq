@@ -422,7 +422,7 @@
                                                             
                                                             <td>
                                                                 <asp:Button ID="btnExcel" CssClass="BtnShow" runat="server" Text="导出"  
-                                                                    OnClientClick="return addmarkCheck_data()" onclick="btnExcel_Click" />
+                                                                    onclick="btnExcel_Click" />
                                                             </td>
                                                             <td>
                                                               <a href="javascript:void(0)"  onclick="DelTrademarkListDailog()" class="BtnShowhref" style="width:73px">删 除</a>
@@ -470,7 +470,7 @@
           身份证
         </ItemTemplate>
       </asp:TemplateField>
-        <asp:BoundField DataField="CardNo" HeaderText="身分证件号码" /> 
+        <asp:BoundField DataField="CardNo" HeaderText="身分证件号码" ItemStyle-CssClass="text" /> 
           <asp:TemplateField HeaderText="身份证件扫描件">
         <ItemTemplate>
           <%# Eval("CardNoPDF") != null ? "已上传" : "未上传"%>
@@ -483,28 +483,28 @@
       </asp:TemplateField>
           <asp:TemplateField HeaderText="申请人行政区划">
         <ItemTemplate>
-          <%# Eval("nvc_WeituoFile")!=null?"已上传":"未上传"  %>
+         <%#GetProviceArea(Eval("ProvinceId"), Eval("CityId"), Eval("AreaId"))%>
         </ItemTemplate>
       </asp:TemplateField>
       
-      <asp:BoundField DataField="Address" HeaderText="申请人地址" />
-      <asp:BoundField DataField="ContactPerson" HeaderText="联系人" />
-      <asp:BoundField DataField="Phone" HeaderText="联系电话" />
-       <asp:BoundField DataField="Fax" HeaderText="传真" />
-        <asp:BoundField DataField="PostCode" HeaderText="邮编" />
+      <asp:BoundField DataField="Address" HeaderText="申请人地址" ItemStyle-CssClass="text" />
+      <asp:BoundField DataField="ContactPerson" HeaderText="联系人" ItemStyle-CssClass="text" />
+      <asp:BoundField DataField="Phone" HeaderText="联系电话" ItemStyle-CssClass="text"  />
+       <asp:BoundField DataField="Fax" HeaderText="传真" ItemStyle-CssClass="text" />
+        <asp:BoundField DataField="PostCode" HeaderText="邮编" ItemStyle-CssClass="text" />
       <asp:TemplateField HeaderText="三维标志">
         <ItemTemplate>
-          <%# bool.Parse(Eval("Is3D").ToString()) == true? "是" : "否"%>
+         <%# bool.Parse(Eval("Is3D") == null ? "false" : Eval("Is3D").ToString()) == true ? "是" : "否"%>
         </ItemTemplate>
       </asp:TemplateField>
       <asp:TemplateField HeaderText="颜色组合">
         <ItemTemplate>
-          <%# bool.Parse(Eval("IsColor").ToString()) == true ? "是" : "否"%>
+          <%# bool.Parse(Eval("IsColor")==null? "false":Eval("IsColor").ToString()) == true ? "是" : "否"%>
         </ItemTemplate>
       </asp:TemplateField>
       <asp:TemplateField HeaderText="声音商标">
         <ItemTemplate>
-          <%# bool.Parse(Eval("IsSound").ToString()) == true ? "是" : "否"%>
+         <%# bool.Parse(Eval("IsSound") == null ? "false" : Eval("IsSound").ToString()) == true ? "是" : "否"%>
         </ItemTemplate>
       </asp:TemplateField>
         <asp:TemplateField HeaderText="声音文件">
@@ -515,6 +515,11 @@
 
       <asp:BoundField DataField="TrademarkRemark" HeaderText="商标说明" />
       <asp:BoundField DataField="TrademarkType" HeaderText="商标类别" />
+       <asp:TemplateField HeaderText="图样">
+        <ItemTemplate>
+         <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("TrademarkPattern1") %>' width="50" height="30"  />
+        </ItemTemplate>
+      </asp:TemplateField> 
 
         <asp:BoundField DataField="ApplyDate" DataFormatString="{0:yyyy-MM-dd}" HeaderText="商标申请日" />      
         <asp:BoundField DataField="PublicPreliminaryDate"  DataFormatString="{0:yyyy-MM-dd}" HeaderText="初审公告日" />   

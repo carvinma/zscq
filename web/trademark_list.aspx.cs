@@ -12,8 +12,8 @@ public partial class trademark_list : System.Web.UI.Page
     dal_NewTrademark mark = new dal_NewTrademark();
     dal_Trademark DALT = new dal_Trademark();
     dal_Member DALM = new dal_Member();
-    dal_Nationality DALN = new dal_Nationality();
     dal_TrademarkSetup DALTS = new dal_TrademarkSetup();
+    dal_Address address = new dal_Address();
     public string Sbtype = "", Sbjiaofeitype = "", SbregName = "", Sbnum = "", Sbjiaofei = "", Sbtime = "", Stime = "";
     public int UserId = 0, usertype = 0;
     public string returnurl = "";
@@ -153,75 +153,6 @@ public partial class trademark_list : System.Web.UI.Page
         }
         return returnurl;
     }
-    public string Getxiaoji(string sbid)
-    {
-        string xiaoji = "0.00";
-        string bizhong = "";
-        t_Trademark model = DALT.Trademark_Select_Id(int.Parse(sbid));
-        t_TradeMarkSetup model1 = DALTS.TrademarkSetup_Select();//代理费用
-        if (model != null)
-        {
-            if (model1 != null)
-            {
-                t_Member m = DALM.Member_Select_Id(int.Parse(model.i_MemberId.ToString()));
-                if (m != null)
-                {
-                    t_Nationality na = DALN.Nationality_Select_Id(m.i_GuoJiId);
-                    if (na != null)
-                    {
-                        if (na.nvc_Name == "中国")
-                        {
-                            bizhong = na.nvc_JFBizhong;
-                            #region 委托缴费
-                            if (model.i_JiaoFeiType == 2)
-                            {
-                                string totalmoney = (model1.dm_TMDaiLi + model1.dm_TrademarkMoney).ToString("0.00");
-                                xiaoji = bizhong + ":" + totalmoney;
-                            #endregion
-                            }
-                            if (model.i_JiaoFeiType == 1)
-                            {
-                                //#region 自行缴费
-                                //xiaoji = bizhong + ":" + (model1.dm_TrademarkMoney).ToString("0.00");
-                                //#endregion
-                            }
-                        }
-                        else
-                        {
-                            t_Nationality nafee = DALN.Nationality_Select_BiZhong(na.nvc_JFBizhong);
-                            decimal huilv = 1;
-                            bizhong = na.nvc_JFBizhong;
-                            if (nafee != null)
-                            {
-                                if (nafee.dm_Exchange != null || nafee.dm_Exchange != 0)
-                                {
-                                    huilv = nafee.dm_Exchange;
-                                }
-                            }
-                            #region  委托缴费
-                            string totalmoney = (model1.dm_TMDaiLi + model1.dm_TrademarkMoney).ToString("0.00");
-                            string totalmoneyGY = ((model1.dm_TMDaiLi + model1.dm_TrademarkMoney) * huilv).ToString("0.00");
-                            string shangbiao = (model1.dm_TrademarkMoney).ToString("0.00");
-                            string shangbiaoGY = ((model1.dm_TrademarkMoney) * huilv).ToString("0.00");
-                            string dailimoneyGy = ((model1.dm_TMDaiLi) * huilv).ToString();
-                            xiaoji = bizhong + ":" + totalmoneyGY;
-                            // xiaoji = totalmoney;
-                            #endregion
-
-                            //#region  自行缴费
-                            //string totalmoney1 = (model1.dm_TrademarkMoney).ToString("0.00");
-                            //string totalmoneyGY1 = ((model1.dm_TrademarkMoney) / huilv).ToString("0.00");
-
-                            //xiaoji = bizhong + ":" + totalmoneyGY1;
-                            ////  xiaoji =bizhong+":"+totalmoney1;
-                            //#endregion
-                        }
-                    }
-                }
-            }
-        }
-        return xiaoji;
-    }
     /// <summary>
     /// 状态判断
     /// </summary>
@@ -339,46 +270,12 @@ public partial class trademark_list : System.Web.UI.Page
         return namestr;
     }
 
-
-    public string GetSBtypeAndName(string country, string typeid)//获得商标类型
+    public override void VerifyRenderingInServerForm(Control control)
     {
-        string typename = "";
-        if (country == "1")
-        {
-            if (typeid == "1")
-            {
-                typename = "中国个人";
-            }
-            if (typeid == "2")
-            {
-                typename = "中国企业";
-            }
-            if (typeid == "3")
-            {
-                typename = "中国代理机构";
-            }
-        }
-        if (country == "2")
-        {
-            if (typeid == "1")
-            {
-                typename = "外国个人";
-            }
-            if (typeid == "2")
-            {
-                typename = "外国企业";
-            }
-            if (typeid == "3")
-            {
-                typename = "外国代理机构";
-            }
-        }
-        return typename;
-
     }
-
     private void toExecl(GridView GVId)
     {
+        string style = @"<style> .text { mso-number-format:\@; } </script> "; 
         DateTime dt = DateTime.Now;
         Response.Clear();
         Response.Buffer = true;
@@ -392,6 +289,7 @@ public partial class trademark_list : System.Web.UI.Page
         System.IO.StringWriter oStringWriter = new System.IO.StringWriter();
         System.Web.UI.HtmlTextWriter oHtmlTextWriter = new System.Web.UI.HtmlTextWriter(oStringWriter);
         GVId.RenderControl(oHtmlTextWriter);
+        Response.Write(style); 
         Response.Output.Write(oStringWriter.ToString());
         Response.Flush();
         Response.End();
@@ -437,36 +335,6 @@ public partial class trademark_list : System.Web.UI.Page
         }
     }
 
-    public string GetCurrentClassName(int days)
-    {
-        string cname = "time0";
-        if (days > 90)
-        {
-            cname = "time1";
-        }
-        if (days >= 61 && days <= 90)
-        {
-            cname = "time2";
-        }
-        if (days >= 31 && days <= 60)
-        {
-            cname = "time3";
-        }
-        if (days >= 16 && days <= 30)
-        {
-            cname = "time4";
-        }
-        if (days >= 0 && days <= 15)
-        {
-            cname = "time5";
-        }
-        if (days < 0)
-        {
-            cname = "time6";
-        }
-        return cname;
-    }
-
     protected void btnQuery_Click(object sender, EventArgs e)
     {
         this.qCaseNo = this.txtCaseNo.Text.Trim();
@@ -479,17 +347,26 @@ public partial class trademark_list : System.Web.UI.Page
         if (Request.Form["chkItem"] != null)
         {
             string[] IDList = Request.Form["chkItem"].ToString().Split(',');
-            for (int i = 0; i < IDList.Length; i++)
+            if (IDList.Count() > 0)
             {
-               // t_Member user = userdal.Member_Select_Id(int.Parse(IDList[i]));
-               // string username = user.nvc_Name != null ? user.nvc_Name : "异常";
+                GridView1.DataSource = mark.Trademark_web_Excel(IDList);
+                GridView1.DataBind();
+                toExecl(GridView1);
+                GridView1.DataSource = null;
+                GridView1.DataBind();
+            }
+        }      
+    }
+    public string GetProviceArea(object provinceid,object cityid,object areaid)
+    {
+        int pid, cid, aid;
+        if (provinceid != null && cityid != null && areaid != null)
+        {
+            if (int.TryParse(provinceid.ToString(), out pid) && int.TryParse(cityid.ToString(), out cid) && int.TryParse(areaid.ToString(), out aid))
+            {
+                return address.Set_AddressName_PId_CId_AId(pid, cid, aid);
             }
         }
-
-        //GridView1.DataSource = DALT.Trademark_web_SelectPage(pageCurrent, 100000, UserId, Sbtype, Sbjiaofeitype, SbregName, Sbnum, Sbjiaofei, Sbtime, Stime, isjiaofei, jiaofeistate, sb_num, sb_type, sb_regname, int.Parse(sb_guoji), sb_passtime, c_anjuanhao, uname, uaddress, utel, ref Ccount);
-        GridView1.DataBind();
-        toExecl(GridView1);
-        GridView1.DataSource = null;
-        GridView1.DataBind();
+        return string.Empty;
     }
 }

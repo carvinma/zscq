@@ -93,7 +93,18 @@ namespace zscq.DAL
             }
         }
 
-         /// <summary>
+
+        /// <summary>
+        /// 前台TradeMarkList导出商标
+        /// </summary>
+        /// <param name="ids">id集合</param>
+        /// <returns></returns>
+        public IQueryable<t_NewTradeMarkInfo> Trademark_web_Excel(string[] ids)
+        {
+            return mark.t_NewTradeMarkInfo.Where(p=>ids.Contains(p.i_Id.ToString()));
+        }
+
+        /// <summary>
         /// 前台商标分页获取
         /// </summary>
         /// <param name="startIndex"></param>
