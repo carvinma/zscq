@@ -234,10 +234,11 @@
   </tr>
 </table>
 </td>
-                              <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
+      <td width="76" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+      <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="6"></td>
-    <td width="60" align="left"><span>申请号</span><a href="trademarkrenewal_list.aspx?sbapplyno=desc_5" title="倒序" id="daoxu5">↑</a>
+    <td width="70" align="left"><span>申请号</span><a href="trademarkrenewal_list.aspx?sbapplyno=desc_5" title="倒序" id="daoxu5">↑</a>
     <a href="trademarkrenewal_list.aspx?sbapplyno=asc_5" title="正序" id="zhengxu5" style="display: none;" >↓</a></td>
   </tr>
 </table></td>

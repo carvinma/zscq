@@ -68,7 +68,7 @@ function SubmitTrademarkListDailog() {
     $this.each(function () {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
-            if (status != "1" || status != "10" || status != "11") {
+            if (status == "1" || status == "10" || status == "11") {
                 $.jBox.info("只有尚未提交订单的续展案才能提交！<br/>请重新选择！", "提示");
                 strval = [];
                 return false;
