@@ -1,6 +1,13 @@
 ﻿function DelTrademarkListDailog() {
+    var $this = $("input[name='chkItem']:checked");
+    if($this.length==0)
+    {
+       $.jBox.info("请选择申请案！","提示");
+       return false;
+    }
+
     var strval = new Array();
-    $("input[name='chkItem']:checked").each(function () {
+    $this.each(function () {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
             if (status != "0") {
@@ -43,8 +50,14 @@ var submit = function (v, h, f) {
 
 
 function SubmitTrademarkListDailog() {
+ var $this = $("input[name='chkItem']:checked");
+    if($this.length==0)
+    {
+       $.jBox.info("请选择申请案！","提示");
+      return false;
+    }
     var strval = new Array();
-    $("input[name='chkItem']:checked").each(function () {
+    $this.each(function () {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
             if (status != "0") {
