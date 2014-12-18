@@ -87,7 +87,7 @@
                         
                     </td>
                 </tr>
-                <tr id="faq1" <% if (myurl == "trademark_detail" || myurl == "add_trademark" || myurl == "edit_trademark" || myurl == "add_trademark_renewal" ||myurl == "trademark_list"||myurl == "trademarkrenewal_list" ||myurl == "user_sblb" || myurl == "user_trademarkorderok" || myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_sbdd" || myurl == "user_sbddck" || myurl == "user_sbly" || myurl == "user_trademarkorderadd" || myurl == "user_sbjf"||myurl == "user_sbsetintegral"|| myurl == "user_sbcoupon"|| myurl == "user_trademarkzixing" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
+                <tr id="faq1" <% if (myurl == "trademarkrenewal_detail"|| myurl == "trademark_detail" || myurl == "add_trademark" || myurl == "edit_trademark" || myurl == "add_trademark_renewal" ||myurl == "trademark_list"||myurl == "trademarkrenewal_list" ||myurl == "user_sblb" || myurl == "user_trademarkorderok" || myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_sbdd" || myurl == "user_sbddck" || myurl == "user_sbly" || myurl == "user_trademarkorderadd" || myurl == "user_sbjf"||myurl == "user_sbsetintegral"|| myurl == "user_sbcoupon"|| myurl == "user_trademarkzixing" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
                     <td align="left" valign="top">&nbsp;
                         
                     </td>
