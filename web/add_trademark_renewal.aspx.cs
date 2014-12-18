@@ -168,14 +168,14 @@ public partial class add_trademark_renewal : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status = 0;
+        model.Status = 12;
         mark.Trademark_Add(model);
         addRegNoticeData(model.i_Id);
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status = 1;
+        model.Status = 10;
         mark.Trademark_Add(model);
         addRegNoticeData(model.i_Id);
     }
