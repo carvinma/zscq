@@ -413,12 +413,17 @@ function doSelect() {
 
 var cancleadd = function (v, h, f) {
     if (v == "ok") {
-        window.location.href = "trademark_list.aspx";
+        var addype = h.find("div:hidden").html();
+        if(addype=="0")
+              window.location.href = "trademark_list.aspx";
+           else
+               window.location.href = "trademarkrenewal_list.aspx";
     }
     return true;
 };
-function cancleSumbit() {
-    $.jBox.confirm("是否确定放弃提交？", "提示", cancleadd);
+function cancleSumbit(addype) {
+    //addype=0 申请 =1续展
+    $.jBox.confirm("是否确定放弃提交？<div style='display:none'>" + addype + "</div>", "提示", cancleadd);
 }
 
 function showDelDailog(id) {
