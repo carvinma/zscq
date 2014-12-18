@@ -335,7 +335,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
     public string GetApplyStatus(object applyStatus)
     {
         if (applyStatus != null)
-            return BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+            return BaseDataUtil.tradeMarkRenewedStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
         return string.Empty;
     }
 }

@@ -354,6 +354,7 @@
                         <td align="left"><asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px">
     <Columns>
       <asp:BoundField DataField="CaseNo" HeaderText="案件号" />
+       <asp:BoundField DataField="RegisteredNo" HeaderText="申请号" ItemStyle-CssClass="text" />    
       <asp:TemplateField HeaderText="申请人类别">
         <ItemTemplate>
           <%# GetApplyTypeName(Eval("ApplyType"))%>
@@ -410,14 +411,22 @@
 
       <asp:BoundField DataField="TrademarkRemark" HeaderText="商标说明" />
       <asp:BoundField DataField="TrademarkType" HeaderText="商标类别" />
-      <%-- <asp:TemplateField HeaderText="图样">
+       <asp:TemplateField HeaderText="描述类型">
         <ItemTemplate>
-         <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("TrademarkPattern1") %>' width="50" height="30"  />
+          <%# Eval("TrademarkDescribeType").ToString()=="0"? "文字商标":(Eval("TrademarkDescribeType").ToString()=="1" ? "图形商标":"文字与图形商标") %>
         </ItemTemplate>
-      </asp:TemplateField> --%>
+      </asp:TemplateField>
+      <asp:BoundField DataField="TrademarkDescribe" HeaderText="商标描述" />
+        <asp:TemplateField HeaderText="注册证书">
+        <ItemTemplate>
+         <%# Eval("TrademarkRegBook") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
 
         <asp:BoundField DataField="ApplyDate" DataFormatString="{0:yyyy-MM-dd}" HeaderText="商标申请日" />      
-        <asp:BoundField DataField="PublicPreliminaryDate"  DataFormatString="{0:yyyy-MM-dd}" HeaderText="初审公告日" />   
+        <asp:BoundField DataField="PublicPreliminaryDate"  DataFormatString="{0:yyyy-MM-dd}" HeaderText="初审公告日" />  
+        <asp:BoundField DataField="PublicPreliminaryDate"  DataFormatString="{0:yyyy-MM-dd}" HeaderText="期限日" />    
+        
       <asp:TemplateField HeaderText="最近状态">
         <ItemTemplate>
           <%# GetApplyStatus(Eval("Status"))%>
@@ -433,6 +442,17 @@
       <asp:TemplateField HeaderText="申请委托书">
         <ItemTemplate>
            <%# Eval("AgentBook") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+       <asp:TemplateField HeaderText="续展申请书">
+        <ItemTemplate>
+         <%# Eval("RenewalApplyBook") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+
+      <asp:TemplateField HeaderText="续展委托书">
+        <ItemTemplate>
+           <%# Eval("RenewalAgentBook") != null ? "已上传" : "未上传"%>
         </ItemTemplate>
       </asp:TemplateField>
       </Columns>
