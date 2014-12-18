@@ -169,9 +169,11 @@ public class HandlerCode
         int iResult = 0;
         try
         {
-            if (context.Request["ids"] != null && context.Request["ids"].ToString() != "")
+            if (context.Request["ids"] != null && context.Request["ids"].ToString() != ""
+                && context.Request["status"] != null && context.Request["status"].ToString()!="")
             {
                 string[] ids = context.Request["ids"].Split(',');
+                int status = int.Parse(context.Request["status"]);
 
                 using (DataTradeMarkDataContext mark = new DataTradeMarkDataContext())
                 {
@@ -179,7 +181,7 @@ public class HandlerCode
 
                     foreach (var item in find)
                     {
-                        item.Status=1;
+                        item.Status = status;
                     }
                     mark.SubmitChanges();
                     iResult = 1;
