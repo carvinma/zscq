@@ -15,6 +15,10 @@
   <meta http-equiv="x-ua-compatible" content="ie=7" />
 <script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
+       <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+    <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
+    <script src="js/TrademarkRenewalList.js" type="text/javascript"></script>
   <%--  <link href="css/pager.css" rel="stylesheet" type="text/css" />--%>
   <script type="text/javascript">
       $(function () {
@@ -135,64 +139,7 @@
       <td width="260" height="618" align="left" valign="top" style="background-image: url(images/server2.gif);">
         <uc1:zscq_sb_leftmenu ID="zscq_sb_leftmenu1" runat="server" />
 
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px">
-    <Columns>
-      <asp:BoundField DataField="nvc_UserNum" HeaderText="客户编号" />
-      <asp:TemplateField HeaderText="用户类型">
-        <ItemTemplate>
-          <%# GetSBtypeAndName(Eval("i_GuoJiId").ToString(), Eval("i_UserTypeId").ToString())%>
-        </ItemTemplate>
-      </asp:TemplateField>
-       <asp:TemplateField HeaderText="商标注册证书">
-        <ItemTemplate>
-          <%# Eval("nvc_SBFile")!=null?"已上传":"未上传"  %>
-        </ItemTemplate>
-      </asp:TemplateField>
-          <asp:TemplateField HeaderText="主体资格证明">
-        <ItemTemplate>
-          <%#SBZTFile(Eval("i_Id"))%>
-        </ItemTemplate>
-      </asp:TemplateField>
-        <asp:TemplateField HeaderText="商标续展申请书">
-        <ItemTemplate>
-          <%# Eval("nvc_ShenQingShu") != null ? "已上传" : "未上传"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-          <asp:TemplateField HeaderText="商标续展委托书">
-        <ItemTemplate>
-          <%# Eval("nvc_WeituoFile")!=null?"已上传":"未上传"  %>
-        </ItemTemplate>
-      </asp:TemplateField>
-      <asp:BoundField DataField="nvc_SBRegNum" HeaderText="商标注册号" />
-      <asp:BoundField DataField="nvc_SBType" HeaderText="商标类别" />
-      <asp:BoundField DataField="nvc_SBRegName" HeaderText="商标注册人名称" />
-      <asp:BoundField DataField="nvc_SBRegEnName" HeaderText="注册人英文名称" />     
-      <asp:BoundField DataField="nvc_SBRegAddress" HeaderText="商标注册人详细地址" />
-      <asp:BoundField DataField="nvc_SBRegEnAddress" HeaderText="商标注册人英文地址" />
-      <asp:TemplateField HeaderText="审核状态">
-        <ItemTemplate>
-          <%#Eval("i_State").ToString() == "1" ?"审核通过<font style='color:red;'>(有效期"+Eval("nvc_SbDaoqiTime")+"</font>)" :(Eval("i_State").ToString() == "2"?"未通过":"未审核")%>
-        </ItemTemplate>
-      </asp:TemplateField>
-      <asp:BoundField DataField="nvc_SBPostcode" HeaderText="邮编" />
-      <asp:BoundField DataField="dt_AddTime" HeaderText="添加时间" />
-        <asp:BoundField DataField="nvc_SbRegTime" HeaderText="商标注册日" />      
-             <asp:BoundField DataField="nvc_SbDaoqiTime" HeaderText="到期时间" />   
-      <asp:BoundField DataField="i_ShengDays" HeaderText="剩余天数" />
-      <asp:TemplateField HeaderText="商标描述类型">
-        <ItemTemplate>
-         <%#Eval("i_MiaoShuType").ToString() == "1" ? "文字商标" : Eval("i_MiaoShuType").ToString() == "2" ? "图形商标" : "文字与图形商标"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-
-      <asp:BoundField DataField="nvc_SBDescribe" HeaderText="商标描述" />
-      <asp:TemplateField HeaderText="商标缴费类型">
-        <ItemTemplate>
-          <%#Eval("i_JiaoFeiType").ToString() == "1" ?"自行缴费" :"委托缴费"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-      </Columns>
-  </asp:GridView>
+    
 
       </td>
       <td align="left" valign="top">
@@ -363,7 +310,64 @@
                         </td>
                       </tr>
                       <tr>
-                        <td align="left">&nbsp;</td>
+                        <td align="left"><asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px">
+    <Columns>
+      <asp:BoundField DataField="nvc_UserNum" HeaderText="客户编号" />
+      <asp:TemplateField HeaderText="用户类型">
+        <ItemTemplate>
+          <%# GetSBtypeAndName(Eval("i_GuoJiId").ToString(), Eval("i_UserTypeId").ToString())%>
+        </ItemTemplate>
+      </asp:TemplateField>
+       <asp:TemplateField HeaderText="商标注册证书">
+        <ItemTemplate>
+          <%# Eval("nvc_SBFile")!=null?"已上传":"未上传"  %>
+        </ItemTemplate>
+      </asp:TemplateField>
+          <asp:TemplateField HeaderText="主体资格证明">
+        <ItemTemplate>
+          <%#SBZTFile(Eval("i_Id"))%>
+        </ItemTemplate>
+      </asp:TemplateField>
+        <asp:TemplateField HeaderText="商标续展申请书">
+        <ItemTemplate>
+          <%# Eval("nvc_ShenQingShu") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+          <asp:TemplateField HeaderText="商标续展委托书">
+        <ItemTemplate>
+          <%# Eval("nvc_WeituoFile")!=null?"已上传":"未上传"  %>
+        </ItemTemplate>
+      </asp:TemplateField>
+      <asp:BoundField DataField="nvc_SBRegNum" HeaderText="商标注册号" />
+      <asp:BoundField DataField="nvc_SBType" HeaderText="商标类别" />
+      <asp:BoundField DataField="nvc_SBRegName" HeaderText="商标注册人名称" />
+      <asp:BoundField DataField="nvc_SBRegEnName" HeaderText="注册人英文名称" />     
+      <asp:BoundField DataField="nvc_SBRegAddress" HeaderText="商标注册人详细地址" />
+      <asp:BoundField DataField="nvc_SBRegEnAddress" HeaderText="商标注册人英文地址" />
+      <asp:TemplateField HeaderText="审核状态">
+        <ItemTemplate>
+          <%#Eval("i_State").ToString() == "1" ?"审核通过<font style='color:red;'>(有效期"+Eval("nvc_SbDaoqiTime")+"</font>)" :(Eval("i_State").ToString() == "2"?"未通过":"未审核")%>
+        </ItemTemplate>
+      </asp:TemplateField>
+      <asp:BoundField DataField="nvc_SBPostcode" HeaderText="邮编" />
+      <asp:BoundField DataField="dt_AddTime" HeaderText="添加时间" />
+        <asp:BoundField DataField="nvc_SbRegTime" HeaderText="商标注册日" />      
+             <asp:BoundField DataField="nvc_SbDaoqiTime" HeaderText="到期时间" />   
+      <asp:BoundField DataField="i_ShengDays" HeaderText="剩余天数" />
+      <asp:TemplateField HeaderText="商标描述类型">
+        <ItemTemplate>
+         <%#Eval("i_MiaoShuType").ToString() == "1" ? "文字商标" : Eval("i_MiaoShuType").ToString() == "2" ? "图形商标" : "文字与图形商标"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+
+      <asp:BoundField DataField="nvc_SBDescribe" HeaderText="商标描述" />
+      <asp:TemplateField HeaderText="商标缴费类型">
+        <ItemTemplate>
+          <%#Eval("i_JiaoFeiType").ToString() == "1" ?"自行缴费" :"委托缴费"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+      </Columns>
+  </asp:GridView> </td>
                       </tr>
                     </table>
                   </td>
@@ -375,134 +379,7 @@
       </td>
     </tr>
   </table>
-  <div id="bg">
-  </div>
-  <div id="show">
-    <table width="488" height="222" border="0" cellspacing="0" cellpadding="0" style="margin: 0 auto; background-image: url(images/bgkuang1.png)">
-      <tr>
-        <td height="222" align="left" valign="top">
-          <table width="488" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="36" height="58">&nbsp; </td>
-              <td width="397">&nbsp; </td>
-              <td width="55" align="right" valign="top"><a href="javascript:void(0);" onclick="hidediv();" style="width: 38px; height: 38px; display: block;">
-                <%--<img src="images/close.jpg"  border="0" onclick="hidediv();" />--%></a> </td>
-            </tr>
-            <tr>
-              <td height="132">&nbsp; </td>
-              <td align="left" valign="top">
-                <table width="397" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td colspan="2" align="center">信息提示！ </td>
-                  </tr>
-                  <tr>
-                    <td height="30" colspan="2" align="center"><strong style="color: #d34245;"></strong></td>
-                  </tr>
-                  <tr>
-                    <td colspan="2" align="center"><span id="maxdays"></span></td>
-                  </tr>
-                  <tr>
-                    <td height="30" colspan="2" align="center"><strong style="color: #d34245;"></strong></td>
-                  </tr>
-                  <tr>
-                    <td height="30" style="width: 200px;" align="center"><img src="images/shaohou.gif" width="85" height="29" onclick="hidediv();" /> </td>
-                    <td height="30" align="center">
-                      <asp:ImageButton runat="server" ID="ImageButton2" ImageUrl="images/jixujiaofei.gif" Width="85" Height="29" BorderWidth="0" OnClick="ImageButton1_Click" />
-                    </td>
-                  </tr>
-                </table>
-              </td>
-              <td>&nbsp; </td>
-            </tr>
-            <tr>
-              <td height="15">&nbsp; </td>
-              <td>&nbsp; </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-
-  </div>
-  <script type="text/javascript">
-    function openBg(state) { //遮照打开关闭控制
-      if (state == 1) {
-        document.getElementById("bg").style.display = "block";
-        var h = document.body.offsetHeight > document.documentElement.offsetHeight ? document.body.offsetHeight : document.documentElement.offsetHeight;
-        h = h > document.body.scrollHeight ? h : document.body.scrollHeight;
-        //alert(document.body.clientHeight);
-        //alert(document.body.scrollHeight);
-        //alert(document.body.offsetHeight);
-        //alert(document.documentElement.offsetHeight); 
-        document.getElementById("bg").style.height = h + "px";
-      }
-      else {
-        document.getElementById("bg").style.display = "none";
-      }
-    }
-    function showdiv(id) {
-      //var id=$("#Hidden1").val();
-      //alert(id);
-      // var showdiv = $("#show");
-
-      $("#show").show();
-      document.getElementById("show").style.left = (document.getElementById("bg").offsetWidth - document.getElementById("show").offsetWidth) / 2 + "px";
-      document.getElementById("show").style.top = document.documentElement.scrollTop + 100 + "px";
-      //$("#Label2").html(id);
-      // $("#Text4").val(id);
-    }
-
-    function hidediv() {
-      $("#show").hide();
-      $("#bg").hide();
-    }
-    function checkshuzi(id) {
-      //定义正则表达式部分
-      var str = $("#" + id).val();
-      var reg = /^\d+$/;
-      if (str.constructor === String) {
-        var re = value.match(reg);
-        return true;
-      }
-      return false;
-    }
-  </script>
-<script type="text/javascript">
-    function getCookie(name) {
-        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-
-        if (arr = document.cookie.match(reg))
-
-            return arr[2];
-        else
-            return null;
-    }
-      $(document).ready(function () {
-          var inputlist = document.getElementsByName("inputPageid");
-          //var tid = document.getElementById("hi_trademark").value;
-          var tid = getCookie("hqht_Trademarktidstr");
-          if (tid != 0) {
-              var listid = tid.split('|');
-              for (var i = 1; i < listid.length; i++) {
-                  for (var j = 0; j < inputlist.length; j++) {
-                      if (inputlist[j].value == listid[i].split(',')[0]) {
-                          inputlist[j].checked = true;
-                      }
-                  }
-              }
-          }
-      });
-
-    function Checknum() {
-      var num = 0;
-      var inputlist = document.getElementsByName("inputPageid");
-      for (var j = 0; j < inputlist.length; j++) {
-        if (inputlist[j].checked) {
-          num++;
-        }
-      }
-    }
-</script>
+   
   <script type="text/javascript">
     function Selbox(obj) {
         if ($(obj).attr("checked") != "checked") {          
