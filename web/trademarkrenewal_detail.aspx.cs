@@ -92,7 +92,7 @@ public partial class trademarkrenewal_detail : System.Web.UI.Page
             division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
         }
         if (model.Status != null)
-            status = BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
+            status = BaseDataUtil.tradeMarkRenewedStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
 
         if (!string.IsNullOrEmpty(model.ApplyBook))
             model.ApplyBook = "<a href='" + model.ApplyBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
@@ -103,6 +103,16 @@ public partial class trademarkrenewal_detail : System.Web.UI.Page
             model.AgentBook = "<a href='" + model.AgentBook + "' title='点击查看' target='_blank'>委托书已上传</a>";
         else
             model.AgentBook = "未上传";
+
+        if (!string.IsNullOrEmpty(model.RenewalApplyBook))
+            model.RenewalApplyBook = "<a href='" + model.RenewalApplyBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
+        else
+            model.RenewalApplyBook = "未上传";
+
+        if (!string.IsNullOrEmpty(model.RenewalAgentBook))
+            model.RenewalAgentBook = "<a href='" + model.RenewalAgentBook + "' title='点击查看' target='_blank'>委托书已上传</a>";
+        else
+            model.RenewalAgentBook = "未上传";
 
         if (!string.IsNullOrEmpty(model.SoundFile))
             model.SoundFile = "<a href='" + model.SoundFile + "' title='点击查看' target='_blank'>声音文件已上传</a>";

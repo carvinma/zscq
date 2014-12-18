@@ -79,7 +79,7 @@
 					<div class="ui-tabs-panel">
 						<div class="content reset">
 						 <table width="689" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
+                            <tr>
                         <td height="115" align="center" valign="top">
                           <table width="689" border="0" cellspacing="0" cellpadding="0">
                           <tr><td height="10">
@@ -233,7 +233,7 @@
                                         
                                     </td>
                                      </tr>
-                                    <tr id="printGoods" style="display:none">
+                                     <tr id="printGoods" style="display:none">
                                      <td width="260" height="32" align="right" ><strong>商品详情：</strong>
                                     </td>  
                                      <td>
@@ -288,6 +288,18 @@
                                     </tr>
                                     
                                       <tr>
+                                    <td width="260" height="32" align="right" ><strong>商标描述类型：</strong></td>  
+                                    <td> 
+                                        <%=model.TrademarkDescribeType == 0 ? "文字" : (model.TrademarkDescribeType == 1 ? "图形" : "文字与图形")%></td>                                  
+                                    </tr>
+                                    
+                                      <tr>
+                                    <td width="260" height="32" align="right" ><strong>商标描述：</strong></td>  
+                                    <td> 
+                                         <%=model.TrademarkDescribe%></td>                                  
+                                    </tr>
+                                    
+                                      <tr>
                                     <td width="260" align="right" height="32"><strong>是否三维商标：</strong></td>
                                     <td>
                                         <%=model.Is3D==true ? "是":"否" %>
@@ -305,7 +317,7 @@
                                           </td><td><%=model.IsSound==true ? "是":"否" %></td>                                    
                                     </tr>   
                                        <% if (model.IsSound == true) { %>
-                                      <tr style=''>
+                                      <tr>
                                     <td width="260" align="right" height="32"><strong>声音文件：</strong></td>
                                     <td><%=model.SoundFile%></td>                                    
                                     </tr>   
@@ -346,6 +358,26 @@
                                     </td>
                                   </tr>
                                   <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>注册公告日：</strong></td>
+                                    <td width="429" valign="middle">
+                                        <%= string.Format("{0:yyyy-MM-dd}", model.RegNoticeDate)%></td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">&nbsp;</td>
+                                    <td width="429" valign="middle">
+                                        &nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>续展期限日：</strong></td>
+                                    <td width="429" valign="middle">
+                                        <%= string.Format("{0:yyyy-MM-dd}", model.RenewalDate)%></td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>所剩天数：</strong></td>
+                                    <td width="429" valign="middle">
+                                       <%=model.RestDays%></td>
+                                  </tr>
+                                  <tr>
                                     <td width="260" height="32" align="right" valign="middle"><b><span>最近状态：</span></b></td>
                                     <td width="429" valign="middle">
                                         <%=status%></td>
@@ -377,18 +409,32 @@
                                     <td height="115" align="left" valign="top">
                                       <table width="689" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                          <td width="260" height="32" align="right"><strong><span>商标注册申请书</span>：<br />
+                                          <td width="260" height="32" align="right"><strong>商标注册申请书：
                                           </strong></td>
                                           <td width="429" align="left">
                                             <%=model.ApplyBook%>
                                           </td>
                                         </tr>
                                         <tr>
-                                          <td width="260" height="32" align="right"><strong>商标申请委托书：<br />
+                                          <td width="260" height="32" align="right"><strong>商标申请委托书：
                                           </strong></td>
                                           <td width="429" align="left">
                                             <%=model.AgentBook%>
                                           </td>
+                                        </tr>
+                                       
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>商标续展申请书：
+                                          </strong></td>
+                                          <td width="429" align="left">
+                                               <%=model.RenewalApplyBook%></td>
+                                        </tr>
+                                       
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>商标续展委托书：
+                                          </strong></td>
+                                          <td width="429" align="left">
+                                               <%=model.RenewalAgentBook%></td>
                                         </tr>
                                        
                                         <tr>
@@ -411,9 +457,7 @@
                               <td align="left">&nbsp; </td>
                             </tr>
                           </table>
-                        </td>
-                      </tr>
-                    </table>
+                        
 						</div>
 					</div>
 					<div class="ui-tabs-panel ui-tabs-hide">
@@ -477,7 +521,7 @@
                         </asp:Repeater>
                     </table>
 				    </div>
-				</div>
+    	</div>
   
       </td>
     </tr>

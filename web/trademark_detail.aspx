@@ -305,7 +305,7 @@
                                           </td><td><%=model.IsSound==true ? "是":"否" %></td>                                    
                                     </tr>   
                                        <% if (model.IsSound == true) { %>
-                                      <tr style=''>
+                                      <tr>
                                     <td width="260" align="right" height="32"><strong>声音文件：</strong></td>
                                     <td><%=model.SoundFile%></td>                                    
                                     </tr>   
