@@ -417,7 +417,7 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                              <a href="javascript:void(0)"  onclick="SubmitTrademarkListDailog()" class="BtnShowhref" style="width:73px">提交订单</a>                                                               <%# Eval("ApplyName")%>
+                                                              <a href="javascript:void(0)"  onclick="SubmitTrademarkListDailog()" class="BtnShowhref" style="width:73px">提交订单</a>
                                                             </td>
                                                             
                                                             <td>
@@ -426,14 +426,11 @@
                                                             </td>
                                                             <td>
                                                               <a href="javascript:void(0)"  onclick="DelTrademarkListDailog()" class="BtnShowhref" style="width:73px">删 除</a>
-                                                                <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
-                                                                     ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                             <tr>
                                                 <td align="left">
                                                     &nbsp;

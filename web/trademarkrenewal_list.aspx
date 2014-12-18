@@ -48,31 +48,6 @@
           if (ody7[1] == "7") {
               orderby(ody7[0], 7);
           }
-//          if (hitime == "0") {
-//              $(".time1").attr("class", "time0");
-//          }
-//          if (hitime == "1") {
-//              $(".time1").attr("class", "time1");
-//          }
-//          if (hitime == "2") {
-//              $(".time1").attr("class", "time2");
-//          }
-//          if (hitime == "3") {
-//              $(".time1").attr("class", "time3");
-//          }
-//          if (hitime == "4") {
-//              $(".time1").attr("class", "time4");
-//          }
-//          if (hitime == "5") {
-//              $(".time1").attr("class", "time5");
-//          }
-//          if (hitime == "6") {
-//              $(".time1").attr("class", "time6");
-//          }
-//          if (hitime == "7") {
-//              $(".time1").attr("class", "time7");
-//          }
-
       });
     function orderby(ody, index) {
 
@@ -213,81 +188,74 @@
                         <td height="115" align="left" valign="top">
                           <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                             <tr>
-                              <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
+                              <td width="76" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="12"></td>
-    <td align="left"><span>商标注<br />
-                              册号</span><a href="user_sblb.aspx?sbnum=desc_4" title="倒序" id="daoxu4">↑</a><a href="user_sblb.aspx?sbnum=asc_4" title="正序" id="zhengxu4" style="display: none;">↓</a></td>
+    <td align="left"><span>案件号</span><a href="user_sblb.aspx?sbnum=desc_4" title="倒序" id="daoxu4">↑</a><a href="user_sblb.aspx?sbnum=asc_4" title="正序" id="zhengxu4" style="display: none;">↓</a></td>
   </tr>
 </table>
 </td>
                               <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="6"></td>
-    <td width="60" align="left"><span>商标申请/<br />
-委托书</span></td>
+    <td width="60" align="left"><span>申请号</span></td>
   </tr>
 </table></td>
-                              <td width="96" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="92" height="42" border="0" cellspacing="0" cellpadding="0">
+    <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+    <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="5"></td>
-    <td width="87" align="left"><span>主体资格证明/<br />商标注册证书</span></td>
+    <td width="6"></td>
+    <td width="60" align="left"><span>申请人</span></td>
   </tr>
 </table></td>
                               <td width="49" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="49" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="6"></td>
-    <td width="44" align="left"><span>商标<br />
-                              类别</span><a href="user_sblb.aspx?sbtype=desc_1" title="倒序" id="daoxu1">↑</a><a href='user_sblb.aspx?sbtype=asc_1' title="正序" id="zhengxu1" style="display: none;">↓</a></td>
+    <td width="44" align="left"> 图样
+   </td>
   </tr>
 </table></td>
                               <td width="136" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="90" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="12"></td>
-    <td width="78" align="left"><span>注册人姓名</span><a href="user_sblb.aspx?sbreg=desc_3" title="倒序" id="daoxu3">↑</a><a href="user_sblb.aspx?sbreg=asc_3" title="正序" id="zhengxu3" style="display: none;">↓</a></td>
+    <td width="78" align="left"><span>类别</span><a href="user_sblb.aspx?sbreg=desc_3" title="倒序" id="daoxu3">↑</a><a href="user_sblb.aspx?sbreg=asc_3" title="正序" id="zhengxu3" style="display: none;">↓</a></td>
   </tr>
 </table></td>
-                              <%if (usertype == 3)
-                                { %>
-                                 <td width="69" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><span>案卷号</span><a href="user_sblb.aspx?xnum=desc_7" title="倒序" id="daoxu7">↑</a><a href='user_sblb.aspx?xnum=asc_7' title="正序" id="zhengxu7" style="display: none;">↓</a></td>
-                                 <%} %>
-                              
-                              <td width="46" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="46" height="42" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="5"></td>
-    <td width="41" align="left"><span>剩余<br />天数</span><a href="user_sblb.aspx?sbtime=desc_6" title="倒序" id="daoxu6">↑</a><a href="user_sblb.aspx?sbtime=asc_6" title="正序" id="zhengxu6" style="display: none;" >↓</a></td>
-  </tr>
-</table></td>
-                              <td width="53" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">费用小计</td>
-                              <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">详情</td>
-                              <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">选择</td>
+ <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+  <span>期限日</span><a href="user_sblb.aspx?sbtime=desc_6" title="倒序" id="daoxu6">↑</a>
+    <a href="user_sblb.aspx?sbtime=asc_6" title="正序" id="zhengxu6" style="display: none;" >↓</a>
+</td>
+                              <td width="53" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请书</td>
+                              <td width="53" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">委托书</td>
+                              <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                <input type="checkbox" onclick="doSelect()" id="selectall"/></td>
                             </tr>
                             <asp:Repeater ID="Rp_sb_list" runat="server">
                               <ItemTemplate>
                                 <tr>
-                                  <td height="42" align="center" bgcolor="#FFFFFF"><span class="<%#GetCurrentClassName(Convert.ToInt32(Eval("i_ShengDays"))) %>">
-                                    <%# Eval("nvc_SBRegNum") %></span></td>
-                                  <td height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><%#BoolFileImg(Eval("nvc_ShenQingShu")) ? "<a href='" + Eval("nvc_ShenQingShu") + "' title='申请书'>商标申请书</a>" : "<a href='user_sbck.aspx?t_r_id="+Eval("i_Id")+"' >未上传</a>"%><br /><%# int.Parse(Eval("i_JiaoFeiType").ToString())==2?(BoolFileImg(Eval("nvc_WeituoFile")) ? "<a href='" + Eval("nvc_WeituoFile") + "' title='委托书'>商标委托书</a>" : "<a href='user_sbck.aspx?t_r_id=" + Eval("i_Id") + "'>未上传</a>"):""%>
+                                  <td height="42" align="center" bgcolor="#FFFFFF">
+                                   <a href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t"><%# Eval("CaseNo")%></a>
+                                   </td>
+                                  <td height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                     <%# Eval("ApplyName")%>
                                   </td>
-                                  <td height="42" align="center" bgcolor="#FFFFFF"><%#ZTFileImg(Eval("nvc_ZhuTiFile"), Eval("i_Id"))%><br /><%#BoolFileImg(Eval("nvc_SBFile")) ? "<a href='" + Eval("nvc_SBFile") + "'><img src='" + Eval("nvc_SBFile") + "' width='20'  title='商标注册证书复印件' border='0'/></a>" : "<a href='user_sbupdate.aspx?t_r_id=" + Eval("i_Id") + "' >未上传</a>"%>
+                                  <td height="42" align="center" bgcolor="#FFFFFF">
+                                    <%# Eval("ApplyName")%>
                                   </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                    <%# Eval("nvc_SBType") %></td>
+                                    <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                                   <td align="center" bgcolor="#FFFFFF">
-                                    <%# Eval("nvc_SBRegName") %></td> 
-                                    
-                                      <%if (usertype == 3)
-                                        { %>
-                                     <td align="center" bgcolor="#FFFFFF"  <%# int.Parse(Eval("i_UserTypeId").ToString())==3?"":"style='display:none;'" %>>
-                                    <%# Eval("nvc_CFaxnumber")%></td>
-                                    <%} %>
-
-       
+                                     <%# GetApplyTypeName(Eval("ApplyType"))%></td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                    <%# Eval("i_ShengDays")%></td>
+                                    <%# string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%></td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                    <%# Getxiaoji(Eval("i_Id").ToString()) %></td>
-                                  <td align="center" bgcolor="#FFFFFF"><a href="user_sbck.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t">查看</a></td>
+                                    <%# (Eval("RenewalApplyBook") != null && string.IsNullOrEmpty(Eval("RenewalApplyBook").ToString()) == false)
+                                                                              ? ("<a href='" + Eval("RenewalApplyBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                  </td>
+                                   <td align="center" bgcolor="#FFFFFF">
+                                    <%# (Eval("RenewalAgentBook") != null && string.IsNullOrEmpty(Eval("RenewalAgentBook").ToString()) == false)
+                                                                              ? ("<a href='" + Eval("RenewalAgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                  </td>
                                   <td align="center" bgcolor="#FFFFFF">
                                     <input name="inputPageid" onchange="Selbox(this)" type="checkbox" <%# SetChecked(Eval("i_State").ToString(),Eval("i_IsPayState").ToString(),Eval("i_XujiaoStates").ToString()) %> value="<%#Eval("i_Id")%>" id="cb_<%#Eval("i_Id")%>" /></td>
                                 </tr>
@@ -305,23 +273,16 @@
                         <td align="center">
                         <table>
                         <tr>  <td>
-                         <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/sbweituofee.jpg" OnClick="ImageButton1_Click" OnClientClick="return Maxjiaofei();" />
+                         <a href="javascript:void(0)"  onclick="SubmitTrademarkListDailog()" class="BtnShowhref" style="width:73px">提交订单</a>
                         </td>
-                        <td>
-                         <asp:ImageButton ID="ImageButton4" runat="server" 
-                                  ImageUrl="~/images/sbweizijiaofee.jpg" OnClientClick="" 
-                                  onclick="ImageButton4_Click" />
-                        </td>
-                         
                          <td>
                          
-                        <asp:ImageButton ID="ImageButton3" runat="server" 
-                                  ImageUrl="~/images/sballdaochu.jpg" OnClientClick="" 
-                                  onclick="ImageButton3_Click" /></td>
+                         <asp:Button ID="btnExcel" CssClass="BtnShow" runat="server" Text="导出"  
+                                                                    OnClientClick=" return ExportToExcel();" onclick="btnExcel_Click" />
+                                                                    </td>
                                   <td>
                          
-                        <asp:ImageButton ID="ImageButton5" runat="server" ImageUrl="images/user_zl_del.jpg" OnClientClick="javascript:return confirm('您确认要执行此操作吗?')" 
-                                onclick="ImageButton5_Click"/>
+                         <a href="javascript:void(0)"  onclick="DelTrademarkListDailog()" class="BtnShowhref" style="width:73px">删 除</a>
                                 </td>
                         </tr>                        
                         </table>                         

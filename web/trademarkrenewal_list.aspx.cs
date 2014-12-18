@@ -550,4 +550,10 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         }
         return cname;
     }
+
+
+    public string GetApplyTypeName(object applyType)
+    {
+        return EnumManager.GetDescription(typeof(ApplyUserTypeEnum), applyType);
+    }
 }
