@@ -6,11 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
+using zscq.BLL;
 public partial class trademarkrenewal_list : System.Web.UI.Page
 {
+    dal_NewTrademark mark = new dal_NewTrademark();
     dal_Trademark DALT = new dal_Trademark();
     dal_Member DALM = new dal_Member();
-    dal_Nationality DALN = new dal_Nationality();
     dal_TrademarkSetup DALTS = new dal_TrademarkSetup();
     public string Sbtype = "", Sbjiaofeitype = "", SbregName = "", Sbnum = "", Sbjiaofei = "", Sbtime = "", Stime = "";
     public int UserId = 0, usertype = 0;
@@ -452,6 +453,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
     }
     private void toExecl(GridView GVId)
     {
+        string style = @"<style> .text { mso-number-format:\@; } </script> "; 
         DateTime dt = DateTime.Now;
         Response.Clear();
         Response.Buffer = true;
@@ -465,6 +467,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         System.IO.StringWriter oStringWriter = new System.IO.StringWriter();
         System.Web.UI.HtmlTextWriter oHtmlTextWriter = new System.Web.UI.HtmlTextWriter(oStringWriter);
         GVId.RenderControl(oHtmlTextWriter);
+        Response.Write(style); 
         Response.Output.Write(oStringWriter.ToString());
         Response.Flush();
         Response.End();
@@ -498,5 +501,25 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
             cname = "time6";
         }
         return cname;
-    }    
+    }
+
+    public string GetApplyTypeName(object applyType)
+    {
+        return EnumManager.GetDescription(typeof(ApplyUserTypeEnum), applyType);
+    }
+    protected void btnExcel_Click(object sender, EventArgs e)
+    {
+        if (Request.Form["chkItem"] != null)
+        {
+            string[] IDList = Request.Form["chkItem"].ToString().Split(',');
+            if (IDList.Count() > 0)
+            {
+                GridView1.DataSource = mark.Trademark_web_Excel(IDList);
+                GridView1.DataBind();
+                toExecl(GridView1);
+                GridView1.DataSource = null;
+                GridView1.DataBind();
+            }
+        }      
+    }
 }

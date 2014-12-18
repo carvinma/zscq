@@ -244,7 +244,7 @@
                                    <a href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t"><%# Eval("CaseNo")%></a>
                                    </td>
                                   <td height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                     <%# Eval("ApplyName")%>
+                                     <%# Eval("RegisteredNo")%>
                                   </td>
                                   <td height="42" align="center" bgcolor="#FFFFFF">
                                     <%# Eval("ApplyName")%>
@@ -264,7 +264,9 @@
                                                                               ? ("<a href='" + Eval("RenewalAgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                   </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                    <input name="inputPageid" onchange="Selbox(this)" type="checkbox" <%# SetChecked(Eval("i_State").ToString(),Eval("i_IsPayState").ToString(),Eval("i_XujiaoStates").ToString()) %> value="<%#Eval("i_Id")%>" id="cb_<%#Eval("i_Id")%>" /></td>
+                                    <input name="chkItem" type="checkbox" status="<%#Eval("Status")%>"
+                                                                            value="<%#Eval("i_Id")%>" id="Checkbox1" />
+                                    </td>
                                 </tr>
                               </ItemTemplate>
                             </asp:Repeater>
@@ -286,7 +288,7 @@
                          
                          <asp:Button ID="btnExcel" CssClass="BtnShow" runat="server" Text="导出"  
                                                                     OnClientClick=" return ExportToExcel();" onclick="btnExcel_Click" />
-                                                                    </td>
+                                </td>
                                   <td>
                          
                          <a href="javascript:void(0)"  onclick="DelTrademarkListDailog()" class="BtnShowhref" style="width:73px">删 除</a>
