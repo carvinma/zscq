@@ -146,5 +146,7 @@ public partial class trademarkrenewal_detail : System.Web.UI.Page
                 this.Rpt_goods.DataBind();
             }
         }
+       this.RptRenewalDate.DataSource= mark.TrademarkRenewalDate_Select_TrademarkId(trademarkId);
+       this.RptRenewalDate.DataBind();
     }
 }

@@ -365,7 +365,23 @@
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">&nbsp;</td>
                                     <td width="429" valign="middle">
-                                        &nbsp;</td>
+                                       <table width="429" border="0" cellspacing="1" cellpadding="1"  class="table-b" id="Table3">
+                                                           <%-- <tr id="Tr1">
+                                                             <td width="50" height="20" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">序号</td>
+                                                              <td align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</td>
+                                                              <td width="80" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类似群</td>
+                                                            </tr>--%>
+                                                              <asp:Repeater ID="RptRenewalDate" runat="server">
+                                                               <ItemTemplate>
+                                                               <tr>
+                                                               <td align="left">
+                                                                <%# string.Format("{0:yyyy年MM月dd日}",Eval("RenewalDate"))%>之前是否续展完成  <%# bool.Parse(Eval("IsFinish").ToString())==true ? "是":"否"%>
+                                                                </td> 
+                                                                
+                                                               </tr>
+                                                                </ItemTemplate>
+                                                                </asp:Repeater>
+                                                           </table></td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><strong>续展期限日：</strong></td>

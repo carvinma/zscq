@@ -353,7 +353,15 @@ namespace zscq.DAL
                 return 0;
             }
         }
-
+        /// <summary>
+        /// 根据商标ID查询注册公告日是否完成
+        /// </summary>
+        /// <param name="TrademarkId"></param>
+        /// <returns></returns>
+        public IQueryable<t_NewTradeMarkRenewalInfo> TrademarkRenewalDate_Select_TrademarkId(int TrademarkId)
+        {
+            return mark.t_NewTradeMarkRenewalInfo.Where(p => p.TradeMarkId == TrademarkId).OrderBy(p=>p.RenewalDate);
+        }
         /// <summary>
         /// 商标描述填写示例的获取
         /// </summary>
