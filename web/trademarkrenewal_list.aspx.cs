@@ -10,14 +10,20 @@ using zscq.BLL;
 public partial class trademarkrenewal_list : System.Web.UI.Page
 {
     dal_NewTrademark mark = new dal_NewTrademark();
+    dal_Address address = new dal_Address();
+
     dal_Trademark DALT = new dal_Trademark();
     dal_Member DALM = new dal_Member();
     dal_TrademarkSetup DALTS = new dal_TrademarkSetup();
     public string Sbtype = "", Sbjiaofeitype = "", SbregName = "", Sbnum = "", Sbjiaofei = "", Sbtime = "", Stime = "";
     public int UserId = 0, usertype = 0;
     public string returnurl = "";
-    public int isjiaofei = -1, jiaofeistate = 0;
     public string sb_type = "", days = "", uname = "", uaddress = "", sb_guoji = "0", sb_num = "", sb_regname = "", sb_passtime = "", utel = "", c_anjuanhao = "";
+
+    public string ByCaseNo, ByName, Bytype, ByTime,ByApplyNo;
+    public int? applyType;
+    public string qCaseNo,qApplyNo, qName;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
@@ -38,110 +44,62 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-           
+            Dictionary<string, int?> dic = new Dictionary<string, int?>();
+            dic.Add("全部", null);
+            for (int i = 0; i <= 1; i++)
+            {
+                string key = EnumManager.GetDescription(typeof(ApplyUserTypeEnum), i);
+                if (!string.IsNullOrEmpty(key))
+                    dic.Add(key, i);
+            }
+
+            this.ddlApplyType.DataSource = dic;
+            this.ddlApplyType.DataTextField = "Key";
+            this.ddlApplyType.DataValueField = "Value";
+            this.ddlApplyType.DataBind();
         }
         Bind_Page_value();
         Bind_Rpt_Trademark();
     }
     public void Bind_Page_value()
     {
-        if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
+        if (Request.QueryString["sbcaseno"] != null && Request.QueryString["sbcaseno"] != "")
         {
-            hi_trademark.Value = Request.Cookies["hqht_Trademarktidstr"].Value.ToString();
+            this.ByCaseNo = Request.QueryString["sbcaseno"].ToString().Split('_')[0];
+            Hi_orderby1.Value = Request.QueryString["sbcaseno"].ToString();
+            HF_ORDERBY.Value = Request.QueryString["sbcaseno"].ToString();//BY CHY
         }
-
+        if (Request.QueryString["sbname"] != null && Request.QueryString["sbname"] != "")
+        {
+            this.ByName = Request.QueryString["sbname"].ToString().Split('_')[0];
+            Hi_orderby2.Value = Request.QueryString["sbname"].ToString();
+            HF_ORDERBY.Value = Request.QueryString["sbname"].ToString();//BY CHY
+        }
         if (Request.QueryString["sbtype"] != null && Request.QueryString["sbtype"] != "")
         {
-            this.Sbtype = Request.QueryString["sbtype"].ToString().Split('_')[0];
-            Hi_orderby1.Value = Request.QueryString["sbtype"].ToString();
+            this.Bytype = Request.QueryString["sbtype"].ToString().Split('_')[0];
+            Hi_orderby3.Value = Request.QueryString["sbtype"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbtype"].ToString();//BY CHY
-        }
-        if (Request.QueryString["sbjiaofeitype"] != null && Request.QueryString["sbjiaofeitype"] != "")
-        {
-            this.Sbjiaofeitype = Request.QueryString["sbjiaofeitype"].ToString().Split('_')[0];
-            Hi_orderby2.Value = Request.QueryString["sbjiaofeitype"].ToString();
-            HF_ORDERBY.Value = Request.QueryString["sbjiaofeitype"].ToString();//BY CHY
-        }
-        if (Request.QueryString["sbreg"] != null && Request.QueryString["sbreg"] != "")
-        {
-            this.SbregName = Request.QueryString["sbreg"].ToString().Split('_')[0];
-            Hi_orderby3.Value = Request.QueryString["sbreg"].ToString();
-            HF_ORDERBY.Value = Request.QueryString["sbreg"].ToString();//BY CHY
-        }
-        if (Request.QueryString["sbnum"] != null && Request.QueryString["sbnum"] != "")
-        {
-            this.Sbnum = Request.QueryString["sbnum"].ToString().Split('_')[0];
-            Hi_orderby4.Value = Request.QueryString["sbnum"].ToString();
-            HF_ORDERBY.Value = Request.QueryString["sbnum"].ToString();//BY CHY
-        }
-        if (Request.QueryString["sbjiaofei"] != null && Request.QueryString["sbjiaofei"] != "")
-        {
-            this.Sbjiaofei = Request.QueryString["sbjiaofei"].ToString().Split('_')[0];
-            Hi_orderby5.Value = Request.QueryString["sbjiaofei"].ToString();
-            HF_ORDERBY.Value = Request.QueryString["sbjiaofei"].ToString();//BY CHY
         }
         if (Request.QueryString["sbtime"] != null && Request.QueryString["sbtime"] != "")
         {
-            this.Sbtime = Request.QueryString["sbtime"].ToString().Split('_')[0];
-            Hi_orderby6.Value = Request.QueryString["sbtime"].ToString();
+            this.ByTime = Request.QueryString["sbtime"].ToString().Split('_')[0];
+            Hi_orderby4.Value = Request.QueryString["sbtime"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbtime"].ToString();//BY CHY
         }
-        if (Request.QueryString["xnum"] != null && Request.QueryString["xnum"] != "")
+        if (Request.QueryString["sbapplyno"] != null && Request.QueryString["sbapplyno"] != "")
         {
-            this.Sbtime = Request.QueryString["xnum"].ToString().Split('_')[0];
-            Hi_orderby7.Value = Request.QueryString["xnum"].ToString();
-            HF_ORDERBY.Value = Request.QueryString["xnum"].ToString();//BY CHY
+            this.ByApplyNo = Request.QueryString["sbapplyno"].ToString().Split('_')[0];
+            Hi_orderby5.Value = Request.QueryString["sbapplyno"].ToString();
+            HF_ORDERBY.Value = Request.QueryString["sbapplyno"].ToString();//BY CHY
         }
+
         if (Request.QueryString["stime"] != null && Request.QueryString["stime"] != "")
         {
             string[] stimelist = Request.QueryString["stime"].ToString().Split('_');
             this.Stime = stimelist[0];
             hi_time.Value = stimelist[1];
-            HF_ORDERBY.Value = Request.QueryString["stime"].ToString();//BY CHY
-        }
-        if (Request.QueryString["jiaofeistate"] != null && Request.QueryString["jiaofeistate"] != "")
-        {
-            jiaofeistate = int.Parse(Request.QueryString["jiaofeistate"].ToString()); //统计页面传递过来的値 缴费状态    
-        }
-        if (Request.QueryString["isjiaofei"] != null && Request.QueryString["isjiaofei"] != "")
-        {
-            isjiaofei = int.Parse(Request.QueryString["isjiaofei"].ToString()); //统计页面传递过来的値 是否缴费     
-        }
-        if (Request.QueryString["sb_num"] != null && Request.QueryString["sb_num"] != "")
-        {
-            sb_num = Request.QueryString["sb_num"].ToString(); //检索页面传递过来的値
-        }
-        if (Request.QueryString["sb_type"] != null && Request.QueryString["sb_type"] != "")
-        {
-            sb_type = Request.QueryString["sb_type"].ToString(); //检索页面传递过来的値 
-        }
-        if (Request.QueryString["sb_regname"] != null && Request.QueryString["sb_regname"] != "")
-        {
-            sb_regname = Request.QueryString["sb_regname"].ToString(); //检索页面传递过来的値    
-        }
-        if (Request.QueryString["sb_regguoji"] != null && Request.QueryString["sb_regguoji"] != "")
-        {
-            sb_guoji = Request.QueryString["sb_regguoji"].ToString(); //检索页面传递过来的値 
-        }
-        if (Request.QueryString["sb_passtime"] != null && Request.QueryString["sb_passtime"] != "")
-        {
-            sb_passtime = Request.QueryString["sb_passtime"].ToString(); //检索页面传递过来的値
-        }
-        if (Request.QueryString["c_anjuanhao"] != null && Request.QueryString["c_anjuanhao"] != "")
-        {
-            c_anjuanhao = Request.QueryString["c_anjuanhao"].ToString(); //检索页面传递过来的値  
-        }
-        if (Request.QueryString["c_uname"] != null && Request.QueryString["c_uname"] != "")
-        {
-            uname = Request.QueryString["c_uname"].ToString(); //检索页面传递过来的値  
-        }
-        if (Request.QueryString["c_address"] != null && Request.QueryString["c_address"] != "")
-        {
-            uaddress = Request.QueryString["c_address"].ToString(); //检索页面传递过来的値
-        }
-        if (Request.QueryString["c_tel"] != null && Request.QueryString["c_tel"] != "")
-        {
-            utel = Request.QueryString["c_tel"].ToString(); //检索页面传递过来的値    
+            HF_ORDERBY.Value = Request.QueryString["stime"].ToString();
         }
     }
     public string Geturl(string url)
@@ -169,95 +127,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         }
         return returnurl;
     }
-    public string Getxiaoji(string sbid)
-    {
-        string xiaoji = "0.00";
-        string bizhong = "";
-        t_Trademark model = DALT.Trademark_Select_Id(int.Parse(sbid));
-        t_TradeMarkSetup model1 = DALTS.TrademarkSetup_Select();//代理费用
-        if (model != null)
-        {
-            if (model1 != null)
-            {
-                t_Member m = DALM.Member_Select_Id(int.Parse(model.i_MemberId.ToString()));
-                if (m != null)
-                {
-                    t_Nationality na = DALN.Nationality_Select_Id(m.i_GuoJiId);
-                    if (na != null)
-                    {
-                        if (na.nvc_Name == "中国")
-                        {
-                            bizhong = na.nvc_JFBizhong;
-                            #region 委托缴费
-                            if (model.i_JiaoFeiType == 2)
-                            {
-                                string totalmoney = (model1.dm_TMDaiLi + model1.dm_TrademarkMoney).ToString("0.00");
-                                xiaoji = bizhong + ":" + totalmoney;
-                            #endregion
-                            }
-                            if (model.i_JiaoFeiType == 1)
-                            {
-                                //#region 自行缴费
-                                //xiaoji = bizhong + ":" + (model1.dm_TrademarkMoney).ToString("0.00");
-                                //#endregion
-                            }
-                        }
-                        else
-                        {
-                            t_Nationality nafee = DALN.Nationality_Select_BiZhong(na.nvc_JFBizhong);
-                            decimal huilv = 1;
-                            bizhong = na.nvc_JFBizhong;
-                            if (nafee != null)
-                            {
-                                if (nafee.dm_Exchange != null || nafee.dm_Exchange != 0)
-                                {
-                                    huilv = nafee.dm_Exchange;
-                                }
-                            }
-                            #region  委托缴费
-                            string totalmoney = (model1.dm_TMDaiLi + model1.dm_TrademarkMoney).ToString("0.00");
-                            string totalmoneyGY = ((model1.dm_TMDaiLi + model1.dm_TrademarkMoney) * huilv).ToString("0.00");
-                            string shangbiao = (model1.dm_TrademarkMoney).ToString("0.00");
-                            string shangbiaoGY = ((model1.dm_TrademarkMoney) * huilv).ToString("0.00");
-                            string dailimoneyGy = ((model1.dm_TMDaiLi) * huilv).ToString();
-                            xiaoji = bizhong + ":" + totalmoneyGY;
-                            // xiaoji = totalmoney;
-                            #endregion
-
-                            //#region  自行缴费
-                            //string totalmoney1 = (model1.dm_TrademarkMoney).ToString("0.00");
-                            //string totalmoneyGY1 = ((model1.dm_TrademarkMoney) / huilv).ToString("0.00");
-
-                            //xiaoji = bizhong + ":" + totalmoneyGY1;
-                            ////  xiaoji =bizhong+":"+totalmoney1;
-                            //#endregion
-                        }
-                    }
-                }
-            }
-        }
-        return xiaoji;
-    }
-    /// <summary>
-    /// 状态判断
-    /// </summary>
-    public string SetChecked(string state, string isjiaofei, string XujiaoStates)
-    {
-        string str = "";
-        //if (state == "1")
-        //{
-        if (isjiaofei == "1" || XujiaoStates == "1")//1提交订单 代缴费，2 已交费  4，取消
-        {
-            str = "disabled='disabled'";
-        }
-        //}
-        //else
-        //{
-        //    str = "disabled='disabled'";
-        //}
-        return str;
-    }
-
+    
     private void Bind_Rpt_Trademark()//绑定列表
     {
         if (UserId != 0)
@@ -265,7 +135,13 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
             int Ccount = 0;
             int PageSize = AspNetPager1.PageSize;
             int pageCurrent = AspNetPager1.CurrentPageIndex;
-            this.Rp_sb_list.DataSource = DALT.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, Sbtype, Sbjiaofeitype, SbregName, Sbnum, Sbjiaofei, Sbtime, Stime, isjiaofei, jiaofeistate, sb_num, sb_type, sb_regname, int.Parse(sb_guoji), sb_passtime, c_anjuanhao, uname, uaddress, utel, ref Ccount);
+            this.qCaseNo = this.txtCaseNo.Text.Trim();
+            this.qApplyNo = this.txtApplyNo.Text.Trim();
+            this.qName = this.txtApplyUser.Text.Trim();
+            if (!string.IsNullOrEmpty(this.ddlApplyType.SelectedValue))
+                this.applyType = int.Parse(this.ddlApplyType.SelectedValue);
+
+            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, 1, applyType, ByCaseNo, ByName, Bytype, ByTime, ByApplyNo, qCaseNo, qApplyNo, qName, this.Stime, ref Ccount);
             this.Rp_sb_list.DataBind();
             AspNetPager1.RecordCount = Ccount;
             AspNetPager1.PageSize = PageSize;
@@ -289,28 +165,14 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         {
             switch (HF_ORDERBY.Value.Split('_')[1])
             {
-                case "1": Sbtype = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "2": Sbjiaofeitype = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "3": SbregName = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "4": Sbnum = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "5": Sbjiaofei = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "6": Sbtime = HF_ORDERBY.Value.Split('_')[0]; break;
-                case "7": Stime = HF_ORDERBY.Value.Split('_')[0]; break;
+                case "1": ByCaseNo = HF_ORDERBY.Value.Split('_')[0]; break;
+                case "2": ByName = HF_ORDERBY.Value.Split('_')[0]; break;
+                case "3": applyType = int.Parse(HF_ORDERBY.Value.Split('_')[0]); break;
+                case "4": ByTime = HF_ORDERBY.Value.Split('_')[0]; break;
+                case "5": ByApplyNo = HF_ORDERBY.Value.Split('_')[0]; break;
             }
         }
         Bind_Rpt_Trademark();
-    }
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-        if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
-        {
-            Response.Redirect("User_TrademarkOrderAdd.aspx");
-        }
-        else
-        {
-            div_a.InnerHtml = "<script>alert('请选择缴费商标！');</script>";
-
-        }
     }
     public string ZTFileImg(object zhuti, object sbid)
     {
@@ -377,76 +239,6 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         return namestr;
     }
 
-    protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
-    {
-
-        if (UserId != 0)
-        {
-            bool booldaochu = true;
-            t_Member model = DALM.Member_Select_Id(UserId);
-            if (model != null)
-            {
-                if (model.nvc_Power != null && model.nvc_Power != "")
-                {
-                    booldaochu = model.nvc_Power.Split(',')[1] == "1" ? true : false;//导出  
-
-                }
-            }
-            if (booldaochu == false)
-            {
-                Response.Redirect("user_pageinfo.aspx");
-            }
-            int Ccount = 0;
-            int PageSize = AspNetPager1.PageSize;
-            int pageCurrent = AspNetPager1.CurrentPageIndex;
-            GridView1.DataSource = DALT.Trademark_web_SelectPage(pageCurrent, 100000, UserId, Sbtype, Sbjiaofeitype, SbregName, Sbnum, Sbjiaofei, Sbtime, Stime, isjiaofei, jiaofeistate, sb_num, sb_type, sb_regname, int.Parse(sb_guoji), sb_passtime, c_anjuanhao, uname, uaddress, utel, ref Ccount);
-            this.Rp_sb_list.DataBind();
-            GridView1.DataBind();
-            toExecl(GridView1);
-            GridView1.DataSource = null;
-            GridView1.DataBind();
-        }
-    }
-    public string GetSBtypeAndName(string country, string typeid)//获得商标类型
-    {
-        string typename = "";
-        if (country == "1")
-        {
-            if (typeid == "1")
-            {
-                typename = "中国个人";
-            }
-            if (typeid == "2")
-            {
-                typename = "中国企业";
-            }
-            if (typeid == "3")
-            {
-                typename = "中国代理机构";
-            }
-        }
-        if (country == "2")
-        {
-            if (typeid == "1")
-            {
-                typename = "外国个人";
-            }
-            if (typeid == "2")
-            {
-                typename = "外国企业";
-            }
-            if (typeid == "3")
-            {
-                typename = "外国代理机构";
-            }
-        }
-        return typename;
-
-    }
-    protected void Button2_Click(object sender, EventArgs e)
-    {
-
-    }
     public override void VerifyRenderingInServerForm(Control control)
     {
 
@@ -521,5 +313,29 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
                 GridView1.DataBind();
             }
         }      
+    }
+    protected void btnQuery_Click(object sender, EventArgs e)
+    {
+        this.qCaseNo = this.txtCaseNo.Text.Trim();
+        this.qName = this.txtApplyUser.Text.Trim();
+    }
+
+    public string GetProviceArea(object provinceid, object cityid, object areaid)
+    {
+        int pid, cid, aid;
+        if (provinceid != null && cityid != null && areaid != null)
+        {
+            if (int.TryParse(provinceid.ToString(), out pid) && int.TryParse(cityid.ToString(), out cid) && int.TryParse(areaid.ToString(), out aid))
+            {
+                return address.Set_AddressName_PId_CId_AId(pid, cid, aid);
+            }
+        }
+        return string.Empty;
+    }
+    public string GetApplyStatus(object applyStatus)
+    {
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
     }
 }

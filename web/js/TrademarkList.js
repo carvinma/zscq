@@ -1,7 +1,7 @@
 ﻿function ExportToExcel() {
     var $this = $("input[name='chkItem']:checked");
     if ($this.length == 0) {
-        $.jBox.info("请选择申请案！", "提示");
+        $.jBox.info("请选择要导出的商标！", "提示");
         return false;
     }
     return true;
@@ -10,7 +10,7 @@ function DelTrademarkListDailog() {
     var $this = $("input[name='chkItem']:checked");
     if($this.length==0)
     {
-       $.jBox.info("请选择申请案！","提示");
+        $.jBox.info("请选择要删除的商标！", "提示");
        return false;
     }
 
@@ -19,7 +19,7 @@ function DelTrademarkListDailog() {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
             if (status != "0") {
-                $.jBox.info("只有保存状态的申请案才能删除！<br/>请重新选择！","提示");
+                $.jBox.info("只有保存状态的商标才能删除！<br/>请重新选择！", "提示");
                 strval = [];
                 return false;
             }
@@ -61,7 +61,7 @@ function SubmitTrademarkListDailog() {
  var $this = $("input[name='chkItem']:checked");
     if($this.length==0)
     {
-       $.jBox.info("请选择申请案！","提示");
+        $.jBox.info("请选择要提交的商标！", "提示");
       return false;
     }
     var strval = new Array();
@@ -69,7 +69,7 @@ function SubmitTrademarkListDailog() {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
             if (status != "0") {
-                $.jBox.info("只有保存状态的申请案才能提交！<br/>请重新选择！", "提示");
+                $.jBox.info("只有保存状态的商标才能提交！<br/>请重新选择！", "提示");
                 strval = [];
                 return false;
             }

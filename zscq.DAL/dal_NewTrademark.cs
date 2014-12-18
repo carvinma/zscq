@@ -105,7 +105,7 @@ namespace zscq.DAL
         }
 
         /// <summary>
-        /// 前台商标分页获取
+        /// 申请前台商标分页获取
         /// </summary>
         /// <param name="startIndex"></param>
         /// <param name="pageSize"></param>
@@ -143,6 +143,85 @@ namespace zscq.DAL
             if (!string.IsNullOrEmpty(ByStatus))
             {
                 sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.Status) : sortedList.OrderBy(p => p.Status);
+            }
+            count = sortedList.Count();
+            return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
+        }
+
+        /// <summary>
+        /// 续展前台商标分页获取
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        public IQueryable<t_NewTradeMarkInfo> Trademark_web_SelectPage(int PageIndex, int PageSize,
+            int userid, int i_type, int? applyType,
+            string ByCaseNo, string ByName, string Bytype, string ByTime,string ByApplyNo,
+            string qCaseNo,string qApplyNo, string qName, string qRestDays, ref int count)
+        {
+            Expression<Func<t_NewTradeMarkInfo, bool>> WhereExpr = PredicateExtensions.True<t_NewTradeMarkInfo>();
+            WhereExpr = WhereExpr.And(a => a.i_MemberId == userid);
+            WhereExpr = WhereExpr.And(a => a.i_Type == i_type);
+            if (applyType.HasValue)
+                WhereExpr = WhereExpr.And(a => a.ApplyType == applyType.Value);
+            if (!string.IsNullOrEmpty(qCaseNo))
+                WhereExpr = WhereExpr.And(a => a.CaseNo.Contains(qCaseNo));
+            if (!string.IsNullOrEmpty(qApplyNo))
+                WhereExpr = WhereExpr.And(a => a.RegisteredNo.Contains(qApplyNo));
+            if (!string.IsNullOrEmpty(qName))
+                WhereExpr = WhereExpr.And(a => a.ApplyName.Contains(qName));
+
+            if (!string.IsNullOrEmpty(qRestDays))
+            {
+                if (qRestDays == "90")
+                {
+                    WhereExpr = WhereExpr.And(a => a.RestDays > 90);
+                }
+                if (qRestDays == "61-90")
+                {
+                    WhereExpr = WhereExpr.And(a => a.RestDays >= 61);
+                    WhereExpr = WhereExpr.And(a => a.RestDays <= 90);
+                }
+                if (qRestDays == "31-60")
+                {
+                    WhereExpr = WhereExpr.And(a => a.RestDays >= 31);
+                    WhereExpr = WhereExpr.And(a => a.RestDays <= 60);
+                }
+                if (qRestDays == "16-30")
+                {
+                    WhereExpr = WhereExpr.And(a => a.RestDays >= 16);
+                    WhereExpr = WhereExpr.And(a => a.RestDays <= 30);
+                }
+                if (qRestDays == "0-15")
+                {
+                    WhereExpr = WhereExpr.And(a => a.RestDays >= 0);
+                    WhereExpr = WhereExpr.And(a => a.RestDays <= 15);
+                }
+                if (qRestDays == "chao")
+                {
+                    WhereExpr = WhereExpr.And(a => a.RestDays < 0);
+                }
+            }
+            var sortedList = mark.t_NewTradeMarkInfo.Where(WhereExpr);
+            if (!string.IsNullOrEmpty(ByCaseNo))
+            {
+                sortedList = ByCaseNo == "desc" ? sortedList.OrderByDescending(p => p.CaseNo) : sortedList.OrderBy(p => p.CaseNo);
+            }
+            if (!string.IsNullOrEmpty(ByName))
+            {
+                sortedList = ByName == "desc" ? sortedList.OrderByDescending(p => p.ApplyName) : sortedList.OrderBy(p => p.ApplyName);
+            }
+            if (!string.IsNullOrEmpty(Bytype))
+            {
+                sortedList = Bytype == "desc" ? sortedList.OrderByDescending(p => p.ApplyType) : sortedList.OrderBy(p => p.ApplyType);
+            }
+            if (!string.IsNullOrEmpty(ByTime))
+            {
+                sortedList = ByTime == "desc" ? sortedList.OrderByDescending(p => p.RenewalDate) : sortedList.OrderBy(p => p.RenewalDate);
+            }
+            if (!string.IsNullOrEmpty(ByApplyNo))
+            {
+                sortedList = ByApplyNo == "desc" ? sortedList.OrderByDescending(p => p.RegisteredNo) : sortedList.OrderBy(p => p.RegisteredNo);
             }
             count = sortedList.Count();
             return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);

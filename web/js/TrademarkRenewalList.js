@@ -18,8 +18,8 @@ function DelTrademarkListDailog() {
     $this.each(function () {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
-            if (status != "0") {
-                $.jBox.info("只有保存状态的续展案才能删除！<br/>请重新选择！", "提示");
+            if (status == "0" || status == "1" || status == "10" || status == "11") {
+                $.jBox.info("商标状态为：<br/>无需我公司监管<br/>放弃续费<br/>已提交订单，尚未接收汇款<br/>已提交订单，续展中<br/>的续展案不能删除！<br/>---------------------------<br/>请重新选择！", "提示");
                 strval = [];
                 return false;
             }
@@ -68,8 +68,8 @@ function SubmitTrademarkListDailog() {
     $this.each(function () {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
-            if (status != "0") {
-                $.jBox.info("只有保存状态的续展案才能提交！<br/>请重新选择！", "提示");
+            if (status != "1" || status != "10" || status != "11") {
+                $.jBox.info("只有尚未提交订单的续展案才能提交！<br/>请重新选择！", "提示");
                 strval = [];
                 return false;
             }

@@ -264,7 +264,7 @@
                                                                 <strong>案件号</strong>
                                                             </td>
                                                             <td align="left">
-                                                                <asp:TextBox ID="txtCaseNo" runat="server" Width="70px" Height="18px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtCaseNo" runat="server" Width="70px"></asp:TextBox>
                                                             </td>
                                                             <td align="center" nowrap="nowrap">
                                                                 <strong>申请人</strong>

@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css" />
        <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+      <script src="js/jtrademark.js" type="text/javascript"></script>
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script src="js/TrademarkRenewalList.js" type="text/javascript"></script>
   <%--  <link href="css/pager.css" rel="stylesheet" type="text/css" />--%>
@@ -27,9 +28,6 @@
           var ody3 = $("#Hi_orderby3").val().split('_');
           var ody4 = $("#Hi_orderby4").val().split('_');
           var ody5 = $("#Hi_orderby5").val().split('_');
-          var ody6 = $("#Hi_orderby6").val().split('_');
-          var ody7 = $("#Hi_orderby7").val().split('_');
-          var hitime = $("#hi_time").val();
 
           if (ody1[1] == "1") {
               orderby(ody1[0], 1);
@@ -46,23 +44,16 @@
           if (ody5[1] == "5") {
               orderby(ody5[0], 5);
           }
-          if (ody6[1] == "6") {
-              orderby(ody6[0], 6);
-          }
-          if (ody7[1] == "7") {
-              orderby(ody7[0], 7);
-          }
       });
     function orderby(ody, index) {
-
-      if (ody == "desc") {
-        $("#daoxu" + index).hide();
-        $("#zhengxu" + index).show();
-      }
-      else {
-        $("#zhengxu" + index).hide();
-        $("#daoxu" + index).show();
-      }
+        if (ody == "desc") {
+            $("#daoxu" + index).hide();
+            $("#zhengxu" + index).show();
+        }
+        else {
+            $("#zhengxu" + index).hide();
+            $("#daoxu" + index).show();
+        }
     }
   </script>
   <script language="javascript">
@@ -122,8 +113,6 @@
   <input type="hidden" id="Hi_orderby3" runat="server" value="0" />
   <input type="hidden" id="Hi_orderby4" runat="server" value="0" />
   <input type="hidden" id="Hi_orderby5" runat="server" value="0" />
-  <input type="hidden" id="Hi_orderby6" runat="server" value="0" />
-  <input type="hidden" id="Hi_orderby7" runat="server" value="0" />
   <input type="hidden" id="hi_time" runat="server" value="0" />
   <input type="hidden" id="hi_trademark" runat="server" value="" />
   <input type="hidden" id="HF_ORDERBY" runat="server" value="" />
@@ -173,23 +162,64 @@
                         <td height="29" align="left" valign="top">
                           <table width="689" border="0" cellspacing="0" cellpadding="0">
                             <tr>
-                              <td width="114" height="29" align="center" style="background-color: #1e2b6c;"><a href='user_sblb.aspx?stime=90_1&<%=Geturl("stime") %>' class="ac2">90天以上</a></td>
+                              <td width="114" height="29" align="center" style="background-color: #1e2b6c;"><a href='trademarkrenewal_list.aspx?stime=90_1&<%=Geturl("stime") %>' class="ac2">90天以上</a></td>
                               <td width="1"></td>
-                              <td width="114" align="center" style="background-color: #50245f;"><a href='user_sblb.aspx?stime=61-90_2&<%=Geturl("stime") %>' class="ac2">61-90天</a></td>
+                              <td width="114" align="center" style="background-color: #50245f;"><a href='trademarkrenewal_list.aspx?stime=61-90_2&<%=Geturl("stime") %>' class="ac2">61-90天</a></td>
                               <td width="1"></td>
-                              <td width="114" align="center" style="background-color: #852349;"><a href='user_sblb.aspx?stime=31-60_3&<%=Geturl("stime") %>' class="ac2">31-60天</a></td>
+                              <td width="114" align="center" style="background-color: #852349;"><a href='trademarkrenewal_list.aspx?stime=31-60_3&<%=Geturl("stime") %>' class="ac2">31-60天</a></td>
                               <td width="1"></td>
-                              <td width="114" align="center" style="background-color: #b2333d;"><a href='user_sblb.aspx?stime=16-30_4&<%=Geturl("stime") %>' class="ac2">16-30天</a></td>
+                              <td width="114" align="center" style="background-color: #b2333d;"><a href='trademarkrenewal_list.aspx?stime=16-30_4&<%=Geturl("stime") %>' class="ac2">16-30天</a></td>
                               <td width="1"></td>
-                              <td width="114" align="center" style="background-color: #d14b1a;"><a href='user_sblb.aspx?stime=0-15_5&<%=Geturl("stime") %>' class="ac2">0-15天</a></td>
+                              <td width="114" align="center" style="background-color: #d14b1a;"><a href='trademarkrenewal_list.aspx?stime=0-15_5&<%=Geturl("stime") %>' class="ac2">0-15天</a></td>
                               <td width="1"></td>
-                              <td width="114" align="center" style="background-color: #ebbf1c;"><a href='user_sblb.aspx?stime=chao_6&<%=Geturl("stime") %>' class="ac2">过期商标</a></td>
+                              <td width="114" align="center" style="background-color: #ebbf1c;"><a href='trademarkrenewal_list.aspx?stime=chao_6&<%=Geturl("stime") %>' class="ac2">过期商标</a></td>
                             </tr>
                           </table>
                         </td>
                       </tr>
                       <tr>
-                        <td height="26" align="left"></td>
+                      <td height="18">
+                      </td></tr>
+                      <tr>
+                        <td height="26" align="left">
+                         <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td height="29" align="right" nowrap="nowrap">
+                                                                <strong>案件号</strong>
+                                                            </td>
+                                                            <td align="left">
+                                                                <asp:TextBox ID="txtCaseNo" runat="server" Width="70px"></asp:TextBox>
+                                                            </td>
+                                                            <td align="center" nowrap="nowrap">
+                                                                <strong>申请号</strong>
+                                                            </td>
+                                                            <td>
+                                                                 <asp:TextBox ID="txtApplyNo" runat="server" Width="70px"></asp:TextBox></td>
+                                                            <td  align="center" nowrap="nowrap">
+                                                                <strong>申请人</strong>
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtApplyUser" runat="server" Width="70px"></asp:TextBox>
+                                                            </td>
+                                                            <td width="30" align="center" nowrap="nowrap">
+                                                                <strong>类别</strong>
+                                                            </td>
+                                                            <td width="114">
+                                                                <asp:DropDownList ID="ddlApplyType" runat="server">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td width="80" align="center">
+                                                                <asp:Button ID="btnQuery" CssClass="BtnShow" runat="server" Text="查 询" 
+                                                                    onclick="btnQuery_Click" />
+                                                            </td>
+                                                            <td width="1">
+                                                            </td>
+                                                            <td width="110" align="center">
+                                                                <asp:Button ID="Button2" CssClass="BtnShow" runat="server" Text="打印全部列表" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                        </td>
                       </tr>
                       <tr>
                         <td height="115" align="left" valign="top">
@@ -198,24 +228,29 @@
                               <td width="76" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="12"></td>
-    <td align="left"><span>案件号</span><a href="user_sblb.aspx?sbnum=desc_4" title="倒序" id="daoxu4">↑</a><a href="user_sblb.aspx?sbnum=asc_4" title="正序" id="zhengxu4" style="display: none;">↓</a></td>
+    <td align="left">
+      <span>案件号</span><a href="trademarkrenewal_list.aspx?sbcaseno=desc_1" title="倒序" id="daoxu1">↑</a><a
+      href="trademarkrenewal_list.aspx?sbcaseno=asc_1" title="正序" id="zhengxu1" style="display: none;">↓</a></td>
   </tr>
 </table>
 </td>
                               <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="6"></td>
-    <td width="60" align="left"><span>申请号</span></td>
+    <td width="60" align="left"><span>申请号</span><a href="trademarkrenewal_list.aspx?sbapplyno=desc_5" title="倒序" id="daoxu5">↑</a>
+    <a href="trademarkrenewal_list.aspx?sbapplyno=asc_5" title="正序" id="zhengxu5" style="display: none;" >↓</a></td>
   </tr>
 </table></td>
     <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
     <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="6"></td>
-    <td width="60" align="left"><span>申请人</span></td>
+    <td width="60" align="left"> <span>申请人</span><a href="trademarkrenewal_list.aspx?sbname=desc_2" title="倒序" id="daoxu2">↑</a>
+    <a href="trademarkrenewal_list.aspx?sbname=asc_2" title="正序" id="zhengxu2" style="display: none;">↓</a></td>
   </tr>
 </table></td>
-                              <td width="49" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="49" height="42" border="0" cellspacing="0" cellpadding="0">
+    <td width="49" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+    <table width="49" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="6"></td>
     <td width="44" align="left"> 图样
@@ -225,12 +260,15 @@
                               <td width="136" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline"><table width="90" height="42" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td width="12"></td>
-    <td width="78" align="left"><span>类别</span><a href="user_sblb.aspx?sbreg=desc_3" title="倒序" id="daoxu3">↑</a><a href="user_sblb.aspx?sbreg=asc_3" title="正序" id="zhengxu3" style="display: none;">↓</a></td>
+    <td width="78" align="left">
+     <span>类别</span><a href="trademarkrenewal_list.aspx?sbtype=desc_3" title="倒序" id="daoxu3">↑</a><a
+        href='trademarkrenewal_list.aspx?sbtype=asc_3' title="正序" id="zhengxu3" style="display: none;">↓</a>
+        </td>
   </tr>
 </table></td>
- <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-  <span>期限日</span><a href="user_sblb.aspx?sbtime=desc_6" title="倒序" id="daoxu6">↑</a>
-    <a href="user_sblb.aspx?sbtime=asc_6" title="正序" id="zhengxu6" style="display: none;" >↓</a>
+ <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+  <span>期限日</span><a href="trademarkrenewal_list.aspx?sbtime=desc_4" title="倒序" id="daoxu4">↑</a>
+    <a href="trademarkrenewal_list.aspx?sbtime=asc_4" title="正序" id="zhengxu4" style="display: none;" >↓</a>
 </td>
                               <td width="53" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请书</td>
                               <td width="53" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">委托书</td>
@@ -314,58 +352,86 @@
                       <tr>
                         <td align="left"><asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px">
     <Columns>
-      <asp:BoundField DataField="nvc_UserNum" HeaderText="客户编号" />
-      <asp:TemplateField HeaderText="用户类型">
+      <asp:BoundField DataField="CaseNo" HeaderText="案件号" />
+      <asp:TemplateField HeaderText="申请人类别">
         <ItemTemplate>
-          <%# GetSBtypeAndName(Eval("i_GuoJiId").ToString(), Eval("i_UserTypeId").ToString())%>
+          <%# GetApplyTypeName(Eval("ApplyType"))%>
         </ItemTemplate>
       </asp:TemplateField>
-       <asp:TemplateField HeaderText="商标注册证书">
+         <asp:BoundField DataField="ApplyName" HeaderText="申请人名称" />
+       <asp:TemplateField HeaderText="身份证件">
         <ItemTemplate>
-          <%# Eval("nvc_SBFile")!=null?"已上传":"未上传"  %>
+          身份证
         </ItemTemplate>
       </asp:TemplateField>
-          <asp:TemplateField HeaderText="主体资格证明">
+        <asp:BoundField DataField="CardNo" HeaderText="身分证件号码" ItemStyle-CssClass="text" /> 
+          <asp:TemplateField HeaderText="身份证件扫描件">
         <ItemTemplate>
-          <%#SBZTFile(Eval("i_Id"))%>
+          <%# Eval("CardNoPDF") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+         </asp:TemplateField>
+          <asp:TemplateField HeaderText="营业执照副本">
+        <ItemTemplate>
+          <%# Eval("Businesslicense") != null ? "已上传" : "未上传"%>
         </ItemTemplate>
       </asp:TemplateField>
-        <asp:TemplateField HeaderText="商标续展申请书">
+          <asp:TemplateField HeaderText="申请人行政区划">
         <ItemTemplate>
-          <%# Eval("nvc_ShenQingShu") != null ? "已上传" : "未上传"%>
+         <%#GetProviceArea(Eval("ProvinceId"), Eval("CityId"), Eval("AreaId"))%>
         </ItemTemplate>
       </asp:TemplateField>
-          <asp:TemplateField HeaderText="商标续展委托书">
+      
+      <asp:BoundField DataField="Address" HeaderText="申请人地址" ItemStyle-CssClass="text" />
+      <asp:BoundField DataField="ContactPerson" HeaderText="联系人" ItemStyle-CssClass="text" />
+      <asp:BoundField DataField="Phone" HeaderText="联系电话" ItemStyle-CssClass="text"  />
+       <asp:BoundField DataField="Fax" HeaderText="传真" ItemStyle-CssClass="text" />
+        <asp:BoundField DataField="PostCode" HeaderText="邮编" ItemStyle-CssClass="text" />
+      <asp:TemplateField HeaderText="三维标志">
         <ItemTemplate>
-          <%# Eval("nvc_WeituoFile")!=null?"已上传":"未上传"  %>
+         <%# bool.Parse(Eval("Is3D") == null ? "false" : Eval("Is3D").ToString()) == true ? "是" : "否"%>
         </ItemTemplate>
       </asp:TemplateField>
-      <asp:BoundField DataField="nvc_SBRegNum" HeaderText="商标注册号" />
-      <asp:BoundField DataField="nvc_SBType" HeaderText="商标类别" />
-      <asp:BoundField DataField="nvc_SBRegName" HeaderText="商标注册人名称" />
-      <asp:BoundField DataField="nvc_SBRegEnName" HeaderText="注册人英文名称" />     
-      <asp:BoundField DataField="nvc_SBRegAddress" HeaderText="商标注册人详细地址" />
-      <asp:BoundField DataField="nvc_SBRegEnAddress" HeaderText="商标注册人英文地址" />
-      <asp:TemplateField HeaderText="审核状态">
+      <asp:TemplateField HeaderText="颜色组合">
         <ItemTemplate>
-          <%#Eval("i_State").ToString() == "1" ?"审核通过<font style='color:red;'>(有效期"+Eval("nvc_SbDaoqiTime")+"</font>)" :(Eval("i_State").ToString() == "2"?"未通过":"未审核")%>
+          <%# bool.Parse(Eval("IsColor")==null? "false":Eval("IsColor").ToString()) == true ? "是" : "否"%>
         </ItemTemplate>
       </asp:TemplateField>
-      <asp:BoundField DataField="nvc_SBPostcode" HeaderText="邮编" />
-      <asp:BoundField DataField="dt_AddTime" HeaderText="添加时间" />
-        <asp:BoundField DataField="nvc_SbRegTime" HeaderText="商标注册日" />      
-             <asp:BoundField DataField="nvc_SbDaoqiTime" HeaderText="到期时间" />   
-      <asp:BoundField DataField="i_ShengDays" HeaderText="剩余天数" />
-      <asp:TemplateField HeaderText="商标描述类型">
+      <asp:TemplateField HeaderText="声音商标">
         <ItemTemplate>
-         <%#Eval("i_MiaoShuType").ToString() == "1" ? "文字商标" : Eval("i_MiaoShuType").ToString() == "2" ? "图形商标" : "文字与图形商标"%>
+         <%# bool.Parse(Eval("IsSound") == null ? "false" : Eval("IsSound").ToString()) == true ? "是" : "否"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+        <asp:TemplateField HeaderText="声音文件">
+        <ItemTemplate>
+          <%# Eval("SoundFile") != null ? "已上传" : "未上传"%>
         </ItemTemplate>
       </asp:TemplateField>
 
-      <asp:BoundField DataField="nvc_SBDescribe" HeaderText="商标描述" />
-      <asp:TemplateField HeaderText="商标缴费类型">
+      <asp:BoundField DataField="TrademarkRemark" HeaderText="商标说明" />
+      <asp:BoundField DataField="TrademarkType" HeaderText="商标类别" />
+      <%-- <asp:TemplateField HeaderText="图样">
         <ItemTemplate>
-          <%#Eval("i_JiaoFeiType").ToString() == "1" ?"自行缴费" :"委托缴费"%>
+         <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("TrademarkPattern1") %>' width="50" height="30"  />
+        </ItemTemplate>
+      </asp:TemplateField> --%>
+
+        <asp:BoundField DataField="ApplyDate" DataFormatString="{0:yyyy-MM-dd}" HeaderText="商标申请日" />      
+        <asp:BoundField DataField="PublicPreliminaryDate"  DataFormatString="{0:yyyy-MM-dd}" HeaderText="初审公告日" />   
+      <asp:TemplateField HeaderText="最近状态">
+        <ItemTemplate>
+          <%# GetApplyStatus(Eval("Status"))%>
+        </ItemTemplate>
+      </asp:TemplateField>
+
+      <asp:TemplateField HeaderText="注册申请书">
+        <ItemTemplate>
+         <%# Eval("ApplyBook") != null ? "已上传" : "未上传"%>
+        </ItemTemplate>
+      </asp:TemplateField>
+
+      <asp:TemplateField HeaderText="申请委托书">
+        <ItemTemplate>
+           <%# Eval("AgentBook") != null ? "已上传" : "未上传"%>
         </ItemTemplate>
       </asp:TemplateField>
       </Columns>
