@@ -91,7 +91,7 @@ var submitStatus = function (v, h, f) {
             type: "POST",
             url: "Handler.ashx",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: "flag=marklistsubmit&ids=" + ids,
+            data: "flag=marklistsubmit&ids=" + ids + "&status=1",
             success: function (data) {
                 if (data == "1") {
                     jBox.tip("提交成功！", 'success');
