@@ -515,11 +515,11 @@
 
       <asp:BoundField DataField="TrademarkRemark" HeaderText="商标说明" />
       <asp:BoundField DataField="TrademarkType" HeaderText="商标类别" />
-       <asp:TemplateField HeaderText="图样">
+      <%-- <asp:TemplateField HeaderText="图样">
         <ItemTemplate>
          <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("TrademarkPattern1") %>' width="50" height="30"  />
         </ItemTemplate>
-      </asp:TemplateField> 
+      </asp:TemplateField> --%>
 
         <asp:BoundField DataField="ApplyDate" DataFormatString="{0:yyyy-MM-dd}" HeaderText="商标申请日" />      
         <asp:BoundField DataField="PublicPreliminaryDate"  DataFormatString="{0:yyyy-MM-dd}" HeaderText="初审公告日" />   

@@ -275,6 +275,14 @@ public partial class trademark_list : System.Web.UI.Page
     }
     private void toExecl(GridView GVId)
     {
+        //for (int i = 0; i < GVId.Columns.Count; i++) //设置每个单元格
+        //{
+        //    for (int j = 0; j < GVId.Rows.Count; j++)
+        //    {
+        //        GVId.Rows[j].Cells[i].Attributes.Add("style", "vnd.ms-excel.numberformat:@;");
+        //    }
+        //}
+
         string style = @"<style> .text { mso-number-format:\@; } </script> "; 
         DateTime dt = DateTime.Now;
         Response.Clear();
