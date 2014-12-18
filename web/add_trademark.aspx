@@ -909,7 +909,7 @@
                                                                                 Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkCheck_data()"/>
                                                                         </td>
                                                                         <td width="100">
-                                                                         <a  href="javascript:void(0)" id="linkDel" class="BtnShowhref"  onclick="cancleSumbit()">放弃提交</a>
+                                                                         <a  href="javascript:void(0)" id="linkDel" class="BtnShowhref"  onclick="cancleSumbit('0')">放弃提交</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>

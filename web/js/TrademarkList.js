@@ -1,4 +1,12 @@
-﻿function DelTrademarkListDailog() {
+﻿function ExportToExcel() {
+    var $this = $("input[name='chkItem']:checked");
+    if ($this.length == 0) {
+        $.jBox.info("请选择申请案！", "提示");
+        return false;
+    }
+    return true;
+}
+function DelTrademarkListDailog() {
     var $this = $("input[name='chkItem']:checked");
     if($this.length==0)
     {

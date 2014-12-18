@@ -422,7 +422,7 @@
                                                             
                                                             <td>
                                                                 <asp:Button ID="btnExcel" CssClass="BtnShow" runat="server" Text="导出"  
-                                                                    onclick="btnExcel_Click" />
+                                                                    OnClientClick=" return ExportToExcel();" onclick="btnExcel_Click" />
                                                             </td>
                                                             <td>
                                                               <a href="javascript:void(0)"  onclick="DelTrademarkListDailog()" class="BtnShowhref" style="width:73px">删 除</a>
