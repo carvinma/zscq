@@ -457,7 +457,9 @@
                               <td align="left">&nbsp; </td>
                             </tr>
                           </table>
-                        
+                        </td>
+                        </tr>
+                        </table>
 						</div>
 					</div>
 					<div class="ui-tabs-panel ui-tabs-hide">
