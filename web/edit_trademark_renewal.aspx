@@ -809,9 +809,20 @@
                                                                         <td  height="32" align="right" valign="middle">
                                                                              &nbsp;</td>
                                                                         <td colspan="2" valign="middle">
-                                                                        <table id="tbdate">
-                                                                        
-                                                                        </table>
+                                                                                <table id="tbdate">
+                                                                                <asp:Repeater ID="RptRenewalDate" runat="server">
+                                                                                    <ItemTemplate>
+                                                                                    <tr>
+                                                                                     <td>
+                                                                                        <span><%#string.Format("{0:yyyy年MM月dd}",Eval("RenewalDate"))%></span>日之前是否续展完成
+                                                                                      </td>
+                                                                                    <td>
+                                                                                    <%# bool.Parse(Eval("IsFinish").ToString()) == true ? ("<input id='Radio1' name='rdoGroup" + string.Format("{0:yyyy}", Eval("RenewalDate")) + "' type='radio'  checked='checked' value='1' class='chkregdate'>是<input id='Radio4' name='rdoGroup" + string.Format("{0:yyyy}", Eval("RenewalDate")) + "' type='radio' value='0' class='chkregdate'>否") :("<input id='Radio1' name='rdoGroup" + string.Format("{0:yyyy}", Eval("RenewalDate")) + "' type='radio' value='1' class='chkregdate'>是<input id='Radio4' name='rdoGroup" + string.Format("{0:yyyy}", Eval("RenewalDate")) + "' checked='checked' type='radio' value='0' class='chkregdate'>否")%>
+                                                                                    </td>
+                                                                                    </tr>
+                                                                                    </ItemTemplate>
+                                                                            </asp:Repeater>
+                                                                            </table>
                                                                         </td>
                                                                         
                                                                     </tr>

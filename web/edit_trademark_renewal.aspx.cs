@@ -122,6 +122,8 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
             Image1.ImageUrl = model.TrademarkPattern1;
             upPattern1.Value = model.TrademarkPattern1;
         }
+        this.RptRenewalDate.DataSource = mark.TrademarkRenewalDate_Select_TrademarkId(trademarkId);
+        this.RptRenewalDate.DataBind();
 
     }
     #endregion
@@ -151,7 +153,16 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
             System.IO.Directory.CreateDirectory(Server.MapPath(filePath));
         }
 
-        t_NewTradeMarkInfo model = new t_NewTradeMarkInfo();
+        t_NewTradeMarkInfo model;
+        if (Request.QueryString["t_r_id"] != null && Request.QueryString["t_r_id"].ToString() != "")
+        {
+            int trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
+            model = mark.Trademark_Select_Id(trademarkId);
+        }
+        else
+        {
+            model = new t_NewTradeMarkInfo();
+        }
         model.i_MemberId = int.Parse(Hi_MemberId.Value);
         model.i_Type = 1;
         model.ApplyName = txt_applyname.Value.Trim();
@@ -208,26 +219,46 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
             model.ApplyDate = DateTime.Parse(txt_applydate.Value);
         if (!string.IsNullOrEmpty(txt_RegNoticeDate.Value))
         {
-            model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
-            TimeSpan ts = DateTime.Today - DateTime.Parse(txt_RegNoticeDate.Value);
-            model.RestDays = ts.Days; //剩于天数
+            model.RegNoticeDate = DateTime.Parse(this.txt_RegNoticeDate.Value);
+            
         }
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
-            model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
-        if (!string.IsNullOrEmpty(this.upRegisteCertificate.Value))
         {
-            fileName = this.upRegisteCertificate.Value;//注册证书
-            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-                   HttpContext.Current.Server.MapPath(filePath + fileName));
-            model.TrademarkRegBook = filePath + fileName;
+            model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
+            TimeSpan ts = DateTime.Parse(txt_RenewalDate.Value) - DateTime.Today;
+            model.RestDays = ts.Days; //剩于天数
+        }
+        fileName = this.upRegisteCertificate.Value;//注册证书
+        if (!string.IsNullOrEmpty(fileName))
+        {
+            if (fileName.Contains("File_ShangBiao"))
+            {
+                model.TrademarkRegBook = fileName;
+            }
+            else
+            {
+                System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+                        HttpContext.Current.Server.MapPath(filePath + fileName));
+                model.TrademarkRegBook = filePath + fileName;
+            }
         }
         model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
         //model.TrademarkGoods = sortGoods.Value.Trim();
         fileName = this.upPattern1.Value;//图样
-        System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-               HttpContext.Current.Server.MapPath(filePath + fileName));
-        model.TrademarkPattern1 = filePath + fileName;
+        if (!string.IsNullOrEmpty(fileName))
+        {
+            if (fileName.Contains("File_ShangBiao"))
+            {
+                model.TrademarkPattern1 = fileName;
+            }
+            else
+            {
+                System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+                        HttpContext.Current.Server.MapPath(filePath + fileName));
+                model.TrademarkPattern1 = filePath + fileName;
+            }
+        }
         model.Remark = txt_remark.Value.Trim();
 
         return model;
@@ -260,15 +291,32 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 12;
-        mark.Trademark_Add(model);
-        addRegNoticeData(model.i_Id);
+        if (mark.Trademark_Submit() > 0)
+        {
+            addRegNoticeData(model.i_Id);
+            UserLog.AddUserLog(model.i_Id, "商标系统", "更新商标内容");
+            Response.Redirect("trademarkrenewal_list.aspx");
+        }
+        else
+        {
+            div_a.InnerHtml = "<script>alert('信息更新失败!');<script>";
+        }
+        
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
         model.Status = 10;
-        mark.Trademark_Add(model);
-        addRegNoticeData(model.i_Id);
+        if (mark.Trademark_Submit() > 0)
+        {
+            addRegNoticeData(model.i_Id);
+            UserLog.AddUserLog(model.i_Id, "商标系统", "更新商标内容");
+            Response.Redirect("trademarkrenewal_list.aspx");
+        }
+        else
+        {
+            div_a.InnerHtml = "<script>alert('信息更新失败!');<script>";
+        }
     }
     protected void btnCancle_Click(object sender, EventArgs e)
     {

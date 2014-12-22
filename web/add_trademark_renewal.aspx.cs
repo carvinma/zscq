@@ -118,11 +118,13 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         if (!string.IsNullOrEmpty(txt_RegNoticeDate.Value))
         {
             model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
-            TimeSpan ts = DateTime.Today - DateTime.Parse(txt_RegNoticeDate.Value);
-            model.RestDays = ts.Days; //剩于天数
         }
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
+        {
             model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
+            TimeSpan ts = DateTime.Parse(txt_RenewalDate.Value) - DateTime.Today;
+            model.RestDays = ts.Days; //剩于天数
+        }
         if (!string.IsNullOrEmpty(this.upRegisteCertificate.Value))
         {
             fileName = this.upRegisteCertificate.Value;//注册证书
