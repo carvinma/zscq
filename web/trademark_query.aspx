@@ -21,11 +21,28 @@
        $(function () {
            InitProCityArea();
        });
+       $('input[type=radio][name="Quick0"]').change(function () {
+           var applyType = $('input:radio[name="Quick0"]:checked').val();
+           $("#hi_CaseType").val(applyType);
+       });
+       $('input[type=radio][name="Quick"]').change(function () {
+           var applyType = $('input:radio[name="Quick"]:checked').val();
+           $("#hi_CaseType").val(applyType);
+       });
+
+       function checkCaseType() {
+           if ($("#hi_CaseType").val() == null || $("#hi_CaseType").val() == "") {
+               alert('请选择案件分类');
+               return false;
+           }
+           return true;
+       }
    </script>
 </head>
 <body id="index">
   <form id="form1" runat="server">
   <uc4:zscqtop2 ID="zscqtop21" runat="server" />
+  <input id="hi_CaseType" type="hidden" />
   <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
   <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
     <tr>
@@ -86,10 +103,8 @@
                             <tr>
                               <td width="238" height="32" align="right"><strong>案件分类：</strong></td>
                               <td width="433" align="left">
-                                  <asp:RadioButton ID="RadioButton1" runat="server" GroupName="Quick0" 
-                                      Text="申请" />
-                                  <asp:RadioButton ID="RadioButton2" runat="server" GroupName="Quick0" 
-                                      Text="续展" />
+                                <input id="RdoPeople" type="radio" name="Quick0" value="0" runat="server" />申请
+                                   <input id="Radio1" type="radio" name="Quick0" value="1" runat="server" />续展
                                 </td>
                             </tr>
                             <tr>
@@ -106,8 +121,7 @@
                             </tr>
                             <tr>
                               <td height="32" align="right">
-                                  <span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 21px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
-                                  <strong>申请人名称：</strong></span></td>
+                                  <strong>申请人名称：</strong></td>
                               <td align="left">
                                       <input type="text" name="s19" id="txt_applyName0" class="font12000" maxlength="50" 
                                             runat="server" size="20" /></td>
@@ -126,7 +140,7 @@
                                   <tr>
                                     <td width="8" height="35"></td>
                                     <td width="95" align="left">
-                                      <asp:Button ID="bt_kuaijiansuo" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_kuaijiansuo_Click" />
+                                      <asp:Button ID="bt_kuaijiansuo" OnClientClick="checkCaseType()" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_kuaijiansuo_Click" />
                                     </td>
                                     <td width="108" align="left">
                                         <%--<input id="Reset2" type="reset" value="" style="border: 0; cursor: pointer; background: url(images/user_js_b2.gif); width: 86px; height: 27px;" />--%>
@@ -189,8 +203,8 @@
                                     <td width="225" height="32" align="right"><strong>案件分类：<br />
                                     </strong></td>
                                     <td width="415" align="left">
-                                        <asp:RadioButton ID="RadioButton3" runat="server" GroupName="Quick" Text="申请" />
-                                        <asp:RadioButton ID="RadioButton4" runat="server" GroupName="Quick" Text="续展" />
+                                           <input id="Radio2" type="radio" name="Quick" value="0" runat="server" />申请
+                                   <input id="Radio3" type="radio" name="Quick" value="1" runat="server" />续展
                                       </td>
                                   </tr>
                                   <tr>
@@ -433,7 +447,7 @@
                                   <tr>
                                     <td width="8" height="35"></td>
                                     <td width="95" align="left">
-                                      <asp:Button ID="Button2" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_jiansuoAll_Click" />
+                                      <asp:Button ID="Button2" OnClientClick="checkCaseType()" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_jiansuoAll_Click" />
                                     </td>
                                     <td width="108" align="left">
                                         <%--<input id="Reset3" type="reset" value="" style="border: 0; cursor: pointer; background: url(images/user_js_b2.gif); width: 86px; height: 27px;" />--%>
