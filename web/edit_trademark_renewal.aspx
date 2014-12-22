@@ -262,9 +262,9 @@
             });
             $(".chkregdate").live("click", function () {
                 var regdate = $(this).parent().prev().find("span").text().replace('年', '-').replace('月', '-');
-                if ($(this).is(":checked")) {
+                if ($(this).val() == "1") {
                     var flag = true;
-                    var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
+                    var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td> <input id="Radio1" name="rdoGroup" type="radio" value="1" class="chkregdate"/>是<input id="chkdate" name="rdoGroupNO" type="radio"  checked="checked" value="0" class="chkregdate"/>否</td></tr>'
                     $("#tbdate tr").each(function () {
                         var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
                         if (new Date(tmpdate) > new Date(regdate)) {
@@ -283,7 +283,7 @@
                             day = "0" + day;
                         var ndate = (d.getFullYear()) + "-" + month + "-" + day;
                         $("#txt_RenewalDate").val(ndate);
-                        $("#tbdate").append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day));
+                        $("#tbdate").append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day).replace('rdoGroup', 'rdoGroup' + d.getFullYear()).replace('rdoGroupNO', 'rdoGroup' + d.getFullYear()));
                     }
                 }
                 else {
@@ -324,7 +324,7 @@
             var s = '';
             $("#tbdate tr").each(function () {
                 var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
-                var chked = $(this).find("input[type='checkbox']").is(':checked') ? "1" : "0";
+                var chked = $(this).find('input:radio:checked').val();
                 s += tmpdate + "_" + chked + "|"
             });
             $("#hi_RegNoticeDate").val(s);
@@ -333,8 +333,7 @@
            var regdate =$dp.cal.getNewDateStr();
            var tbdate = $("#tbdate");
            tbdate.empty();
-            var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
-//          
+           var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td> <input id="Radio1" name="rdoGroup" type="radio" value="1" class="chkregdate"/>是<input id="chkdate" name="rdoGroupNO" type="radio"  checked="checked" value="0" class="chkregdate"/>否</td></tr>'
            var d = new Date(regdate);
            d.setYear(d.getFullYear() + parseInt(10));
            d.setDate(d.getDate() - parseInt(1));
@@ -347,7 +346,7 @@
                day = "0" + day;
            var ndate = (d.getFullYear()) + "-" + month + "-" + day;
            $("#txt_RenewalDate").val(ndate);
-           tbdate.append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day));
+           tbdate.append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day).replace('rdoGroup', 'rdoGroup' + d.getFullYear()).replace('rdoGroupNO', 'rdoGroup' + d.getFullYear()));
            $("#hi_RegNoticeDate").val(ndate +"_"+"0"+ "|");
        }
        function calcsortarr() {
