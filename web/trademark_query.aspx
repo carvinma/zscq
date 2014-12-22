@@ -198,26 +198,21 @@
                                     <td align="left">
                                         &nbsp;</td>
                                   </tr>
-                                  <tr>
-                                    <td height="32" align="right"><strong>商标申请日：</strong></td>
-                                    <td align="left">
-                                      <input type="text" name="s10" runat="server" id="hot_pass_date" class="font12000" maxlength="30" style="width: 79px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />
-                                    </td>
-                                  </tr>
-                                </table>
+                                  </table>
                               </td>
                             </tr>
                             <tr>
                               <td height="30" align="left">&nbsp;</td>
                             </tr>
                           </table>
+                         
                           <table width="630" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
                                 <table width="114" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td width="10" height="20">&nbsp;</td>
-                                    <td width="98" align="center" class="font12bt">缴费信息</td>
+                                    <td width="98" align="center" class="font12bt">其它信息</td>
                                     <td width="6"></td>
                                   </tr>
                                 </table>
@@ -230,93 +225,121 @@
                               <td height="115" align="left" valign="top">
                                 <table width="630" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
-                                    <td height="32" align="right"><strong>商标费缴纳状态：</strong></td>
-                                    <td align="left">
-                                      <asp:DropDownList ID="ddl_jiaofei" runat="server">
-                                        <asp:ListItem Value="-1">请选择</asp:ListItem>
-                                         <asp:ListItem Value="1">已提交订单</asp:ListItem>
-                                        <asp:ListItem Value="2">已缴费</asp:ListItem>
-                                        <asp:ListItem Value="0">未缴费</asp:ListItem>
-                                      </asp:DropDownList>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td width="221" height="32" align="right"><strong>距缴费期限所剩天数：</strong></td>
-                                    <td width="409" align="left"><span class="font12b4e user_zlbottomline">
-                                      <asp:DropDownList ID="ddl_day" runat="server">
-                                        <asp:ListItem Value="0">请选择</asp:ListItem>
-                                        <asp:ListItem Value="1">>90</asp:ListItem>
-                                        <asp:ListItem Value="2">61-90</asp:ListItem>
-                                        <asp:ListItem Value="3">31-60</asp:ListItem>
-                                        <asp:ListItem Value="4">16-30</asp:ListItem>
-                                        <asp:ListItem Value="5">0-15</asp:ListItem>
-                                        <asp:ListItem Value="chao">过期</asp:ListItem>
-                                      </asp:DropDownList>
-                                    </span></td>
-                                  </tr>
-                                  <%-- <tr>
-                            <td height="32" align="right"><strong>待缴年度：</strong></td>
-                            <td align="left"><span class="font12b4e user_zlbottomline">
-                              <select name="t6" class="font12000_t">
-                                <option value="" selected="selected">所有年度</option>
-                                <option value="1">日本</option>
-                                <option value="2">中国</option>
-                              </select>
-                            </span></td>
-                          </tr>--%>
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td align="left">&nbsp;</td>
-                            </tr>
-                          </table>
-                          <%if(userType==3){ %>
-                          <table width="630" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
-                                <table width="114" border="0" cellspacing="0" cellpadding="0">
-                                  <tr>
-                                    <td width="10" height="20">&nbsp;</td>
-                                    <td width="98" align="center" class="font12bt">第三方信息</td>
-                                    <td width="6"></td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td height="18" align="left"></td>
-                            </tr>
-                            <tr>
-                              <td height="115" align="left" valign="top">
-                                <table width="630" border="0" cellspacing="0" cellpadding="0">
-                                  <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>会员编号</strong>：</td>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>会员编号：</strong></td>
                                     <td width="429" valign="middle">
                                       <input type="text" runat="server" id="t_anjuanhao" class="font12000" maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" />
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>会员名称</strong>：</td>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>会员名称：</strong></td>
                                     <td width="429" valign="middle">
                                       <input type="text" runat="server" id="txt_linkman" class="font12000" maxlength="20" />
                                     </td>
                                   </tr>
                                 
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>行政区划</strong>：</td>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>行政区划：</strong></td>
                                     <td width="429" valign="middle">
                                       <input type="text" runat="server" id="txt_phone" class="font12000" maxlength="20" />
                                     </td>
                                   </tr>
                                     <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>地址</strong>：</td>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>地址：</strong></td>
                                     <td width="429" valign="middle">                                
                                         <textarea cols="20" rows="2" type="text" name="s6" id="txt_address" style="width: 300px;height:40px;"  class="font12000" maxlength="250" runat="server" ></textarea>
                                     </td>
                                   </tr>
+                                    <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                       <strong>联系人：</strong></td>
+                                    <td width="429" valign="middle">                                
+                                        &nbsp;</td>
+                                  </tr>
+                                    <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                      <strong>联系电话：</strong></td>
+                                    <td width="429" valign="middle">                                
+                                        &nbsp;</td>
+                                  </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">&nbsp;</td>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                       <strong>申请号：</strong></td>
+                                    <td align="left" valign="middle">&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                       <strong>商标说明：</strong></td>
+                                    <td align="left" valign="middle">&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                       <strong>是否三维商标：</strong></td>
+                                    <td align="left" valign="middle">&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                        <strong>是否颜色组合商标：</strong></td>
+                                    <td align="left" valign="middle">&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                       <strong>是否声音商标：</strong></td>
+                                    <td align="left" valign="middle">&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                       <strong>商标申请日：</strong></td>
+                                    <td align="left" valign="middle">
+                                      <input type="text" name="s10" runat="server" id="hot_pass_date" class="font12000" maxlength="30" 
+                                      style="background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                        <strong>初审公告日：</strong></td>
+                                    <td align="left" valign="middle">
+                                      <input type="text" name="s12" runat="server" id="hot_pass_date0" 
+                                            class="font12000" maxlength="30" 
+                                      
+                                            style="background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                       <strong>注册公告日：</strong></td>
+                                    <td align="left" valign="middle">
+                                        &nbsp; 从<input type="text" name="s13" runat="server" id="hot_pass_date1" 
+                                            class="font12000" maxlength="30" 
+                                      
+                                            style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />到<input type="text" 
+                                            name="s15" runat="server" id="hot_pass_date3" 
+                                            class="font12000" maxlength="30" 
+                                      
+                                            style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                        <strong>续展期限日：</strong></td>
+                                    <td align="left" valign="middle">
+                                        &nbsp; 从<input type="text" name="s17" runat="server" id="hot_pass_date5" 
+                                            class="font12000" maxlength="30" 
+                                      
+                                            style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />到<input type="text" name="s16" runat="server" id="hot_pass_date4" 
+                                            class="font12000" maxlength="30" 
+                                      
+                                            style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                        <strong>所剩天数：</strong></td>
+                                    <td align="left" valign="middle">&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                    <td width="260" height="32" align="right" valign="middle">
+                                       <strong>商标状态：</strong></td>
                                     <td align="left" valign="middle">&nbsp;</td>
                                   </tr>
                                 </table>
@@ -326,7 +349,7 @@
                               <td align="left">&nbsp;</td>
                             </tr>
                           </table>
-                          <%} %>
+                         
                           <table width="630" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td height="18" align="left"></td>
