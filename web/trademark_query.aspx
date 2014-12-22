@@ -21,6 +21,10 @@
    <script type="text/javascript">
        $(function () {
            InitProCityArea();
+           $(".intinput").bind("input propertychange paste", function () {
+               $(this).val($(this).val().replace(/[^\d]/g, ''));
+           }).css("ime-mode", "disabled");
+
        $('input[type=radio][name="Quick0"]').change(function () {
            var applyType = $('input:radio[name="Quick0"]:checked').val();
            $("#hi_CaseType").val(applyType);
@@ -189,7 +193,7 @@
                 <tr>
                   <td height="123">&nbsp;</td>
                   <td width="691" align="left" valign="top">
-                    <table width="671" border="0" cellspacing="0" cellpadding="0" id="table_search2">
+                    <table width="671" border="0" cellspacing="0" cellpadding="0" id="table_search2" style="display:none">
                       <tr>
                         <td height="26" align="left" valign="top" style="background-image: url(images/user_js_bg.gif);">
                           <table width="671" border="0" cellspacing="0" cellpadding="0">
@@ -266,14 +270,14 @@
                               <td height="30" align="left">&nbsp;</td>
                             </tr>
                           </table>
-                         
-                          <table width="630" border="0" cellspacing="0" cellpadding="0">
+
+                           <table width="630" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
                                 <table width="114" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td width="10" height="20">&nbsp;</td>
-                                    <td width="98" align="center" class="font12bt">其它信息</td>
+                                    <td width="98" align="center" class="font12bt">注册人信息</td>
                                     <td width="6"></td>
                                   </tr>
                                 </table>
@@ -330,10 +334,38 @@
                                     <tr>
                                     <td width="260" align="right" valign="middle" class="style1">
                                       <strong>联系电话：</strong></td>
-                                    <td width="429" valign="middle" class="style1">                                
-                                      <input type="text" runat="server" id="txt_phone" class="font12000" 
+                                    <td width="429" valign="middle">                                
+                                      <input type="text" runat="server" id="txt_phone" class="font12000 intinput" 
                                             maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
                                   </tr>
+                                  </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="30" align="left">&nbsp;</td>
+                            </tr>
+                          </table>
+
+                         
+                          <table width="630" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                <table width="114" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="10" height="20">&nbsp;</td>
+                                    <td width="98" align="center" class="font12bt">其它信息</td>
+                                    <td width="6"></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td height="18" align="left"></td>
+                            </tr>
+                            <tr>
+                              <td height="115" align="left" valign="top">
+                                <table width="630" border="0" cellspacing="0" cellpadding="0">
+                                
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>申请号：</strong></td>
@@ -435,7 +467,7 @@
                                     <td width="260" height="32" align="right" valign="middle">
                                         <strong>所剩天数：</strong></td>
                                     <td align="left" valign="middle">
-                                      <input type="text" runat="server" id="txt_restDays" class="font12000" 
+                                      <input type="text" runat="server" id="txt_restDays" class="font12000 intinput" 
                                             maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
                                   </tr>
                                   <tr>
