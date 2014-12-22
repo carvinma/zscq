@@ -17,6 +17,12 @@
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
    <script src="js/tooltips.js" type="text/javascript"></script>
+    <style type="text/css">
+        .style1
+        {
+            height: 32px;
+        }
+    </style>
 </head>
 <body id="index">
   <form id="form1" runat="server">
@@ -81,29 +87,38 @@
                             <tr>
                               <td width="238" height="32" align="right"><strong>案件分类：</strong></td>
                               <td width="433" align="left">
-                                <input type="text" name="s1" id="sb_num" class="font12000 tooltip" maxlength="50" runat="server"  tips="只能输入字母和数字 例如：E35123535"/></td>
+                                  <asp:RadioButton ID="RadioButton1" runat="server" GroupName="Quick0" 
+                                      Text="申请" />
+                                  <asp:RadioButton ID="RadioButton2" runat="server" GroupName="Quick0" 
+                                      Text="续展" />
+                                </td>
                             </tr>
                             <tr>
                               <td height="32" align="right"><strong>案件号：</strong></td>
                               <td align="left">
-                                <input type="text" name="s5" id="sb_type" class="font12000" maxlength="50" runat="server" /></td>
+                                <input type="text" name="s5" id="txt_CaseNo0" class="font12000" maxlength="50" 
+                                      runat="server" /></td>
                             </tr>
                             <tr>
                               <td height="32" align="right"><strong>商品大类别：</strong></td>
                               <td align="left">
-                                <input type="text" name="s3" id="Sb_regName" class="font12000" maxlength="50" runat="server" /></td>
+                                <input type="text" name="s3" id="txt_TrademarkType0" class="font12000" 
+                                      maxlength="50" runat="server" /></td>
                             </tr>
                             <tr>
                               <td height="32" align="right">
                                   <span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 21px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
                                   <strong>申请人名称：</strong></span></td>
                               <td align="left">
-                                  &nbsp;</td>
+                                      <input type="text" name="s19" id="txt_applyName0" class="font12000" maxlength="50" 
+                                            runat="server" size="20" /></td>
                             </tr>
                             <tr>
                               <td height="32" align="right"><strong>最近状态：</strong></td>
                               <td align="left">
-                                  &nbsp;</td>
+                                  <asp:DropDownList ID="ddlStatus0" runat="server">
+                                  </asp:DropDownList>
+                                </td>
                             </tr>
                             <tr>
                               <td height="32" align="right">&nbsp;</td>
@@ -115,7 +130,7 @@
                                       <asp:Button ID="bt_kuaijiansuo" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_kuaijiansuo_Click" />
                                     </td>
                                     <td width="108" align="left">
-                                      <%--<input id="Reset2" type="reset" value="" style="border: 0; cursor: pointer; background: url(images/user_js_b2.gif); width: 86px; height: 27px;" />--%>
+                                        <%--<input id="Reset2" type="reset" value="" style="border: 0; cursor: pointer; background: url(images/user_js_b2.gif); width: 86px; height: 27px;" />--%>
                                     </td>
                                     <td width="204" align="left"><img src="images/user_js_b3.gif" width="91" height="27" border="0" style="cursor: hand" onclick="onclickt1();" /></td>
                                   </tr>
@@ -175,28 +190,34 @@
                                     <td width="225" height="32" align="right"><strong>案件分类：<br />
                                     </strong></td>
                                     <td width="415" align="left">
-                                        &nbsp;</td>
+                                        <asp:RadioButton ID="RadioButton3" runat="server" GroupName="Quick" Text="申请" />
+                                        <asp:RadioButton ID="RadioButton4" runat="server" GroupName="Quick" Text="续展" />
+                                      </td>
                                   </tr>
                                   <tr>
                                     <td height="32" align="right"><strong>案件号：</strong></td>
                                     <td align="left">
-                                      <input type="text" name="s5" id="Sb_Type1" class="font12000" maxlength="50" runat="server" /></td>
+                                      <input type="text" name="s5" id="txt_CaseNo" class="font12000" maxlength="50" 
+                                            runat="server" /></td>
                                   </tr>
                                   <tr>
-                                    <td height="32" align="right"><strong>商品大类别：</strong></td>
-                                    <td align="left">
-                                      <input type="text" name="s5" id="Sb_regName1" class="font12000" maxlength="50" runat="server" /></td>
+                                    <td align="right" class="style1"><strong>商品大类别：</strong></td>
+                                    <td align="left" class="style1">
+                                      <input type="text" name="s5" id="txt_TrademarkType" class="font12000" 
+                                            maxlength="50" runat="server" /></td>
                                   </tr>
                                   <tr>
                                     <td height="32" align="right"><strong>申请人名称：</strong></td>
                                     <td align="left">
-                                      <input type="text" name="s11" id="Sb_Num1" class="font12000" maxlength="50" 
+                                      <input type="text" name="s11" id="txt_applyName" class="font12000" maxlength="50" 
                                             runat="server" size="20" /></td>
                                   </tr>
                                   <tr>
                                     <td height="32" align="right"><strong>最近状态：</strong></td>
                                     <td align="left">
-                                        &nbsp;</td>
+                                        <asp:DropDownList ID="ddlStatus" runat="server">
+                                        </asp:DropDownList>
+                                      </td>
                                   </tr>
                                   </table>
                               </td>
@@ -227,25 +248,26 @@
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><strong>会员编号：</strong></td>
                                     <td width="429" valign="middle">
-                                      <input type="text" runat="server" id="t_anjuanhao" class="font12000" maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" />
+                                      <input type="text" runat="server" id="txt_memberNo" class="font12000" 
+                                            maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" />
                                     </td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><strong>会员名称：</strong></td>
                                     <td width="429" valign="middle">
-                                      <input type="text" runat="server" id="txt_linkman" class="font12000" maxlength="20" />
+                                      <input type="text" runat="server" id="txt_memberName" class="font12000" 
+                                            maxlength="20" />
                                     </td>
                                   </tr>
                                 
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><strong>行政区划：</strong></td>
                                     <td width="429" valign="middle">
-                                      <input type="text" runat="server" id="txt_phone" class="font12000" maxlength="20" />
-                                    </td>
+                                      &nbsp;</td>
                                   </tr>
                                     <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>地址：</strong></td>
-                                    <td width="429" valign="middle">                                
+                                    <td width="260" align="right" valign="middle" class="style1"><strong>地址：</strong></td>
+                                    <td width="429" valign="middle" class="style1">                                
                                         <textarea cols="20" rows="2" type="text" name="s6" id="txt_address" style="width: 300px;height:40px;"  class="font12000" maxlength="250" runat="server" ></textarea>
                                     </td>
                                   </tr>
@@ -253,51 +275,78 @@
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>联系人：</strong></td>
                                     <td width="429" valign="middle">                                
-                                        &nbsp;</td>
+                                      <input type="text" runat="server" id="txt_contactPerson" class="font12000" 
+                                            maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
                                   </tr>
                                     <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td width="260" align="right" valign="middle" class="style1">
                                       <strong>联系电话：</strong></td>
-                                    <td width="429" valign="middle">                                
-                                        &nbsp;</td>
+                                    <td width="429" valign="middle" class="style1">                                
+                                      <input type="text" runat="server" id="txt_phone" class="font12000" 
+                                            maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>申请号：</strong></td>
-                                    <td align="left" valign="middle">&nbsp;</td>
+                                    <td align="left" valign="middle">
+                                      <input type="text" runat="server" id="txt_regNo" class="font12000" 
+                                            maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>商标说明：</strong></td>
-                                    <td align="left" valign="middle">&nbsp;</td>
+                                    <td align="left" valign="middle">                                
+                                        <textarea cols="20" rows="2" type="text" name="s18" id="txt_remark" 
+                                            style="width: 300px;height:40px;"  class="font12000" maxlength="250" 
+                                            runat="server" ></textarea></td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>是否三维商标：</strong></td>
-                                    <td align="left" valign="middle">&nbsp;</td>
+                                    <td align="left" valign="middle">
+                                        <asp:DropDownList ID="ddl3D" runat="server">
+                                            <asp:ListItem Value="-1">全部</asp:ListItem>
+                                            <asp:ListItem Value="1">是</asp:ListItem>
+                                            <asp:ListItem Value="0">否</asp:ListItem>
+                                        </asp:DropDownList>
+                                      </td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                         <strong>是否颜色组合商标：</strong></td>
-                                    <td align="left" valign="middle">&nbsp;</td>
+                                    <td align="left" valign="middle">
+                                        <asp:DropDownList ID="ddlColor" runat="server">
+                                            <asp:ListItem Value="-1">全部</asp:ListItem>
+                                            <asp:ListItem Value="1">是</asp:ListItem>
+                                            <asp:ListItem Value="0">否</asp:ListItem>
+                                        </asp:DropDownList>
+                                      </td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td width="260" align="right" valign="middle" class="style1">
                                        <strong>是否声音商标：</strong></td>
-                                    <td align="left" valign="middle">&nbsp;</td>
+                                    <td align="left" valign="middle" class="style1">
+                                        <asp:DropDownList ID="ddlSound" runat="server">
+                                            <asp:ListItem Value="-1">全部</asp:ListItem>
+                                            <asp:ListItem Value="1">是</asp:ListItem>
+                                            <asp:ListItem Value="0">否</asp:ListItem>
+                                        </asp:DropDownList>
+                                      </td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>商标申请日：</strong></td>
                                     <td align="left" valign="middle">
-                                      <input type="text" name="s10" runat="server" id="hot_pass_date" class="font12000" maxlength="30" 
-                                      style="background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
+                                      <input type="text" name="s10" runat="server" id="txt_applydate" class="font12000" maxlength="30" 
+                                      
+                                            style="background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                         <strong>初审公告日：</strong></td>
                                     <td align="left" valign="middle">
-                                      <input type="text" name="s12" runat="server" id="hot_pass_date0" 
+                                      <input type="text" name="s12" runat="server" id="txt_publicdate" 
                                             class="font12000" maxlength="30" 
                                       
                                             style="background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
@@ -307,12 +356,12 @@
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>注册公告日：</strong></td>
                                     <td align="left" valign="middle">
-                                        &nbsp; 从<input type="text" name="s13" runat="server" id="hot_pass_date1" 
+                                        &nbsp; 从<input type="text" name="s13" runat="server" id="txt_regDateBegin" 
                                             class="font12000" maxlength="30" 
                                       
                                             style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
                                             onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />到<input type="text" 
-                                            name="s15" runat="server" id="hot_pass_date3" 
+                                            name="s15" runat="server" id="txt_regDateEnd" 
                                             class="font12000" maxlength="30" 
                                       
                                             style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
@@ -322,11 +371,12 @@
                                     <td width="260" height="32" align="right" valign="middle">
                                         <strong>续展期限日：</strong></td>
                                     <td align="left" valign="middle">
-                                        &nbsp; 从<input type="text" name="s17" runat="server" id="hot_pass_date5" 
+                                        &nbsp; 从<input type="text" name="s17" runat="server" id="txt_renewalDateBegin" 
                                             class="font12000" maxlength="30" 
                                       
                                             style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
-                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />到<input type="text" name="s16" runat="server" id="hot_pass_date4" 
+                                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />到<input type="text" 
+                                            name="s16" runat="server" id="txt_renewalDateEnd" 
                                             class="font12000" maxlength="30" 
                                       
                                             style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
@@ -335,12 +385,17 @@
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                         <strong>所剩天数：</strong></td>
-                                    <td align="left" valign="middle">&nbsp;</td>
+                                    <td align="left" valign="middle">
+                                      <input type="text" runat="server" id="txt_restDays" class="font12000" 
+                                            maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
                                   </tr>
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>商标状态：</strong></td>
-                                    <td align="left" valign="middle">&nbsp;</td>
+                                    <td align="left" valign="middle">
+                                        <asp:DropDownList ID="ddlAdminStatus" runat="server">
+                                        </asp:DropDownList>
+                                      </td>
                                   </tr>
                                 </table>
                               </td>
@@ -373,7 +428,7 @@
                                       <asp:Button ID="Button2" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_jiansuoAll_Click" />
                                     </td>
                                     <td width="108" align="left">
-                                      <%--<input id="Reset3" type="reset" value="" style="border: 0; cursor: pointer; background: url(images/user_js_b2.gif); width: 86px; height: 27px;" />--%>
+                                        <%--<input id="Reset3" type="reset" value="" style="border: 0; cursor: pointer; background: url(images/user_js_b2.gif); width: 86px; height: 27px;" />--%>
                                     </td>
                                     <td width="204" align="left"><img src="images/user_js_b4.gif" width="91" height="27" border="0" style="cursor: hand" onclick="onclickt2()"/></td>
                                   </tr>

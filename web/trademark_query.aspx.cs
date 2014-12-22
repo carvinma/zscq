@@ -33,9 +33,9 @@ public partial class trademark_query : System.Web.UI.Page
     }
     protected void bt_kuaijiansuo_Click(object sender, EventArgs e)
     {
-        string sbnum = sb_num.Value;
-        string sbtype = sb_type.Value;
-        string sbregname = Sb_regName.Value;
+        string sbnum = txt_caseNo0.Value;
+        string sbtype = txt_CaseNo0.Value;
+        string sbregname = txt_TrademarkType0.Value;
         string data = "";
         if (sbnum != "")
         {
@@ -53,16 +53,16 @@ public partial class trademark_query : System.Web.UI.Page
     }
     protected void bt_jiansuoAll_Click(object sender, EventArgs e)
     {
-        string sbnum = Sb_Num1.Value;
-        string sbtype = Sb_Type1.Value;
-        string sbregname = Sb_regName1.Value;
+        string sbnum = txt_applyName.Value;
+        string sbtype = txt_CaseNo.Value;
+        string sbregname = txt_TrademarkType.Value;
         //string guoji = Drp_GuoJi.SelectedValue;
-        string shenqintime = hot_pass_date.Value;
+        string shenqintime = txt_applydate.Value;
         string isjiaofei = ddl_jiaofei.SelectedValue;
         string stime = ddl_day.SelectedItem.ToString();
-        string anjuanhao = t_anjuanhao.Value;
+        string anjuanhao = txt_memberNo.Value;
         string caddress = txt_address.Value;
-        string linkman = txt_linkman.Value;
+        string linkman = txt_memberName.Value;
         string Ctel = txt_phone.Value;
         string data = "";
         if (sbnum != "")
