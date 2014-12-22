@@ -157,9 +157,7 @@
                             <tr>
                               <td height="32" align="right"><strong>最近状态：</strong></td>
                               <td align="left">
-                               <select id="ddlStatus0" name="ddlStatus0">
-                                <%--  <asp:DropDownList ID="ddlStatus0" runat="server">
-                                  </asp:DropDownList>--%>
+                               <select id="ddlStatus0" name="ddlStatus0" />
                                 </td>
                             </tr>
                             <tr>
@@ -257,9 +255,8 @@
                                   <tr>
                                     <td height="32" align="right"><strong>最近状态：</strong></td>
                                     <td align="left">
-                                     <select id="ddlStatus" name="ddlStatus0">
-                                       <%-- <asp:DropDownList ID="ddlStatus" runat="server">
-                                        </asp:DropDownList>--%>
+                                     <select id="ddlStatus" name="ddlStatus"/>
+                                    
                                       </td>
                                   </tr>
                                   </table>
