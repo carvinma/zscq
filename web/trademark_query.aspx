@@ -354,7 +354,7 @@
                                        <strong>是否三维商标：</strong></td>
                                     <td align="left" valign="middle">
                                         <asp:DropDownList ID="ddl3D" runat="server">
-                                            <asp:ListItem Value="-1">全部</asp:ListItem>
+                                            <asp:ListItem>全部</asp:ListItem>
                                             <asp:ListItem Value="1">是</asp:ListItem>
                                             <asp:ListItem Value="0">否</asp:ListItem>
                                         </asp:DropDownList>
@@ -365,7 +365,7 @@
                                         <strong>是否颜色组合商标：</strong></td>
                                     <td align="left" valign="middle">
                                         <asp:DropDownList ID="ddlColor" runat="server">
-                                            <asp:ListItem Value="-1">全部</asp:ListItem>
+                                            <asp:ListItem>全部</asp:ListItem>
                                             <asp:ListItem Value="1">是</asp:ListItem>
                                             <asp:ListItem Value="0">否</asp:ListItem>
                                         </asp:DropDownList>
@@ -376,7 +376,7 @@
                                        <strong>是否声音商标：</strong></td>
                                     <td align="left" valign="middle" class="style1">
                                         <asp:DropDownList ID="ddlSound" runat="server">
-                                            <asp:ListItem Value="-1">全部</asp:ListItem>
+                                            <asp:ListItem>全部</asp:ListItem>
                                             <asp:ListItem Value="1">是</asp:ListItem>
                                             <asp:ListItem Value="0">否</asp:ListItem>
                                         </asp:DropDownList>
