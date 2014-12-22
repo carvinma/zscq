@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
 
-public partial class add_trademark_renewal : System.Web.UI.Page
+public partial class edit_trademark_renewal : System.Web.UI.Page
 {
     private dal_Goods goods = new dal_Goods();
     private dal_NewTrademark mark = new dal_NewTrademark();
@@ -17,11 +17,27 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         if (!IsPostBack)
         {
             Bind_Page_Member();
-            
+
             hi_MainFees.Value = goods.CategoryFees_Select_All().First(p => p.i_Type == 1).MainFees.ToString();//续展每个大类费用
-            hi_tradeMarkdesc.Value= mark.TrademarkRenewalWriteSample();
+            hi_tradeMarkdesc.Value = mark.TrademarkRenewalWriteSample();
             this.Sb_miaosu.Value = hi_tradeMarkdesc.Value;
+            Bind_Page_Type();
         }
+    }
+
+    public void Bind_Page_Type()// 绑定页面信息
+    {
+        if (Request.QueryString["t_r_id"] != null && Request.QueryString["t_r_id"].ToString() != "")
+        {
+            int trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
+            Bind_Page_EditInfo(trademarkId);
+            // Bind_TradeMarkStatus();
+        }
+        else
+        {
+            //Response.Redirect("trademark_list.aspx");
+        }
+
     }
     public void Bind_Page_Member()//绑定ID和用户名
     {
@@ -34,6 +50,81 @@ public partial class add_trademark_renewal : System.Web.UI.Page
             Response.Redirect("Login.aspx?flag=sb&pageurl=" + HttpUtility.UrlEncode(Request.Url.ToString()));
         }
     }
+
+    #region  编辑
+    private void Bind_Page_EditInfo(int trademarkId)// 绑定商标详细数据
+    {
+        var model = mark.Trademark_Select_Id(trademarkId);
+        if (model.ApplyType == 0)
+        {
+            this.RdoPeople.Checked = false;
+            this.RdoCorp.Checked = true;
+        }
+        else
+        {
+            this.RdoPeople.Checked = true;
+            this.RdoCorp.Checked = false;
+        }
+        txt_applyname.Value = model.ApplyName;
+        txt_applyCardNo.Value = model.CardNo;
+        if (!string.IsNullOrEmpty(model.CardNoPDF))
+        {
+            hiUpCardNo.Value = model.CardNoPDF;
+            aCardNoPdf.Visible = true;
+        }
+        if (!string.IsNullOrEmpty(model.Businesslicense))
+        {
+            upBusinessLinces.Value = model.Businesslicense;
+            aBusinessLicense.Visible = true;
+        }
+
+        if (!string.IsNullOrEmpty(model.TrademarkRegBook))
+        {
+            upRegisteCertificate.Value = model.TrademarkRegBook;
+            aRegisteCertificate.Visible = true;
+        }
+
+        Hi_prov.Value = model.ProvinceId.ToString();//
+        Hi_city.Value = model.CityId.ToString();
+        Hi_country.Value = model.AreaId.ToString();
+        this.txt_address.Value = model.Address;
+        this.txt_ContactPerson.Value = model.ContactPerson;
+        this.txt_phone.Value = model.Phone;
+        this.txt_fax.Value = model.Fax;
+        this.txt_postcode.Value = model.PostCode;
+        this.lblCaseNo.Text = model.CaseNo;
+
+        this.txt_RegNo.Value = model.RegisteredNo;
+
+        txt_remark.Value = model.Remark;
+        sortarr.Value = model.TrademarkType;
+        sortGoods.Value = model.TrademarkGoods;
+
+        if (model.TrademarkDescribeType == 0)
+            this.RadioButton1.Checked = true;
+        else if (model.TrademarkDescribeType == 1)
+            this.RadioButton2.Checked = true;
+        else
+            this.RadioButton3.Checked = true;
+
+        Sb_miaosu.Value = model.TrademarkDescribe;
+        if (model.ApplyDate.HasValue)
+            this.txt_applydate.Value = model.ApplyDate.Value.ToString("yyyy-MM-dd");
+        if(model.RegNoticeDate.HasValue)
+            this.txt_RegNoticeDate.Value = model.RegNoticeDate.Value.ToString("yyyy-MM-dd");
+
+        if (model.RenewalDate.HasValue)
+            this.txt_RenewalDate.Value = model.RenewalDate.Value.ToString("yyyy-MM-dd");
+
+        //
+        if (!string.IsNullOrEmpty(model.TrademarkPattern1))
+        {
+            Image1.ImageUrl = model.TrademarkPattern1;
+            upPattern1.Value = model.TrademarkPattern1;
+        }
+
+    }
+    #endregion
     protected void btnPreview_Click(object sender, EventArgs e)
     {
         txt_applyname.Value.Trim();
@@ -130,7 +221,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                    HttpContext.Current.Server.MapPath(filePath + fileName));
             model.TrademarkRegBook = filePath + fileName;
         }
-        //model.TrademarkRemark = txt_remark.Value.Trim();
+        model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
         //model.TrademarkGoods = sortGoods.Value.Trim();
         fileName = this.upPattern1.Value;//图样
@@ -138,7 +229,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                HttpContext.Current.Server.MapPath(filePath + fileName));
         model.TrademarkPattern1 = filePath + fileName;
         model.Remark = txt_remark.Value.Trim();
-       
+
         return model;
     }
     private void addRegNoticeData(int trademarkid)
@@ -155,7 +246,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                 string[] RenewalDate = liststr[i].Split('_');
                 renewalModel.TradeMarkId = trademarkid;
                 renewalModel.RenewalDate = DateTime.Parse(RenewalDate[0]);
-                renewalModel.IsFinish = RenewalDate[1]=="1" ?true:false ;
+                renewalModel.IsFinish = RenewalDate[1] == "1" ? true : false;
                 list.Add(renewalModel);
             }
             if (list.Count > 0)

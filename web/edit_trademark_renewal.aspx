@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="edit_trademark.aspx.cs" Inherits="aBrand_edit_trademark" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="edit_trademark_renewal.aspx.cs" Inherits="edit_trademark_renewal" %>
 
 <%@ Register Src="ascx/zscqfoot.ascx" TagName="zscqfoot" TagPrefix="uc2" %>
 <%@ Register Src="ascx/zscqadv.ascx" TagName="zscqadv" TagPrefix="uc3" %>
@@ -13,6 +13,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=7" />
     <script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
     <script src="js/jtrademark.js" type="text/javascript"></script>
     <script src="js/j.suggest.js" type="text/javascript"></script>
     <script src="js/swfobject.js" type="text/javascript"></script>
@@ -21,14 +22,13 @@
     <script src="js/tooltips.js" type="text/javascript"></script>
     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
-    <%--<script src="js/js.js" type="text/javascript"></script>--%>
+    <script src="js/js.js" type="text/javascript"></script>
     <script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
 
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         var tmptoCity, tmptoCityCode;
         $(function () {
-
             var userid = $('#Hi_MemberId').val();
             var trademarkid = getUrlParam('t_r_id');
             if (trademarkid > 0) //编辑
@@ -88,15 +88,6 @@
                 }
             });
 
-
-            $("#chkSound").click(function () {
-                var state = $(this).is(':checked');
-                if (state == false) {
-                    $("#soundfiles").hide();
-                } else {
-                    $("#soundfiles").show();
-                }
-            });
 
             $("#upCardNoPdf").uploadify({
                 'swf': 'js/SWF/uploadify.swf',
@@ -184,7 +175,7 @@
                 }
             });
 
-            $("#upWav").uploadify({
+            $("#upfileRegisteCertificate").uploadify({
                 'swf': 'js/SWF/uploadify.swf',
                 'uploader': 'Handler.ashx?flag=uploadimage',
                 //'buttonImg': "images/aboutus1s.gif",
@@ -194,15 +185,16 @@
                 'width': '80',
                 'height': '32',
                 'overrideEvents': ['onDialogClose'],
-                'fileTypeDesc': '选择文件(*.mp3 *.wav)',
-                'fileTypeExts': '*.mp3;*.wav',
+                'fileTypeDesc': '浏览文件(*pdf)',
+                'fileTypeExts': '*.pdf',
                 'auto': true,
                 'multi': false,
-                'fileSizeLimit': '5MB',
+                'fileSizeLimit': '2MB',
                 'queueSizeLimit': 1,
                 'onUploadSuccess': function (file, data, response) {
                     $.jBox.closeTip();
-                    $("#upSound").val(data);
+                    $("#aRegisteCertificate").show();
+                    $("#upRegisteCertificate").val(data);
                 },
                 'onSelect': function (file) {
                     $.jBox.tip("正在上传文件，请稍后...", 'loading');
@@ -211,10 +203,10 @@
                 'onSelectError': function (file, errorCode, errorMsg) {
                     switch (errorCode) {
                         case -100:
-                            alert("上传的文件数量已经超出系统限制的" + $('#upWav').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                            alert("上传的文件数量已经超出系统限制的" + $('#upRegisteCertificate').uploadify('settings', 'queueSizeLimit') + "个文件！");
                             break;
                         case -110:
-                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upWav').uploadify('settings', 'fileSizeLimit') + "大小！");
+                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upRegisteCertificate').uploadify('settings', 'fileSizeLimit') + "大小！");
                             break;
                         case -120:
                             alert("文件 [" + file.name + "] 大小异常！");
@@ -268,50 +260,108 @@
                     }
                 }
             });
-
-            $("#addpicture2").uploadify({
-                'swf': 'js/SWF/uploadify.swf',
-                'uploader': 'Handler.ashx?flag=uploadimage',
-                //'buttonImg': "images/aboutus1s.gif",
-                'buttionClass': '',
-                'buttonText': '选择图片',
-                'queueID': 'fileQueue',
-                'width': '80',
-                'height': '32',
-                'overrideEvents': ['onDialogClose'],
-                'fileTypeDesc': '选择图片',
-                'fileTypeExts': '*.jpg;*.jpge;*.gif;*.png',
-                'auto': true,
-                'multi': false,
-                'fileSizeLimit': '500KB',
-                'queueSizeLimit': 1,
-                'onUploadSuccess': function (file, data, response) {
-                    $.jBox.closeTip();
-                    $('#Image2').attr('src', 'UploadTemp/' + data);
-                    $("#upPattern2").val(data);
-                },
-                'onSelect': function (file) {
-                    $.jBox.tip("正在上传图片，请稍后...", 'loading');
-                },
-                //返回一个错误，选择文件的时候触发
-                'onSelectError': function (file, errorCode, errorMsg) {
-                    switch (errorCode) {
-                        case -100:
-                            alert("上传的文件数量已经超出系统限制的" + $('#addpicture2').uploadify('settings', 'queueSizeLimit') + "个文件！");
-                            break;
-                        case -110:
-                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#addpicture2').uploadify('settings', 'fileSizeLimit') + "大小！");
-                            break;
-                        case -120:
-                            alert("文件 [" + file.name + "] 大小异常！");
-                            break;
-                        case -130:
-                            alert("文件 [" + file.name + "] 类型不正确！");
-                            break;
+            $(".chkregdate").live("click", function () {
+                var regdate = $(this).parent().prev().find("span").text().replace('年', '-').replace('月', '-');
+                if ($(this).is(":checked")) {
+                    var flag = true;
+                    var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
+                    $("#tbdate tr").each(function () {
+                        var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                        if (new Date(tmpdate) > new Date(regdate)) {
+                            flag = false;
+                            return;
+                        }
+                    });
+                    if (flag) {
+                        var d = new Date(regdate);
+                        d.setYear(d.getFullYear() + parseInt(10));
+                        var month = d.getMonth() + 1;
+                        if (parseInt(month) < 10)
+                            month = "0" + month;
+                        var day = d.getDate();
+                        if (parseInt(day) < 10)
+                            day = "0" + day;
+                        var ndate = (d.getFullYear()) + "-" + month + "-" + day;
+                        $("#txt_RenewalDate").val(ndate);
+                        $("#tbdate").append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day));
                     }
                 }
+                else {
+                    $("#tbdate tr").each(function () {
+                        var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                        if (new Date(tmpdate) > new Date(regdate)) {
+                            $(this).remove();
+                        }
+                    });
+                    $("#txt_RenewalDate").val(regdate);
+                }
+                recordRegnoticeDate();
             });
         });
+
+        function miaoshutype() {
+
+            var description = $("#hi_tradeMarkdesc").val();
+            var rb1 = document.getElementById("RadioButton1");
+            var rb2 = document.getElementById("RadioButton2");
+            var rb3 = document.getElementById("RadioButton3");
+            if (rb1.checked) {
+                $("#Sb_miaosu").val(description);
+                $("#Sb_miaosu").disabled = false;
+                $("#sbmiaoshu").show();
+            }
+            if (rb2.checked) {
+                $("#sbmiaoshu").hide();
+                $("#Sb_miaosu").val("");
+            }
+            if (rb3.checked) {
+                $("#Sb_miaosu").val(description);
+                $("#Sb_miaosu").disabled = false;
+                $("#sbmiaoshu").show();
+            }
+        }
+        function recordRegnoticeDate() {
+            var s = '';
+            $("#tbdate tr").each(function () {
+                var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                var chked = $(this).find("input[type='checkbox']").is(':checked') ? "1" : "0";
+                s += tmpdate + "_" + chked + "|"
+            });
+            $("#hi_RegNoticeDate").val(s);
+         }
+        function calcRegnoticeDate() {
+           var regdate =$dp.cal.getNewDateStr();
+           var tbdate = $("#tbdate");
+           tbdate.empty();
+            var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
+//          
+           var d = new Date(regdate);
+           d.setYear(d.getFullYear() + parseInt(10));
+           d.setDate(d.getDate() - parseInt(1));
+           
+           var month = d.getMonth() + 1;
+           if (parseInt(month) < 10)
+               month = "0" + month;
+           var day = d.getDate();
+           if (parseInt(day) < 10)
+               day = "0" + day;
+           var ndate = (d.getFullYear()) + "-" + month + "-" + day;
+           $("#txt_RenewalDate").val(ndate);
+           tbdate.append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day));
+           $("#hi_RegNoticeDate").val(ndate +"_"+"0"+ "|");
+       }
+       function calcsortarr() {
+           var goodstype = $("#sortarr").val();
+           if (!isEmpty(goodstype)) {
+               var parr = new Array();
+               parr = goodstype.replace(/，/g, ',').split(",");
+               $("#lbltotalCost").text("包含" + parr.length + "类，共计规费:" + (parr.length * parseFloat($("#hi_MainFees").val())) + "元");
+               $("#lbltotalCost").show();
+           }
+           else {
+               $("#lbltotalCost").hide();
+           }
+       }
     </script>
     <style type="text/css">
         p.MsoNormal
@@ -335,12 +385,14 @@
     <input id="hi_zhitifiles" type="hidden" runat="server" />
     <input id="hi_sbid" type="hidden" runat="server" value="0" />
 
+     <input id="hi_tradeMarkdesc" type="hidden" runat="server" value="0" />
+     <input id="hi_RegNoticeDate" type="hidden" runat="server" value="0" />
     <input id="hi_MainFees" type="hidden" runat="server" value="0" />
     <input id="hi_ItemNum" type="hidden" runat="server" value="0" />
     <input id="hi_ExceedFees" type="hidden" runat="server" value="0" />
      <input type="hidden" runat="server"  id="hiUpCardNo" value="" />
      <input type="hidden" runat="server"  id="upBusinessLinces" value="" />
-      <input type="hidden" runat="server"  id="upSound" />
+      <input type="hidden" runat="server"  id="upRegisteCertificate" />
       <input type="hidden" runat="server"  id="upPattern1" />
        <input type="hidden" runat="server"  id="upPattern2" />
     <uc4:zscqtop2 ID="zscqtop21" runat="server" />
@@ -378,7 +430,7 @@
                                     </td>
                                     <td align="left">
                                         <a href="index.aspx">首页</a>&nbsp;&gt;&gt;&nbsp;会员中心&nbsp;&gt;&gt;&nbsp;服务中心&nbsp;&gt;&gt;&nbsp;我的商标&nbsp;&gt;&gt;&nbsp;添加商标信息&nbsp;
-                                        &gt;&gt; 添加商标申请案
+                                        &gt;&gt; 添加商标续展案
                                     </td>
                                 </tr>
                             </table>
@@ -424,13 +476,9 @@
                                     <td width="691" align="left" class="font12bd44147">
                                         <br />
                                         <br />
-                                        *如果申请人为自然人，则必需是具有营业执照的自然人（例：个体工商业），其他中国大陆自然人暂不能申请<br />
-                                        &nbsp;如有以下情况，请直接联系我们，本系统暂不支持。<br />
-                                        <br />
-                                        （1） 如您申请集体商标或证明商标<br />
-                                        （2） 如您使用肖像作为商标<br />
-                                        （3） 如您的商标想享有优先权<br />
-                                        （4） 如您的商标申请人有两个或两个以上<br />
+                                        *如商标申请人有两个或两个以上（即共有商标），请直接联系我们，<br />&nbsp;电话：010-84505596，邮箱：pat-annuity@hqht-online.com
+                                        &nbsp <br />
+                      
                                     </td>
                                 </tr>
                                 <tr>
@@ -465,7 +513,7 @@
                                                                             &nbsp;
                                                                         </td>
                                                                         <td width="98" align="center" class="font12bt">
-                                                                            申请人信息
+                                                                            注册人信息
                                                                         </td>
                                                                         <td width="6">
                                                                         </td>
@@ -484,7 +532,7 @@
                                                                 <table width="689" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
                                                                         <td align="right">
-                                                                            <strong>选择申请人类别</strong>：
+                                                                            <strong>选择注册人类别</strong>：
                                                                         </td>
                                                                         <td>
                                                                             <input id="RdoPeople" type="radio" name="person" value="1" runat="server" />自然人&nbsp;&nbsp;&nbsp;&nbsp;
@@ -494,12 +542,12 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td width="180" height="32" align="right">
-                                                                            <strong>申请人名称：</strong>
+                                                                            <strong>注册人名称：</strong>
                                                                         </td>
                                                                         <td align="left">
                                                                             <input runat="server" id="txt_applyname" type="text" 
-                                                                            onblur="check_ApplyUser('name_div')" name="" value="" placeholder="" 
-                                                                            class="font12000" maxlength="50" clientidmode="Static" autocomplete="off"/>
+                                                                            onblur="check_ApplyUser('name_div')" tips="请与商标注册证书一致"  placeholder="" 
+                                                                            class="font12000 tooltip" maxlength="50" clientidmode="Static" autocomplete="off"/>
                                                                             <span style="color: Red;">*</span>  <span class="status error" id="name_div_error"></span>
                                                                             <input type="hidden" name="applyname_3word" runat="server" clientidmode="Static"
                                                                                 id="applyname_3word" value="CAN" /><br />
@@ -582,11 +630,11 @@
                                                                         </td>
                                                                         <td align="left">
                                                                            <span class="fl selected-address" id="areaNameTxt"></span>
-                                                                            <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" style="ime-mode: disabled;" id="txt_address" maxlength="50" type="text" 
+                                                                            <input class="font12000 tooltip" onblur="check_ApplyUser('address_div')" 
+                                                                            runat="server" id="txt_address" maxlength="50" type="text" tips="请与证明文件中的地址一致"
                                                                                name="" value=""/>
                                                                                <span style="color: Red;">*</span> 
-                                                                                <span class="status error" id="address_div_error"></span>
-                                                                        </td>
+                                                                                <span class="status error" id="address_div_error"><span></span></span></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td height="32" align="right">
@@ -618,7 +666,7 @@
                                                                           <span class="status error" id="fax_div_error"></span>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr id="sbmiaoshu">
+                                                                    <tr>
                                                                         <td height="32" align="right">
                                                                             <strong>邮政编码：</strong>
                                                                         </td>
@@ -673,63 +721,119 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td height="32" align="right" valign="middle">
-                                                                            <strong><span>是否三维标志</span></strong>：
+                                                                        <td height="32" width="360" align="right" valign="middle">
+                                                                            <strong>注册号/申请号：</strong></td>
+                                                                        <td valign="middle">
+                                                                         <input class="font12000 tooltip"  onblur="check_ApplyUser('regno_div')" runat="server" 
+                                                                                style="ime-mode: disabled;" tips="请与商标注册证书一致"
+                                                                                id="txt_RegNo" maxlength="20" type="text"   value="" placeholder=""/></td>
+                                                                        <td width="429" valign="middle">
+                                                                          <span style="color: Red;">*</span>
+                                                                            <span class="status error" id="regno_div_error"></span>
+                                                                            </td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                            <strong>商标类别：</strong>
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <input id="Radio3DNo" name="rdo3D" runat="server" checked="true" type="radio" />
-                                                                            否&nbsp;&nbsp;
-                                                                            <input id="Radio3DYES" name="rdo3D" runat="server" type="radio" />
-                                                                            是
+                                                                            <input id="sortarr" type="text" runat="server" class="font12000"  style="ime-mode: disabled;" 
+                                                                             onblur="check_ApplyUser('sortarr_div');calcsortarr();"/>
+                                                                             <input type="hidden" id="sortGoods" runat="server"/>
+                                                                             <div><span style="color: Red;">多个商标类别，以逗号分隔</span></div>
                                                                         </td>
                                                                         <td valign="middle">
+                                                                         <span style="color: Red;">*</span>
+                                                                            <span class="status error" id="sortarr_div_error"></span>
+                                                                             <asp:Label ID="lbltotalCost" style="display:none" runat="server" Text="Label"></asp:Label>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                            <strong>商标描述类型：</strong></td>
+                                                                        <td valign="middle">
+                                                                            <asp:RadioButton ID="RadioButton1" runat="server" GroupName="aa" 
+                                                                                onclick="miaoshutype();" Checked="True" />
+                                                                            文字商标<asp:RadioButton ID="RadioButton2" runat="server" GroupName="aa" 
+                                                                                onclick="miaoshutype();" />
+                                                                            图形商标<asp:RadioButton ID="RadioButton3" runat="server" GroupName="aa" 
+                                                                                onclick="miaoshutype();" />
+                                                                            文字与图形商标</td>
+                                                                        <td valign="middle">
+                                                                            &nbsp;</td>
+                                                                    </tr>
+                                                                    <tr id="sbmiaoshu">
                                                                         <td height="32" align="right" valign="middle">
-                                                                            <strong><span>是否颜色组合</span></strong>：
+                                                                           <strong> 商标描述：</strong></td>
+                                                                        <td valign="middle" colspan="2">
+                                                                        <input type="text" name="s6" id="Sb_miaosu" class="font12000" maxlength="50" runat="server" 
+                                                                        onblur="checkOk('Sb_miaosu');"  onclick="value='';focus()" style="width:300px;"/> <span style="color: Red;" id="Sb_miaosu1">*</span>
                                                                         </td>
-                                                                        <td valign="middle">
-                                                                            <input id="rdoColorNO" name="rdoColor" runat="server" checked="true" type="radio" />
-                                                                            否&nbsp;&nbsp;
-                                                                            <input id="rdoColorYes" name="rdoColor" runat="server"  type="radio" />
-                                                                            是
-                                                                        </td>
-                                                                        <td valign="middle">
-                                                                        </td>
+                                                                         
                                                                     </tr>
                                                                     <tr>
-                                                                        <td height="32" align="right" valign="middle">
-                                                                            <strong><span>声音商标</span></strong>：
-                                                                        </td>
-                                                                        <td valign="middle">
-                                                                            <input id="chkSound" runat="server" type="checkbox" />
-                                                                        </td>
-                                                                        <td valign="middle">
-                                                                        </td>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                            <strong>商标注册证书：</strong></td>
+                                                                        <td colspan="2" valign="middle">
+                                                                            <div id="upfileRegisteCertificate"></div>
+                                                                             <span id="aRegisteCertificate" runat="server"  style="display:none">商标注册证书已上传</span>
+                                                                             <div>
+                                                                                <span style="color: Red;">请将商标注册证书扫描为彩色上传，格式为pdf，大小不超过2M</span>
+                                                                                </div>
+                                                                         </td>
+                                                                        
                                                                     </tr>
-                                                                    <tr id="soundfiles" runat="server" style="display:none">
-                                                                        <td height="32" align="right"  valign="middle" >
-                                                                            <strong>声音文件</strong>：
+                                                                    <tr>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                            <strong>商标申请日：</strong></td>
+                                                                        <td valign="middle">
+                                                                            <input type="text" name="s6" runat="server" id="txt_applydate" onblur="checkOk('txt_applydate');"  
+                                                                            class="font12000" readonly="readonly" style="background-image:url(images/user_js_date.gif); 
+                                                                                background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/></td>
+                                                                        <td valign="middle">
+                                                                            &nbsp;</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                             <strong>注册公告日：</strong></td>
+                                                                        <td valign="middle">
+                                                                           <input type="text" runat="server" id="txt_RegNoticeDate"  
+                                                                             onblur="check_ApplyUser('regdate_div')"  
+                                                                           class="font12000" maxlength="50" style="background-image:url(images/user_js_date.gif); background-repeat:no-repeat; background-position:right;" 
+                                                                           onclick="WdatePicker({el:'txt_RegNoticeDate',dateFmt:'yyyy-MM-dd',onpicked:calcRegnoticeDate});"/>
+                                                                           </td>
+                                                                        <td valign="middle">
+                                                                            <span class="status error" id="regdate_div_error"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                             &nbsp;</td>
+                                                                        <td colspan="2" valign="middle">
+                                                                        <table id="tbdate">
+                                                                        
+                                                                        </table>
+                                                                        </td>
+                                                                        
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                             <strong>续展期限日：</strong></td>
+                                                                         <td valign="middle">
+                                                                        <input type="text" runat="server" id="txt_RenewalDate" class="font12000" readonly="readonly" />
                                                                         </td>
                                                                         <td valign="middle">
-                                                                           <div id="upWav"></div>
-                                                                            <div>
-                                                                                <span style="color: Red;">样本格式为mp3或wav，大小不超过5M</span></div>
-                                                                        </td>
-                                                                        <td valign="middle">
-                                                                        </td>
+                                                                            &nbsp;</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td align="right" valign="middle">
-                                                                            <strong>商标说明</strong>：
-                                                                        </td>
+                                                                            <strong>备注：</strong></td>
                                                                         <td valign="middle">
-                                                                            <textarea cols="20" rows="2" type="text" name="s6" id="txt_remark" style="width: 293px;
-                                                                                height: 180px;" class="font12000" maxlength="180" runat="server"  onblur="check_ApplyUser('remark_div')" ></textarea>
-                                                                        </td>
+                                                                            <textarea cols="20" rows="2" type="text" name="s7" id="txt_remark" style="width: 293px;
+                                                                                height: 180px;" class="font12000" maxlength="180" runat="server"  
+                                                                                ></textarea></td>
                                                                         <td valign="middle">
-                                                                            <div>
+                                                                           <div>
                                                                                 <p>
                                                                                     (1)长度在1-180个字符之间</p>
                                                                                 <br />
@@ -737,45 +841,10 @@
                                                                                     (2)只能使用中文、英文或阿拉伯数字</p>
                                                                                 <br />
                                                                                 <p>
-                                                                                    (3)以三维标志、颜色组合、声音标志<br />
-                                                                                    申请商标注册的，应说明商标使用方式</p>
-                                                                                <br />
-                                                                                (4)商标为外文或者包含外文的，应当说明含义
-                                                                               <br />
+                                                                                    &nbsp;</p>
+&nbsp;<br />
                                                                                 <span class="status error" id="remark_div_error"></span>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td align="right" valign="middle">
-                                                                            &nbsp;
-                                                                        </td>
-                                                                        <td valign="middle">
-                                                                            <a href="">【更多说明】</a>
-                                                                        </td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td align="right" valign="middle">
-                                                                            <strong>商标类别</strong>：
-                                                                        </td>
-                                                                        <td valign="middle">
-                                                                            <input id="sortarr" type="text" runat="server" readonly="readonly" class="font12000" onblur="check_ApplyUser('sortarr_div')" onclick="showGoods()"/>
-                                                                             <input type="hidden" id="sortGoods" runat="server"/>
-                                                                        </td>
-                                                                        <td valign="middle">
-                                                                            <span class="status error" id="sortarr_div_error"></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td align="right" valign="middle">
-                                                                            &nbsp;</td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;</td>
-                                                                        <td valign="middle">
-                                                                            &nbsp;</td>
+                                                                            </div></td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -783,41 +852,9 @@
                                                         <tr><td align="center"><div id="goodsCalcInfo"></div></td>
                                                         </tr>
                                                         <tr><td align="center">
-                                                           <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0" id="th_table">
-                                                            <tr id="th_box">
-                                                             <td width="58" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">序号</td>
-                                                              <td width="78" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</td>
-                                                              <td width="108" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类似群</td>
-                                                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品编码</td>
-                                                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商品名称</td>
-                                                               <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
-                                                            </tr>
-                                                              <asp:Repeater ID="Rpt_goods" runat="server">
-                                                               <ItemTemplate>
-                                                               <tr classname="arr_goods" name="arr_goods[]" val="<%# Eval("id")%>" id="arr_goods<%# goodsItemCount- Container.ItemIndex%>">
-                                                               <td height="25" align="center" bgcolor="#FFFFFF" id="4<%# goodsItemCount- Container.ItemIndex%>"><%# goodsItemCount- Container.ItemIndex%></td>
-                                                               <td align="center" bgcolor="#FFFFFF" id="3<%# goodsItemCount- Container.ItemIndex%>">
-                                                                <input type="hidden" classname="hid_classsort" name="hid_sort[]" value='<%# Eval("MainCategoryCode")%>'><%# Eval("MainCategoryCode")%></td>
-                                                               <td align="center" bgcolor="#FFFFFF" id="2<%# goodsItemCount- Container.ItemIndex%>">
-                                                               <input type="hidden" name="hid_group[]" value='<%# Eval("DetailCategoryCode")%>'><%# Eval("DetailCategoryCode")%></td>
-                                                               <td align="center" bgcolor="#FFFFFF" id="1<%# goodsItemCount- Container.ItemIndex%>">
-                                                               <input type="hidden" name="hid_goods[]" value='<%# Eval("GoodsCode")%>'><%# Eval("GoodsCode")%></td>
-                                                               <td align="center" bgcolor="#FFFFFF" id="0<%# goodsItemCount- Container.ItemIndex%>">
-                                                               <input type="hidden" name="hid_goodsname[]" classname="<%#Eval("MainCategoryCode")%>" value='<%#Eval("GoodsRemark")%>'><%# Eval("GoodsRemark")%></td>
-                                                               <td align="center" bgcolor="#FFFFFF">
-                                                               <a href="javascript:;" style="color:red;" onclick="del_onegoods(<%# goodsItemCount- Container.ItemIndex%>)">删除</a></td>
-                                                               </tr>
-                                                                </ItemTemplate>
-                                                                </asp:Repeater>
-                                                           </table>
-                                                        </td>
+                                                            &nbsp;</td>
                                                         </tr>
-                                                        <tr>
-                                                            <td align="left">
-                                                                
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                        </table>
                                                     <table width="689" border="0" cellspacing="0" cellpadding="0">
                                                         <tr>
                                                             <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
@@ -846,7 +883,7 @@
                                                                         <td style="height: 50px; width: 260px;" align="center">
                                                                             <asp:Image ID="Image1" runat="server" Width="150px" Height="150px" />
                                                                             <br />
-                                                                            图样1
+                                                                            图样
                                                                         </td>
                                                                         <td>
                                          <p>                             
@@ -858,7 +895,7 @@
                                                                                 <span style="color: Red;">格式为.jpg.gif.png,不大于500K</span></div>
                                                                         </td>
                                                                         <td>
-                                                                            请按照下的面的图样说明选择图样
+                                                                           
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -872,25 +909,7 @@
                                                                     </tr>
 
                                                        
-                                                        <tr>
-                                                            <td style="height: 50px; width: 260px;" align="center">
-                                                                <asp:Image ID="Image2" runat="server" Width="150px" Height="150px" />
-                                                                <br />
-                                                                图样2
-                                                            </td>
-                                                            <td>
-                                                            <div id="addpicture2">  </div>  
-                                                                 <span style="color: Red;">
-                                                                    <br />
-                                                                    格式为.jpg.gif.png,不大于500K</span>
-                                                            </td>
-                                                            <td>
-                                                                以颜色组合或者着色图样申请商标注册<br />
-                                                                的，应分别上传着色图样及黑白稿，黑<br />
-                                                                白稿在图样2中上传
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                        </table>
                                                     </td></tr>
                                                     </table>
                                               </td>
@@ -917,19 +936,18 @@
                                                                     <tr>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnPreview" CssClass="BtnShow" runat="server" Text="预  览" 
-                                                                                onclick="btnPreview_Click" Visible="false" />
+                                                                                onclick="btnPreview_Click" />
                                                                         </td>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnSave" CssClass="BtnShow" runat="server" Text="保  存" 
-                                                                                onclick="btnSave_Click"  OnClientClick="return addmarkCheck_data()"/>
+                                                                                onclick="btnSave_Click"  OnClientClick="return addmarkRenewalCheck_data()"/>
                                                                         </td> 
                                                                         <td width="100">
                                                                             <asp:Button ID="btnSubmit" CssClass="BtnShow" runat="server"
-                                                                                Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkCheck_data()"/>
+                                                                                Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkRenewalCheck_data()"/>
                                                                         </td>
                                                                         <td width="100">
-                                                                            <asp:Button ID="btnCancle" CssClass="BtnShow" runat="server" Text="放弃提交" 
-                                                                                onclick="btnCancle_Click" />
+                                                                          <a  href="javascript:void(0)" id="linkDel" class="BtnShowhref"  onclick="cancleSumbit('1')">放弃提交</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
