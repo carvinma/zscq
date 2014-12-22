@@ -49,7 +49,15 @@
            });
        });
     });
-       function checkCaseType() {
+   function checkCaseType() {
+       if ($("#table_search1").is(":visible")) {
+           var v = $("#ddlStatus0").find("option:selected").val();
+           $("#hi_Status").val(v);
+       }
+       else {
+           var v = $("#ddlStatus").find("option:selected").val();
+           $("#hi_Status").val(v);
+       }
            if ($("#hi_CaseType").val() == null || $("#hi_CaseType").val() == "") {
                alert('请选择案件分类');
                return false;
@@ -62,6 +70,7 @@
   <form id="form1" runat="server">
   <uc4:zscqtop2 ID="zscqtop21" runat="server" />
   <input id="hi_CaseType" runat="server" type="hidden" />
+   <input id="hi_Status" runat="server" type="hidden" />
   <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
   <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
     <tr>
@@ -148,8 +157,9 @@
                             <tr>
                               <td height="32" align="right"><strong>最近状态：</strong></td>
                               <td align="left">
-                                  <asp:DropDownList ID="ddlStatus0" runat="server">
-                                  </asp:DropDownList>
+                               <select id="ddlStatus0" name="ddlStatus0">
+                                <%--  <asp:DropDownList ID="ddlStatus0" runat="server">
+                                  </asp:DropDownList>--%>
                                 </td>
                             </tr>
                             <tr>
@@ -247,8 +257,9 @@
                                   <tr>
                                     <td height="32" align="right"><strong>最近状态：</strong></td>
                                     <td align="left">
-                                        <asp:DropDownList ID="ddlStatus" runat="server">
-                                        </asp:DropDownList>
+                                     <select id="ddlStatus" name="ddlStatus0">
+                                       <%-- <asp:DropDownList ID="ddlStatus" runat="server">
+                                        </asp:DropDownList>--%>
                                       </td>
                                   </tr>
                                   </table>

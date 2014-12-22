@@ -60,9 +60,9 @@ public partial class trademark_query : System.Web.UI.Page
         {
             data += "qtmapplyname=" + qtmapplyname + "&";
         }
-        if (!string.IsNullOrEmpty(ddlStatus0.SelectedValue))
+        if (!string.IsNullOrEmpty(hi_Status.Value))
         {
-            data += "qtmstatus=" + ddlStatus0.SelectedValue + "&";
+            data += "qtmstatus=" + hi_Status.Value + "&";
         }
 
 
@@ -104,9 +104,9 @@ public partial class trademark_query : System.Web.UI.Page
         {
             data += "qtmapplyname=" + qtmapplyname + "&";
         }
-        if (!string.IsNullOrEmpty(ddlStatus.SelectedValue))
+        if (!string.IsNullOrEmpty(hi_Status.Value))
         {
-            data += "qtmstatus=" + ddlStatus.SelectedValue + "&";
+            data += "qtmstatus=" + hi_Status.Value + "&";
         }
 
         if (shenqintime != "")
