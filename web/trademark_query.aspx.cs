@@ -77,10 +77,7 @@ public partial class trademark_query : System.Web.UI.Page
         {
             data += "sb_regname=" + sbregname + "&";
         }
-        //if (guoji != "0")
-        //{
-        //    data += "sb_regguoji=" + guoji + "&";
-        //}
+        
         if (shenqintime != "")
         {
             data += "sb_passtime=" + shenqintime + "&";
@@ -118,17 +115,4 @@ public partial class trademark_query : System.Web.UI.Page
         }
         Response.Redirect("user_sblb.aspx?" + data);
     }
-    //void Bind_Drp_PGuoJiaType()// 绑定国籍
-    //{
-    //    Drp_GuoJi.Items.Clear();
-    //    ListItem item = new ListItem("请选择", "0");
-    //    Drp_GuoJi.Items.Add(item);
-    //    var iquery = DALN.Nationality_SelectAll();
-    //    foreach (var q in iquery)
-    //    {
-    //        ListItem li = new ListItem(q.nvc_Name, q.i_Id.ToString());
-    //        Drp_GuoJi.Items.Add(li);
-    //    }
-    //}
-
 }

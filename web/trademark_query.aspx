@@ -17,12 +17,11 @@
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
    <script src="js/tooltips.js" type="text/javascript"></script>
-    <style type="text/css">
-        .style1
-        {
-            height: 32px;
-        }
-    </style>
+   <script type="text/javascript">
+       $(function () {
+           InitProCityArea();
+       });
+   </script>
 </head>
 <body id="index">
   <form id="form1" runat="server">
@@ -263,7 +262,16 @@
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><strong>行政区划：</strong></td>
                                     <td width="429" valign="middle">
-                                      &nbsp;</td>
+                                       <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
+                                  <option value="">请选择：</option></select>
+                                  <select id="live_city" name="live_city" onchange="SelArea(this.value);">
+                                  <option value="">请选择：</option></select>
+                                  <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
+                                  <option value="">请选择：</option></select>&nbsp;
+                                   <span class="status error" id="area_div_error"></span>
+                                    <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />
+                                    <input type="hidden" runat="server" id="Hi_city" clientidmode="Static" />
+                                    <input type="hidden" runat="server" id="Hi_country" clientidmode="Static" /></td>
                                   </tr>
                                     <tr>
                                     <td width="260" align="right" valign="middle" class="style1"><strong>地址：</strong></td>
