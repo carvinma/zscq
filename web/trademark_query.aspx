@@ -79,19 +79,31 @@
                         <td height="115" align="left" valign="top">
                           <table width="671" border="0" cellspacing="0" cellpadding="0">
                             <tr>
-                              <td width="238" height="32" align="right"><strong>商标注册号：</strong></td>
+                              <td width="238" height="32" align="right"><strong>案件分类：</strong></td>
                               <td width="433" align="left">
                                 <input type="text" name="s1" id="sb_num" class="font12000 tooltip" maxlength="50" runat="server"  tips="只能输入字母和数字 例如：E35123535"/></td>
                             </tr>
                             <tr>
-                              <td height="32" align="right"><strong>商标类别：</strong></td>
+                              <td height="32" align="right"><strong>案件号：</strong></td>
                               <td align="left">
                                 <input type="text" name="s5" id="sb_type" class="font12000" maxlength="50" runat="server" /></td>
                             </tr>
                             <tr>
-                              <td height="32" align="right"><strong>商标注册人：</strong></td>
+                              <td height="32" align="right"><strong>商品大类别：</strong></td>
                               <td align="left">
                                 <input type="text" name="s3" id="Sb_regName" class="font12000" maxlength="50" runat="server" /></td>
+                            </tr>
+                            <tr>
+                              <td height="32" align="right">
+                                  <span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 21px; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">
+                                  <strong>申请人名称：</strong></span></td>
+                              <td align="left">
+                                  &nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td height="32" align="right"><strong>最近状态：</strong></td>
+                              <td align="left">
+                                  &nbsp;</td>
                             </tr>
                             <tr>
                               <td height="32" align="right">&nbsp;</td>
@@ -122,7 +134,7 @@
                 <tr>
                   <td height="123">&nbsp;</td>
                   <td width="691" align="left" valign="top">
-                    <table width="671" border="0" cellspacing="0" cellpadding="0" id="table_search2" style="display: none;">
+                    <table width="671" border="0" cellspacing="0" cellpadding="0" id="table_search2">
                       <tr>
                         <td height="26" align="left" valign="top" style="background-image: url(images/user_js_bg.gif);">
                           <table width="671" border="0" cellspacing="0" cellpadding="0">
@@ -160,28 +172,32 @@
                               <td height="115" align="left" valign="top">
                                 <table width="630" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
-                                    <td width="225" height="32" align="right"><strong>商标注册号：<br />
+                                    <td width="225" height="32" align="right"><strong>案件分类：<br />
                                     </strong></td>
                                     <td width="415" align="left">
-                                      <input type="text" name="s5" id="Sb_Num1" class="font12000" maxlength="50" runat="server" /></td>
+                                        &nbsp;</td>
                                   </tr>
                                   <tr>
-                                    <td height="32" align="right"><strong>商标类别：</strong></td>
+                                    <td height="32" align="right"><strong>案件号：</strong></td>
                                     <td align="left">
                                       <input type="text" name="s5" id="Sb_Type1" class="font12000" maxlength="50" runat="server" /></td>
                                   </tr>
                                   <tr>
-                                    <td height="32" align="right"><strong>商标注册人：</strong></td>
+                                    <td height="32" align="right"><strong>商品大类别：</strong></td>
                                     <td align="left">
                                       <input type="text" name="s5" id="Sb_regName1" class="font12000" maxlength="50" runat="server" /></td>
                                   </tr>
-                                 <%-- <tr>
-                                    <td height="32" align="right"><strong>商标注册人国籍：</strong></td>
-                                    <td align="left"><span class="font12b4e user_zlbottomline">
-                                      <asp:DropDownList ID="Drp_GuoJi" runat="server">
-                                      </asp:DropDownList>
-                                    </span></td>
-                                  </tr>--%>
+                                  <tr>
+                                    <td height="32" align="right"><strong>申请人名称：</strong></td>
+                                    <td align="left">
+                                      <input type="text" name="s11" id="Sb_Num1" class="font12000" maxlength="50" 
+                                            runat="server" size="20" /></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="32" align="right"><strong>最近状态：</strong></td>
+                                    <td align="left">
+                                        &nbsp;</td>
+                                  </tr>
                                   <tr>
                                     <td height="32" align="right"><strong>商标申请日：</strong></td>
                                     <td align="left">
@@ -275,20 +291,20 @@
                               <td height="115" align="left" valign="top">
                                 <table width="630" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>案卷号</strong>：</td>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>会员编号</strong>：</td>
                                     <td width="429" valign="middle">
                                       <input type="text" runat="server" id="t_anjuanhao" class="font12000" maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" />
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>联系人</strong>：</td>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>会员名称</strong>：</td>
                                     <td width="429" valign="middle">
                                       <input type="text" runat="server" id="txt_linkman" class="font12000" maxlength="20" />
                                     </td>
                                   </tr>
                                 
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle"><strong>电话</strong>：</td>
+                                    <td width="260" height="32" align="right" valign="middle"><strong>行政区划</strong>：</td>
                                     <td width="429" valign="middle">
                                       <input type="text" runat="server" id="txt_phone" class="font12000" maxlength="20" />
                                     </td>
