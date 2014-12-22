@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
    <script src="js/tooltips.js" type="text/javascript"></script>
+   <script src="js/jtrademark.js" type="text/javascript"></script>
    <script type="text/javascript">
        $(function () {
            InitProCityArea();
@@ -42,7 +43,7 @@
 <body id="index">
   <form id="form1" runat="server">
   <uc4:zscqtop2 ID="zscqtop21" runat="server" />
-  <input id="hi_CaseType" type="hidden" />
+  <input id="hi_CaseType" runat="server" type="hidden" />
   <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
   <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
     <tr>
@@ -140,7 +141,7 @@
                                   <tr>
                                     <td width="8" height="35"></td>
                                     <td width="95" align="left">
-                                      <asp:Button ID="bt_kuaijiansuo" OnClientClick="checkCaseType()" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_kuaijiansuo_Click" />
+                                      <asp:Button ID="bt_kuaijiansuo" OnClientClick="return checkCaseType();" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_kuaijiansuo_Click" />
                                     </td>
                                     <td width="108" align="left">
                                         <%--<input id="Reset2" type="reset" value="" style="border: 0; cursor: pointer; background: url(images/user_js_b2.gif); width: 86px; height: 27px;" />--%>
@@ -447,10 +448,9 @@
                                   <tr>
                                     <td width="8" height="35"></td>
                                     <td width="95" align="left">
-                                      <asp:Button ID="Button2" OnClientClick="checkCaseType()" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_jiansuoAll_Click" />
+                                      <asp:Button ID="Button2" OnClientClick="return checkCaseType();" runat="server" Text="" Style="background: url(images/user_js_b1.gif); width: 85px; height: 29px; border: 0" OnClick="bt_jiansuoAll_Click" />
                                     </td>
                                     <td width="108" align="left">
-                                        <%--<input id="Reset3" type="reset" value="" style="border: 0; cursor: pointer; background: url(images/user_js_b2.gif); width: 86px; height: 27px;" />--%>
                                     </td>
                                     <td width="204" align="left"><img src="images/user_js_b4.gif" width="91" height="27" border="0" style="cursor: hand" onclick="onclickt2()"/></td>
                                   </tr>

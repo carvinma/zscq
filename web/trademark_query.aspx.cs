@@ -6,97 +6,114 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
+using zscq.BLL;
 public partial class trademark_query : System.Web.UI.Page
 {
     dal_Nationality DALN = new dal_Nationality();
     dal_Member DALM = new dal_Member();
-    public int MemberId = 0,userType=0;
+    public int MemberId = 0, userType = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
         {
             MemberId = int.Parse(Request.Cookies["hqhtshop"]["hqht_sb_uid"].ToString());
-              t_Member mm = DALM.Member_Select_Id(MemberId);
-              if (mm != null)
-              {
-                  if (mm.i_UserTypeId == 3)
-                  {
-                      userType = 3;
-                  }
-              }
+            t_Member mm = DALM.Member_Select_Id(MemberId);
+            if (mm != null)
+            {
+                if (mm.i_UserTypeId == 3)
+                {
+                    userType = 3;
+                }
+            }
         }
         else
         {
             Response.Redirect("Login.aspx?flag=sb&pageurl=" + HttpUtility.UrlEncode(Request.Url.ToString()));
         }
-        //Bind_Drp_PGuoJiaType();
+        if (!IsPostBack)
+            Bind_Drp_AdminStatus();
+    }
+    private void Bind_Drp_AdminStatus()
+    {
+        List<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkStatuslist.ToList();
+        tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
+        this.ddlAdminStatus.DataSource = tradeMarkStatuslist;
+        this.ddlAdminStatus.DataTextField = "StatusName";
+        this.ddlAdminStatus.DataValueField = "StatusValue";
+        this.ddlAdminStatus.DataBind();
     }
     protected void bt_kuaijiansuo_Click(object sender, EventArgs e)
     {
-        string sbnum = txt_caseNo0.Value;
-        string sbtype = txt_CaseNo0.Value;
-        string sbregname = txt_TrademarkType0.Value;
+        string qtmcaseno = txt_CaseNo0.Value;
+        string qtmtype = txt_TrademarkType0.Value;
+        string qtmapplyname = txt_applyName0.Value;
         string data = "";
-        if (sbnum != "")
+        if (qtmcaseno != "")
         {
-            data += "sb_num=" + sbnum + "&";
+            data += "qtmcaseno=" + qtmcaseno + "&";
         }
-        if (sbtype != "")
+        if (qtmtype != "")
         {
-            data += "sb_type=" + sbtype + "&";
+            data += "qtmtype=" + qtmtype + "&";
         }
-        if (sbregname != "")
+        if (qtmapplyname != "")
         {
-            data += "sb_regname=" + sbregname + "&";
+            data += "qtmapplyname=" + qtmapplyname + "&";
         }
-        Response.Redirect("user_sblb.aspx?" + data);
+        if (!string.IsNullOrEmpty(ddlStatus0.SelectedValue))
+        {
+            data += "qtmstatus=" + ddlStatus0.SelectedValue + "&";
+        }
+
+
+        if (!string.IsNullOrEmpty(hi_CaseType.Value))
+        {
+            if (hi_CaseType.Value == "0")
+            {
+                Response.Redirect("trademark_list.aspx?" + data);
+            }
+            else
+            {
+                Response.Redirect("trademarkrenewal_list.aspx?" + data);
+            }
+        }
     }
     protected void bt_jiansuoAll_Click(object sender, EventArgs e)
     {
-        string sbnum = txt_applyName.Value;
-        string sbtype = txt_CaseNo.Value;
-        string sbregname = txt_TrademarkType.Value;
-        //string guoji = Drp_GuoJi.SelectedValue;
+        string qtmcaseno = txt_CaseNo.Value;
+        string qtmtype = txt_TrademarkType.Value;
+        string qtmapplyname = txt_applyName.Value;
+        
+
         string shenqintime = txt_applydate.Value;
-        string isjiaofei = ddl_jiaofei.SelectedValue;
-        string stime = ddl_day.SelectedItem.ToString();
+       
         string anjuanhao = txt_memberNo.Value;
         string caddress = txt_address.Value;
         string linkman = txt_memberName.Value;
         string Ctel = txt_phone.Value;
         string data = "";
-        if (sbnum != "")
+        if (qtmcaseno != "")
         {
-            data += "sb_num=" + sbnum + "&";
+            data += "qtmcaseno=" + qtmcaseno + "&";
         }
-        if (sbtype != "")
+        if (qtmtype != "")
         {
-            data += "sb_type=" + sbtype + "&";
+            data += "qtmtype=" + qtmtype + "&";
         }
-        if (sbregname != "")
+        if (qtmapplyname != "")
         {
-            data += "sb_regname=" + sbregname + "&";
+            data += "qtmapplyname=" + qtmapplyname + "&";
         }
-        
+        if (!string.IsNullOrEmpty(ddlStatus.SelectedValue))
+        {
+            data += "qtmstatus=" + ddlStatus.SelectedValue + "&";
+        }
+
         if (shenqintime != "")
         {
             data += "sb_passtime=" + shenqintime + "&";
         }
-        if (isjiaofei != "-1")
-        {
-            data += "isjiaofei=" + isjiaofei + "&";
-        }
-        if (stime != "0")
-        {
-            if (ddl_day.SelectedValue == "chao")
-            {
-                data += "stime=chao_6&";
-            }
-            else
-            {
-                data += "stime=" + stime + "_" + ddl_day.SelectedValue + "&";
-            }
-        }
+         
         if (anjuanhao != "")
         {
             data += "c_anjuanhao=" + anjuanhao + "&";
