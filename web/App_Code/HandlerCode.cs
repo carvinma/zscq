@@ -270,6 +270,25 @@ public class HandlerCode
     #endregion
 
     #region
+
+    public void TrademarkStatusddl(HttpContext context)//商标最近状态
+    {
+        int type = Convert.ToInt32(context.Request["casetype"]);
+        List<t_NewTradeMarkStatus> list;
+        if(type==0)
+            list= BaseDataUtil.tradeMarkApplyStatuslist.ToList();
+        else
+            list = BaseDataUtil.tradeMarkRenewedStatuslist.ToList();
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append("<option value=\"-1\">请选择</option>");
+        foreach (var v in list)
+        {
+           sb.Append("<option value=\"" + v.StatusValue + "\">" + v.StatusName + "</option>");
+        }
+        context.Response.Write(sb);
+    }
+
     public void selshouquanguo(HttpContext context)//专利授权国
     {
         var iquery = DALN.Nationality_SelectAll();

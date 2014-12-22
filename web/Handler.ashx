@@ -120,6 +120,9 @@ public class Handler : HandlerCode, IHttpHandler, IRequiresSessionState
                     case "marklistsubmit":
                         SubmitTradeMarkListByIds(context);
                         break;
+                    case "trademarkstatusddl":
+                        TrademarkStatusddl(context);
+                        break;
                     default:
                         context.Response.Write("未知的类型");
                         break;

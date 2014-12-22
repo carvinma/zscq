@@ -21,16 +21,34 @@
    <script type="text/javascript">
        $(function () {
            InitProCityArea();
-       });
        $('input[type=radio][name="Quick0"]').change(function () {
            var applyType = $('input:radio[name="Quick0"]:checked').val();
            $("#hi_CaseType").val(applyType);
+           $.ajax({
+               type: "POST",
+               url: "Handler.ashx",
+               contentType: "application/x-www-form-urlencoded; charset=utf-8",
+               data: "flag=trademarkstatusddl&casetype="+applyType,
+               success: function (data) {
+                   $("#ddlStatus0").html(data);
+               }
+           });
        });
+
        $('input[type=radio][name="Quick"]').change(function () {
            var applyType = $('input:radio[name="Quick"]:checked').val();
            $("#hi_CaseType").val(applyType);
+           $.ajax({
+               type: "POST",
+               url: "Handler.ashx",
+               contentType: "application/x-www-form-urlencoded; charset=utf-8",
+               data: "flag=trademarkstatusddl&casetype="+applyType,
+               success: function (data) {
+                   $("#ddlStatus").html(data);
+               }
+           });
        });
-
+    });
        function checkCaseType() {
            if ($("#hi_CaseType").val() == null || $("#hi_CaseType").val() == "") {
                alert('请选择案件分类');
