@@ -49,7 +49,7 @@ public partial class trademarkrenewal_detail : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("trademark_list.aspx");
+            Response.Redirect("trademarkrenewal_list.aspx");
         }
 
     }
