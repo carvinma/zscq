@@ -365,16 +365,15 @@
                             <tr>
                               <td height="115" align="left" valign="top">
                                 <table width="630" border="0" cellspacing="0" cellpadding="0">
-                                
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle">
                                        <strong>申请号：</strong></td>
-                                    <td align="left" valign="middle">
+                                    <td width="429" valign="middle">
                                       <input type="text" runat="server" id="txt_regNo" class="font12000" 
                                             maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td height="32" align="right" valign="middle">
                                        <strong>商标说明：</strong></td>
                                     <td align="left" valign="middle">                                
                                         <textarea cols="20" rows="2" type="text" name="s18" id="txt_remark" 
@@ -382,7 +381,7 @@
                                             runat="server" ></textarea></td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td height="32" align="right" valign="middle">
                                        <strong>是否三维商标：</strong></td>
                                     <td align="left" valign="middle">
                                         <asp:DropDownList ID="ddl3D" runat="server">
@@ -393,7 +392,7 @@
                                       </td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td height="32" align="right" valign="middle">
                                         <strong>是否颜色组合商标：</strong></td>
                                     <td align="left" valign="middle">
                                         <asp:DropDownList ID="ddlColor" runat="server">
@@ -404,7 +403,7 @@
                                       </td>
                                   </tr>
                                   <tr>
-                                    <td width="260" align="right" valign="middle" class="style1">
+                                    <td align="right" valign="middle" class="style1">
                                        <strong>是否声音商标：</strong></td>
                                     <td align="left" valign="middle" class="style1">
                                         <asp:DropDownList ID="ddlSound" runat="server">
@@ -415,7 +414,7 @@
                                       </td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td height="32" align="right" valign="middle">
                                        <strong>商标申请日：</strong></td>
                                     <td align="left" valign="middle">
                                       <input type="text" name="s10" runat="server" id="txt_applydate" class="font12000" maxlength="30" 
@@ -424,7 +423,7 @@
                                             onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td height="32" align="right" valign="middle">
                                         <strong>初审公告日：</strong></td>
                                     <td align="left" valign="middle">
                                       <input type="text" name="s12" runat="server" id="txt_publicdate" 
@@ -434,44 +433,44 @@
                                             onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td height="32" align="right" valign="middle">
                                        <strong>注册公告日：</strong></td>
                                     <td align="left" valign="middle">
-                                        &nbsp; 从<input type="text" name="s13" runat="server" id="txt_regDateBegin" 
+                                       从<input type="text" name="s13" runat="server" id="txt_regDateBegin" 
                                             class="font12000" maxlength="30" 
                                       
-                                            style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            style="width:136px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
                                             onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />到<input type="text" 
                                             name="s15" runat="server" id="txt_regDateEnd" 
                                             class="font12000" maxlength="30" 
                                       
-                                            style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            style="width:136px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
                                             onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td height="32" align="right" valign="middle">
                                         <strong>续展期限日：</strong></td>
                                     <td align="left" valign="middle">
-                                        &nbsp; 从<input type="text" name="s17" runat="server" id="txt_renewalDateBegin" 
+                                       从<input type="text" name="s17" runat="server" id="txt_renewalDateBegin" 
                                             class="font12000" maxlength="30" 
                                       
-                                            style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            style="width:136px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
                                             onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" />到<input type="text" 
                                             name="s16" runat="server" id="txt_renewalDateEnd" 
                                             class="font12000" maxlength="30" 
                                       
-                                            style="width:130px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
+                                            style="width:136px; background-image: url(images/user_js_date.gif); background-repeat: no-repeat; background-position: right;" 
                                             onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" /></td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td height="32" align="right" valign="middle">
                                         <strong>所剩天数：</strong></td>
                                     <td align="left" valign="middle">
                                       <input type="text" runat="server" id="txt_restDays" class="font12000 intinput" 
                                             maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
                                   </tr>
                                   <tr>
-                                    <td width="260" height="32" align="right" valign="middle">
+                                    <td  height="32" align="right" valign="middle">
                                        <strong>商标状态：</strong></td>
                                     <td align="left" valign="middle">
                                         <asp:DropDownList ID="ddlAdminStatus" runat="server">
