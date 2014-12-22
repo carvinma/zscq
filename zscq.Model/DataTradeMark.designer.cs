@@ -186,14 +186,6 @@ namespace zscq.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<vw_NewTradeMark> vw_NewTradeMark
-		{
-			get
-			{
-				return this.GetTable<vw_NewTradeMark>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_NewTradeMarkMessage> t_NewTradeMarkMessage
 		{
 			get
@@ -207,6 +199,14 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<t_NewTradeMarkInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_NewTradeMark> vw_NewTradeMark
+		{
+			get
+			{
+				return this.GetTable<vw_NewTradeMark>();
 			}
 		}
 	}
@@ -1980,879 +1980,6 @@ namespace zscq.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_NewTradeMark")]
-	public partial class vw_NewTradeMark
-	{
-		
-		private int _i_Id;
-		
-		private int _i_MemberId;
-		
-		private System.Nullable<int> _i_Type;
-		
-		private int _ApplyType;
-		
-		private string _ApplyName;
-		
-		private System.Nullable<int> _CardNoType;
-		
-		private string _CardNo;
-		
-		private string _CardNoPDF;
-		
-		private string _Businesslicense;
-		
-		private System.Nullable<int> _ProvinceId;
-		
-		private System.Nullable<int> _CityId;
-		
-		private System.Nullable<int> _AreaId;
-		
-		private string _Address;
-		
-		private string _ContactPerson;
-		
-		private string _Phone;
-		
-		private string _Fax;
-		
-		private string _PostCode;
-		
-		private string _CaseNo;
-		
-		private System.Nullable<bool> _Is3D;
-		
-		private System.Nullable<bool> _IsColor;
-		
-		private System.Nullable<bool> _IsSound;
-		
-		private string _SoundFile;
-		
-		private string _RegisteredNo;
-		
-		private System.Nullable<System.DateTime> _ApplyDate;
-		
-		private System.Nullable<System.DateTime> _PublicPreliminaryDate;
-		
-		private System.Nullable<System.DateTime> _RegNoticeDate;
-		
-		private System.Nullable<System.DateTime> _RenewalDate;
-		
-		private System.Nullable<int> _TrademarkDescribeType;
-		
-		private string _TrademarkDescribe;
-		
-		private string _TrademarkRemark;
-		
-		private string _TrademarkType;
-		
-		private string _TrademarkGoods;
-		
-		private string _TrademarkPattern1;
-		
-		private string _TrademarkPattern2;
-		
-		private string _TrademarkRegBook;
-		
-		private string _ApplyBook;
-		
-		private string _AgentBook;
-		
-		private System.Nullable<System.DateTime> _InputTime;
-		
-		private System.Nullable<bool> _IsSubmit;
-		
-		private System.Nullable<bool> _IsShow;
-		
-		private System.Nullable<bool> _IsReceiveEmail;
-		
-		private string _Remark;
-		
-		private System.Nullable<int> _Status;
-		
-		private System.Nullable<int> _AdminStatus;
-		
-		private System.Nullable<int> _RestDays;
-		
-		private string _nvc_UserNum;
-		
-		private string _nvc_Name;
-		
-		private string _nvc_OrderNum;
-		
-		public vw_NewTradeMark()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", DbType="Int NOT NULL")]
-		public int i_Id
-		{
-			get
-			{
-				return this._i_Id;
-			}
-			set
-			{
-				if ((this._i_Id != value))
-				{
-					this._i_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
-		public int i_MemberId
-		{
-			get
-			{
-				return this._i_MemberId;
-			}
-			set
-			{
-				if ((this._i_MemberId != value))
-				{
-					this._i_MemberId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Type", DbType="Int")]
-		public System.Nullable<int> i_Type
-		{
-			get
-			{
-				return this._i_Type;
-			}
-			set
-			{
-				if ((this._i_Type != value))
-				{
-					this._i_Type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyType", DbType="Int NOT NULL")]
-		public int ApplyType
-		{
-			get
-			{
-				return this._ApplyType;
-			}
-			set
-			{
-				if ((this._ApplyType != value))
-				{
-					this._ApplyType = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string ApplyName
-		{
-			get
-			{
-				return this._ApplyName;
-			}
-			set
-			{
-				if ((this._ApplyName != value))
-				{
-					this._ApplyName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNoType", DbType="Int")]
-		public System.Nullable<int> CardNoType
-		{
-			get
-			{
-				return this._CardNoType;
-			}
-			set
-			{
-				if ((this._CardNoType != value))
-				{
-					this._CardNoType = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNo", DbType="NVarChar(50)")]
-		public string CardNo
-		{
-			get
-			{
-				return this._CardNo;
-			}
-			set
-			{
-				if ((this._CardNo != value))
-				{
-					this._CardNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNoPDF", DbType="NVarChar(100)")]
-		public string CardNoPDF
-		{
-			get
-			{
-				return this._CardNoPDF;
-			}
-			set
-			{
-				if ((this._CardNoPDF != value))
-				{
-					this._CardNoPDF = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Businesslicense", DbType="NVarChar(100)")]
-		public string Businesslicense
-		{
-			get
-			{
-				return this._Businesslicense;
-			}
-			set
-			{
-				if ((this._Businesslicense != value))
-				{
-					this._Businesslicense = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProvinceId", DbType="Int")]
-		public System.Nullable<int> ProvinceId
-		{
-			get
-			{
-				return this._ProvinceId;
-			}
-			set
-			{
-				if ((this._ProvinceId != value))
-				{
-					this._ProvinceId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityId", DbType="Int")]
-		public System.Nullable<int> CityId
-		{
-			get
-			{
-				return this._CityId;
-			}
-			set
-			{
-				if ((this._CityId != value))
-				{
-					this._CityId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AreaId", DbType="Int")]
-		public System.Nullable<int> AreaId
-		{
-			get
-			{
-				return this._AreaId;
-			}
-			set
-			{
-				if ((this._AreaId != value))
-				{
-					this._AreaId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
-		public string Address
-		{
-			get
-			{
-				return this._Address;
-			}
-			set
-			{
-				if ((this._Address != value))
-				{
-					this._Address = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactPerson", DbType="NVarChar(50)")]
-		public string ContactPerson
-		{
-			get
-			{
-				return this._ContactPerson;
-			}
-			set
-			{
-				if ((this._ContactPerson != value))
-				{
-					this._ContactPerson = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this._Phone = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fax", DbType="NVarChar(50)")]
-		public string Fax
-		{
-			get
-			{
-				return this._Fax;
-			}
-			set
-			{
-				if ((this._Fax != value))
-				{
-					this._Fax = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostCode", DbType="NVarChar(50)")]
-		public string PostCode
-		{
-			get
-			{
-				return this._PostCode;
-			}
-			set
-			{
-				if ((this._PostCode != value))
-				{
-					this._PostCode = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseNo", DbType="NVarChar(50)")]
-		public string CaseNo
-		{
-			get
-			{
-				return this._CaseNo;
-			}
-			set
-			{
-				if ((this._CaseNo != value))
-				{
-					this._CaseNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Is3D", DbType="Bit")]
-		public System.Nullable<bool> Is3D
-		{
-			get
-			{
-				return this._Is3D;
-			}
-			set
-			{
-				if ((this._Is3D != value))
-				{
-					this._Is3D = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsColor", DbType="Bit")]
-		public System.Nullable<bool> IsColor
-		{
-			get
-			{
-				return this._IsColor;
-			}
-			set
-			{
-				if ((this._IsColor != value))
-				{
-					this._IsColor = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSound", DbType="Bit")]
-		public System.Nullable<bool> IsSound
-		{
-			get
-			{
-				return this._IsSound;
-			}
-			set
-			{
-				if ((this._IsSound != value))
-				{
-					this._IsSound = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoundFile", DbType="NVarChar(200)")]
-		public string SoundFile
-		{
-			get
-			{
-				return this._SoundFile;
-			}
-			set
-			{
-				if ((this._SoundFile != value))
-				{
-					this._SoundFile = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredNo", DbType="NVarChar(50)")]
-		public string RegisteredNo
-		{
-			get
-			{
-				return this._RegisteredNo;
-			}
-			set
-			{
-				if ((this._RegisteredNo != value))
-				{
-					this._RegisteredNo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ApplyDate
-		{
-			get
-			{
-				return this._ApplyDate;
-			}
-			set
-			{
-				if ((this._ApplyDate != value))
-				{
-					this._ApplyDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicPreliminaryDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> PublicPreliminaryDate
-		{
-			get
-			{
-				return this._PublicPreliminaryDate;
-			}
-			set
-			{
-				if ((this._PublicPreliminaryDate != value))
-				{
-					this._PublicPreliminaryDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegNoticeDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> RegNoticeDate
-		{
-			get
-			{
-				return this._RegNoticeDate;
-			}
-			set
-			{
-				if ((this._RegNoticeDate != value))
-				{
-					this._RegNoticeDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> RenewalDate
-		{
-			get
-			{
-				return this._RenewalDate;
-			}
-			set
-			{
-				if ((this._RenewalDate != value))
-				{
-					this._RenewalDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribeType", DbType="Int")]
-		public System.Nullable<int> TrademarkDescribeType
-		{
-			get
-			{
-				return this._TrademarkDescribeType;
-			}
-			set
-			{
-				if ((this._TrademarkDescribeType != value))
-				{
-					this._TrademarkDescribeType = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribe", DbType="NVarChar(200)")]
-		public string TrademarkDescribe
-		{
-			get
-			{
-				return this._TrademarkDescribe;
-			}
-			set
-			{
-				if ((this._TrademarkDescribe != value))
-				{
-					this._TrademarkDescribe = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRemark", DbType="NVarChar(200)")]
-		public string TrademarkRemark
-		{
-			get
-			{
-				return this._TrademarkRemark;
-			}
-			set
-			{
-				if ((this._TrademarkRemark != value))
-				{
-					this._TrademarkRemark = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkType", DbType="NVarChar(200)")]
-		public string TrademarkType
-		{
-			get
-			{
-				return this._TrademarkType;
-			}
-			set
-			{
-				if ((this._TrademarkType != value))
-				{
-					this._TrademarkType = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkGoods", DbType="NVarChar(800)")]
-		public string TrademarkGoods
-		{
-			get
-			{
-				return this._TrademarkGoods;
-			}
-			set
-			{
-				if ((this._TrademarkGoods != value))
-				{
-					this._TrademarkGoods = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkPattern1", DbType="NVarChar(100)")]
-		public string TrademarkPattern1
-		{
-			get
-			{
-				return this._TrademarkPattern1;
-			}
-			set
-			{
-				if ((this._TrademarkPattern1 != value))
-				{
-					this._TrademarkPattern1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkPattern2", DbType="NVarChar(100)")]
-		public string TrademarkPattern2
-		{
-			get
-			{
-				return this._TrademarkPattern2;
-			}
-			set
-			{
-				if ((this._TrademarkPattern2 != value))
-				{
-					this._TrademarkPattern2 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRegBook", DbType="NVarChar(100)")]
-		public string TrademarkRegBook
-		{
-			get
-			{
-				return this._TrademarkRegBook;
-			}
-			set
-			{
-				if ((this._TrademarkRegBook != value))
-				{
-					this._TrademarkRegBook = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyBook", DbType="NVarChar(100)")]
-		public string ApplyBook
-		{
-			get
-			{
-				return this._ApplyBook;
-			}
-			set
-			{
-				if ((this._ApplyBook != value))
-				{
-					this._ApplyBook = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AgentBook", DbType="NVarChar(100)")]
-		public string AgentBook
-		{
-			get
-			{
-				return this._AgentBook;
-			}
-			set
-			{
-				if ((this._AgentBook != value))
-				{
-					this._AgentBook = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InputTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> InputTime
-		{
-			get
-			{
-				return this._InputTime;
-			}
-			set
-			{
-				if ((this._InputTime != value))
-				{
-					this._InputTime = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSubmit", DbType="Bit")]
-		public System.Nullable<bool> IsSubmit
-		{
-			get
-			{
-				return this._IsSubmit;
-			}
-			set
-			{
-				if ((this._IsSubmit != value))
-				{
-					this._IsSubmit = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsShow", DbType="Bit")]
-		public System.Nullable<bool> IsShow
-		{
-			get
-			{
-				return this._IsShow;
-			}
-			set
-			{
-				if ((this._IsShow != value))
-				{
-					this._IsShow = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsReceiveEmail", DbType="Bit")]
-		public System.Nullable<bool> IsReceiveEmail
-		{
-			get
-			{
-				return this._IsReceiveEmail;
-			}
-			set
-			{
-				if ((this._IsReceiveEmail != value))
-				{
-					this._IsReceiveEmail = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="NVarChar(500)")]
-		public string Remark
-		{
-			get
-			{
-				return this._Remark;
-			}
-			set
-			{
-				if ((this._Remark != value))
-				{
-					this._Remark = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
-		public System.Nullable<int> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this._Status = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminStatus", DbType="Int")]
-		public System.Nullable<int> AdminStatus
-		{
-			get
-			{
-				return this._AdminStatus;
-			}
-			set
-			{
-				if ((this._AdminStatus != value))
-				{
-					this._AdminStatus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RestDays", DbType="Int")]
-		public System.Nullable<int> RestDays
-		{
-			get
-			{
-				return this._RestDays;
-			}
-			set
-			{
-				if ((this._RestDays != value))
-				{
-					this._RestDays = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_UserNum", DbType="NVarChar(50)")]
-		public string nvc_UserNum
-		{
-			get
-			{
-				return this._nvc_UserNum;
-			}
-			set
-			{
-				if ((this._nvc_UserNum != value))
-				{
-					this._nvc_UserNum = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Name", DbType="NVarChar(150)")]
-		public string nvc_Name
-		{
-			get
-			{
-				return this._nvc_Name;
-			}
-			set
-			{
-				if ((this._nvc_Name != value))
-				{
-					this._nvc_Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_OrderNum", DbType="NVarChar(MAX)")]
-		public string nvc_OrderNum
-		{
-			get
-			{
-				return this._nvc_OrderNum;
-			}
-			set
-			{
-				if ((this._nvc_OrderNum != value))
-				{
-					this._nvc_OrderNum = value;
-				}
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTradeMarkMessage")]
 	public partial class t_NewTradeMarkMessage : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -4149,6 +3276,897 @@ namespace zscq.Model
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_NewTradeMark")]
+	public partial class vw_NewTradeMark
+	{
+		
+		private int _i_Id;
+		
+		private int _i_MemberId;
+		
+		private System.Nullable<int> _i_Type;
+		
+		private int _ApplyType;
+		
+		private string _ApplyName;
+		
+		private System.Nullable<int> _CardNoType;
+		
+		private string _CardNo;
+		
+		private string _CardNoPDF;
+		
+		private string _Businesslicense;
+		
+		private System.Nullable<int> _ProvinceId;
+		
+		private System.Nullable<int> _CityId;
+		
+		private System.Nullable<int> _AreaId;
+		
+		private string _Address;
+		
+		private string _ContactPerson;
+		
+		private string _Phone;
+		
+		private string _Fax;
+		
+		private string _PostCode;
+		
+		private string _CaseNo;
+		
+		private System.Nullable<bool> _Is3D;
+		
+		private System.Nullable<bool> _IsColor;
+		
+		private System.Nullable<bool> _IsSound;
+		
+		private string _SoundFile;
+		
+		private string _RegisteredNo;
+		
+		private System.Nullable<System.DateTime> _ApplyDate;
+		
+		private System.Nullable<System.DateTime> _PublicPreliminaryDate;
+		
+		private System.Nullable<System.DateTime> _RegNoticeDate;
+		
+		private System.Nullable<System.DateTime> _RenewalDate;
+		
+		private System.Nullable<int> _TrademarkDescribeType;
+		
+		private string _TrademarkDescribe;
+		
+		private string _TrademarkRemark;
+		
+		private string _TrademarkType;
+		
+		private string _TrademarkGoods;
+		
+		private string _TrademarkPattern1;
+		
+		private string _TrademarkPattern2;
+		
+		private string _TrademarkRegBook;
+		
+		private string _ApplyBook;
+		
+		private string _AgentBook;
+		
+		private string _RenewalAgentBook;
+		
+		private string _RenewalApplyBook;
+		
+		private System.Nullable<System.DateTime> _InputTime;
+		
+		private System.Nullable<bool> _IsShow;
+		
+		private System.Nullable<bool> _IsReceiveEmail;
+		
+		private string _Remark;
+		
+		private System.Nullable<int> _Status;
+		
+		private System.Nullable<int> _AdminStatus;
+		
+		private System.Nullable<int> _RestDays;
+		
+		private string _nvc_UserNum;
+		
+		private string _nvc_Name;
+		
+		private string _nvc_OrderNum;
+		
+		public vw_NewTradeMark()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", DbType="Int NOT NULL")]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this._i_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
+		public int i_MemberId
+		{
+			get
+			{
+				return this._i_MemberId;
+			}
+			set
+			{
+				if ((this._i_MemberId != value))
+				{
+					this._i_MemberId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Type", DbType="Int")]
+		public System.Nullable<int> i_Type
+		{
+			get
+			{
+				return this._i_Type;
+			}
+			set
+			{
+				if ((this._i_Type != value))
+				{
+					this._i_Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyType", DbType="Int NOT NULL")]
+		public int ApplyType
+		{
+			get
+			{
+				return this._ApplyType;
+			}
+			set
+			{
+				if ((this._ApplyType != value))
+				{
+					this._ApplyType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ApplyName
+		{
+			get
+			{
+				return this._ApplyName;
+			}
+			set
+			{
+				if ((this._ApplyName != value))
+				{
+					this._ApplyName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNoType", DbType="Int")]
+		public System.Nullable<int> CardNoType
+		{
+			get
+			{
+				return this._CardNoType;
+			}
+			set
+			{
+				if ((this._CardNoType != value))
+				{
+					this._CardNoType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNo", DbType="NVarChar(50)")]
+		public string CardNo
+		{
+			get
+			{
+				return this._CardNo;
+			}
+			set
+			{
+				if ((this._CardNo != value))
+				{
+					this._CardNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CardNoPDF", DbType="NVarChar(100)")]
+		public string CardNoPDF
+		{
+			get
+			{
+				return this._CardNoPDF;
+			}
+			set
+			{
+				if ((this._CardNoPDF != value))
+				{
+					this._CardNoPDF = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Businesslicense", DbType="NVarChar(100)")]
+		public string Businesslicense
+		{
+			get
+			{
+				return this._Businesslicense;
+			}
+			set
+			{
+				if ((this._Businesslicense != value))
+				{
+					this._Businesslicense = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProvinceId", DbType="Int")]
+		public System.Nullable<int> ProvinceId
+		{
+			get
+			{
+				return this._ProvinceId;
+			}
+			set
+			{
+				if ((this._ProvinceId != value))
+				{
+					this._ProvinceId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityId", DbType="Int")]
+		public System.Nullable<int> CityId
+		{
+			get
+			{
+				return this._CityId;
+			}
+			set
+			{
+				if ((this._CityId != value))
+				{
+					this._CityId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AreaId", DbType="Int")]
+		public System.Nullable<int> AreaId
+		{
+			get
+			{
+				return this._AreaId;
+			}
+			set
+			{
+				if ((this._AreaId != value))
+				{
+					this._AreaId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this._Address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactPerson", DbType="NVarChar(50)")]
+		public string ContactPerson
+		{
+			get
+			{
+				return this._ContactPerson;
+			}
+			set
+			{
+				if ((this._ContactPerson != value))
+				{
+					this._ContactPerson = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(50)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this._Phone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fax", DbType="NVarChar(50)")]
+		public string Fax
+		{
+			get
+			{
+				return this._Fax;
+			}
+			set
+			{
+				if ((this._Fax != value))
+				{
+					this._Fax = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PostCode", DbType="NVarChar(50)")]
+		public string PostCode
+		{
+			get
+			{
+				return this._PostCode;
+			}
+			set
+			{
+				if ((this._PostCode != value))
+				{
+					this._PostCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseNo", DbType="NVarChar(50)")]
+		public string CaseNo
+		{
+			get
+			{
+				return this._CaseNo;
+			}
+			set
+			{
+				if ((this._CaseNo != value))
+				{
+					this._CaseNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Is3D", DbType="Bit")]
+		public System.Nullable<bool> Is3D
+		{
+			get
+			{
+				return this._Is3D;
+			}
+			set
+			{
+				if ((this._Is3D != value))
+				{
+					this._Is3D = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsColor", DbType="Bit")]
+		public System.Nullable<bool> IsColor
+		{
+			get
+			{
+				return this._IsColor;
+			}
+			set
+			{
+				if ((this._IsColor != value))
+				{
+					this._IsColor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSound", DbType="Bit")]
+		public System.Nullable<bool> IsSound
+		{
+			get
+			{
+				return this._IsSound;
+			}
+			set
+			{
+				if ((this._IsSound != value))
+				{
+					this._IsSound = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoundFile", DbType="NVarChar(200)")]
+		public string SoundFile
+		{
+			get
+			{
+				return this._SoundFile;
+			}
+			set
+			{
+				if ((this._SoundFile != value))
+				{
+					this._SoundFile = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegisteredNo", DbType="NVarChar(50)")]
+		public string RegisteredNo
+		{
+			get
+			{
+				return this._RegisteredNo;
+			}
+			set
+			{
+				if ((this._RegisteredNo != value))
+				{
+					this._RegisteredNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ApplyDate
+		{
+			get
+			{
+				return this._ApplyDate;
+			}
+			set
+			{
+				if ((this._ApplyDate != value))
+				{
+					this._ApplyDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicPreliminaryDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PublicPreliminaryDate
+		{
+			get
+			{
+				return this._PublicPreliminaryDate;
+			}
+			set
+			{
+				if ((this._PublicPreliminaryDate != value))
+				{
+					this._PublicPreliminaryDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegNoticeDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RegNoticeDate
+		{
+			get
+			{
+				return this._RegNoticeDate;
+			}
+			set
+			{
+				if ((this._RegNoticeDate != value))
+				{
+					this._RegNoticeDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> RenewalDate
+		{
+			get
+			{
+				return this._RenewalDate;
+			}
+			set
+			{
+				if ((this._RenewalDate != value))
+				{
+					this._RenewalDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribeType", DbType="Int")]
+		public System.Nullable<int> TrademarkDescribeType
+		{
+			get
+			{
+				return this._TrademarkDescribeType;
+			}
+			set
+			{
+				if ((this._TrademarkDescribeType != value))
+				{
+					this._TrademarkDescribeType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkDescribe", DbType="NVarChar(200)")]
+		public string TrademarkDescribe
+		{
+			get
+			{
+				return this._TrademarkDescribe;
+			}
+			set
+			{
+				if ((this._TrademarkDescribe != value))
+				{
+					this._TrademarkDescribe = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRemark", DbType="NVarChar(200)")]
+		public string TrademarkRemark
+		{
+			get
+			{
+				return this._TrademarkRemark;
+			}
+			set
+			{
+				if ((this._TrademarkRemark != value))
+				{
+					this._TrademarkRemark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkType", DbType="NVarChar(200)")]
+		public string TrademarkType
+		{
+			get
+			{
+				return this._TrademarkType;
+			}
+			set
+			{
+				if ((this._TrademarkType != value))
+				{
+					this._TrademarkType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkGoods", DbType="NVarChar(800)")]
+		public string TrademarkGoods
+		{
+			get
+			{
+				return this._TrademarkGoods;
+			}
+			set
+			{
+				if ((this._TrademarkGoods != value))
+				{
+					this._TrademarkGoods = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkPattern1", DbType="NVarChar(100)")]
+		public string TrademarkPattern1
+		{
+			get
+			{
+				return this._TrademarkPattern1;
+			}
+			set
+			{
+				if ((this._TrademarkPattern1 != value))
+				{
+					this._TrademarkPattern1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkPattern2", DbType="NVarChar(100)")]
+		public string TrademarkPattern2
+		{
+			get
+			{
+				return this._TrademarkPattern2;
+			}
+			set
+			{
+				if ((this._TrademarkPattern2 != value))
+				{
+					this._TrademarkPattern2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkRegBook", DbType="NVarChar(100)")]
+		public string TrademarkRegBook
+		{
+			get
+			{
+				return this._TrademarkRegBook;
+			}
+			set
+			{
+				if ((this._TrademarkRegBook != value))
+				{
+					this._TrademarkRegBook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyBook", DbType="NVarChar(100)")]
+		public string ApplyBook
+		{
+			get
+			{
+				return this._ApplyBook;
+			}
+			set
+			{
+				if ((this._ApplyBook != value))
+				{
+					this._ApplyBook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AgentBook", DbType="NVarChar(100)")]
+		public string AgentBook
+		{
+			get
+			{
+				return this._AgentBook;
+			}
+			set
+			{
+				if ((this._AgentBook != value))
+				{
+					this._AgentBook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalAgentBook", DbType="NVarChar(100)")]
+		public string RenewalAgentBook
+		{
+			get
+			{
+				return this._RenewalAgentBook;
+			}
+			set
+			{
+				if ((this._RenewalAgentBook != value))
+				{
+					this._RenewalAgentBook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RenewalApplyBook", DbType="NVarChar(100)")]
+		public string RenewalApplyBook
+		{
+			get
+			{
+				return this._RenewalApplyBook;
+			}
+			set
+			{
+				if ((this._RenewalApplyBook != value))
+				{
+					this._RenewalApplyBook = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InputTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> InputTime
+		{
+			get
+			{
+				return this._InputTime;
+			}
+			set
+			{
+				if ((this._InputTime != value))
+				{
+					this._InputTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsShow", DbType="Bit")]
+		public System.Nullable<bool> IsShow
+		{
+			get
+			{
+				return this._IsShow;
+			}
+			set
+			{
+				if ((this._IsShow != value))
+				{
+					this._IsShow = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsReceiveEmail", DbType="Bit")]
+		public System.Nullable<bool> IsReceiveEmail
+		{
+			get
+			{
+				return this._IsReceiveEmail;
+			}
+			set
+			{
+				if ((this._IsReceiveEmail != value))
+				{
+					this._IsReceiveEmail = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Remark", DbType="NVarChar(500)")]
+		public string Remark
+		{
+			get
+			{
+				return this._Remark;
+			}
+			set
+			{
+				if ((this._Remark != value))
+				{
+					this._Remark = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int")]
+		public System.Nullable<int> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdminStatus", DbType="Int")]
+		public System.Nullable<int> AdminStatus
+		{
+			get
+			{
+				return this._AdminStatus;
+			}
+			set
+			{
+				if ((this._AdminStatus != value))
+				{
+					this._AdminStatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RestDays", DbType="Int")]
+		public System.Nullable<int> RestDays
+		{
+			get
+			{
+				return this._RestDays;
+			}
+			set
+			{
+				if ((this._RestDays != value))
+				{
+					this._RestDays = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_UserNum", DbType="NVarChar(50)")]
+		public string nvc_UserNum
+		{
+			get
+			{
+				return this._nvc_UserNum;
+			}
+			set
+			{
+				if ((this._nvc_UserNum != value))
+				{
+					this._nvc_UserNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Name", DbType="NVarChar(150)")]
+		public string nvc_Name
+		{
+			get
+			{
+				return this._nvc_Name;
+			}
+			set
+			{
+				if ((this._nvc_Name != value))
+				{
+					this._nvc_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_OrderNum", DbType="NVarChar(MAX)")]
+		public string nvc_OrderNum
+		{
+			get
+			{
+				return this._nvc_OrderNum;
+			}
+			set
+			{
+				if ((this._nvc_OrderNum != value))
+				{
+					this._nvc_OrderNum = value;
+				}
 			}
 		}
 	}

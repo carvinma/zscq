@@ -12,17 +12,16 @@ public partial class trademark_list : System.Web.UI.Page
     dal_NewTrademark mark = new dal_NewTrademark();
     dal_Trademark DALT = new dal_Trademark();
     dal_Member DALM = new dal_Member();
-    dal_TrademarkSetup DALTS = new dal_TrademarkSetup();
     dal_Address address = new dal_Address();
-    public string Sbtype = "", Sbjiaofeitype = "", SbregName = "", Sbnum = "", Sbjiaofei = "", Sbtime = "", Stime = "";
     public int UserId = 0, usertype = 0;
     public string returnurl = "";
-    public int isjiaofei = -1, jiaofeistate = 0;
-    public string sb_type = "", days = "", uname = "", uaddress = "", sb_guoji = "0", sb_num = "", sb_regname = "", sb_passtime = "", utel = "", c_anjuanhao = "";
     public int? applyType;
     public string ByCaseNo, ByName, Bytype, ByStatus;
     public string qCaseNo, qName;
     public int? qStatus;
+
+    QueryModel querymodel = new QueryModel();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
@@ -98,6 +97,110 @@ public partial class trademark_list : System.Web.UI.Page
             Hi_orderby4.Value = Request.QueryString["sbstatus"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbstatus"].ToString();//BY CHY
         }
+
+
+      
+        if (Request.QueryString["qtmcaseno"] != null && Request.QueryString["qtmcaseno"] != "")
+        {
+            querymodel.qtmcaseno = Request.QueryString["qtmcaseno"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmtype"]))
+        {
+            querymodel.qtmtype = Request.QueryString["qtmtype"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmapplyname"]))
+        {
+            querymodel.qtmapplyname = Request.QueryString["qtmapplyname"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmmemberno"]))
+        {
+            querymodel.qtmmemberno = Request.QueryString["qtmmemberno"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmmembername"]))
+        {
+            querymodel.qtmmembername = Request.QueryString["qtmmembername"].ToString(); //检索页面传递过来的値
+        }
+
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmprovinceid"]))
+        {
+            querymodel.qtmprovinceid = Request.QueryString["qtmprovinceid"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmcityid"]))
+        {
+            querymodel.qtmcityid = Request.QueryString["qtmcityid"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmareaid"]))
+        {
+            querymodel.qtmareaid = Request.QueryString["qtmareaid"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmaddress"]))
+        {
+            querymodel.qtmaddress = Request.QueryString["qtmaddress"].ToString(); //检索页面传递过来的値
+        }
+
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmcontactPerson"]))
+        {
+            querymodel.qtmcontactPerson = Request.QueryString["qtmcontactPerson"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmphone"]))
+        {
+            querymodel.qtmphone = Request.QueryString["qtmphone"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmapplyno"]))
+        {
+            querymodel.qtmapplyno = Request.QueryString["qtmapplyno"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmtradmemarkRemark"]))
+        {
+            querymodel.qtmtradmemarkRemark = Request.QueryString["qtmtradmemarkRemark"].ToString(); //检索页面传递过来的値
+        }
+
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmis3D"]))
+        {
+            querymodel.qtmis3D = Request.QueryString["qtmis3D"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmisColor"]))
+        {
+            querymodel.qtmisColor = Request.QueryString["qtmisColor"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmisSound"]))
+        {
+            querymodel.qtmisSound = Request.QueryString["qtmisSound"].ToString(); //检索页面传递过来的値
+        }
+
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmapplydate"]))
+        {
+            querymodel.qtmapplydate = Request.QueryString["qtmapplydate"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmpublicDate"]))
+        {
+            querymodel.qtmpublicDate = Request.QueryString["qtmpublicDate"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmRegNoticeBeginDate"]))
+        {
+            querymodel.qtmRegNoticeBeginDate = Request.QueryString["qtmRegNoticeBeginDate"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmRegNoticeEndDate"]))
+        {
+            querymodel.qtmRegNoticeEndDate = Request.QueryString["qtmRegNoticeEndDate"].ToString(); //检索页面传递过来的値
+        }
+
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmRenewalBeginDate"]))
+        {
+            querymodel.qtmRenewalBeginDate = Request.QueryString["qtmRenewalBeginDate"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmRenewalEndDate"]))
+        {
+            querymodel.qtmRenewalEndDate = Request.QueryString["qtmRenewalEndDate"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmrestDays"]))
+        {
+            querymodel.qtmrestDays = Request.QueryString["qtmrestDays"].ToString(); //检索页面传递过来的値
+        }
+        if (!string.IsNullOrEmpty(Request.QueryString["qtmadminStatus"]))
+        {
+            querymodel.qtmadminStatus = Request.QueryString["qtmadminStatus"].ToString(); //检索页面传递过来的値
+        }
     }
     public string GetApplyTypeName(object applyType)
     {
@@ -164,7 +267,7 @@ public partial class trademark_list : System.Web.UI.Page
             if (!string.IsNullOrEmpty(this.ddlTradeMarkStatus.SelectedValue))
                 this.qStatus = int.Parse(this.ddlTradeMarkStatus.SelectedValue);
 
-            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId,0, applyType, ByCaseNo, ByName, Bytype, ByStatus, qCaseNo, qName, qStatus, ref Ccount);
+            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, 0, applyType, ByCaseNo, ByName, Bytype, ByStatus, qCaseNo, qName, qStatus, ref Ccount, querymodel);
             this.Rp_sb_list.DataBind();
             AspNetPager1.RecordCount = Ccount;
             AspNetPager1.PageSize = PageSize;
@@ -216,39 +319,6 @@ public partial class trademark_list : System.Web.UI.Page
             }
         }
         return aa;
-    }
-
-    public string SBZTFile(object tid)
-    {
-        string namestr = "";
-        if (tid != null)
-        {
-            t_Trademark model = DALT.Trademark_Select_Id(int.Parse(tid.ToString()));
-            if (model != null)
-            {
-                if (model.nvc_ZhuTiFile == null)
-                {
-                    var m = DALM.Member_Select_Id(UserId);
-                    if (m != null && !string.IsNullOrWhiteSpace(m.nvc_ZhuTiFile))
-                    {
-                        namestr = "已上传";
-                    }
-                    else
-                    {
-                        namestr = "未上传";
-                    }
-                }
-                else
-                {
-                    namestr = "已上传";
-                }
-            }
-        }
-        else
-        {
-            namestr = "未上传";
-        }
-        return namestr;
     }
 
     public override void VerifyRenderingInServerForm(Control control)

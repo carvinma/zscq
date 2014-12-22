@@ -140,7 +140,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                HttpContext.Current.Server.MapPath(filePath + fileName));
         model.TrademarkPattern1 = filePath + fileName;
         model.Remark = txt_remark.Value.Trim();
-       
+        model.IsShow = true;
         return model;
     }
     private void addRegNoticeData(int trademarkid)

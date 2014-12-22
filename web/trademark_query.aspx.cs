@@ -110,17 +110,7 @@ public partial class trademark_query : System.Web.UI.Page
         string qtmrestDays = txt_restDays.Value.Trim();
         string qtmadminStatus = ddlAdminStatus.SelectedValue;
 
-
         string data = "";
-        if (!string.IsNullOrEmpty(qtmrestDays))
-        {
-            data += "qtmrestDays=" + qtmrestDays + "&";
-        }
-        if (!string.IsNullOrEmpty(qtmadminStatus))
-        {
-            data += "qtmadminStatus=" + qtmadminStatus + "&";
-        }
-
 
         if (!string.IsNullOrEmpty(qtmcaseno))
         {
@@ -215,6 +205,15 @@ public partial class trademark_query : System.Web.UI.Page
         {
             data += "qtmRenewalEndDate=" + qtmRenewalEndDate + "&";
         }
+        if (!string.IsNullOrEmpty(qtmrestDays))
+        {
+            data += "qtmrestDays=" + qtmrestDays + "&";
+        }
+        if (!string.IsNullOrEmpty(qtmadminStatus))
+        {
+            data += "qtmadminStatus=" + qtmadminStatus + "&";
+        }
+
 
         if (!string.IsNullOrEmpty(hi_CaseType.Value))
         {
