@@ -501,8 +501,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
 
     protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Cookies["hqht_Trademarktidstr"].Value = null;
-        Response.Redirect("user_sblb.aspx");
+       // Response.Cookies["hqht_Trademarktidstr"].Value = null;
+        Response.Redirect("trademark_list.aspx");
     }
     string Bind_Rpt_BankList(int guojitype, int type)
     {

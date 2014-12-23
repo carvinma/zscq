@@ -931,33 +931,7 @@
         showbank();
     }
 
-    function calcTotalMoney() {
-        var guifei = $("#guifei").html();
-        var v; var sxf;
-        $("input[name='payway']:checked").each(function () {
-            v = $(this).val();
-        });
-        if (v.indexOf("网银直接支付") >= 0) {
-            sxf = (parseFloat(guifei) * 0.012);
-            $("#shouxufei").html(sxf.toFixed(2));
-        }
-        else if (v.indexOf("财付通支付") >= 0) {
-            sxf = (parseFloat(guifei) * 0.01);
-            $("#shouxufei").html(sxf.toFixed(2));
-        }
-        else if (v.indexOf("支付宝支付") >= 0) {
-            sxf = (parseFloat(guifei) * 0.012);
-            $("#shouxufei").html(sxf.toFixed(2));
-        }
-        else {
-            sxf = 0;
-            $("#shouxufei").html(0);
-        }
-
-        var all = parseFloat(guifei) + sxf;
-        $("#allmoney").html(all.toFixed(2));
-        $("#hi_allmy").val(all.toFixed(2));
-    }
+    
     function obj(id) {
         return document.getElementById(id);
     }
