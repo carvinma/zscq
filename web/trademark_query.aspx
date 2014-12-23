@@ -289,14 +289,14 @@
                             <tr>
                               <td height="115" align="left" valign="top">
                                 <table width="630" border="0" cellspacing="0" cellpadding="0">
-                                  <tr>
+                                  <tr style="display:none">
                                     <td width="260" height="32" align="right" valign="middle"><strong>会员编号：</strong></td>
                                     <td width="429" valign="middle">
                                       <input type="text" runat="server" id="txt_memberNo" class="font12000" 
                                             maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" />
                                     </td>
                                   </tr>
-                                  <tr>
+                                  <tr style="display:none">
                                     <td width="260" height="32" align="right" valign="middle"><strong>会员名称：</strong></td>
                                     <td width="429" valign="middle">
                                       <input type="text" runat="server" id="txt_memberName" class="font12000" 
