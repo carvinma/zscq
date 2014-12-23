@@ -929,8 +929,7 @@
                                                                                 Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkCheck_data()"/>
                                                                         </td>
                                                                         <td width="100">
-                                                                            <asp:Button ID="btnCancle" CssClass="BtnShow" runat="server" Text="放弃提交" 
-                                                                                onclick="btnCancle_Click" />
+                                                                              <a  href="javascript:void(0)" id="linkDel" class="BtnShowhref"  onclick="cancleSumbit('0')">放弃提交</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>

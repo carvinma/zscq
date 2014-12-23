@@ -44,6 +44,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     public StringBuilder Str_AllMoney = new StringBuilder();
     public int dazhe = 0, dazhe1 = 0;
     public decimal TMDaiLi = 0, TrademarkMoney = 0, TMZhiNaJin = 0;
+    public string ids;
     protected void Page_Load(object sender, EventArgs e)
     {
         href = Request.Url.ToString();
@@ -139,21 +140,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 OrderModer.nvc_FaPiaoTaiTou = txt_fptt.Value;
                 OrderModer.i_IsYouJi = 1;
                 OrderModer.i_YouJiType = 1;//是否邮寄
-                if (hi_guoji.Value != "1")//国外
-                {
-                    string fapiao = ((float.Parse(hi_GanfeeZhinajin.Value)) * 0.033).ToString();
-                    OrderModer.dm_FapiaoMoney = decimal.Parse(fapiao);
-                    OrderModer.dm_YoujiFee = decimal.Parse(guowaiyouji.ToString());
-                    string nowmoney = (float.Parse(strtotalmoney) + float.Parse(fapiao) + float.Parse(guowaiyouji)).ToString();
-                    if (youhuifee > 0)
-                    {
-                        nowmoney = (float.Parse(strtotalmoney) + float.Parse(fapiao) + float.Parse(guowaiyouji) - (float.Parse(youhuifee.ToString()))).ToString();
-                    }
-                    OrderModer.dm_TotalMoney = decimal.Parse(nowmoney);//国内要缴纳的总钱
-                    OrderModer.dm_TotalMoneyGY = decimal.Parse((decimal.Parse(nowmoney) * meihuilv).ToString());
-                }
-                else
-                {
+               
                     OrderModer.i_YouJiType = 2;
                     string youjinow = "0";
                     string youji = Request.Form["way"];
@@ -172,7 +159,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                         nowmoney = (float.Parse(strtotalmoney) + float.Parse(fapiao) + float.Parse(youjinow) - (float.Parse(youhuifee.ToString()))).ToString();
                     }
                     OrderModer.dm_TotalMoney = decimal.Parse(nowmoney);//国内要缴纳的总钱                   
-                }
+               
                 vw_ReceiveAddress dizhi = DALRA.ReceiveAddress_vw_Select_Id(zscqaddress.AddressId);
                 if (dizhi != null)
                 {
@@ -202,18 +189,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             int o = DALTO.TrademarkOrder_Add(OrderModer);
             #region 银行
             string bankId = "";
-            if (Convert.ToInt32(hi_guoji.Value) == 1)
-            {
-                bankId = Bind_Rpt_BankList(0, 1);
-            }
-            else if (Convert.ToInt32(hi_guoji.Value) == 11)
-            {
-                bankId = Bind_Rpt_BankList(2, 1);
-            }
-            else
-            {
-                bankId = Bind_Rpt_BankList(1, 1);
-            }
+            bankId = Bind_Rpt_BankList(0, 1);
 
             #region
             if (OrderModer.nvc_PayType == "线下汇款")
@@ -368,8 +344,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     {
         if (!string.IsNullOrEmpty(Request.QueryString["ids"]))
         {
-            string patentid = Request.QueryString["ids"];
-            string[] arr_pid = patentid.Split(',');
+            ids = Request.QueryString["ids"];
+            string[] arr_pid = ids.Split(',');
 
             #region 用户资料
 
@@ -437,15 +413,16 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             Bind_Rpt_BankList(0, 0);//国内
 
             var iquery = mark.Trademark_web_Excel(arr_pid);
+            sbnum = iquery.Count();
             Rpt_order.DataSource = iquery;
             Rpt_order.DataBind();
 
-            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\">" + iquery.Sum(p => p.TrademarkMoney).Value.ToString("0.00") + "*" + sbnum + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\" id='guifei'>" + iquery.Sum(p => p.TrademarkMoney).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费：</td><td width=\"110\">" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\">" + (iquery.Sum(p => p.TrademarkMoney).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\">" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr class='FP' style='display:none;' align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\" id='tax'>" + (iquery.Sum(p => p.TrademarkMoney).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\"  id='shouxufei'>" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             string totalmoney = string.Empty;
-            totalmoney = (iquery.Sum(p => p.TrademarkMoney).Value + iquery.Sum(p => p.TrademarkMoney).Value * 0.033m + 0).ToString("0.00");
+            totalmoney = (iquery.Sum(p => p.TrademarkMoney).Value).ToString("0.00");
             hi_allmy.Value = totalmoney;
             strtotalmoney = totalmoney;
             Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总金额：</td><td style=\"color:red;\" width=\"30\">CNY</td><td style='color:red;width:100px;' id='allmoney'  align=\"left\">" + totalmoney + "</td></tr>");
@@ -489,12 +466,12 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             if (q.nvc_Name == "支付宝支付")
             {
                 img = "&nbsp;&nbsp;<img alt=\"\" border=\"0\" src=\"images/orderimg1.jpg\">";
-                info = "推荐淘宝用户使用!";
+                info = "推荐淘宝用户使用!   <span style='color:Red'>（加收1.2%手续费）</span>";
             }
             else if (q.nvc_Name == "财付通支付")
             {
                 img = "&nbsp;&nbsp;<img alt=\"\" border=\"0\" src=\"images/orderimg2.jpg\">";
-                info = "推荐腾讯拍拍用户使用";
+                info = "推荐腾讯拍拍用户使用!   <span style='color:Red'>（加收1%手续费）</span>";
             }
             tr_PayWay.Append("<tr><td width=\"29\" height=\"35\" align=\"right\" valign=\"middle\">&nbsp;");
             tr_PayWay.Append("<input id=\"payway" + shu + "\" name=\"payway\" type=\"radio\" onclick=\"change();checkpay(0);\" value=\"" + q.nvc_Name + "," + q.nt_Explain + "\"" + ischeck + " /></td>");

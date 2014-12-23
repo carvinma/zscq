@@ -18,6 +18,10 @@
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(document).ready(function () {
+            if (getUrlParam('order') == "1") { //当为订单时的返回
+                var ids = getUrlParam('ids');
+                $("#hrefBack").attr("href", "Add_TrademarkOrder.aspx?ids=" + ids);
+            }
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
                 if (e.target == this) {
                     var tabs = $(this).parent().parent().children('li');
@@ -103,7 +107,9 @@
                               </td>
                             <td><a href="edit_trademark.aspx?t_r_id=<%=trademarkId %>">
                              <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a></td>
-                            <td> <a href="trademark_list.aspx"><img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>
+                            <td> 
+                            <a href="trademark_list.aspx" id="hrefBack">
+                            <img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>
                             </tr></table>
                            
                            </td></tr>

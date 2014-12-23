@@ -225,7 +225,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status = 1;
+        model.Status =0;
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
