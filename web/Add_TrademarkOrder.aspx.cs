@@ -56,7 +56,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             {
                 Delete_Patent();
                 Bind_Page_PayWay();
-                Bind_Drp_PGuoJiaType();
                 Bind_Drp_YouHuiQuan();
                 GetDefaultAddress(uId);
             }
@@ -64,8 +63,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-        //Response.Write(TMDaiLi);
-        //Response.End();
         if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
         {
             string patentid = Request.Cookies["hqht_Trademarktidstr"].Value;
@@ -650,21 +647,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             Response.Redirect("user_sblb.aspx");
         }
     }
-    private string getquhuoid(string name)
-    {
-        return name == "快递配送" ? "quhuo" : "";
-    }
 
-    public string GetGuojiName(int id)// 获得国籍
-    {
-        string guojiname = "";
-        t_Nationality nn = DALN.Nationality_Select_Id(id);
-        if (nn != null)
-        {
-            guojiname = nn.nvc_Name;
-        }
-        return guojiname;
-    }
     void Delete_Patent()
     {
         if (Request["pagetype"] != null && Request["pagetype"].ToString() != "")
@@ -692,13 +675,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         {
             shu++;
             string ischeck = "";
-            //if ((Hi_MaxPayWay.Value != "" && Hi_MaxPayWay.Value == q.nvc_Name) || (Hi_MaxPayWay.Value == "" && shu == 1))
-            //{
-            //    ischeck = " checked=\"checked\"";
-            //    input_payway.Value = q.nvc_Name;
-            //    PayWay = q.nvc_Name;
-            //    PayWayBZ = q.nt_Explain;
-            //}
             string img = "";
             string info = "";
             if (q.nvc_Name == "支付宝支付")
@@ -736,18 +712,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             // s_adress.Style["display"] = "block";
         }
     }
-    void Bind_Drp_PGuoJiaType()// 绑定国籍
-    {
-        //// Drp_GuoJi.Items.Clear();
-        // ListItem item = new ListItem("请选择", "0");
-        // Drp_GuoJi.Items.Add(item);
-        // var iquery = DALN.Nationality_SelectAll();
-        // foreach (var q in iquery)
-        // {
-        //     ListItem li = new ListItem(q.nvc_Name, q.i_Id.ToString());
-        //     Drp_GuoJi.Items.Add(li);
-        // }
-    }
+     
     protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
     {
         Response.Cookies["hqht_Trademarktidstr"].Value = null;

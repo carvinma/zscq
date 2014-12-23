@@ -105,42 +105,6 @@
                                     <td width="77" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请书</td>
                                     <td width="77" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">委托书</td>
                                   </tr>
-                                  <asp:Repeater ID="Rpt_order" runat="server">
-                                            <ItemTemplate>
-                                                <tr>
-                                                    <td height="35" align="center" bgcolor="#FFFFFF">
-                                                        <a href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t">
-                                                            <%# Eval("CaseNo")%></a>
-                                                    </td>
-                                                    <td align="center" bgcolor="#FFFFFF">
-                                                        <%# Eval("ApplyName")%>
-                                                    </td>
-                                                    <td align="center" bgcolor="#FFFFFF">
-                                                        <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
-                                                    </td>
-                                                    <td align="center" bgcolor="#FFFFFF">
-                                                        <%# Eval("ApplyType")%>
-                                                    </td>
-                                                    <td align="center" bgcolor="#FFFFFF"  class="font12b4e">
-                                                        <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
-                                                        ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
-                                                    </td>
-                                                                    
-                                                    <td align="center" bgcolor="#FFFFFF"  class="font12b4e">
-                                                    <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
-                                                        ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
-                                                    </td>
-                                                                    
-                                                    <td align="center" bgcolor="#FFFFFF">
-                                                        <%#Eval("Status")%>
-                                                    </td>
-                                                    <td align="center" bgcolor="#FFFFFF">
-                                                        <input name="chkItem" type="checkbox" status="<%#Eval("Status")%>"
-                                                            value="<%#Eval("i_Id")%>" id="cb_<%#Eval("i_Id")%>" />
-                                                    </td>
-                                                </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
                                   <%=sb_trademrk %>
                                   <tr>
                                   <td colspan="7" class="font12bd44147">
