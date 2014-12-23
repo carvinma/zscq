@@ -99,6 +99,7 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         txt_remark.Value = model.Remark;
         sortarr.Value = model.TrademarkType;
         sortGoods.Value = model.TrademarkGoods;
+        hi_money.Value = model.TrademarkMoney.ToString();
 
         if (model.TrademarkDescribeType == 0)
             this.RadioButton1.Checked = true;
@@ -244,6 +245,9 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         }
         model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
+        decimal money = 0;
+        decimal.TryParse(hi_money.Value, out money);
+        model.TrademarkMoney = money;
         //model.TrademarkGoods = sortGoods.Value.Trim();
         fileName = this.upPattern1.Value;//图样
         if (!string.IsNullOrEmpty(fileName))

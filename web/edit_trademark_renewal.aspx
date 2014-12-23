@@ -354,8 +354,10 @@
            if (!isEmpty(goodstype)) {
                var parr = new Array();
                parr = goodstype.replace(/，/g, ',').split(",");
-               $("#lbltotalCost").text("包含" + parr.length + "类，共计规费:" + (parr.length * parseFloat($("#hi_MainFees").val())) + "元");
+               var totalmoney= parr.length * parseFloat($("#hi_MainFees").val());
+               $("#lbltotalCost").text("包含" + parr.length + "类，共计规费:" + totalmoney + "元");
                $("#lbltotalCost").show();
+               $("#hi_money").val(totalmoney);
            }
            else {
                $("#lbltotalCost").hide();
@@ -383,6 +385,7 @@
     <input id="hi_usertype" type="hidden" runat="server" />
     <input id="hi_zhitifiles" type="hidden" runat="server" />
     <input id="hi_sbid" type="hidden" runat="server" value="0" />
+     <input id="hi_money" type="hidden" runat="server" value="0" />
 
      <input id="hi_tradeMarkdesc" type="hidden" runat="server" value="0" />
      <input id="hi_RegNoticeDate" type="hidden" runat="server" value="0" />

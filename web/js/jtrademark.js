@@ -190,6 +190,7 @@ var goodscalc = {
         if (sum > 0) {
             html += "<p>共选择" + totalgoods + "个商品项目，费用" + sum + "元</p><br/>";
         }
+        $("#hi_money").val(sum);
         $("#goodsCalcInfo").html(html);
         this.v = [];
     }

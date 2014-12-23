@@ -188,6 +188,9 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Trim();
         model.TrademarkGoods = sortGoods.Value.Trim();
+        decimal money = 0;
+        decimal.TryParse(hi_money.Value, out money);
+        model.TrademarkMoney = money;
         fileName = this.upPattern1.Value;//图样1
         System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
                HttpContext.Current.Server.MapPath(filePath + fileName));
@@ -227,7 +230,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
             UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
-            Response.Redirect("trademark_list.aspx");
+            Response.Redirect("Add_TrademarkOrder.aspx?ids=" + model.i_Id);
         }
         else
         {

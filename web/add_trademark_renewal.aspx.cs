@@ -135,6 +135,9 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         //model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
         //model.TrademarkGoods = sortGoods.Value.Trim();
+        decimal money = 0;
+        decimal.TryParse(hi_money.Value, out money);
+        model.TrademarkMoney = money;
         fileName = this.upPattern1.Value;//图样
         System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
                HttpContext.Current.Server.MapPath(filePath + fileName));

@@ -33,6 +33,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     dal_ReceiveAddress DALRA = new dal_ReceiveAddress();
     dal_UserGrade DALUG = new dal_UserGrade();
     dal_Coupon DALC = new dal_Coupon();
+
+    dal_NewTrademark mark = new dal_NewTrademark();
     public string strtotalmoney = "0", strtotalmoneymei = "0", guowaiyouji = "0";
     public string bizhong = "", guowaiinfo = "";
     public int guoji = 0;
@@ -162,7 +164,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                         youjinow = youjimoney[1].ToString();
                         fapiao = ((float.Parse(hi_GanfeeZhinajin.Value)) * 0.033).ToString();
                         OrderModer.dm_YoujiFee = decimal.Parse(youjinow.ToString());
-                        OrderModer.nvc_YouJiWay = lb_Way.Value;
                     }
                     OrderModer.dm_FapiaoMoney = decimal.Parse(fapiao);
                     string nowmoney = (float.Parse(strtotalmoney) + float.Parse(fapiao) + float.Parse(youjinow)).ToString();
@@ -182,14 +183,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     OrderModer.i_Address_AId = (int)dizhi.i_AId;
                     OrderModer.nvc_Address = dizhi.nvc_StreetAddress;
                 }
-                //else
-                //{
-                //    //OrderModer.i_Address_Gid = int.Parse(Drp_GuoJi.SelectedValue);
-                //    //OrderModer.i_Address_PId = int.Parse(DropDownList2.SelectedValue);
-                //    //OrderModer.i_Address_CId = int.Parse(DropDownList3.SelectedValue);
-                //    //OrderModer.i_Address_AId = int.Parse(DropDownList4.SelectedValue);
-                //   // OrderModer.nvc_Address = t_address.Value;
-                //}
             }
             t_Member user = DALM.Member_Select_Id(uId);
             if (user != null)
@@ -320,7 +313,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='user_sblb.aspx';</script>";
             }
             else
-            { 
+            {
                 if (emalladdress != "")
                 {
                     bool states = false;
@@ -373,11 +366,12 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     public int sbnum = 0, sbdailinum = 0, zhinajinnum = 0;
     void Bind_PatentList()
     {
-        if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
+        if (!string.IsNullOrEmpty(Request.QueryString["ids"]))
         {
-            // hi_dfaid.Value = zscqaddress.AddressId.ToString();
-            string patentid = Request.Cookies["hqht_Trademarktidstr"].Value;
-            string[] arr_pid = patentid.Split('|');
+            string patentid = Request.QueryString["ids"];
+            string[] arr_pid = patentid.Split(',');
+
+            #region 用户资料
 
             t_Member muser = DALM.Member_Select_Id(uId);
             if (muser != null)
@@ -437,214 +431,29 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 }
                 #endregion
             }
-            for (var i = 0; i < arr_pid.Length; i++)
-            {
-                if (arr_pid[i] != "")
-                {
-                    int tid = Convert.ToInt32(arr_pid[i].Split(',')[0]);
-                    int number = Convert.ToInt32(arr_pid[i].Split(',')[1]);
-                    t_Trademark model = DALT.Trademark_Select_Id(tid);
-                    if (model.i_JiaoFeiType == 1)
-                    {
-                        model.i_JiaoFeiType = 2;
-                        DALT.Trademark_Update(model);
-                    }
-                    if (model != null && muser != null)
-                    {
-                        if (muser.i_UserTypeId == 3)
-                        {
-                            if (model.nvc_ZhuTiFile == null || model.nvc_ZhuTiFile == "")
-                            {
-                                MessageBox.ShowAndRedirect(this.Page, model.nvc_SBRegNum + "该商标没有上传主体资格证书,请到商标列表里点击上传！", "user_sblb.aspx");
-                                return;
-                            }
-                        }
-                        else if (muser.i_UserTypeId != 3)
-                        {
-                            if (muser.nvc_ZhuTiFile == null || muser.nvc_ZhuTiFile == "")
-                            {
-                                MessageBox.ShowAndRedirect(this.Page, model.nvc_SBRegNum + "该商标没有上传主体资格证书,请到我的资料里点击上传！", "user_sbzl.aspx");
-                                return;
-                            }
-                        }
-                        if (model.nvc_SBFile == null || model.nvc_SBFile == "")
-                        {
-                            MessageBox.ShowAndRedirect(this.Page, model.nvc_SBRegNum + "该商标没有上传商标证书扫描件,请到商标列表里点击上传！", "user_sblb.aspx");
-                            return;
-                        }
-                    }
-                }
-            }
+            #endregion
 
-            // int trademarkcount = arr_pid.Length;
-            decimal dailifee = 0;
-            t_TradeMarkSetup model1 = DALTS.TrademarkSetup_Select();//代理费用
-            for (var i = 0; i < arr_pid.Length; i++)
-            {
-                if (arr_pid[i] != "")
-                {
-                    int tid = Convert.ToInt32(arr_pid[i].Split(',')[0]);
-                    int number = Convert.ToInt32(arr_pid[i].Split(',')[1]);
-                    t_Trademark model = DALT.Trademark_Select_Id(tid);
-                    if (model != null)
-                    {
-                        sbnum += 1;
-                        if (model.i_JiaoFeiType == 2)
-                        {
-                            sbdailinum += 1;
-                            if (model.i_ShengDays < 0)
-                            {
-                                zhinajinnum += 1;
-                            }
-                        }
 
-                        sb_trademrk.Append("<tr>");
-                        sb_trademrk.Append("<td  height='32' align='center' bgcolor='#FFFFFF' >" + model.nvc_SBRegNum + "</td>");
-                        sb_trademrk.Append("<td align='center' bgcolor='#FFFFFF'>" + model.nvc_SBType + "</td>");
-                        sb_trademrk.Append("<td  align='center' bgcolor='#FFFFFF'>" + (model.i_JiaoFeiType.ToString() == "1" ? "自行缴费" : "委托缴费") + "</td>");
-                        sb_trademrk.Append("<td align='center' bgcolor='#FFFFFF'>" + model.nvc_SBRegName + "</td>");
-                        //sb_trademrk.Append("<td width='77' align='center' bgcolor='#FFFFFF'>" + (model.i_State.ToString() == "1" ? "已审核" : (model.i_State.ToString() == "2" ? "未通过" : "未审核")) + "</td>");
-                        //sb_trademrk.Append("<td width='76' align='center' bgcolor='#FFFFFF'>" + (model.i_IsPayState.ToString() == "2" ? "已交费，等待下次缴费" : (model.i_IsPayState.ToString() == "3" ? "无效" : "未缴费")) + "</td>");
-                        sb_trademrk.Append("<td  align='center' bgcolor='#FFFFFF'>" + model.nvc_SbDaoqiTime + "</td>");
-                        sb_trademrk.Append("<td align='center' bgcolor='#FFFFFF' class=\"hidesbinfo\"><a href='user_sbck.aspx?t_r_id=" + tid + "&href=" + href + "' class='ac5t'>查看</a> <a href=" + "'?pagetype=del&cs=" + tid + "," + number + "' class='ac5t'>删除</a></td>");
-                        sb_trademrk.Append("</tr>");
-                    }
-                }
-            }
-            t_Member mm = DALM.Member_Select_Id(uId);
-            if (mm != null)
-            {
-                if (mm.i_GuoJiId != null)
-                {
-                    hi_guoji.Value = mm.i_GuoJiId.ToString();
-                    if (mm.i_GuoJiId == 1)
-                    {
-                        Bind_Rpt_BankList(0, 0);//国内
-                    }
-                    else if (mm.i_GuoJiId == 11)
-                    {
-                        Bind_Rpt_BankList(2, 0);//香港
-                    }
-                    else
-                    {
-                        Bind_Rpt_BankList(1, 0);//国外
-                    }
-                    t_Nationality na = DALN.Nationality_Select_Id(mm.i_GuoJiId);
-                    if (na != null)
-                    {
-                        bizhong = na.nvc_JFBizhong;
-                        if (na.nvc_Name == "中国")
-                        {
-                            guoji = 1;
-                            //Bind_Rpt_BankList(0, 0);//中国
-                            var iquery = DALPSW.PSWay_Select_All();
-                            var num = 0; string ischeck = "";
-                            foreach (var item in iquery)
-                            {
-                                num++;
-                                if (num == 1)
-                                {
-                                    ischeck = "checked='checked'";
-                                }
-                                PSWay.Append("<input name=\"way\" type=\"radio\"  id=\"radio1\" value=\"" + item.nvc_Name + "," + item.i_Cost + "\" onclick=\"kuaidicheck();\" />" + item.nvc_Name + "(" + item.i_Cost + "元)" + " &nbsp;&nbsp;");
-                            }
-                            #region 会员折扣 by chy
-                            decimal dalifee = model1.dm_TMDaiLi;
-                            if (dazhe != 0)
-                            {
-                                dalifee = dalifee * dazhe / 100;
-                            }
-                            if (dazhe1 != 0)
-                            {
-                                dalifee = dalifee * dazhe1 / 100;
-                            }
+            Bind_Rpt_BankList(0, 0);//国内
 
-                            TrademarkMoney = model1.dm_TrademarkMoney * sbnum;
-                            TMZhiNaJin = model1.dm_TMZhiNaJin * zhinajinnum;
-                            TMDaiLi = dalifee * sbdailinum;
-                            #endregion
-                            hi_GanfeeZhinajin.Value = (((model1.dm_TrademarkMoney) * sbnum) + ((model1.dm_TMZhiNaJin) * zhinajinnum)).ToString();
-                            //string totalmoney = (((model1.dm_TMDaiLi) * sbdailinum) + ((model1.dm_TrademarkMoney) * sbnum)+ ((model1.dm_TMZhiNaJin) * zhinajinnum)).ToString("0.00");
-                            string totalmoney = (((dalifee) * sbdailinum) + ((model1.dm_TrademarkMoney) * sbnum) + ((model1.dm_TMZhiNaJin) * zhinajinnum)).ToString("0.00");
-                            hi_allmy.Value = totalmoney;
-                            strtotalmoney = totalmoney;
+            var iquery = mark.Trademark_web_Excel(arr_pid);
+            Rpt_order.DataSource = iquery;
+            Rpt_order.DataBind();
 
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">官方商标续展费用：</td><td width=\"110\">" + (model1.dm_TrademarkMoney).ToString("0.00") + "*" + sbnum + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            if (zhinajinnum != 0)
-                            {
-                                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\">" + (model1.dm_TMZhiNaJin).ToString("0.00") + "*" + zhinajinnum + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            }
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费用：</td><td width=\"110\">" + (dalifee).ToString("0.00") + "*" + sbdailinum + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\">" + iquery.Sum(p => p.TrademarkMoney).Value.ToString("0.00") + "*" + sbnum + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费：</td><td width=\"110\">" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\">" + (iquery.Sum(p => p.TrademarkMoney).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\">" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            string totalmoney = string.Empty;
+            totalmoney = (iquery.Sum(p => p.TrademarkMoney).Value + iquery.Sum(p => p.TrademarkMoney).Value * 0.033m + 0).ToString("0.00");
+            hi_allmy.Value = totalmoney;
+            strtotalmoney = totalmoney;
+            Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总金额：</td><td style=\"color:red;\" width=\"30\">CNY</td><td style='color:red;width:100px;' id='allmoney'  align=\"left\">" + totalmoney + "</td></tr>");
 
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">小计：</td><td width=\"30\">CNY</td><td width=\"100\" align=\"left\">" + totalmoney + "</td></tr>");
-
-                            Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总计：</td><td style=\"color:red;\" width=\"30\">CNY</td><td style='color:red;width:100px;' id='allmoney'  align=\"left\">" + totalmoney + "</td></tr>");
-                        }
-                        else
-                        {
-                            //Bind_Rpt_BankList(1,0);//国外
-                            t_SystemSetup ss = DALSS.SystemSetup_Select();
-                            if (ss.dm_YouJIFee != null)
-                            {
-                                hi_guowaifee.Value = ss.dm_YouJIFee.ToString();
-                                hi_youji.Value = ss.dm_YouJIFee.ToString();
-                                guowaiyouji = ss.dm_YouJIFee.ToString();
-                            }
-                            #region 会员折扣 by chy
-                            decimal dalifee = model1.dm_TMDaiLi;
-                            if (dazhe != 0)
-                            {
-                                dalifee = dalifee * dazhe / 100;
-                            }
-                            if (dazhe1 != 0)
-                            {
-                                dalifee = dalifee * dazhe1 / 100;
-                            }
-                            #endregion
-                            decimal huilv = 1;
-                            t_Nationality nafee = DALN.Nationality_Select_BiZhong(na.nvc_JFBizhong);
-                            if (nafee != null)
-                            {
-                                bizhong = nafee.nvc_Currency;
-                                if (nafee.dm_Exchange != null || nafee.dm_Exchange != 0)
-                                {
-                                    huilv = nafee.dm_Exchange;
-                                    meihuilv = nafee.dm_Exchange;
-                                    hi_hui.Value = huilv.ToString();
-                                }
-                            }
-                            TrademarkMoney = model1.dm_TrademarkMoney * sbnum;
-                            TMZhiNaJin = model1.dm_TMZhiNaJin * zhinajinnum;
-                            TMDaiLi = dalifee * sbdailinum;
-                            hi_GanfeeZhinajin.Value = ((model1.dm_TrademarkMoney) * sbdailinum).ToString();
-                            string totalmoney = (((dalifee) * sbdailinum) + ((model1.dm_TrademarkMoney) * sbnum) + ((model1.dm_TMZhiNaJin) * zhinajinnum)).ToString("0.00");
-                            //string totalmoneyGY = ((((dalifee) / huilv) * sbdailinum) + (((model1.dm_TrademarkMoney) / huilv) * sbnum) + (((model1.dm_TMZhiNaJin) / huilv) * zhinajinnum)).ToString("0.00");
-                            string totalmoneyGY = ((((dalifee) * huilv) * sbdailinum) + (((model1.dm_TrademarkMoney) * huilv) * sbnum) + (((model1.dm_TMZhiNaJin) * huilv) * zhinajinnum)).ToString("0.00");
-
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">官方商标续展费用：</td><td width=\"110\">" + (model1.dm_TrademarkMoney).ToString("0.00") + "*" + sbnum + "</td><td width=\"30\"></td><td style=\"width:100px;\"></td></tr>");
-                            if (zhinajinnum != 0)
-                            {
-                                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\">" + (model1.dm_TMZhiNaJin).ToString("0.00") + "*" + zhinajinnum + "</td><td width=\"30\"></td><td style=\"width:100px;\"></td></tr>");
-                            }
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费用：</td><td width=\"110\">" + (dalifee).ToString("0.00") + "*" + sbdailinum + "</td><td width=\"30\"></td><td style=\"width:100px;\"></td></tr>");
-
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">小计：</td><td width=\"30\">CNY</td><td style=\"width:100px;\" align=\"left\">" + totalmoney + "</td></tr>");
-
-                            Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总计：</td><td style='color:red;' width=\"30\">CNY</td><td style='color:red;' width=\"100\" id='allmoney'  align=\"left\">" + totalmoney + "</td></tr>");
-
-                            Str_AllMoney.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\"></td><td style='color:red;' width=\"30\">" + bizhong + "&nbsp;</td><td style='color:red;' width=\"100\" id='allmonymei' >" + totalmoneyGY + "</td></tr>");
-                            hi_allmy.Value = totalmoney;
-                            hi_allmymei.Value = totalmoneyGY;
-                            strtotalmoney = totalmoney;
-                            strtotalmoneymei = totalmoneyGY;
-                        }
-                    }
-                }
-            }
         }
         else
         {
-            Response.Redirect("user_sblb.aspx");
+            Response.Redirect("trademark_list.aspx");
         }
     }
 
@@ -712,7 +521,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             // s_adress.Style["display"] = "block";
         }
     }
-     
+
     protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
     {
         Response.Cookies["hqht_Trademarktidstr"].Value = null;

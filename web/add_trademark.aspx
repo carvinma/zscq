@@ -333,6 +333,7 @@
     <input id="hi_usertype" type="hidden" runat="server" />
     <input id="hi_zhitifiles" type="hidden" runat="server" />
     <input id="hi_sbid" type="hidden" runat="server" value="0" />
+     <input id="hi_money" type="hidden" runat="server" value="0" />
 
     <input id="hi_MainFees" type="hidden" runat="server" value="0" />
     <input id="hi_ItemNum" type="hidden" runat="server" value="0" />

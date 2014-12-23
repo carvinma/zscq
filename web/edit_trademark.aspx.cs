@@ -87,6 +87,7 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         txt_remark.Value = model.TrademarkRemark;
         sortarr.Value = model.TrademarkType;
         sortGoods.Value = model.TrademarkGoods;
+        hi_money.Value = model.TrademarkMoney.ToString();
         //
         if (!string.IsNullOrEmpty(model.TrademarkPattern1))
         {
@@ -225,6 +226,9 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         model.TrademarkRemark = txt_remark.Value.Trim();
         model.TrademarkType = sortarr.Value.Trim();
         model.TrademarkGoods = sortGoods.Value.Trim();
+        decimal money = 0;
+        decimal.TryParse(hi_money.Value, out money);
+        model.TrademarkMoney = money;
         fileName = this.upPattern1.Value;//图样1
         if (fileName.Contains("File_ShangBiao"))
         {

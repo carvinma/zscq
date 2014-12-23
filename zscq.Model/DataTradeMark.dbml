@@ -112,56 +112,6 @@
       <Column Name="AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.t_NewTradeMarkInfo" Member="t_NewTradeMarkInfo">
-    <Type Name="t_NewTradeMarkInfo">
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ApplyType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ApplyName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="CardNoType" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CardNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CardNoPDF" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="Businesslicense" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="ProvinceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AreaId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ContactPerson" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="PostCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CaseNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Is3D" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsColor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsSound" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="SoundFile" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="RegisteredNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ApplyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PublicPreliminaryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RegNoticeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RenewalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="TrademarkDescribeType" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TrademarkDescribe" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="TrademarkRemark" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="TrademarkType" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
-      <Column Name="TrademarkGoods" Type="System.String" DbType="NVarChar(800)" CanBeNull="true" />
-      <Column Name="TrademarkPattern1" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="TrademarkPattern2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="TrademarkRegBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="ApplyBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="AgentBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="RenewalApplyBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="RenewalAgentBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="InputTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="IsShow" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="IsReceiveEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AdminStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RestDays" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.vw_NewTradeMark" Member="vw_NewTradeMark">
     <Type Name="vw_NewTradeMark">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -213,6 +163,57 @@
       <Column Name="nvc_UserNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Column Name="nvc_OrderNum" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_NewTradeMarkInfo" Member="t_NewTradeMarkInfo">
+    <Type Name="t_NewTradeMarkInfo">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApplyType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApplyName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CardNoType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CardNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CardNoPDF" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Businesslicense" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ProvinceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CityId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AreaId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ContactPerson" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Fax" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="PostCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CaseNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Is3D" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsColor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsSound" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SoundFile" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="RegisteredNo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ApplyDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PublicPreliminaryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RegNoticeDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RenewalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TrademarkDescribeType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TrademarkDescribe" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="TrademarkRemark" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="TrademarkType" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="TrademarkGoods" Type="System.String" DbType="NVarChar(800)" CanBeNull="true" />
+      <Column Name="TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TrademarkPattern1" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TrademarkPattern2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TrademarkRegBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ApplyBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AgentBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RenewalApplyBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RenewalAgentBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="InputTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsShow" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsReceiveEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Remark" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AdminStatus" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RestDays" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
