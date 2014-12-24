@@ -170,21 +170,21 @@ body {
                 <table><tr><td> <asp:ImageButton ID="ImageButton1" runat="server" 
                         ImageUrl="~/images/user_zl_b6.gif" onclick="ImageButton1_Click"  />    
                         </td>
-                        <td> <a href="user_sbddck.aspx?order=<%=sbOrderId%>">
+                        <td> &nbsp;&nbsp;<a href="user_sbddck.aspx?order=<%=sbOrderId%>">
                             <img src="images/user_zl_b7.gif" width="85" height="29" border="0" />
                            </a></td>
-                <td style="width:120px"><a href="user_sblb.aspx"><img src="images/user_zl_b8.gif" width="85" height="29" border="0" /></a>
+                <td style="width:80px"><a style="display:none" href="user_sblb.aspx"><img src="images/user_zl_b8.gif" width="85" height="29" border="0" /></a>
                 </td>
                 <td > 
                  <ul id="nav" style="width:95px">
                 <li><a href="javascript:void(0)">下载帐单</a><span>&nbsp;</span>
                 <ul>
                         <li>
-                            <a href="record/editMemo.htm?bizInNo=20141217073341&amp;bizType=D_TRANSFER" target="_blank">下载总帐单</a>
+                            <a href="#" target="_blank">下载总帐单</a>
                         </li>
         
                         <li>
-                            <a href="record/delete.json?record=" >下载分帐单</a>
+                            <a href="#" >下载分帐单</a>
                         </li>
                 </ul>
                 </li>
