@@ -82,7 +82,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             OrderModer.dm_TMDaiLi = TMDaiLi;
             OrderModer.i_MemberId = uId;
             OrderModer.i_Status = 1;
-            //OrderModer.dm_TotalMoney = decimal.Parse(strtotalmoney);//国内要缴纳的总钱
+            OrderModer.dm_TotalMoney = decimal.Parse(hi_totalmoney.Value);//国内要缴纳的总钱
             //OrderModer.dm_TotalMoneyGY = decimal.Parse(strtotalmoneymei);
             OrderModer.dt_AddTime = DateTime.Now;
             string youhui = "", yhqid = ""; decimal youhuifee = 0;
@@ -171,7 +171,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             {
                 OrderModer.nvc_PayType = input_payway.Value;
             }
-            OrderModer.dm_TotalMoney = decimal.Parse(hi_totalmoney.Value);//国内要缴纳的总钱
+            
             int o = DALTO.TrademarkOrder_Add(OrderModer);//增加订单
             #region 银行
             string bankId = "";
@@ -215,8 +215,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             DALTO.TrademarkOrder_Update(OrderModer);
             #endregion
             #endregion
-
-            sbnum = iquery.Count();
             foreach (var model in iquery)
             {
                 #region 生成订单详情
@@ -241,43 +239,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             }
             mark.Trademark_Submit();
 
-            //for (var i = 0; i < arr_pid.Length; i++)
-            //{
-            //    if (arr_pid[i] != "")
-            //    {
-            //        int tid = Convert.ToInt32(arr_pid[i].Split(',')[0]);
-            //        t_Trademark model = DALT.Trademark_Select_Id(tid);
-
-            //        if (model != null)
-            //        {
-            //            sbnum += 1;
-            //            if (model.i_IsPayState == 2)//续交商标
-            //            {
-            //                model.i_XujiaoStates = 1;
-            //            }
-            //            else
-            //            {
-            //                model.i_IsPayState = 1;
-            //            }
-            //            #region 生成订单详情
-            //            int trademarkid = model.i_Id;
-            //            t_TrademarkOrderDetails dModer = new t_TrademarkOrderDetails();
-            //            dModer.i_OrderId = OrderModer.i_Id;
-            //            dModer.i_TrademarkId = trademarkid;
-            //            dModer.nvc_SBRegNum = model.nvc_SBRegNum;
-            //            dModer.nvc_SBType = model.nvc_SBType;
-            //            dModer.nvc_SBRegName = model.nvc_SBRegName;
-            //            dModer.nvc_SBRegEnName = model.nvc_SBRegEnName;
-            //            dModer.i_ShengDays = model.i_ShengDays;
-            //            dModer.i_JiaoFeiType = model.i_JiaoFeiType;
-            //            dModer.nvc_SbDaoqiTime = model.nvc_SbDaoqiTime;
-            //            int ok = DALTOD.OrderDetails_Add(dModer);
-            //            DALT.Trademark_Update(model);
-            //            #endregion
-            //            UserLog.AddUserLog(uId, "商标系统", "提交订单");
-            //        }
-            //    }
-            //}
             dal_SystemSetup DALS = new dal_SystemSetup();
             t_SystemSetup ts = DALS.SystemSetup_Select();
             if (ts != null)
