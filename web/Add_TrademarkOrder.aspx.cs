@@ -47,6 +47,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     public int dazhe = 0, dazhe1 = 0;
     public decimal TMDaiLi = 0, TrademarkMoney = 0, TMZhiNaJin = 0;
     public string ids;
+    public string membername;
     protected void Page_Load(object sender, EventArgs e)
     {
         href = Request.Url.ToString();
@@ -305,12 +306,100 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         }
 
     }
-    private void CreateWordToPDF()
+    private void CreateWordToPDF(t_TrademarkOrder OrderModer)
     {
         //读取doc文档
-        Document doc = new Document(@"C:\Users\Administrator\Desktop\流调系统存在问题 .doc");
+       // Document doc = new Document(@"C:\Users\Administrator\Desktop\流调系统存在问题 .doc");
         //保存为PDF文件，此处的SaveFormat支持很多种格式，如图片，epub,rtf 等等
-        doc.Save("temp.pdf", SaveFormat.Pdf);
+       // doc.Save("temp.pdf", SaveFormat.Pdf);
+
+        string tmppath = Server.MapPath("File_Zscq/template/trademarkApplyAll.doc");
+        Document doc = new Document(tmppath); //载入模板 
+        if (doc.Range.Bookmarks["ClientName"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["ClientName"];
+            mark.Text = this.membername;
+        }
+        if (doc.Range.Bookmarks["OrderNo"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["OrderNo"];
+            mark.Text = OrderModer.nvc_OrderNumber;
+        }
+        if (doc.Range.Bookmarks["address"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["address"];
+            mark.Text = OrderModer.nvc_Address;
+        }
+        if (doc.Range.Bookmarks["OrderDate"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["OrderDate"];
+            mark.Text = OrderModer.dt_AddTime.Value.ToString("yyyy-MM-dd");
+        }
+        if (doc.Range.Bookmarks["LinkMan"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["LinkMan"];
+            mark.Text = str.Split(';')[0];
+        }
+        if (doc.Range.Bookmarks["OrderStatus"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["OrderStatus"];
+            mark.Text = OrderModer.i_Status;
+        }
+        if (doc.Range.Bookmarks["guiFee"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["guiFee"];
+            mark.Text = OrderModer.dm_TrademarkMoney.ToString();
+        }
+        if (doc.Range.Bookmarks["daliFee"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["daliFee"];
+            mark.Text = OrderModer.dm_TMDaiLi.ToString();
+        }
+        if (doc.Range.Bookmarks["taxFee"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["taxFee"];
+            mark.Text = OrderModer.dm_ZengZhiTax.ToString();
+        }
+        if (doc.Range.Bookmarks["shouxuFee"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["shouxuFee"];
+            mark.Text = OrderModer.dm_ShouXuFee.ToString();
+        }
+        if (doc.Range.Bookmarks["youhuiMoney"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["youhuiMoney"];
+            mark.Text = OrderModer.dm_YouHuiFee.ToString();
+        }
+        if (doc.Range.Bookmarks["totalMoney"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["totalMoney"];
+            mark.Text = OrderModer.dm_TotalMoney.ToString();
+        }
+
+
+        if (doc.Range.Bookmarks["bank"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["bank"];
+            mark.Text = str.Split(';')[0];
+        }
+        if (doc.Range.Bookmarks["bankName"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["bankName"];
+            mark.Text = str.Split(';')[0];
+        }
+        if (doc.Range.Bookmarks["bankCardNo"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["bankCardNo"];
+            mark.Text = str.Split(';')[0];
+        }
+
+        if (doc.Range.Bookmarks["table"] != null)
+        {
+            Bookmark mark = doc.Range.Bookmarks["table"];
+            mark.Text = str.Split(';')[0];
+        }
+        
+
     }
     void Bind_Drp_YouHuiQuan()
     {
@@ -342,6 +431,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             t_Member muser = DALM.Member_Select_Id(uId);
             if (muser != null)
             {
+                membername = muser.nvc_Name;
                 if (muser.i_UserTypeId == 3)
                 {
                     if ((muser.nvc_DaiLiName == "" || muser.nvc_DaiLiName == null) || (muser.nvc_RealName == "" || muser.nvc_RealName == null) || (muser.nvc_TelPhone == "" || muser.nvc_TelPhone == null) || (muser.nvc_Address == "" || muser.nvc_Address == null) || (muser.nvc_ZipCode == "" || muser.nvc_ZipCode == null))
