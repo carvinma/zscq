@@ -80,27 +80,29 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             OrderModer.i_MemberId = uId;
             OrderModer.i_Status = 1;
             OrderModer.dm_TotalMoney = decimal.Parse(strtotalmoney);//国内要缴纳的总钱
-            OrderModer.dm_TotalMoneyGY = decimal.Parse(strtotalmoneymei);
+            //OrderModer.dm_TotalMoneyGY = decimal.Parse(strtotalmoneymei);
             OrderModer.dt_AddTime = DateTime.Now;
             string youhui = "", yhqid = ""; decimal youhuifee = 0;
             if (rp_youhui.Items.Count > 0)
             {
                 string flag = Request.Form["inputPageid"];
                 //得到币种和汇率
-                t_Member mm = DALM.Member_Select_Id(uId);
+                //t_Member mm = DALM.Member_Select_Id(uId);
 
-                t_Nationality na = DALN.Nationality_Select_Id(mm.i_GuoJiId);
+                //t_Nationality na = DALN.Nationality_Select_Id(mm.i_GuoJiId);
 
-                t_Nationality nafee = DALN.Nationality_Select_BiZhong(na.nvc_JFBizhong);
-                if (nafee != null)
-                {
-                    bizhong = "CNY";
-                    if (nafee.dm_Exchange != null || nafee.dm_Exchange != 0)
-                    {
-                        meihuilv = nafee.dm_Exchange;
-                    }
-                }
-                if (flag != null && flag != "")
+                //t_Nationality nafee = DALN.Nationality_Select_BiZhong(na.nvc_JFBizhong);
+                //if (nafee != null)
+                //{
+                //    bizhong = "CNY";
+                //    if (nafee.dm_Exchange != null || nafee.dm_Exchange != 0)
+                //    {
+                //        meihuilv = nafee.dm_Exchange;
+                //    }
+                //}
+
+                bizhong = "CNY";
+                if (flag != null && flag != "") //使用优惠券
                 {
                     string[] flaglist = flag.Split(',');
                     for (int j = 0; j < flaglist.Length; j++)
@@ -124,7 +126,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     OrderModer.nvc_YHQIdstr = yhqid;
                     OrderModer.dm_YouHuiFee = youhuifee;
                     OrderModer.dm_TotalMoney = decimal.Parse(strtotalmoney) - youhuifee;
-                    OrderModer.dm_TotalMoneyGY = decimal.Parse((OrderModer.dm_TotalMoney * meihuilv).ToString());
+                    //OrderModer.dm_TotalMoneyGY = decimal.Parse((OrderModer.dm_TotalMoney * meihuilv).ToString());
                 }
                 OrderModer.nvc_YouHUiQuan = youhui.TrimStart('+');
             }
@@ -294,8 +296,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
 
                     BLLE.Email_Add(emalladdress, "商标缴费订单", "您好！您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
                 }
-                Response.Cookies["hqht_Trademarktidstr"].Value = null;
-                Response.Redirect("User_TrademarkOrderOk.aspx?order=" + OrderModer.i_Id);
+                Response.Redirect("trademarkOrderOk.aspx?order=" + OrderModer.i_Id);
             }
         }
         else
