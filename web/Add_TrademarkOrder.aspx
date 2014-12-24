@@ -41,6 +41,8 @@
     <input type="hidden" runat="server" id="hi_total" value="0" />
 
     <input type="hidden" runat="server" id="hi_ids" value="0" />
+    <input type="hidden" runat="server" id="hi_tax" value="0" />
+    <input type="hidden" runat="server" id="hi_shouxufei" value="0" />
     <input type="hidden" runat="server" id="hi_totalmoney" value="0" />
     
     <uc1:zscqtop2 ID="zscqtop21" runat="server" />
@@ -793,6 +795,7 @@
         var ganfeezhinajin = $("#hi_GanfeeZhinajin").val();
         var youhui = $("#hi_youhui").val();
         if ($("#checkfp").attr("checked") == "checked") {
+            $("#hi_tax").val($("#tax").html());
             if (!isfacheck) {
                 //=========银行显示 
                 $(".fp_true").show();
@@ -814,6 +817,7 @@
             //alert(nowmoney);
         }
         else {
+            $("#hi_tax").val(0);
             if (!isnofacheck) {
                 //=========银行显示
                 $(".fp_true").hide();

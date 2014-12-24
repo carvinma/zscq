@@ -82,6 +82,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             OrderModer.dm_TrademarkMoney = iquery.Sum(p => p.TrademarkMoney); //商标金额
             OrderModer.dm_TMZhiNaJin = TMZhiNaJin;
             OrderModer.dm_TMDaiLi = TMDaiLi;//代理费
+            OrderModer.dm_ZengZhiTax = decimal.Parse(hi_tax.Value);//增值税
+            OrderModer.dm_ShouXuFee = decimal.Parse(hi_shouxufei.Value);//手续费
             OrderModer.i_MemberId = uId;
             OrderModer.i_Status = 1;
             OrderModer.dm_TotalMoney = decimal.Parse(hi_totalmoney.Value);//国内要缴纳的总钱
@@ -233,6 +235,24 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 dModer.i_JiaoFeiType = 1; //缴费类型，1代表自行缴费，2代表代理缴费
                 if (model.RenewalDate.HasValue)
                     dModer.nvc_SbDaoqiTime = model.RenewalDate.Value.ToString("yyyy-MM-dd");//到期时间
+                dModer.dm_TrademarkMoney = model.TrademarkMoney;
+                dModer.dm_TMDaiLi = 0;
+
+                decimal? tax=this.checkfp.Checked ? (model.TrademarkMoney * 0.033m):0;
+                dModer.dm_ZengZhiTax = tax;
+
+                decimal point=0;
+                if (OrderModer.nvc_PayType == "支付宝支付" || OrderModer.nvc_PayType == "网银直接支付")
+                {
+                    point = 0.012m;
+                }
+                else if (OrderModer.nvc_PayType == "财付通支付")
+                {
+                    point = 0.01m;
+                }
+                dModer.dm_ShouXuFee = (model.TrademarkMoney + tax) * point;
+                dModer.dm_TotalMoney = dModer.dm_ShouXuFee + dModer.dm_ZengZhiTax + model.TrademarkMoney;
+
                 int ok = DALTOD.OrderDetails_Add(dModer);
                 model.Status = 1;
                 //DALT.Trademark_Update(model);
