@@ -981,17 +981,17 @@
                 alert("请选择默认票据地址！");
                 return false;
             }
-            var ways = document.getElementsByName('way');
-            var numyj = 0;
-            for (var i = 0; i < ways.length; i++) {
-                if (ways[i].checked) {
-                    numyj++;
-                }
-            }
-            if (numyj == 0) {
-                alert("请选择邮寄方式！");
-                return false;
-            }
+//            var ways = document.getElementsByName('way');
+//            var numyj = 0;
+//            for (var i = 0; i < ways.length; i++) {
+//                if (ways[i].checked) {
+//                    numyj++;
+//                }
+//            }
+//            if (numyj == 0) {
+//                alert("请选择邮寄方式！");
+//                return false;
+//            }
         }
         var pays = document.getElementsByName('payway');
         var paynum = 0, banknum = 0;
