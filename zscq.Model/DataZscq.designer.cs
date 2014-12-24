@@ -22,7 +22,7 @@ namespace zscq.Model
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DataSource")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="db_zscq")]
 	public partial class DataZscqDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -69,21 +69,21 @@ namespace zscq.Model
     partial void Insertt_PatentOrder(t_PatentOrder instance);
     partial void Updatet_PatentOrder(t_PatentOrder instance);
     partial void Deletet_PatentOrder(t_PatentOrder instance);
-    partial void Insertt_TrademarkOrderDetails(t_TrademarkOrderDetails instance);
-    partial void Updatet_TrademarkOrderDetails(t_TrademarkOrderDetails instance);
-    partial void Deletet_TrademarkOrderDetails(t_TrademarkOrderDetails instance);
     partial void Insertt_Nationality(t_Nationality instance);
     partial void Updatet_Nationality(t_Nationality instance);
     partial void Deletet_Nationality(t_Nationality instance);
-    partial void Insertt_TrademarkOrder(t_TrademarkOrder instance);
-    partial void Updatet_TrademarkOrder(t_TrademarkOrder instance);
-    partial void Deletet_TrademarkOrder(t_TrademarkOrder instance);
     partial void Insertt_Trademark(t_Trademark instance);
     partial void Updatet_Trademark(t_Trademark instance);
     partial void Deletet_Trademark(t_Trademark instance);
     partial void Insertt_PatentOrderInfo(t_PatentOrderInfo instance);
     partial void Updatet_PatentOrderInfo(t_PatentOrderInfo instance);
     partial void Deletet_PatentOrderInfo(t_PatentOrderInfo instance);
+    partial void Insertt_TrademarkOrder(t_TrademarkOrder instance);
+    partial void Updatet_TrademarkOrder(t_TrademarkOrder instance);
+    partial void Deletet_TrademarkOrder(t_TrademarkOrder instance);
+    partial void Insertt_TrademarkOrderDetails(t_TrademarkOrderDetails instance);
+    partial void Updatet_TrademarkOrderDetails(t_TrademarkOrderDetails instance);
+    partial void Deletet_TrademarkOrderDetails(t_TrademarkOrderDetails instance);
     #endregion
 		
 		public DataZscqDataContext() : 
@@ -220,27 +220,11 @@ namespace zscq.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<t_TrademarkOrderDetails> t_TrademarkOrderDetails
-		{
-			get
-			{
-				return this.GetTable<t_TrademarkOrderDetails>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_Nationality> t_Nationality
 		{
 			get
 			{
 				return this.GetTable<t_Nationality>();
-			}
-		}
-		
-		public System.Data.Linq.Table<t_TrademarkOrder> t_TrademarkOrder
-		{
-			get
-			{
-				return this.GetTable<t_TrademarkOrder>();
 			}
 		}
 		
@@ -257,6 +241,22 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<t_PatentOrderInfo>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_TrademarkOrder> t_TrademarkOrder
+		{
+			get
+			{
+				return this.GetTable<t_TrademarkOrder>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_TrademarkOrderDetails> t_TrademarkOrderDetails
+		{
+			get
+			{
+				return this.GetTable<t_TrademarkOrderDetails>();
 			}
 		}
 	}
@@ -5501,325 +5501,6 @@ namespace zscq.Model
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_TrademarkOrderDetails")]
-	public partial class t_TrademarkOrderDetails : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _i_Id;
-		
-		private System.Nullable<int> _i_OrderId;
-		
-		private int _i_TrademarkId;
-		
-		private string _nvc_SBRegNum;
-		
-		private string _nvc_SBType;
-		
-		private string _nvc_SBRegName;
-		
-		private string _nvc_SBRegEnName;
-		
-		private int _i_ShengDays;
-		
-		private int _i_JiaoFeiType;
-		
-		private string _nvc_SbDaoqiTime;
-		
-		private EntityRef<t_TrademarkOrder> _t_TrademarkOrder;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oni_IdChanging(int value);
-    partial void Oni_IdChanged();
-    partial void Oni_OrderIdChanging(System.Nullable<int> value);
-    partial void Oni_OrderIdChanged();
-    partial void Oni_TrademarkIdChanging(int value);
-    partial void Oni_TrademarkIdChanged();
-    partial void Onnvc_SBRegNumChanging(string value);
-    partial void Onnvc_SBRegNumChanged();
-    partial void Onnvc_SBTypeChanging(string value);
-    partial void Onnvc_SBTypeChanged();
-    partial void Onnvc_SBRegNameChanging(string value);
-    partial void Onnvc_SBRegNameChanged();
-    partial void Onnvc_SBRegEnNameChanging(string value);
-    partial void Onnvc_SBRegEnNameChanged();
-    partial void Oni_ShengDaysChanging(int value);
-    partial void Oni_ShengDaysChanged();
-    partial void Oni_JiaoFeiTypeChanging(int value);
-    partial void Oni_JiaoFeiTypeChanged();
-    partial void Onnvc_SbDaoqiTimeChanging(string value);
-    partial void Onnvc_SbDaoqiTimeChanged();
-    #endregion
-		
-		public t_TrademarkOrderDetails()
-		{
-			this._t_TrademarkOrder = default(EntityRef<t_TrademarkOrder>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int i_Id
-		{
-			get
-			{
-				return this._i_Id;
-			}
-			set
-			{
-				if ((this._i_Id != value))
-				{
-					this.Oni_IdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Id = value;
-					this.SendPropertyChanged("i_Id");
-					this.Oni_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_OrderId", DbType="Int")]
-		public System.Nullable<int> i_OrderId
-		{
-			get
-			{
-				return this._i_OrderId;
-			}
-			set
-			{
-				if ((this._i_OrderId != value))
-				{
-					if (this._t_TrademarkOrder.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Oni_OrderIdChanging(value);
-					this.SendPropertyChanging();
-					this._i_OrderId = value;
-					this.SendPropertyChanged("i_OrderId");
-					this.Oni_OrderIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_TrademarkId", DbType="Int NOT NULL")]
-		public int i_TrademarkId
-		{
-			get
-			{
-				return this._i_TrademarkId;
-			}
-			set
-			{
-				if ((this._i_TrademarkId != value))
-				{
-					this.Oni_TrademarkIdChanging(value);
-					this.SendPropertyChanging();
-					this._i_TrademarkId = value;
-					this.SendPropertyChanged("i_TrademarkId");
-					this.Oni_TrademarkIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegNum", DbType="NVarChar(50)")]
-		public string nvc_SBRegNum
-		{
-			get
-			{
-				return this._nvc_SBRegNum;
-			}
-			set
-			{
-				if ((this._nvc_SBRegNum != value))
-				{
-					this.Onnvc_SBRegNumChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_SBRegNum = value;
-					this.SendPropertyChanged("nvc_SBRegNum");
-					this.Onnvc_SBRegNumChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBType", DbType="NVarChar(50)")]
-		public string nvc_SBType
-		{
-			get
-			{
-				return this._nvc_SBType;
-			}
-			set
-			{
-				if ((this._nvc_SBType != value))
-				{
-					this.Onnvc_SBTypeChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_SBType = value;
-					this.SendPropertyChanged("nvc_SBType");
-					this.Onnvc_SBTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegName", DbType="NVarChar(50)")]
-		public string nvc_SBRegName
-		{
-			get
-			{
-				return this._nvc_SBRegName;
-			}
-			set
-			{
-				if ((this._nvc_SBRegName != value))
-				{
-					this.Onnvc_SBRegNameChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_SBRegName = value;
-					this.SendPropertyChanged("nvc_SBRegName");
-					this.Onnvc_SBRegNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegEnName", DbType="NVarChar(50)")]
-		public string nvc_SBRegEnName
-		{
-			get
-			{
-				return this._nvc_SBRegEnName;
-			}
-			set
-			{
-				if ((this._nvc_SBRegEnName != value))
-				{
-					this.Onnvc_SBRegEnNameChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_SBRegEnName = value;
-					this.SendPropertyChanged("nvc_SBRegEnName");
-					this.Onnvc_SBRegEnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_ShengDays", DbType="Int NOT NULL")]
-		public int i_ShengDays
-		{
-			get
-			{
-				return this._i_ShengDays;
-			}
-			set
-			{
-				if ((this._i_ShengDays != value))
-				{
-					this.Oni_ShengDaysChanging(value);
-					this.SendPropertyChanging();
-					this._i_ShengDays = value;
-					this.SendPropertyChanged("i_ShengDays");
-					this.Oni_ShengDaysChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_JiaoFeiType", DbType="Int NOT NULL")]
-		public int i_JiaoFeiType
-		{
-			get
-			{
-				return this._i_JiaoFeiType;
-			}
-			set
-			{
-				if ((this._i_JiaoFeiType != value))
-				{
-					this.Oni_JiaoFeiTypeChanging(value);
-					this.SendPropertyChanging();
-					this._i_JiaoFeiType = value;
-					this.SendPropertyChanged("i_JiaoFeiType");
-					this.Oni_JiaoFeiTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SbDaoqiTime", DbType="NVarChar(50)")]
-		public string nvc_SbDaoqiTime
-		{
-			get
-			{
-				return this._nvc_SbDaoqiTime;
-			}
-			set
-			{
-				if ((this._nvc_SbDaoqiTime != value))
-				{
-					this.Onnvc_SbDaoqiTimeChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_SbDaoqiTime = value;
-					this.SendPropertyChanged("nvc_SbDaoqiTime");
-					this.Onnvc_SbDaoqiTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_TrademarkOrder_t_TrademarkOrderDetails", Storage="_t_TrademarkOrder", ThisKey="i_OrderId", OtherKey="i_Id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public t_TrademarkOrder t_TrademarkOrder
-		{
-			get
-			{
-				return this._t_TrademarkOrder.Entity;
-			}
-			set
-			{
-				t_TrademarkOrder previousValue = this._t_TrademarkOrder.Entity;
-				if (((previousValue != value) 
-							|| (this._t_TrademarkOrder.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._t_TrademarkOrder.Entity = null;
-						previousValue.t_TrademarkOrderDetails.Remove(this);
-					}
-					this._t_TrademarkOrder.Entity = value;
-					if ((value != null))
-					{
-						value.t_TrademarkOrderDetails.Add(this);
-						this._i_OrderId = value.i_Id;
-					}
-					else
-					{
-						this._i_OrderId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("t_TrademarkOrder");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Nationality")]
 	public partial class t_Nationality : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -6287,916 +5968,6 @@ namespace zscq.Model
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_TrademarkOrder")]
-	public partial class t_TrademarkOrder : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _i_Id;
-		
-		private int _i_MemberId;
-		
-		private string _nvc_OrderNumber;
-		
-		private decimal _dm_TotalMoneyGY;
-		
-		private decimal _dm_TotalMoney;
-		
-		private int _i_Status;
-		
-		private System.Nullable<System.DateTime> _dt_AddTime;
-		
-		private System.Nullable<System.DateTime> _dt_PayTime;
-		
-		private int _i_IsFaPiao;
-		
-		private string _nvc_FaPiaoTaiTou;
-		
-		private int _i_IsYouJi;
-		
-		private int _i_YouJiType;
-		
-		private string _nvc_YouHUiQuan;
-		
-		private string _nvc_PayType;
-		
-		private string _nvc_Bank;
-		
-		private int _i_JiFen;
-		
-		private int _i_Address_Gid;
-		
-		private int _i_Address_PId;
-		
-		private int _i_Address_CId;
-		
-		private int _i_Address_AId;
-		
-		private string _nvc_Address;
-		
-		private int _i_IsUseYHQ;
-		
-		private decimal _dm_FapiaoMoney;
-		
-		private decimal _dm_YoujiFee;
-		
-		private decimal _dm_YouHuiFee;
-		
-		private int _i_SendEmailOrder;
-		
-		private int _i_SendPhoneOrder;
-		
-		private int _i_AddressId;
-		
-		private string _nvc_YHQIdstr;
-		
-		private string _nvc_YouJiWay;
-		
-		private string _nvc_BankId;
-		
-		private System.Nullable<decimal> _dm_TrademarkMoney;
-		
-		private System.Nullable<decimal> _dm_TMDaiLi;
-		
-		private System.Nullable<decimal> _dm_TMZhiNaJin;
-		
-		private EntitySet<t_TrademarkOrderOperateInfos> _t_TrademarkOrderOperateInfos;
-		
-		private EntitySet<t_TrademarkOrderDetails> _t_TrademarkOrderDetails;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oni_IdChanging(int value);
-    partial void Oni_IdChanged();
-    partial void Oni_MemberIdChanging(int value);
-    partial void Oni_MemberIdChanged();
-    partial void Onnvc_OrderNumberChanging(string value);
-    partial void Onnvc_OrderNumberChanged();
-    partial void Ondm_TotalMoneyGYChanging(decimal value);
-    partial void Ondm_TotalMoneyGYChanged();
-    partial void Ondm_TotalMoneyChanging(decimal value);
-    partial void Ondm_TotalMoneyChanged();
-    partial void Oni_StatusChanging(int value);
-    partial void Oni_StatusChanged();
-    partial void Ondt_AddTimeChanging(System.Nullable<System.DateTime> value);
-    partial void Ondt_AddTimeChanged();
-    partial void Ondt_PayTimeChanging(System.Nullable<System.DateTime> value);
-    partial void Ondt_PayTimeChanged();
-    partial void Oni_IsFaPiaoChanging(int value);
-    partial void Oni_IsFaPiaoChanged();
-    partial void Onnvc_FaPiaoTaiTouChanging(string value);
-    partial void Onnvc_FaPiaoTaiTouChanged();
-    partial void Oni_IsYouJiChanging(int value);
-    partial void Oni_IsYouJiChanged();
-    partial void Oni_YouJiTypeChanging(int value);
-    partial void Oni_YouJiTypeChanged();
-    partial void Onnvc_YouHUiQuanChanging(string value);
-    partial void Onnvc_YouHUiQuanChanged();
-    partial void Onnvc_PayTypeChanging(string value);
-    partial void Onnvc_PayTypeChanged();
-    partial void Onnvc_BankChanging(string value);
-    partial void Onnvc_BankChanged();
-    partial void Oni_JiFenChanging(int value);
-    partial void Oni_JiFenChanged();
-    partial void Oni_Address_GidChanging(int value);
-    partial void Oni_Address_GidChanged();
-    partial void Oni_Address_PIdChanging(int value);
-    partial void Oni_Address_PIdChanged();
-    partial void Oni_Address_CIdChanging(int value);
-    partial void Oni_Address_CIdChanged();
-    partial void Oni_Address_AIdChanging(int value);
-    partial void Oni_Address_AIdChanged();
-    partial void Onnvc_AddressChanging(string value);
-    partial void Onnvc_AddressChanged();
-    partial void Oni_IsUseYHQChanging(int value);
-    partial void Oni_IsUseYHQChanged();
-    partial void Ondm_FapiaoMoneyChanging(decimal value);
-    partial void Ondm_FapiaoMoneyChanged();
-    partial void Ondm_YoujiFeeChanging(decimal value);
-    partial void Ondm_YoujiFeeChanged();
-    partial void Ondm_YouHuiFeeChanging(decimal value);
-    partial void Ondm_YouHuiFeeChanged();
-    partial void Oni_SendEmailOrderChanging(int value);
-    partial void Oni_SendEmailOrderChanged();
-    partial void Oni_SendPhoneOrderChanging(int value);
-    partial void Oni_SendPhoneOrderChanged();
-    partial void Oni_AddressIdChanging(int value);
-    partial void Oni_AddressIdChanged();
-    partial void Onnvc_YHQIdstrChanging(string value);
-    partial void Onnvc_YHQIdstrChanged();
-    partial void Onnvc_YouJiWayChanging(string value);
-    partial void Onnvc_YouJiWayChanged();
-    partial void Onnvc_BankIdChanging(string value);
-    partial void Onnvc_BankIdChanged();
-    partial void Ondm_TrademarkMoneyChanging(System.Nullable<decimal> value);
-    partial void Ondm_TrademarkMoneyChanged();
-    partial void Ondm_TMDaiLiChanging(System.Nullable<decimal> value);
-    partial void Ondm_TMDaiLiChanged();
-    partial void Ondm_TMZhiNaJinChanging(System.Nullable<decimal> value);
-    partial void Ondm_TMZhiNaJinChanged();
-    #endregion
-		
-		public t_TrademarkOrder()
-		{
-			this._t_TrademarkOrderOperateInfos = new EntitySet<t_TrademarkOrderOperateInfos>(new Action<t_TrademarkOrderOperateInfos>(this.attach_t_TrademarkOrderOperateInfos), new Action<t_TrademarkOrderOperateInfos>(this.detach_t_TrademarkOrderOperateInfos));
-			this._t_TrademarkOrderDetails = new EntitySet<t_TrademarkOrderDetails>(new Action<t_TrademarkOrderDetails>(this.attach_t_TrademarkOrderDetails), new Action<t_TrademarkOrderDetails>(this.detach_t_TrademarkOrderDetails));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int i_Id
-		{
-			get
-			{
-				return this._i_Id;
-			}
-			set
-			{
-				if ((this._i_Id != value))
-				{
-					this.Oni_IdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Id = value;
-					this.SendPropertyChanged("i_Id");
-					this.Oni_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
-		public int i_MemberId
-		{
-			get
-			{
-				return this._i_MemberId;
-			}
-			set
-			{
-				if ((this._i_MemberId != value))
-				{
-					this.Oni_MemberIdChanging(value);
-					this.SendPropertyChanging();
-					this._i_MemberId = value;
-					this.SendPropertyChanged("i_MemberId");
-					this.Oni_MemberIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_OrderNumber", DbType="NVarChar(50)")]
-		public string nvc_OrderNumber
-		{
-			get
-			{
-				return this._nvc_OrderNumber;
-			}
-			set
-			{
-				if ((this._nvc_OrderNumber != value))
-				{
-					this.Onnvc_OrderNumberChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_OrderNumber = value;
-					this.SendPropertyChanged("nvc_OrderNumber");
-					this.Onnvc_OrderNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TotalMoneyGY", DbType="Decimal(18,2) NOT NULL")]
-		public decimal dm_TotalMoneyGY
-		{
-			get
-			{
-				return this._dm_TotalMoneyGY;
-			}
-			set
-			{
-				if ((this._dm_TotalMoneyGY != value))
-				{
-					this.Ondm_TotalMoneyGYChanging(value);
-					this.SendPropertyChanging();
-					this._dm_TotalMoneyGY = value;
-					this.SendPropertyChanged("dm_TotalMoneyGY");
-					this.Ondm_TotalMoneyGYChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TotalMoney", DbType="Decimal(18,2) NOT NULL")]
-		public decimal dm_TotalMoney
-		{
-			get
-			{
-				return this._dm_TotalMoney;
-			}
-			set
-			{
-				if ((this._dm_TotalMoney != value))
-				{
-					this.Ondm_TotalMoneyChanging(value);
-					this.SendPropertyChanging();
-					this._dm_TotalMoney = value;
-					this.SendPropertyChanged("dm_TotalMoney");
-					this.Ondm_TotalMoneyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Status", DbType="Int NOT NULL")]
-		public int i_Status
-		{
-			get
-			{
-				return this._i_Status;
-			}
-			set
-			{
-				if ((this._i_Status != value))
-				{
-					this.Oni_StatusChanging(value);
-					this.SendPropertyChanging();
-					this._i_Status = value;
-					this.SendPropertyChanged("i_Status");
-					this.Oni_StatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_AddTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> dt_AddTime
-		{
-			get
-			{
-				return this._dt_AddTime;
-			}
-			set
-			{
-				if ((this._dt_AddTime != value))
-				{
-					this.Ondt_AddTimeChanging(value);
-					this.SendPropertyChanging();
-					this._dt_AddTime = value;
-					this.SendPropertyChanged("dt_AddTime");
-					this.Ondt_AddTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_PayTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> dt_PayTime
-		{
-			get
-			{
-				return this._dt_PayTime;
-			}
-			set
-			{
-				if ((this._dt_PayTime != value))
-				{
-					this.Ondt_PayTimeChanging(value);
-					this.SendPropertyChanging();
-					this._dt_PayTime = value;
-					this.SendPropertyChanged("dt_PayTime");
-					this.Ondt_PayTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsFaPiao", DbType="Int NOT NULL")]
-		public int i_IsFaPiao
-		{
-			get
-			{
-				return this._i_IsFaPiao;
-			}
-			set
-			{
-				if ((this._i_IsFaPiao != value))
-				{
-					this.Oni_IsFaPiaoChanging(value);
-					this.SendPropertyChanging();
-					this._i_IsFaPiao = value;
-					this.SendPropertyChanged("i_IsFaPiao");
-					this.Oni_IsFaPiaoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_FaPiaoTaiTou", DbType="NVarChar(500)")]
-		public string nvc_FaPiaoTaiTou
-		{
-			get
-			{
-				return this._nvc_FaPiaoTaiTou;
-			}
-			set
-			{
-				if ((this._nvc_FaPiaoTaiTou != value))
-				{
-					this.Onnvc_FaPiaoTaiTouChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_FaPiaoTaiTou = value;
-					this.SendPropertyChanged("nvc_FaPiaoTaiTou");
-					this.Onnvc_FaPiaoTaiTouChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsYouJi", DbType="Int NOT NULL")]
-		public int i_IsYouJi
-		{
-			get
-			{
-				return this._i_IsYouJi;
-			}
-			set
-			{
-				if ((this._i_IsYouJi != value))
-				{
-					this.Oni_IsYouJiChanging(value);
-					this.SendPropertyChanging();
-					this._i_IsYouJi = value;
-					this.SendPropertyChanged("i_IsYouJi");
-					this.Oni_IsYouJiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_YouJiType", DbType="Int NOT NULL")]
-		public int i_YouJiType
-		{
-			get
-			{
-				return this._i_YouJiType;
-			}
-			set
-			{
-				if ((this._i_YouJiType != value))
-				{
-					this.Oni_YouJiTypeChanging(value);
-					this.SendPropertyChanging();
-					this._i_YouJiType = value;
-					this.SendPropertyChanged("i_YouJiType");
-					this.Oni_YouJiTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YouHUiQuan", DbType="NVarChar(50)")]
-		public string nvc_YouHUiQuan
-		{
-			get
-			{
-				return this._nvc_YouHUiQuan;
-			}
-			set
-			{
-				if ((this._nvc_YouHUiQuan != value))
-				{
-					this.Onnvc_YouHUiQuanChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_YouHUiQuan = value;
-					this.SendPropertyChanged("nvc_YouHUiQuan");
-					this.Onnvc_YouHUiQuanChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_PayType", DbType="NVarChar(50)")]
-		public string nvc_PayType
-		{
-			get
-			{
-				return this._nvc_PayType;
-			}
-			set
-			{
-				if ((this._nvc_PayType != value))
-				{
-					this.Onnvc_PayTypeChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_PayType = value;
-					this.SendPropertyChanged("nvc_PayType");
-					this.Onnvc_PayTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Bank", DbType="NVarChar(50)")]
-		public string nvc_Bank
-		{
-			get
-			{
-				return this._nvc_Bank;
-			}
-			set
-			{
-				if ((this._nvc_Bank != value))
-				{
-					this.Onnvc_BankChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_Bank = value;
-					this.SendPropertyChanged("nvc_Bank");
-					this.Onnvc_BankChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_JiFen", DbType="Int NOT NULL")]
-		public int i_JiFen
-		{
-			get
-			{
-				return this._i_JiFen;
-			}
-			set
-			{
-				if ((this._i_JiFen != value))
-				{
-					this.Oni_JiFenChanging(value);
-					this.SendPropertyChanging();
-					this._i_JiFen = value;
-					this.SendPropertyChanged("i_JiFen");
-					this.Oni_JiFenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_Gid", DbType="Int NOT NULL")]
-		public int i_Address_Gid
-		{
-			get
-			{
-				return this._i_Address_Gid;
-			}
-			set
-			{
-				if ((this._i_Address_Gid != value))
-				{
-					this.Oni_Address_GidChanging(value);
-					this.SendPropertyChanging();
-					this._i_Address_Gid = value;
-					this.SendPropertyChanged("i_Address_Gid");
-					this.Oni_Address_GidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_PId", DbType="Int NOT NULL")]
-		public int i_Address_PId
-		{
-			get
-			{
-				return this._i_Address_PId;
-			}
-			set
-			{
-				if ((this._i_Address_PId != value))
-				{
-					this.Oni_Address_PIdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Address_PId = value;
-					this.SendPropertyChanged("i_Address_PId");
-					this.Oni_Address_PIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_CId", DbType="Int NOT NULL")]
-		public int i_Address_CId
-		{
-			get
-			{
-				return this._i_Address_CId;
-			}
-			set
-			{
-				if ((this._i_Address_CId != value))
-				{
-					this.Oni_Address_CIdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Address_CId = value;
-					this.SendPropertyChanged("i_Address_CId");
-					this.Oni_Address_CIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_AId", DbType="Int NOT NULL")]
-		public int i_Address_AId
-		{
-			get
-			{
-				return this._i_Address_AId;
-			}
-			set
-			{
-				if ((this._i_Address_AId != value))
-				{
-					this.Oni_Address_AIdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Address_AId = value;
-					this.SendPropertyChanged("i_Address_AId");
-					this.Oni_Address_AIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Address", DbType="NVarChar(250)")]
-		public string nvc_Address
-		{
-			get
-			{
-				return this._nvc_Address;
-			}
-			set
-			{
-				if ((this._nvc_Address != value))
-				{
-					this.Onnvc_AddressChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_Address = value;
-					this.SendPropertyChanged("nvc_Address");
-					this.Onnvc_AddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsUseYHQ", DbType="Int NOT NULL")]
-		public int i_IsUseYHQ
-		{
-			get
-			{
-				return this._i_IsUseYHQ;
-			}
-			set
-			{
-				if ((this._i_IsUseYHQ != value))
-				{
-					this.Oni_IsUseYHQChanging(value);
-					this.SendPropertyChanging();
-					this._i_IsUseYHQ = value;
-					this.SendPropertyChanged("i_IsUseYHQ");
-					this.Oni_IsUseYHQChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_FapiaoMoney", DbType="Decimal(18,2) NOT NULL")]
-		public decimal dm_FapiaoMoney
-		{
-			get
-			{
-				return this._dm_FapiaoMoney;
-			}
-			set
-			{
-				if ((this._dm_FapiaoMoney != value))
-				{
-					this.Ondm_FapiaoMoneyChanging(value);
-					this.SendPropertyChanging();
-					this._dm_FapiaoMoney = value;
-					this.SendPropertyChanged("dm_FapiaoMoney");
-					this.Ondm_FapiaoMoneyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_YoujiFee", DbType="Decimal(18,2) NOT NULL")]
-		public decimal dm_YoujiFee
-		{
-			get
-			{
-				return this._dm_YoujiFee;
-			}
-			set
-			{
-				if ((this._dm_YoujiFee != value))
-				{
-					this.Ondm_YoujiFeeChanging(value);
-					this.SendPropertyChanging();
-					this._dm_YoujiFee = value;
-					this.SendPropertyChanged("dm_YoujiFee");
-					this.Ondm_YoujiFeeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_YouHuiFee", DbType="Decimal(18,2) NOT NULL")]
-		public decimal dm_YouHuiFee
-		{
-			get
-			{
-				return this._dm_YouHuiFee;
-			}
-			set
-			{
-				if ((this._dm_YouHuiFee != value))
-				{
-					this.Ondm_YouHuiFeeChanging(value);
-					this.SendPropertyChanging();
-					this._dm_YouHuiFee = value;
-					this.SendPropertyChanged("dm_YouHuiFee");
-					this.Ondm_YouHuiFeeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_SendEmailOrder", DbType="Int NOT NULL")]
-		public int i_SendEmailOrder
-		{
-			get
-			{
-				return this._i_SendEmailOrder;
-			}
-			set
-			{
-				if ((this._i_SendEmailOrder != value))
-				{
-					this.Oni_SendEmailOrderChanging(value);
-					this.SendPropertyChanging();
-					this._i_SendEmailOrder = value;
-					this.SendPropertyChanged("i_SendEmailOrder");
-					this.Oni_SendEmailOrderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_SendPhoneOrder", DbType="Int NOT NULL")]
-		public int i_SendPhoneOrder
-		{
-			get
-			{
-				return this._i_SendPhoneOrder;
-			}
-			set
-			{
-				if ((this._i_SendPhoneOrder != value))
-				{
-					this.Oni_SendPhoneOrderChanging(value);
-					this.SendPropertyChanging();
-					this._i_SendPhoneOrder = value;
-					this.SendPropertyChanged("i_SendPhoneOrder");
-					this.Oni_SendPhoneOrderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_AddressId", DbType="Int NOT NULL")]
-		public int i_AddressId
-		{
-			get
-			{
-				return this._i_AddressId;
-			}
-			set
-			{
-				if ((this._i_AddressId != value))
-				{
-					this.Oni_AddressIdChanging(value);
-					this.SendPropertyChanging();
-					this._i_AddressId = value;
-					this.SendPropertyChanged("i_AddressId");
-					this.Oni_AddressIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YHQIdstr", DbType="NVarChar(150)")]
-		public string nvc_YHQIdstr
-		{
-			get
-			{
-				return this._nvc_YHQIdstr;
-			}
-			set
-			{
-				if ((this._nvc_YHQIdstr != value))
-				{
-					this.Onnvc_YHQIdstrChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_YHQIdstr = value;
-					this.SendPropertyChanged("nvc_YHQIdstr");
-					this.Onnvc_YHQIdstrChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YouJiWay", DbType="NVarChar(50)")]
-		public string nvc_YouJiWay
-		{
-			get
-			{
-				return this._nvc_YouJiWay;
-			}
-			set
-			{
-				if ((this._nvc_YouJiWay != value))
-				{
-					this.Onnvc_YouJiWayChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_YouJiWay = value;
-					this.SendPropertyChanged("nvc_YouJiWay");
-					this.Onnvc_YouJiWayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_BankId", DbType="NVarChar(50)")]
-		public string nvc_BankId
-		{
-			get
-			{
-				return this._nvc_BankId;
-			}
-			set
-			{
-				if ((this._nvc_BankId != value))
-				{
-					this.Onnvc_BankIdChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_BankId = value;
-					this.SendPropertyChanged("nvc_BankId");
-					this.Onnvc_BankIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TrademarkMoney", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> dm_TrademarkMoney
-		{
-			get
-			{
-				return this._dm_TrademarkMoney;
-			}
-			set
-			{
-				if ((this._dm_TrademarkMoney != value))
-				{
-					this.Ondm_TrademarkMoneyChanging(value);
-					this.SendPropertyChanging();
-					this._dm_TrademarkMoney = value;
-					this.SendPropertyChanged("dm_TrademarkMoney");
-					this.Ondm_TrademarkMoneyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TMDaiLi", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> dm_TMDaiLi
-		{
-			get
-			{
-				return this._dm_TMDaiLi;
-			}
-			set
-			{
-				if ((this._dm_TMDaiLi != value))
-				{
-					this.Ondm_TMDaiLiChanging(value);
-					this.SendPropertyChanging();
-					this._dm_TMDaiLi = value;
-					this.SendPropertyChanged("dm_TMDaiLi");
-					this.Ondm_TMDaiLiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TMZhiNaJin", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> dm_TMZhiNaJin
-		{
-			get
-			{
-				return this._dm_TMZhiNaJin;
-			}
-			set
-			{
-				if ((this._dm_TMZhiNaJin != value))
-				{
-					this.Ondm_TMZhiNaJinChanging(value);
-					this.SendPropertyChanging();
-					this._dm_TMZhiNaJin = value;
-					this.SendPropertyChanged("dm_TMZhiNaJin");
-					this.Ondm_TMZhiNaJinChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_TrademarkOrder_t_TrademarkOrderOperateInfos", Storage="_t_TrademarkOrderOperateInfos", ThisKey="i_Id", OtherKey="i_OrderId")]
-		public EntitySet<t_TrademarkOrderOperateInfos> t_TrademarkOrderOperateInfos
-		{
-			get
-			{
-				return this._t_TrademarkOrderOperateInfos;
-			}
-			set
-			{
-				this._t_TrademarkOrderOperateInfos.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_TrademarkOrder_t_TrademarkOrderDetails", Storage="_t_TrademarkOrderDetails", ThisKey="i_Id", OtherKey="i_OrderId")]
-		public EntitySet<t_TrademarkOrderDetails> t_TrademarkOrderDetails
-		{
-			get
-			{
-				return this._t_TrademarkOrderDetails;
-			}
-			set
-			{
-				this._t_TrademarkOrderDetails.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_t_TrademarkOrderOperateInfos(t_TrademarkOrderOperateInfos entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_TrademarkOrder = this;
-		}
-		
-		private void detach_t_TrademarkOrderOperateInfos(t_TrademarkOrderOperateInfos entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_TrademarkOrder = null;
-		}
-		
-		private void attach_t_TrademarkOrderDetails(t_TrademarkOrderDetails entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_TrademarkOrder = this;
-		}
-		
-		private void detach_t_TrademarkOrderDetails(t_TrademarkOrderDetails entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_TrademarkOrder = null;
 		}
 	}
 	
@@ -9044,6 +7815,1403 @@ namespace zscq.Model
 						this._i_OrderId = default(int);
 					}
 					this.SendPropertyChanged("t_PatentOrder");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_TrademarkOrder")]
+	public partial class t_TrademarkOrder : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private int _i_MemberId;
+		
+		private string _nvc_OrderNumber;
+		
+		private decimal _dm_TotalMoneyGY;
+		
+		private decimal _dm_TotalMoney;
+		
+		private int _i_Status;
+		
+		private System.Nullable<System.DateTime> _dt_AddTime;
+		
+		private System.Nullable<System.DateTime> _dt_PayTime;
+		
+		private int _i_IsFaPiao;
+		
+		private string _nvc_FaPiaoTaiTou;
+		
+		private int _i_IsYouJi;
+		
+		private int _i_YouJiType;
+		
+		private string _nvc_YouHUiQuan;
+		
+		private string _nvc_PayType;
+		
+		private string _nvc_Bank;
+		
+		private int _i_JiFen;
+		
+		private int _i_Address_Gid;
+		
+		private int _i_Address_PId;
+		
+		private int _i_Address_CId;
+		
+		private int _i_Address_AId;
+		
+		private string _nvc_Address;
+		
+		private int _i_IsUseYHQ;
+		
+		private decimal _dm_FapiaoMoney;
+		
+		private decimal _dm_YoujiFee;
+		
+		private decimal _dm_YouHuiFee;
+		
+		private int _i_SendEmailOrder;
+		
+		private int _i_SendPhoneOrder;
+		
+		private int _i_AddressId;
+		
+		private string _nvc_YHQIdstr;
+		
+		private string _nvc_YouJiWay;
+		
+		private string _nvc_BankId;
+		
+		private System.Nullable<decimal> _dm_TrademarkMoney;
+		
+		private System.Nullable<decimal> _dm_TMDaiLi;
+		
+		private System.Nullable<decimal> _dm_ZengZhiTax;
+		
+		private System.Nullable<decimal> _dm_ShouXuFee;
+		
+		private System.Nullable<decimal> _dm_TMZhiNaJin;
+		
+		private EntitySet<t_TrademarkOrderOperateInfos> _t_TrademarkOrderOperateInfos;
+		
+		private EntitySet<t_TrademarkOrderDetails> _t_TrademarkOrderDetails;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void Oni_MemberIdChanging(int value);
+    partial void Oni_MemberIdChanged();
+    partial void Onnvc_OrderNumberChanging(string value);
+    partial void Onnvc_OrderNumberChanged();
+    partial void Ondm_TotalMoneyGYChanging(decimal value);
+    partial void Ondm_TotalMoneyGYChanged();
+    partial void Ondm_TotalMoneyChanging(decimal value);
+    partial void Ondm_TotalMoneyChanged();
+    partial void Oni_StatusChanging(int value);
+    partial void Oni_StatusChanged();
+    partial void Ondt_AddTimeChanging(System.Nullable<System.DateTime> value);
+    partial void Ondt_AddTimeChanged();
+    partial void Ondt_PayTimeChanging(System.Nullable<System.DateTime> value);
+    partial void Ondt_PayTimeChanged();
+    partial void Oni_IsFaPiaoChanging(int value);
+    partial void Oni_IsFaPiaoChanged();
+    partial void Onnvc_FaPiaoTaiTouChanging(string value);
+    partial void Onnvc_FaPiaoTaiTouChanged();
+    partial void Oni_IsYouJiChanging(int value);
+    partial void Oni_IsYouJiChanged();
+    partial void Oni_YouJiTypeChanging(int value);
+    partial void Oni_YouJiTypeChanged();
+    partial void Onnvc_YouHUiQuanChanging(string value);
+    partial void Onnvc_YouHUiQuanChanged();
+    partial void Onnvc_PayTypeChanging(string value);
+    partial void Onnvc_PayTypeChanged();
+    partial void Onnvc_BankChanging(string value);
+    partial void Onnvc_BankChanged();
+    partial void Oni_JiFenChanging(int value);
+    partial void Oni_JiFenChanged();
+    partial void Oni_Address_GidChanging(int value);
+    partial void Oni_Address_GidChanged();
+    partial void Oni_Address_PIdChanging(int value);
+    partial void Oni_Address_PIdChanged();
+    partial void Oni_Address_CIdChanging(int value);
+    partial void Oni_Address_CIdChanged();
+    partial void Oni_Address_AIdChanging(int value);
+    partial void Oni_Address_AIdChanged();
+    partial void Onnvc_AddressChanging(string value);
+    partial void Onnvc_AddressChanged();
+    partial void Oni_IsUseYHQChanging(int value);
+    partial void Oni_IsUseYHQChanged();
+    partial void Ondm_FapiaoMoneyChanging(decimal value);
+    partial void Ondm_FapiaoMoneyChanged();
+    partial void Ondm_YoujiFeeChanging(decimal value);
+    partial void Ondm_YoujiFeeChanged();
+    partial void Ondm_YouHuiFeeChanging(decimal value);
+    partial void Ondm_YouHuiFeeChanged();
+    partial void Oni_SendEmailOrderChanging(int value);
+    partial void Oni_SendEmailOrderChanged();
+    partial void Oni_SendPhoneOrderChanging(int value);
+    partial void Oni_SendPhoneOrderChanged();
+    partial void Oni_AddressIdChanging(int value);
+    partial void Oni_AddressIdChanged();
+    partial void Onnvc_YHQIdstrChanging(string value);
+    partial void Onnvc_YHQIdstrChanged();
+    partial void Onnvc_YouJiWayChanging(string value);
+    partial void Onnvc_YouJiWayChanged();
+    partial void Onnvc_BankIdChanging(string value);
+    partial void Onnvc_BankIdChanged();
+    partial void Ondm_TrademarkMoneyChanging(System.Nullable<decimal> value);
+    partial void Ondm_TrademarkMoneyChanged();
+    partial void Ondm_TMDaiLiChanging(System.Nullable<decimal> value);
+    partial void Ondm_TMDaiLiChanged();
+    partial void Ondm_ZengZhiTaxChanging(System.Nullable<decimal> value);
+    partial void Ondm_ZengZhiTaxChanged();
+    partial void Ondm_ShouXuFeeChanging(System.Nullable<decimal> value);
+    partial void Ondm_ShouXuFeeChanged();
+    partial void Ondm_TMZhiNaJinChanging(System.Nullable<decimal> value);
+    partial void Ondm_TMZhiNaJinChanged();
+    #endregion
+		
+		public t_TrademarkOrder()
+		{
+			this._t_TrademarkOrderOperateInfos = new EntitySet<t_TrademarkOrderOperateInfos>(new Action<t_TrademarkOrderOperateInfos>(this.attach_t_TrademarkOrderOperateInfos), new Action<t_TrademarkOrderOperateInfos>(this.detach_t_TrademarkOrderOperateInfos));
+			this._t_TrademarkOrderDetails = new EntitySet<t_TrademarkOrderDetails>(new Action<t_TrademarkOrderDetails>(this.attach_t_TrademarkOrderDetails), new Action<t_TrademarkOrderDetails>(this.detach_t_TrademarkOrderDetails));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
+		public int i_MemberId
+		{
+			get
+			{
+				return this._i_MemberId;
+			}
+			set
+			{
+				if ((this._i_MemberId != value))
+				{
+					this.Oni_MemberIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_MemberId = value;
+					this.SendPropertyChanged("i_MemberId");
+					this.Oni_MemberIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_OrderNumber", DbType="NVarChar(50)")]
+		public string nvc_OrderNumber
+		{
+			get
+			{
+				return this._nvc_OrderNumber;
+			}
+			set
+			{
+				if ((this._nvc_OrderNumber != value))
+				{
+					this.Onnvc_OrderNumberChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_OrderNumber = value;
+					this.SendPropertyChanged("nvc_OrderNumber");
+					this.Onnvc_OrderNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TotalMoneyGY", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_TotalMoneyGY
+		{
+			get
+			{
+				return this._dm_TotalMoneyGY;
+			}
+			set
+			{
+				if ((this._dm_TotalMoneyGY != value))
+				{
+					this.Ondm_TotalMoneyGYChanging(value);
+					this.SendPropertyChanging();
+					this._dm_TotalMoneyGY = value;
+					this.SendPropertyChanged("dm_TotalMoneyGY");
+					this.Ondm_TotalMoneyGYChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TotalMoney", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_TotalMoney
+		{
+			get
+			{
+				return this._dm_TotalMoney;
+			}
+			set
+			{
+				if ((this._dm_TotalMoney != value))
+				{
+					this.Ondm_TotalMoneyChanging(value);
+					this.SendPropertyChanging();
+					this._dm_TotalMoney = value;
+					this.SendPropertyChanged("dm_TotalMoney");
+					this.Ondm_TotalMoneyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Status", DbType="Int NOT NULL")]
+		public int i_Status
+		{
+			get
+			{
+				return this._i_Status;
+			}
+			set
+			{
+				if ((this._i_Status != value))
+				{
+					this.Oni_StatusChanging(value);
+					this.SendPropertyChanging();
+					this._i_Status = value;
+					this.SendPropertyChanged("i_Status");
+					this.Oni_StatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_AddTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dt_AddTime
+		{
+			get
+			{
+				return this._dt_AddTime;
+			}
+			set
+			{
+				if ((this._dt_AddTime != value))
+				{
+					this.Ondt_AddTimeChanging(value);
+					this.SendPropertyChanging();
+					this._dt_AddTime = value;
+					this.SendPropertyChanged("dt_AddTime");
+					this.Ondt_AddTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_PayTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dt_PayTime
+		{
+			get
+			{
+				return this._dt_PayTime;
+			}
+			set
+			{
+				if ((this._dt_PayTime != value))
+				{
+					this.Ondt_PayTimeChanging(value);
+					this.SendPropertyChanging();
+					this._dt_PayTime = value;
+					this.SendPropertyChanged("dt_PayTime");
+					this.Ondt_PayTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsFaPiao", DbType="Int NOT NULL")]
+		public int i_IsFaPiao
+		{
+			get
+			{
+				return this._i_IsFaPiao;
+			}
+			set
+			{
+				if ((this._i_IsFaPiao != value))
+				{
+					this.Oni_IsFaPiaoChanging(value);
+					this.SendPropertyChanging();
+					this._i_IsFaPiao = value;
+					this.SendPropertyChanged("i_IsFaPiao");
+					this.Oni_IsFaPiaoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_FaPiaoTaiTou", DbType="NVarChar(500)")]
+		public string nvc_FaPiaoTaiTou
+		{
+			get
+			{
+				return this._nvc_FaPiaoTaiTou;
+			}
+			set
+			{
+				if ((this._nvc_FaPiaoTaiTou != value))
+				{
+					this.Onnvc_FaPiaoTaiTouChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_FaPiaoTaiTou = value;
+					this.SendPropertyChanged("nvc_FaPiaoTaiTou");
+					this.Onnvc_FaPiaoTaiTouChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsYouJi", DbType="Int NOT NULL")]
+		public int i_IsYouJi
+		{
+			get
+			{
+				return this._i_IsYouJi;
+			}
+			set
+			{
+				if ((this._i_IsYouJi != value))
+				{
+					this.Oni_IsYouJiChanging(value);
+					this.SendPropertyChanging();
+					this._i_IsYouJi = value;
+					this.SendPropertyChanged("i_IsYouJi");
+					this.Oni_IsYouJiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_YouJiType", DbType="Int NOT NULL")]
+		public int i_YouJiType
+		{
+			get
+			{
+				return this._i_YouJiType;
+			}
+			set
+			{
+				if ((this._i_YouJiType != value))
+				{
+					this.Oni_YouJiTypeChanging(value);
+					this.SendPropertyChanging();
+					this._i_YouJiType = value;
+					this.SendPropertyChanged("i_YouJiType");
+					this.Oni_YouJiTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YouHUiQuan", DbType="NVarChar(50)")]
+		public string nvc_YouHUiQuan
+		{
+			get
+			{
+				return this._nvc_YouHUiQuan;
+			}
+			set
+			{
+				if ((this._nvc_YouHUiQuan != value))
+				{
+					this.Onnvc_YouHUiQuanChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_YouHUiQuan = value;
+					this.SendPropertyChanged("nvc_YouHUiQuan");
+					this.Onnvc_YouHUiQuanChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_PayType", DbType="NVarChar(50)")]
+		public string nvc_PayType
+		{
+			get
+			{
+				return this._nvc_PayType;
+			}
+			set
+			{
+				if ((this._nvc_PayType != value))
+				{
+					this.Onnvc_PayTypeChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_PayType = value;
+					this.SendPropertyChanged("nvc_PayType");
+					this.Onnvc_PayTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Bank", DbType="NVarChar(50)")]
+		public string nvc_Bank
+		{
+			get
+			{
+				return this._nvc_Bank;
+			}
+			set
+			{
+				if ((this._nvc_Bank != value))
+				{
+					this.Onnvc_BankChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_Bank = value;
+					this.SendPropertyChanged("nvc_Bank");
+					this.Onnvc_BankChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_JiFen", DbType="Int NOT NULL")]
+		public int i_JiFen
+		{
+			get
+			{
+				return this._i_JiFen;
+			}
+			set
+			{
+				if ((this._i_JiFen != value))
+				{
+					this.Oni_JiFenChanging(value);
+					this.SendPropertyChanging();
+					this._i_JiFen = value;
+					this.SendPropertyChanged("i_JiFen");
+					this.Oni_JiFenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_Gid", DbType="Int NOT NULL")]
+		public int i_Address_Gid
+		{
+			get
+			{
+				return this._i_Address_Gid;
+			}
+			set
+			{
+				if ((this._i_Address_Gid != value))
+				{
+					this.Oni_Address_GidChanging(value);
+					this.SendPropertyChanging();
+					this._i_Address_Gid = value;
+					this.SendPropertyChanged("i_Address_Gid");
+					this.Oni_Address_GidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_PId", DbType="Int NOT NULL")]
+		public int i_Address_PId
+		{
+			get
+			{
+				return this._i_Address_PId;
+			}
+			set
+			{
+				if ((this._i_Address_PId != value))
+				{
+					this.Oni_Address_PIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Address_PId = value;
+					this.SendPropertyChanged("i_Address_PId");
+					this.Oni_Address_PIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_CId", DbType="Int NOT NULL")]
+		public int i_Address_CId
+		{
+			get
+			{
+				return this._i_Address_CId;
+			}
+			set
+			{
+				if ((this._i_Address_CId != value))
+				{
+					this.Oni_Address_CIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Address_CId = value;
+					this.SendPropertyChanged("i_Address_CId");
+					this.Oni_Address_CIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_AId", DbType="Int NOT NULL")]
+		public int i_Address_AId
+		{
+			get
+			{
+				return this._i_Address_AId;
+			}
+			set
+			{
+				if ((this._i_Address_AId != value))
+				{
+					this.Oni_Address_AIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Address_AId = value;
+					this.SendPropertyChanged("i_Address_AId");
+					this.Oni_Address_AIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Address", DbType="NVarChar(250)")]
+		public string nvc_Address
+		{
+			get
+			{
+				return this._nvc_Address;
+			}
+			set
+			{
+				if ((this._nvc_Address != value))
+				{
+					this.Onnvc_AddressChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_Address = value;
+					this.SendPropertyChanged("nvc_Address");
+					this.Onnvc_AddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsUseYHQ", DbType="Int NOT NULL")]
+		public int i_IsUseYHQ
+		{
+			get
+			{
+				return this._i_IsUseYHQ;
+			}
+			set
+			{
+				if ((this._i_IsUseYHQ != value))
+				{
+					this.Oni_IsUseYHQChanging(value);
+					this.SendPropertyChanging();
+					this._i_IsUseYHQ = value;
+					this.SendPropertyChanged("i_IsUseYHQ");
+					this.Oni_IsUseYHQChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_FapiaoMoney", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_FapiaoMoney
+		{
+			get
+			{
+				return this._dm_FapiaoMoney;
+			}
+			set
+			{
+				if ((this._dm_FapiaoMoney != value))
+				{
+					this.Ondm_FapiaoMoneyChanging(value);
+					this.SendPropertyChanging();
+					this._dm_FapiaoMoney = value;
+					this.SendPropertyChanged("dm_FapiaoMoney");
+					this.Ondm_FapiaoMoneyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_YoujiFee", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_YoujiFee
+		{
+			get
+			{
+				return this._dm_YoujiFee;
+			}
+			set
+			{
+				if ((this._dm_YoujiFee != value))
+				{
+					this.Ondm_YoujiFeeChanging(value);
+					this.SendPropertyChanging();
+					this._dm_YoujiFee = value;
+					this.SendPropertyChanged("dm_YoujiFee");
+					this.Ondm_YoujiFeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_YouHuiFee", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_YouHuiFee
+		{
+			get
+			{
+				return this._dm_YouHuiFee;
+			}
+			set
+			{
+				if ((this._dm_YouHuiFee != value))
+				{
+					this.Ondm_YouHuiFeeChanging(value);
+					this.SendPropertyChanging();
+					this._dm_YouHuiFee = value;
+					this.SendPropertyChanged("dm_YouHuiFee");
+					this.Ondm_YouHuiFeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_SendEmailOrder", DbType="Int NOT NULL")]
+		public int i_SendEmailOrder
+		{
+			get
+			{
+				return this._i_SendEmailOrder;
+			}
+			set
+			{
+				if ((this._i_SendEmailOrder != value))
+				{
+					this.Oni_SendEmailOrderChanging(value);
+					this.SendPropertyChanging();
+					this._i_SendEmailOrder = value;
+					this.SendPropertyChanged("i_SendEmailOrder");
+					this.Oni_SendEmailOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_SendPhoneOrder", DbType="Int NOT NULL")]
+		public int i_SendPhoneOrder
+		{
+			get
+			{
+				return this._i_SendPhoneOrder;
+			}
+			set
+			{
+				if ((this._i_SendPhoneOrder != value))
+				{
+					this.Oni_SendPhoneOrderChanging(value);
+					this.SendPropertyChanging();
+					this._i_SendPhoneOrder = value;
+					this.SendPropertyChanged("i_SendPhoneOrder");
+					this.Oni_SendPhoneOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_AddressId", DbType="Int NOT NULL")]
+		public int i_AddressId
+		{
+			get
+			{
+				return this._i_AddressId;
+			}
+			set
+			{
+				if ((this._i_AddressId != value))
+				{
+					this.Oni_AddressIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_AddressId = value;
+					this.SendPropertyChanged("i_AddressId");
+					this.Oni_AddressIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YHQIdstr", DbType="NVarChar(150)")]
+		public string nvc_YHQIdstr
+		{
+			get
+			{
+				return this._nvc_YHQIdstr;
+			}
+			set
+			{
+				if ((this._nvc_YHQIdstr != value))
+				{
+					this.Onnvc_YHQIdstrChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_YHQIdstr = value;
+					this.SendPropertyChanged("nvc_YHQIdstr");
+					this.Onnvc_YHQIdstrChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YouJiWay", DbType="NVarChar(50)")]
+		public string nvc_YouJiWay
+		{
+			get
+			{
+				return this._nvc_YouJiWay;
+			}
+			set
+			{
+				if ((this._nvc_YouJiWay != value))
+				{
+					this.Onnvc_YouJiWayChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_YouJiWay = value;
+					this.SendPropertyChanged("nvc_YouJiWay");
+					this.Onnvc_YouJiWayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_BankId", DbType="NVarChar(50)")]
+		public string nvc_BankId
+		{
+			get
+			{
+				return this._nvc_BankId;
+			}
+			set
+			{
+				if ((this._nvc_BankId != value))
+				{
+					this.Onnvc_BankIdChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_BankId = value;
+					this.SendPropertyChanged("nvc_BankId");
+					this.Onnvc_BankIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TrademarkMoney", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TrademarkMoney
+		{
+			get
+			{
+				return this._dm_TrademarkMoney;
+			}
+			set
+			{
+				if ((this._dm_TrademarkMoney != value))
+				{
+					this.Ondm_TrademarkMoneyChanging(value);
+					this.SendPropertyChanging();
+					this._dm_TrademarkMoney = value;
+					this.SendPropertyChanged("dm_TrademarkMoney");
+					this.Ondm_TrademarkMoneyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TMDaiLi", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TMDaiLi
+		{
+			get
+			{
+				return this._dm_TMDaiLi;
+			}
+			set
+			{
+				if ((this._dm_TMDaiLi != value))
+				{
+					this.Ondm_TMDaiLiChanging(value);
+					this.SendPropertyChanging();
+					this._dm_TMDaiLi = value;
+					this.SendPropertyChanged("dm_TMDaiLi");
+					this.Ondm_TMDaiLiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_ZengZhiTax", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_ZengZhiTax
+		{
+			get
+			{
+				return this._dm_ZengZhiTax;
+			}
+			set
+			{
+				if ((this._dm_ZengZhiTax != value))
+				{
+					this.Ondm_ZengZhiTaxChanging(value);
+					this.SendPropertyChanging();
+					this._dm_ZengZhiTax = value;
+					this.SendPropertyChanged("dm_ZengZhiTax");
+					this.Ondm_ZengZhiTaxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_ShouXuFee", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_ShouXuFee
+		{
+			get
+			{
+				return this._dm_ShouXuFee;
+			}
+			set
+			{
+				if ((this._dm_ShouXuFee != value))
+				{
+					this.Ondm_ShouXuFeeChanging(value);
+					this.SendPropertyChanging();
+					this._dm_ShouXuFee = value;
+					this.SendPropertyChanged("dm_ShouXuFee");
+					this.Ondm_ShouXuFeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TMZhiNaJin", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TMZhiNaJin
+		{
+			get
+			{
+				return this._dm_TMZhiNaJin;
+			}
+			set
+			{
+				if ((this._dm_TMZhiNaJin != value))
+				{
+					this.Ondm_TMZhiNaJinChanging(value);
+					this.SendPropertyChanging();
+					this._dm_TMZhiNaJin = value;
+					this.SendPropertyChanged("dm_TMZhiNaJin");
+					this.Ondm_TMZhiNaJinChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_TrademarkOrder_t_TrademarkOrderOperateInfos", Storage="_t_TrademarkOrderOperateInfos", ThisKey="i_Id", OtherKey="i_OrderId")]
+		public EntitySet<t_TrademarkOrderOperateInfos> t_TrademarkOrderOperateInfos
+		{
+			get
+			{
+				return this._t_TrademarkOrderOperateInfos;
+			}
+			set
+			{
+				this._t_TrademarkOrderOperateInfos.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_TrademarkOrder_t_TrademarkOrderDetails", Storage="_t_TrademarkOrderDetails", ThisKey="i_Id", OtherKey="i_OrderId")]
+		public EntitySet<t_TrademarkOrderDetails> t_TrademarkOrderDetails
+		{
+			get
+			{
+				return this._t_TrademarkOrderDetails;
+			}
+			set
+			{
+				this._t_TrademarkOrderDetails.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_TrademarkOrderOperateInfos(t_TrademarkOrderOperateInfos entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_TrademarkOrder = this;
+		}
+		
+		private void detach_t_TrademarkOrderOperateInfos(t_TrademarkOrderOperateInfos entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_TrademarkOrder = null;
+		}
+		
+		private void attach_t_TrademarkOrderDetails(t_TrademarkOrderDetails entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_TrademarkOrder = this;
+		}
+		
+		private void detach_t_TrademarkOrderDetails(t_TrademarkOrderDetails entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_TrademarkOrder = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_TrademarkOrderDetails")]
+	public partial class t_TrademarkOrderDetails : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private System.Nullable<int> _i_OrderId;
+		
+		private int _i_TrademarkId;
+		
+		private string _nvc_SBRegNum;
+		
+		private string _nvc_SBType;
+		
+		private string _nvc_SBRegName;
+		
+		private string _nvc_SBRegEnName;
+		
+		private int _i_ShengDays;
+		
+		private int _i_JiaoFeiType;
+		
+		private string _nvc_SbDaoqiTime;
+		
+		private System.Nullable<decimal> _dm_TotalMoney;
+		
+		private System.Nullable<decimal> _dm_TrademarkMoney;
+		
+		private System.Nullable<decimal> _dm_TMDaiLi;
+		
+		private System.Nullable<decimal> _dm_ZengZhiTax;
+		
+		private System.Nullable<decimal> _dm_ShouXuFee;
+		
+		private EntityRef<t_TrademarkOrder> _t_TrademarkOrder;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void Oni_OrderIdChanging(System.Nullable<int> value);
+    partial void Oni_OrderIdChanged();
+    partial void Oni_TrademarkIdChanging(int value);
+    partial void Oni_TrademarkIdChanged();
+    partial void Onnvc_SBRegNumChanging(string value);
+    partial void Onnvc_SBRegNumChanged();
+    partial void Onnvc_SBTypeChanging(string value);
+    partial void Onnvc_SBTypeChanged();
+    partial void Onnvc_SBRegNameChanging(string value);
+    partial void Onnvc_SBRegNameChanged();
+    partial void Onnvc_SBRegEnNameChanging(string value);
+    partial void Onnvc_SBRegEnNameChanged();
+    partial void Oni_ShengDaysChanging(int value);
+    partial void Oni_ShengDaysChanged();
+    partial void Oni_JiaoFeiTypeChanging(int value);
+    partial void Oni_JiaoFeiTypeChanged();
+    partial void Onnvc_SbDaoqiTimeChanging(string value);
+    partial void Onnvc_SbDaoqiTimeChanged();
+    partial void Ondm_TotalMoneyChanging(System.Nullable<decimal> value);
+    partial void Ondm_TotalMoneyChanged();
+    partial void Ondm_TrademarkMoneyChanging(System.Nullable<decimal> value);
+    partial void Ondm_TrademarkMoneyChanged();
+    partial void Ondm_TMDaiLiChanging(System.Nullable<decimal> value);
+    partial void Ondm_TMDaiLiChanged();
+    partial void Ondm_ZengZhiTaxChanging(System.Nullable<decimal> value);
+    partial void Ondm_ZengZhiTaxChanged();
+    partial void Ondm_ShouXuFeeChanging(System.Nullable<decimal> value);
+    partial void Ondm_ShouXuFeeChanged();
+    #endregion
+		
+		public t_TrademarkOrderDetails()
+		{
+			this._t_TrademarkOrder = default(EntityRef<t_TrademarkOrder>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_OrderId", DbType="Int")]
+		public System.Nullable<int> i_OrderId
+		{
+			get
+			{
+				return this._i_OrderId;
+			}
+			set
+			{
+				if ((this._i_OrderId != value))
+				{
+					if (this._t_TrademarkOrder.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oni_OrderIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_OrderId = value;
+					this.SendPropertyChanged("i_OrderId");
+					this.Oni_OrderIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_TrademarkId", DbType="Int NOT NULL")]
+		public int i_TrademarkId
+		{
+			get
+			{
+				return this._i_TrademarkId;
+			}
+			set
+			{
+				if ((this._i_TrademarkId != value))
+				{
+					this.Oni_TrademarkIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_TrademarkId = value;
+					this.SendPropertyChanged("i_TrademarkId");
+					this.Oni_TrademarkIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegNum", DbType="NVarChar(50)")]
+		public string nvc_SBRegNum
+		{
+			get
+			{
+				return this._nvc_SBRegNum;
+			}
+			set
+			{
+				if ((this._nvc_SBRegNum != value))
+				{
+					this.Onnvc_SBRegNumChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_SBRegNum = value;
+					this.SendPropertyChanged("nvc_SBRegNum");
+					this.Onnvc_SBRegNumChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBType", DbType="NVarChar(50)")]
+		public string nvc_SBType
+		{
+			get
+			{
+				return this._nvc_SBType;
+			}
+			set
+			{
+				if ((this._nvc_SBType != value))
+				{
+					this.Onnvc_SBTypeChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_SBType = value;
+					this.SendPropertyChanged("nvc_SBType");
+					this.Onnvc_SBTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegName", DbType="NVarChar(50)")]
+		public string nvc_SBRegName
+		{
+			get
+			{
+				return this._nvc_SBRegName;
+			}
+			set
+			{
+				if ((this._nvc_SBRegName != value))
+				{
+					this.Onnvc_SBRegNameChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_SBRegName = value;
+					this.SendPropertyChanged("nvc_SBRegName");
+					this.Onnvc_SBRegNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegEnName", DbType="NVarChar(50)")]
+		public string nvc_SBRegEnName
+		{
+			get
+			{
+				return this._nvc_SBRegEnName;
+			}
+			set
+			{
+				if ((this._nvc_SBRegEnName != value))
+				{
+					this.Onnvc_SBRegEnNameChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_SBRegEnName = value;
+					this.SendPropertyChanged("nvc_SBRegEnName");
+					this.Onnvc_SBRegEnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_ShengDays", DbType="Int NOT NULL")]
+		public int i_ShengDays
+		{
+			get
+			{
+				return this._i_ShengDays;
+			}
+			set
+			{
+				if ((this._i_ShengDays != value))
+				{
+					this.Oni_ShengDaysChanging(value);
+					this.SendPropertyChanging();
+					this._i_ShengDays = value;
+					this.SendPropertyChanged("i_ShengDays");
+					this.Oni_ShengDaysChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_JiaoFeiType", DbType="Int NOT NULL")]
+		public int i_JiaoFeiType
+		{
+			get
+			{
+				return this._i_JiaoFeiType;
+			}
+			set
+			{
+				if ((this._i_JiaoFeiType != value))
+				{
+					this.Oni_JiaoFeiTypeChanging(value);
+					this.SendPropertyChanging();
+					this._i_JiaoFeiType = value;
+					this.SendPropertyChanged("i_JiaoFeiType");
+					this.Oni_JiaoFeiTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SbDaoqiTime", DbType="NVarChar(50)")]
+		public string nvc_SbDaoqiTime
+		{
+			get
+			{
+				return this._nvc_SbDaoqiTime;
+			}
+			set
+			{
+				if ((this._nvc_SbDaoqiTime != value))
+				{
+					this.Onnvc_SbDaoqiTimeChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_SbDaoqiTime = value;
+					this.SendPropertyChanged("nvc_SbDaoqiTime");
+					this.Onnvc_SbDaoqiTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TotalMoney", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TotalMoney
+		{
+			get
+			{
+				return this._dm_TotalMoney;
+			}
+			set
+			{
+				if ((this._dm_TotalMoney != value))
+				{
+					this.Ondm_TotalMoneyChanging(value);
+					this.SendPropertyChanging();
+					this._dm_TotalMoney = value;
+					this.SendPropertyChanged("dm_TotalMoney");
+					this.Ondm_TotalMoneyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TrademarkMoney", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TrademarkMoney
+		{
+			get
+			{
+				return this._dm_TrademarkMoney;
+			}
+			set
+			{
+				if ((this._dm_TrademarkMoney != value))
+				{
+					this.Ondm_TrademarkMoneyChanging(value);
+					this.SendPropertyChanging();
+					this._dm_TrademarkMoney = value;
+					this.SendPropertyChanged("dm_TrademarkMoney");
+					this.Ondm_TrademarkMoneyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TMDaiLi", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TMDaiLi
+		{
+			get
+			{
+				return this._dm_TMDaiLi;
+			}
+			set
+			{
+				if ((this._dm_TMDaiLi != value))
+				{
+					this.Ondm_TMDaiLiChanging(value);
+					this.SendPropertyChanging();
+					this._dm_TMDaiLi = value;
+					this.SendPropertyChanged("dm_TMDaiLi");
+					this.Ondm_TMDaiLiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_ZengZhiTax", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_ZengZhiTax
+		{
+			get
+			{
+				return this._dm_ZengZhiTax;
+			}
+			set
+			{
+				if ((this._dm_ZengZhiTax != value))
+				{
+					this.Ondm_ZengZhiTaxChanging(value);
+					this.SendPropertyChanging();
+					this._dm_ZengZhiTax = value;
+					this.SendPropertyChanged("dm_ZengZhiTax");
+					this.Ondm_ZengZhiTaxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_ShouXuFee", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_ShouXuFee
+		{
+			get
+			{
+				return this._dm_ShouXuFee;
+			}
+			set
+			{
+				if ((this._dm_ShouXuFee != value))
+				{
+					this.Ondm_ShouXuFeeChanging(value);
+					this.SendPropertyChanging();
+					this._dm_ShouXuFee = value;
+					this.SendPropertyChanged("dm_ShouXuFee");
+					this.Ondm_ShouXuFeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_TrademarkOrder_t_TrademarkOrderDetails", Storage="_t_TrademarkOrder", ThisKey="i_OrderId", OtherKey="i_Id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public t_TrademarkOrder t_TrademarkOrder
+		{
+			get
+			{
+				return this._t_TrademarkOrder.Entity;
+			}
+			set
+			{
+				t_TrademarkOrder previousValue = this._t_TrademarkOrder.Entity;
+				if (((previousValue != value) 
+							|| (this._t_TrademarkOrder.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_TrademarkOrder.Entity = null;
+						previousValue.t_TrademarkOrderDetails.Remove(this);
+					}
+					this._t_TrademarkOrder.Entity = value;
+					if ((value != null))
+					{
+						value.t_TrademarkOrderDetails.Add(this);
+						this._i_OrderId = value.i_Id;
+					}
+					else
+					{
+						this._i_OrderId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("t_TrademarkOrder");
 				}
 			}
 		}

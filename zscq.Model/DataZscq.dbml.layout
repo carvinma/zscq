@@ -50,7 +50,7 @@
         <elementListCompartment Id="01c6cf0c-4bc6-4988-8f40-459b6d80faef" absoluteBounds="3.5150000005960464, 6.33500000089407, 1.9700000000000002, 3.7492167154947915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 6.09999999962747); (3.5 : 6.09999999962747)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 6.09999999962747); (3.5 : 6.09999999962747)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataZscqDataContext/t_PatentType/t_PatentType_t_PatentFee" />
       <nodes>
         <classShapeMoniker Id="e47a38ee-6e7d-4e71-9a0e-82638c0ee479" />
@@ -87,38 +87,12 @@
         <elementListCompartment Id="c7487453-dcab-477e-81a6-0f745a00c96e" absoluteBounds="0.76500000059604645, 4.33500000089407, 1.9700000000000002, 5.781951904296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="98372114-6e6e-4add-b476-861356123055" isExpanded="false" absoluteBounds="3.5, 0.875, 2, 0.45000000000000018">
-      <DataClassMoniker Name="/DataZscqDataContext/t_TrademarkOrderDetails" />
-      <nestedChildShapes>
-        <elementListCompartment Id="9fe75b10-4bdf-4c58-b539-9feeae22809d" absoluteBounds="3.5150000005960464, 1.3350000008940697, 1.9700000000000002, 2.0860697428385415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="f1dd5422-6b1b-438f-81da-e67cdd5537fd" isExpanded="false" absoluteBounds="9.75, 4.75, 2, 0.44999999999999929">
       <DataClassMoniker Name="/DataZscqDataContext/t_Nationality" />
       <nestedChildShapes>
         <elementListCompartment Id="71f577d5-d48e-4d90-b08d-0323e0ae67a6" absoluteBounds="9.765, 5.21, 1.9700000000000002, 3.564422607421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="24851d65-4432-4da3-a511-6e097dca5941" isExpanded="false" absoluteBounds="0.75, 1.5, 2, 0.45000000000000018">
-      <DataClassMoniker Name="/DataZscqDataContext/t_TrademarkOrder" />
-      <nestedChildShapes>
-        <elementListCompartment Id="d096d213-1963-4ac8-8526-27b1efa99adf" absoluteBounds="0.76500000059604645, 1.9600000008940697, 1.9700000000000002, 6.5211283365885411" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(2.75000000159655 : 1.95); (3.49999999840345 : 2.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DataZscqDataContext/t_TrademarkOrder/t_TrademarkOrder_t_TrademarkOrderOperateInfos" />
-      <nodes>
-        <classShapeMoniker Id="24851d65-4432-4da3-a511-6e097dca5941" />
-        <classShapeMoniker Id="d0149fec-7578-465b-99be-01ecec4311ee" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75000000159655 : 1.5); (3.49999999840345 : 1.325)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DataZscqDataContext/t_TrademarkOrder/t_TrademarkOrder_t_TrademarkOrderDetails" />
-      <nodes>
-        <classShapeMoniker Id="24851d65-4432-4da3-a511-6e097dca5941" />
-        <classShapeMoniker Id="98372114-6e6e-4add-b476-861356123055" />
-      </nodes>
-    </associationConnector>
     <classShape Id="695e4914-aa0a-4b24-a0a5-a2f0bc70812a" isExpanded="false" absoluteBounds="9.75, 6.75, 2, 0.44999999999999929">
       <DataClassMoniker Name="/DataZscqDataContext/t_Trademark" />
       <nestedChildShapes>
@@ -131,11 +105,37 @@
         <elementListCompartment Id="781ba1f4-4b64-4d07-95f1-0a01569456a6" absoluteBounds="3.5149999999999997, 4.335, 1.9700000000000002, 4.673187255859375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 4.1); (3.5 : 4.1)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 4.1); (3.5 : 4.1)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataZscqDataContext/t_PatentOrder/t_PatentOrder_t_PatentOrderInfo" />
       <nodes>
         <classShapeMoniker Id="1d6363a3-92d6-4abd-a937-5656c6c48b49" />
         <classShapeMoniker Id="a7f603c0-340c-4ca1-a683-5fec82ab6278" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ce1d2c41-f91b-4878-9cb1-8ccf1e9c5505" isExpanded="false" absoluteBounds="0.875, 1.5, 2, 0.45">
+      <DataClassMoniker Name="/DataZscqDataContext/t_TrademarkOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0d9c7356-f7c2-439d-ab6c-204cc0bf5bf4" absoluteBounds="0.89000000000000012, 1.96, 1.9700000000000002, 6.890716552734375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.875 : 1.95); (3.5 : 2.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataZscqDataContext/t_TrademarkOrder/t_TrademarkOrder_t_TrademarkOrderOperateInfos" />
+      <nodes>
+        <classShapeMoniker Id="ce1d2c41-f91b-4878-9cb1-8ccf1e9c5505" />
+        <classShapeMoniker Id="d0149fec-7578-465b-99be-01ecec4311ee" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="0a9e6ca4-5a92-460d-9bef-bee40e8ef609" isExpanded="false" absoluteBounds="3.5, 1, 2, 0.45">
+      <DataClassMoniker Name="/DataZscqDataContext/t_TrademarkOrderDetails" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5e3c6cd4-4bcc-42b5-b320-fad617e97a1a" absoluteBounds="3.515, 1.46, 1.9700000000000002, 3.010040283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.875 : 1.5); (3.5 : 1.45)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DataZscqDataContext/t_TrademarkOrder/t_TrademarkOrder_t_TrademarkOrderDetails" />
+      <nodes>
+        <classShapeMoniker Id="ce1d2c41-f91b-4878-9cb1-8ccf1e9c5505" />
+        <classShapeMoniker Id="0a9e6ca4-5a92-460d-9bef-bee40e8ef609" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

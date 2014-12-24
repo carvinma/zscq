@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DataSource" Class="DataZscqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_zscq" Class="DataZscqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.t_PatentOperateNote" Member="t_PatentOperateNote">
     <Type Name="t_PatentOperateNote">
@@ -248,21 +248,6 @@
       <Association Name="t_PatentOrder_t_PatentOrderInfo" Member="t_PatentOrderInfo" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_PatentOrderInfo" />
     </Type>
   </Table>
-  <Table Name="dbo.t_TrademarkOrderDetails" Member="t_TrademarkOrderDetails">
-    <Type Name="t_TrademarkOrderDetails">
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="i_OrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="i_TrademarkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_SBRegNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBRegName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBRegEnName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="i_ShengDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_JiaoFeiType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_SbDaoqiTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="t_TrademarkOrder_t_TrademarkOrderDetails" Member="t_TrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_TrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
   <Table Name="dbo.t_Nationality" Member="t_Nationality">
     <Type Name="t_Nationality">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -283,46 +268,6 @@
       <Column Name="nt_enDescription" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="nt_krDescription" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="nt_jpDescription" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_TrademarkOrder" Member="t_TrademarkOrder">
-    <Type Name="t_TrademarkOrder">
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="dm_TotalMoneyGY" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="i_Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="dt_PayTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="i_IsFaPiao" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_FaPiaoTaiTou" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="i_IsYouJi" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_YouJiType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_YouHUiQuan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_PayType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_Bank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="i_JiFen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_Address_Gid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_Address_PId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_Address_CId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_Address_AId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_Address" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="i_IsUseYHQ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dm_FapiaoMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="dm_YoujiFee" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="dm_YouHuiFee" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="i_SendEmailOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_SendPhoneOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_AddressId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_YHQIdstr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="nvc_YouJiWay" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_BankId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="dm_TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="dm_TMDaiLi" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="dm_TMZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Association Name="t_TrademarkOrder_t_TrademarkOrderOperateInfos" Member="t_TrademarkOrderOperateInfos" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_TrademarkOrderOperateInfos" />
-      <Association Name="t_TrademarkOrder_t_TrademarkOrderDetails" Member="t_TrademarkOrderDetails" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_TrademarkOrderDetails" />
     </Type>
   </Table>
   <Table Name="dbo.t_Trademark" Member="t_Trademark">
@@ -405,6 +350,68 @@
       <Column Name="i_PatentShouQuanGuoId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="nvc_AnJuanNum" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
       <Association Name="t_PatentOrder_t_PatentOrderInfo" Member="t_PatentOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_PatentOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_TrademarkOrder" Member="t_TrademarkOrder">
+    <Type Name="t_TrademarkOrder">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dm_TotalMoneyGY" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dt_PayTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="i_IsFaPiao" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_FaPiaoTaiTou" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_IsYouJi" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_YouJiType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_YouHUiQuan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_PayType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Bank" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_JiFen" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_Gid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_PId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_CId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Address_AId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Address" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="i_IsUseYHQ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_FapiaoMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_YoujiFee" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="dm_YouHuiFee" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="i_SendEmailOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_SendPhoneOrder" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_AddressId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_YHQIdstr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="nvc_YouJiWay" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_BankId" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dm_TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_TMDaiLi" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ZengZhiTax" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ShouXuFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_TMZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Association Name="t_TrademarkOrder_t_TrademarkOrderOperateInfos" Member="t_TrademarkOrderOperateInfos" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_TrademarkOrderOperateInfos" />
+      <Association Name="t_TrademarkOrder_t_TrademarkOrderDetails" Member="t_TrademarkOrderDetails" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_TrademarkOrderDetails" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_TrademarkOrderDetails" Member="t_TrademarkOrderDetails">
+    <Type Name="t_TrademarkOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="i_TrademarkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_SBRegNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBRegName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBRegEnName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_ShengDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_JiaoFeiType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_SbDaoqiTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_TMDaiLi" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ZengZhiTax" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ShouXuFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Association Name="t_TrademarkOrder_t_TrademarkOrderDetails" Member="t_TrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_TrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>
