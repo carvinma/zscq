@@ -39,6 +39,7 @@
     <input type="hidden" runat="server" id="hi_GanfeeZhinajin" value="0" />
     <input type="hidden" runat="server" id="hi_youhui" value="0" />
     <input type="hidden" runat="server" id="hi_total" value="0" />
+    <input type="hidden" runat="server" id="hi_ids" value="0" />
     <uc1:zscqtop2 ID="zscqtop21" runat="server" />
     <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
     <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
@@ -1009,6 +1010,15 @@
                 }
             }
         }
+
+        var ids = [];
+        $("#tabOrder tr:gt(0)").each(function () {
+            var id = $(this).attr("id");
+            if (!isEmpty(id)) {
+                ids.push(id.replace('ordertr', ''));
+            }
+        });
+        $("#hi_ids").val(ids);
     }
 
  

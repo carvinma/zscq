@@ -66,10 +66,10 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-        if (Request.Cookies["hqht_Trademarktidstr"] != null && Request.Cookies["hqht_Trademarktidstr"].Value != "")
+        if (!string.IsNullOrEmpty(hi_ids.Value))
         {
-            string patentid = Request.Cookies["hqht_Trademarktidstr"].Value;
-            string[] arr_pid = patentid.Split('|');
+            string patentid = hi_ids.Value;
+            string[] arr_pid = patentid.Split(',');
             string emalladdress = "";
             #region 生成订单
             t_TrademarkOrder OrderModer = new t_TrademarkOrder();
@@ -86,8 +86,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             if (rp_youhui.Items.Count > 0)
             {
                 string flag = Request.Form["inputPageid"];
-                //Response.Write(flag);
-                //return;
                 //得到币种和汇率
                 t_Member mm = DALM.Member_Select_Id(uId);
 
@@ -127,12 +125,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     OrderModer.dm_YouHuiFee = youhuifee;
                     OrderModer.dm_TotalMoney = decimal.Parse(strtotalmoney) - youhuifee;
                     OrderModer.dm_TotalMoneyGY = decimal.Parse((OrderModer.dm_TotalMoney * meihuilv).ToString());
-
-
                 }
-
                 OrderModer.nvc_YouHUiQuan = youhui.TrimStart('+');
-
             }
             if (checkfp.Checked)
             {
@@ -235,7 +229,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 if (arr_pid[i] != "")
                 {
                     int tid = Convert.ToInt32(arr_pid[i].Split(',')[0]);
-                    int number = Convert.ToInt32(arr_pid[i].Split(',')[1]);
                     t_Trademark model = DALT.Trademark_Select_Id(tid);
 
                     if (model != null)
@@ -243,11 +236,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                         sbnum += 1;
                         if (model.i_IsPayState == 2)//续交商标
                         {
-                            //model.nvc_SbRegTime = model.nvc_SbDaoqiTime;
-                            //model.nvc_SbDaoqiTime = DateTime.Parse(model.nvc_SbDaoqiTime + " 00:00").AddYears(10).ToShortDateString();
-                            //DateTime dt = DateTime.Parse(model.nvc_SbDaoqiTime + " 00:00:00").AddYears(10);
-                            //DateTime dtold = DateTime.Parse(model.nvc_SbDaoqiTime + " 00:00:00");
-                            //model.i_ShengDays += int.Parse(HelpString.DateDiff(dt, dtold, "day"));
                             model.i_XujiaoStates = 1;
                         }
                         else
@@ -270,10 +258,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                         DALT.Trademark_Update(model);
                         #endregion
                         UserLog.AddUserLog(uId, "商标系统", "提交订单");
-                        if (o > 0 && ok > 0)
-                        {
-
-                        }
                     }
                 }
             }
@@ -281,12 +265,12 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             t_SystemSetup ts = DALS.SystemSetup_Select();
             if (ts != null)
             {
-                OrderModer.i_JiFen = DALTOD.OrderDetails_Select_Count(OrderModer.i_Id) * ts.i_SbIntergral;
+                OrderModer.i_JiFen = DALTOD.OrderDetails_Select_Count(OrderModer.i_Id) * ts.i_SbIntergral; //一个商标赠送积分
                 DALTO.TrademarkOrder_Update(OrderModer);
             }
             if (sbnum == 0)
             {
-                div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='user_sblb.aspx';</script>";
+                div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='trademark_list.aspx';</script>";
             }
             else
             {
@@ -296,8 +280,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     string huikuanbankinfo = "";
                     if (input_payway.Value == "线下汇款")
                     {
-                        // huikuanbankinfo = "";
-
                         string str1 = "本公司的银行帐户信息如下<br/>";
                         for (int i = 0; i < OrderModer.nvc_BankId.Split(',').Length; i++)
                         {
@@ -318,7 +300,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         }
         else
         {
-            div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='user_sblb.aspx';</script>";
+            div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='trademark_list.aspx';</script>";
         }
 
     }
