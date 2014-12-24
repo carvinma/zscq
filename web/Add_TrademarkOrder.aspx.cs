@@ -9,6 +9,8 @@ using System.Text;
 using zscq.DAL;
 using zscq.Model;
 using zscq.BLL;
+using Aspose.Words;
+using Aspose.Cells;
 public partial class Add_TrademarkOrder : System.Web.UI.Page
 {
     public dal_PatentOrder DALPO = new dal_PatentOrder();
@@ -79,7 +81,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             OrderModer.nvc_OrderNumber = DALTO.Set_OrderNo();
             OrderModer.dm_TrademarkMoney = iquery.Sum(p => p.TrademarkMoney); //商标金额
             OrderModer.dm_TMZhiNaJin = TMZhiNaJin;
-            OrderModer.dm_TMDaiLi = TMDaiLi;
+            OrderModer.dm_TMDaiLi = TMDaiLi;//代理费
             OrderModer.i_MemberId = uId;
             OrderModer.i_Status = 1;
             OrderModer.dm_TotalMoney = decimal.Parse(hi_totalmoney.Value);//国内要缴纳的总钱
@@ -282,6 +284,13 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='trademark_list.aspx';</script>";
         }
 
+    }
+    private void CreateWordToPDF()
+    {
+        //读取doc文档
+        Document doc = new Document(@"C:\Users\Administrator\Desktop\流调系统存在问题 .doc");
+        //保存为PDF文件，此处的SaveFormat支持很多种格式，如图片，epub,rtf 等等
+        doc.Save("temp.pdf", SaveFormat.Pdf);
     }
     void Bind_Drp_YouHuiQuan()
     {
