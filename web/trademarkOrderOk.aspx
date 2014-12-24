@@ -18,60 +18,85 @@
 
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <style type="text/css">
-        .style1
-        {
-            width: 25px;
-        }
+*{margin:0;padding:0;border:0;}
+body {
+ font-family: arial, 宋体, serif;
+        font-size:12px;
+}
+
+#nav {
+  line-height: 24px;  list-style-type: none; background:#666;
+}
+
+#nav span{
+  background: url(images/arrowbg.gif) no-repeat 0px -552px;float: right;padding-left: 10px;}
+}
+
+#nav a {
+ display: block; width: 95px; text-align:center;
+}
+
+#nav a:link  {
+ color:#fff; text-decoration:none;
+}
+#nav a:visited  {
+ color:#666;text-decoration:none;
+}
+#nav a:hover  {
+ color:#FFF;text-decoration:none;font-weight:bold;
+}
+
+#nav li {
+ float: left; width: 95px; background:#d34245;
+}
+#nav li a:hover{
+ 
+}
+#nav li a{
+ text-align:center; padding-left:15px;
+}
+
+#nav li ul {
+ line-height: 27px;  list-style-type: none;text-align:left;
+ left: -999em; width: 95px; position: absolute;
+}
+#nav li ul li{
+ float: left; width: 95px;
+ background: #F6F6F6;
+}
+
+
+#nav li ul a{
+ display: block; width: 80px;_width: 80px;height:auto; margin:0 auto;text-align:left; padding-left:15px;
+}
+
+#nav li ul a:link  {
+ color:#666; text-decoration:none;
+}
+#nav li ul a:visited  {
+ color:#666;text-decoration:none;
+}
+#nav li ul a:hover  {
+ color:#F3F3F3;text-decoration:none;font-weight:normal;
+ background:#fa9b3d;
+}
+
+#nav li:hover ul {
+ left: auto;
+}
+#nav li.sfhover ul {
+ left: auto;
+}
+#content {
+ clear: left;
+}
+
     </style>
 </head>
-<body id="index" onload="showfile();">
+<body id="index">
     <form id="form1" runat="server">
     <uc1:zscqtop2 ID="zscqtop21" runat="server" />
  <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
-
- <div id="divbg" class="divbg">
-</div>
-<div id="divshowxiazai" class="divshow">
-  <table width="571" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td height="38" align="left" valign="top" style="background-image: url(images/faq_bg1.gif);">
-        <table width="700" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="662" height="38">&nbsp;</td>
-            <td width="38"><a href="#"><img src="images/faq_close.gif" width="38" height="38" border="0" onclick="hidedivbox('divshowxiazai');" /></a></td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td height="150" align="left" valign="top" style="background-image: url(images/faq_bg2.gif);">
-        <table width="700" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="36">&nbsp;</td>
-            <td align="center" style="line-height: 21px; font-size: 14px; font-weight: bold;color:red;">请下载以下文件，签字盖章后邮寄给我们，邮寄时请注明客户编号</td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr>
-            <td width="40" height="150">&nbsp;</td>
-            <td width="615" align="left" valign="top" style="line-height: 21px; word-break: break-all; word-wrap: break-word;">
-           
-         <iframe id="ffi" width="665" height="300" scrolling="no" frameborder="0" src="user_Xiazai.aspx?order=<%=sbOrderId%>" ></iframe>
-            </td>
-            <td width="45">&nbsp;</td>
-          </tr>
-        </table>
-
-
-
-
-
-      </td>
-    </tr>
-    <tr>
-      <td height="15"><img src="images/faq_bg3.gif" width="700" height="20" /></td>
-    </tr>
-  </table>
-</div>
 <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin:0 auto;background-color: #fff;">
   <tr>
     <td width="260" height="618" align="left" valign="top"style="background-image: url(images/server2.gif);">
@@ -142,14 +167,38 @@
               </tr>
               <tr>
                 <td align="center" class="font12b4e">
-                  <asp:ImageButton ID="ImageButton1" runat="server" 
-                        ImageUrl="~/images/user_zl_b6.gif" onclick="ImageButton1_Click"  />                
-                &nbsp;&nbsp;<a href="user_sbddck.aspx?order=<%=sbOrderId%>">
+                <table><tr><td> <asp:ImageButton ID="ImageButton1" runat="server" 
+                        ImageUrl="~/images/user_zl_b6.gif" onclick="ImageButton1_Click"  />    
+                        </td>
+                        <td> <a href="user_sbddck.aspx?order=<%=sbOrderId%>">
+                            <img src="images/user_zl_b7.gif" width="85" height="29" border="0" />
+                           </a></td>
+                <td style="width:120px"><a href="user_sblb.aspx"><img src="images/user_zl_b8.gif" width="85" height="29" border="0" /></a>
+                </td>
+                <td > 
+                 <ul id="nav" style="width:95px">
+                <li><a href="javascript:void(0)">下载帐单</a><span>&nbsp;</span>
+                <ul>
+                        <li>
+                            <a href="record/editMemo.htm?bizInNo=20141217073341&amp;bizType=D_TRANSFER" target="_blank">下载总帐单</a>
+                        </li>
+        
+                        <li>
+                            <a href="record/delete.json?record=" >下载分帐单</a>
+                        </li>
+                </ul>
+                </li>
+                </ul>
+                </td></tr></table>
+                             
+                &nbsp;&nbsp;
+               
+                &nbsp;&nbsp;
+                
 
+              
+                </td>
 
-
-                <img src="images/user_zl_b7.gif" width="85" height="29" border="0" />
-                </a>&nbsp;&nbsp;<a href="user_sblb.aspx"><img src="images/user_zl_b8.gif" width="85" height="29" border="0" /></a></td>
               </tr>
               <tr>
                 <td align="left">&nbsp;</td>
@@ -195,7 +244,28 @@
         $("#checkfp").attr("checked", "")
         $("#checkyj").attr("checked", "")
         $(".tr_fp").hide();
+        menuFix();
+
     });
+
+    function menuFix() {
+        var sfEls = document.getElementById("nav").getElementsByTagName("li");
+        for (var i = 0; i < sfEls.length; i++) {
+            sfEls[i].onmouseover = function () {
+                this.className += (this.className.length > 0 ? " " : "") + "sfhover";
+            }
+            sfEls[i].onMouseDown = function () {
+                this.className += (this.className.length > 0 ? " " : "") + "sfhover";
+            }
+            sfEls[i].onMouseUp = function () {
+                this.className += (this.className.length > 0 ? " " : "") + "sfhover";
+            }
+            sfEls[i].onmouseout = function () {
+                this.className = this.className.replace(new RegExp("( ?|^)sfhover\\b"),"");
+            }
+        }
+    }
+
     function fpshow() {
         if ($("#checkfp").attr("checked") == true) {
             $(".tr_fp1").show();
@@ -241,30 +311,4 @@
         }
     }
 </script>
-<script type="text/javascript">
-    function showfile() {
-        openboxBg(1);
-        showdivbox('divshowxiazai');
-    }
-    function openboxBg(state) { //遮照打开关闭控制
-        if (state == 1) {
-            document.getElementById("divbg").style.display = "block";
-            var h = document.body.offsetHeight > document.documentElement.offsetHeight ? document.body.offsetHeight : document.documentElement.offsetHeight;
-            h = h > document.body.scrollHeight ? h : document.body.scrollHeight;
-            document.getElementById("divbg").style.height = h + "px";
-        }
-        else {
-            document.getElementById("divbg").style.display = "none";
-        }
-    }
-    function showdivbox(id) {
-        var top1 = document.documentElement.scrollTop + document.body.scrollTop;
-        document.getElementById(id).style.display = "block";
-        document.getElementById(id).style.left = (document.getElementById("divbg").offsetWidth - document.getElementById(id).offsetWidth) / 2 + "px";
-        document.getElementById(id).style.top = top1 + 150 + "px"; //document.documentElement.scrollTop + 100 + "px";  
-    }
-    function hidedivbox(id) {
-        document.getElementById("divbg").style.display = "none";
-        document.getElementById(id).style.display = "none";
-    } 
-</script>
+ 
