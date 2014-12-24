@@ -39,7 +39,10 @@
     <input type="hidden" runat="server" id="hi_GanfeeZhinajin" value="0" />
     <input type="hidden" runat="server" id="hi_youhui" value="0" />
     <input type="hidden" runat="server" id="hi_total" value="0" />
+
     <input type="hidden" runat="server" id="hi_ids" value="0" />
+    <input type="hidden" runat="server" id="hi_totalmoney" value="0" />
+    
     <uc1:zscqtop2 ID="zscqtop21" runat="server" />
     <uc3:zscqadv ID="zscqadv1" TypeId="54" runat="server" />
     <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
@@ -795,6 +798,7 @@
                 $(".fp_true").show();
                 $(".fp_false").hide();
                 $(".tr_fp1").show();
+                $(".tr_fp3").show();
                 $(".FP").show();
                 //              var youji = $("#hi_youji").val();                         
                 //              var sui = parseFloat(parseFloat(ganfeezhinajin) * 0.033).toFixed(2);
@@ -839,7 +843,7 @@
 
         }
         else {
-            $(".tr_fp3").hide();
+            //$(".tr_fp3").hide();
             $(".tr_fp4").hide();
             var allmoney = $("#allmoney").html();
 
@@ -1018,6 +1022,7 @@
                 ids.push(id.replace('ordertr', ''));
             }
         });
+        $("#hi_totalmoney").val($("#allmoney").html());
         $("#hi_ids").val(ids);
     }
 
