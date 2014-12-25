@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using zscq.Model;
 using zscq.DAL;
+using zscq.BLL;
 public partial class trademarkOrder_list : System.Web.UI.Page
 {
     public int UserId = 0;  
@@ -23,6 +24,10 @@ public partial class trademarkOrder_list : System.Web.UI.Page
         else
         {
             Response.Redirect("Login.aspx?flag=sb&pageurl=" + HttpUtility.UrlEncode(Request.Url.ToString()));
+        }
+        if (!IsPostBack)
+        {
+            BindDDLOrderStatsus();
         }
         BindOrderlist();
     }
@@ -72,14 +77,25 @@ public partial class trademarkOrder_list : System.Web.UI.Page
         }
     }
 
-    
+
+    private void BindDDLOrderStatsus()
+    {
+        List<t_NewTradeMarkStatus> tradeMarkStatuslist = new List<t_NewTradeMarkStatus>();
+        tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
+        this.ddlOrderStatus.DataSource = tradeMarkStatuslist;
+        this.ddlOrderStatus.DataTextField = "StatusName";
+        this.ddlOrderStatus.DataValueField = "StatusValue";
+        this.ddlOrderStatus.DataBind();
+    }
     protected void AspNetPager1_PageChanged(object sender, EventArgs e)
     {
         BindOrderlist();
     }
-    public string ConvertStatus(object obj)
+    public string ConvertStatus(object applyStatus)
     {
-        return DALTO.Set_TrademarkOrderState(obj);
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkOrderStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
     }
     protected void rp_orderlist_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {

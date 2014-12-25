@@ -758,8 +758,10 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         return s;
     }
 
-    public string ConvertStatus(object obj)
+    public string ConvertStatus(object applyStatus)
     {
-        return DALTO.Set_TrademarkOrderState(obj);
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkOrderStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
     }
 }
