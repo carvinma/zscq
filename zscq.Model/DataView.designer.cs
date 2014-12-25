@@ -23074,6 +23074,8 @@ namespace zscq.Model
 		
 		private System.Nullable<decimal> _dm_TMZhiNaJin;
 		
+		private System.Nullable<int> _CaseType;
+		
 		private string _CaseNo;
 		
 		private string _ApplyName;
@@ -23798,6 +23800,22 @@ namespace zscq.Model
 				if ((this._dm_TMZhiNaJin != value))
 				{
 					this._dm_TMZhiNaJin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseType", DbType="Int")]
+		public System.Nullable<int> CaseType
+		{
+			get
+			{
+				return this._CaseType;
+			}
+			set
+			{
+				if ((this._CaseType != value))
+				{
+					this._CaseType = value;
 				}
 			}
 		}

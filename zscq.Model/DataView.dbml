@@ -1500,6 +1500,7 @@
       <Column Name="dm_TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_TMDaiLi" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_TMZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CaseType" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CaseNo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ApplyName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>

@@ -356,10 +356,10 @@
         <elementListCompartment Id="73cb8c78-f1b6-4da3-8aa7-eb9eb95543ba" absoluteBounds="18.765, 5.2100000000000009, 1.9700000000000002, 6.705922444661458" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fba6df07-8469-469d-9ab0-bf590e6dee2b" isExpanded="false" absoluteBounds="18.75, 6.625, 2, 0.45">
+    <classShape Id="5e6f8a3c-da3f-4c6a-a530-8ca40ca0b71e" isExpanded="false" absoluteBounds="18.75, 6.625, 2, 0.45">
       <DataClassMoniker Name="/DataViewDataContext/vw_TrademarkOrder" />
       <nestedChildShapes>
-        <elementListCompartment Id="79e32b1a-b895-413d-985d-d8c4bbec271d" absoluteBounds="18.765, 7.085, 1.9700000000000002, 8.9234517415364571" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="778a364e-0915-457f-89b4-6f99755f96a0" absoluteBounds="18.765, 7.085, 1.9700000000000002, 9.108245849609375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
