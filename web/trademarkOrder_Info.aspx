@@ -150,36 +150,35 @@
                               <td height="115" align="left" valign="top">
                                 <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                                   <tr>
-                                    <td width="106" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商标注册号</td>
-                                    <td width="75" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商标类别</td>
-                                    <td width="80" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">交费类型</td>
-                                    <td width="141" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">注册人姓名</td>
-                                 <%--   <td width="77" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">审核状态</td>--%>
-                                    <td width="69" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">缴费状态</td>
-                                    <td width="67" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">到期日</td>
-                                    <td width="48" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">详情</td>
-                                                <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">下载</td>
+                                    <td width="106" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">案件号</td>
+                                    <td width="85" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请人</td>
+                                    <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">图样</td>
+                                    <td width="121" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">类别</td>
+                                    <td width="79" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">金额</td>
+                                    <td width="67" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请书</td>
+                                    <td width="48" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">委托书</td>
                                   </tr>
                                   <asp:Repeater ID="rp_trademark" runat="server">
                                     <ItemTemplate>
                                       <tr>
                                         <td width="106" height="32" align="center" bgcolor="#FFFFFF">
-                                          <%# Eval("nvc_SBRegNum") %></td>
+                                          <%# Eval("CaseNo")%></td>
                                         <td width="75" align="center" bgcolor="#FFFFFF">
-                                          <%# Eval("nvc_SBType")%></td>
+                                          <%# Eval("ApplyName")%></td>
                                         <td width="80" align="center" bgcolor="#FFFFFF">
-                                          <%#Eval("i_JiaoFeiType").ToString() == "1" ?"自行缴费" :"委托缴费"%></td>
+                                          <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                                         <td width="141" align="center" bgcolor="#FFFFFF">
-                                          <%# Eval("nvc_SBRegName") %></td>
-                                     <%--   <td width="77" align="center" bgcolor="#FFFFFF">
-                                          <%#Eval("i_State").ToString() == "1" ? "已审核" :(Eval("i_State").ToString() == "2"?"未通过":"未审核")%>
-                                        </td>--%>
+                                          <%# Eval("TrademarkType")%></td>
                                         <td width="69" align="center" bgcolor="#FFFFFF">
-                                          <%# Eval("i_IsPayState").ToString()=="1"?"代缴费":(Eval("i_IsPayState").ToString()=="2"?"已缴费":"未缴费")%></td>
+                                          <%# (decimal.Parse(Eval("TrademarkMoney").ToString()) + dailiFee)%></td>
                                         <td width="67" align="center" bgcolor="#FFFFFF">
-         <%# Eval("nvc_SbDaoqiTime")%></td>
-                                        <td width="48" align="center" bgcolor="#FFFFFF"><a href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>" target="_blank" class="ac5t">查看</a></td>
-                                         <td width="78" align="center" bgcolor="#FFFFFF"><a href="user_World_sbweituo.aspx?id=<%#Eval("i_TrademarkId")%>&type=2" target="_blank" class="ac5t">委托书下载</a> <br /><a href="user_World_sb.aspx?id=<%#Eval("i_TrademarkId")%>&type=3" target="_blank" class="ac5t">申请书下载</a></td>
+                                          <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
+                                                                     ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                        </td>
+                                        <td width="48" align="center" bgcolor="#FFFFFF">
+                                        <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
+                                                                        ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                        </td>
                                       </tr>
                                     </ItemTemplate>
                                   </asp:Repeater>
@@ -217,7 +216,7 @@
                             <tr>
                               <td height="32" align="right" style="line-height: 21px;">邮寄方式：</td>
                               <td colspan="5" style="line-height: 21px;">
-                                <%=youjitype%>&nbsp;&nbsp; </td>
+                                快递（到付）</td>
                             </tr>
                             <tr>
                               <td height="32" align="right" style="line-height: 21px;">邮寄地址：</td>
@@ -380,7 +379,7 @@
                           {%>
                           <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/user_zl_b10.gif" OnClick="ImageButton1_Click" />
                           <%} %>
-                          &nbsp;&nbsp;<a href="user_sbdd.aspx"><img src="images/user_zl_b11.gif" width="85" height="29" border="0" /></a>  &nbsp;&nbsp;  <a href="javascript:void(0)"> <img src="images/user_zl_pr.jpg" onclick="printPage()" /></a>
+                          &nbsp;&nbsp;<a href="trademarkOrder_list.aspx"><img src="images/user_zl_b11.gif" width="85" height="29" border="0" /></a>  &nbsp;&nbsp;  <a href="javascript:void(0)"> <img src="images/user_zl_pr.jpg" onclick="printPage()" /></a>
                                                     <script type="text/javascript">
                                                         function printPage() {
                                                             var newWin = window.open();

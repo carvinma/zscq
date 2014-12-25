@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using zscq.Model;
 using zscq.DAL;
 using System.Text;
+using zscq.BLL;
 public partial class trademarkOrder_Info : System.Web.UI.Page
 {
     dal_Trademark DALT = new dal_Trademark();
@@ -18,6 +19,7 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
     dal_ReceiveAddress DALRA = new dal_ReceiveAddress();
     dal_Member DALM = new dal_Member();
     dal_TrademarkSetup DALTS = new dal_TrademarkSetup();
+    dal_NewTrademark mark = new dal_NewTrademark();
     public int uId = 0, guoji = 0, zhinajinnum=0,isfapiao=0,isyouhuiquan=0,xianxiafukuan=0;
     public string OrderNum = "", UserNum = "", UserName = "", dt_addtime = "", OrderState = "";
     public string fapiaotaitou = "无", youjitype = "无", youjidizhi = "无", youjidizhia = "无", youjidizhib = "无", payway = "";
@@ -27,6 +29,7 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
     public StringBuilder Str_Money = new StringBuilder();
     public StringBuilder Str_AllMoney = new StringBuilder();
     public int dazhe = 0, dazhe1 = 0;
+    public decimal dailiFee=0;//代理费
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
@@ -37,23 +40,35 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
         {
             Response.Redirect("Login.aspx?flag=sb&pageurl=" + HttpUtility.UrlEncode(Request.Url.ToString()));
         }
+        if (!IsPostBack)
+        {
+            dal_Goods goods=new dal_Goods();
+            var dali=goods.CategoryFees_Select_All().First(p => p.i_Type == 2);
+            if (dali != null && dali.MainFees.HasValue)
+                dailiFee = dali.MainFees.Value;
+        }
         Bind_Order_Info();
     }
     public void Bind_Order_Info()
     {
-        if (Request.QueryString["order"] != null || Request.QueryString["order"].ToString() != "")
+        if (!string.IsNullOrEmpty(Request.QueryString["order"]) && !string.IsNullOrEmpty(Request.QueryString["TrademarkIds"]))
         {
             int orderid = int.Parse(Request.QueryString["order"].ToString());
             HF_oId.Value = orderid.ToString();
             var iquery = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderid);
-            rp_trademark.DataSource = iquery;
+
+            #region 案件
+            string[] TrademarkIds = Request.QueryString["TrademarkIds"].Split(',');
+            var trademarkList = mark.Trademark_web_Excel(TrademarkIds);
+
+            rp_trademark.DataSource = trademarkList;
             rp_trademark.DataBind();
+            #endregion
+
             t_TrademarkOrder order = DALTO.TrademarkOrder_Select_Id(orderid);
             t_Member user = DALM.Member_Select_Id(order.i_MemberId);
             if (order != null)
             {
-                //payway = order.nvc_PayType;
-                int num = 0;
                 if (order.nvc_PayType == "线下汇款")
                 {
                     //string str = "";
@@ -209,28 +224,16 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
                     }
                 }
             }
+
+            #region 发票
+          
             if (order.i_IsFaPiao == 1)
             {
                 isfapiao = 1;
-                t_SystemSetup ss = DALSS.SystemSetup_Select();
                
                 fapiaosui = order.dm_FapiaoMoney.ToString();
                 fapiaotaitou = order.nvc_FaPiaoTaiTou;
-
-                if (order.i_YouJiType == 1)
-                {
-                    if (ss.dm_YouJIFee != null)
-                    {
-                        youjifee = ss.dm_YouJIFee.ToString();
-                        youjitype = "国外邮寄";                       
-                    }
-                }
-                if (order.i_YouJiType == 2)
-                {
-
-                    youjitype = order.nvc_YouJiWay;
-                    youjifee = order.dm_YoujiFee.ToString();
-                }
+                
                 t_ReceiveAddress ra = DALRA.ReceiveAddress_Select_Id(order.i_AddressId);
                 if (ra != null)
                 {
@@ -248,7 +251,7 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
                     youjidizhib = tel ;
                 }
             }
-
+            #endregion
 
             #region 优惠券第三部分
 
@@ -285,29 +288,11 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
             #endregion
         }
     }
-    public string ConvertStatus(object obj)
+    public string ConvertStatus(object applyStatus)
     {
-        return DALTO.Set_TrademarkOrderState(obj);
-    }
-    public string GetGuojiName(int id)// 获得国籍
-    {
-        string guojiname = "";
-        t_Nationality nn = DALN.Nationality_Select_Id(id);
-        if (nn != null)
-        {
-            guojiname = nn.nvc_Name;
-        }
-        return guojiname;
-    }
-    public string GetGuojiName(object id)// 获得国籍
-    {
-        string guojiname = "";
-        t_Nationality nn = DALN.Nationality_Select_Id(id.ToString().GetInt());
-        if (nn != null)
-        {
-            guojiname = nn.nvc_Name;
-        }
-        return guojiname;
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkOrderStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
     }
     protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
