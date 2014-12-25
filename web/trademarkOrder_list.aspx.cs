@@ -80,7 +80,7 @@ public partial class trademarkOrder_list : System.Web.UI.Page
 
     private void BindDDLOrderStatsus()
     {
-        List<t_NewTradeMarkStatus> tradeMarkStatuslist = new List<t_NewTradeMarkStatus>();
+        List<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkOrderStatuslist.ToList();
         tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });
         this.ddlOrderStatus.DataSource = tradeMarkStatuslist;
         this.ddlOrderStatus.DataTextField = "StatusName";
@@ -106,6 +106,18 @@ public partial class trademarkOrder_list : System.Web.UI.Page
             int orderID = Convert.ToInt32(oid.Value);
             rep.DataSource = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderID);
             rep.DataBind();
+
+            Repeater repApply = e.Item.FindControl("repApply") as Repeater;
+            HiddenField oid = (HiddenField)e.Item.FindControl("hf_oid");
+            int orderID = Convert.ToInt32(oid.Value);
+            repApply.DataSource = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderID);
+            repApply.DataBind();
+
+            Repeater repPattern = e.Item.FindControl("repPattern") as Repeater;
+            HiddenField oid = (HiddenField)e.Item.FindControl("hf_oid");
+            int orderID = Convert.ToInt32(oid.Value);
+            repPattern.DataSource = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderID);
+            repPattern.DataBind();
         }
     }
 

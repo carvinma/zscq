@@ -506,6 +506,28 @@ namespace zscq.DAL
         }
 
 
+        /// <summary>
+        /// 商标前台订单分页数据lizx
+        /// </summary>
+        /// <param name="startIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="uid"></param>
+
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public IQueryable<vw_TrademarkOrder> TrademarkOrder_Web_New_SelectPage(int startIndex, int pageSize, int uid, ref int count,string orderNo,string caseNo,string applyname,string orderdate,int orderstatus)
+        {
+            var iquery = from i in dvdc.vw_TrademarkOrder select i;
+            if (uid != 0)
+            {
+                iquery = from i in iquery where i.i_MemberId == uid select i;
+            }
+            iquery = from i in iquery orderby i.i_Id descending select i;
+            count = iquery.Count();
+            return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
+        }
+
+
 
 
 

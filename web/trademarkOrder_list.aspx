@@ -124,24 +124,23 @@
                                                             <td align="left">
                                                                 <asp:TextBox ID="txtOrder" runat="server" Width="70px"></asp:TextBox>
                                                             </td>
-                                                            <td height="29" align="right" nowrap="nowrap">
+                                                            <td width="40" height="29" align="right" nowrap="nowrap">
                                                                 <strong>案件号</strong>
                                                             </td>
                                                             <td align="left">
                                                                 <asp:TextBox ID="txtCaseNo" runat="server" Width="70px"></asp:TextBox>
                                                             </td>
-                                                            <td align="center" nowrap="nowrap">
+                                                            <td width="40" align="center" nowrap="nowrap">
                                                                 <strong>申请人</strong>
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtApplyUser" runat="server" Width="70px"></asp:TextBox>
                                                             </td>
-                                                            <td width="30" align="center" nowrap="nowrap">
+                                                            <td width="52" align="center" nowrap="nowrap">
                                                                 <strong>下单日期</strong>
                                                             </td>
                                                             <td>
-                                                                
-                                                                <asp:TextBox ID="txtOrderDate" runat="server" Width="70px"
+                                                                <asp:TextBox ID="txtOrderDate" runat="server" Width="85px"
                                                                  ReadOnly="true" style="background-image:url(images/user_js_date.gif); 
                                                                                 background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});">
                                                                                 </asp:TextBox>
@@ -193,7 +192,7 @@
                                     </asp:Repeater>
                                   </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                   <asp:Repeater runat="server" ID="Repeater1">
+                                   <asp:Repeater runat="server" ID="repApply">
                                       <ItemTemplate>
                                         <div style="text-align: center; width: 100%;">
                                            <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">
@@ -203,7 +202,7 @@
                                     </asp:Repeater>
                                  </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                   <asp:Repeater runat="server" ID="Repeater2">
+                                   <asp:Repeater runat="server" ID="repPattern">
                                       <ItemTemplate>
                                         <div style="text-align: center; width: 100%;">
                                            <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">

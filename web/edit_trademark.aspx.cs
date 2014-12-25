@@ -276,11 +276,11 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status = 1;
+        model.Status = 0;
         if (mark.Trademark_Submit() > 0)
         {
             UserLog.AddUserLog(model.i_Id, "商标系统", "更新商标内容");
-            Response.Redirect("trademark_list.aspx");
+            Response.Redirect("Add_TrademarkOrder.aspx?ids=" + model.i_Id);
         }
         else
         {
