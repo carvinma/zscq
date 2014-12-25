@@ -176,7 +176,7 @@
                             </tr>
                             <asp:Repeater ID="rp_orderlist" runat="server" OnItemDataBound="rp_orderlist_ItemDataBound">
                               <ItemTemplate>
-                                <asp:HiddenField ID="hf_oid" runat="server" Value='<%# Eval("i_Id") %>' />
+                                <asp:HiddenField ID="hf_oid" runat="server" Value='<%# Eval("TrademarkIds") %>' />
                                 <tr>
                                   <td height="32" align="center" bgcolor="#FFFFFF">
                                     <a href="user_sbddck.aspx?order=<%# Eval("i_Id") %>" class="ac5t">  <%# Eval("nvc_OrderNumber") %></a> 
@@ -184,9 +184,10 @@
                                   <td align="center" bgcolor="#FFFFFF">
                                     <asp:Repeater runat="server" ID="repTrademark">
                                       <ItemTemplate>
-                                        <div style="text-align: center; width: 100%;">
-                                           <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">
-                                            <%#Eval("nvc_SBRegNum")%></a>
+                                        <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
+
+                                         <a title="案件号<%# Eval("CaseNo") %>" href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t">
+                                                                            <%# Eval("CaseNo")%></a>
                                         </div>
                                       </ItemTemplate>
                                     </asp:Repeater>
@@ -194,9 +195,8 @@
                                   <td align="center" bgcolor="#FFFFFF">
                                    <asp:Repeater runat="server" ID="repApply">
                                       <ItemTemplate>
-                                        <div style="text-align: center; width: 100%;">
-                                           <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">
-                                            <%#Eval("nvc_SBRegNum")%></a>
+                                        <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
+                                          <%#Eval("ApplyName")%>
                                         </div>
                                       </ItemTemplate>
                                     </asp:Repeater>
@@ -204,9 +204,8 @@
                                   <td align="center" bgcolor="#FFFFFF">
                                    <asp:Repeater runat="server" ID="repPattern">
                                       <ItemTemplate>
-                                        <div style="text-align: center; width: 100%;">
-                                           <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">
-                                            <%#Eval("nvc_SBRegNum")%></a>
+                                        <div style="text-align: center; width: 100%;;height:30px;line-height:30px;">
+                                            <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                                         </div>
                                       </ItemTemplate>
                                     </asp:Repeater>
@@ -219,7 +218,7 @@
                                    </td>
                                   <td align="center" bgcolor="#FFFFFF"> <%#ConvertStatus(Eval("i_Status"))%></td>
                                     <td align="center" bgcolor="#FFFFFF">
-                                    <%# (Eval("i_Status").ToString() == "0" || Eval("i_Status").ToString() == "1") ? "<a href='user_sbdd.aspx?order=" + Eval("i_Id") + "' class='ac5t'>取消订单</a>" :(Eval("i_Status").ToString() == "5"?"已取消订单":"")%>
+                                    <%# (Eval("i_Status").ToString() == "0" || Eval("i_Status").ToString() == "1") ? "<a href='user_sbdd.aspx?order=" + Eval("i_Id") + "' class='ac5t'>取消订单</a>" :(Eval("i_Status").ToString() == "3"?"已取消订单":"")%>
                                      </td>
                                 </tr>
                               </ItemTemplate>

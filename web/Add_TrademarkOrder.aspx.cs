@@ -227,7 +227,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 t_TrademarkOrderDetails dModer = new t_TrademarkOrderDetails();
                 dModer.i_OrderId = OrderModer.i_Id;
                 dModer.i_TrademarkId = trademarkid; //nvc_SBRegNum
-                dModer.nvc_SBRegNum = model.RegisteredNo; //商标注册号
+                dModer.nvc_SBRegNum = model.RegisteredNo; //申请-商标注册号为空 续展-商标注册号
                 dModer.nvc_SBType = model.i_Type.ToString(); //商标类型 0-申请 1续展
                 dModer.nvc_SBRegName = model.ApplyName; //商标申请人名称
                 //dModer.nvc_SBRegEnName = model.nvc_SBRegEnName;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.Linq;
 using zscq.Model;
 using System.Web;
+using System.Linq.Expressions;
 
 namespace zscq.DAL
 {
@@ -507,21 +508,41 @@ namespace zscq.DAL
 
 
         /// <summary>
-        /// 商标前台订单分页数据lizx
+        ///  商标前台订单分页数据lizx
         /// </summary>
         /// <param name="startIndex"></param>
         /// <param name="pageSize"></param>
         /// <param name="uid"></param>
-
         /// <param name="count"></param>
+        /// <param name="caseType">0-申请 1续展</param>
+        /// <param name="orderNo"></param>
+        /// <param name="caseNo"></param>
+        /// <param name="applyname"></param>
+        /// <param name="orderdate"></param>
+        /// <param name="orderstatus"></param>
         /// <returns></returns>
-        public IQueryable<vw_TrademarkOrder> TrademarkOrder_Web_New_SelectPage(int startIndex, int pageSize, int uid, ref int count,string orderNo,string caseNo,string applyname,string orderdate,int orderstatus)
+        public IQueryable<vw_TrademarkOrder> TrademarkOrder_Web_New_SelectPage(int startIndex, int pageSize, int uid, ref int count, int caseType, string orderNo, string caseNo, string applyname, string orderdate, int orderstatus)
         {
-            var iquery = from i in dvdc.vw_TrademarkOrder select i;
-            if (uid != 0)
-            {
-                iquery = from i in iquery where i.i_MemberId == uid select i;
-            }
+            Expression<Func<vw_TrademarkOrder, bool>> WhereExpr = PredicateExtensions.True<vw_TrademarkOrder>();
+            WhereExpr = WhereExpr.And(a => a.i_MemberId == uid).And(p => p.CaseType == caseType);
+            if (!string.IsNullOrEmpty(orderNo))
+                WhereExpr = WhereExpr.And(p => p.nvc_OrderNumber.Contains(orderNo));
+
+            if (!string.IsNullOrEmpty(caseNo))
+                WhereExpr = WhereExpr.And(p => p.CaseNo.Contains(caseNo));
+
+            if (!string.IsNullOrEmpty(applyname))
+                WhereExpr = WhereExpr.And(p => p.ApplyName.Contains(applyname));
+
+            if (!string.IsNullOrEmpty(orderdate))
+                WhereExpr = WhereExpr.And(p => p.dt_AddTime.Value.ToString("yyyy-MM-dd") == applyname);
+
+            if (orderstatus>=0)
+                WhereExpr = WhereExpr.And(p => p.i_Status == orderstatus);
+
+            dvdc.vw_TrademarkOrder.Where(WhereExpr);
+
+            var iquery = dvdc.vw_TrademarkOrder.Where(WhereExpr);
             iquery = from i in iquery orderby i.i_Id descending select i;
             count = iquery.Count();
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);

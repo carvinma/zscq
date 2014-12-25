@@ -15,6 +15,7 @@ public partial class trademarkOrder_list : System.Web.UI.Page
     dal_Nationality DALN = new dal_Nationality();
     dal_TrademarkOrder DALTO = new dal_TrademarkOrder();
     dal_TrademarkOrderDetails DALTOD = new dal_TrademarkOrderDetails();
+    dal_NewTrademark mark = new dal_NewTrademark();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
@@ -38,7 +39,12 @@ public partial class trademarkOrder_list : System.Web.UI.Page
             int count = 0;
             int index = AspNetPager1.CurrentPageIndex;
             int pagesize = AspNetPager1.PageSize;
-            rp_orderlist.DataSource = DALTO.TrademarkOrder_Web_SelectPage(index, pagesize, UserId, ref count);
+            int status=-1;
+            if(!string.IsNullOrEmpty(this.ddlOrderStatus.SelectedValue))
+            {
+                status=int.Parse(this.ddlOrderStatus.SelectedValue);
+            }
+            rp_orderlist.DataSource = DALTO.TrademarkOrder_Web_New_SelectPage(index, pagesize, UserId, ref count, 0, this.txtOrder.Text.Trim(), this.txtCaseNo.Text.Trim(),this.txtApplyUser.Text.Trim(), this.txtOrderDate.Text.Trim(), status);
             rp_orderlist.DataBind();
             AspNetPager1.RecordCount = count;
             AspNetPager1.PageSize = pagesize;
@@ -103,20 +109,17 @@ public partial class trademarkOrder_list : System.Web.UI.Page
         {
             Repeater rep = e.Item.FindControl("repTrademark") as Repeater;
             HiddenField oid = (HiddenField)e.Item.FindControl("hf_oid");
-            int orderID = Convert.ToInt32(oid.Value);
-            rep.DataSource = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderID);
+
+            var iquery= mark.Trademark_web_Excel(oid.Value.Split(','));
+            rep.DataSource = iquery;
             rep.DataBind();
 
             Repeater repApply = e.Item.FindControl("repApply") as Repeater;
-            HiddenField oid = (HiddenField)e.Item.FindControl("hf_oid");
-            int orderID = Convert.ToInt32(oid.Value);
-            repApply.DataSource = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderID);
+            repApply.DataSource = iquery;
             repApply.DataBind();
 
             Repeater repPattern = e.Item.FindControl("repPattern") as Repeater;
-            HiddenField oid = (HiddenField)e.Item.FindControl("hf_oid");
-            int orderID = Convert.ToInt32(oid.Value);
-            repPattern.DataSource = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderID);
+            repPattern.DataSource = iquery;
             repPattern.DataBind();
         }
     }
