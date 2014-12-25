@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body id="index" onload="checkpay(1);">
+<body id="index" onload="checkpay(1);change();">
     <form id="form1" runat="server" method="post">
     <input type="hidden" runat="server" id="input_payway" value="" />
     <input type="hidden" runat="server" id="bank" value="" />

@@ -180,23 +180,16 @@ body {
                 <li><a href="javascript:void(0)">下载帐单</a><span>&nbsp;</span>
                 <ul>
                         <li>
-                            <a href="#" target="_blank">下载总帐单</a>
+                            <a href="#" id="downAll" target="_blank">下载总帐单</a>
                         </li>
         
                         <li>
-                            <a href="#" >下载分帐单</a>
+                            <a href="#" id="downDetail" target="_blank">下载分帐单</a>
                         </li>
                 </ul>
                 </li>
                 </ul>
-                </td></tr></table>
-                             
-                &nbsp;&nbsp;
-               
-                &nbsp;&nbsp;
-                
-
-              
+                </td></tr></table>               
                 </td>
 
               </tr>
@@ -245,9 +238,17 @@ body {
         $("#checkyj").attr("checked", "")
         $(".tr_fp").hide();
         menuFix();
-
+        var orderNo = getUrlParam("orderNo");
+        if (orderNo != null && orderNo != "") {
+            $("#downAll").attr("href", "File_Zscq/AccountPDF/applyTotal" + orderNo + ".pdf");
+            $("#downDetail").attr("href", "File_Zscq/AccountPDF/applyDetail" + orderNo+".pdf");
+        }
     });
-
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
     function menuFix() {
         var sfEls = document.getElementById("nav").getElementsByTagName("li");
         for (var i = 0; i < sfEls.length; i++) {

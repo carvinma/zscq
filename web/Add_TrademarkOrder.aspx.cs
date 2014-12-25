@@ -47,7 +47,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     public int dazhe = 0, dazhe1 = 0;
     public decimal TMDaiLi = 0, TrademarkMoney = 0, TMZhiNaJin = 0;
     public string ids;
-    public string membername;
+    public string membername, linkMan;
     protected void Page_Load(object sender, EventArgs e)
     {
         href = Request.Url.ToString();
@@ -176,7 +176,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             {
                 OrderModer.nvc_PayType = input_payway.Value;
             }
-            
+
             int o = DALTO.TrademarkOrder_Add(OrderModer);//增加订单
             #region 银行
             string bankId = "";
@@ -239,10 +239,10 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 dModer.dm_TrademarkMoney = model.TrademarkMoney;
                 dModer.dm_TMDaiLi = 0;
 
-                decimal? tax=this.checkfp.Checked ? (model.TrademarkMoney * 0.033m):0;
+                decimal? tax = this.checkfp.Checked ? (model.TrademarkMoney * 0.033m) : 0;
                 dModer.dm_ZengZhiTax = tax;
 
-                decimal point=0;
+                decimal point = 0;
                 if (OrderModer.nvc_PayType == "支付宝支付" || OrderModer.nvc_PayType == "网银直接支付")
                 {
                     point = 0.012m;
@@ -270,7 +270,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 DALTO.TrademarkOrder_Update(OrderModer);
             }
 
-
+            CreateWordToPDF_Total(OrderModer);
+            CreateWordToPDF_Detail(OrderModer, iquery);
             if (sbnum == 0)
             {
                 div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='trademark_list.aspx';</script>";
@@ -297,7 +298,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
 
                     // BLLE.Email_Add(emalladdress, "商标缴费订单", "您好！您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
                 }
-                Response.Redirect("trademarkOrderOk.aspx?order=" + OrderModer.i_Id);
+                Response.Redirect("trademarkOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber);
             }
         }
         else
@@ -306,101 +307,244 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         }
 
     }
-    private void CreateWordToPDF(t_TrademarkOrder OrderModer)
+    private void CreateWordToPDF_Total(t_TrademarkOrder OrderModer)
     {
-        //读取doc文档
-       // Document doc = new Document(@"C:\Users\Administrator\Desktop\流调系统存在问题 .doc");
-        //保存为PDF文件，此处的SaveFormat支持很多种格式，如图片，epub,rtf 等等
-       // doc.Save("temp.pdf", SaveFormat.Pdf);
+
+        #region  生成总帐单
 
         string tmppath = Server.MapPath("File_Zscq/template/trademarkApplyAll.doc");
         Document doc = new Document(tmppath); //载入模板 
-        if (doc.Range.Bookmarks["ClientName"] != null)
+        foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
         {
-            Bookmark mark = doc.Range.Bookmarks["ClientName"];
-            mark.Text = this.membername;
-        }
-        if (doc.Range.Bookmarks["OrderNo"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["OrderNo"];
-            mark.Text = OrderModer.nvc_OrderNumber;
-        }
-        if (doc.Range.Bookmarks["address"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["address"];
-            mark.Text = OrderModer.nvc_Address;
-        }
-        if (doc.Range.Bookmarks["OrderDate"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["OrderDate"];
-            mark.Text = OrderModer.dt_AddTime.Value.ToString("yyyy-MM-dd");
-        }
-        if (doc.Range.Bookmarks["LinkMan"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["LinkMan"];
-            mark.Text = str.Split(';')[0];
-        }
-        if (doc.Range.Bookmarks["OrderStatus"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["OrderStatus"];
-            mark.Text = OrderModer.i_Status;
-        }
-        if (doc.Range.Bookmarks["guiFee"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["guiFee"];
-            mark.Text = OrderModer.dm_TrademarkMoney.ToString();
-        }
-        if (doc.Range.Bookmarks["daliFee"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["daliFee"];
-            mark.Text = OrderModer.dm_TMDaiLi.ToString();
-        }
-        if (doc.Range.Bookmarks["taxFee"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["taxFee"];
-            mark.Text = OrderModer.dm_ZengZhiTax.ToString();
-        }
-        if (doc.Range.Bookmarks["shouxuFee"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["shouxuFee"];
-            mark.Text = OrderModer.dm_ShouXuFee.ToString();
-        }
-        if (doc.Range.Bookmarks["youhuiMoney"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["youhuiMoney"];
-            mark.Text = OrderModer.dm_YouHuiFee.ToString();
-        }
-        if (doc.Range.Bookmarks["totalMoney"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["totalMoney"];
-            mark.Text = OrderModer.dm_TotalMoney.ToString();
+            if (mark.Name == "ClientName")
+                mark.Text = this.membername;
+            if (mark.Name == "OrderNo")
+                mark.Text = OrderModer.nvc_OrderNumber;
+            if (mark.Name == "OrderDate")
+                mark.Text = OrderModer.dt_AddTime.Value.ToString("yyyy-MM-dd");
+            if (mark.Name == "OrderStatus")
+                mark.Text = ConvertStatus(OrderModer.i_Status);
+            if (mark.Name == "guiFee")
+                mark.Text = OrderModer.dm_TrademarkMoney.ToString();
+            if (mark.Name == "daliFee")
+                mark.Text = OrderModer.dm_TMDaiLi.ToString();
+            if (mark.Name == "taxFee")
+                mark.Text = OrderModer.dm_ZengZhiTax.ToString();
+            if (mark.Name == "shouxuFee")
+                mark.Text = OrderModer.dm_ShouXuFee.ToString();
+            if (mark.Name == "youhuiMoney")
+                mark.Text = OrderModer.dm_YouHuiFee.ToString();
+            if (mark.Name == "totalMoney")
+                mark.Text = OrderModer.dm_TotalMoney.ToString();
+
+            //string address= GetDefaultAddress(this.uId);
+            if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
+                mark.Text = OrderModer.nvc_Address;
+            if (mark.Name == "LinkMan" && !string.IsNullOrEmpty(linkMan))
+                mark.Text = linkMan;
         }
 
 
-        if (doc.Range.Bookmarks["bank"] != null)
+        int tableIndex = 3;
+        if (!string.IsNullOrEmpty(OrderModer.nvc_BankId))
         {
-            Bookmark mark = doc.Range.Bookmarks["bank"];
-            mark.Text = str.Split(';')[0];
+            string[] bankids = OrderModer.nvc_BankId.Split(',');
+            int k = 0;
+            if (bankids.Length == 1)
+            {
+                Aspose.Words.Tables.Table tableBank = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, tableIndex, true);
+                tableBank.Remove();
+            }
+            else
+                tableIndex = 4;
+            foreach (string bankid in bankids)
+            {
+                t_Bank bank = DALBK.Bank_Select_Id(int.Parse(bankid));
+
+                if (doc.Range.Bookmarks["bank" + k] != null)
+                {
+                    Bookmark mark = doc.Range.Bookmarks["bank" + k];
+                    mark.Text = bank.nvc_BankName;
+                }
+                if (doc.Range.Bookmarks["bankName" + k] != null)
+                {
+                    Bookmark mark = doc.Range.Bookmarks["bankName" + k];
+                    mark.Text = bank.nvc_AccountName;
+                }
+                if (doc.Range.Bookmarks["bankCardNo" + k] != null)
+                {
+                    Bookmark mark = doc.Range.Bookmarks["bankCardNo" + k];
+                    mark.Text = bank.nvc_BankNumber;
+                }
+                k++;
+            }
+
+
         }
-        if (doc.Range.Bookmarks["bankName"] != null)
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        var orderDetailsList = DALTOD.OrderDetails_Select_OrderId(OrderModer.i_Id);
+        int rownum = 1;
+        Aspose.Words.Tables.Table table = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, tableIndex, true);
+        foreach (var detail in orderDetailsList)
         {
-            Bookmark mark = doc.Range.Bookmarks["bankName"];
-            mark.Text = str.Split(';')[0];
-        }
-        if (doc.Range.Bookmarks["bankCardNo"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["bankCardNo"];
-            mark.Text = str.Split(';')[0];
+            var trademarkModel = mark.Trademark_Select_Id(detail.i_TrademarkId);
+
+            if (rownum < orderDetailsList.Count())
+            {
+                Aspose.Words.Tables.Row beforeRow = table.Rows[rownum];
+                Aspose.Words.Tables.Row clonedRow = (Aspose.Words.Tables.Row)beforeRow.Clone(true);
+                table.InsertAfter(clonedRow, beforeRow);//插入到指定位置下面
+            }
+
+            builder.MoveToCell(tableIndex, rownum, 0, 0);
+            builder.Write(rownum.ToString());
+            builder.MoveToCell(tableIndex, rownum, 1, 0);
+            builder.Write(trademarkModel.CaseNo);
+            builder.MoveToCell(tableIndex, rownum, 2, 0);
+            builder.Write(trademarkModel.ApplyName);
+
+            builder.MoveToCell(tableIndex, rownum, 3, 0);
+            builder.InsertImage(Server.MapPath(trademarkModel.TrademarkPattern1), 50, 30);
+            builder.MoveToCell(tableIndex, rownum, 4, 0);
+            builder.Write(trademarkModel.TrademarkType);
+            rownum++;
         }
 
-        if (doc.Range.Bookmarks["table"] != null)
-        {
-            Bookmark mark = doc.Range.Bookmarks["table"];
-            mark.Text = str.Split(';')[0];
-        }
-        
+        string pdfPath = Server.MapPath("File_Zscq/AccountPDF/applyTotal" + OrderModer.nvc_OrderNumber + ".pdf");
+        doc.Save(pdfPath, SaveFormat.Pdf);
+        #endregion
 
     }
+
+    private void CreateWordToPDF_Detail(t_TrademarkOrder OrderModer, IQueryable<t_NewTradeMarkInfo> listMark)
+    {
+        #region  生成分帐单
+        int orderRank = 1;
+        List<string> allDetailPath = new List<string>();
+        foreach (var item in listMark)
+        {
+            string tmppath = Server.MapPath("File_Zscq/template/trademarkApplyDetail.doc");
+            Document doc = new Document(tmppath); //载入模板 
+            decimal? tax = this.checkfp.Checked ? (item.TrademarkMoney * 0.033m) : 0;//增值税
+            decimal? shouxuFee = 0;
+            decimal point = 0;
+            if (OrderModer.nvc_PayType == "支付宝支付" || OrderModer.nvc_PayType == "网银直接支付")
+            {
+                point = 0.012m;
+            }
+            else if (OrderModer.nvc_PayType == "财付通支付")
+            {
+                point = 0.01m;
+            }
+            shouxuFee = (item.TrademarkMoney + tax) * point;
+
+            foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
+            {
+                if (mark.Name == "ClientName")
+                    mark.Text = this.membername;
+                if (mark.Name == "OrderNo")
+                    mark.Text = OrderModer.nvc_OrderNumber + "-" + orderRank.ToString();
+                if (mark.Name == "OrderDate")
+                    mark.Text = OrderModer.dt_AddTime.Value.ToString("yyyy-MM-dd");
+                if (mark.Name == "OrderStatus")
+                    mark.Text = ConvertStatus(OrderModer.i_Status);
+                if (mark.Name == "guiFee")
+                    mark.Text = item.TrademarkMoney.ToString();
+                if (mark.Name == "daliFee")
+                    mark.Text = "0";
+                if (mark.Name == "taxFee" && tax.HasValue)
+                    mark.Text = tax.ToString();
+
+                if (mark.Name == "shouxuFee" && shouxuFee.HasValue)
+                    mark.Text = shouxuFee.ToString();
+                if (mark.Name == "youhuiMoney")
+                    mark.Text = "0";
+                if (mark.Name == "totalMoney")
+                    mark.Text = (item.TrademarkMoney + tax + shouxuFee).ToString();
+
+                //string address= GetDefaultAddress(this.uId);
+                if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
+                    mark.Text = OrderModer.nvc_Address;
+                if (mark.Name == "LinkMan" && !string.IsNullOrEmpty(linkMan))
+                    mark.Text = linkMan;
+            }
+
+
+            int tableIndex = 4;
+            if (!string.IsNullOrEmpty(OrderModer.nvc_BankId))
+            {
+                string[] bankids = OrderModer.nvc_BankId.Split(',');
+                int k = 0;
+                if (bankids.Length == 1)
+                {
+                    Aspose.Words.Tables.Table tableBank = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, tableIndex, true);
+                    tableBank.Remove();
+                }
+                foreach (string bankid in bankids)
+                {
+                    t_Bank bank = DALBK.Bank_Select_Id(int.Parse(bankid));
+
+                    if (doc.Range.Bookmarks["bank" + k] != null)
+                    {
+                        Bookmark mark = doc.Range.Bookmarks["bank" + k];
+                        mark.Text = bank.nvc_BankName;
+                    }
+                    if (doc.Range.Bookmarks["bankName" + k] != null)
+                    {
+                        Bookmark mark = doc.Range.Bookmarks["bankName" + k];
+                        mark.Text = bank.nvc_AccountName;
+                    }
+                    if (doc.Range.Bookmarks["bankCardNo" + k] != null)
+                    {
+                        Bookmark mark = doc.Range.Bookmarks["bankCardNo" + k];
+                        mark.Text = bank.nvc_BankNumber;
+                    }
+                    k++;
+                }
+
+
+            }
+            tableIndex = 1;
+            DocumentBuilder builder = new DocumentBuilder(doc);
+            int rownum = 1;
+            Aspose.Words.Tables.Table table = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, tableIndex, true);
+
+
+            builder.MoveToCell(tableIndex, rownum, 0, 0);
+            builder.Write(item.CaseNo);
+            builder.MoveToCell(tableIndex, rownum, 1, 0);
+            builder.Write(item.ApplyName);
+
+            builder.MoveToCell(tableIndex, rownum, 2, 0);
+            builder.InsertImage(Server.MapPath(item.TrademarkPattern1), 50, 30);
+            builder.MoveToCell(tableIndex, rownum, 3, 0);
+            builder.Write(item.TrademarkType);
+            builder.MoveToCell(tableIndex, rownum, 4, 0);
+            builder.Write(item.TrademarkMoney.ToString());
+
+            string pdfPath = "File_Zscq/AccountPDF/applyDetail" + OrderModer.nvc_OrderNumber + "-" + orderRank + ".doc";
+            allDetailPath.Add(pdfPath);
+            doc.Save(Server.MapPath(pdfPath));
+            orderRank++;
+        } 
+        #endregion
+        if (allDetailPath.Count > 0)
+        {
+            Document dstDoc = new Document(Server.MapPath(allDetailPath[0]));
+
+            foreach (string path in allDetailPath)
+            {
+                if (path != allDetailPath[0])
+                {
+                    Document srcDoc = new Document(Server.MapPath(path));
+                    srcDoc.FirstSection.PageSetup.SectionStart = SectionStart.NewPage;
+                    dstDoc.AppendDocument(srcDoc, ImportFormatMode.KeepSourceFormatting);
+                }
+            }
+            dstDoc.Save(Server.MapPath("File_Zscq/AccountPDF/applyDetail" + OrderModer.nvc_OrderNumber+ ".pdf"));
+        }
+    }
+
     void Bind_Drp_YouHuiQuan()
     {
         int count = 0;
@@ -432,6 +576,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             if (muser != null)
             {
                 membername = muser.nvc_Name;
+                linkMan = muser.nvc_LinkName;
                 if (muser.i_UserTypeId == 3)
                 {
                     if ((muser.nvc_DaiLiName == "" || muser.nvc_DaiLiName == null) || (muser.nvc_RealName == "" || muser.nvc_RealName == null) || (muser.nvc_TelPhone == "" || muser.nvc_TelPhone == null) || (muser.nvc_Address == "" || muser.nvc_Address == null) || (muser.nvc_ZipCode == "" || muser.nvc_ZipCode == null))
@@ -563,7 +708,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         }
 
     }
-    void GetDefaultAddress(int uid)
+    string GetDefaultAddress(int uid)
     {
         string address = "";
         t_Member model = DALM.Member_Select_Id(uid);
@@ -577,6 +722,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         {
             // s_adress.Style["display"] = "block";
         }
+        return address;
     }
 
     protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
@@ -601,5 +747,10 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             }
         }
         return s;
+    }
+
+    public string ConvertStatus(object obj)
+    {
+        return DALTO.Set_TrademarkOrderState(obj);
     }
 }
