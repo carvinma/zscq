@@ -457,10 +457,10 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 if (mark.Name == "daliFee")
                     mark.Text = "0";
                 if (mark.Name == "taxFee" && tax.HasValue)
-                    mark.Text = tax.ToString();
+                    mark.Text = tax.Value.ToString("0.00");
 
                 if (mark.Name == "shouxuFee" && shouxuFee.HasValue)
-                    mark.Text = shouxuFee.ToString();
+                    mark.Text = shouxuFee.Value.ToString("0.00");
                 decimal youhimoney = 0;
                 if (mark.Name == "youhuiMoney")
                 {
@@ -471,7 +471,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     mark.Text = youhimoney.ToString();
                 }
                 if (mark.Name == "totalMoney")
-                    mark.Text = (item.TrademarkMoney + tax + shouxuFee - youhimoney).ToString();
+                    mark.Text = (item.TrademarkMoney + tax + shouxuFee - youhimoney).Value.ToString("0.00");
 
                 //string address= GetDefaultAddress(this.uId);
                 if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
