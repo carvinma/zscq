@@ -23080,6 +23080,8 @@ namespace zscq.Model
 		
 		private string _ApplyName;
 		
+		private string _TrademarkIds;
+		
 		public vw_TrademarkOrder()
 		{
 		}
@@ -23848,6 +23850,22 @@ namespace zscq.Model
 				if ((this._ApplyName != value))
 				{
 					this._ApplyName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkIds", DbType="NVarChar(MAX)")]
+		public string TrademarkIds
+		{
+			get
+			{
+				return this._TrademarkIds;
+			}
+			set
+			{
+				if ((this._TrademarkIds != value))
+				{
+					this._TrademarkIds = value;
 				}
 			}
 		}
