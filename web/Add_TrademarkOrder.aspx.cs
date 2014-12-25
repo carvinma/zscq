@@ -307,6 +307,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         }
 
     }
+
+    #region 生成帐单
     private void CreateWordToPDF_Total(t_TrademarkOrder OrderModer)
     {
 
@@ -544,7 +546,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             dstDoc.Save(Server.MapPath("File_Zscq/AccountPDF/applyDetail" + OrderModer.nvc_OrderNumber+ ".pdf"));
         }
     }
-
+    #endregion
     void Bind_Drp_YouHuiQuan()
     {
         int count = 0;
