@@ -180,10 +180,10 @@
                                 </td>
                                 <td height="30" align="left" style="border-bottom: 1px solid #d3d3d3;">
                                     <%--<a href="user_sbdd.aspx" <% if (myurl == "user_sbdd" ||  myurl == "user_sbddck"||  myurl == "user_trademarkorderok" ||myurl == "user_trademarkorderadd"){ %>class="font12bd44147" <%}else{%>class="" <%} %>>·我的商标订单</a>--%>
-                                    <a href="javascript:void(0)"  class="menuchild">·我的商标订单</a>
+                                    <a href="javascript:void(0)" <% if (myurl == "trademarkOrder_list" ||  myurl == "trademarkrenewalOrder_list"||  myurl == "user_trademarkorderok" ||myurl == "user_trademarkorderadd"){ %>class="font12bd44147 menuchild" <%}else{%>class="menuchild" <%} %> >·我的商标订单</a>
                                     <table style="display:none">
-                                    <tr><td width="10" height="30"></td><td>  <a href="trademark_list.aspx">·商标申请案订单</a></td></tr>
-                                     <tr><td width="10" height="30"></td><td> <a href="user_sbtj.aspx">·商标续展案订单</a></td></tr>
+                                    <tr><td width="10" height="30"></td><td>  <a href="trademarkOrder_list.aspx">·商标申请案订单</a></td></tr>
+                                     <tr><td width="10" height="30"></td><td> <a href="trademarkrenewalOrder_list.aspx">·商标续展案订单</a></td></tr>
                                     </table>
                                 </td>
                                 <td style="border-bottom: 1px solid #d3d3d3;">&nbsp;
