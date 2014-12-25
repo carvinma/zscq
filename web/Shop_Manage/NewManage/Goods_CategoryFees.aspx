@@ -61,7 +61,9 @@
                 - 商标申请大类费用 </span>
         <div style="clear: both">
         </div>
-    <asp:HiddenField ID="HiddenID" runat="server" /> <asp:HiddenField ID="HiddenRenewalID" runat="server" />
+    <asp:HiddenField ID="HiddenID" runat="server" /> 
+    <asp:HiddenField ID="HiddenRenewalID" runat="server" />
+       <asp:HiddenField ID="HiddenDailiID" runat="server" />
     </h1>
 
     <script type="text/javascript" src="../js/fucties.js"></script>
@@ -81,6 +83,11 @@
         <span id="search_id1" class="action-span1">
                 商标续展：每个大类费用<input type="text" id="txtRenewalFees" maxlength="8" 
             class="numberinput"  size="15" value="" runat="server" /></span></div>
+            <div class="form-div" id="Div2">
+        <span id="Span1" class="action-span1">
+                 每个案件代理费：<input type="text" id="txtDaiLiFee" maxlength="8" 
+            class="numberinput"  size="15" value="" runat="server" /></span></div>
+
     <input type="hidden" id="HiddenDel" value="" runat="server" />
      <div class="form-div" id="Div1">
      <table width="100%"><tr><td align="center">
