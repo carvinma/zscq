@@ -460,7 +460,16 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 if (mark.Name == "shouxuFee" && shouxuFee.HasValue)
                     mark.Text = shouxuFee.ToString();
                 if (mark.Name == "youhuiMoney")
-                    mark.Text = "0";
+                {
+                    if (orderRank == 1)
+                    {
+                        mark.Text = OrderModer.dm_YouHuiFee.ToString();
+                    }
+                    else
+                    {
+                        mark.Text = "0";
+                    }
+                }
                 if (mark.Name == "totalMoney")
                     mark.Text = (item.TrademarkMoney + tax + shouxuFee).ToString();
 
