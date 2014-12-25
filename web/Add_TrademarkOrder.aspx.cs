@@ -380,8 +380,10 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 }
                 k++;
             }
-
-
+        }
+        else
+        {
+            tableIndex = 4;
         }
         DocumentBuilder builder = new DocumentBuilder(doc);
         var orderDetailsList = DALTOD.OrderDetails_Select_OrderId(OrderModer.i_Id);

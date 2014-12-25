@@ -321,9 +321,6 @@
                                 <%} %>
                                 <%if(isfapiao==1){ %> 
                                  <tr align="left" >  
-                                <td width="200" align="right">邮寄费用：</td><td width="110" id="youji"><%=youjifee %></td><td width="30"></td><td width="100"></td>
-                                </tr> 
-                                 <tr align="left" >  
                                 <td width="200" align="right">增值税金额：</td><td width="110" id="suidian"><%=fapiaosui%></td><td width="30"></td><td width="100"></td>
                                 </tr>
                                    

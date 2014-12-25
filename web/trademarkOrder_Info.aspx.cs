@@ -20,16 +20,16 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
     dal_Member DALM = new dal_Member();
     dal_TrademarkSetup DALTS = new dal_TrademarkSetup();
     dal_NewTrademark mark = new dal_NewTrademark();
-    public int uId = 0, guoji = 0, zhinajinnum=0,isfapiao=0,isyouhuiquan=0,xianxiafukuan=0;
+    public int uId = 0, guoji = 0, zhinajinnum = 0, isfapiao = 0, isyouhuiquan = 0, xianxiafukuan = 0;
     public string OrderNum = "", UserNum = "", UserName = "", dt_addtime = "", OrderState = "";
     public string fapiaotaitou = "无", youjitype = "无", youjidizhi = "无", youjidizhia = "无", youjidizhib = "无", payway = "";
     public string youhuiquan = "无", isuseyouhui = "无";
-    public string fapiaosui = "0.00", youhuifee = "0.00", youjifee = "0.00", totalmoney = "0.00";
+    public string fapiaosui = "0.00", youhuifee = "0.00", totalmoney = "0.00";
     public string Str_Moneysb = "0", Str_Moneysbdaili = "0", Str_Moneymeisb = "0", Str_Moneymeisbdaili = "0", bizhong = "", guowaiinfo = "";
     public StringBuilder Str_Money = new StringBuilder();
     public StringBuilder Str_AllMoney = new StringBuilder();
     public int dazhe = 0, dazhe1 = 0;
-    public decimal dailiFee=0;//代理费
+    public decimal dailiFee = 0;//代理费
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != null && Request.Cookies["hqhtshop"]["hqht_sb_uid"] != "")
@@ -42,8 +42,8 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            dal_Goods goods=new dal_Goods();
-            var dali=goods.CategoryFees_Select_All().First(p => p.i_Type == 2);
+            dal_Goods goods = new dal_Goods();
+            var dali = goods.CategoryFees_Select_All().First(p => p.i_Type == 2);
             if (dali != null && dali.MainFees.HasValue)
                 dailiFee = dali.MainFees.Value;
         }
@@ -110,7 +110,7 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
                 if (order.nvc_PayType == "线下汇款" || order.i_Status == 5)
                 {
                     ImageButton1.Visible = false;
-                }  
+                }
                 totalmoney = order.dm_TotalMoney.ToString();
                 OrderNum = order.nvc_OrderNumber;
                 dt_addtime = order.dt_AddTime.ToString();
@@ -170,70 +170,30 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
 
             if (mm != null)
             {
-                if (mm.i_GuoJiId != null)
+                guoji = 1;
+                string totalmoney = (Convert.ToDecimal(order.dm_TMDaiLi + order.dm_TMZhiNaJin + order.dm_TrademarkMoney)).ToString("0.00");
+
+                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">官方商标续展费用：</td><td width=\"110\">" + order.dm_TrademarkMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+                if (zhinajinnum != 0)
                 {
-                    t_Nationality na = DALN.Nationality_Select_Id(mm.i_GuoJiId);
-                    if (na != null)
-                    {
-                        bizhong = na.nvc_Currency;
-                        if (na.nvc_Name == "中国")
-                        {
-                            guoji = 1;
-                            string totalmoney = (Convert.ToDecimal(order.dm_TMDaiLi + order.dm_TMZhiNaJin + order.dm_TrademarkMoney)).ToString("0.00");
-
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">官方商标续展费用：</td><td width=\"110\">" + order.dm_TrademarkMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            if (zhinajinnum != 0)
-                            {
-                                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\">" + order.dm_TMZhiNaJin + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            }
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费用：</td><td width=\"110\">" + order.dm_TMDaiLi + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">小计：</td><td width=\"30\">CNY</td><td width=\"100\" align=\"left\">" + order.dm_TotalMoney + "</td></tr>");
-                            Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总计：</td><td width=\"color:red;\" width=\"30\">CNY</td><td style='color:red;' id='allmoney'  align=\"left\" width=\"100\" >" + order.dm_TotalMoney + "</td></tr>");
-                        }
-                        else
-                        {
-                           
-                            decimal huilv = 1;
-                            t_Nationality nafee = DALN.Nationality_Select_BiZhong(na.nvc_JFBizhong);
-                            if (nafee != null)
-                            {
-                                bizhong = nafee.nvc_Currency;
-                                if (nafee.dm_Exchange != null || nafee.dm_Exchange != 0)
-                                {
-                                    huilv = nafee.dm_Exchange;
-                                }
-                            }
-                            string totalmoney = (Convert.ToDecimal(order.dm_TMDaiLi + order.dm_TMZhiNaJin + order.dm_TrademarkMoney)).ToString("0.00");
-                            string totalmoneyGY = ((((dalifee) / huilv) * sbdailinum) + (((model1.dm_TrademarkMoney) / huilv) * sbnum) + (((model1.dm_TMZhiNaJin) / huilv) * zhinajinnum)).ToString("0.00");
-
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">官方商标续展费用：</td><td width=\"110\">" + order.dm_TrademarkMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            if (zhinajinnum != 0)
-                            {
-                                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\">" + order.dm_TMZhiNaJin + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            }
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费用：</td><td width=\"110\">" + order.dm_TMDaiLi + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">小计：</td><td width=\"30\">CNY</td><td width=\"100\" align=\"left\">" + totalmoney + "</td></tr>");
-
-                            Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总计：</td><td style='color:red;' width=\"30\"\">CNY</td><td style='color:red;' width=\"100\" id='allmoney'  align=\"left\">" + order.dm_TotalMoney + "</td></tr>");
-
-                            Str_AllMoney.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\"></td><td style='color:red;' width=\"30\">" + bizhong + "&nbsp;</td><td style='color:red;' width=\"100\" id='allmonymei' >" + order.dm_TotalMoneyGY + "</td></tr>");
-
-                        }
-                    }
+                    Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\">" + order.dm_TMZhiNaJin + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
                 }
+                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费用：</td><td width=\"110\">" + order.dm_TMDaiLi + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+
+                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">小计：</td><td width=\"30\">CNY</td><td width=\"100\" align=\"left\">" + order.dm_TotalMoney + "</td></tr>");
+                Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总计：</td><td width=\"color:red;\" width=\"30\">CNY</td><td style='color:red;' id='allmoney'  align=\"left\" width=\"100\" >" + order.dm_TotalMoney + "</td></tr>");
+
             }
 
             #region 发票
-          
+
             if (order.i_IsFaPiao == 1)
             {
                 isfapiao = 1;
-               
+
                 fapiaosui = order.dm_FapiaoMoney.ToString();
                 fapiaotaitou = order.nvc_FaPiaoTaiTou;
-                
+
                 t_ReceiveAddress ra = DALRA.ReceiveAddress_Select_Id(order.i_AddressId);
                 if (ra != null)
                 {
@@ -246,32 +206,14 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
                     {
                         tel = ra.nvc_TelPhone;
                     }
-                    youjidizhi = DALA.Set_AddressName_Gid_PId_CId_AId(order.i_Address_Gid, order.i_Address_PId, order.i_Address_CId, order.i_Address_AId) + order.nvc_Address ;
-                    youjidizhia =  ra.nvc_Consignee;
-                    youjidizhib = tel ;
+                    youjidizhi = DALA.Set_AddressName_Gid_PId_CId_AId(order.i_Address_Gid, order.i_Address_PId, order.i_Address_CId, order.i_Address_AId) + order.nvc_Address;
+                    youjidizhia = ra.nvc_Consignee;
+                    youjidizhib = tel;
                 }
             }
             #endregion
 
             #region 优惠券第三部分
-
-            //DataViewDataContext dvdc = new DataViewDataContext();
-            //var iqueryCoupon = from i in dvdc.vw_Coupon where i.i_MemberId == order.i_MemberId && i.i_Where <= order.dm_TotalMoney && i.i_State == 1 && i.dt_AddTime < DateTime.Now && DateTime.Now < i.dt_ExpireTime select i;
-            //if (iqueryCoupon.Count() > 0)
-            //{
-
-            //    DDL_youhui.Items.Add(new ListItem("您有可以使用的优惠券", "0,0"));
-
-            //    string CouponType = "";//暂存种类
-            //    foreach (var q in iqueryCoupon)
-            //    {
-            //        if ((CouponType + ",").IndexOf("," + q.i_Type + ",") == -1)//如果已经有这个优惠券种类了
-            //        {
-            //            DDL_youhui.Items.Add(new ListItem(q.nvc_Name.ToString(), q.i_Id.ToString() + "," + q.i_Money.ToString()));
-            //            CouponType += "," + q.i_Type;
-            //        }
-            //    }
-            //}
 
             if (order.i_IsUseYHQ == 1)
             {
