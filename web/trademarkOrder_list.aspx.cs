@@ -72,33 +72,10 @@ public partial class trademarkOrder_list : System.Web.UI.Page
         }
     }
 
-    public string GetBizhong()
-    {       
-        string bizhong = "";
-        t_Member m = DALM.Member_Select_Id(UserId);
-        if (m != null)
-        {
-            t_Nationality na = DALN.Nationality_Select_Id(m.i_GuoJiId);
-            if (na != null)
-            {
-                bizhong = na.nvc_JFBizhong+":";
-            }
-        }
-        return bizhong;
-    }
+    
     protected void AspNetPager1_PageChanged(object sender, EventArgs e)
     {
         BindOrderlist();
-    }
-    public string GetGuojiName(int id)// 获得国籍
-    {
-        string guojiname = "";
-        t_Nationality nn = DALN.Nationality_Select_Id(id);
-        if (nn != null)
-        {
-            guojiname = nn.nvc_Name;
-        }
-        return guojiname;
     }
     public string ConvertStatus(object obj)
     {
@@ -116,4 +93,8 @@ public partial class trademarkOrder_list : System.Web.UI.Page
         }
     }
 
+    protected void btnQuery_Click(object sender, EventArgs e)
+    {
+
+    }
 }

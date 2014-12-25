@@ -15,6 +15,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=7" />
 
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <style type="text/css">
     .aspnetpager a { display: block; float: left; padding: 2px 10px; background: #fff; text-align: center; line-height: 20px; border: 1px solid #ccc; color: #0065DB; margin: 0 3px; }
@@ -104,7 +105,7 @@
                                 <table width="114" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
                                     <td width="10" height="20">&nbsp;</td>
-                                    <td width="98" align="center" class="font12bt">我的商标订单</td>
+                                    <td width="98" align="center" class="font12bt">商标申请案订单</td>
                                     <td width="6"></td>
                                   </tr>
                                 </table>
@@ -113,17 +114,65 @@
                             <tr>
                               <td height="26" align="left"></td>
                             </tr>
+                            <tr>
+                              <td height="26" align="left"> 
+                                  <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                         <td height="29" align="right" nowrap="nowrap">
+                                                                <strong>订单号</strong>
+                                                            </td>
+                                                            <td align="left">
+                                                                <asp:TextBox ID="txtOrder" runat="server" Width="70px"></asp:TextBox>
+                                                            </td>
+                                                            <td height="29" align="right" nowrap="nowrap">
+                                                                <strong>案件号</strong>
+                                                            </td>
+                                                            <td align="left">
+                                                                <asp:TextBox ID="txtCaseNo" runat="server" Width="70px"></asp:TextBox>
+                                                            </td>
+                                                            <td align="center" nowrap="nowrap">
+                                                                <strong>申请人</strong>
+                                                            </td>
+                                                            <td>
+                                                                <asp:TextBox ID="txtApplyUser" runat="server" Width="70px"></asp:TextBox>
+                                                            </td>
+                                                            <td width="30" align="center" nowrap="nowrap">
+                                                                <strong>下单日期</strong>
+                                                            </td>
+                                                            <td>
+                                                                
+                                                                <asp:TextBox ID="txtOrderDate" runat="server" Width="70px"
+                                                                 ReadOnly="true" style="background-image:url(images/user_js_date.gif); 
+                                                                                background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});">
+                                                                                </asp:TextBox>
+                                                                
+                                                            </td>
+                                                            <td width="30" align="center" nowrap="nowrap">
+                                                                <strong>状态</strong>
+                                                            </td>
+                                                            <td width="114">
+                                                                <asp:DropDownList ID="ddlOrderStatus" runat="server">
+                                                                </asp:DropDownList>
+                                                            </td>
+                                                            <td>
+                                                                &nbsp;</td>
+                                                            <td width="110" align="center">
+                                                                <asp:Button ID="btnQuery" CssClass="BtnShow" runat="server" Text="查 询" 
+                                                                    onclick="btnQuery_Click" />
+                                                            </td>
+                                                        </tr>
+                                                    </table></td>
+                            </tr>
                           </table>
                           <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                             <tr>
                               <td width="108" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单号</td>
-                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">商标注册号</td>
-                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">总金额</td>
-                              <%--   <td width="66" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">已付金额</td>--%>
-                              <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">下单时间</td>
-                              <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">缴费时间</td>
+                              <td width="108" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">案件号</td>
+                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请人</td>
+                              <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">图样</td>
+                              <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">金额</td>
+                              <td width="88" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">下单日期</td>
                               <td width="88" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单状态</td>
-                              <td width="49" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">详情</td>
                                <td width="100" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
                             </tr>
                             <asp:Repeater ID="rp_orderlist" runat="server" OnItemDataBound="rp_orderlist_ItemDataBound">
@@ -131,27 +180,45 @@
                                 <asp:HiddenField ID="hf_oid" runat="server" Value='<%# Eval("i_Id") %>' />
                                 <tr>
                                   <td height="32" align="center" bgcolor="#FFFFFF">
-                                    <%# Eval("nvc_OrderNumber") %></td>
+                                    <a href="user_sbddck.aspx?order=<%# Eval("i_Id") %>" class="ac5t">  <%# Eval("nvc_OrderNumber") %></a> 
+                                    </td>
                                   <td align="center" bgcolor="#FFFFFF">
                                     <asp:Repeater runat="server" ID="repTrademark">
                                       <ItemTemplate>
                                         <div style="text-align: center; width: 100%;">
-                                          <%--<%#  Container.ItemIndex+1%>.--%> <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">
+                                           <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">
                                             <%#Eval("nvc_SBRegNum")%></a>
                                         </div>
                                       </ItemTemplate>
                                     </asp:Repeater>
                                   </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                   <%#GetBizhong()%><%# GetGuojiName(int.Parse(Eval("i_GuoJiId").ToString()))=="中国"?Eval("dm_TotalMoney"):Eval("dm_TotalMoneyGY") %></span> </td>
-                                  <%--     <td width="66" align="center" bgcolor="#FFFFFF">1025</td>--%>
+                                   <asp:Repeater runat="server" ID="Repeater1">
+                                      <ItemTemplate>
+                                        <div style="text-align: center; width: 100%;">
+                                           <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">
+                                            <%#Eval("nvc_SBRegNum")%></a>
+                                        </div>
+                                      </ItemTemplate>
+                                    </asp:Repeater>
+                                 </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                    <%# Eval("dt_AddTime") %></td>
+                                   <asp:Repeater runat="server" ID="Repeater2">
+                                      <ItemTemplate>
+                                        <div style="text-align: center; width: 100%;">
+                                           <a title="商标编号：<%#Eval("nvc_SBRegNum")%>" href="user_sbck.aspx?t_r_id=<%#Eval("i_TrademarkId")%>">
+                                            <%#Eval("nvc_SBRegNum")%></a>
+                                        </div>
+                                      </ItemTemplate>
+                                    </asp:Repeater>
+                                 </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                    <%# Eval("dt_PayTime") %></td>
+                                    <%# Eval("dm_TotalMoney")%>
+                                    </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                    <%#ConvertStatus(Eval("i_Status"))%></td>
-                                  <td align="center" bgcolor="#FFFFFF"><a href="user_sbddck.aspx?order=<%# Eval("i_Id") %>" class="ac5t">查看</a> </td>
+                                   <%# Eval("dt_AddTime") %></td>
+                                   </td>
+                                  <td align="center" bgcolor="#FFFFFF"> <%#ConvertStatus(Eval("i_Status"))%></td>
                                     <td align="center" bgcolor="#FFFFFF">
                                     <%# (Eval("i_Status").ToString() == "0" || Eval("i_Status").ToString() == "1") ? "<a href='user_sbdd.aspx?order=" + Eval("i_Id") + "' class='ac5t'>取消订单</a>" :(Eval("i_Status").ToString() == "5"?"已取消订单":"")%>
                                      </td>

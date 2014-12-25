@@ -459,19 +459,17 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
 
                 if (mark.Name == "shouxuFee" && shouxuFee.HasValue)
                     mark.Text = shouxuFee.ToString();
+                decimal youhimoney = 0;
                 if (mark.Name == "youhuiMoney")
                 {
                     if (orderRank == 1)
                     {
-                        mark.Text = OrderModer.dm_YouHuiFee.ToString();
+                        youhimoney = OrderModer.dm_YouHuiFee;
                     }
-                    else
-                    {
-                        mark.Text = "0";
-                    }
+                    mark.Text = youhimoney.ToString();
                 }
                 if (mark.Name == "totalMoney")
-                    mark.Text = (item.TrademarkMoney + tax + shouxuFee).ToString();
+                    mark.Text = (item.TrademarkMoney + tax + shouxuFee - youhimoney).ToString();
 
                 //string address= GetDefaultAddress(this.uId);
                 if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
