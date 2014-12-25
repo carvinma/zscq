@@ -22,6 +22,9 @@
                 var ids = getUrlParam('ids');
                 $("#hrefBack").attr("href", "Add_TrademarkOrder.aspx?ids=" + ids);
             }
+            else if (getUrlParam('orderlist') == "1") {
+                $("#hrefBack").attr("href", "trademarkOrder_list.aspx?");
+            }
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
                 if (e.target == this) {
                     var tabs = $(this).parent().parent().children('li');

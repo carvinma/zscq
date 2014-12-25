@@ -86,7 +86,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             OrderModer.dm_ZengZhiTax = decimal.Parse(hi_tax.Value);//增值税
             OrderModer.dm_ShouXuFee = decimal.Parse(hi_shouxufei.Value);//手续费
             OrderModer.i_MemberId = uId;
-            OrderModer.i_Status = 1;
+            OrderModer.i_Status = 0;
             OrderModer.dm_TotalMoney = decimal.Parse(hi_totalmoney.Value);//国内要缴纳的总钱
             //OrderModer.dm_TotalMoneyGY = decimal.Parse(strtotalmoneymei);
             OrderModer.dt_AddTime = DateTime.Now;
