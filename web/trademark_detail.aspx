@@ -25,6 +25,12 @@
             else if (getUrlParam('orderlist') == "1") {
                 $("#hrefBack").attr("href", "trademarkOrder_list.aspx?");
             }
+            else if (getUrlParam('orderinfo') == "1") {
+                var orderid = getUrlParam('order');
+                var tIds = getUrlParam('tIds');
+
+                $("#hrefBack").attr("href", "trademarkOrder_info.aspx?order=" + orderid + "&tIds=" + tIds);
+            }
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
                 if (e.target == this) {
                     var tabs = $(this).parent().parent().children('li');

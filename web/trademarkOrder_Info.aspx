@@ -162,7 +162,9 @@
                                     <ItemTemplate>
                                       <tr>
                                         <td width="106" height="32" align="center" bgcolor="#FFFFFF">
-                                          <%# Eval("CaseNo")%></td>
+                                          <a href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>&orderinfo=1&order=<%=Orderid%>&tIds=<%=TrademarkIds %>" class="ac5t">
+                                               <%# Eval("CaseNo")%></a>
+                                           </td>
                                         <td width="75" align="center" bgcolor="#FFFFFF">
                                           <%# Eval("ApplyName")%></td>
                                         <td width="80" align="center" bgcolor="#FFFFFF">
@@ -257,10 +259,10 @@
                           <table width="95%" border="0" cellspacing="0" cellpadding="0" style="margin: 0 auto" runat="server" id="Table_YouHuiQuan2">
                             <tr class="orderxx">
                               <td height="30" align="left" valign="middle">
-                                <table width="415" border="0" cellspacing="0" cellpadding="0">
+                                <table width="426" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
-                                    <td width="100" align="right">是否使用优惠券：</td>
-                                    <td width="326" align="left">
+                                    <td width="130" align="right">是否使用优惠券：</td>
+                                    <td width="*" align="left">
                                       <%=isuseyouhui %>
                                     </td>
                                   </tr>
@@ -269,10 +271,10 @@
                             </tr>
                             <tr class="orderxx" id="youhuiquan1" runat="server">
                               <td height="30" align="left" valign="middle">
-                                <table width="415" border="0" cellspacing="0" cellpadding="0">
+                                <table width="426" border="0" cellspacing="0" cellpadding="0">
                                   <tr>
-                                    <td width="100" align="right">使用优惠券：</td>
-                                    <td width="326" align="left">
+                                    <td width="130" align="right">使用优惠券：</td>
+                                    <td width="*" align="left">
                                       <%=youhuiquan %>
                                     </td>
                                   </tr>
