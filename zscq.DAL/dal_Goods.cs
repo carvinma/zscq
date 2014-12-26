@@ -462,11 +462,16 @@ namespace zscq.DAL
             }
         }
 
-        public t_GoodsCategoryFees CategoryFees_Select_One()
+       /// <summary>
+       /// 获取费用设置
+       /// </summary>
+        /// <param name="type">0：申请案 1：续展案 2：代理费 3：滞纳金</param>
+       /// <returns></returns>
+        public t_GoodsCategoryFees CategoryFees_Select_ByType(int type)
         {
             try
             {
-                var model = mark.t_GoodsCategoryFees.First();
+                var model = mark.t_GoodsCategoryFees.First(p => p.i_Type == type);
                 return model;
             }
             catch

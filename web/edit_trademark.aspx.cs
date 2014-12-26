@@ -229,6 +229,10 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
         model.TrademarkMoney = money;
+        var agencyModel = goods.CategoryFees_Select_ByType(2);
+        model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
+        model.TrademarkLateFee = 0;//滞纳金
+
         fileName = this.upPattern1.Value;//图样1
         if (fileName.Contains("File_ShangBiao"))
         {

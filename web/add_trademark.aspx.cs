@@ -17,7 +17,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         if (!IsPostBack)
         {
             Bind_Page_Member();
-            t_GoodsCategoryFees fees = goods.CategoryFees_Select_One();
+            t_GoodsCategoryFees fees = goods.CategoryFees_Select_ByType(0);
             hi_MainFees.Value = fees.MainFees.Value.ToString();
             hi_ItemNum.Value = fees.ItemNum.Value.ToString();
             hi_ExceedFees.Value = fees.ExceedFees.Value.ToString();
@@ -191,6 +191,9 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
         model.TrademarkMoney = money;
+        var agencyModel= goods.CategoryFees_Select_ByType(2);
+        model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
+        model.TrademarkLateFee = 0;//滞纳金
         fileName = this.upPattern1.Value;//图样1
         System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
                HttpContext.Current.Server.MapPath(filePath + fileName));

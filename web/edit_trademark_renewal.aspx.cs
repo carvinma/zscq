@@ -248,6 +248,10 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
         model.TrademarkMoney = money;
+        var agencyModel = goods.CategoryFees_Select_ByType(2);
+        model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
+        model.TrademarkLateFee = 0;//滞纳金
+
         //model.TrademarkGoods = sortGoods.Value.Trim();
         fileName = this.upPattern1.Value;//图样
         if (!string.IsNullOrEmpty(fileName))
