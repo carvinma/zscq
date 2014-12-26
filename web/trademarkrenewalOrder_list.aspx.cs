@@ -66,7 +66,7 @@ public partial class trademarkrenewalOrder_list : System.Web.UI.Page
             var result = mark.Trademark_web_Excel(tIds);
             foreach (var r in result)
             {
-                r.Status = 0;//已保存，未提交
+                r.Status = 12;//已保存，未提交
             }
             mark.Trademark_Submit();
             dal_Coupon DALCOU = new dal_Coupon(); //优惠券信息表
@@ -79,7 +79,7 @@ public partial class trademarkrenewalOrder_list : System.Web.UI.Page
                 coupons.dt_UpdateStateTime = null;
                 DALCOU.Coupon_Update2(coupons);
             }
-            Response.Redirect("trademarkOrder_list.aspx");
+            Response.Redirect("trademarkrenewalOrder_list.aspx");
         }
         #endregion
     }
