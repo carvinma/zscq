@@ -175,7 +175,7 @@
                                                                                         <%#Eval("TrademarkType")%>
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
-                                                                                        <%#Eval("TrademarkMoney")%>
+                                                                                        <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
                                                                                         <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
