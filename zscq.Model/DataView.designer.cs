@@ -23078,6 +23078,8 @@ namespace zscq.Model
 		
 		private string _CaseNo;
 		
+		private string _ApplyNo;
+		
 		private string _ApplyName;
 		
 		private string _TrademarkIds;
@@ -23834,6 +23836,22 @@ namespace zscq.Model
 				if ((this._CaseNo != value))
 				{
 					this._CaseNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyNo", DbType="NVarChar(MAX)")]
+		public string ApplyNo
+		{
+			get
+			{
+				return this._ApplyNo;
+			}
+			set
+			{
+				if ((this._ApplyNo != value))
+				{
+					this._ApplyNo = value;
 				}
 			}
 		}

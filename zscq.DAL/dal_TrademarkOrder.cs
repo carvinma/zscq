@@ -528,8 +528,14 @@ namespace zscq.DAL
             if (!string.IsNullOrEmpty(orderNo))
                 WhereExpr = WhereExpr.And(p => p.nvc_OrderNumber.Contains(orderNo));
 
+
             if (!string.IsNullOrEmpty(caseNo))
-                WhereExpr = WhereExpr.And(p => p.CaseNo.Contains(caseNo));
+            {
+                if (caseType == 0) //申请案 案件号
+                    WhereExpr = WhereExpr.And(p => p.CaseNo.Contains(caseNo));
+                else //续展案 申请号
+                    WhereExpr = WhereExpr.And(p => p.ApplyNo.Contains(caseNo));
+            }
 
             if (!string.IsNullOrEmpty(applyname))
                 WhereExpr = WhereExpr.And(p => p.ApplyName.Contains(applyname));
@@ -540,7 +546,7 @@ namespace zscq.DAL
                 WhereExpr = WhereExpr.And(p => p.dt_AddTime >= dt).And(p => p.dt_AddTime < dt.AddDays(1));
             }
 
-            if (orderstatus>=0)
+            if (orderstatus >= 0)
                 WhereExpr = WhereExpr.And(p => p.i_Status == orderstatus);
 
             var iquery = dvdc.vw_TrademarkOrder.Where(WhereExpr);

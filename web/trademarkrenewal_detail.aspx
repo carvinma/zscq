@@ -18,6 +18,20 @@
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(document).ready(function () {
+            if (getUrlParam('order') == "1") { //当为订单时的返回
+                var ids = getUrlParam('ids');
+                $("#hrefBack").attr("href", "Add_TrademarkrenewalOrder.aspx?ids=" + ids);
+            }
+            else if (getUrlParam('orderlist') == "1") {
+                $("#hrefBack").attr("href", "trademarkrenewalOrder_list.aspx?");
+            }
+            else if (getUrlParam('orderinfo') == "1") {
+                var orderid = getUrlParam('order');
+                var tIds = getUrlParam('tIds');
+
+                $("#hrefBack").attr("href", "trademarkrenewalOrder_info.aspx?order=" + orderid + "&tIds=" + tIds);
+            }
+
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
                 if (e.target == this) {
                     var tabs = $(this).parent().parent().children('li');
@@ -103,7 +117,8 @@
                               </td>
                             <td><a href="edit_trademark_renewal.aspx?t_r_id=<%=trademarkId %>">
                              <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a></td>
-                            <td> <a href="trademarkrenewal_list.aspx"><img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>
+                            <td> <a href="trademarkrenewal_list.aspx" id="hrefBack">
+                               <img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>
                             </tr></table>
                            
                            </td></tr>

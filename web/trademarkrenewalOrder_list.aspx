@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="trademarkOrder_list.aspx.cs" Inherits="trademarkOrder_list" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="trademarkrenewalOrder_list.aspx.cs" Inherits="trademarkrenewalOrder_list" %>
 
 <%@ Register Src="ascx/zscqfoot.ascx" TagName="zscqfoot" TagPrefix="uc2" %>
 <%@ Register Src="ascx/zscqtop2.ascx" TagName="zscqtop2" TagPrefix="uc4" %>
@@ -22,6 +22,10 @@
     .aspnetpager a:hover { border: 1px solid #FF5500; color: #FF5500; background: #FFEEE6; text-decoration: none; }
     .aspnetpager td .pagetext { width: 35px; height: 23px; background: #fff; text-align: center; line-height: 23px; border: 1px solid #ccc; }
     .aspnetpager td .submitbutton { width: 39px; height: 23px; background: url(images/fenbar.jpg); color: #fff; line-height: 23px; text-align: center; border: none; margin-left: 5px; }
+      .style1
+      {
+          height: 32px;
+      }
   </style>
   <script language="javascript">
     function switchTag1(tag, content, k) {
@@ -125,10 +129,10 @@
                                                                 <asp:TextBox ID="txtOrder" runat="server" Width="70px"></asp:TextBox>
                                                             </td>
                                                             <td width="40" height="29" align="right" nowrap="nowrap">
-                                                                <strong>案件号</strong>
+                                                                <strong>申请号</strong>
                                                             </td>
                                                             <td align="left">
-                                                                <asp:TextBox ID="txtCaseNo" runat="server" Width="70px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtApplyNo" runat="server" Width="70px"></asp:TextBox>
                                                             </td>
                                                             <td width="40" align="center" nowrap="nowrap">
                                                                 <strong>申请人</strong>
@@ -165,7 +169,7 @@
                           <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                             <tr>
                               <td width="108" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单号</td>
-                              <td width="108" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">案件号</td>
+                              <td width="108" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请号</td>
                               <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请人</td>
                               <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">图样</td>
                               <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">金额</td>
@@ -185,8 +189,8 @@
                                       <ItemTemplate>
                                         <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
 
-                                         <a title="案件号<%# Eval("CaseNo") %>" href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>&orderlist=1" class="ac5t">
-                                                                            <%# Eval("CaseNo")%></a>
+                                         <a title="申请号<%# Eval("RegisteredNo") %>" href="trademarkrenewal_detail.aspx?t_r_id=<%# Eval("i_Id") %>&orderlist=1" class="ac5t">
+                                                                            <%# Eval("RegisteredNo")%></a>
                                         </div>
                                       </ItemTemplate>
                                     </asp:Repeater>
@@ -204,7 +208,7 @@
                                    <asp:Repeater runat="server" ID="repPattern">
                                       <ItemTemplate>
                                         <div style="text-align: center; width: 100%;;height:30px;line-height:30px;">
-                                            <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
+                                            <img alt="无" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                                         </div>
                                       </ItemTemplate>
                                     </asp:Repeater>

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using zscq.Model;
 using zscq.DAL;
 using zscq.BLL;
-public partial class trademarkOrder_list : System.Web.UI.Page
+public partial class trademarkrenewalOrder_list : System.Web.UI.Page
 {
     public int UserId = 0;
     dal_Member DALM = new dal_Member();
@@ -44,7 +44,7 @@ public partial class trademarkOrder_list : System.Web.UI.Page
             {
                 status = int.Parse(this.ddlOrderStatus.SelectedValue);
             }
-            rp_orderlist.DataSource = DALTO.TrademarkOrder_Web_New_SelectPage(index, pagesize, UserId, ref count, 0, this.txtOrder.Text.Trim(), this.txtCaseNo.Text.Trim(), this.txtApplyUser.Text.Trim(), this.txtOrderDate.Text.Trim(), status);
+            rp_orderlist.DataSource = DALTO.TrademarkOrder_Web_New_SelectPage(index, pagesize, UserId, ref count, 1, this.txtOrder.Text.Trim(), this.txtApplyNo.Text.Trim(), this.txtApplyUser.Text.Trim(), this.txtOrderDate.Text.Trim(), status);
             rp_orderlist.DataBind();
             AspNetPager1.RecordCount = count;
             AspNetPager1.PageSize = pagesize;
