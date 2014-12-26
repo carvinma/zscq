@@ -535,14 +535,16 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             builder.MoveToCell(tableIndex, rownum, 0, 0);
             builder.Write(item.CaseNo);
             builder.MoveToCell(tableIndex, rownum, 1, 0);
-            builder.Write(item.ApplyName);
+            builder.Write(item.RegisteredNo);
 
             builder.MoveToCell(tableIndex, rownum, 2, 0);
-            builder.InsertImage(Server.MapPath(item.TrademarkPattern1), 50, 30);
-            builder.MoveToCell(tableIndex, rownum, 3, 0);
             builder.Write(item.TrademarkType);
+            builder.MoveToCell(tableIndex, rownum, 3, 0);
+            builder.Write(item.ApplyName);
             builder.MoveToCell(tableIndex, rownum, 4, 0);
-            builder.Write((item.TrademarkMoney+item.TrademarkAgencyFee).ToString());
+            builder.Write(item.RenewalDate.Value.ToString("yyyy-MM-dd"));
+            builder.MoveToCell(tableIndex, rownum,5, 0);
+            builder.Write((item.TrademarkMoney+item.TrademarkAgencyFee+item.TrademarkLateFee).ToString());
 
             string pdfPath = "File_Zscq/AccountPDF/SeparateBill" + OrderModer.nvc_OrderNumber + "-" + orderRank + ".doc";
             allDetailPath.Add(pdfPath);
