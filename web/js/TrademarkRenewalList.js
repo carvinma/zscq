@@ -86,22 +86,24 @@ function SubmitTrademarkListDailog() {
 var submitStatus = function (v, h, f) {
     if (v == "ok") {
         var ids = h.find("div:hidden").html();
-        $.jBox.tip("正在提交数据...", 'loading');
-        $.ajax({
-            type: "POST",
-            url: "Handler.ashx",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: "flag=marklistsubmit&ids=" + ids+"&status=10",
-            success: function (data) {
-                if (data == "1") {
-                    jBox.tip("提交成功！", 'success');
-                    $("#btnQuery").click();
-                }
-                else {
-                    jBox.tip("提交失败！", 'info');
-                }
-            }
-        });
+        window.location.href = "Add_TrademarkrenewalOrder.aspx?ids=" + ids; 
+//        var ids = h.find("div:hidden").html();
+//        $.jBox.tip("正在提交数据...", 'loading');
+//        $.ajax({
+//            type: "POST",
+//            url: "Handler.ashx",
+//            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+//            data: "flag=marklistsubmit&ids=" + ids+"&status=10",
+//            success: function (data) {
+//                if (data == "1") {
+//                    jBox.tip("提交成功！", 'success');
+//                    $("#btnQuery").click();
+//                }
+//                else {
+//                    jBox.tip("提交失败！", 'info');
+//                }
+//            }
+//        });
     }
     return true;
 };
