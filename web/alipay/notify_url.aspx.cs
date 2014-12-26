@@ -154,8 +154,10 @@ public partial class notify_url : System.Web.UI.Page
                                     //DALT.Trademark_Update(sb_model);
 
                                     var markModel = mark.Trademark_Select_Id(r.i_TrademarkId);
-                                    markModel.Status = 2;//申请中，已汇款
-                                    mark.Trademark_Update(markModel);
+                                    if (markModel.i_Type == 0) //申请案
+                                        markModel.Status = 2;//申请中，已汇款
+                                    else //续展案
+                                        markModel.Status = 11;//已提交订单，续展中
                                 }
 
                                 #region 赠送积分

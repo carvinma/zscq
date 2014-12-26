@@ -29,8 +29,8 @@ public partial class trademarkOrder_list : System.Web.UI.Page
         if (!IsPostBack)
         {
             BindDDLOrderStatsus();
+            BindOrderlist();
         }
-        BindOrderlist();
     }
     void BindOrderlist()
     {
@@ -127,6 +127,6 @@ public partial class trademarkOrder_list : System.Web.UI.Page
 
     protected void btnQuery_Click(object sender, EventArgs e)
     {
-
+        BindOrderlist();
     }
 }

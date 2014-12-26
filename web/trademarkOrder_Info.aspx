@@ -582,11 +582,8 @@ body {
                                                                 <table>
                                                                     <tr>
                                                                         <td> 
-                                                                            <%if (xianxiafukuan == 0)
-                                                                              {%>
                                                                             <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/images/user_zl_b10.gif"
                                                                                 OnClick="ImageButton1_Click" />
-                                                                            <%} %>
                                                                         </td>
                                                                         <td>
                                                                             &nbsp;&nbsp;<a href="trademarkOrder_list.aspx"><img src="images/user_zl_b11.gif"

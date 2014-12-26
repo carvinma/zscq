@@ -20,7 +20,7 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
     dal_Member DALM = new dal_Member();
     dal_TrademarkSetup DALTS = new dal_TrademarkSetup();
     dal_NewTrademark mark = new dal_NewTrademark();
-    public int uId = 0, guoji = 0, zhinajinnum = 0, isfapiao = 0, isyouhuiquan = 0, xianxiafukuan = 0;
+    public int uId = 0, guoji = 0, zhinajinnum = 0, isfapiao = 0, isyouhuiquan = 0;
     public string OrderNum = "", UserNum = "", UserName = "", dt_addtime = "", OrderState = "";
     public string fapiaotaitou = "无", youjitype = "无", youjidizhi = "无", youjidizhia = "无", youjidizhib = "无", payway = "";
     public string youhuiquan = "无", isuseyouhui = "无";

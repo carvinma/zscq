@@ -142,8 +142,7 @@
                                                             <td>
                                                                 <asp:TextBox ID="txtOrderDate" runat="server" Width="85px"
                                                                  ReadOnly="true" style="background-image:url(images/user_js_date.gif); 
-                                                                                background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});">
-                                                                                </asp:TextBox>
+                                                                                background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"> </asp:TextBox>
                                                                 
                                                             </td>
                                                             <td width="30" align="center" nowrap="nowrap">
@@ -218,7 +217,7 @@
                                    </td>
                                   <td align="center" bgcolor="#FFFFFF"> <%#ConvertStatus(Eval("i_Status"))%></td>
                                     <td align="center" bgcolor="#FFFFFF">
-                                    <%# (Eval("i_Status").ToString() == "0" || Eval("i_Status").ToString() == "1") ? "<a href='trademarkOrder_list.aspx?order=" + Eval("i_Id") +"&tIds="+Eval("TrademarkIds")+ "' class='ac5t'>取消订单</a>" : (Eval("i_Status").ToString() == "3" ? "已取消订单" : "")%>
+                                    <%# (Eval("i_Status").ToString() == "0" || Eval("i_Status").ToString() == "4") ? "<a href='trademarkOrder_list.aspx?order=" + Eval("i_Id") +"&tIds="+Eval("TrademarkIds")+ "' class='ac5t'>取消订单</a>" : (Eval("i_Status").ToString() == "3" ? "已取消订单" : "")%>
                                      </td>
                                 </tr>
                               </ItemTemplate>

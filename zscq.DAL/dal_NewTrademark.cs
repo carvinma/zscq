@@ -58,6 +58,26 @@ namespace zscq.DAL
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="AdvModel"></param>
+        /// <returns></returns>
+        public int Trademark_Update(t_NewTradeMarkInfo model)
+        {
+            try
+            {
+                t_NewTradeMarkInfo Newmodel = mark.t_NewTradeMarkInfo.SingleOrDefault(b => b.i_Id == model.i_Id);
+                mark.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         /// <summary>
         /// 修改商标
         /// </summary>

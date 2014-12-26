@@ -123,20 +123,29 @@ public partial class payReturnUrl : System.Web.UI.Page
                 {
                     #region 商标订单
                     dal_TrademarkOrderDetails DALTOD = new dal_TrademarkOrderDetails();
-                    dal_Trademark DALT = new dal_Trademark();
+                    dal_NewTrademark mark = new dal_NewTrademark();
                     dal_TrademarkOrder DALTO = new dal_TrademarkOrder();
                     t_TrademarkOrder model = DALTO.TrademarkOrder_Select_Number(out_trade_no);
                     if (model != null)
                     {
-                        if (model.i_Status < 2)
+                        if (model.i_Status ==0)
                         {
-                            model.i_Status = 2;
+                            model.i_Status = 1;//已支付
                             model.dt_PayTime = DateTime.Now;
                             DALTO.TrademarkOrder_Update(model);
                             //if (model.i_RebateIntegral > 0)
                             //{
                             //    BLLUIN.UserIntegralNote_Add(model.i_MemberId, "付款成功", model.i_RebateIntegral, model.i_Id, 0);
                             //}
+                            var result = DALTOD.OrderDetails_vw_Select_OrderId(model.i_Id);
+                            foreach (var r in result)
+                            {
+                                var markModel = mark.Trademark_Select_Id(r.i_TrademarkId);
+                                if (markModel.i_Type == 0) //申请案
+                                    markModel.Status = 2;//申请中，已汇款
+                                else //续展案
+                                    markModel.Status = 11;//已提交订单，续展中
+                            }
 
                             #region 赠送积分
 

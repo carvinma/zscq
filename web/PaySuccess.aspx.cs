@@ -69,7 +69,7 @@ public partial class PaySuccess : System.Web.UI.Page
                 if (member != null && member.i_IntegralMobileId != 0)
                 {
                     Ishave = true;
-                } 
+                }
                 t_PatentOrder pModel = DALPO.PatentOrder_Select_OrderNum(OrderNumer);
                 if (pModel != null && pModel.dt_PayMoneyTime > DateTime.Now.AddMinutes(-5))
                 {
@@ -77,7 +77,6 @@ public partial class PaySuccess : System.Web.UI.Page
                     AllPrice = pModel.dm_TotalMoney.ToString() + "(" + pModel.nvc_CurrencyType + ")";
                     OId = pModel.i_Id;
 
-                    //lqurl = "user_patentsetIntegral.aspx";
                     leapurl = "User_PatentOrderInfo.aspx?oId=" + OId;
 
                 }
@@ -100,8 +99,14 @@ public partial class PaySuccess : System.Web.UI.Page
                     setIntegral = DALTOD.OrderDetails_Select_Count(tModel.i_Id) * model.i_ZlIntergral;
                     AllPrice = tModel.dm_TotalMoney.ToString();
                     OId = tModel.i_Id;
-                    //lqurl = "user_sbsetIntegral.aspx";
-                    leapurl = "user_sbddck.aspx?order=" + OId;
+
+                    var orderInfo = DALTO.TrademarkOrder_vw_Select_Id(tModel.i_Id);
+                    if (orderInfo.CaseType == 1) //x续展
+                    {
+                        leapurl = "trademarkrenewalOrder_Info.aspx?order=" + OId + "&tIds=" + orderInfo.TrademarkIds; //申请
+                    }
+                    else
+                        leapurl = "trademarkOrder_Info.aspx?order=" + OId + "&tIds=" + orderInfo.TrademarkIds; //申请
                 }
                 else
                 {
@@ -126,7 +131,7 @@ public partial class PaySuccess : System.Web.UI.Page
             if (member != null && member.i_IntegralMobileId == 0)//专利没有手机号
             {
                 model = DALIM.IntegralMobile_SelectByMobile(txt_moblie.Value);
-                if (model != null )//手机号是否使用
+                if (model != null)//手机号是否使用
                 {
                     if (model.i_zluid == 0)
                     {
