@@ -335,7 +335,9 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             if (mark.Name == "shouxuFee")
                 mark.Text = OrderModer.dm_ShouXuFee.ToString();
             if (mark.Name == "youhuiMoney")
-                mark.Text = OrderModer.dm_YouHuiFee.ToString();
+            {
+                mark.Text = OrderModer.dm_YouHuiFee > 0 ? ("-" + OrderModer.dm_YouHuiFee.ToString()) : "0";
+            }
             if (mark.Name == "totalMoney")
                 mark.Text = OrderModer.dm_TotalMoney.ToString();
 
@@ -465,15 +467,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
            
                 if (mark.Name == "youhuiMoney")
                 {
-                    if (orderRank == 1)
-                        youhimoney = OrderModer.dm_YouHuiFee;
-                    else
-                        youhimoney = 0;
-
-                    if (youhimoney > 0)
-                        mark.Text = "-" + youhimoney.ToString();
-                    else
-                        mark.Text = "0";
+                    youhimoney = orderRank == 1 ? OrderModer.dm_YouHuiFee : 0;
+                    mark.Text = youhimoney > 0 ? ("-" + youhimoney.ToString()) : "0";
                 }
                 if (mark.Name == "totalMoney")
                     mark.Text = (item.TrademarkMoney + item.TrademarkAgencyFee + tax + shouxuFee - youhimoney).Value.ToString("0.00");
