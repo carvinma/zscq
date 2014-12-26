@@ -9,7 +9,7 @@ using System.Text;
 using zscq.DAL;
 using zscq.Model;
 
-public partial class trademarkOrderOk : System.Web.UI.Page
+public partial class trademarkrenewalOrderOk : System.Web.UI.Page
 {
     int uId = 0;
     string href = "";
@@ -21,7 +21,6 @@ public partial class trademarkOrderOk : System.Web.UI.Page
     public string OrderNum = "", UserNum = "", UserName = "", dt_addtime = "", OrderState = "", all_money = "",all_moneymei="", payway = "",sbOrderId="",bizhong="";
     public int guoji=0;
     public string tIds;
-
     protected void Page_Load(object sender, EventArgs e)
     {
         href = Request.Url.ToString();

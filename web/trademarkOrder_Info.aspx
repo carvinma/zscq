@@ -641,8 +641,8 @@ body {
             menuFix();
             var orderNo = $("#orderNum").text();
             if (orderNo != null && orderNo != "") {
-                $("#downAll").attr("href", "File_Zscq/AccountPDF/applyTotal" + orderNo + ".pdf");
-                $("#downDetail").attr("href", "File_Zscq/AccountPDF/applyDetail" + orderNo + ".pdf");
+                $("#downAll").attr("href", "File_Zscq/AccountPDF/TotalBill" + orderNo + ".pdf");
+                $("#downDetail").attr("href", "File_Zscq/AccountPDF/SeparateBill" + orderNo + ".pdf");
             }
         });
         function Checkshow() {
