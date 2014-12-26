@@ -431,6 +431,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             Document doc = new Document(tmppath); //载入模板 
             decimal? tax = this.checkfp.Checked ? ((item.TrademarkMoney+item.TrademarkAgencyFee) * 0.033m) : 0;//增值税
             decimal? shouxuFee = 0;
+            decimal youhimoney = 0;
             decimal point = 0;
             if (OrderModer.nvc_PayType == "支付宝支付" || OrderModer.nvc_PayType == "网银直接支付")
             {
@@ -441,7 +442,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 point = 0.01m;
             }
             shouxuFee = (item.TrademarkMoney +item.TrademarkAgencyFee+ tax) * point;
-
+           
             foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
             {
                 if (mark.Name == "ClientName")
@@ -455,24 +456,27 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 if (mark.Name == "guiFee")
                     mark.Text = item.TrademarkMoney.ToString();
                 if (mark.Name == "daliFee")
-                    mark.Text = "0";
+                    mark.Text = item.TrademarkAgencyFee.ToString();
                 if (mark.Name == "taxFee" && tax.HasValue)
                     mark.Text = tax.Value.ToString("0.00");
 
                 if (mark.Name == "shouxuFee" && shouxuFee.HasValue)
                     mark.Text = shouxuFee.Value.ToString("0.00");
-                decimal youhimoney = 0;
+           
                 if (mark.Name == "youhuiMoney")
                 {
                     if (orderRank == 1)
-                    {
                         youhimoney = OrderModer.dm_YouHuiFee;
-                    }
-                    mark.Text = youhimoney.ToString();
+                    else
+                        youhimoney = 0;
+
+                    if (youhimoney > 0)
+                        mark.Text = "-" + youhimoney.ToString();
+                    else
+                        mark.Text = "0";
                 }
                 if (mark.Name == "totalMoney")
                     mark.Text = (item.TrademarkMoney + item.TrademarkAgencyFee + tax + shouxuFee - youhimoney).Value.ToString("0.00");
-
                 //string address= GetDefaultAddress(this.uId);
                 if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
                     mark.Text = OrderModer.nvc_Address;
@@ -531,7 +535,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             builder.MoveToCell(tableIndex, rownum, 3, 0);
             builder.Write(item.TrademarkType);
             builder.MoveToCell(tableIndex, rownum, 4, 0);
-            builder.Write(item.TrademarkMoney.ToString());
+            builder.Write((item.TrademarkMoney+item.TrademarkAgencyFee).ToString());
 
             string pdfPath = "File_Zscq/AccountPDF/applyDetail" + OrderModer.nvc_OrderNumber + "-" + orderRank + ".doc";
             allDetailPath.Add(pdfPath);
