@@ -654,11 +654,11 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             Rpt_order.DataBind();
 
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\" id='guifei'>" + iquery.Sum(p => p.TrademarkMoney).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费：</td><td width=\"110\">" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-            Str_Money.Append(" <tr class='FP' style='display:none;' align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\" id='tax'>" + (iquery.Sum(p => p.TrademarkMoney).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费：</td><td width=\"110\">" + iquery.Sum(p => p.TrademarkAgencyFee).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr class='FP' style='display:none;' align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\" id='tax'>" + (iquery.Sum(p => p.TrademarkMoney + p.TrademarkAgencyFee).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\"  id='shouxufei'>" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             string totalmoney = string.Empty;
-            totalmoney = (iquery.Sum(p => p.TrademarkMoney).Value).ToString("0.00");
+            totalmoney = (iquery.Sum(p => p.TrademarkMoney+p.TrademarkAgencyFee).Value).ToString("0.00");
             hi_allmy.Value = totalmoney;
             strtotalmoney = totalmoney;
             Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总金额：</td><td style=\"color:red;\" width=\"30\">CNY</td><td style='color:red;width:100px;' id='allmoney'  align=\"left\">" + totalmoney + "</td></tr>");
