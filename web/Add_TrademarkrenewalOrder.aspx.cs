@@ -326,8 +326,13 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                 mark.Text = OrderModer.dt_AddTime.Value.ToString("yyyy-MM-dd");
             if (mark.Name == "OrderStatus")
                 mark.Text = ConvertStatus(OrderModer.i_Status);
+            if (mark.Name == "DateLimit")
+                mark.Text = OrderModer.dt_AddTime.Value.AddDays(3).ToString("yyyy-MM-dd"); //延长三天后的日期
+            
             if (mark.Name == "guiFee")
                 mark.Text = OrderModer.dm_TrademarkMoney.ToString();
+            if (mark.Name == "zhinaJin")
+                mark.Text = OrderModer.dm_TMZhiNaJin.ToString();
             if (mark.Name == "daliFee")
                 mark.Text = OrderModer.dm_TMDaiLi.ToString();
             if (mark.Name == "taxFee")
@@ -403,16 +408,18 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             }
 
             builder.MoveToCell(tableIndex, rownum, 0, 0);
-            builder.Write(rownum.ToString());
+            builder.Write(rownum.ToString());//序号
             builder.MoveToCell(tableIndex, rownum, 1, 0);
-            builder.Write(trademarkModel.CaseNo);
+            builder.Write(trademarkModel.CaseNo);//案件号
             builder.MoveToCell(tableIndex, rownum, 2, 0);
-            builder.Write(trademarkModel.ApplyName);
+            builder.Write(trademarkModel.RegisteredNo);//申请号
 
             builder.MoveToCell(tableIndex, rownum, 3, 0);
-            builder.InsertImage(Server.MapPath(trademarkModel.TrademarkPattern1), 50, 30);
+            builder.Write(trademarkModel.TrademarkType);//类别
             builder.MoveToCell(tableIndex, rownum, 4, 0);
-            builder.Write(trademarkModel.TrademarkType);
+            builder.Write(trademarkModel.ApplyName);//权利人
+            builder.MoveToCell(tableIndex, rownum, 5, 0);
+            builder.Write(trademarkModel.RenewalDate.Value.ToString("yyyy-MM-dd"));//期限日
             rownum++;
         }
 
@@ -429,9 +436,9 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
         List<string> allDetailPath = new List<string>();
         foreach (var item in listMark)
         {
-            string tmppath = Server.MapPath("File_Zscq/template/trademarkApplyDetail.doc");
+            string tmppath = Server.MapPath("File_Zscq/template/trademarkRenewalDetail.doc");
             Document doc = new Document(tmppath); //载入模板 
-            decimal? tax = this.checkfp.Checked ? ((item.TrademarkMoney+item.TrademarkAgencyFee) * 0.033m) : 0;//增值税
+            decimal? tax = this.checkfp.Checked ? ((item.TrademarkMoney+item.TrademarkAgencyFee+item.TrademarkLateFee) * 0.033m) : 0;//增值税
             decimal? shouxuFee = 0;
             decimal youhimoney = 0;
             decimal point = 0;
@@ -443,7 +450,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             {
                 point = 0.01m;
             }
-            shouxuFee = (item.TrademarkMoney +item.TrademarkAgencyFee+ tax) * point;
+            shouxuFee = (item.TrademarkMoney +item.TrademarkAgencyFee+item.TrademarkLateFee+ tax) * point;
            
             foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
             {
@@ -471,7 +478,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                     mark.Text = youhimoney > 0 ? ("-" + youhimoney.ToString()) : "0";
                 }
                 if (mark.Name == "totalMoney")
-                    mark.Text = (item.TrademarkMoney + item.TrademarkAgencyFee + tax + shouxuFee - youhimoney).Value.ToString("0.00");
+                    mark.Text = (item.TrademarkMoney + item.TrademarkAgencyFee+item.TrademarkLateFee + tax + shouxuFee - youhimoney).Value.ToString("0.00");
                 //string address= GetDefaultAddress(this.uId);
                 if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
                     mark.Text = OrderModer.nvc_Address;
