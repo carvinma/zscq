@@ -608,7 +608,8 @@ body {
                                                                     function printPage() {
                                                                         var newWin = window.open();
                                                                         var titleHTML = document.getElementById("pr_table").innerHTML;
-                                                                        newWin.document.write(titleHTML);
+                                                                        var findhtml = $("#nav").html();
+                                                                        newWin.document.write(titleHTML.replace(findhtml,''));
                                                                         newWin.document.location.reload();
                                                                         newWin.print();
                                                                     }
