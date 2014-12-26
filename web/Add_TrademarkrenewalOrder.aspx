@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Add_TrademarkrenwalOrder.aspx.cs"
-    Inherits="Add_TrademarkrenwalOrder" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Add_TrademarkrenewalOrder.aspx.cs"
+    Inherits="Add_TrademarkrenewalOrder" %>
 
 <%@ Register Src="ascx/zscqtop2.ascx" TagName="zscqtop2" TagPrefix="uc1" %>
 <%@ Register Src="ascx/zscq_sb_leftmenu.ascx" TagName="zscq_sb_leftmenu" TagPrefix="uc1" %>
@@ -132,7 +132,7 @@
                                                                     <table width="689" id="tabOrder" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                                                                         <tr>
                                                                             <td width="131" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                                案件号
+                                                                                申请号
                                                                             </td>
                                                                             <td width="92" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 申请人
@@ -162,8 +162,8 @@
                                                                                     <td height="35" align="center" bgcolor="#FFFFFF">
                                                                                         <span style="display:none"><%# Eval("i_Id") %></span>
                                                                                         <a href="javascript:void(0)"
-                                                                                          onclick="orderCaseDetail(<%# Eval("i_Id") %>)"   class="ac5t">
-                                                                                            <%# Eval("CaseNo")%></a>
+                                                                                          onclick="orderCaseDetail(<%# Eval("i_Id") %>,1)"   class="ac5t">
+                                                                                            <%# Eval("RegisteredNo")%></a>
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                                         <%# Eval("ApplyName")%>

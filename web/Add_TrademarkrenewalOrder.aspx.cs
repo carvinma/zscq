@@ -11,7 +11,7 @@ using zscq.Model;
 using zscq.BLL;
 using Aspose.Words;
 using Aspose.Cells;
-public partial class Add_TrademarkrenwalOrder : System.Web.UI.Page
+public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
 {
     public dal_PatentOrder DALPO = new dal_PatentOrder();
     int uId = 0;
@@ -738,7 +738,7 @@ public partial class Add_TrademarkrenwalOrder : System.Web.UI.Page
     protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
     {
         // Response.Cookies["hqht_Trademarktidstr"].Value = null;
-        Response.Redirect("trademark_list.aspx");
+        Response.Redirect("trademarkrenewal_list.aspx");
     }
     string Bind_Rpt_BankList(int guojitype, int type)
     {

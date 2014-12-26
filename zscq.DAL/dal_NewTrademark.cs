@@ -226,7 +226,7 @@ namespace zscq.DAL
             {
                 sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.RegisteredNo) : sortedList.OrderBy(p => p.RegisteredNo);
             }
-            
+            sortedList = sortedList.OrderByDescending(p => p.i_Id);
             count = sortedList.Count();
             return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
         }
@@ -365,6 +365,7 @@ namespace zscq.DAL
             {
                 sortedList = ByApplyNo == "desc" ? sortedList.OrderByDescending(p => p.RegisteredNo) : sortedList.OrderBy(p => p.RegisteredNo);
             }
+            sortedList = sortedList.OrderByDescending(p => p.i_Id);
             count = sortedList.Count();
             return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
         }
