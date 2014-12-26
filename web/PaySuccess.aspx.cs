@@ -101,9 +101,9 @@ public partial class PaySuccess : System.Web.UI.Page
                     OId = tModel.i_Id;
 
                     var orderInfo = DALTO.TrademarkOrder_vw_Select_Id(tModel.i_Id);
-                    if (orderInfo.CaseType == 1) //x续展
+                    if (orderInfo.CaseType == 1) //续展
                     {
-                        leapurl = "trademarkrenewalOrder_Info.aspx?order=" + OId + "&tIds=" + orderInfo.TrademarkIds; //申请
+                        leapurl = "trademarkrenewalOrder_Info.aspx?order=" + OId + "&tIds=" + orderInfo.TrademarkIds; //续展
                     }
                     else
                         leapurl = "trademarkOrder_Info.aspx?order=" + OId + "&tIds=" + orderInfo.TrademarkIds; //申请
