@@ -179,15 +179,33 @@ public partial class add_trademark_renewal : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 12;
-        mark.Trademark_Add(model);
-        addRegNoticeData(model.i_Id);
+        if (mark.Trademark_Add(model) > 0)
+        {
+            addRegNoticeData(model.i_Id);
+            div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
+            UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
+            Response.Redirect("trademarkrenewal_list.aspx");
+        }
+        else
+        {
+            div_a.InnerHtml = "<script>alert('信息添加失败!');<script>";
+        }
     }
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status = 10;
-        mark.Trademark_Add(model);
-        addRegNoticeData(model.i_Id);
+        model.Status = 12;//已保存，未提交
+        if (mark.Trademark_Add(model) > 0)
+        {
+            addRegNoticeData(model.i_Id);
+            div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
+            UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
+            Response.Redirect("Add_TrademarkrenewalOrder.aspx?ids=" + model.i_Id);
+        }
+        else
+        {
+            div_a.InnerHtml = "<script>alert('信息添加失败!');<script>";
+        }
     }
     protected void btnCancle_Click(object sender, EventArgs e)
     {
