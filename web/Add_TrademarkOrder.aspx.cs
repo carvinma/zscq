@@ -81,8 +81,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             t_TrademarkOrder OrderModer = new t_TrademarkOrder();
             OrderModer.nvc_OrderNumber = DALTO.Set_OrderNo();
             OrderModer.dm_TrademarkMoney = iquery.Sum(p => p.TrademarkMoney); //商标金额
-            OrderModer.dm_TMZhiNaJin = TMZhiNaJin;
-            OrderModer.dm_TMDaiLi = TMDaiLi;//代理费
+            OrderModer.dm_TMZhiNaJin = iquery.Sum(p => p.TrademarkLateFee);//滞纳金
+            OrderModer.dm_TMDaiLi = iquery.Sum(p => p.TrademarkAgencyFee);//代理费
             OrderModer.dm_ZengZhiTax = decimal.Parse(hi_tax.Value);//增值税
             OrderModer.dm_ShouXuFee = decimal.Parse(hi_shouxufei.Value);//手续费
             OrderModer.i_MemberId = uId;
@@ -237,10 +237,10 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 if (model.RenewalDate.HasValue)
                     dModer.nvc_SbDaoqiTime = model.RenewalDate.Value.ToString("yyyy-MM-dd");//到期时间
                 dModer.dm_TrademarkMoney = model.TrademarkMoney;
-                dModer.dm_TMDaiLi = 0;
+                dModer.dm_TMDaiLi = model.TrademarkAgencyFee;//代理费
 
-                decimal? tax = this.checkfp.Checked ? (model.TrademarkMoney * 0.033m) : 0;
-                dModer.dm_ZengZhiTax = tax;
+                decimal? tax = this.checkfp.Checked ? ((model.TrademarkMoney + model.TrademarkAgencyFee) * 0.033m) : 0;
+                dModer.dm_ZengZhiTax = tax;//增值税
 
                 decimal point = 0;
                 if (OrderModer.nvc_PayType == "支付宝支付" || OrderModer.nvc_PayType == "网银直接支付")
@@ -251,8 +251,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 {
                     point = 0.01m;
                 }
-                dModer.dm_ShouXuFee = (model.TrademarkMoney + tax) * point;
-                dModer.dm_TotalMoney = dModer.dm_ShouXuFee + dModer.dm_ZengZhiTax + model.TrademarkMoney;
+                dModer.dm_ShouXuFee = (model.TrademarkMoney + model.TrademarkAgencyFee+ tax) * point;
+                dModer.dm_TotalMoney = dModer.dm_ShouXuFee + dModer.dm_ZengZhiTax + model.TrademarkMoney + model.TrademarkAgencyFee;
 
                 int ok = DALTOD.OrderDetails_Add(dModer);
                 model.Status = 1;//申请中，未汇款
@@ -429,7 +429,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         {
             string tmppath = Server.MapPath("File_Zscq/template/trademarkApplyDetail.doc");
             Document doc = new Document(tmppath); //载入模板 
-            decimal? tax = this.checkfp.Checked ? (item.TrademarkMoney * 0.033m) : 0;//增值税
+            decimal? tax = this.checkfp.Checked ? ((item.TrademarkMoney+item.TrademarkAgencyFee) * 0.033m) : 0;//增值税
             decimal? shouxuFee = 0;
             decimal point = 0;
             if (OrderModer.nvc_PayType == "支付宝支付" || OrderModer.nvc_PayType == "网银直接支付")
@@ -440,7 +440,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             {
                 point = 0.01m;
             }
-            shouxuFee = (item.TrademarkMoney + tax) * point;
+            shouxuFee = (item.TrademarkMoney +item.TrademarkAgencyFee+ tax) * point;
 
             foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
             {
@@ -471,7 +471,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     mark.Text = youhimoney.ToString();
                 }
                 if (mark.Name == "totalMoney")
-                    mark.Text = (item.TrademarkMoney + tax + shouxuFee - youhimoney).Value.ToString("0.00");
+                    mark.Text = (item.TrademarkMoney + item.TrademarkAgencyFee + tax + shouxuFee - youhimoney).Value.ToString("0.00");
 
                 //string address= GetDefaultAddress(this.uId);
                 if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
