@@ -314,7 +314,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
 
         #region  生成总帐单
 
-        string tmppath = Server.MapPath("File_Zscq/template/trademarkApplyAll.doc");
+        string tmppath = Server.MapPath("File_Zscq/template/trademarkRenewalAll.doc");
         Document doc = new Document(tmppath); //载入模板 
         foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
         {
