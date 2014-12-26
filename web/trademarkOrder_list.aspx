@@ -218,7 +218,7 @@
                                    </td>
                                   <td align="center" bgcolor="#FFFFFF"> <%#ConvertStatus(Eval("i_Status"))%></td>
                                     <td align="center" bgcolor="#FFFFFF">
-                                    <%# (Eval("i_Status").ToString() == "0" || Eval("i_Status").ToString() == "1") ? "<a href='user_sbdd.aspx?order=" + Eval("i_Id") + "' class='ac5t'>取消订单</a>" :(Eval("i_Status").ToString() == "3"?"已取消订单":"")%>
+                                    <%# (Eval("i_Status").ToString() == "0" || Eval("i_Status").ToString() == "1") ? "<a href='trademarkOrder_list.aspx?order=" + Eval("i_Id") +"&tIds="+Eval("TrademarkIds")+ "' class='ac5t'>取消订单</a>" : (Eval("i_Status").ToString() == "3" ? "已取消订单" : "")%>
                                      </td>
                                 </tr>
                               </ItemTemplate>
