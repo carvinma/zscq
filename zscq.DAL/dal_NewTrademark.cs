@@ -132,7 +132,7 @@ namespace zscq.DAL
         /// <returns></returns>
         public IQueryable<vw_NewTradeMark> Trademark_web_SelectPage(int PageIndex, int PageSize,
             int userid, int i_type, int? applyType,
-            string ByCaseNo, string ByName, string Bytype, string ByStatus, 
+            string ByCaseNo, string ByName, string Bytype, string ByStatus,string ByApplyNo, 
             string qCaseNo,string qName, int? qStatus, ref int count,QueryModel queryModel)
         {
             Expression<Func<vw_NewTradeMark, bool>> WhereExpr = PredicateExtensions.True<vw_NewTradeMark>();
@@ -222,6 +222,11 @@ namespace zscq.DAL
             {
                 sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.Status) : sortedList.OrderBy(p => p.Status);
             }
+            if (!string.IsNullOrEmpty(ByApplyNo))
+            {
+                sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.RegisteredNo) : sortedList.OrderBy(p => p.RegisteredNo);
+            }
+            
             count = sortedList.Count();
             return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
         }

@@ -183,7 +183,7 @@
                                     <a href="javascript:void(0)" class="menuchild">·我的商标订单</a>
                                     <table <% if (myurl == "trademarkorder_info" ||myurl == "trademarkorder_list" ||myurl == "trademarkrenewalorder_list" ) {  %>style="display:;" <%}else{%>style="display:none;" <%} %>>
                                     <tr><td width="10" height="22"></td><td> <a href="trademarkOrder_list.aspx"  <% if (myurl == "trademarkorder_info" ||myurl == "trademarkorder_list" ){ %>class="ac7" <%}else{%>class="" <%} %>>·商标申请案订单</a></td></tr>
-                                     <tr><td width="10" height="22"></td><td> <a href="trademarkrenewalOrder_list.aspx">·商标续展案订单</a></td></tr>
+                                     <tr><td width="10" height="22"></td><td> <a href="trademarkrenewalOrder_list.aspx" <% if (myurl == "trademarkrenewalorder_info" ||myurl == "trademarkrenewalorder_list" ){ %>class="ac7" <%}else{%>class="" <%} %> >·商标续展案订单</a></td></tr>
                                     </table>
                                 </td>
                                 <td style="border-bottom: 1px solid #d3d3d3;">&nbsp;

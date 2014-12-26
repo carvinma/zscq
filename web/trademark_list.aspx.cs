@@ -16,7 +16,7 @@ public partial class trademark_list : System.Web.UI.Page
     public int UserId = 0, usertype = 0;
     public string returnurl = "";
     public int? applyType;
-    public string ByCaseNo, ByName, Bytype, ByStatus;
+    public string ByCaseNo, ByName, Bytype, ByStatus,ByApplyNo;
     public string qCaseNo, qName;
     public int? qStatus;
 
@@ -96,6 +96,12 @@ public partial class trademark_list : System.Web.UI.Page
             this.ByStatus = Request.QueryString["sbstatus"].ToString().Split('_')[0];
             Hi_orderby4.Value = Request.QueryString["sbstatus"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbstatus"].ToString();//BY CHY
+        }
+        if (Request.QueryString["sbapplyno"] != null && Request.QueryString["sbapplyno"] != "")
+        {
+            this.ByApplyNo = Request.QueryString["sbapplyno"].ToString().Split('_')[0];
+            Hi_orderby5.Value = Request.QueryString["sbapplyno"].ToString();
+            HF_ORDERBY.Value = Request.QueryString["sbapplyno"].ToString();//BY CHY
         }
 
 
@@ -267,7 +273,7 @@ public partial class trademark_list : System.Web.UI.Page
             if (!string.IsNullOrEmpty(this.ddlTradeMarkStatus.SelectedValue))
                 this.qStatus = int.Parse(this.ddlTradeMarkStatus.SelectedValue);
 
-            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, 0, applyType, ByCaseNo, ByName, Bytype, ByStatus, qCaseNo, qName, qStatus, ref Ccount, querymodel);
+            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, 0, applyType, ByCaseNo, ByName, Bytype, ByStatus,ByApplyNo, qCaseNo, qName, qStatus, ref Ccount, querymodel);
             this.Rp_sb_list.DataBind();
             AspNetPager1.RecordCount = Ccount;
             AspNetPager1.PageSize = PageSize;

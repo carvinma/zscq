@@ -28,6 +28,7 @@
             var ody2 = $("#Hi_orderby2").val().split('_');
             var ody3 = $("#Hi_orderby3").val().split('_');
             var ody4 = $("#Hi_orderby4").val().split('_');
+            var ody5 = $("#Hi_orderby5").val().split('_');
               
             if (ody1[1] == "1") {
                 orderby(ody1[0], 1);
@@ -40,6 +41,9 @@
             }
             if (ody4[1] == "4") {
                 orderby(ody4[0], 4);
+            }
+            if (ody5[1] == "5") {
+                orderby(ody5[0], 5);
             }
         });
         function orderby(ody, index) {
@@ -199,6 +203,7 @@
     <input type="hidden" id="Hi_orderby2" runat="server" value="0" />
     <input type="hidden" id="Hi_orderby3" runat="server" value="0" />
     <input type="hidden" id="Hi_orderby4" runat="server" value="0" />
+    <input type="hidden" id="Hi_orderby5" runat="server" value="0" />
     <input type="hidden" id="hi_trademark" runat="server" value="" />
     <input type="hidden" id="HF_ORDERBY" runat="server" value="" />
     <uc4:zscqtop2 ID="zscqtop21" runat="server" />
@@ -319,6 +324,18 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
+                                                              <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
+                                                                    <tr>
+                                                                        <td width="12">
+                                                                        </td>
+                                                                        <td align="left">
+                                                                            <span>申请号</span><a href="trademark_list.aspx?sbapplyno=desc_5" title="倒序" id="daoxu5">↑</a><a
+                                                                                href="trademark_list.aspx?sbapplyno=asc_5" title="正序" id="zhengxu5" style="display: none;">↓</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
                                                             <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
@@ -346,10 +363,10 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                            <td width="50" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                申请书
                                                             </td>
-                                                            <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                            <td width="50" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                委托书
                                                             </td>
                                                             <td width="66" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
@@ -363,7 +380,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                            <td width="30" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                <input type="checkbox" onclick="doSelect()" id="selectall"/>
                                                             </td>
                                                         </tr>
@@ -373,6 +390,9 @@
                                                                     <td height="35" align="center" bgcolor="#FFFFFF">
                                                                         <a href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t">
                                                                             <%# Eval("CaseNo")%></a>
+                                                                    </td>
+                                                                     <td height="35" align="center" bgcolor="#FFFFFF">
+                                                                            <%# Eval("RegisteredNo")%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                         <%# Eval("ApplyName")%>
