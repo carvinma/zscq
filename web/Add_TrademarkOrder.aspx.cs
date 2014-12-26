@@ -60,7 +60,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             Bind_PatentList();
             if (!IsPostBack)
             {
-                Delete_Patent();
+                //Delete_Patent();
                 Bind_Page_PayWay();
                 Bind_Drp_YouHuiQuan();
                 GetDefaultAddress(uId);

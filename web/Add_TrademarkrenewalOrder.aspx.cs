@@ -60,7 +60,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             Bind_PatentList();
             if (!IsPostBack)
             {
-                Delete_Patent();
+               // Delete_Patent();
                 Bind_Page_PayWay();
                 Bind_Drp_YouHuiQuan();
                 GetDefaultAddress(uId);
@@ -238,8 +238,9 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                     dModer.nvc_SbDaoqiTime = model.RenewalDate.Value.ToString("yyyy-MM-dd");//到期时间
                 dModer.dm_TrademarkMoney = model.TrademarkMoney;
                 dModer.dm_TMDaiLi = model.TrademarkAgencyFee;//代理费
+                dModer.dm_ZhiNaJin= model.TrademarkLateFee;   //滞纳金
 
-                decimal? tax = this.checkfp.Checked ? ((model.TrademarkMoney + model.TrademarkAgencyFee) * 0.033m) : 0;
+                decimal? tax = this.checkfp.Checked ? ((model.TrademarkMoney + model.TrademarkAgencyFee+model.TrademarkLateFee) * 0.033m) : 0;
                 dModer.dm_ZengZhiTax = tax;//增值税
 
                 decimal point = 0;
@@ -251,8 +252,8 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                 {
                     point = 0.01m;
                 }
-                dModer.dm_ShouXuFee = (model.TrademarkMoney + model.TrademarkAgencyFee+ tax) * point;
-                dModer.dm_TotalMoney = dModer.dm_ShouXuFee + dModer.dm_ZengZhiTax + model.TrademarkMoney + model.TrademarkAgencyFee;
+                dModer.dm_ShouXuFee = (model.TrademarkMoney + model.TrademarkAgencyFee+model.TrademarkLateFee+ tax) * point;
+                dModer.dm_TotalMoney = dModer.dm_ShouXuFee + dModer.dm_ZengZhiTax + model.TrademarkMoney + model.TrademarkAgencyFee+model.TrademarkLateFee;
 
                 int ok = DALTOD.OrderDetails_Add(dModer);
                 model.Status = 1;//申请中，未汇款
@@ -280,7 +281,6 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             {
                 if (emalladdress != "")
                 {
-                    bool states = false;
                     string huikuanbankinfo = "";
                     if (input_payway.Value == "线下汇款")
                     {
@@ -298,7 +298,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
 
                     // BLLE.Email_Add(emalladdress, "商标缴费订单", "您好！您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
                 }
-                Response.Redirect("trademarkOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber);
+                Response.Redirect("trademarkrenewalOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber);
             }
         }
         else
@@ -416,7 +416,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             rownum++;
         }
 
-        string pdfPath = Server.MapPath("File_Zscq/AccountPDF/applyTotal" + OrderModer.nvc_OrderNumber + ".pdf");
+        string pdfPath = Server.MapPath("File_Zscq/AccountPDF/TotalBill" + OrderModer.nvc_OrderNumber + ".pdf");
         doc.Save(pdfPath, SaveFormat.Pdf);
         #endregion
 
@@ -551,7 +551,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                     dstDoc.AppendDocument(srcDoc, ImportFormatMode.KeepSourceFormatting);
                 }
             }
-            dstDoc.Save(Server.MapPath("File_Zscq/AccountPDF/applyDetail" + OrderModer.nvc_OrderNumber+ ".pdf"));
+            dstDoc.Save(Server.MapPath("File_Zscq/AccountPDF/SeparateBill" + OrderModer.nvc_OrderNumber + ".pdf"));
         }
     }
     #endregion
@@ -653,11 +653,12 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             Rpt_order.DataBind();
 
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\" id='guifei'>" + iquery.Sum(p => p.TrademarkMoney).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\" id='zhinajin'>" + iquery.Sum(p => p.TrademarkLateFee).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费：</td><td width=\"110\" id='dailifei'>" + iquery.Sum(p => p.TrademarkAgencyFee).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-            Str_Money.Append(" <tr class='FP' style='display:none;' align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\" id='tax'>" + (iquery.Sum(p => p.TrademarkMoney + p.TrademarkAgencyFee).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr class='FP' style='display:none;' align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\" id='tax'>" + (iquery.Sum(p => p.TrademarkMoney + p.TrademarkAgencyFee+ p.TrademarkLateFee).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\"  id='shouxufei'>" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             string totalmoney = string.Empty;
-            totalmoney = (iquery.Sum(p => p.TrademarkMoney+p.TrademarkAgencyFee).Value).ToString("0.00");
+            totalmoney = (iquery.Sum(p => p.TrademarkMoney + p.TrademarkAgencyFee + p.TrademarkLateFee).Value).ToString("0.00");
             hi_allmy.Value = totalmoney;
             strtotalmoney = totalmoney;
             Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总金额：</td><td style=\"color:red;\" width=\"30\">CNY</td><td style='color:red;width:100px;' id='allmoney'  align=\"left\">" + totalmoney + "</td></tr>");
@@ -665,7 +666,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("trademark_list.aspx");
+            Response.Redirect("trademarkrenewal_list.aspx");
         }
     }
 
