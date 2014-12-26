@@ -131,14 +131,14 @@ public partial class return_url : System.Web.UI.Page
                     {
                         #region 商标订单
                         dal_TrademarkOrderDetails DALTOD = new dal_TrademarkOrderDetails();
-                        dal_Trademark DALT = new dal_Trademark();
+                        dal_NewTrademark mark = new dal_NewTrademark();
                         dal_TrademarkOrder DALTO = new dal_TrademarkOrder();
                         t_TrademarkOrder model = DALTO.TrademarkOrder_Select_Number(order_no);
                         if (model != null)
                         {
-                            if (model.i_Status < 2)
+                            if (model.i_Status == 0)//未支付
                             {
-                                model.i_Status = 2;
+                                model.i_Status = 1;//已支付
                                 model.dt_PayTime = DateTime.Now;
                                 //DALTO.TrademarkOrder_Update(model);
                                 //if (model.i_RebateIntegral > 0)
@@ -148,10 +148,12 @@ public partial class return_url : System.Web.UI.Page
                                 var result = DALTOD.OrderDetails_vw_Select_OrderId(model.i_Id);
                                 foreach (var r in result)
                                 {
-                                    t_Trademark sb_model = DALT.Trademark_Select_Id(r.i_TrademarkId);
-                                    sb_model.i_IsPayState = 2;
-                                    DALT.Trademark_Update(sb_model);
+                                    var markModel= mark.Trademark_Select_Id(r.i_TrademarkId);
+                                    markModel.Status = 2;//申请中，已汇款
+                                    mark.Trademark_Update(markModel);
                                 }
+                                //mark.Trademark_Submit();
+
                                 #region 赠送积分
                                 dal_IntegralMobile DALIM = new dal_IntegralMobile();
                                 bll_UserIntegralNote BLLUIN = new bll_UserIntegralNote();

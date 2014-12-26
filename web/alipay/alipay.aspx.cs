@@ -135,20 +135,35 @@ public partial class alipay_alipay : System.Web.UI.Page
                 {
                     #region 商标
                     t_TrademarkOrder Omodel = DALO.TrademarkOrder_Select_Id(oId);
-                    if (Omodel != null && Omodel.i_Status < 2)
+                    if (Omodel != null && Omodel.i_Status == 0)//未支付
                     {
                         IQueryable<t_TrademarkOrderDetails> OrderD = (IQueryable<t_TrademarkOrderDetails>)DALOD.OrderDetails_Select_OrderId(Omodel.i_Id);
                         string OrderName = "";
                         string nvc_Name = "";
                         DataZscqDataContext dpdc = new DataZscqDataContext();
+                        DataTradeMarkDataContext markdc = new DataTradeMarkDataContext();
+                        //foreach (var qy in OrderD)
+                        //{
+                        //    var query_1 = from i in dpdc.t_Trademark
+                        //                  where i.i_Id == qy.i_TrademarkId
+                        //                  select i;
+                        //    foreach (var qy1 in query_1)
+                        //    {
+                        //        OrderName += "," + qy1.nvc_SBRegName; //商标注册名称
+                        //    }
+                        //}
+
                         foreach (var qy in OrderD)
                         {
-                            var query_1 = from i in dpdc.t_Trademark
+                            var query_1 = from i in markdc.t_NewTradeMarkInfo
                                           where i.i_Id == qy.i_TrademarkId
                                           select i;
                             foreach (var qy1 in query_1)
                             {
-                                OrderName += "," + qy1.nvc_SBRegName;
+                                if (!string.IsNullOrEmpty(qy1.TrademarkRemark))
+                                    OrderName += "," + qy1.TrademarkRemark; //商标说明
+                                else
+                                    OrderName += "," + qy1.TrademarkDescribe;//描述
                             }
                         }
                         nvc_Name = OrderName.Length > 1 ? OrderName.Substring(1, OrderName.Length - 1) : "";
