@@ -268,6 +268,9 @@ body {
                                                             <td height="115" align="left" valign="top">
                                                                 <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                                                                     <tr>
+                                                                     <td width="100" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            案件号
+                                                                        </td>
                                                                         <td width="106" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             申请号
                                                                         </td>
@@ -280,43 +283,53 @@ body {
                                                                         <td width="121" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             类别
                                                                         </td>
+                                                                         <td width="92" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                                到期日
+                                                                            </td>
                                                                         <td width="79" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             金额
                                                                         </td>
-                                                                        <td width="67" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                        <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             申请书
                                                                         </td>
-                                                                        <td width="48" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                        <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             委托书
                                                                         </td>
                                                                     </tr>
                                                                     <asp:Repeater ID="rp_trademark" runat="server">
                                                                         <ItemTemplate>
                                                                             <tr>
-                                                                                <td width="106" height="32" align="center" bgcolor="#FFFFFF">
+                                                                                <td  height="32" align="center" bgcolor="#FFFFFF">
                                                                                     <a href="trademarkrenewal_detail.aspx?t_r_id=<%# Eval("i_Id") %>&orderinfo=1&order=<%=Orderid%>&tIds=<%=TrademarkIds %>"
                                                                                         class="ac5t">
-                                                                                        <%# Eval("RegisteredNo")%></a>
+                                                                                        <%# Eval("CaseNo")%></a>
                                                                                 </td>
-                                                                                <td width="75" align="center" bgcolor="#FFFFFF">
+                                                                                <td  height="32" align="center" bgcolor="#FFFFFF">
+                                                                                     <%# Eval("RegisteredNo")%>
+                                                                                </td>
+                                                                                <td align="center" bgcolor="#FFFFFF">
                                                                                     <%# Eval("ApplyName")%>
                                                                                 </td>
-                                                                                <td width="80" align="center" bgcolor="#FFFFFF">
+                                                                                <td align="center" bgcolor="#FFFFFF">
                                                                                     <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
-                                                                                    <td width="141" align="center" bgcolor="#FFFFFF">
-                                                                                        <%# Eval("TrademarkType")%>
                                                                                     </td>
-                                                                                    <td width="69" align="center" bgcolor="#FFFFFF">
-                                                                                        <%# (decimal.Parse(Eval("TrademarkMoney").ToString()) + dailiFee)%>
-                                                                                    </td>
-                                                                                    <td width="67" align="center" bgcolor="#FFFFFF">
-                                                                                        <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
-                                                                     ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
-                                                                                    </td>
-                                                                                    <td width="48" align="center" bgcolor="#FFFFFF">
-                                                                                        <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
-                                                                        ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
-                                                                                    </td>
+                                                                                <td align="center" bgcolor="#FFFFFF">
+                                                                                    <%# Eval("TrademarkType")%>
+                                                                                </td>
+                                                                                 <td align="center" bgcolor="#FFFFFF">
+                                                                                    <%#string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%>
+                                                                                </td>
+                                                                                <td align="center" bgcolor="#FFFFFF">
+                                                                                    <%# (decimal.Parse(Eval("TrademarkMoney").ToString()) + dailiFee)%>
+                                                                                </td>
+                                                                                <td  align="center" bgcolor="#FFFFFF">
+                                                                                    <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
+                                                                    ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                                                                </td>
+                                                                                <td align="center" bgcolor="#FFFFFF">
+                                                                                    <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
+                                                                    ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                                                                </td>
                                                                             </tr>
                                                                         </ItemTemplate>
                                                                     </asp:Repeater>
@@ -585,7 +598,7 @@ body {
                                                                                 OnClick="ImageButton1_Click" />
                                                                         </td>
                                                                         <td>
-                                                                            &nbsp;&nbsp;<a href="trademarkOrder_list.aspx"><img src="images/user_zl_b11.gif"
+                                                                            &nbsp;&nbsp;<a href="trademarkrenewalOrder_list.aspx"><img src="images/user_zl_b11.gif"
                                                                                 width="85" height="29" border="0" /></a> &nbsp;&nbsp; <a href="javascript:void(0)">
                                                                                     <img src="images/user_zl_pr.jpg" onclick="printPage()" /></a>
                                                                                     &nbsp;&nbsp;
@@ -640,8 +653,8 @@ body {
             menuFix();
             var orderNo = $("#orderNum").text();
             if (orderNo != null && orderNo != "") {
-                $("#downAll").attr("href", "File_Zscq/AccountPDF/applyTotal" + orderNo + ".pdf");
-                $("#downDetail").attr("href", "File_Zscq/AccountPDF/applyDetail" + orderNo + ".pdf");
+                $("#downAll").attr("href", "File_Zscq/AccountPDF/TotalBill" + orderNo + ".pdf");
+                $("#downDetail").attr("href", "File_Zscq/AccountPDF/SeparateBill" + orderNo + ".pdf");
             }
         });
         function Checkshow() {
