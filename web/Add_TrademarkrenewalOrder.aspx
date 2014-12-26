@@ -198,7 +198,7 @@
                                                                         ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                                        <a href="javascript:void(0)" id="linkDel<%# Eval("i_Id")%>" class="ac5t" onclick="orderDelCase(<%# Eval("i_Id")%>)">
+                                                                                        <a href="javascript:void(0)" id="linkDel<%# Eval("i_Id")%>" class="ac5t" onclick="orderDelCase(<%# Eval("i_Id")%>,1)">
                                                                                             删除</a>
                                                                                     </td>
                                                                                 </tr>
@@ -1039,6 +1039,10 @@
         });
         $("#hi_totalmoney").val($("#allmoney").html());
         $("#hi_ids").val(ids);
+        if (ids.length == 0) {
+            alert("案件数量为零，请重新选择案件");
+            return false;
+        }
     }
 
  

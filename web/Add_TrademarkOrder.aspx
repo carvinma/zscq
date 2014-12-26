@@ -1028,6 +1028,11 @@
         });
         $("#hi_totalmoney").val($("#allmoney").html());
         $("#hi_ids").val(ids);
+
+        if (ids.length == 0) {
+            alert("案件数量为零，请重新选择案件");
+            return false;
+        }
     }
 
  
