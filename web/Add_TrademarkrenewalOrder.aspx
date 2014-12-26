@@ -189,7 +189,7 @@
                                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
                                                                                         <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
                                                                                     </td>
-                                                                                    <td align="center" bgcolor="#FFFFFF" class="font12b4e">
+                                                                                    <td align="center" bgcolor="#FFFFFF">
                                                                                         <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
                                                                      ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                                                                     </td>
