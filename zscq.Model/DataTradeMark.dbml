@@ -200,6 +200,7 @@
       <Column Name="TrademarkType" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="TrademarkGoods" Type="System.String" DbType="NVarChar(800)" CanBeNull="true" />
       <Column Name="TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TrademarkAgencyFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="TrademarkPattern1" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="TrademarkPattern2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="TrademarkRegBook" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
