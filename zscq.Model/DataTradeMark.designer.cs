@@ -3103,6 +3103,8 @@ namespace zscq.Model
 		
 		private System.Nullable<decimal> _TrademarkAgencyFee;
 		
+		private System.Nullable<decimal> _TrademarkLateFee;
+		
 		private string _TrademarkPattern1;
 		
 		private string _TrademarkPattern2;
@@ -3203,6 +3205,8 @@ namespace zscq.Model
     partial void OnTrademarkMoneyChanged();
     partial void OnTrademarkAgencyFeeChanging(System.Nullable<decimal> value);
     partial void OnTrademarkAgencyFeeChanged();
+    partial void OnTrademarkLateFeeChanging(System.Nullable<decimal> value);
+    partial void OnTrademarkLateFeeChanged();
     partial void OnTrademarkPattern1Changing(string value);
     partial void OnTrademarkPattern1Changed();
     partial void OnTrademarkPattern2Changing(string value);
@@ -3914,6 +3918,26 @@ namespace zscq.Model
 					this._TrademarkAgencyFee = value;
 					this.SendPropertyChanged("TrademarkAgencyFee");
 					this.OnTrademarkAgencyFeeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkLateFee", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> TrademarkLateFee
+		{
+			get
+			{
+				return this._TrademarkLateFee;
+			}
+			set
+			{
+				if ((this._TrademarkLateFee != value))
+				{
+					this.OnTrademarkLateFeeChanging(value);
+					this.SendPropertyChanging();
+					this._TrademarkLateFee = value;
+					this.SendPropertyChanged("TrademarkLateFee");
+					this.OnTrademarkLateFeeChanged();
 				}
 			}
 		}
