@@ -535,12 +535,13 @@ namespace zscq.DAL
                 WhereExpr = WhereExpr.And(p => p.ApplyName.Contains(applyname));
 
             if (!string.IsNullOrEmpty(orderdate))
-                WhereExpr = WhereExpr.And(p => p.dt_AddTime.Value.ToString("yyyy-MM-dd") == applyname);
+            {
+                DateTime dt = DateTime.Parse(orderdate);
+                WhereExpr = WhereExpr.And(p => p.dt_AddTime >= dt).And(p => p.dt_AddTime < dt.AddDays(1));
+            }
 
             if (orderstatus>=0)
                 WhereExpr = WhereExpr.And(p => p.i_Status == orderstatus);
-
-            dvdc.vw_TrademarkOrder.Where(WhereExpr);
 
             var iquery = dvdc.vw_TrademarkOrder.Where(WhereExpr);
             iquery = from i in iquery orderby i.i_Id descending select i;

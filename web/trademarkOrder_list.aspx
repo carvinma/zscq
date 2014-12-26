@@ -141,7 +141,7 @@
                                                             </td>
                                                             <td>
                                                                 <asp:TextBox ID="txtOrderDate" runat="server" Width="85px"
-                                                                 ReadOnly="true" style="background-image:url(images/user_js_date.gif); 
+                                                                  style="background-image:url(images/user_js_date.gif); 
                                                                                 background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"> </asp:TextBox>
                                                                 
                                                             </td>
