@@ -271,7 +271,7 @@ body {
                                                                      <td width="100" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             案件号
                                                                         </td>
-                                                                        <td width="106" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                        <td width="100" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             申请号
                                                                         </td>
                                                                         <td width="85" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
@@ -280,11 +280,11 @@ body {
                                                                         <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             图样
                                                                         </td>
-                                                                        <td width="121" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                        <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             类别
                                                                         </td>
-                                                                         <td width="92" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                                到期日
+                                                                         <td width="95" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                             到期日
                                                                             </td>
                                                                         <td width="79" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                             金额
