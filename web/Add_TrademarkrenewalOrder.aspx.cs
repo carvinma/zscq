@@ -462,8 +462,13 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                     mark.Text = OrderModer.dt_AddTime.Value.ToString("yyyy-MM-dd");
                 if (mark.Name == "OrderStatus")
                     mark.Text = ConvertStatus(OrderModer.i_Status);
+                if (mark.Name == "DateLimit")
+                    mark.Text = OrderModer.dt_AddTime.Value.AddDays(3).ToString("yyyy-MM-dd"); //延长三天后的日期
+
                 if (mark.Name == "guiFee")
                     mark.Text = item.TrademarkMoney.ToString();
+                if (mark.Name == "zhinaJin")
+                    mark.Text = item.TrademarkLateFee.ToString();
                 if (mark.Name == "daliFee")
                     mark.Text = item.TrademarkAgencyFee.ToString();
                 if (mark.Name == "taxFee" && tax.HasValue)
@@ -539,7 +544,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             builder.MoveToCell(tableIndex, rownum, 4, 0);
             builder.Write((item.TrademarkMoney+item.TrademarkAgencyFee).ToString());
 
-            string pdfPath = "File_Zscq/AccountPDF/applyDetail" + OrderModer.nvc_OrderNumber + "-" + orderRank + ".doc";
+            string pdfPath = "File_Zscq/AccountPDF/SeparateBill" + OrderModer.nvc_OrderNumber + "-" + orderRank + ".doc";
             allDetailPath.Add(pdfPath);
             doc.Save(Server.MapPath(pdfPath));
             orderRank++;
