@@ -18,7 +18,7 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         if (!IsPostBack)
         {
             Bind_Page_Member();
-            t_GoodsCategoryFees fees = goods.CategoryFees_Select_One();
+            t_GoodsCategoryFees fees = goods.CategoryFees_Select_ByType(0);
             hi_MainFees.Value = fees.MainFees.Value.ToString();
             hi_ItemNum.Value = fees.ItemNum.Value.ToString();
             hi_ExceedFees.Value = fees.ExceedFees.Value.ToString();

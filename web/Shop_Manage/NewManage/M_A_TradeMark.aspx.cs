@@ -56,7 +56,7 @@ public partial class M_A_TradeMark : System.Web.UI.Page
             Bind_Admin_Status();
             this.lblCaseNo.Text= caseNo.GetTodayMaxCaseNo();
 
-            t_GoodsCategoryFees fees = goods.CategoryFees_Select_One();
+            t_GoodsCategoryFees fees = goods.CategoryFees_Select_ByType(0);
             hi_MainFees.Value = fees.MainFees.Value.ToString();
             hi_ItemNum.Value = fees.ItemNum.Value.ToString();
             hi_ExceedFees.Value = fees.ExceedFees.Value.ToString();
