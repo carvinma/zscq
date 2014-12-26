@@ -244,7 +244,7 @@
                                     </td>  
                                      <td> 
                                         <%=model.TrademarkType %> 
-                                        &nbsp;<a href="javascript:void(0)" onclick="editTradeMarkshowGoods();">商品详情</a>
+                                        &nbsp;<%--<a href="javascript:void(0)" onclick="editTradeMarkshowGoods();">商品详情</a>--%>
                                         
                                     </td>
                                      </tr>
