@@ -27,7 +27,7 @@ public partial class Shop_Manage_NewManage_Goods_CategoryFees : System.Web.UI.Pa
             this.txtDaiLiFee.Value = dali.MainFees.Value.ToString();
 
             var zhinajin = goods.CategoryFees_Select_All().First(p => p.i_Type == 3);
-            this.txtZhiNaJin.Value = dali.MainFees.Value.ToString();
+            this.txtZhiNaJin.Value = zhinajin.MainFees.Value.ToString();
 
 
             this.HiddenID.Value = model.i_Id.ToString();
