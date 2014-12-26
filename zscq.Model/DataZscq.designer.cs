@@ -8828,6 +8828,8 @@ namespace zscq.Model
 		
 		private System.Nullable<decimal> _dm_TrademarkMoney;
 		
+		private System.Nullable<decimal> _dm_ZhiNaJin;
+		
 		private System.Nullable<decimal> _dm_TMDaiLi;
 		
 		private System.Nullable<decimal> _dm_ZengZhiTax;
@@ -8864,6 +8866,8 @@ namespace zscq.Model
     partial void Ondm_TotalMoneyChanged();
     partial void Ondm_TrademarkMoneyChanging(System.Nullable<decimal> value);
     partial void Ondm_TrademarkMoneyChanged();
+    partial void Ondm_ZhiNaJinChanging(System.Nullable<decimal> value);
+    partial void Ondm_ZhiNaJinChanged();
     partial void Ondm_TMDaiLiChanging(System.Nullable<decimal> value);
     partial void Ondm_TMDaiLiChanged();
     partial void Ondm_ZengZhiTaxChanging(System.Nullable<decimal> value);
@@ -9118,6 +9122,26 @@ namespace zscq.Model
 					this._dm_TrademarkMoney = value;
 					this.SendPropertyChanged("dm_TrademarkMoney");
 					this.Ondm_TrademarkMoneyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_ZhiNaJin", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_ZhiNaJin
+		{
+			get
+			{
+				return this._dm_ZhiNaJin;
+			}
+			set
+			{
+				if ((this._dm_ZhiNaJin != value))
+				{
+					this.Ondm_ZhiNaJinChanging(value);
+					this.SendPropertyChanging();
+					this._dm_ZhiNaJin = value;
+					this.SendPropertyChanged("dm_ZhiNaJin");
+					this.Ondm_ZhiNaJinChanged();
 				}
 			}
 		}

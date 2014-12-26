@@ -408,6 +408,7 @@
       <Column Name="nvc_SbDaoqiTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_TMDaiLi" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_ZengZhiTax" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_ShouXuFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
