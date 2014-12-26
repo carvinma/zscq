@@ -131,17 +131,23 @@
                                                                 <div id="trademarkinfo">
                                                                     <table width="689" id="tabOrder" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                                                                         <tr>
-                                                                            <td width="131" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="120" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                                案件号
+                                                                            </td>
+                                                                            <td width="120" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 申请号
                                                                             </td>
-                                                                            <td width="92" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="90" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 申请人
                                                                             </td>
-                                                                            <td width="92" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="52" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 图样
                                                                             </td>
                                                                             <td width="180" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 类别
+                                                                            </td>
+                                                                             <td width="92" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                                到期日
                                                                             </td>
                                                                             <td width="85" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 金额
@@ -159,11 +165,14 @@
                                                                         <asp:Repeater ID="Rpt_order" runat="server">
                                                                             <ItemTemplate>
                                                                                 <tr id='ordertr<%# Eval("i_Id") %>'>
-                                                                                    <td height="35" align="center" bgcolor="#FFFFFF">
+                                                                                 <td height="35" align="center" bgcolor="#FFFFFF">
                                                                                         <span style="display:none"><%# Eval("i_Id") %></span>
                                                                                         <a href="javascript:void(0)"
                                                                                           onclick="orderCaseDetail(<%# Eval("i_Id") %>,1)"   class="ac5t">
-                                                                                            <%# Eval("RegisteredNo")%></a>
+                                                                                            <%# Eval("CaseNo")%></a>
+                                                                                    </td>
+                                                                                    <td height="35" align="center" bgcolor="#FFFFFF">
+                                                                                         <%# Eval("RegisteredNo")%>
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                                         <%# Eval("ApplyName")%>
@@ -173,6 +182,9 @@
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                                         <%#Eval("TrademarkType")%>
+                                                                                    </td>
+                                                                                     <td align="center" bgcolor="#FFFFFF">
+                                                                                        <%#string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%>
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
                                                                                         <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
@@ -193,12 +205,11 @@
                                                                             </ItemTemplate>
                                                                         </asp:Repeater>
                                                                         <tr>
-                                                                            <td colspan="7" class="font12bd44147">
+                                                                            <td colspan="10" class="font12bd44147">
                                                                                 <br />
                                                                                 提示语：
                                                                                 <br />
-                                                                                电子申请：请下载商标申请委托书，签字/盖章后上传到相应商标信息中，否则我司将视本申请未委托我司，不承担任何责任；要求彩色扫描，格式为pdf，大小不超过1M。 纸件申请：请下载商标注册申请书和商标申请委托书，签字/盖章后随同身份证明文件和主体资格证明文件及图样一起邮寄到我司，否则我司将视本申请未委托我司，不承担任何责任。
-                                                                                以上两种方式，选择一种即可。
+                                                                               请下载商标续展申请书，商标续展代理委托书，签字/盖章后与其他所需文件一并邮寄到我司（我司收到原件之日，为订单实际生效日），否则我司将视本订单未提交，如发生续展超过期限、商标失效等情况我司将不承担任何责任。
                                                                             </td>
                                                                         </tr>
                                                                     </table>

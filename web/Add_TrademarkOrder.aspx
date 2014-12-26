@@ -193,7 +193,7 @@
                                                                             </ItemTemplate>
                                                                         </asp:Repeater>
                                                                         <tr>
-                                                                            <td colspan="7" class="font12bd44147">
+                                                                            <td colspan="8" class="font12bd44147">
                                                                                 <br />
                                                                                 提示语：
                                                                                 <br />
