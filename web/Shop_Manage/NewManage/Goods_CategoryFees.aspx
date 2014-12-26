@@ -64,6 +64,7 @@
     <asp:HiddenField ID="HiddenID" runat="server" /> 
     <asp:HiddenField ID="HiddenRenewalID" runat="server" />
        <asp:HiddenField ID="HiddenDailiID" runat="server" />
+        <asp:HiddenField ID="HiddenZhinaJinID" runat="server" />
     </h1>
 
     <script type="text/javascript" src="../js/fucties.js"></script>
@@ -84,8 +85,13 @@
                 商标续展：每个大类费用<input type="text" id="txtRenewalFees" maxlength="8" 
             class="numberinput"  size="15" value="" runat="server" /></span></div>
             <div class="form-div" id="Div2">
-        <span id="Span1" class="action-span1">
-                 每个案件代理费：<input type="text" id="txtDaiLiFee" maxlength="8" 
+                <span id="Span1" class="action-span1">
+                 代理费：每个大类费用<input type="text" id="txtDaiLiFee" maxlength="8" 
+            class="numberinput"  size="15" value="" runat="server" /></span></div>
+
+               <div class="form-div" id="Div3">
+                <span id="Span2" class="action-span1">
+                 滞纳金：每个大类费用<input type="text" id="txtZhiNaJin" maxlength="8" 
             class="numberinput"  size="15" value="" runat="server" /></span></div>
 
     <input type="hidden" id="HiddenDel" value="" runat="server" />

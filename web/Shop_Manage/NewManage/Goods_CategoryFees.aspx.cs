@@ -26,9 +26,14 @@ public partial class Shop_Manage_NewManage_Goods_CategoryFees : System.Web.UI.Pa
             var dali=goods.CategoryFees_Select_All().First(p => p.i_Type == 2);
             this.txtDaiLiFee.Value = dali.MainFees.Value.ToString();
 
+            var zhinajin = goods.CategoryFees_Select_All().First(p => p.i_Type == 3);
+            this.txtZhiNaJin.Value = dali.MainFees.Value.ToString();
+
+
             this.HiddenID.Value = model.i_Id.ToString();
             this.HiddenRenewalID.Value = modeRenewal.i_Id.ToString();
             this.HiddenDailiID.Value = dali.i_Id.ToString();
+            this.HiddenZhinaJinID.Value = zhinajin.i_Id.ToString();
         }
     }
     protected void btnOK_Click(object sender, EventArgs e)
@@ -50,8 +55,15 @@ public partial class Shop_Manage_NewManage_Goods_CategoryFees : System.Web.UI.Pa
         daili.MainFees = decimal.Parse(txtDaiLiFee.Value);
         int p = goods.CategoryFees_Update(daili);
 
+        var zhinajin = new t_GoodsCategoryFees();
+        zhinajin.i_Id = int.Parse(this.HiddenZhinaJinID.Value);
+        zhinajin.MainFees = decimal.Parse(txtZhiNaJin.Value);
+        int z = goods.CategoryFees_Update(daili);
 
-        if(i>0&&k>0&&p>0)lblmsg.Text = "<script>alert('设置成功');</script>";
-        else lblmsg.Text = "<script>alert('设置失败');</script>";
+
+        if(i>0&&k>0&&p>0&&z>0)
+            lblmsg.Text = "<script>alert('设置成功');</script>";
+        else 
+            lblmsg.Text = "<script>alert('设置失败');</script>";
     }
 }
