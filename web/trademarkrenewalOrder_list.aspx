@@ -182,7 +182,7 @@
                                 <asp:HiddenField ID="hf_oid" runat="server" Value='<%# Eval("TrademarkIds") %>' />
                                 <tr>
                                   <td height="32" align="center" bgcolor="#FFFFFF">
-                                    <a href="trademarkOrder_info.aspx?order=<%# Eval("i_Id") %>&tIds=<%# Eval("TrademarkIds") %>" class="ac5t">  <%# Eval("nvc_OrderNumber") %></a> 
+                                    <a href="trademarkrenewalOrder_info.aspx?order=<%# Eval("i_Id") %>&tIds=<%# Eval("TrademarkIds") %>" class="ac5t">  <%# Eval("nvc_OrderNumber") %></a> 
                                     </td>
                                   <td align="center" bgcolor="#FFFFFF">
                                     <asp:Repeater runat="server" ID="repTrademark">
