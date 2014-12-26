@@ -29,7 +29,6 @@ public partial class trademarkrenewalOrder_Info : System.Web.UI.Page
     public StringBuilder Str_Money = new StringBuilder();
     public StringBuilder Str_AllMoney = new StringBuilder();
     public int dazhe = 0, dazhe1 = 0;
-    public decimal dailiFee = 0;//代理费
     public string Orderid; 
     public string TrademarkIds;
     protected void Page_Load(object sender, EventArgs e)
@@ -44,12 +43,8 @@ public partial class trademarkrenewalOrder_Info : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            dal_Goods goods = new dal_Goods();
-            var dali = goods.CategoryFees_Select_All().First(p => p.i_Type == 2);
-            if (dali != null && dali.MainFees.HasValue)
-                dailiFee = dali.MainFees.Value;
+              Bind_Order_Info();
         }
-        Bind_Order_Info();
     }
     public void Bind_Order_Info()
     {
@@ -115,23 +110,23 @@ public partial class trademarkrenewalOrder_Info : System.Web.UI.Page
                 UserNum = user.nvc_UserNum;
                 UserName = user.nvc_Name;
             }
-            int sbnum = 0, sbdailinum = 0;
-            foreach (var item in iquery)
-            {
-                t_Trademark model = DALT.Trademark_Select_Id(item.i_TrademarkId); ;
-                if (model != null)
-                {
-                    sbnum += 1;
-                    if (model.i_JiaoFeiType == 2)
-                    {
-                        sbdailinum += 1;
-                        if (model.i_ShengDays < 0)
-                        {
-                            zhinajinnum += 1;
-                        }
-                    }
-                }
-            }
+            //int sbnum = 0, sbdailinum = 0;
+            //foreach (var item in iquery)
+            //{
+            //    t_Trademark model = DALT.Trademark_Select_Id(item.i_TrademarkId); ;
+            //    if (model != null)
+            //    {
+            //        sbnum += 1;
+            //        if (model.i_JiaoFeiType == 2)
+            //        {
+            //            sbdailinum += 1;
+            //            if (model.i_ShengDays < 0)
+            //            {
+            //                zhinajinnum += 1;
+            //            }
+            //        }
+            //    }
+            //}
             t_TradeMarkSetup model1 = DALTS.TrademarkSetup_Select();//代理费用
             t_Member mm = DALM.Member_Select_Id(uId);
 
@@ -160,10 +155,7 @@ public partial class trademarkrenewalOrder_Info : System.Web.UI.Page
             #region 金额相关
 
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\">" + order.dm_TrademarkMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-            //if (zhinajinnum != 0)
-            //{
-            //    Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\">" + order.dm_TMZhiNaJin + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-            //}
+            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\">" + order.dm_TMZhiNaJin + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费：</td><td width=\"110\">" + order.dm_TMDaiLi + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\">" + order.dm_ZengZhiTax + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\">" + order.dm_ShouXuFee + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");

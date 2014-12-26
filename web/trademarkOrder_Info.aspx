@@ -309,7 +309,7 @@ body {
                                                                                     <%# Eval("TrademarkType")%>
                                                                                 </td>
                                                                                 <td align="center" bgcolor="#FFFFFF">
-                                                                                    <%# (decimal.Parse(Eval("TrademarkMoney").ToString()) + dailiFee)%>
+                                                                                    <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
                                                                                 </td>
                                                                                 <td align="center" bgcolor="#FFFFFF">
                                                                                     <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)

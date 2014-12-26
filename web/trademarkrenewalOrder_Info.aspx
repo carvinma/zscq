@@ -320,7 +320,7 @@ body {
                                                                                     <%#string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%>
                                                                                 </td>
                                                                                 <td align="center" bgcolor="#FFFFFF">
-                                                                                    <%# (decimal.Parse(Eval("TrademarkMoney").ToString()) + dailiFee)%>
+                                                                                     <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString()) + decimal.Parse(Eval("TrademarkLateFee").ToString())%>
                                                                                 </td>
                                                                                 <td  align="center" bgcolor="#FFFFFF">
                                                                                     <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)

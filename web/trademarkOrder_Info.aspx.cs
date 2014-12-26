@@ -29,7 +29,6 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
     public StringBuilder Str_Money = new StringBuilder();
     public StringBuilder Str_AllMoney = new StringBuilder();
     public int dazhe = 0, dazhe1 = 0;
-    public decimal dailiFee = 0;//代理费
     public string Orderid; 
     public string TrademarkIds;
     protected void Page_Load(object sender, EventArgs e)
@@ -44,12 +43,9 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            dal_Goods goods = new dal_Goods();
-            var dali = goods.CategoryFees_Select_All().First(p => p.i_Type == 2);
-            if (dali != null && dali.MainFees.HasValue)
-                dailiFee = dali.MainFees.Value;
+              Bind_Order_Info();
         }
-        Bind_Order_Info();
+      
     }
     public void Bind_Order_Info()
     {
