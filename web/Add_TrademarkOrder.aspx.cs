@@ -255,7 +255,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 dModer.dm_TotalMoney = dModer.dm_ShouXuFee + dModer.dm_ZengZhiTax + model.TrademarkMoney;
 
                 int ok = DALTOD.OrderDetails_Add(dModer);
-                model.Status = 1;
+                model.Status = 1;//申请中，未汇款
                 //DALT.Trademark_Update(model);
                 #endregion
                 UserLog.AddUserLog(uId, "商标系统", "提交订单");
