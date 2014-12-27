@@ -58,6 +58,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
             this.ddlApplyType.DataTextField = "Key";
             this.ddlApplyType.DataValueField = "Value";
             this.ddlApplyType.DataBind();
+            Bind_RptPrint_Trademark();
         }
         Bind_Page_value();
         Bind_Rpt_Trademark();
@@ -251,6 +252,17 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
             AspNetPager1.CurrentPageIndex = pageCurrent;
         }
     }
+
+    private void Bind_RptPrint_Trademark()//绑定打印列表
+    {
+        if (UserId != 0)
+        {
+            int Ccount = 0;
+            this.rptPrint.DataSource = mark.Trademark_web_SelectPage(1, int.MaxValue-1, UserId, 1, null, "", "", "", "", "", "", "", "", "", ref Ccount, null);
+            this.rptPrint.DataBind();
+        }
+    }
+
     public bool BoolFileImg(object fileurl)
     {
         if (fileurl != null)

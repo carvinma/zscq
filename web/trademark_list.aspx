@@ -296,8 +296,7 @@
                                                             <td width="1">
                                                             </td>
                                                             <td width="110" align="center">
-                                                                <asp:Button ID="Button2" CssClass="BtnShow" runat="server" Text="打印全部列表" />
-                                                                <a href="javascript:void(0)" CssClass="BtnShow" onclick="printPage()" > 打印全部列表</a>
+                                                                <a href="javascript:void(0)" class="BtnShowhref" onclick="printPage()" > 打印全部列表</a>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -558,7 +557,7 @@
                                             </tr>
                                             <tr style="display:none">
                                                 <td id="pr_table">
-                                                    <table width="689" border="1" cellspacing="0" cellpadding="0" bgcolor="#d0d0d0" style="border-collapse: collapse;border: none; ">
+                                                    <table width="689" border="1" cellspacing="0" cellpadding="0" bgcolor="#d0d0d0" style="border-collapse: collapse;border: none;">
                                                         <tr>
                                                             <td width="76" height="42" align="center" bgcolor="#FFFFFF">
                                                                案件号

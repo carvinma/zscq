@@ -340,7 +340,7 @@
                                                             <td width="1">
                                                             </td>
                                                             <td width="110" align="center">
-                                                                <asp:Button ID="Button2" CssClass="BtnShow" runat="server" Text="打印全部列表" />
+                                                                  <a href="javascript:void(0)" class="BtnShowhref" onclick="printPage()" > 打印全部列表</a>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -619,6 +619,70 @@
                                                     </asp:GridView>
                                                 </td>
                                             </tr>
+                                            <tr style="display:none">
+                                            <td id="pr_table">
+                                            <table width="689" border="1" cellspacing="0" cellpadding="0" bgcolor="#d0d0d0" style="border-collapse: collapse;border: none;">
+                                                        <tr>
+                                                            <td width="76" height="42" align="center" bgcolor="#FFFFFF">
+                                                               案件号
+                                                            </td>
+                                                            <td width="76" height="42" align="center" bgcolor="#FFFFFF">
+                                                                申请号
+                                                            </td>
+                                                            <td width="66" height="42" align="center" bgcolor="#FFFFFF">
+                                                               申请人
+                                                            </td>
+                                                            <td width="55" align="center" bgcolor="#FFFFFF">
+                                                               图样
+                                                            </td>
+                                                            <td width="90" align="center" bgcolor="#FFFFFF">
+                                                              类别
+                                                            </td>
+                                                            <td width="70" align="center" bgcolor="#FFFFFF">
+                                                               期限日
+                                                            </td>
+                                                            <td width="53" align="center" bgcolor="#FFFFFF">
+                                                                申请书
+                                                            </td>
+                                                            <td width="53" align="center" bgcolor="#FFFFFF">
+                                                                委托书
+                                                            </td>
+                                                        </tr>
+                                                        <asp:Repeater ID="rptPrint" runat="server">
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td height="42" align="center" bgcolor="#FFFFFF">
+                                                                        <%# Eval("CaseNo")%>
+                                                                    </td>
+                                                                    <td height="42" align="center" bgcolor="#FFFFFF">
+                                                                        <%# Eval("RegisteredNo")%>
+                                                                    </td>
+                                                                    <td height="42" align="center" bgcolor="#FFFFFF">
+                                                                        <%# Eval("ApplyName")%>
+                                                                    </td>
+                                                                    <td align="center" bgcolor="#FFFFFF">
+                                                                        <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
+                                                                        </td>
+                                                                        <td align="center" bgcolor="#FFFFFF">
+                                                                            <%# GetApplyTypeName(Eval("ApplyType"))%>
+                                                                        </td>
+                                                                        <td align="center" bgcolor="#FFFFFF">
+                                                                            <%# string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%>
+                                                                        </td>
+                                                                        <td align="center" bgcolor="#FFFFFF">
+                                                                            <%# (Eval("RenewalApplyBook") != null && string.IsNullOrEmpty(Eval("RenewalApplyBook").ToString()) == false)
+                                                                                                                                                              ? "已上传" : "未上传"%>
+                                                                        </td>
+                                                                        <td align="center" bgcolor="#FFFFFF">
+                                                                            <%# (Eval("RenewalAgentBook") != null && string.IsNullOrEmpty(Eval("RenewalAgentBook").ToString()) == false)
+                                                                                                                                                              ? "已上传" : "未上传"%>
+                                                                        </td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </table>
+                                            </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
@@ -630,6 +694,13 @@
         </tr>
     </table>
     <script type="text/javascript">
+        function printPage() {
+            var newWin = window.open();
+            var titleHTML = document.getElementById("pr_table").innerHTML;
+            newWin.document.write(titleHTML);
+            newWin.document.location.reload();
+            newWin.print();
+        }
         function Selbox(obj) {
             if ($(obj).attr("checked") != "checked") {
                 SetSectet(obj.value, "nocheck");
