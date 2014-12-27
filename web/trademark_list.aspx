@@ -16,10 +16,9 @@
     <script src="js/jquery-1.8.0.min.js" type="text/javascript"></script>
     <script src="js/jtrademark.js" type="text/javascript"></script>
     <script src="js/TrademarkList.js" type="text/javascript"></script>
-     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
+    <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
-
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <%--  <link href="css/pager.css" rel="stylesheet" type="text/css" />--%>
     <script type="text/javascript">
@@ -29,7 +28,7 @@
             var ody3 = $("#Hi_orderby3").val().split('_');
             var ody4 = $("#Hi_orderby4").val().split('_');
             var ody5 = $("#Hi_orderby5").val().split('_');
-              
+
             if (ody1[1] == "1") {
                 orderby(ody1[0], 1);
             }
@@ -58,38 +57,38 @@
             }
         }
     </script>
-   <script language="javascript">
-       function switchTag1(tag, content, k) {
-           for (i = 1; i < 3; i++) {
-               if (i == k)
-               { document.getElementById(tag + i).className = "font12bt"; document.getElementById(content + i).className = ""; }
-               else
-               { document.getElementById(tag + i).className = "font12bs"; document.getElementById(content + i).className = "h_lsit_none"; }
-           }
-       }
-       var rollFlag = 0;
+    <script language="javascript">
+        function switchTag1(tag, content, k) {
+            for (i = 1; i < 3; i++) {
+                if (i == k)
+                { document.getElementById(tag + i).className = "font12bt"; document.getElementById(content + i).className = ""; }
+                else
+                { document.getElementById(tag + i).className = "font12bs"; document.getElementById(content + i).className = "h_lsit_none"; }
+            }
+        }
+        var rollFlag = 0;
 
-       function txt_roll(str) {
-           sub_num = str.substring(str.length - 2);
-           sub_str = str.substring(0, str.length - 2);
+        function txt_roll(str) {
+            sub_num = str.substring(str.length - 2);
+            sub_str = str.substring(0, str.length - 2);
 
-           if (document.all[str].style.display == "") {
-               document.all[str].style.display = "none";
-               rollFlag = 0;
-               return;
-           }
-           else {
-               if (rollFlag != 0) {
-                   //document.all[sub_str+rollFlag].style.display="none";
-                   document.all[str].style.display = "";
-               }
+            if (document.all[str].style.display == "") {
+                document.all[str].style.display = "none";
+                rollFlag = 0;
+                return;
+            }
+            else {
+                if (rollFlag != 0) {
+                    //document.all[sub_str+rollFlag].style.display="none";
+                    document.all[str].style.display = "";
+                }
 
-               document.all[str].style.display = "";
-               rollFlag = sub_num;
-           }
+                document.all[str].style.display = "";
+                rollFlag = sub_num;
+            }
 
-       }
-  </script>
+        }
+    </script>
     <style type="text/css">
         .time0
         {
@@ -195,7 +194,7 @@
             position: absolute;
             top: 0px;
         }
-        </style>
+    </style>
 </head>
 <body id="index">
     <form id="form1" runat="server">
@@ -292,13 +291,13 @@
                                                                 </asp:DropDownList>
                                                             </td>
                                                             <td width="80" align="center">
-                                                                <asp:Button ID="btnQuery" CssClass="BtnShow" runat="server" Text="查 询" 
-                                                                    onclick="btnQuery_Click" />
+                                                                <asp:Button ID="btnQuery" CssClass="BtnShow" runat="server" Text="查 询" OnClick="btnQuery_Click" />
                                                             </td>
                                                             <td width="1">
                                                             </td>
                                                             <td width="110" align="center">
                                                                 <asp:Button ID="Button2" CssClass="BtnShow" runat="server" Text="打印全部列表" />
+                                                                <a href="javascript:void(0)" CssClass="BtnShow" onclick="printPage()" > 打印全部列表</a>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -324,7 +323,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                              <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                            <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
                                                                         <td width="12">
@@ -342,14 +341,14 @@
                                                                         <td width="6">
                                                                         </td>
                                                                         <td width="60" align="center">
-                                                                              <span>申请人</span><a href="trademark_list.aspx?sbname=desc_2" title="倒序" id="daoxu2">↑</a><a
+                                                                            <span>申请人</span><a href="trademark_list.aspx?sbname=desc_2" title="倒序" id="daoxu2">↑</a><a
                                                                                 href="trademark_list.aspx?sbname=asc_2" title="正序" id="zhengxu2" style="display: none;">↓</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
                                                             <td width="55" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                               图样
+                                                                图样
                                                             </td>
                                                             <td width="49" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 <table width="49" height="42" border="0" cellspacing="0" cellpadding="0">
@@ -364,10 +363,10 @@
                                                                 </table>
                                                             </td>
                                                             <td width="50" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                               申请书
+                                                                申请书
                                                             </td>
                                                             <td width="50" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                               委托书
+                                                                委托书
                                                             </td>
                                                             <td width="66" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 <table width="46" height="42" border="0" cellspacing="0" cellpadding="0">
@@ -381,7 +380,7 @@
                                                                 </table>
                                                             </td>
                                                             <td width="30" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                               <input type="checkbox" onclick="doSelect()" id="selectall"/>
+                                                                <input type="checkbox" onclick="doSelect()" id="selectall" />
                                                             </td>
                                                         </tr>
                                                         <asp:Repeater ID="Rp_sb_list" runat="server">
@@ -391,8 +390,8 @@
                                                                         <a href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t">
                                                                             <%# Eval("CaseNo")%></a>
                                                                     </td>
-                                                                     <td height="35" align="center" bgcolor="#FFFFFF">
-                                                                            <%# Eval("RegisteredNo")%>
+                                                                    <td height="35" align="center" bgcolor="#FFFFFF">
+                                                                        <%# Eval("RegisteredNo")%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                         <%# Eval("ApplyName")%>
@@ -403,22 +402,20 @@
                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                         <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                                     </td>
-                                                                    <td align="center" bgcolor="#FFFFFF"  class="font12b4e">
-                                                                       <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
+                                                                    <td align="center" bgcolor="#FFFFFF" class="font12b4e">
+                                                                        <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
                                                                      ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                                                     </td>
-                                                                    
-                                                                    <td align="center" bgcolor="#FFFFFF"  class="font12b4e">
-                                                                    <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
+                                                                    <td align="center" bgcolor="#FFFFFF" class="font12b4e">
+                                                                        <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
                                                                         ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                                                     </td>
-                                                                    
                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                         <%# GetApplyStatus(Eval("Status"))%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
-                                                                        <input name="chkItem" type="checkbox" status="<%#Eval("Status")%>"
-                                                                            value="<%#Eval("i_Id")%>" id="cb_<%#Eval("i_Id")%>" />
+                                                                        <input name="chkItem" type="checkbox" status="<%#Eval("Status")%>" value="<%#Eval("i_Id")%>"
+                                                                            id="cb_<%#Eval("i_Id")%>" />
                                                                     </td>
                                                                 </tr>
                                                             </ItemTemplate>
@@ -437,15 +434,16 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                              <a href="javascript:void(0)"  onclick="SubmitTrademarkListDailog()" class="BtnShowhref" style="width:73px">提交订单</a>
-                                                            </td>
-                                                            
-                                                            <td>
-                                                                <asp:Button ID="btnExcel" CssClass="BtnShow" runat="server" Text="导出"  
-                                                                    OnClientClick=" return ExportToExcel();" onclick="btnExcel_Click" />
+                                                                <a href="javascript:void(0)" onclick="SubmitTrademarkListDailog()" class="BtnShowhref"
+                                                                    style="width: 73px">提交订单</a>
                                                             </td>
                                                             <td>
-                                                              <a href="javascript:void(0)"  onclick="DelTrademarkListDailog()" class="BtnShowhref" style="width:73px">删 除</a>
+                                                                <asp:Button ID="btnExcel" CssClass="BtnShow" runat="server" Text="导出" OnClientClick=" return ExportToExcel();"
+                                                                    OnClick="btnExcel_Click" />
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:void(0)" onclick="DelTrademarkListDailog()" class="BtnShowhref"
+                                                                    style="width: 73px">删 除</a>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -473,92 +471,153 @@
                                             </tr>
                                             <tr>
                                                 <td align="left">
-   <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None" BorderWidth="1px">
-    <Columns>
-      <asp:BoundField DataField="CaseNo" HeaderText="案件号" />
-      <asp:TemplateField HeaderText="申请人类别">
-        <ItemTemplate>
-          <%# GetApplyTypeName(Eval("ApplyType"))%>
-        </ItemTemplate>
-      </asp:TemplateField>
-         <asp:BoundField DataField="ApplyName" HeaderText="申请人名称" />
-       <asp:TemplateField HeaderText="身份证件">
-        <ItemTemplate>
-          身份证
-        </ItemTemplate>
-      </asp:TemplateField>
-        <asp:BoundField DataField="CardNo" HeaderText="身分证件号码" ItemStyle-CssClass="text" /> 
-          <asp:TemplateField HeaderText="身份证件扫描件">
-        <ItemTemplate>
-          <%# Eval("CardNoPDF") != null ? "已上传" : "未上传"%>
-        </ItemTemplate>
-         </asp:TemplateField>
-          <asp:TemplateField HeaderText="营业执照副本">
-        <ItemTemplate>
-          <%# Eval("Businesslicense") != null ? "已上传" : "未上传"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-          <asp:TemplateField HeaderText="申请人行政区划">
-        <ItemTemplate>
-         <%#GetProviceArea(Eval("ProvinceId"), Eval("CityId"), Eval("AreaId"))%>
-        </ItemTemplate>
-      </asp:TemplateField>
-      
-      <asp:BoundField DataField="Address" HeaderText="申请人地址" ItemStyle-CssClass="text" />
-      <asp:BoundField DataField="ContactPerson" HeaderText="联系人" ItemStyle-CssClass="text" />
-      <asp:BoundField DataField="Phone" HeaderText="联系电话" ItemStyle-CssClass="text"  />
-       <asp:BoundField DataField="Fax" HeaderText="传真" ItemStyle-CssClass="text" />
-        <asp:BoundField DataField="PostCode" HeaderText="邮编" ItemStyle-CssClass="text" />
-      <asp:TemplateField HeaderText="三维标志">
-        <ItemTemplate>
-         <%# bool.Parse(Eval("Is3D") == null ? "false" : Eval("Is3D").ToString()) == true ? "是" : "否"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-      <asp:TemplateField HeaderText="颜色组合">
-        <ItemTemplate>
-          <%# bool.Parse(Eval("IsColor")==null? "false":Eval("IsColor").ToString()) == true ? "是" : "否"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-      <asp:TemplateField HeaderText="声音商标">
-        <ItemTemplate>
-         <%# bool.Parse(Eval("IsSound") == null ? "false" : Eval("IsSound").ToString()) == true ? "是" : "否"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-        <asp:TemplateField HeaderText="声音文件">
-        <ItemTemplate>
-          <%# Eval("SoundFile") != null ? "已上传" : "未上传"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-
-      <asp:BoundField DataField="TrademarkRemark" HeaderText="商标说明" />
-      <asp:BoundField DataField="TrademarkType" HeaderText="商标类别" />
-      <%-- <asp:TemplateField HeaderText="图样">
-        <ItemTemplate>
-         <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("TrademarkPattern1") %>' width="50" height="30"  />
-        </ItemTemplate>
-      </asp:TemplateField> --%>
-
-        <asp:BoundField DataField="ApplyDate" DataFormatString="{0:yyyy-MM-dd}" HeaderText="商标申请日" />      
-        <asp:BoundField DataField="PublicPreliminaryDate"  DataFormatString="{0:yyyy-MM-dd}" HeaderText="初审公告日" />   
-      <asp:TemplateField HeaderText="最近状态">
-        <ItemTemplate>
-          <%# GetApplyStatus(Eval("Status"))%>
-        </ItemTemplate>
-      </asp:TemplateField>
-
-      <asp:TemplateField HeaderText="注册申请书">
-        <ItemTemplate>
-         <%# Eval("ApplyBook") != null ? "已上传" : "未上传"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-
-      <asp:TemplateField HeaderText="申请委托书">
-        <ItemTemplate>
-           <%# Eval("AgentBook") != null ? "已上传" : "未上传"%>
-        </ItemTemplate>
-      </asp:TemplateField>
-      </Columns>
-  </asp:GridView>
+                                                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" BorderStyle="None"
+                                                        BorderWidth="1px">
+                                                        <Columns>
+                                                            <asp:BoundField DataField="CaseNo" HeaderText="案件号" />
+                                                            <asp:TemplateField HeaderText="申请人类别">
+                                                                <ItemTemplate>
+                                                                    <%# GetApplyTypeName(Eval("ApplyType"))%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="ApplyName" HeaderText="申请人名称" />
+                                                            <asp:TemplateField HeaderText="身份证件">
+                                                                <ItemTemplate>
+                                                                    身份证
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="CardNo" HeaderText="身分证件号码" ItemStyle-CssClass="text" />
+                                                            <asp:TemplateField HeaderText="身份证件扫描件">
+                                                                <ItemTemplate>
+                                                                    <%# Eval("CardNoPDF") != null ? "已上传" : "未上传"%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="营业执照副本">
+                                                                <ItemTemplate>
+                                                                    <%# Eval("Businesslicense") != null ? "已上传" : "未上传"%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="申请人行政区划">
+                                                                <ItemTemplate>
+                                                                    <%#GetProviceArea(Eval("ProvinceId"), Eval("CityId"), Eval("AreaId"))%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="Address" HeaderText="申请人地址" ItemStyle-CssClass="text" />
+                                                            <asp:BoundField DataField="ContactPerson" HeaderText="联系人" ItemStyle-CssClass="text" />
+                                                            <asp:BoundField DataField="Phone" HeaderText="联系电话" ItemStyle-CssClass="text" />
+                                                            <asp:BoundField DataField="Fax" HeaderText="传真" ItemStyle-CssClass="text" />
+                                                            <asp:BoundField DataField="PostCode" HeaderText="邮编" ItemStyle-CssClass="text" />
+                                                            <asp:TemplateField HeaderText="三维标志">
+                                                                <ItemTemplate>
+                                                                    <%# bool.Parse(Eval("Is3D") == null ? "false" : Eval("Is3D").ToString()) == true ? "是" : "否"%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="颜色组合">
+                                                                <ItemTemplate>
+                                                                    <%# bool.Parse(Eval("IsColor")==null? "false":Eval("IsColor").ToString()) == true ? "是" : "否"%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="声音商标">
+                                                                <ItemTemplate>
+                                                                    <%# bool.Parse(Eval("IsSound") == null ? "false" : Eval("IsSound").ToString()) == true ? "是" : "否"%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="声音文件">
+                                                                <ItemTemplate>
+                                                                    <%# Eval("SoundFile") != null ? "已上传" : "未上传"%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:BoundField DataField="TrademarkRemark" HeaderText="商标说明" />
+                                                            <asp:BoundField DataField="TrademarkType" HeaderText="商标类别" />
+                                                            <%-- <asp:TemplateField HeaderText="图样">
+                                                            <ItemTemplate>
+                                                             <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("TrademarkPattern1") %>' width="50" height="30"  />
+                                                            </ItemTemplate>
+                                                          </asp:TemplateField> --%>
+                                                            <asp:BoundField DataField="ApplyDate" DataFormatString="{0:yyyy-MM-dd}" HeaderText="商标申请日" />
+                                                            <asp:BoundField DataField="PublicPreliminaryDate" DataFormatString="{0:yyyy-MM-dd}"
+                                                                HeaderText="初审公告日" />
+                                                            <asp:TemplateField HeaderText="最近状态">
+                                                                <ItemTemplate>
+                                                                    <%# GetApplyStatus(Eval("Status"))%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="注册申请书">
+                                                                <ItemTemplate>
+                                                                    <%# Eval("ApplyBook") != null ? "已上传" : "未上传"%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="申请委托书">
+                                                                <ItemTemplate>
+                                                                    <%# Eval("AgentBook") != null ? "已上传" : "未上传"%>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </td>
+                                            </tr>
+                                            <tr style="display:none">
+                                                <td id="pr_table">
+                                                    <table width="689" border="1" cellspacing="0" cellpadding="0" bgcolor="#d0d0d0" style="border-collapse: collapse;border: none; ">
+                                                        <tr>
+                                                            <td width="76" height="42" align="center" bgcolor="#FFFFFF">
+                                                               案件号
+                                                            </td>
+                                                            <td width="66" height="42" align="center" bgcolor="#FFFFFF">
+                                                              申请号
+                                                            </td>
+                                                            <td width="66" height="42" align="center" bgcolor="#FFFFFF">
+                                                               申请人
+                                                            </td>
+                                                            <td width="55" height="42" align="center" bgcolor="#FFFFFF">
+                                                                图样
+                                                            </td>
+                                                            <td width="49" align="center" bgcolor="#FFFFFF">
+                                                               类别
+                                                            </td>
+                                                            <td width="50" align="center" bgcolor="#FFFFFF">
+                                                                申请书
+                                                            </td>
+                                                            <td width="50" align="center" bgcolor="#FFFFFF">
+                                                                委托书
+                                                            </td>
+                                                            <td width="66" align="center" bgcolor="#FFFFFF" >
+                                                               状态
+                                                            </td>
+                                                        </tr>
+                                                        <asp:Repeater ID="rptPrint" runat="server">
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td height="35" align="center" bgcolor="#FFFFFF">
+                                                                            <%# Eval("CaseNo")%>
+                                                                    </td>
+                                                                    <td height="35" align="center" bgcolor="#FFFFFF">
+                                                                        <%# Eval("RegisteredNo")%>
+                                                                    </td>
+                                                                    <td align="center" bgcolor="#FFFFFF">
+                                                                        <%# Eval("ApplyName")%>
+                                                                    </td>
+                                                                    <td align="center" bgcolor="#FFFFFF">
+                                                                        <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
+                                                                    </td>
+                                                                    <td align="center" bgcolor="#FFFFFF">
+                                                                        <%# GetApplyTypeName(Eval("ApplyType"))%>
+                                                                    </td>
+                                                                    <td align="center" bgcolor="#FFFFFF">
+                                                                        <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
+                                                                                                                                                 ? ("已上传") : "未上传"%>
+                                                                    </td>
+                                                                    <td align="center" bgcolor="#FFFFFF">
+                                                                        <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
+                                                                                                                                                    ? ("已上传") : "未上传"%>
+                                                                    </td>
+                                                                    <td align="center" bgcolor="#FFFFFF">
+                                                                        <%# GetApplyStatus(Eval("Status"))%>
+                                                                    </td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </table>
                                                 </td>
                                             </tr>
                                         </table>
@@ -572,6 +631,13 @@
         </tr>
     </table>
     <script type="text/javascript">
+        function printPage() {
+            var newWin = window.open();
+            var titleHTML = document.getElementById("pr_table").innerHTML;
+            newWin.document.write(titleHTML);
+            newWin.document.location.reload();
+            newWin.print();
+        }
         function getCookie(name) {
             var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 

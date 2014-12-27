@@ -62,6 +62,7 @@ public partial class trademark_list : System.Web.UI.Page
             this.ddlTradeMarkStatus.DataTextField = "StatusName";
             this.ddlTradeMarkStatus.DataValueField = "StatusValue";
             this.ddlTradeMarkStatus.DataBind();
+            Bind_RptPrint_Trademark();
         }
         Bind_Page_value();
         Bind_Rpt_Trademark();
@@ -280,6 +281,17 @@ public partial class trademark_list : System.Web.UI.Page
             AspNetPager1.CurrentPageIndex = pageCurrent;
         }
     }
+
+    private void Bind_RptPrint_Trademark()//打印列表
+    {
+        if (UserId != 0)
+        {
+            int Ccount = 0;
+            this.rptPrint.DataSource = mark.Trademark_web_SelectPage(1, int.MaxValue-1, UserId, 0, null, "", "", "", "", "", "", "", null, ref Ccount, null);
+            this.rptPrint.DataBind();
+        }
+    }
+
     protected void AspNetPager1_PageChanged(object sender, EventArgs e)
     {
         if (HF_ORDERBY.Value != "")
