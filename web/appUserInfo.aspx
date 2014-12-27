@@ -206,7 +206,7 @@
                                        <%# Eval("ApplyType").ToString()=="0" ? "企业单位":"自然人" %>
                                   </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                     <a href="appUserInfoDetail.aspx?u_a_id=<%# Eval("i_Id") %>&ApplyType=<%# Eval("ApplyType")%>"> <%# Eval("ApplyName")%></a>
+                                     <a href="appUserInfoDetail.aspx?u_a_id=<%# Eval("i_Id") %>&ApplyType=<%# Eval("ApplyType")%>" class="ac5t"> <%# Eval("ApplyName")%></a>
                                    </td>
                                   <td align="center" bgcolor="#FFFFFF">
                                     <%# Eval("PhoneNo")%> </td>

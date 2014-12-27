@@ -31,7 +31,8 @@ namespace zscq.BLL
             {
                 t_Coupon Coupon = new t_Coupon();
                 Coupon.dt_AddTime = DateTime.Now;
-                Coupon.dt_ExpireTime = DateTime.Parse(ExpireTime);
+                if (!string.IsNullOrEmpty(ExpireTime)) //当为空时，永久有效
+                    Coupon.dt_ExpireTime = DateTime.Parse(ExpireTime);
                 Coupon.i_State = 1;
                 Coupon.i_Type = int.Parse(type);
                 Coupon.i_MemberId = MemberId;

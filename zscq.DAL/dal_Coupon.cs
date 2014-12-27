@@ -173,9 +173,11 @@ namespace zscq.DAL
         public IQueryable<vw_Coupon> Coupon_Select_Page_MemberYouHui(int PageIndex, int PageSize, int MId, ref int ccount)
         {
             var iquery = from i in dvdc.vw_Coupon where i.i_MemberId == MId select i;           
-            iquery = from i in iquery where i.i_State == 1 select i;        
+            iquery = from i in iquery where i.i_State == 1 select i;  //未使用      
             DateTime nowdate=DateTime.Now;
-            iquery = from i in iquery where Convert.ToDateTime(i.dt_AddTime.ToString())< nowdate  && nowdate < Convert.ToDateTime(i.dt_ExpireTime.ToString()) orderby i.i_Id descending select i;
+            //iquery = from i in iquery where Convert.ToDateTime(i.dt_AddTime.ToString())< nowdate  && nowdate < Convert.ToDateTime(i.dt_ExpireTime.ToString()) orderby i.i_Id descending select i;
+            //永久有效
+            iquery = from i in iquery where i.dt_AddTime < nowdate && nowdate < (i.dt_ExpireTime.HasValue? i.dt_ExpireTime:DateTime.MaxValue) orderby i.i_Id descending select i;
             ccount = iquery.Count();
             return iquery.Skip((PageIndex - 1) * PageSize).Take(PageSize);
         }
@@ -208,7 +210,8 @@ namespace zscq.DAL
             {
                 BTime = DateTime.Parse(stime);
             }
-            DateTime ETime = DateTime.Now.AddDays(1);
+            //DateTime ETime = DateTime.Now.AddDays(1);
+            DateTime ETime = DateTime.MaxValue;
             if (etime != "")
             {
                 ETime = DateTime.Parse(etime);
