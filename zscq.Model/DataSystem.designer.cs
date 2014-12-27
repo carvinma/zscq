@@ -22,7 +22,7 @@ namespace zscq.Model
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DataSource")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="db_zscq")]
 	public partial class DataSystemDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -132,12 +132,12 @@ namespace zscq.Model
     partial void Insertt_QuYu(t_QuYu instance);
     partial void Updatet_QuYu(t_QuYu instance);
     partial void Deletet_QuYu(t_QuYu instance);
-    partial void Insertt_SystemSetup(t_SystemSetup instance);
-    partial void Updatet_SystemSetup(t_SystemSetup instance);
-    partial void Deletet_SystemSetup(t_SystemSetup instance);
     partial void Insertt_EmailNote(t_EmailNote instance);
     partial void Updatet_EmailNote(t_EmailNote instance);
     partial void Deletet_EmailNote(t_EmailNote instance);
+    partial void Insertt_SystemSetup(t_SystemSetup instance);
+    partial void Updatet_SystemSetup(t_SystemSetup instance);
+    partial void Deletet_SystemSetup(t_SystemSetup instance);
     #endregion
 		
 		public DataSystemDataContext() : 
@@ -450,19 +450,19 @@ namespace zscq.Model
 			}
 		}
 		
-		public System.Data.Linq.Table<t_SystemSetup> t_SystemSetup
-		{
-			get
-			{
-				return this.GetTable<t_SystemSetup>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_EmailNote> t_EmailNote
 		{
 			get
 			{
 				return this.GetTable<t_EmailNote>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_SystemSetup> t_SystemSetup
+		{
+			get
+			{
+				return this.GetTable<t_SystemSetup>();
 			}
 		}
 	}
@@ -7744,6 +7744,284 @@ namespace zscq.Model
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_EmailNote")]
+	public partial class t_EmailNote : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private string _nvc_Title;
+		
+		private string _nvc_EmailContent;
+		
+		private int _i_MemberId;
+		
+		private string _nvc_EmailState;
+		
+		private System.DateTime _dt_AddTime;
+		
+		private int _i_systemType;
+		
+		private string _nvc_Language;
+		
+		private string _nvc_Email;
+		
+		private string _nvc_MemberName;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void Onnvc_TitleChanging(string value);
+    partial void Onnvc_TitleChanged();
+    partial void Onnvc_EmailContentChanging(string value);
+    partial void Onnvc_EmailContentChanged();
+    partial void Oni_MemberIdChanging(int value);
+    partial void Oni_MemberIdChanged();
+    partial void Onnvc_EmailStateChanging(string value);
+    partial void Onnvc_EmailStateChanged();
+    partial void Ondt_AddTimeChanging(System.DateTime value);
+    partial void Ondt_AddTimeChanged();
+    partial void Oni_systemTypeChanging(int value);
+    partial void Oni_systemTypeChanged();
+    partial void Onnvc_LanguageChanging(string value);
+    partial void Onnvc_LanguageChanged();
+    partial void Onnvc_EmailChanging(string value);
+    partial void Onnvc_EmailChanged();
+    partial void Onnvc_MemberNameChanging(string value);
+    partial void Onnvc_MemberNameChanged();
+    #endregion
+		
+		public t_EmailNote()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Title", DbType="NVarChar(500)")]
+		public string nvc_Title
+		{
+			get
+			{
+				return this._nvc_Title;
+			}
+			set
+			{
+				if ((this._nvc_Title != value))
+				{
+					this.Onnvc_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_Title = value;
+					this.SendPropertyChanged("nvc_Title");
+					this.Onnvc_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_EmailContent", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string nvc_EmailContent
+		{
+			get
+			{
+				return this._nvc_EmailContent;
+			}
+			set
+			{
+				if ((this._nvc_EmailContent != value))
+				{
+					this.Onnvc_EmailContentChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_EmailContent = value;
+					this.SendPropertyChanged("nvc_EmailContent");
+					this.Onnvc_EmailContentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
+		public int i_MemberId
+		{
+			get
+			{
+				return this._i_MemberId;
+			}
+			set
+			{
+				if ((this._i_MemberId != value))
+				{
+					this.Oni_MemberIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_MemberId = value;
+					this.SendPropertyChanged("i_MemberId");
+					this.Oni_MemberIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_EmailState", DbType="NVarChar(50)")]
+		public string nvc_EmailState
+		{
+			get
+			{
+				return this._nvc_EmailState;
+			}
+			set
+			{
+				if ((this._nvc_EmailState != value))
+				{
+					this.Onnvc_EmailStateChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_EmailState = value;
+					this.SendPropertyChanged("nvc_EmailState");
+					this.Onnvc_EmailStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_AddTime", DbType="DateTime NOT NULL")]
+		public System.DateTime dt_AddTime
+		{
+			get
+			{
+				return this._dt_AddTime;
+			}
+			set
+			{
+				if ((this._dt_AddTime != value))
+				{
+					this.Ondt_AddTimeChanging(value);
+					this.SendPropertyChanging();
+					this._dt_AddTime = value;
+					this.SendPropertyChanged("dt_AddTime");
+					this.Ondt_AddTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_systemType", DbType="Int NOT NULL")]
+		public int i_systemType
+		{
+			get
+			{
+				return this._i_systemType;
+			}
+			set
+			{
+				if ((this._i_systemType != value))
+				{
+					this.Oni_systemTypeChanging(value);
+					this.SendPropertyChanging();
+					this._i_systemType = value;
+					this.SendPropertyChanged("i_systemType");
+					this.Oni_systemTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Language", DbType="NVarChar(50)")]
+		public string nvc_Language
+		{
+			get
+			{
+				return this._nvc_Language;
+			}
+			set
+			{
+				if ((this._nvc_Language != value))
+				{
+					this.Onnvc_LanguageChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_Language = value;
+					this.SendPropertyChanged("nvc_Language");
+					this.Onnvc_LanguageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Email", DbType="NVarChar(50)")]
+		public string nvc_Email
+		{
+			get
+			{
+				return this._nvc_Email;
+			}
+			set
+			{
+				if ((this._nvc_Email != value))
+				{
+					this.Onnvc_EmailChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_Email = value;
+					this.SendPropertyChanged("nvc_Email");
+					this.Onnvc_EmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_MemberName", DbType="NVarChar(50)")]
+		public string nvc_MemberName
+		{
+			get
+			{
+				return this._nvc_MemberName;
+			}
+			set
+			{
+				if ((this._nvc_MemberName != value))
+				{
+					this.Onnvc_MemberNameChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_MemberName = value;
+					this.SendPropertyChanged("nvc_MemberName");
+					this.Onnvc_MemberNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_SystemSetup")]
 	public partial class t_SystemSetup : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -7777,6 +8055,10 @@ namespace zscq.Model
 		private string _nvc_DLTel;
 		
 		private string _nvc_DLFaxNumber;
+		
+		private string _nvc_DLPostCode;
+		
+		private string _nvc_DLAddress;
 		
 		private string _nvc_DLCNName;
 		
@@ -7846,6 +8128,10 @@ namespace zscq.Model
     partial void Onnvc_DLTelChanged();
     partial void Onnvc_DLFaxNumberChanging(string value);
     partial void Onnvc_DLFaxNumberChanged();
+    partial void Onnvc_DLPostCodeChanging(string value);
+    partial void Onnvc_DLPostCodeChanged();
+    partial void Onnvc_DLAddressChanging(string value);
+    partial void Onnvc_DLAddressChanged();
     partial void Onnvc_DLCNNameChanging(string value);
     partial void Onnvc_DLCNNameChanged();
     partial void Onnvc_DLENNameChanging(string value);
@@ -8165,6 +8451,46 @@ namespace zscq.Model
 					this._nvc_DLFaxNumber = value;
 					this.SendPropertyChanged("nvc_DLFaxNumber");
 					this.Onnvc_DLFaxNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_DLPostCode", DbType="NVarChar(50)")]
+		public string nvc_DLPostCode
+		{
+			get
+			{
+				return this._nvc_DLPostCode;
+			}
+			set
+			{
+				if ((this._nvc_DLPostCode != value))
+				{
+					this.Onnvc_DLPostCodeChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_DLPostCode = value;
+					this.SendPropertyChanged("nvc_DLPostCode");
+					this.Onnvc_DLPostCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_DLAddress", DbType="NVarChar(50)")]
+		public string nvc_DLAddress
+		{
+			get
+			{
+				return this._nvc_DLAddress;
+			}
+			set
+			{
+				if ((this._nvc_DLAddress != value))
+				{
+					this.Onnvc_DLAddressChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_DLAddress = value;
+					this.SendPropertyChanged("nvc_DLAddress");
+					this.Onnvc_DLAddressChanged();
 				}
 			}
 		}
@@ -8525,284 +8851,6 @@ namespace zscq.Model
 					this._nvc_ViewsBook_jp = value;
 					this.SendPropertyChanged("nvc_ViewsBook_jp");
 					this.Onnvc_ViewsBook_jpChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_EmailNote")]
-	public partial class t_EmailNote : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _i_Id;
-		
-		private string _nvc_Title;
-		
-		private string _nvc_EmailContent;
-		
-		private int _i_MemberId;
-		
-		private string _nvc_EmailState;
-		
-		private System.DateTime _dt_AddTime;
-		
-		private int _i_systemType;
-		
-		private string _nvc_Language;
-		
-		private string _nvc_Email;
-		
-		private string _nvc_MemberName;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oni_IdChanging(int value);
-    partial void Oni_IdChanged();
-    partial void Onnvc_TitleChanging(string value);
-    partial void Onnvc_TitleChanged();
-    partial void Onnvc_EmailContentChanging(string value);
-    partial void Onnvc_EmailContentChanged();
-    partial void Oni_MemberIdChanging(int value);
-    partial void Oni_MemberIdChanged();
-    partial void Onnvc_EmailStateChanging(string value);
-    partial void Onnvc_EmailStateChanged();
-    partial void Ondt_AddTimeChanging(System.DateTime value);
-    partial void Ondt_AddTimeChanged();
-    partial void Oni_systemTypeChanging(int value);
-    partial void Oni_systemTypeChanged();
-    partial void Onnvc_LanguageChanging(string value);
-    partial void Onnvc_LanguageChanged();
-    partial void Onnvc_EmailChanging(string value);
-    partial void Onnvc_EmailChanged();
-    partial void Onnvc_MemberNameChanging(string value);
-    partial void Onnvc_MemberNameChanged();
-    #endregion
-		
-		public t_EmailNote()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int i_Id
-		{
-			get
-			{
-				return this._i_Id;
-			}
-			set
-			{
-				if ((this._i_Id != value))
-				{
-					this.Oni_IdChanging(value);
-					this.SendPropertyChanging();
-					this._i_Id = value;
-					this.SendPropertyChanged("i_Id");
-					this.Oni_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Title", DbType="NVarChar(500)")]
-		public string nvc_Title
-		{
-			get
-			{
-				return this._nvc_Title;
-			}
-			set
-			{
-				if ((this._nvc_Title != value))
-				{
-					this.Onnvc_TitleChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_Title = value;
-					this.SendPropertyChanged("nvc_Title");
-					this.Onnvc_TitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_EmailContent", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string nvc_EmailContent
-		{
-			get
-			{
-				return this._nvc_EmailContent;
-			}
-			set
-			{
-				if ((this._nvc_EmailContent != value))
-				{
-					this.Onnvc_EmailContentChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_EmailContent = value;
-					this.SendPropertyChanged("nvc_EmailContent");
-					this.Onnvc_EmailContentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
-		public int i_MemberId
-		{
-			get
-			{
-				return this._i_MemberId;
-			}
-			set
-			{
-				if ((this._i_MemberId != value))
-				{
-					this.Oni_MemberIdChanging(value);
-					this.SendPropertyChanging();
-					this._i_MemberId = value;
-					this.SendPropertyChanged("i_MemberId");
-					this.Oni_MemberIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_EmailState", DbType="NVarChar(50)")]
-		public string nvc_EmailState
-		{
-			get
-			{
-				return this._nvc_EmailState;
-			}
-			set
-			{
-				if ((this._nvc_EmailState != value))
-				{
-					this.Onnvc_EmailStateChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_EmailState = value;
-					this.SendPropertyChanged("nvc_EmailState");
-					this.Onnvc_EmailStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_AddTime", DbType="DateTime NOT NULL")]
-		public System.DateTime dt_AddTime
-		{
-			get
-			{
-				return this._dt_AddTime;
-			}
-			set
-			{
-				if ((this._dt_AddTime != value))
-				{
-					this.Ondt_AddTimeChanging(value);
-					this.SendPropertyChanging();
-					this._dt_AddTime = value;
-					this.SendPropertyChanged("dt_AddTime");
-					this.Ondt_AddTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_systemType", DbType="Int NOT NULL")]
-		public int i_systemType
-		{
-			get
-			{
-				return this._i_systemType;
-			}
-			set
-			{
-				if ((this._i_systemType != value))
-				{
-					this.Oni_systemTypeChanging(value);
-					this.SendPropertyChanging();
-					this._i_systemType = value;
-					this.SendPropertyChanged("i_systemType");
-					this.Oni_systemTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Language", DbType="NVarChar(50)")]
-		public string nvc_Language
-		{
-			get
-			{
-				return this._nvc_Language;
-			}
-			set
-			{
-				if ((this._nvc_Language != value))
-				{
-					this.Onnvc_LanguageChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_Language = value;
-					this.SendPropertyChanged("nvc_Language");
-					this.Onnvc_LanguageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Email", DbType="NVarChar(50)")]
-		public string nvc_Email
-		{
-			get
-			{
-				return this._nvc_Email;
-			}
-			set
-			{
-				if ((this._nvc_Email != value))
-				{
-					this.Onnvc_EmailChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_Email = value;
-					this.SendPropertyChanged("nvc_Email");
-					this.Onnvc_EmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_MemberName", DbType="NVarChar(50)")]
-		public string nvc_MemberName
-		{
-			get
-			{
-				return this._nvc_MemberName;
-			}
-			set
-			{
-				if ((this._nvc_MemberName != value))
-				{
-					this.Onnvc_MemberNameChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_MemberName = value;
-					this.SendPropertyChanged("nvc_MemberName");
-					this.Onnvc_MemberNameChanged();
 				}
 			}
 		}

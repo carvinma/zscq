@@ -65,6 +65,24 @@
             </tr>
             <tr>
                 <td align="right">
+                    邮编：</td>
+                <td>
+                     <asp:TextBox ID="txtPostCode" class="inputs200text" runat="server" MaxLength="150"></asp:TextBox><img
+                        src="images/ico_notice.gif" style="vertical-align: middle; margin-left: 5px;"
+                        title="邮编" />
+                        </td>
+            </tr>
+            <tr>
+                <td align="right">
+                    地址:</td>
+                <td>
+                     <asp:TextBox ID="txtAddress" class="inputs200text" runat="server" MaxLength="150"></asp:TextBox><img
+                        src="images/ico_notice.gif" style="vertical-align: middle; margin-left: 5px;"
+                        title="地址" />
+                        </td>
+            </tr>
+            <tr>
+                <td align="right">
                     代理组织名称(中文)：
                 </td>
                 <td>

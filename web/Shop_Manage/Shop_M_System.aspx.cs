@@ -44,6 +44,8 @@ public partial class Shop_Manage_shop_upsystem : System.Web.UI.Page
         text_cnname.Value = model.nvc_DLCNName;
         text_enname.Value = model.nvc_DLENName;
         t_youjifee.Text = model.dm_YouJIFee.ToString();
+        txtPostCode.Text = model.nvc_DLPostCode;
+        txtAddress.Text = model.nvc_DLAddress;
         if (!string.IsNullOrWhiteSpace(model.nvc_ZLBook))
         {
             zlbook = "<a href='../" + model.nvc_ZLBook + "' title='点击查看'>已上传专利说明书</a>";
@@ -111,11 +113,13 @@ public partial class Shop_Manage_shop_upsystem : System.Web.UI.Page
     protected void btnUpdate_Click(object sender, EventArgs e)
     {
         t_SystemSetup model = DALS.SystemSetup_Select();
-        model.nvc_DLName = dlname.Text;
-        model.nvc_DLTel = dltel.Text;
-        model.nvc_DLFaxNumber = dlchuanzhen.Text;
-        model.nvc_DLCNName = text_cnname.Value;
-        model.nvc_DLENName = text_enname.Value;
+        model.nvc_DLName = dlname.Text.Trim();
+        model.nvc_DLTel = dltel.Text.Trim();
+        model.nvc_DLFaxNumber = dlchuanzhen.Text.Trim();
+        model.nvc_DLCNName = text_cnname.Value.Trim();
+        model.nvc_DLENName = text_enname.Value.Trim();
+        model.nvc_DLPostCode = txtPostCode.Text.Trim();
+        model.nvc_DLAddress = txtAddress.Text.Trim();
 
         try
         {
