@@ -6,12 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
+using Aspose.Words;
 
 public partial class aBrand_add_trademark : System.Web.UI.Page
 {
     private dal_Goods goods = new dal_Goods();
     private dal_NewTrademark mark = new dal_NewTrademark();
     private dal_CaseNoOrder caseNo = new dal_CaseNoOrder();
+    private dal_Address address = new dal_Address();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -30,7 +32,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         {
             int trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
             Bind_Page_EditInfo(trademarkId);
-           // Bind_TradeMarkStatus();
+            // Bind_TradeMarkStatus();
         }
         else
         {
@@ -44,7 +46,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     {
         var model = mark.Trademark_Select_Id(trademarkId);
         if (model.ApplyType == 0) this.RdoCorp.Checked = true;
-        else  this.RdoPeople.Checked = true;
+        else this.RdoPeople.Checked = true;
         txt_applyname.Value = model.ApplyName;
         txt_applyCardNo.Value = model.CardNo;
         if (!string.IsNullOrEmpty(model.CardNoPDF))
@@ -191,7 +193,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
         model.TrademarkMoney = money;
-        var agencyModel= goods.CategoryFees_Select_ByType(2);
+        var agencyModel = goods.CategoryFees_Select_ByType(2);
         model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
         model.TrademarkLateFee = 0;//滞纳金
         fileName = this.upPattern1.Value;//图样1
@@ -214,6 +216,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 0;
+        CreateAgentBook(model);
+        CreateApplyBook(model);
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
@@ -228,7 +232,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status =0;
+        model.Status = 0;
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
@@ -243,5 +247,117 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     protected void btnCancle_Click(object sender, EventArgs e)
     {
         Response.Redirect("trademark_list.aspx");
+    }
+
+    /// <summary>
+    /// 商标申请代理委托书
+    /// </summary>
+    private void CreateAgentBook(t_NewTradeMarkInfo model)
+    {
+       string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
+
+        string tmppath = Server.MapPath("File_Zscq/template/BookTrademarkAgent.doc");
+        Document doc = new Document(tmppath); //载入模板 
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
+        {
+            if (mark.Name == "client")//委托人
+            {
+                string agentPeople = model.ApplyName;
+                if (model.ApplyType == 1)
+                    agentPeople = model.ApplyName + "("+model.CardNo+")";
+                mark.Text = agentPeople.PadRight(40,' ');
+            }
+            if (mark.Name == "pattern")
+            {
+                builder.MoveToBookmark("pattern");
+                builder.InsertImage(Server.MapPath(model.TrademarkPattern1), 40, 20);
+            }
+            if (mark.Name == "address")
+                mark.Text = (division.Replace(" ", "") + model.Address).PadRight(26, ' ');
+            if (mark.Name == "linkman")
+                mark.Text = model.ContactPerson.PadRight(29,' ');
+            if (mark.Name == "tel")
+                mark.Text = model.Phone.PadRight(29, ' '); 
+            if (mark.Name == "postcode")
+                mark.Text = model.PostCode.PadRight(29, ' '); 
+        }
+       // doc.Range.Bookmarks["pattern"].Text = "";    // 清掉标示  
+        string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkAgent" + model.CaseNo + ".doc");
+        doc.Save(docPath);
+    }
+    /// <summary>
+    /// 商标注册申请书
+    /// </summary>
+    private void CreateApplyBook(t_NewTradeMarkInfo model)
+    {
+        string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
+
+        string tmppath = Server.MapPath("File_Zscq/template/BookTrademarkApply.doc");
+        Document doc = new Document(tmppath); //载入模板 
+        DocumentBuilder builder = new DocumentBuilder(doc);
+
+        dal_SystemSetup systemSetup = new dal_SystemSetup();
+        t_SystemSetup systemModel = systemSetup.SystemSetup_Select();
+
+        foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
+        {
+            if (mark.Name == "applyname")
+                mark.Text = model.ApplyName;
+            if (mark.Name == "applyaddress")
+                mark.Text = division.Replace(" ", "") + model.Address;
+            if (mark.Name == "postcode")
+                mark.Text = model.PostCode;
+            if (mark.Name == "linkman")
+                mark.Text = model.ContactPerson;
+            if (mark.Name == "tel")
+                mark.Text = model.Phone;
+            if (mark.Name == "agentgroup")
+                mark.Text = systemModel.nvc_DLCNName;
+            if (mark.Name == "is3D")
+            {
+                if (model.Is3D == null || !model.Is3D.Value)
+                    mark.Text = "  ";
+            }
+            if (mark.Name == "isColor")
+            {
+                if (model.IsColor == null || !model.IsColor.Value)
+                    mark.Text = "  ";
+            }
+            if (mark.Name == "isSound")
+            {
+                if (model.IsSound == null || !model.IsSound.Value)
+                    mark.Text = "  ";
+            }
+            if (mark.Name == "applyno"&&!string.IsNullOrEmpty(model.RegisteredNo))
+                mark.Text = model.RegisteredNo;
+            if (mark.Name == "image")
+            {
+                builder.MoveToBookmark("image");
+                builder.InsertImage(Server.MapPath(model.TrademarkPattern1),283,280);
+            }
+            if (mark.Name == "remark")
+                mark.Text = model.TrademarkRemark;
+        }
+        builder.MoveToBookmark("marktype");
+        foreach (string type in model.TrademarkType.Split(','))
+        {
+            builder.InsertBreak(BreakType.LineBreak);
+            builder.Writeln("类别：" + type);
+            foreach (string good in model.TrademarkGoods.Split(','))
+            {
+                builder.Writeln("商品/服务项目：");
+            }
+        }
+        doc.Range.Bookmarks["marktype"].Text = "";    // 清掉标示  
+        
+        //类别：	9
+//商品/服务项目：	帽子；领子；袖子 截止
+
+        //类别
+        //商品
+        //doc.Range.Bookmarks["table"].Text = "";    // 清掉标示  
+        string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkApply" + model.CaseNo + ".doc");
+        doc.Save(docPath);
     }
 }
