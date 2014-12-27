@@ -284,7 +284,7 @@
                                     
                                 </td>
                                 <td height="30" align="left" style="border-bottom: 1px solid #d3d3d3;">
-                                    <a href="appUserInfo.aspx" <% if (myurl == "appUserInfo" ){ %>class="font12bd44147" <%}else{%>class="" <%} %>>·常用申请人</a>
+                                    <a href="appUserInfo.aspx" <% if (myurl == "appuserinfo" ){ %>class="font12bd44147" <%}else{%>class="" <%} %>>·常用申请人</a>
                                 </td>
                                 <td style="border-bottom: 1px solid #d3d3d3;">&nbsp;
                                     
