@@ -192,7 +192,10 @@ public partial class Shop_Manage_shop_orderadd1 : System.Web.UI.Page
                             if (m != null)
                             {
                                 couponshu += int.Parse(Array_GiveNumber[i]);
-                                BLLC.Coupon_ForAdd(int.Parse(Array_GiveNumber[i]), DateTime.Now.AddMonths(m.i_TimeLength).ToString(), Array_CouponType[i], q.i_Id, From);
+                                if (m.i_TimeLength == 7)//永久有效
+                                    BLLC.Coupon_ForAdd(int.Parse(Array_GiveNumber[i]),"", Array_CouponType[i], q.i_Id, From);
+                                else
+                                    BLLC.Coupon_ForAdd(int.Parse(Array_GiveNumber[i]), DateTime.Now.AddMonths(m.i_TimeLength).ToString(), Array_CouponType[i], q.i_Id, From);
                             }
                         }
 
