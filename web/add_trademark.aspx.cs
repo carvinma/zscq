@@ -247,10 +247,6 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
             div_a.InnerHtml = "<script>alert('信息添加失败!');<script>";
         }
     }
-    protected void btnCancle_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("trademark_list.aspx");
-    }
 
     /// <summary>
     /// 商标申请代理委托书

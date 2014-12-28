@@ -12,6 +12,7 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
     private dal_Goods goods = new dal_Goods();
     private dal_NewTrademark mark = new dal_NewTrademark();
     private dal_CaseNoOrder caseNo = new dal_CaseNoOrder();
+    private dal_Address address = new dal_Address();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
