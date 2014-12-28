@@ -223,7 +223,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
     {
         string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
 
-        string tmppath = Server.MapPath("File_Zscq/template/BookTrademarkAgent.doc");
+        string tmppath = Server.MapPath("File_Zscq/template/BookTrademarkRenewalAgent.doc");
         Document doc = new Document(tmppath); //载入模板 
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -276,7 +276,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
             if (mark.Name == "postcode")
                 mark.Text = model.PostCode.PadRight(29, ' ');
         }
-        string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkAgent" + model.CaseNo + ".doc");
+        string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkRenewalAgent" + model.CaseNo + ".doc");
         doc.Save(docPath);
         return docPath;
     }
@@ -287,7 +287,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
     {
         string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
 
-        string tmppath = Server.MapPath("File_Zscq/template/BookTrademarkApply.doc");
+        string tmppath = Server.MapPath("File_Zscq/template/BookTrademarkRenewalApply.doc");
         Document doc = new Document(tmppath); //载入模板 
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -348,7 +348,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         }
 
         //doc.Range.Bookmarks["table"].Text = "";    // 清掉标示  
-        string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkApply" + model.CaseNo + ".doc");
+        string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkRenewalApply" + model.CaseNo + ".doc");
         doc.Save(docPath);
         return docPath;
     }
