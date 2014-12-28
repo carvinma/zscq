@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
 using Aspose.Words;
+using Aspose.Words.Drawing;
 
 public partial class aBrand_add_trademark : System.Web.UI.Page
 {
@@ -216,8 +217,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 0;
-        CreateAgentBook(model);
-        CreateApplyBook(model);
+        model.ApplyBook = CreateAgentBook(model);
+        model.AgentBook = CreateApplyBook(model);
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
@@ -233,6 +234,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 0;
+        model.ApplyBook= CreateAgentBook(model);
+        model.AgentBook= CreateApplyBook(model);
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
@@ -252,21 +255,48 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     /// <summary>
     /// 商标申请代理委托书
     /// </summary>
-    private void CreateAgentBook(t_NewTradeMarkInfo model)
+    private string CreateAgentBook(t_NewTradeMarkInfo model)
     {
-       string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
+        string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
 
         string tmppath = Server.MapPath("File_Zscq/template/BookTrademarkAgent.doc");
         Document doc = new Document(tmppath); //载入模板 
         DocumentBuilder builder = new DocumentBuilder(doc);
-        foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
+
+        NodeCollection shapeCollection = doc.GetChildNodes(NodeType.Shape, true);
+
+        // Since we will be adding/removing nodes, it is better to copy all collection
+        // into a fixed size array, otherwise iterator will be invalidated.
+        Node[] shapes = shapeCollection.ToArray();
+
+        foreach (Shape shape in shapes)
         {
-            if (mark.Name == "client")//委托人
+            if (shape.ShapeType.Equals(ShapeType.TextBox))//委托人
             {
                 string agentPeople = model.ApplyName;
                 if (model.ApplyType == 1)
-                    agentPeople = model.ApplyName + "("+model.CardNo+")";
-                mark.Text = agentPeople.PadRight(40,' ');
+                    agentPeople = model.ApplyName + "(" + model.CardNo + ")";
+
+                shape.AppendChild(new Paragraph(doc));
+                Paragraph para = shape.FirstParagraph;
+                para.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+
+                Run run = new Run(doc);
+                run.Text = agentPeople;
+                run.Font.Name = "宋体";
+                run.Font.Size = 12;
+                para.AppendChild(run);
+                break;
+            }
+        }
+        foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
+        {
+            if (mark.Name == "client")
+            {
+                //string agentPeople = model.ApplyName;
+                //if (model.ApplyType == 1)
+                //    agentPeople = model.ApplyName + "("+model.CardNo+")";
+                //mark.Text = agentPeople.PadRight(38,' ');
             }
             if (mark.Name == "pattern")
             {
@@ -276,20 +306,20 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
             if (mark.Name == "address")
                 mark.Text = (division.Replace(" ", "") + model.Address).PadRight(26, ' ');
             if (mark.Name == "linkman")
-                mark.Text = model.ContactPerson.PadRight(29,' ');
+                mark.Text = model.ContactPerson.PadRight(29, ' ');
             if (mark.Name == "tel")
-                mark.Text = model.Phone.PadRight(29, ' '); 
+                mark.Text = model.Phone.PadRight(29, ' ');
             if (mark.Name == "postcode")
-                mark.Text = model.PostCode.PadRight(29, ' '); 
+                mark.Text = model.PostCode.PadRight(29, ' ');
         }
-       // doc.Range.Bookmarks["pattern"].Text = "";    // 清掉标示  
         string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkAgent" + model.CaseNo + ".doc");
         doc.Save(docPath);
+        return docPath;
     }
     /// <summary>
     /// 商标注册申请书
     /// </summary>
-    private void CreateApplyBook(t_NewTradeMarkInfo model)
+    private string CreateApplyBook(t_NewTradeMarkInfo model)
     {
         string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
 
@@ -329,35 +359,33 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
                 if (model.IsSound == null || !model.IsSound.Value)
                     mark.Text = "  ";
             }
-            if (mark.Name == "applyno"&&!string.IsNullOrEmpty(model.RegisteredNo))
-                mark.Text = model.RegisteredNo;
+            if (mark.Name == "applyno")
+            {
+                mark.Text = !string.IsNullOrEmpty(model.RegisteredNo) ? model.RegisteredNo : "";
+            }
             if (mark.Name == "image")
             {
                 builder.MoveToBookmark("image");
-                builder.InsertImage(Server.MapPath(model.TrademarkPattern1),283,280);
+                builder.InsertImage(Server.MapPath(model.TrademarkPattern1), 283, 280);
             }
             if (mark.Name == "remark")
                 mark.Text = model.TrademarkRemark;
         }
         builder.MoveToBookmark("marktype");
+        IQueryable<t_GoodsSearch> find = goods.Goods_Select_MultipleId(model.TrademarkGoods.Split(','));
         foreach (string type in model.TrademarkType.Split(','))
         {
             builder.InsertBreak(BreakType.LineBreak);
             builder.Writeln("类别：" + type);
-            foreach (string good in model.TrademarkGoods.Split(','))
-            {
-                builder.Writeln("商品/服务项目：");
-            }
+            var q = find.Where(p => p.MainCategoryCode == type)
+                .Select(p=>p.GoodsRemark).ToArray().Aggregate((current, next) => String.Format("{0}、{1}", current, next));
+            builder.Writeln("商品/服务项目："+q);
+            
         }
-        doc.Range.Bookmarks["marktype"].Text = "";    // 清掉标示  
-        
-        //类别：	9
-//商品/服务项目：	帽子；领子；袖子 截止
 
-        //类别
-        //商品
         //doc.Range.Bookmarks["table"].Text = "";    // 清掉标示  
         string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkApply" + model.CaseNo + ".doc");
         doc.Save(docPath);
+        return docPath;
     }
 }
