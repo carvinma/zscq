@@ -318,45 +318,14 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                 mark.Text = model.Phone;
             if (mark.Name == "agentgroup")
                 mark.Text = systemModel.nvc_DLCNName;
-            if (mark.Name == "is3D")
-            {
-                if (model.Is3D == null || !model.Is3D.Value)
-                    mark.Text = "  ";
-            }
-            if (mark.Name == "isColor")
-            {
-                if (model.IsColor == null || !model.IsColor.Value)
-                    mark.Text = "  ";
-            }
-            if (mark.Name == "isSound")
-            {
-                if (model.IsSound == null || !model.IsSound.Value)
-                    mark.Text = "  ";
-            }
+            
             if (mark.Name == "applyno")
             {
                 mark.Text = !string.IsNullOrEmpty(model.RegisteredNo) ? model.RegisteredNo : "";
             }
-            if (mark.Name == "image")
-            {
-                builder.MoveToBookmark("image");
-                builder.InsertImage(Server.MapPath(model.TrademarkPattern1), 283, 280);
-            }
-            if (mark.Name == "remark")
-                mark.Text = model.TrademarkRemark;
+            if (mark.Name == "marktype")
+                mark.Text = model.TrademarkType;
         }
-        builder.MoveToBookmark("marktype");
-        IQueryable<t_GoodsSearch> find = goods.Goods_Select_MultipleId(model.TrademarkGoods.Split(','));
-        foreach (string type in model.TrademarkType.Split(','))
-        {
-            builder.InsertBreak(BreakType.LineBreak);
-            builder.Writeln("类别：" + type);
-            var q = find.Where(p => p.MainCategoryCode == type)
-                .Select(p => p.GoodsRemark).ToArray().Aggregate((current, next) => String.Format("{0}、{1}", current, next));
-            builder.Writeln("商品/服务项目：" + q);
-
-        }
-
         //doc.Range.Bookmarks["table"].Text = "";    // 清掉标示  
         string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkRenewalApply" + model.CaseNo + ".doc");
         doc.Save(docPath);
