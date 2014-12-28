@@ -233,24 +233,33 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         // into a fixed size array, otherwise iterator will be invalidated.
         Node[] shapes = shapeCollection.ToArray();
 
+        int k = 0;
         foreach (Shape shape in shapes)
         {
-            if (shape.ShapeType.Equals(ShapeType.TextBox))//委托人
+            if (shape.ShapeType.Equals(ShapeType.TextBox))//委托人 //商标
             {
-                string agentPeople = model.ApplyName;
-                if (model.ApplyType == 1)
-                    agentPeople = model.ApplyName + "(" + model.CardNo + ")";
-
+                string value = string.Empty;
+                if (k == 0)
+                {
+                    value = model.ApplyName;
+                    if (model.ApplyType == 1)
+                        value = model.ApplyName + "(" + model.CardNo + ")";
+                }
+                else if (k == 1)
+                {
+                    value = model.TrademarkDescribe;
+                }
                 shape.AppendChild(new Paragraph(doc));
                 Paragraph para = shape.FirstParagraph;
                 para.ParagraphFormat.Alignment = ParagraphAlignment.Center;
 
                 Run run = new Run(doc);
-                run.Text = agentPeople;
+                run.Text = value;
                 run.Font.Name = "宋体";
                 run.Font.Size = 12;
                 para.AppendChild(run);
-                break;
+                if (k == 1) break;
+                k++;
             }
         }
         foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
@@ -262,11 +271,12 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                 //    agentPeople = model.ApplyName + "("+model.CardNo+")";
                 //mark.Text = agentPeople.PadRight(38,' ');
             }
-            if (mark.Name == "pattern")
-            {
-                builder.MoveToBookmark("pattern");
-                builder.InsertImage(Server.MapPath(model.TrademarkPattern1), 40, 20);
-            }
+            //if (mark.Name == "pattern")
+            //{
+            //    //builder.MoveToBookmark("pattern");
+            //    //builder.InsertImage(Server.MapPath(model.TrademarkPattern1), 40, 20);
+            //    mark.Text =model.TrademarkDescribe;
+            //}
             if (mark.Name == "address")
                 mark.Text = (division.Replace(" ", "") + model.Address).PadRight(26, ' ');
             if (mark.Name == "linkman")
