@@ -8,6 +8,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 	position: relative;
 	margin-bottom: 1em;
 }
+/*
 .uploadify-button {
 	background-color: #505050;
 	background-image: linear-gradient(bottom, #505050 0%, #707070 100%);
@@ -50,6 +51,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 	);
 	background-position: center bottom;
 }
+*/
 .uploadify-button.disabled {
 	background-color: #D0D0D0;
 	color: #808080;
@@ -89,4 +91,25 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 	background-color: #0099FF;
 	height: 3px;
 	width: 1px;
+}
+/*
+.uploadify-button {
+background:url('../images/btnbg.gif');
+}
+.uploadify:hover .uploadify-button {
+background:url('../images/btnbg.gif');
+}
+
+*/
+BtnShowhref {
+color: #FFF;
+display: block;
+height: 27px;
+line-height: 27px;
+padding: 0 5px;
+text-align: center;
+font-weight: bold; 
+background:#D34245;
+text-decoration:none;
+
 }

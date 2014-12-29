@@ -18,8 +18,12 @@
     <script src="js/TrademarkList.js" type="text/javascript"></script>
     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+        <script src="js/swfobject.js" type="text/javascript"></script>
+    <script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
+      <script src="js/upfile.js" type="text/javascript"></script>
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+      <link rel="stylesheet" type="text/css" href="css/uploadify.css" />
     <%--  <link href="css/pager.css" rel="stylesheet" type="text/css" />--%>
     <script type="text/javascript">
         $(function () {
@@ -57,7 +61,7 @@
             }
         }
     </script>
-    <script language="javascript">
+    <script type="text/javascript" language="javascript">
         function switchTag1(tag, content, k) {
             for (i = 1; i < 3; i++) {
                 if (i == k)
@@ -251,7 +255,6 @@
                                         &nbsp;
                                     </td>
                                     <td width="691">
-                                        &nbsp;
                                     </td>
                                 </tr>
                                 <tr>
@@ -402,6 +405,7 @@
                                                                         <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
+                                                                     <a href="javascript:void(0)" class="upfile">上传</a>
                                                                         <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
                                                                      ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
                                                                     </td>
