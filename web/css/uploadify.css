@@ -101,15 +101,3 @@ background:url('../images/btnbg.gif');
 }
 
 */
-BtnShowhref {
-color: #FFF;
-display: block;
-height: 27px;
-line-height: 27px;
-padding: 0 5px;
-text-align: center;
-font-weight: bold; 
-background:#D34245;
-text-decoration:none;
-
-}
