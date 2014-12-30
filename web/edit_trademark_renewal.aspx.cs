@@ -302,8 +302,8 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 12;
-        model.RenewalApplyBook = CreateAgentBook(model);
-        model.RenewalAgentBook = CreateApplyBook(model);
+        model.RenewalAgentBook = CreateAgentBook(model);
+        model.RenewalApplyBook = CreateApplyBook(model);
         if (mark.Trademark_Submit() > 0)
         {
             addRegNoticeData(model.i_Id);
@@ -321,8 +321,8 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 12;
-        model.RenewalApplyBook = CreateAgentBook(model);
-        model.RenewalAgentBook = CreateApplyBook(model);
+        model.RenewalAgentBook = CreateAgentBook(model);
+        model.RenewalApplyBook = CreateApplyBook(model);
         if (mark.Trademark_Submit() > 0)
         {
             addRegNoticeData(model.i_Id);

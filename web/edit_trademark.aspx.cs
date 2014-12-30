@@ -269,8 +269,8 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 0;
-        model.ApplyBook = CreateAgentBook(model);
-        model.AgentBook = CreateApplyBook(model);
+        model.AgentBook = CreateAgentBook(model);
+        model.ApplyBook = CreateApplyBook(model);
         if (mark.Trademark_Submit() > 0)
         {
             UserLog.AddUserLog(model.i_Id, "商标系统", "更新商标内容");
@@ -285,8 +285,8 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 0;
-        model.ApplyBook = CreateAgentBook(model);
-        model.AgentBook = CreateApplyBook(model);
+        model.AgentBook = CreateAgentBook(model);
+        model.ApplyBook = CreateApplyBook(model);
         if (mark.Trademark_Submit() > 0)
         {
             UserLog.AddUserLog(model.i_Id, "商标系统", "更新商标内容");

@@ -217,8 +217,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 0;
-        model.ApplyBook = CreateAgentBook(model);
-        model.AgentBook = CreateApplyBook(model);
+        model.AgentBook = CreateAgentBook(model);
+        model.ApplyBook = CreateApplyBook(model);
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
@@ -234,8 +234,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     {
         var model = InitModel();
         model.Status = 0;
-        model.ApplyBook= CreateAgentBook(model);
-        model.AgentBook= CreateApplyBook(model);
+        model.AgentBook= CreateAgentBook(model);
+        model.ApplyBook= CreateApplyBook(model);
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
