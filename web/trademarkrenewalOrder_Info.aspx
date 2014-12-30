@@ -323,12 +323,10 @@ body {
                                                                                      <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString()) + decimal.Parse(Eval("TrademarkLateFee").ToString())%>
                                                                                 </td>
                                                                                 <td  align="center" bgcolor="#FFFFFF">
-                                                                                    <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
-                                                                    ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                                                                 <a href='<%#Eval("RenewalApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                                 </td>
                                                                                 <td align="center" bgcolor="#FFFFFF">
-                                                                                    <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
-                                                                    ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                                                                 <a href='<%#Eval("RenewalAgentBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                                 </td>
                                                                             </tr>
                                                                         </ItemTemplate>
