@@ -83,7 +83,7 @@
         </div>
     <div class="form-div" id="listDiv">
         
-                商标申请代理费：每个大类费用<input type="text" id="txtDaiLiFee" maxlength="8" 
+                商标申请：代理费（每个大类费用）<input type="text" id="txtDaiLiFee" maxlength="8" 
             class="numberinput"  size="15" value="" runat="server" /> 
             </div>
             <div class="form-div" id="Div2">
