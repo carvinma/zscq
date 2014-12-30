@@ -330,7 +330,12 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
         {
             if (mark.Name == "applyname")
-                mark.Text = model.ApplyName;
+            {
+                string agentPeople = model.ApplyName;
+                if (model.ApplyType == 1)
+                    agentPeople = model.ApplyName + "(" + model.CardNo + ")";
+                mark.Text = agentPeople;
+            }
             if (mark.Name == "applyaddress")
                 mark.Text = division.Replace(" ", "") + model.Address;
             if (mark.Name == "postcode")
@@ -376,7 +381,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
             builder.Writeln("类别：" + type);
             var q = find.Where(p => p.MainCategoryCode == type)
                 .Select(p=>p.GoodsRemark).ToArray().Aggregate((current, next) => String.Format("{0}、{1}", current, next));
-            builder.Writeln("商品/服务项目："+q);
+            builder.Writeln("商品/服务项目：" + q + " 截止");
             
         }
 

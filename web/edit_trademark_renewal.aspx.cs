@@ -426,7 +426,12 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
         {
             if (mark.Name == "applyname")
-                mark.Text = model.ApplyName;
+            {
+                string agentPeople = model.ApplyName;
+                if (model.ApplyType == 1)
+                    agentPeople = model.ApplyName + "(" + model.CardNo + ")";
+                mark.Text = agentPeople;
+            }
             if (mark.Name == "applyaddress")
                 mark.Text = division.Replace(" ", "") + model.Address;
             if (mark.Name == "postcode")
