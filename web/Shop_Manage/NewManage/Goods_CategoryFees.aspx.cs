@@ -20,14 +20,14 @@ public partial class Shop_Manage_NewManage_Goods_CategoryFees : System.Web.UI.Pa
             this.txtItemNum.Value = model.ItemNum.Value.ToString();
             this.txtExceedFees.Value = model.ExceedFees.Value.ToString();
 
-            var modeRenewal = goods.CategoryFees_Select_All().First(p => p.i_Type == 1);
+            var modeRenewal = goods.CategoryFees_Select_All().First(p => p.i_Type == 1); //续展每个大类费用
             this.txtRenewalFees.Value = modeRenewal.MainFees.Value.ToString();
 
-            var dali=goods.CategoryFees_Select_All().First(p => p.i_Type == 2);
+            var dali=goods.CategoryFees_Select_All().First(p => p.i_Type == 2); //申请代理费用
             this.txtDaiLiFee.Value = dali.MainFees.Value.ToString();
 
-            var zhinajin = goods.CategoryFees_Select_All().First(p => p.i_Type == 3);
-            this.txtZhiNaJin.Value = zhinajin.MainFees.Value.ToString();
+            var zhinajin = goods.CategoryFees_Select_All().First(p => p.i_Type == 3); //续展滞纳金
+            this.txtRenewalZhiNaJin.Value = zhinajin.MainFees.Value.ToString();
 
 
             this.HiddenID.Value = model.i_Id.ToString();
@@ -57,7 +57,7 @@ public partial class Shop_Manage_NewManage_Goods_CategoryFees : System.Web.UI.Pa
 
         var zhinajin = new t_GoodsCategoryFees();
         zhinajin.i_Id = int.Parse(this.HiddenZhinaJinID.Value);
-        zhinajin.MainFees = decimal.Parse(txtZhiNaJin.Value);
+        zhinajin.MainFees = decimal.Parse(txtRenewalZhiNaJin.Value);
         int z = goods.CategoryFees_Update(daili);
 
 

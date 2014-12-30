@@ -81,18 +81,18 @@
         &nbsp;
         </div>
     <div class="form-div" id="listDiv">
-        <span id="search_id1" class="action-span1">
-                商标续展：每个大类费用<input type="text" id="txtRenewalFees" maxlength="8" 
-            class="numberinput"  size="15" value="" runat="server" /></span></div>
+        
+                商标申请代理费：每个大类费用<input type="text" id="txtDaiLiFee" maxlength="8" 
+            class="numberinput"  size="15" value="" runat="server" /> 
+            </div>
             <div class="form-div" id="Div2">
-                <span id="Span1" class="action-span1">
-                 代理费：每个大类费用<input type="text" id="txtDaiLiFee" maxlength="8" 
-            class="numberinput"  size="15" value="" runat="server" /></span></div>
-
-               <div class="form-div" id="Div3">
-                <span id="Span2" class="action-span1">
-                 滞纳金：每个大类费用<input type="text" id="txtZhiNaJin" maxlength="8" 
-            class="numberinput"  size="15" value="" runat="server" /></span></div>
+               
+                  商标续展：每个大类费用<input type="text" id="txtRenewalFees" maxlength="8" 
+            class="numberinput"  size="15" value="" runat="server" />&nbsp;&nbsp; 代理费：（每个大类）<input 
+                      type="text" id="txtRenewalDaiLi" maxlength="8" 
+            class="numberinput"  size="15" value="" runat="server" />&nbsp;&nbsp;&nbsp;&nbsp; 滞纳金：（每个大类）<input 
+                      type="text" id="txtRenewalZhiNaJin" maxlength="8" 
+            class="numberinput"  size="15" value="" runat="server" /></div>
 
     <input type="hidden" id="HiddenDel" value="" runat="server" />
      <div class="form-div" id="Div1">
