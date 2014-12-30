@@ -64,6 +64,7 @@
     <asp:HiddenField ID="HiddenID" runat="server" /> 
     <asp:HiddenField ID="HiddenRenewalID" runat="server" />
        <asp:HiddenField ID="HiddenDailiID" runat="server" />
+        <asp:HiddenField ID="HiddenRenewalDaiLi" runat="server" />
         <asp:HiddenField ID="HiddenZhinaJinID" runat="server" />
     </h1>
 

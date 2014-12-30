@@ -26,13 +26,16 @@ public partial class Shop_Manage_NewManage_Goods_CategoryFees : System.Web.UI.Pa
             var dali=goods.CategoryFees_Select_All().First(p => p.i_Type == 2); //申请代理费用
             this.txtDaiLiFee.Value = dali.MainFees.Value.ToString();
 
-            var zhinajin = goods.CategoryFees_Select_All().First(p => p.i_Type == 3); //续展滞纳金
-            this.txtRenewalZhiNaJin.Value = zhinajin.MainFees.Value.ToString();
+            var rnewaldali = goods.CategoryFees_Select_All().First(p => p.i_Type == 3); //续展代理费用
+            this.txtRenewalDaiLi.Value = rnewaldali.MainFees.Value.ToString();
 
+            var zhinajin = goods.CategoryFees_Select_All().First(p => p.i_Type == 4); //续展滞纳金
+            this.txtRenewalZhiNaJin.Value = zhinajin.MainFees.Value.ToString();
 
             this.HiddenID.Value = model.i_Id.ToString();
             this.HiddenRenewalID.Value = modeRenewal.i_Id.ToString();
             this.HiddenDailiID.Value = dali.i_Id.ToString();
+            this.HiddenRenewalDaiLi.Value = zhinajin.i_Id.ToString();
             this.HiddenZhinaJinID.Value = zhinajin.i_Id.ToString();
         }
     }
@@ -55,13 +58,18 @@ public partial class Shop_Manage_NewManage_Goods_CategoryFees : System.Web.UI.Pa
         daili.MainFees = decimal.Parse(txtDaiLiFee.Value);
         int p = goods.CategoryFees_Update(daili);
 
+        var Renewaldaili = new t_GoodsCategoryFees();
+        Renewaldaili.i_Id = int.Parse(this.HiddenRenewalDaiLi.Value);
+        Renewaldaili.MainFees = decimal.Parse(txtRenewalDaiLi.Value);
+        int r = goods.CategoryFees_Update(Renewaldaili);
+
         var zhinajin = new t_GoodsCategoryFees();
         zhinajin.i_Id = int.Parse(this.HiddenZhinaJinID.Value);
         zhinajin.MainFees = decimal.Parse(txtRenewalZhiNaJin.Value);
         int z = goods.CategoryFees_Update(daili);
 
 
-        if(i>0&&k>0&&p>0&&z>0)
+        if(i>0&&k>0&&p>0&&r>0&&z>0)
             lblmsg.Text = "<script>alert('设置成功');</script>";
         else 
             lblmsg.Text = "<script>alert('设置失败');</script>";

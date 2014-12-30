@@ -19,6 +19,9 @@
     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
     <script src="js/jtrademark.js" type="text/javascript"></script>
+     <script src="js/swfobject.js" type="text/javascript"></script>
+    <script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
+      <script src="js/upfile.js" type="text/javascript"></script>
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <script src="js/TrademarkRenewalList.js" type="text/javascript"></script>
     <%--  <link href="css/pager.css" rel="stylesheet" type="text/css" />--%>
@@ -448,12 +451,12 @@
                                                                             <%# string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%>
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF">
-                                                                            <%# (Eval("RenewalApplyBook") != null && string.IsNullOrEmpty(Eval("RenewalApplyBook").ToString()) == false)
-                                                                              ? ("<a href='" + Eval("RenewalApplyBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                                                         <a href="javascript:void(0)" casetype="1" booktype="0" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                     <a href='<%# Eval("RenewalApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF">
-                                                                            <%# (Eval("RenewalAgentBook") != null && string.IsNullOrEmpty(Eval("RenewalAgentBook").ToString()) == false)
-                                                                              ? ("<a href='" + Eval("RenewalAgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                                                         <a href="javascript:void(0)" casetype="1" booktype="1" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                     <a href='<%# Eval("RenewalAgentBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF">
                                                                             <input name="chkItem" type="checkbox" status="<%#Eval("Status")%>" value="<%#Eval("i_Id")%>"
