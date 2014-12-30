@@ -87,7 +87,6 @@
             class="numberinput"  size="15" value="" runat="server" /> 
             </div>
             <div class="form-div" id="Div2">
-               
                   商标续展：每个大类费用<input type="text" id="txtRenewalFees" maxlength="8" 
             class="numberinput"  size="15" value="" runat="server" />&nbsp;&nbsp; 代理费：（每个大类）<input 
                       type="text" id="txtRenewalDaiLi" maxlength="8" 
