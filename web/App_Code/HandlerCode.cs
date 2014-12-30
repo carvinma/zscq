@@ -269,15 +269,16 @@ public class HandlerCode
     public void MoveBookFile(HttpContext context)
     {
         context.Response.ContentType = "text/plain";
-        string fileName = context.Request.QueryString["filename"];//
+        string fileName = context.Request["filename"];//
+        // context.Request["flag"]
         if (!string.IsNullOrEmpty(fileName))
         {
             string filePath = "File_Zscq/AccountPDF/";
             FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName));
             if (file.Exists)
             {
-                //File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),);
-                file.MoveTo(HttpContext.Current.Server.MapPath(filePath + fileName));
+                file.CopyTo(HttpContext.Current.Server.MapPath(filePath + fileName),true);
+                file.Delete();
                 context.Response.Write("1");
             }
             else

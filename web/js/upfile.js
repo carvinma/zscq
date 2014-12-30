@@ -12,12 +12,12 @@
         $.jBox(html, { title: "文件上传", width: 500, height: 300, submit: submit, buttons: { '确定': 1, '取消': 0} });
         file_url('*.doc; *.docx', '2MB', caseType, bookType, caseno);
     });
-     
+
     var submit = function (v, h, f) {
         if (v == 1) {
-            //点击上传弹框页的确定
-            var filename = h.find("#fileQueue").html(); //路径
+            var filename = h.find("#fileQueue").html(); //文件名
             if (filename != '') {
+                alert(filename);
                 $.ajax({
                     type: "POST",
                     url: "Handler.ashx",
