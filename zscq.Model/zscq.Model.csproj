@@ -92,6 +92,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataOrder.dbml</DependentUpon>
     </Compile>
+    <Compile Include="DataProc.cs">
+      <DependentUpon>DataProc.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataProc.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataProc.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DataProduct.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -136,6 +144,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataProc.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataProc.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="DataTradeMark.dbml">
@@ -232,6 +245,11 @@
   <ItemGroup>
     <None Include="DataTradeMark.dbml.layout">
       <DependentUpon>DataTradeMark.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataProc.dbml.layout">
+      <DependentUpon>DataProc.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

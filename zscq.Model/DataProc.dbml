@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_zscq" Class="DataProcDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.pro_Count_Case_AdminStatus" Method="pro_Count_Case_AdminStatus">
+    <Parameter Name="caseType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="pro_Count_Case_AdminStatusResult">
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="tids" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="counts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.pro_Count_OrderStatus" Method="pro_Count_OrderStatus">
+    <Parameter Name="caseType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="pro_Count_OrderStatusResult">
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="tids" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="counts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

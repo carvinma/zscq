@@ -12,6 +12,8 @@ public partial class trademark_count : System.Web.UI.Page
     public string stime90 = "0", stime_90 = "0", stime_60 = "0", stime_30 = "0", stime_15 = "0", stime_0 = "0";
     public string nojiaofei = "0", jiaofei = "0", wuyingda = "0", yitijiao = "0", SbTotal = "0";
     dal_Trademark DALT = new dal_Trademark();
+    dal_NewTrademark mark = new dal_NewTrademark();
+    private int memberid;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] == null || Request.Cookies["hqhtshop"]["hqht_sb_uid"] == null || Request.Cookies["hqhtshop"]["hqht_sb_uid"].ToString() == "")
@@ -21,16 +23,12 @@ public partial class trademark_count : System.Web.UI.Page
         else
         {
             int UserId = int.Parse(Request.Cookies["hqhtshop"]["hqht_sb_uid"].ToString());
+            BindApplyCaseAdminStatus(UserId);
             var sbzong = DALT.Trademark_web_SelectCount(UserId, 0, -1, "").Count();
             if (sbzong > 0)
             {
                 SbTotal = sbzong.ToString();
             }
-            //var yijiaofei = DALT.Trademark_web_SelectCount(UserId, 0, 2, "").Count();
-            //if (yijiaofei > 0)
-            //{
-            //    jiaofei = yijiaofei.ToString();
-            //}
             var iquery90 = DALT.Trademark_web_SelectCount(UserId, 0, -1, "90").Count();
             if (iquery90 > 0)
             {
@@ -61,22 +59,26 @@ public partial class trademark_count : System.Web.UI.Page
             {
                 stime_0 = iquery_0.ToString();
             }
-            //var weijiaofei = DALT.Trademark_web_SelectCount(UserId, 0, 1, "").Count();
-            //if (weijiaofei > 0)
-            //{
-            //    nojiaofei = weijiaofei.ToString();
-            //}
             var yitijiaoorder = DALT.Trademark_web_SelectCount(UserId, 0, 1, "").Count();
             if (yitijiaoorder > 0)
             {
                 yitijiao = yitijiaoorder.ToString();
             }
-            //var wuda = DALT.Trademark_web_SelectCount(UserId, 0, 4, "").Count();
-            //if (wuda > 0)
-            //{
-            //    wuyingda = wuda.ToString();
-            //}
-
         }
+    }
+
+
+    private void BindApplyCaseAdminStatus(int userid)
+    {
+        DataProcDataContext proc = new DataProcDataContext();
+        this.rptApplyStatus.DataSource = proc.pro_Count_Case_AdminStatus(0, userid);//申请
+        this.rptApplyStatus.DataBind();
+        this.rptApplyOrderStatus.DataSource = proc.pro_Count_OrderStatus(0, userid); //申请订单
+        this.rptApplyOrderStatus.DataBind();
+
+        this.rptRenewalStatus.DataSource = proc.pro_Count_Case_AdminStatus(1, userid);//续展
+        this.rptRenewalStatus.DataBind();
+        this.rptRenewalOrderStatus.DataSource = proc.pro_Count_OrderStatus(1, userid); //续展订单
+        this.rptRenewalOrderStatus.DataBind();
     }
 }
