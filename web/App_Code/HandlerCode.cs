@@ -170,7 +170,7 @@ public class HandlerCode
         try
         {
             if (context.Request["ids"] != null && context.Request["ids"].ToString() != ""
-                && context.Request["status"] != null && context.Request["status"].ToString()!="")
+                && context.Request["status"] != null && context.Request["status"].ToString() != "")
             {
                 string[] ids = context.Request["ids"].Split(',');
                 int status = int.Parse(context.Request["status"]);
@@ -229,6 +229,63 @@ public class HandlerCode
         }
     }
 
+    /// <summary>
+    /// 商标申请-续展上传委托书、申请书
+    /// </summary>
+    /// <param name="context"></param>
+    public void UploadBookFile(HttpContext context)
+    {
+        context.Response.ContentType = "text/plain";
+        //接收上传后的文件
+        HttpPostedFile file = context.Request.Files["Filedata"];
+        string caseType = context.Request.QueryString["caseType"];//0申请 1续展
+        string bookType = context.Request.QueryString["bookType"];//0申请书 1-委托书
+        string caseNo = context.Request.QueryString["caseNo"];//案件号
+        //获取文件的保存路径
+        string uploadPath = HttpContext.Current.Server.MapPath("UploadTemp\\");
+        //判断上传的文件是否为空
+        if (file != null && !string.IsNullOrEmpty(caseType) && !string.IsNullOrEmpty(bookType) && !string.IsNullOrEmpty(caseNo))
+        {
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+            //保存文件
+            string fileNameExt = System.IO.Path.GetExtension(file.FileName).ToLower();
+
+            caseType = caseType == "0" ? "" : "Renewal";
+            bookType = bookType == "0" ? "Apply" : "Agent";
+            string toFileName = string.Empty;
+            toFileName = string.Format("Trademark{0}{1}{2}{3}", caseType, bookType, caseNo, fileNameExt);
+            file.SaveAs(uploadPath + toFileName);
+            context.Response.Write(toFileName);
+        }
+        else
+        {
+            context.Response.Write("0");
+        }
+    }
+
+    public void MoveBookFile(HttpContext context)
+    {
+        context.Response.ContentType = "text/plain";
+        string fileName = context.Request.QueryString["filename"];//
+        if (!string.IsNullOrEmpty(fileName))
+        {
+            string filePath = "File_Zscq/AccountPDF/";
+            FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName));
+            if (file.Exists)
+            {
+                //File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),);
+                file.MoveTo(HttpContext.Current.Server.MapPath(filePath + fileName));
+                context.Response.Write("1");
+            }
+            else
+                context.Response.Write("0");
+        }
+        context.Response.Write("0");
+    }
+
     #region 省市区
     public void SelProv(HttpContext context)
     {
@@ -275,8 +332,8 @@ public class HandlerCode
     {
         int type = Convert.ToInt32(context.Request["casetype"]);
         List<t_NewTradeMarkStatus> list;
-        if(type==0)
-            list= BaseDataUtil.tradeMarkApplyStatuslist.ToList();
+        if (type == 0)
+            list = BaseDataUtil.tradeMarkApplyStatuslist.ToList();
         else
             list = BaseDataUtil.tradeMarkRenewedStatuslist.ToList();
 
@@ -284,7 +341,7 @@ public class HandlerCode
         sb.Append("<option value=\"-1\">请选择</option>");
         foreach (var v in list)
         {
-           sb.Append("<option value=\"" + v.StatusValue + "\">" + v.StatusName + "</option>");
+            sb.Append("<option value=\"" + v.StatusValue + "\">" + v.StatusName + "</option>");
         }
         context.Response.Write(sb);
     }

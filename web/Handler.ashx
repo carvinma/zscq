@@ -114,6 +114,12 @@ public class Handler : HandlerCode, IHttpHandler, IRequiresSessionState
                     case "uploadimage":
                         UploadImg(context);
                         break;
+                    case "uploadbookfile":
+                        UploadBookFile(context);
+                        break;
+                    case "movebook":
+                        MoveBookFile(context);
+                        break;
                     case "marklistdelete":
                         DelTradeMarkListByIds(context);
                         break;

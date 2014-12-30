@@ -308,8 +308,9 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
             if (mark.Name == "postcode")
                 mark.Text = model.PostCode.PadRight(29, ' ');
         }
-        string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkAgent" + model.CaseNo + ".doc");
-        doc.Save(docPath);
+
+        string docPath ="File_Zscq/AccountPDF/TrademarkAgent" + model.CaseNo + ".doc";
+        doc.Save(Server.MapPath(docPath));
         return docPath;
     }
     /// <summary>
@@ -380,8 +381,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         }
 
         //doc.Range.Bookmarks["table"].Text = "";    // 清掉标示  
-        string docPath = Server.MapPath("File_Zscq/AccountPDF/TrademarkApply" + model.CaseNo + ".doc");
-        doc.Save(docPath);
+        string docPath ="File_Zscq/AccountPDF/TrademarkApply" + model.CaseNo + ".doc";
+        doc.Save(Server.MapPath(docPath));
         return docPath;
     }
 }

@@ -405,13 +405,15 @@
                                                                         <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
-                                                                     <a href="javascript:void(0)" class="upfile">上传</a>
-                                                                        <%# (Eval("ApplyBook") != null && string.IsNullOrEmpty(Eval("ApplyBook").ToString()) == false)
-                                                                     ? ("<a href='"+Eval("ApplyBook")+"' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                                                     <a href="javascript:void(0)" casetype="0" booktype="0" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                     <a href='<%# Eval("ApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
+                                                                        
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
-                                                                        <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
-                                                                        ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>
+                                                                     <a href="javascript:void(0)" casetype="0" booktype="1" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                     <a href='<%# Eval("AgentBook")%>' title='点击下载' target='_blank'>下载</a> 
+                                                                       <%-- <%# (Eval("AgentBook") != null && string.IsNullOrEmpty(Eval("AgentBook").ToString()) == false)
+                                                                        ? ("<a href='" + Eval("AgentBook") + "' title='点击查看' target='_blank'>已上传</a>") : "未上传"%>--%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                         <%# GetApplyStatus(Eval("Status"))%>

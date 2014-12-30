@@ -1,44 +1,41 @@
-﻿//上传图片的js
-$(function () {
+﻿$(function () {
     $(".upfile").click(function () {
-        //        img_url('*.jpg', 'picurl', '1MB');
-        //        //清空隐藏的路径和id
-
+        var caseType = $(this).attr("casetype");
+        var bookType = $(this).attr("booktype");
+        var caseno = $(this).attr("caseno");
         var html = '<table width="100%"><tr><td height="120px" align="center">';
         html += '<input id="file_upload" name="file_upload" type="file" multiple="true"></td><tr>';
         html += '<td align="center"><div id="fileQueue"></div></td></tr></table>';
-        html += '<input id="input_id" type="hidden" name="input_id" value="">';
-        html += '<input id="imgurl" type="hidden" name="imgurl" value="">';
-        html += '';
-        $.jBox(html, { title: "文件上传", width: 500, height:300, submit: submit, buttons: { '确定': 1, '取消': 0} });
-        img_url('*.jpg', 'picurl', '1MB');
-                $("#imgurl").val(''); //路径
-                $("#input_id").val(''); //id
+        html += '<input id="caseType" type="hidden" name="caseType" value="">';
+        html += '<input id="bookType" type="hidden" name="bookType" value="">';
+        html += '<input id="caseno" type="hidden" name="caseno" value="">';
+        $.jBox(html, { title: "文件上传", width: 500, height: 300, submit: submit, buttons: { '确定': 1, '取消': 0} });
+        file_url('*.doc; *.docx', '2MB', caseType, bookType, caseno);
     });
-
+     
     var submit = function (v, h, f) {
         if (v == 1) {
             //点击上传弹框页的确定
-            alert(1);
-            var fileframe = h.find("#imgurl").val(); //路径
-            var fileframe2 = h.find("#input_id").val(); //id
-            alert(fileframe);
-            if (fileframe == '') {
-                return false;
+            var filename = h.find("#fileQueue").html(); //路径
+            if (filename != '') {
+                $.ajax({
+                    type: "POST",
+                    url: "Handler.ashx",
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    data: 'flag=movebook&filename=' + filename,
+                    success: function (data) {
+                        if (data == "1") {
+                        }
+                    }
+                });
             }
-            if (fileframe2 == '') {
-                return false;
-            }
-//            h.find("#" + fileframe2 + "").val("");
-//            h.find("#" + fileframe2 + "").val(fileframe);
-
         }
         return true;
     };
 });
 
 
-function img_url(img_type, img_id, img_size) {
+function file_url(file_type, file_size, caseType, bookType, caseNo) {
     $('#file_upload').uploadify({
         'buttonClass': '',
         'buttonText': '<a href="javascript:void(0)" class="BtnShowhref">选择文件</a>',
@@ -47,17 +44,33 @@ function img_url(img_type, img_id, img_size) {
         'queueID': 'fileQueue',
         'queueSizeLimit': 1, 	//同时上传文件数量 
         'progressData': 'percentage', //上传显示
-        'fileSizeLimit': img_size, 	//最大值
-        'fileTypeExts': img_type, //文件类型
+        'overrideEvents': ['onDialogClose'],
+        'fileSizeLimit': file_size, 	//最大值
+        'fileTypeExts': file_type, //文件类型
         'removeCompleted': false,   //上传完成后是否自动消失
         'swf': 'js/SWF/uploadify.swf',
-        'uploader': 'Handler.ashx?flag=uploadimage',
+        'uploader': 'Handler.ashx?flag=uploadbookfile&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo,
         'onUploadSuccess': function (file, data, response) {
             $('#' + file.id).find('.data').html(' 上传完毕');
             $("#fileQueue").html(data);
-            $("#input_id").val(img_id);
-            $("#imgurl").val(data);
-        } 
+        },
+        //返回一个错误，选择文件的时候触发
+        'onSelectError': function (file, errorCode, errorMsg) {
+            switch (errorCode) {
+                case -100:
+                    alert("上传的文件数量已经超出系统限制的" + $('#file_upload').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                    break;
+                case -110:
+                    alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#file_upload').uploadify('settings', 'fileSizeLimit') + "大小！");
+                    break;
+                case -120:
+                    alert("文件 [" + file.name + "] 大小异常！");
+                    break;
+                case -130:
+                    alert("文件 [" + file.name + "] 类型不正确！");
+                    break;
+            }
+        }
     });
 }
 
