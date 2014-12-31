@@ -116,7 +116,7 @@
                                                                 申请案状态统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=SbTotal %></b>
+                                                                <b>商标总数:<%=ApplyTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -128,7 +128,6 @@
                                                 <td height="18" align="left">
                                                 </td>
                                             </tr>
-                                             <tr><td height="18" align="center"> <strong>申请状态</strong></td></tr>
                                             <tr>
                                                 <td height="115" align="left" valign="top">
                                                     <table width="630" border="0" cellspacing="0" cellpadding="0" id="h_lsitt1">
@@ -148,28 +147,7 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <tr><td height="18"></td></tr>
-                                            <tr><td height="18" align="center"><strong>订单状态</strong></td></tr>
-                                             <tr>
-                                                <td height="115" align="left" valign="top">
-                                                    <table width="630" border="0" cellspacing="0" cellpadding="0" id="Table2">
-                                                        <asp:Repeater ID="rptApplyOrderStatus" runat="server">
-                                                            <ItemTemplate>
-                                                                <tr>
-                                                                    <td width="345" height="30" align="right" class="user_leftline">
-                                                                        <%# Eval("StatusName")%>：
-                                                                    </td>
-                                                                    <td width="285" class="user_rightline">
-                                                                       &nbsp;&nbsp;<a href="trademark_list.aspx?t_r_id=<%# Eval("tids") %>" class="ac_hei">
-                                                                            <%# Eval("counts")%>个</a>
-                                                                    </td>
-                                                                </tr>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                            </table>
                                     </td>
                                 </tr>
                                 <tr>
@@ -183,18 +161,10 @@
                     <tr><td>
                      <table width="691" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td width="38" height="28">
+                                    <td width="38"  height="123">
                                         &nbsp;
                                     </td>
-                                    <td width="653">
-                                        &nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td height="123">
-                                        &nbsp;
-                                    </td>
-                                    <td align="left" valign="top">
+                                    <td width="653" align="left" valign="top">
                                         <table width="654" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td width="654" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
@@ -207,7 +177,7 @@
                                                                 续展案状态统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=SbTotal %></b>
+                                                                <b>商标总数:<%=RenewalTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -219,7 +189,6 @@
                                                 <td height="18" align="left">
                                                 </td>
                                             </tr>
-                                             <tr><td height="18" align="center"> <strong>续展状态</strong></td></tr>
                                             <tr>
                                                 <td height="115" align="left" valign="top">
                                                     <table width="630" border="0" cellspacing="0" cellpadding="0" id="Table3">
@@ -239,28 +208,7 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <tr><td height="18"></td></tr>
-                                            <tr><td height="18" align="center"><strong>订单状态</strong></td></tr>
-                                             <tr>
-                                                <td height="115" align="left" valign="top">
-                                                    <table width="630" border="0" cellspacing="0" cellpadding="0" id="Table4">
-                                                        <asp:Repeater ID="rptRenewalOrderStatus" runat="server">
-                                                            <ItemTemplate>
-                                                                <tr>
-                                                                    <td width="345" height="30" align="right" class="user_leftline">
-                                                                        <%# Eval("StatusName")%>：
-                                                                    </td>
-                                                                    <td width="285" class="user_rightline">
-                                                                       &nbsp;&nbsp;<a href="trademark_list.aspx?t_r_id=<%# Eval("tids") %>" class="ac_hei">
-                                                                            <%# Eval("counts")%>个</a>
-                                                                    </td>
-                                                                </tr>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                            </table>
                                     </td>
                                 </tr>
                                 <tr>
@@ -278,7 +226,52 @@
                                         &nbsp;
                                     </td>
                                     <td width="653">
-                                        &nbsp;
+                                           <table width="654" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="654" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                                    <table width="600" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td width="10" height="20">
+                                                                &nbsp;
+                                                            </td>
+                                                            <td width="116" align="center" class="font12bt">
+                                                                订单统计
+                                                            </td>
+                                                            <td align="right">
+                                                                <b>商标总数:<%=OrderTotal%></b>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="18" align="left">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="115" align="left" valign="top">
+                                                    <table width="630" border="0" cellspacing="0" cellpadding="0" id="Table6">
+                                                        <asp:Repeater ID="rptOrder" runat="server">
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td width="345" height="30" align="right" class="user_leftline">
+                                                                       <%# Eval("StatusName")%>：
+                                                                    </td>
+                                                                    <td width="285" class="user_rightline">
+                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsApply") %>" class="ac_hei">
+                                                                            <%# Eval("countsApply")%>个</a>
+                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsRenewal") %>" class="ac_hei">
+                                                                            <%# Eval("countsRenewal")%>个</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
@@ -298,7 +291,7 @@
                                                                 类别统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=SbTotal %></b>
+                                                                <b>商标总数:<%=TypeTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -349,7 +342,7 @@
                                                                 常用申请人统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=SbTotal %></b>
+                                                                <b>商标总数:<%=ApplyUserTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>
