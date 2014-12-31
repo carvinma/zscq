@@ -69,13 +69,6 @@ namespace zscq.Model
 			return ((ISingleResult<pro_Count_Case_AdminStatusResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.pro_Count_OrderStatus")]
-		public ISingleResult<pro_Count_OrderStatusResult> pro_Count_OrderStatus([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> caseType, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userid)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), caseType, userid);
-			return ((ISingleResult<pro_Count_OrderStatusResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.pro_Count_TrademarkType")]
 		public ISingleResult<pro_Count_TrademarkTypeResult> pro_Count_TrademarkType([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userid)
 		{
@@ -88,6 +81,13 @@ namespace zscq.Model
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid);
 			return ((ISingleResult<pro_Count_ApplyUserResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.pro_Count_OrderStatus")]
+		public ISingleResult<pro_Count_OrderStatusResult> pro_Count_OrderStatus([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userid)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid);
+			return ((ISingleResult<pro_Count_OrderStatusResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -103,86 +103,6 @@ namespace zscq.Model
 		private System.Nullable<int> _counts;
 		
 		public pro_Count_Case_AdminStatusResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusName", DbType="VarChar(50)")]
-		public string StatusName
-		{
-			get
-			{
-				return this._StatusName;
-			}
-			set
-			{
-				if ((this._StatusName != value))
-				{
-					this._StatusName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusValue", DbType="Int")]
-		public System.Nullable<int> StatusValue
-		{
-			get
-			{
-				return this._StatusValue;
-			}
-			set
-			{
-				if ((this._StatusValue != value))
-				{
-					this._StatusValue = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tids", DbType="NVarChar(MAX)")]
-		public string tids
-		{
-			get
-			{
-				return this._tids;
-			}
-			set
-			{
-				if ((this._tids != value))
-				{
-					this._tids = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_counts", DbType="Int")]
-		public System.Nullable<int> counts
-		{
-			get
-			{
-				return this._counts;
-			}
-			set
-			{
-				if ((this._counts != value))
-				{
-					this._counts = value;
-				}
-			}
-		}
-	}
-	
-	public partial class pro_Count_OrderStatusResult
-	{
-		
-		private string _StatusName;
-		
-		private System.Nullable<int> _StatusValue;
-		
-		private string _tids;
-		
-		private System.Nullable<int> _counts;
-		
-		public pro_Count_OrderStatusResult()
 		{
 		}
 		
@@ -378,6 +298,122 @@ namespace zscq.Model
 				if ((this._ApplyName != value))
 				{
 					this._ApplyName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tidsApply", DbType="NVarChar(MAX)")]
+		public string tidsApply
+		{
+			get
+			{
+				return this._tidsApply;
+			}
+			set
+			{
+				if ((this._tidsApply != value))
+				{
+					this._tidsApply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_countsApply", DbType="Int")]
+		public System.Nullable<int> countsApply
+		{
+			get
+			{
+				return this._countsApply;
+			}
+			set
+			{
+				if ((this._countsApply != value))
+				{
+					this._countsApply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tidsRenewal", DbType="NVarChar(MAX)")]
+		public string tidsRenewal
+		{
+			get
+			{
+				return this._tidsRenewal;
+			}
+			set
+			{
+				if ((this._tidsRenewal != value))
+				{
+					this._tidsRenewal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_countsRenewal", DbType="Int")]
+		public System.Nullable<int> countsRenewal
+		{
+			get
+			{
+				return this._countsRenewal;
+			}
+			set
+			{
+				if ((this._countsRenewal != value))
+				{
+					this._countsRenewal = value;
+				}
+			}
+		}
+	}
+	
+	public partial class pro_Count_OrderStatusResult
+	{
+		
+		private string _StatusName;
+		
+		private System.Nullable<int> _StatusValue;
+		
+		private string _tidsApply;
+		
+		private System.Nullable<int> _countsApply;
+		
+		private string _tidsRenewal;
+		
+		private System.Nullable<int> _countsRenewal;
+		
+		public pro_Count_OrderStatusResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusName", DbType="VarChar(50)")]
+		public string StatusName
+		{
+			get
+			{
+				return this._StatusName;
+			}
+			set
+			{
+				if ((this._StatusName != value))
+				{
+					this._StatusName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusValue", DbType="Int")]
+		public System.Nullable<int> StatusValue
+		{
+			get
+			{
+				return this._StatusValue;
+			}
+			set
+			{
+				if ((this._StatusValue != value))
+				{
+					this._StatusValue = value;
 				}
 			}
 		}
