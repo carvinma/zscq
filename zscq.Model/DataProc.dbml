@@ -5,6 +5,7 @@
     <Parameter Name="userid" Type="System.Int32" DbType="Int" />
     <ElementType Name="pro_Count_Case_AdminStatusResult">
       <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StatusValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="tids" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="counts" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
@@ -14,8 +15,29 @@
     <Parameter Name="userid" Type="System.Int32" DbType="Int" />
     <ElementType Name="pro_Count_OrderStatusResult">
       <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StatusValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="tids" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="counts" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.pro_Count_TrademarkType" Method="pro_Count_TrademarkType">
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="pro_Count_TrademarkTypeResult">
+      <Column Name="CategoryCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tidsApply" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="countsApply" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tidsRenewal" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="countsRenewal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.pro_Count_ApplyUser" Method="pro_Count_ApplyUser">
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="pro_Count_ApplyUserResult">
+      <Column Name="ApplyName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="tidsApply" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="countsApply" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="tidsRenewal" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="countsRenewal" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

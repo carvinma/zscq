@@ -75,12 +75,28 @@ namespace zscq.Model
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), caseType, userid);
 			return ((ISingleResult<pro_Count_OrderStatusResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.pro_Count_TrademarkType")]
+		public ISingleResult<pro_Count_TrademarkTypeResult> pro_Count_TrademarkType([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userid)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid);
+			return ((ISingleResult<pro_Count_TrademarkTypeResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.pro_Count_ApplyUser")]
+		public ISingleResult<pro_Count_ApplyUserResult> pro_Count_ApplyUser([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> userid)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid);
+			return ((ISingleResult<pro_Count_ApplyUserResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class pro_Count_Case_AdminStatusResult
 	{
 		
 		private string _StatusName;
+		
+		private System.Nullable<int> _StatusValue;
 		
 		private string _tids;
 		
@@ -102,6 +118,22 @@ namespace zscq.Model
 				if ((this._StatusName != value))
 				{
 					this._StatusName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusValue", DbType="Int")]
+		public System.Nullable<int> StatusValue
+		{
+			get
+			{
+				return this._StatusValue;
+			}
+			set
+			{
+				if ((this._StatusValue != value))
+				{
+					this._StatusValue = value;
 				}
 			}
 		}
@@ -144,6 +176,8 @@ namespace zscq.Model
 		
 		private string _StatusName;
 		
+		private System.Nullable<int> _StatusValue;
+		
 		private string _tids;
 		
 		private System.Nullable<int> _counts;
@@ -164,6 +198,22 @@ namespace zscq.Model
 				if ((this._StatusName != value))
 				{
 					this._StatusName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusValue", DbType="Int")]
+		public System.Nullable<int> StatusValue
+		{
+			get
+			{
+				return this._StatusValue;
+			}
+			set
+			{
+				if ((this._StatusValue != value))
+				{
+					this._StatusValue = value;
 				}
 			}
 		}
@@ -196,6 +246,202 @@ namespace zscq.Model
 				if ((this._counts != value))
 				{
 					this._counts = value;
+				}
+			}
+		}
+	}
+	
+	public partial class pro_Count_TrademarkTypeResult
+	{
+		
+		private string _CategoryCode;
+		
+		private string _tidsApply;
+		
+		private System.Nullable<int> _countsApply;
+		
+		private string _tidsRenewal;
+		
+		private System.Nullable<int> _countsRenewal;
+		
+		public pro_Count_TrademarkTypeResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryCode", DbType="NVarChar(50)")]
+		public string CategoryCode
+		{
+			get
+			{
+				return this._CategoryCode;
+			}
+			set
+			{
+				if ((this._CategoryCode != value))
+				{
+					this._CategoryCode = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tidsApply", DbType="NVarChar(MAX)")]
+		public string tidsApply
+		{
+			get
+			{
+				return this._tidsApply;
+			}
+			set
+			{
+				if ((this._tidsApply != value))
+				{
+					this._tidsApply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_countsApply", DbType="Int")]
+		public System.Nullable<int> countsApply
+		{
+			get
+			{
+				return this._countsApply;
+			}
+			set
+			{
+				if ((this._countsApply != value))
+				{
+					this._countsApply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tidsRenewal", DbType="NVarChar(MAX)")]
+		public string tidsRenewal
+		{
+			get
+			{
+				return this._tidsRenewal;
+			}
+			set
+			{
+				if ((this._tidsRenewal != value))
+				{
+					this._tidsRenewal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_countsRenewal", DbType="Int")]
+		public System.Nullable<int> countsRenewal
+		{
+			get
+			{
+				return this._countsRenewal;
+			}
+			set
+			{
+				if ((this._countsRenewal != value))
+				{
+					this._countsRenewal = value;
+				}
+			}
+		}
+	}
+	
+	public partial class pro_Count_ApplyUserResult
+	{
+		
+		private string _ApplyName;
+		
+		private string _tidsApply;
+		
+		private System.Nullable<int> _countsApply;
+		
+		private string _tidsRenewal;
+		
+		private System.Nullable<int> _countsRenewal;
+		
+		public pro_Count_ApplyUserResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string ApplyName
+		{
+			get
+			{
+				return this._ApplyName;
+			}
+			set
+			{
+				if ((this._ApplyName != value))
+				{
+					this._ApplyName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tidsApply", DbType="NVarChar(MAX)")]
+		public string tidsApply
+		{
+			get
+			{
+				return this._tidsApply;
+			}
+			set
+			{
+				if ((this._tidsApply != value))
+				{
+					this._tidsApply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_countsApply", DbType="Int")]
+		public System.Nullable<int> countsApply
+		{
+			get
+			{
+				return this._countsApply;
+			}
+			set
+			{
+				if ((this._countsApply != value))
+				{
+					this._countsApply = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tidsRenewal", DbType="NVarChar(MAX)")]
+		public string tidsRenewal
+		{
+			get
+			{
+				return this._tidsRenewal;
+			}
+			set
+			{
+				if ((this._tidsRenewal != value))
+				{
+					this._tidsRenewal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_countsRenewal", DbType="Int")]
+		public System.Nullable<int> countsRenewal
+		{
+			get
+			{
+				return this._countsRenewal;
+			}
+			set
+			{
+				if ((this._countsRenewal != value))
+				{
+					this._countsRenewal = value;
 				}
 			}
 		}

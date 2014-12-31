@@ -226,11 +226,11 @@
                                                         <asp:Repeater ID="rptRenewalStatus" runat="server">
                                                             <ItemTemplate>
                                                                 <tr>
-                                                                    <td width="345" height="30" align="right" class="user_leftline" style="font-weight: bold;color: #b2333d;">
+                                                                   <td width="345" height="30" align="right" class="user_leftline" style='<%#RenewalStyle(Eval("StatusValue"))%>'>
                                                                         <%# Eval("StatusName")%>：
                                                                     </td>
-                                                                    <td width="285" class="user_rightline">
-                                                                      &nbsp;&nbsp; <a href="trademark_list.aspx?t_r_id=<%# Eval("tids") %>" class="ac_hei">
+                                                                    <td width="285" class="user_rightline" >
+                                                                      &nbsp;&nbsp; <a href="trademark_list.aspx?t_r_id=<%# Eval("tids") %>" class="ac_hei" style='<%#RenewalStyle(Eval("StatusValue"))%>'>
                                                                             <%# Eval("counts")%>个</a>
                                                                     </td>
                                                                 </tr>
@@ -295,7 +295,7 @@
                                                                 &nbsp;
                                                             </td>
                                                             <td width="116" align="center" class="font12bt">
-                                                                续展案状态统计
+                                                                类别统计
                                                             </td>
                                                             <td align="right">
                                                                 <b>商标总数:<%=SbTotal %></b>
@@ -313,78 +313,21 @@
                                             <tr>
                                                 <td height="115" align="left" valign="top">
                                                     <table width="630" border="0" cellspacing="0" cellpadding="0" id="Table1">
-                                                        <%--<tr>
-                              <td width="345" height="30" align="right" class="user_leftline">全部已缴费商标：</td>
-                              <td width="285" class="user_rightline">&nbsp;&nbsp;<a href="user_sblb.aspx?isjiaofei=2" class="ac_hei"><%=jiaofei%>个</a></td>
-                            </tr>--%>
-                                                        <tr>
-                                                            <td width="345" height="30" align="right" class="user_leftline">
-                                                                已完成缴费，等待下次缴费（&gt;90天）：
-                                                            </td>
-                                                            <td width="285" class="user_rightline">
-                                                                &nbsp;&nbsp;<a href="user_sblb.aspx?stime=90_1" class="ac_hei"><%=stime90 %>个</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="345" height="30" align="right" class="user_leftline">
-                                                                距缴费日期<90天，尚未续费：
-                                                            </td>
-                                                            <td width="285" class="user_rightline">
-                                                                &nbsp;&nbsp;<a href="user_sblb.aspx?stime=61-90_2" class="ac_hei"><%=stime_90 %>个</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="345" height="30" align="right" class="user_leftline">
-                                                                距缴费日期<60天，尚未续费：
-                                                            </td>
-                                                            <td width="285" class="user_rightline">
-                                                                &nbsp;&nbsp;<a href="user_sblb.aspx?stime=31-60_3" class="ac_hei"><%=stime_60 %>个</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="345" height="30" align="right" class="user_leftline" style="font-weight: bold;
-                                                                color: #b2333d;">
-                                                                距缴费日期<30天，尚未续费：
-                                                            </td>
-                                                            <td width="285" class="user_rightline">
-                                                                &nbsp;&nbsp;<a href="user_sblb.aspx?stime=16-30_4" class="ac_hong1"><%=stime_30 %>个</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="345" height="30" align="right" class="user_leftline" style="font-weight: bold;
-                                                                color: #d14b1a;">
-                                                                距缴费日期<15天，尚未续费：
-                                                            </td>
-                                                            <td width="285" class="user_rightline">
-                                                                &nbsp;&nbsp;<a href="user_sblb.aspx?stime=0-15_5" class="ac_hong2"><%=stime_15 %>个</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="345" height="30" align="right" class="user_leftline" style="font-weight: bold;
-                                                                color: #ebbf1c;">
-                                                                距缴费日期&lt;0天，尚未续费：
-                                                            </td>
-                                                            <td width="285" class="user_rightline">
-                                                                &nbsp;&nbsp;<a href="user_sblb.aspx?stime=chao_6" class="ac_huang"><%=stime_0 %>个</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="345" height="30" align="right" class="user_leftline" style="font-weight: bold;
-                                                                color: #ff0510;">
-                                                                已提交订单，尚未续费：
-                                                            </td>
-                                                            <td width="285" class="user_rightline">
-                                                                &nbsp;&nbsp;<a href="user_sblb.aspx?isjiaofei=1" class="ac_hong3"><%=yitijiao%>个</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td width="345" height="30" align="right" class="user_leftline">
-                                                                取消：
-                                                            </td>
-                                                            <td width="285" class="user_rightline">
-                                                                &nbsp;&nbsp;<a href="user_sblb.aspx?isjiaofei=4" class="ac_hei"><%=wuyingda %>个</a>
-                                                            </td>
-                                                        </tr>
+                                                        <asp:Repeater ID="rptTrademarkType" runat="server">
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td width="345" height="30" align="right" class="user_leftline">
+                                                                        类别（<%# Eval("CategoryCode")%>）：
+                                                                    </td>
+                                                                    <td width="285" class="user_rightline">
+                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsApply") %>" class="ac_hei">
+                                                                            <%# Eval("countsApply")%>个</a>
+                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsRenewal") %>" class="ac_hei">
+                                                                            <%# Eval("countsRenewal")%>个</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
                                                     </table>
                                                 </td>
                                             </tr>
@@ -392,8 +335,54 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="left">
-                                        &nbsp;
+                                   <td></td>
+                                    <td align="left" valign="top">
+                                          <table width="654" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="654" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                                    <table width="600" border="0" cellspacing="0" cellpadding="0">
+                                                        <tr>
+                                                            <td width="10" height="20">
+                                                                &nbsp;
+                                                            </td>
+                                                            <td width="116" align="center" class="font12bt">
+                                                                常用申请人统计
+                                                            </td>
+                                                            <td align="right">
+                                                                <b>商标总数:<%=SbTotal %></b>
+                                                            </td>
+                                                            <td>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="18" align="left">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="115" align="left" valign="top">
+                                                    <table width="630" border="0" cellspacing="0" cellpadding="0" id="Table5">
+                                                        <asp:Repeater ID="rptApplyUser" runat="server">
+                                                            <ItemTemplate>
+                                                                <tr>
+                                                                    <td width="345" height="30" align="right" class="user_leftline">
+                                                                        <%# Eval("ApplyName")%>：
+                                                                    </td>
+                                                                    <td width="285" class="user_rightline">
+                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsApply") %>" class="ac_hei">
+                                                                            <%# Eval("countsApply")%>个</a>
+                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsRenewal") %>" class="ac_hei">
+                                                                            <%# Eval("countsRenewal")%>个</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </ItemTemplate>
+                                                        </asp:Repeater>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>

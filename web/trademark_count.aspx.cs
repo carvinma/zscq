@@ -12,8 +12,7 @@ public partial class trademark_count : System.Web.UI.Page
     public string stime90 = "0", stime_90 = "0", stime_60 = "0", stime_30 = "0", stime_15 = "0", stime_0 = "0";
     public string nojiaofei = "0", jiaofei = "0", wuyingda = "0", yitijiao = "0", SbTotal = "0";
     dal_Trademark DALT = new dal_Trademark();
-    dal_NewTrademark mark = new dal_NewTrademark();
-    private int memberid;
+    DataProcDataContext proc = new DataProcDataContext();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["hqhtshop"] == null || Request.Cookies["hqhtshop"]["hqht_sb_uid"] == null || Request.Cookies["hqhtshop"]["hqht_sb_uid"].ToString() == "")
@@ -23,7 +22,9 @@ public partial class trademark_count : System.Web.UI.Page
         else
         {
             int UserId = int.Parse(Request.Cookies["hqhtshop"]["hqht_sb_uid"].ToString());
-            BindApplyCaseAdminStatus(UserId);
+            BindCaseStatusCount(UserId);
+            BindTrademarkType(UserId);
+            BindApplyUser(UserId);
             var sbzong = DALT.Trademark_web_SelectCount(UserId, 0, -1, "").Count();
             if (sbzong > 0)
             {
@@ -67,10 +68,32 @@ public partial class trademark_count : System.Web.UI.Page
         }
     }
 
-
-    private void BindApplyCaseAdminStatus(int userid)
+    public string RenewalStyle(object StatusValue)
     {
-        DataProcDataContext proc = new DataProcDataContext();
+        if (StatusValue != null)
+        {
+            string value = StatusValue.ToString();
+            switch (value)
+            {
+                case "5":
+                 return "font-weight: bold;color: #b2333d;";
+                case "6":
+                 return "font-weight: bold;color: #d14b1a;";
+                case "7":
+                 return "font-weight: bold;color: #ebbf1c;";
+                case "8":
+                 return "font-weight: bold;color: #ef5b9c;";
+                case "9":
+                 return "font-weight: bold;color: #ef4136;";
+                case "10":
+                 return "font-weight: bold;color: #ff0510;";
+            }
+        }
+        return string.Empty;
+    }
+    private void BindCaseStatusCount(int userid)
+    {
+       
         this.rptApplyStatus.DataSource = proc.pro_Count_Case_AdminStatus(0, userid);//申请
         this.rptApplyStatus.DataBind();
         this.rptApplyOrderStatus.DataSource = proc.pro_Count_OrderStatus(0, userid); //申请订单
@@ -80,5 +103,15 @@ public partial class trademark_count : System.Web.UI.Page
         this.rptRenewalStatus.DataBind();
         this.rptRenewalOrderStatus.DataSource = proc.pro_Count_OrderStatus(1, userid); //续展订单
         this.rptRenewalOrderStatus.DataBind();
+    }
+    private void BindTrademarkType(int userid)
+    {
+        this.rptTrademarkType.DataSource = proc.pro_Count_TrademarkType(userid);
+        this.rptTrademarkType.DataBind();
+    }
+    private void BindApplyUser(int userid)
+    {
+        this.rptApplyUser.DataSource = proc.pro_Count_ApplyUser(userid);
+        this.rptApplyUser.DataBind();
     }
 }
