@@ -541,6 +541,22 @@ namespace zscq.Model
 				return this.GetTable<vw_TrademarkOrder>();
 			}
 		}
+		
+		public System.Data.Linq.Table<vw_NewTrademarkOrder> vw_NewTrademarkOrder
+		{
+			get
+			{
+				return this.GetTable<vw_NewTrademarkOrder>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_NewTrademarkOrderDetails> vw_NewTrademarkOrderDetails
+		{
+			get
+			{
+				return this.GetTable<vw_NewTrademarkOrderDetails>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_Help")]
@@ -23884,6 +23900,1320 @@ namespace zscq.Model
 				if ((this._TrademarkIds != value))
 				{
 					this._TrademarkIds = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_NewTrademarkOrder")]
+	public partial class vw_NewTrademarkOrder
+	{
+		
+		private string _nvc_UserNum;
+		
+		private string _nvc_Name;
+		
+		private string _nvc_RealName;
+		
+		private System.Nullable<int> _i_UserTypeId;
+		
+		private System.Nullable<int> _i_RegTypeId;
+		
+		private string _nvc_Email;
+		
+		private string _nvc_TelPhone;
+		
+		private string _nvc_MobilePhone;
+		
+		private int _i_GuoJiId;
+		
+		private int _i_Id;
+		
+		private int _i_MemberId;
+		
+		private string _nvc_OrderNumber;
+		
+		private decimal _dm_TotalMoneyGY;
+		
+		private decimal _dm_TotalMoney;
+		
+		private int _i_Status;
+		
+		private System.Nullable<System.DateTime> _dt_AddTime;
+		
+		private System.Nullable<System.DateTime> _dt_PayTime;
+		
+		private int _i_IsFaPiao;
+		
+		private string _nvc_FaPiaoTaiTou;
+		
+		private int _i_IsYouJi;
+		
+		private int _i_YouJiType;
+		
+		private string _nvc_YouHUiQuan;
+		
+		private string _nvc_PayType;
+		
+		private string _nvc_Bank;
+		
+		private int _i_JiFen;
+		
+		private int _i_Address_Gid;
+		
+		private int _i_Address_PId;
+		
+		private int _i_Address_CId;
+		
+		private int _i_Address_AId;
+		
+		private string _nvc_Address;
+		
+		private int _i_IsUseYHQ;
+		
+		private decimal _dm_FapiaoMoney;
+		
+		private decimal _dm_YoujiFee;
+		
+		private decimal _dm_YouHuiFee;
+		
+		private int _i_SendEmailOrder;
+		
+		private int _i_SendPhoneOrder;
+		
+		private int _i_IsSend;
+		
+		private string _nvc_YouJiWay;
+		
+		private string _nvc_YHQIdstr;
+		
+		private int _i_AddressId;
+		
+		private string _nvc_BankId;
+		
+		private System.Nullable<int> _i_CountryId;
+		
+		private System.Nullable<decimal> _dm_TrademarkMoney;
+		
+		private System.Nullable<decimal> _dm_TMDaiLi;
+		
+		private System.Nullable<decimal> _dm_TMZhiNaJin;
+		
+		private System.Nullable<int> _CaseType;
+		
+		private string _CaseNo;
+		
+		private string _ApplyNo;
+		
+		private string _ApplyName;
+		
+		private string _TrademarkIds;
+		
+		public vw_NewTrademarkOrder()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_UserNum", DbType="NVarChar(50)")]
+		public string nvc_UserNum
+		{
+			get
+			{
+				return this._nvc_UserNum;
+			}
+			set
+			{
+				if ((this._nvc_UserNum != value))
+				{
+					this._nvc_UserNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Name", DbType="NVarChar(150)")]
+		public string nvc_Name
+		{
+			get
+			{
+				return this._nvc_Name;
+			}
+			set
+			{
+				if ((this._nvc_Name != value))
+				{
+					this._nvc_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_RealName", DbType="NVarChar(150)")]
+		public string nvc_RealName
+		{
+			get
+			{
+				return this._nvc_RealName;
+			}
+			set
+			{
+				if ((this._nvc_RealName != value))
+				{
+					this._nvc_RealName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_UserTypeId", DbType="Int")]
+		public System.Nullable<int> i_UserTypeId
+		{
+			get
+			{
+				return this._i_UserTypeId;
+			}
+			set
+			{
+				if ((this._i_UserTypeId != value))
+				{
+					this._i_UserTypeId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_RegTypeId", DbType="Int")]
+		public System.Nullable<int> i_RegTypeId
+		{
+			get
+			{
+				return this._i_RegTypeId;
+			}
+			set
+			{
+				if ((this._i_RegTypeId != value))
+				{
+					this._i_RegTypeId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Email", DbType="NVarChar(100)")]
+		public string nvc_Email
+		{
+			get
+			{
+				return this._nvc_Email;
+			}
+			set
+			{
+				if ((this._nvc_Email != value))
+				{
+					this._nvc_Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_TelPhone", DbType="NVarChar(50)")]
+		public string nvc_TelPhone
+		{
+			get
+			{
+				return this._nvc_TelPhone;
+			}
+			set
+			{
+				if ((this._nvc_TelPhone != value))
+				{
+					this._nvc_TelPhone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_MobilePhone", DbType="NVarChar(50)")]
+		public string nvc_MobilePhone
+		{
+			get
+			{
+				return this._nvc_MobilePhone;
+			}
+			set
+			{
+				if ((this._nvc_MobilePhone != value))
+				{
+					this._nvc_MobilePhone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_GuoJiId", DbType="Int NOT NULL")]
+		public int i_GuoJiId
+		{
+			get
+			{
+				return this._i_GuoJiId;
+			}
+			set
+			{
+				if ((this._i_GuoJiId != value))
+				{
+					this._i_GuoJiId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", DbType="Int NOT NULL")]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this._i_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
+		public int i_MemberId
+		{
+			get
+			{
+				return this._i_MemberId;
+			}
+			set
+			{
+				if ((this._i_MemberId != value))
+				{
+					this._i_MemberId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_OrderNumber", DbType="NVarChar(50)")]
+		public string nvc_OrderNumber
+		{
+			get
+			{
+				return this._nvc_OrderNumber;
+			}
+			set
+			{
+				if ((this._nvc_OrderNumber != value))
+				{
+					this._nvc_OrderNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TotalMoneyGY", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_TotalMoneyGY
+		{
+			get
+			{
+				return this._dm_TotalMoneyGY;
+			}
+			set
+			{
+				if ((this._dm_TotalMoneyGY != value))
+				{
+					this._dm_TotalMoneyGY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TotalMoney", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_TotalMoney
+		{
+			get
+			{
+				return this._dm_TotalMoney;
+			}
+			set
+			{
+				if ((this._dm_TotalMoney != value))
+				{
+					this._dm_TotalMoney = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Status", DbType="Int NOT NULL")]
+		public int i_Status
+		{
+			get
+			{
+				return this._i_Status;
+			}
+			set
+			{
+				if ((this._i_Status != value))
+				{
+					this._i_Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_AddTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dt_AddTime
+		{
+			get
+			{
+				return this._dt_AddTime;
+			}
+			set
+			{
+				if ((this._dt_AddTime != value))
+				{
+					this._dt_AddTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_PayTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dt_PayTime
+		{
+			get
+			{
+				return this._dt_PayTime;
+			}
+			set
+			{
+				if ((this._dt_PayTime != value))
+				{
+					this._dt_PayTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsFaPiao", DbType="Int NOT NULL")]
+		public int i_IsFaPiao
+		{
+			get
+			{
+				return this._i_IsFaPiao;
+			}
+			set
+			{
+				if ((this._i_IsFaPiao != value))
+				{
+					this._i_IsFaPiao = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_FaPiaoTaiTou", DbType="NVarChar(500)")]
+		public string nvc_FaPiaoTaiTou
+		{
+			get
+			{
+				return this._nvc_FaPiaoTaiTou;
+			}
+			set
+			{
+				if ((this._nvc_FaPiaoTaiTou != value))
+				{
+					this._nvc_FaPiaoTaiTou = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsYouJi", DbType="Int NOT NULL")]
+		public int i_IsYouJi
+		{
+			get
+			{
+				return this._i_IsYouJi;
+			}
+			set
+			{
+				if ((this._i_IsYouJi != value))
+				{
+					this._i_IsYouJi = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_YouJiType", DbType="Int NOT NULL")]
+		public int i_YouJiType
+		{
+			get
+			{
+				return this._i_YouJiType;
+			}
+			set
+			{
+				if ((this._i_YouJiType != value))
+				{
+					this._i_YouJiType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YouHUiQuan", DbType="NVarChar(50)")]
+		public string nvc_YouHUiQuan
+		{
+			get
+			{
+				return this._nvc_YouHUiQuan;
+			}
+			set
+			{
+				if ((this._nvc_YouHUiQuan != value))
+				{
+					this._nvc_YouHUiQuan = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_PayType", DbType="NVarChar(50)")]
+		public string nvc_PayType
+		{
+			get
+			{
+				return this._nvc_PayType;
+			}
+			set
+			{
+				if ((this._nvc_PayType != value))
+				{
+					this._nvc_PayType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Bank", DbType="NVarChar(50)")]
+		public string nvc_Bank
+		{
+			get
+			{
+				return this._nvc_Bank;
+			}
+			set
+			{
+				if ((this._nvc_Bank != value))
+				{
+					this._nvc_Bank = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_JiFen", DbType="Int NOT NULL")]
+		public int i_JiFen
+		{
+			get
+			{
+				return this._i_JiFen;
+			}
+			set
+			{
+				if ((this._i_JiFen != value))
+				{
+					this._i_JiFen = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_Gid", DbType="Int NOT NULL")]
+		public int i_Address_Gid
+		{
+			get
+			{
+				return this._i_Address_Gid;
+			}
+			set
+			{
+				if ((this._i_Address_Gid != value))
+				{
+					this._i_Address_Gid = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_PId", DbType="Int NOT NULL")]
+		public int i_Address_PId
+		{
+			get
+			{
+				return this._i_Address_PId;
+			}
+			set
+			{
+				if ((this._i_Address_PId != value))
+				{
+					this._i_Address_PId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_CId", DbType="Int NOT NULL")]
+		public int i_Address_CId
+		{
+			get
+			{
+				return this._i_Address_CId;
+			}
+			set
+			{
+				if ((this._i_Address_CId != value))
+				{
+					this._i_Address_CId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Address_AId", DbType="Int NOT NULL")]
+		public int i_Address_AId
+		{
+			get
+			{
+				return this._i_Address_AId;
+			}
+			set
+			{
+				if ((this._i_Address_AId != value))
+				{
+					this._i_Address_AId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Address", DbType="NVarChar(250)")]
+		public string nvc_Address
+		{
+			get
+			{
+				return this._nvc_Address;
+			}
+			set
+			{
+				if ((this._nvc_Address != value))
+				{
+					this._nvc_Address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsUseYHQ", DbType="Int NOT NULL")]
+		public int i_IsUseYHQ
+		{
+			get
+			{
+				return this._i_IsUseYHQ;
+			}
+			set
+			{
+				if ((this._i_IsUseYHQ != value))
+				{
+					this._i_IsUseYHQ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_FapiaoMoney", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_FapiaoMoney
+		{
+			get
+			{
+				return this._dm_FapiaoMoney;
+			}
+			set
+			{
+				if ((this._dm_FapiaoMoney != value))
+				{
+					this._dm_FapiaoMoney = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_YoujiFee", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_YoujiFee
+		{
+			get
+			{
+				return this._dm_YoujiFee;
+			}
+			set
+			{
+				if ((this._dm_YoujiFee != value))
+				{
+					this._dm_YoujiFee = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_YouHuiFee", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_YouHuiFee
+		{
+			get
+			{
+				return this._dm_YouHuiFee;
+			}
+			set
+			{
+				if ((this._dm_YouHuiFee != value))
+				{
+					this._dm_YouHuiFee = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_SendEmailOrder", DbType="Int NOT NULL")]
+		public int i_SendEmailOrder
+		{
+			get
+			{
+				return this._i_SendEmailOrder;
+			}
+			set
+			{
+				if ((this._i_SendEmailOrder != value))
+				{
+					this._i_SendEmailOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_SendPhoneOrder", DbType="Int NOT NULL")]
+		public int i_SendPhoneOrder
+		{
+			get
+			{
+				return this._i_SendPhoneOrder;
+			}
+			set
+			{
+				if ((this._i_SendPhoneOrder != value))
+				{
+					this._i_SendPhoneOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsSend", DbType="Int NOT NULL")]
+		public int i_IsSend
+		{
+			get
+			{
+				return this._i_IsSend;
+			}
+			set
+			{
+				if ((this._i_IsSend != value))
+				{
+					this._i_IsSend = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YouJiWay", DbType="NVarChar(50)")]
+		public string nvc_YouJiWay
+		{
+			get
+			{
+				return this._nvc_YouJiWay;
+			}
+			set
+			{
+				if ((this._nvc_YouJiWay != value))
+				{
+					this._nvc_YouJiWay = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_YHQIdstr", DbType="NVarChar(150)")]
+		public string nvc_YHQIdstr
+		{
+			get
+			{
+				return this._nvc_YHQIdstr;
+			}
+			set
+			{
+				if ((this._nvc_YHQIdstr != value))
+				{
+					this._nvc_YHQIdstr = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_AddressId", DbType="Int NOT NULL")]
+		public int i_AddressId
+		{
+			get
+			{
+				return this._i_AddressId;
+			}
+			set
+			{
+				if ((this._i_AddressId != value))
+				{
+					this._i_AddressId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_BankId", DbType="NVarChar(50)")]
+		public string nvc_BankId
+		{
+			get
+			{
+				return this._nvc_BankId;
+			}
+			set
+			{
+				if ((this._nvc_BankId != value))
+				{
+					this._nvc_BankId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_CountryId", DbType="Int")]
+		public System.Nullable<int> i_CountryId
+		{
+			get
+			{
+				return this._i_CountryId;
+			}
+			set
+			{
+				if ((this._i_CountryId != value))
+				{
+					this._i_CountryId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TrademarkMoney", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TrademarkMoney
+		{
+			get
+			{
+				return this._dm_TrademarkMoney;
+			}
+			set
+			{
+				if ((this._dm_TrademarkMoney != value))
+				{
+					this._dm_TrademarkMoney = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TMDaiLi", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TMDaiLi
+		{
+			get
+			{
+				return this._dm_TMDaiLi;
+			}
+			set
+			{
+				if ((this._dm_TMDaiLi != value))
+				{
+					this._dm_TMDaiLi = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TMZhiNaJin", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> dm_TMZhiNaJin
+		{
+			get
+			{
+				return this._dm_TMZhiNaJin;
+			}
+			set
+			{
+				if ((this._dm_TMZhiNaJin != value))
+				{
+					this._dm_TMZhiNaJin = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseType", DbType="Int")]
+		public System.Nullable<int> CaseType
+		{
+			get
+			{
+				return this._CaseType;
+			}
+			set
+			{
+				if ((this._CaseType != value))
+				{
+					this._CaseType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CaseNo", DbType="NVarChar(MAX)")]
+		public string CaseNo
+		{
+			get
+			{
+				return this._CaseNo;
+			}
+			set
+			{
+				if ((this._CaseNo != value))
+				{
+					this._CaseNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyNo", DbType="NVarChar(MAX)")]
+		public string ApplyNo
+		{
+			get
+			{
+				return this._ApplyNo;
+			}
+			set
+			{
+				if ((this._ApplyNo != value))
+				{
+					this._ApplyNo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplyName", DbType="NVarChar(MAX)")]
+		public string ApplyName
+		{
+			get
+			{
+				return this._ApplyName;
+			}
+			set
+			{
+				if ((this._ApplyName != value))
+				{
+					this._ApplyName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrademarkIds", DbType="NVarChar(MAX)")]
+		public string TrademarkIds
+		{
+			get
+			{
+				return this._TrademarkIds;
+			}
+			set
+			{
+				if ((this._TrademarkIds != value))
+				{
+					this._TrademarkIds = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_NewTrademarkOrderDetails")]
+	public partial class vw_NewTrademarkOrderDetails
+	{
+		
+		private System.Nullable<int> _i_OrderId;
+		
+		private string _nvc_SBFile;
+		
+		private int _i_TrademarkId;
+		
+		private int _i_Id;
+		
+		private System.Nullable<System.DateTime> _dt_AddTime;
+		
+		private System.Nullable<System.DateTime> _dt_PassTime;
+		
+		private System.Nullable<int> _i_MemberId;
+		
+		private int _i_State;
+		
+		private int _i_IsPayState;
+		
+		private int _i_GuoJiId;
+		
+		private string _nvc_SbRegTime;
+		
+		private string _nvc_ShenQingShu;
+		
+		private string _nvc_WeituoFile;
+		
+		private string _nvc_ZhuTiFile;
+		
+		private string _nvc_SBRegNum;
+		
+		private string _nvc_SBType;
+		
+		private string _nvc_SBRegName;
+		
+		private string _nvc_SBRegEnName;
+		
+		private int _i_ShengDays;
+		
+		private int _i_JiaoFeiType;
+		
+		private string _nvc_SbDaoqiTime;
+		
+		private System.Nullable<int> _i_UserTypeId;
+		
+		public vw_NewTrademarkOrderDetails()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_OrderId", DbType="Int")]
+		public System.Nullable<int> i_OrderId
+		{
+			get
+			{
+				return this._i_OrderId;
+			}
+			set
+			{
+				if ((this._i_OrderId != value))
+				{
+					this._i_OrderId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBFile", DbType="NVarChar(250)")]
+		public string nvc_SBFile
+		{
+			get
+			{
+				return this._nvc_SBFile;
+			}
+			set
+			{
+				if ((this._nvc_SBFile != value))
+				{
+					this._nvc_SBFile = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_TrademarkId", DbType="Int NOT NULL")]
+		public int i_TrademarkId
+		{
+			get
+			{
+				return this._i_TrademarkId;
+			}
+			set
+			{
+				if ((this._i_TrademarkId != value))
+				{
+					this._i_TrademarkId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", DbType="Int NOT NULL")]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this._i_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_AddTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dt_AddTime
+		{
+			get
+			{
+				return this._dt_AddTime;
+			}
+			set
+			{
+				if ((this._dt_AddTime != value))
+				{
+					this._dt_AddTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_PassTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dt_PassTime
+		{
+			get
+			{
+				return this._dt_PassTime;
+			}
+			set
+			{
+				if ((this._dt_PassTime != value))
+				{
+					this._dt_PassTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int")]
+		public System.Nullable<int> i_MemberId
+		{
+			get
+			{
+				return this._i_MemberId;
+			}
+			set
+			{
+				if ((this._i_MemberId != value))
+				{
+					this._i_MemberId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_State", DbType="Int NOT NULL")]
+		public int i_State
+		{
+			get
+			{
+				return this._i_State;
+			}
+			set
+			{
+				if ((this._i_State != value))
+				{
+					this._i_State = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_IsPayState", DbType="Int NOT NULL")]
+		public int i_IsPayState
+		{
+			get
+			{
+				return this._i_IsPayState;
+			}
+			set
+			{
+				if ((this._i_IsPayState != value))
+				{
+					this._i_IsPayState = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_GuoJiId", DbType="Int NOT NULL")]
+		public int i_GuoJiId
+		{
+			get
+			{
+				return this._i_GuoJiId;
+			}
+			set
+			{
+				if ((this._i_GuoJiId != value))
+				{
+					this._i_GuoJiId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SbRegTime", DbType="NVarChar(50)")]
+		public string nvc_SbRegTime
+		{
+			get
+			{
+				return this._nvc_SbRegTime;
+			}
+			set
+			{
+				if ((this._nvc_SbRegTime != value))
+				{
+					this._nvc_SbRegTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_ShenQingShu", DbType="NVarChar(250)")]
+		public string nvc_ShenQingShu
+		{
+			get
+			{
+				return this._nvc_ShenQingShu;
+			}
+			set
+			{
+				if ((this._nvc_ShenQingShu != value))
+				{
+					this._nvc_ShenQingShu = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_WeituoFile", DbType="NVarChar(250)")]
+		public string nvc_WeituoFile
+		{
+			get
+			{
+				return this._nvc_WeituoFile;
+			}
+			set
+			{
+				if ((this._nvc_WeituoFile != value))
+				{
+					this._nvc_WeituoFile = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_ZhuTiFile", DbType="NVarChar(250)")]
+		public string nvc_ZhuTiFile
+		{
+			get
+			{
+				return this._nvc_ZhuTiFile;
+			}
+			set
+			{
+				if ((this._nvc_ZhuTiFile != value))
+				{
+					this._nvc_ZhuTiFile = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegNum", DbType="NVarChar(50)")]
+		public string nvc_SBRegNum
+		{
+			get
+			{
+				return this._nvc_SBRegNum;
+			}
+			set
+			{
+				if ((this._nvc_SBRegNum != value))
+				{
+					this._nvc_SBRegNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBType", DbType="NVarChar(50)")]
+		public string nvc_SBType
+		{
+			get
+			{
+				return this._nvc_SBType;
+			}
+			set
+			{
+				if ((this._nvc_SBType != value))
+				{
+					this._nvc_SBType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegName", DbType="NVarChar(50)")]
+		public string nvc_SBRegName
+		{
+			get
+			{
+				return this._nvc_SBRegName;
+			}
+			set
+			{
+				if ((this._nvc_SBRegName != value))
+				{
+					this._nvc_SBRegName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SBRegEnName", DbType="NVarChar(50)")]
+		public string nvc_SBRegEnName
+		{
+			get
+			{
+				return this._nvc_SBRegEnName;
+			}
+			set
+			{
+				if ((this._nvc_SBRegEnName != value))
+				{
+					this._nvc_SBRegEnName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_ShengDays", DbType="Int NOT NULL")]
+		public int i_ShengDays
+		{
+			get
+			{
+				return this._i_ShengDays;
+			}
+			set
+			{
+				if ((this._i_ShengDays != value))
+				{
+					this._i_ShengDays = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_JiaoFeiType", DbType="Int NOT NULL")]
+		public int i_JiaoFeiType
+		{
+			get
+			{
+				return this._i_JiaoFeiType;
+			}
+			set
+			{
+				if ((this._i_JiaoFeiType != value))
+				{
+					this._i_JiaoFeiType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_SbDaoqiTime", DbType="NVarChar(50)")]
+		public string nvc_SbDaoqiTime
+		{
+			get
+			{
+				return this._nvc_SbDaoqiTime;
+			}
+			set
+			{
+				if ((this._nvc_SbDaoqiTime != value))
+				{
+					this._nvc_SbDaoqiTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_UserTypeId", DbType="Int")]
+		public System.Nullable<int> i_UserTypeId
+		{
+			get
+			{
+				return this._i_UserTypeId;
+			}
+			set
+			{
+				if ((this._i_UserTypeId != value))
+				{
+					this._i_UserTypeId = value;
 				}
 			}
 		}
