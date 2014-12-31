@@ -170,7 +170,7 @@ body {
                 <table><tr><td> <asp:ImageButton ID="ImageButton1" runat="server" 
                         ImageUrl="~/images/user_zl_b6.gif" onclick="ImageButton1_Click"  />    
                         </td>
-                        <td> &nbsp;&nbsp;<a href="trademarkOrder_Info.aspx?order=<%=sbOrderId%>&tIds=<%=tIds %>>">
+                        <td> &nbsp;&nbsp;<a href="trademarkOrder_Info.aspx?order=<%=sbOrderId%>&tIds=<%=tIds %>">
                             <img src="images/user_zl_b7.gif" width="85" height="29" border="0" />
                            </a></td>
                 <td style="width:80px"><a style="display:none" href="user_sblb.aspx"><img src="images/user_zl_b8.gif" width="85" height="29" border="0" /></a>

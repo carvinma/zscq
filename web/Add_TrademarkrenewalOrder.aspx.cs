@@ -393,7 +393,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             tableIndex = 4;
         }
         DocumentBuilder builder = new DocumentBuilder(doc);
-        var orderDetailsList = DALTOD.OrderDetails_Select_OrderId(OrderModer.i_Id);
+        var orderDetailsList = DALTOD.NewOrderDetails_Select_OrderId(OrderModer.i_Id);
         int rownum = 1;
         Aspose.Words.Tables.Table table = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, tableIndex, true);
         foreach (var detail in orderDetailsList)

@@ -85,6 +85,16 @@ namespace zscq.DAL
             return iquery;
         }
         /// <summary>
+        /// 根据订单ID获取订单详情
+        /// </summary>
+        /// <param name="OrderId"></param>
+        /// <returns></returns>
+        public IQueryable<t_NewTrademarkOrderDetails> NewOrderDetails_Select_OrderId(int OrderId)
+        {
+            var iquery = from i in dodc.t_NewTrademarkOrderDetails where i.i_OrderId == OrderId select i;
+            return iquery;
+        }
+        /// <summary>
         /// 根据商标编号ID获取订单详情
         /// </summary>
         /// <param name="OrderId"></param>
