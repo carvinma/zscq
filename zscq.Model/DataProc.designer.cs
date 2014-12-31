@@ -89,6 +89,13 @@ namespace zscq.Model
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid);
 			return ((ISingleResult<pro_Count_OrderStatusResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.pro_Count_TrademarkArea")]
+		public ISingleResult<pro_Count_TrademarkAreaResult> pro_Count_TrademarkArea()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<pro_Count_TrademarkAreaResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class pro_Count_Case_AdminStatusResult
@@ -478,6 +485,50 @@ namespace zscq.Model
 				if ((this._countsRenewal != value))
 				{
 					this._countsRenewal = value;
+				}
+			}
+		}
+	}
+	
+	public partial class pro_Count_TrademarkAreaResult
+	{
+		
+		private string _provinceName;
+		
+		private System.Nullable<int> _counts;
+		
+		public pro_Count_TrademarkAreaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_provinceName", DbType="NVarChar(10)")]
+		public string provinceName
+		{
+			get
+			{
+				return this._provinceName;
+			}
+			set
+			{
+				if ((this._provinceName != value))
+				{
+					this._provinceName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_counts", DbType="Int")]
+		public System.Nullable<int> counts
+		{
+			get
+			{
+				return this._counts;
+			}
+			set
+			{
+				if ((this._counts != value))
+				{
+					this._counts = value;
 				}
 			}
 		}

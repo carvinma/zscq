@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Trademark_Count.aspx.cs" Inherits="Trademark_Count" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Trademark_Count.aspx.cs"
+    Inherits="Trademark_Count" %>
 
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -64,137 +65,133 @@
     <div>
         <h1>
             <span class="action-span"></span><span class="action-span1"><a href="../Shop_Index_Main.aspx">
-                管理中心</a> </span><span id="search_id" class="action-span1">- 商标个人统计 </span>
+                统计管理</a> </span><span id="search_id" class="action-span1">- 商标统计 </span>
             <div style="clear: both">
             </div>
         </h1>
-        <div class="form-div">
-            <table border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td height="28" align="right">
-                        关&nbsp;键&nbsp;词：
-                    </td>
-                    <td class="style1">
-                        <input type="text" id="user_namee" runat="server" name="user_namee" size="12" class="input"
-                            value="" />&nbsp;
-                        <select id="selectt" name="selectt" runat="server">
-                            <option value="0">多字段</option>
-                            <option value="1">会员编号</option>
-                            <option value="2">会员账号</option>
-                            <option value="3">客户姓名</option>
-                            <option value="4">手机号码</option>
-                            <option value="9">积分手机号</option>
-                            <option value="5">电话号码</option>
-                            <option value="6">电子邮箱</option>
-                            <option value="7">QQ/NSN/SKYPE</option>
-                        </select>&nbsp; 等&nbsp;&nbsp;级：<asp:DropDownList ID="ddl_grade" runat="server">
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="28" align="right">
-                        注册时间：
-                    </td>
-                    <td class="style1">
-                        <input name="hot_start_date" type="text" id="hot_start_date" size="10" value='' runat="server"
-                            readonly="readonly" /><input name="selbtn1" type="button" id="selbtn1" onclick="new Calendar().show(form.hot_start_date);"
-                                class="inputcalendarbutton" />&nbsp;至&nbsp;<input name="hot_end_date" type="text"
-                                    id="hot_end_date" size="10" value='' runat="server" readonly="readonly" /><input
-                                        name="selbtn2" type="button" id="selbtn2" onclick="new Calendar().show(form.hot_end_date);"
-                                        class="inputcalendarbutton" />
-                    </td>
-                </tr>
-                <tr style="display:none">
-                    <td height="28" align="right">
-                        国&nbsp;&nbsp;家：
-                    </td>
-                    <td class="style1">
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                            <ContentTemplate>
-                                <asp:DropDownList ID="ddl_country" runat="server">
-                                </asp:DropDownList>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="28" align="right">
-                        &nbsp;&nbsp;
-                    </td>
-                    <td class="style1">
-                        <asp:Button ID="btSelect" runat="server" Text="搜索" class="button" OnClick="btSelect_Click" />
-                    </td>
-                </tr>
-            </table>
-        </div>
         <div class="list-div" id="listDiv">
-            <table cellspacing='1' cellpadding='3'>
+            <table>
                 <tr>
-                    <th width="20%">
-                        会员编号
-                    </th>
-                    <th width="20%">
-                        会员名称
-                    </th>
-                    
-                    <th width="20%">
-                        商标总数
-                    </th>
-                    <th width="20%">
-                        常用申请人商标
-                    </th>
-                </tr>
-                <asp:Repeater ID="rept_list" runat="server" 
-                    onitemdatabound="rept_list_ItemDataBound">
-                    <ItemTemplate>
-                        <tr>
-                            <td align="center">
-                                <asp:HiddenField ID="Hi_Id" runat="server" Value='<%#Eval("i_Id") %>' />
-                                <%#Eval("nvc_UserNum") %>
-                            </td>
-                            <td align="center">
-                                <%#Eval("nvc_Name")%>
-                            </td>
-                            <td align="center">
-                                <%#GetPatentCountById(Eval("i_Id"))%>
-                            </td>
-                            <td align="center">
-                                <table cellspacing='1'>
-                                    <asp:Repeater ID="rept_list1" runat="server">
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td width="50%" align="right">
-                                                   <%#Eval("ApplyName")%>：
-                                                    &nbsp; 
-                                                </td>
-                                                <td align="left">
-                                                  <%# int.Parse(Eval("countsApply").ToString()) + int.Parse(Eval("countsRenewal").ToString())%>个
-                                                </td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </table>
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </table>
-        </div>
-        <div style="text-align: center">
-            <table class="pager" border="0" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td>
-                        <asp:Label ID="Lb_sum" runat="server"></asp:Label>&nbsp;<b style="color: Red;">20</b><asp:Label
-                            ID="Label1" runat="server" Text="条/页"></asp:Label>
-                        &nbsp;<asp:Label ID="Lb_ye" runat="server"></asp:Label>&nbsp;
+                    <td valign="top" width="50%">
+                         <table cellspacing='1' cellpadding='3'>
+                            <tr>
+                                <th width="20%">
+                                    申请案状态
+                                </th>
+                                <th width="20%">
+                                    商标个数
+                                </th>
+                            </tr>
+                            <asp:Repeater ID="rptApply" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td align="center">
+                                            <%#Eval("StatusName")%>
+                                        </td>
+                                        <td align="center">
+                                            <%#Eval("counts")%>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </table>
+                         <table cellspacing='1' cellpadding='3'>
+                            <tr>
+                                <th width="20%">
+                                    订单状态
+                                </th>
+                                <th width="20%">
+                                    商标个数
+                                </th>
+                            </tr>
+                            <asp:Repeater ID="rptOrder" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td align="center">
+                                            <%#Eval("StatusName")%>
+                                        </td>
+                                        <td align="center">
+                                            <%# int.Parse(Eval("countsApply").ToString()) + int.Parse(Eval("countsRenewal").ToString())%>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </table>
                     </td>
-                    <webdiyer:AspNetPager NumericButtonCount="7" ID="aspPage" ShowPageIndexBox="Never"
-                        runat="server" ShowFirstLast="true" FirstPageText="首页" LastPageText="末页" PrevPageText="上一页"
-                        NextPageText="下一页" ShowInputBox="Always" OnPageChanged="aspPage_PageChanged"
-                        PageSize="20" SubmitButtonText="GO" TextAfterInputBox=" " SubmitButtonClass="button"
-                        ShowDisabledButtons="False">
-                    </webdiyer:AspNetPager>
+                    <td valign="top">
+                        <table cellspacing='1' cellpadding='3'>
+                            <tr>
+                                <th width="20%">
+                                    续展案状态
+                                </th>
+                                <th width="20%">
+                                    商标个数
+                                </th>
+                            </tr>
+                            <asp:Repeater ID="rptRenewal" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td align="center">
+                                            <%#Eval("StatusName")%>
+                                        </td>
+                                        <td align="center">
+                                            <%#Eval("counts")%>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </table>
+                    </td>
                 </tr>
+                <tr><td valign="top">
+                  <table cellspacing='1' cellpadding='3'>
+                            <tr>
+                                <th width="20%">
+                                    商品大类
+                                </th>
+                                <th width="20%">
+                                    商标个数
+                                </th>
+                            </tr>
+                            <asp:Repeater ID="rptType" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td align="center">
+                                            类别（<%#Eval("CategoryCode")%>）
+                                        </td>
+                                        <td align="center">
+                                            <%# int.Parse(Eval("countsApply").ToString()) + int.Parse(Eval("countsRenewal").ToString())%>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </table>
+                </td>
+                <td valign="top">
+                    <table cellspacing='1' cellpadding='3'>
+                            <tr>
+                                <th width="20%">
+                                    省份
+                                </th>
+                                <th width="20%">
+                                    商标个数
+                                </th>
+                            </tr>
+                            <asp:Repeater ID="rptArea" runat="server">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td align="center">
+                                            <%#Eval("provinceName")%>
+                                        </td>
+                                        <td align="center">
+                                            <%#Eval("counts")%>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </table>
+                </td></tr>
+                <tr><td height="18px" colspan="2"></td></tr>
             </table>
         </div>
     </div>
