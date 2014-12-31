@@ -133,104 +133,114 @@ namespace zscq.DAL
         public IQueryable<vw_NewTradeMark> Trademark_web_SelectPage(int PageIndex, int PageSize,
             int userid, int i_type, int? applyType,
             string ByCaseNo, string ByName, string Bytype, string ByStatus,string ByApplyNo, 
-            string qCaseNo,string qName, int? qStatus, ref int count,QueryModel queryModel)
+            string qCaseNo,string qName, int? qStatus, ref int count,QueryModel queryModel,string tids="")
         {
-            Expression<Func<vw_NewTradeMark, bool>> WhereExpr = PredicateExtensions.True<vw_NewTradeMark>();
-            WhereExpr = WhereExpr.And(a => a.i_MemberId == userid);
-            WhereExpr = WhereExpr.And(a => a.i_Type == i_type);
-            if (applyType.HasValue)
-                WhereExpr = WhereExpr.And(a => a.ApplyType == applyType.Value);
-            if(!string.IsNullOrEmpty(qCaseNo))
-                WhereExpr = WhereExpr.And(a => a.CaseNo.Contains(qCaseNo));
-            if (!string.IsNullOrEmpty(qName))
-                WhereExpr = WhereExpr.And(a => a.ApplyName.Contains(qName));
-            if (qStatus.HasValue)
-                WhereExpr = WhereExpr.And(a => a.Status == qStatus.Value);
-
-            #region 检索页面查询
-            if (queryModel != null)
+            if (!string.IsNullOrEmpty(tids)) //案件统计
             {
-                if (!string.IsNullOrEmpty(queryModel.qtmcaseno))
-                    WhereExpr = WhereExpr.And(a => a.CaseNo.Contains(queryModel.qtmcaseno));
-                if (!string.IsNullOrEmpty(queryModel.qtmtype))
-                    WhereExpr = WhereExpr.And(a => a.TrademarkType.Split(',').Contains(queryModel.qtmtype));
-                if (!string.IsNullOrEmpty(queryModel.qtmapplyname))
-                    WhereExpr = WhereExpr.And(a => a.ApplyName.Contains(queryModel.qtmapplyname));
-                if (!string.IsNullOrEmpty(queryModel.qtmmemberno))
-                    WhereExpr = WhereExpr.And(a => a.nvc_UserNum.Contains(queryModel.qtmmemberno));
-                if (!string.IsNullOrEmpty(queryModel.qtmmembername))
-                    WhereExpr = WhereExpr.And(a => a.nvc_UserNum.Contains(queryModel.qtmmembername));
-
-                if (!string.IsNullOrEmpty(queryModel.qtmprovinceid))
-                    WhereExpr = WhereExpr.And(a => a.ProvinceId.ToString() == queryModel.qtmprovinceid);
-                if (!string.IsNullOrEmpty(queryModel.qtmcityid))
-                    WhereExpr = WhereExpr.And(a => a.CityId.ToString() == queryModel.qtmcityid);
-                if (!string.IsNullOrEmpty(queryModel.qtmareaid))
-                    WhereExpr = WhereExpr.And(a => a.AreaId.ToString() == queryModel.qtmareaid);
-                if (!string.IsNullOrEmpty(queryModel.qtmaddress))
-                    WhereExpr = WhereExpr.And(a => a.Address.Contains(queryModel.qtmaddress));
-
-                if (!string.IsNullOrEmpty(queryModel.qtmcontactPerson))
-                    WhereExpr = WhereExpr.And(a => a.ContactPerson.Contains(queryModel.qtmcontactPerson));
-                if (!string.IsNullOrEmpty(queryModel.qtmphone))
-                    WhereExpr = WhereExpr.And(a => a.Phone.Contains(queryModel.qtmphone));
-                if (!string.IsNullOrEmpty(queryModel.qtmapplyno))
-                    WhereExpr = WhereExpr.And(a => a.RegisteredNo.Contains(queryModel.qtmapplyno));
-                if (!string.IsNullOrEmpty(queryModel.qtmtradmemarkRemark))
-                    WhereExpr = WhereExpr.And(a => a.TrademarkRemark.Contains(queryModel.qtmtradmemarkRemark));
-
-                if (!string.IsNullOrEmpty(queryModel.qtmis3D))
-                    WhereExpr = WhereExpr.And(a => a.Is3D == (queryModel.qtmis3D == "1" ? true : false));
-                if (!string.IsNullOrEmpty(queryModel.qtmisColor))
-                    WhereExpr = WhereExpr.And(a => a.IsColor == (queryModel.qtmisColor == "1" ? true : false));
-                if (!string.IsNullOrEmpty(queryModel.qtmisSound))
-                    WhereExpr = WhereExpr.And(a => a.IsSound == (queryModel.qtmisSound == "1" ? true : false));
-
-                if (!string.IsNullOrEmpty(queryModel.qtmapplydate))
-                    WhereExpr = WhereExpr.And(a => a.ApplyDate == DateTime.Parse(queryModel.qtmapplydate));
-                if (!string.IsNullOrEmpty(queryModel.qtmpublicDate))
-                    WhereExpr = WhereExpr.And(a => a.PublicPreliminaryDate == DateTime.Parse(queryModel.qtmpublicDate));
-
-                if (!string.IsNullOrEmpty(queryModel.qtmRegNoticeBeginDate))
-                    WhereExpr = WhereExpr.And(a => a.RegNoticeDate >= DateTime.Parse(queryModel.qtmRegNoticeBeginDate));
-                if (!string.IsNullOrEmpty(queryModel.qtmRegNoticeEndDate))
-                    WhereExpr = WhereExpr.And(a => a.RegNoticeDate <= DateTime.Parse(queryModel.qtmRegNoticeEndDate));
-                if (!string.IsNullOrEmpty(queryModel.qtmRenewalBeginDate))
-                    WhereExpr = WhereExpr.And(a => a.RenewalDate >= DateTime.Parse(queryModel.qtmRenewalBeginDate));
-                if (!string.IsNullOrEmpty(queryModel.qtmRenewalEndDate))
-                    WhereExpr = WhereExpr.And(a => a.RenewalDate <= DateTime.Parse(queryModel.qtmRenewalEndDate));
-
-                if (!string.IsNullOrEmpty(queryModel.qtmrestDays))
-                    WhereExpr = WhereExpr.And(a => a.RestDays <= int.Parse(queryModel.qtmrestDays));
-                if (!string.IsNullOrEmpty(queryModel.qtmadminStatus))
-                    WhereExpr = WhereExpr.And(a => a.AdminStatus == int.Parse(queryModel.qtmadminStatus));
+                string[] ids=tids.Split(',');
+                var sortedList = mark.vw_NewTradeMark.Where(p=>ids.Contains(p.i_Id.ToString());
+                count = sortedList.Count();
+                return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
             }
-            WhereExpr = WhereExpr.And(a => a.IsShow==true);
-            #endregion
-            var sortedList = mark.vw_NewTradeMark.Where(WhereExpr);
-            if (!string.IsNullOrEmpty(ByCaseNo))
+            else
             {
-                sortedList=ByCaseNo == "desc" ? sortedList.OrderByDescending(p => p.CaseNo):sortedList.OrderBy(p => p.CaseNo);
+                Expression<Func<vw_NewTradeMark, bool>> WhereExpr = PredicateExtensions.True<vw_NewTradeMark>();
+                WhereExpr = WhereExpr.And(a => a.i_MemberId == userid);
+                WhereExpr = WhereExpr.And(a => a.i_Type == i_type);
+                if (applyType.HasValue)
+                    WhereExpr = WhereExpr.And(a => a.ApplyType == applyType.Value);
+                if (!string.IsNullOrEmpty(qCaseNo))
+                    WhereExpr = WhereExpr.And(a => a.CaseNo.Contains(qCaseNo));
+                if (!string.IsNullOrEmpty(qName))
+                    WhereExpr = WhereExpr.And(a => a.ApplyName.Contains(qName));
+                if (qStatus.HasValue)
+                    WhereExpr = WhereExpr.And(a => a.Status == qStatus.Value);
+
+                #region 检索页面查询
+                if (queryModel != null)
+                {
+                    if (!string.IsNullOrEmpty(queryModel.qtmcaseno))
+                        WhereExpr = WhereExpr.And(a => a.CaseNo.Contains(queryModel.qtmcaseno));
+                    if (!string.IsNullOrEmpty(queryModel.qtmtype))
+                        WhereExpr = WhereExpr.And(a => a.TrademarkType.Split(',').Contains(queryModel.qtmtype));
+                    if (!string.IsNullOrEmpty(queryModel.qtmapplyname))
+                        WhereExpr = WhereExpr.And(a => a.ApplyName.Contains(queryModel.qtmapplyname));
+                    if (!string.IsNullOrEmpty(queryModel.qtmmemberno))
+                        WhereExpr = WhereExpr.And(a => a.nvc_UserNum.Contains(queryModel.qtmmemberno));
+                    if (!string.IsNullOrEmpty(queryModel.qtmmembername))
+                        WhereExpr = WhereExpr.And(a => a.nvc_UserNum.Contains(queryModel.qtmmembername));
+
+                    if (!string.IsNullOrEmpty(queryModel.qtmprovinceid))
+                        WhereExpr = WhereExpr.And(a => a.ProvinceId.ToString() == queryModel.qtmprovinceid);
+                    if (!string.IsNullOrEmpty(queryModel.qtmcityid))
+                        WhereExpr = WhereExpr.And(a => a.CityId.ToString() == queryModel.qtmcityid);
+                    if (!string.IsNullOrEmpty(queryModel.qtmareaid))
+                        WhereExpr = WhereExpr.And(a => a.AreaId.ToString() == queryModel.qtmareaid);
+                    if (!string.IsNullOrEmpty(queryModel.qtmaddress))
+                        WhereExpr = WhereExpr.And(a => a.Address.Contains(queryModel.qtmaddress));
+
+                    if (!string.IsNullOrEmpty(queryModel.qtmcontactPerson))
+                        WhereExpr = WhereExpr.And(a => a.ContactPerson.Contains(queryModel.qtmcontactPerson));
+                    if (!string.IsNullOrEmpty(queryModel.qtmphone))
+                        WhereExpr = WhereExpr.And(a => a.Phone.Contains(queryModel.qtmphone));
+                    if (!string.IsNullOrEmpty(queryModel.qtmapplyno))
+                        WhereExpr = WhereExpr.And(a => a.RegisteredNo.Contains(queryModel.qtmapplyno));
+                    if (!string.IsNullOrEmpty(queryModel.qtmtradmemarkRemark))
+                        WhereExpr = WhereExpr.And(a => a.TrademarkRemark.Contains(queryModel.qtmtradmemarkRemark));
+
+                    if (!string.IsNullOrEmpty(queryModel.qtmis3D))
+                        WhereExpr = WhereExpr.And(a => a.Is3D == (queryModel.qtmis3D == "1" ? true : false));
+                    if (!string.IsNullOrEmpty(queryModel.qtmisColor))
+                        WhereExpr = WhereExpr.And(a => a.IsColor == (queryModel.qtmisColor == "1" ? true : false));
+                    if (!string.IsNullOrEmpty(queryModel.qtmisSound))
+                        WhereExpr = WhereExpr.And(a => a.IsSound == (queryModel.qtmisSound == "1" ? true : false));
+
+                    if (!string.IsNullOrEmpty(queryModel.qtmapplydate))
+                        WhereExpr = WhereExpr.And(a => a.ApplyDate == DateTime.Parse(queryModel.qtmapplydate));
+                    if (!string.IsNullOrEmpty(queryModel.qtmpublicDate))
+                        WhereExpr = WhereExpr.And(a => a.PublicPreliminaryDate == DateTime.Parse(queryModel.qtmpublicDate));
+
+                    if (!string.IsNullOrEmpty(queryModel.qtmRegNoticeBeginDate))
+                        WhereExpr = WhereExpr.And(a => a.RegNoticeDate >= DateTime.Parse(queryModel.qtmRegNoticeBeginDate));
+                    if (!string.IsNullOrEmpty(queryModel.qtmRegNoticeEndDate))
+                        WhereExpr = WhereExpr.And(a => a.RegNoticeDate <= DateTime.Parse(queryModel.qtmRegNoticeEndDate));
+                    if (!string.IsNullOrEmpty(queryModel.qtmRenewalBeginDate))
+                        WhereExpr = WhereExpr.And(a => a.RenewalDate >= DateTime.Parse(queryModel.qtmRenewalBeginDate));
+                    if (!string.IsNullOrEmpty(queryModel.qtmRenewalEndDate))
+                        WhereExpr = WhereExpr.And(a => a.RenewalDate <= DateTime.Parse(queryModel.qtmRenewalEndDate));
+
+                    if (!string.IsNullOrEmpty(queryModel.qtmrestDays))
+                        WhereExpr = WhereExpr.And(a => a.RestDays <= int.Parse(queryModel.qtmrestDays));
+                    if (!string.IsNullOrEmpty(queryModel.qtmadminStatus))
+                        WhereExpr = WhereExpr.And(a => a.AdminStatus == int.Parse(queryModel.qtmadminStatus));
+                }
+                WhereExpr = WhereExpr.And(a => a.IsShow == true);
+                #endregion
+                var sortedList = mark.vw_NewTradeMark.Where(WhereExpr);
+                if (!string.IsNullOrEmpty(ByCaseNo))
+                {
+                    sortedList = ByCaseNo == "desc" ? sortedList.OrderByDescending(p => p.CaseNo) : sortedList.OrderBy(p => p.CaseNo);
+                }
+                if (!string.IsNullOrEmpty(ByName))
+                {
+                    sortedList = ByName == "desc" ? sortedList.OrderByDescending(p => p.ApplyName) : sortedList.OrderBy(p => p.ApplyName);
+                }
+                if (!string.IsNullOrEmpty(Bytype))
+                {
+                    sortedList = Bytype == "desc" ? sortedList.OrderByDescending(p => p.ApplyType) : sortedList.OrderBy(p => p.ApplyType);
+                }
+                if (!string.IsNullOrEmpty(ByStatus))
+                {
+                    sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.Status) : sortedList.OrderBy(p => p.Status);
+                }
+                if (!string.IsNullOrEmpty(ByApplyNo))
+                {
+                    sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.RegisteredNo) : sortedList.OrderBy(p => p.RegisteredNo);
+                }
+                sortedList = sortedList.OrderByDescending(p => p.i_Id);
+                count = sortedList.Count();
+                return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
             }
-            if (!string.IsNullOrEmpty(ByName))
-            {
-                sortedList=ByName == "desc" ? sortedList.OrderByDescending(p => p.ApplyName):sortedList.OrderBy(p => p.ApplyName);
-            }
-            if (!string.IsNullOrEmpty(Bytype))
-            {
-                sortedList=Bytype == "desc" ? sortedList.OrderByDescending(p => p.ApplyType):sortedList.OrderBy(p => p.ApplyType);
-            }
-            if (!string.IsNullOrEmpty(ByStatus))
-            {
-                sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.Status) : sortedList.OrderBy(p => p.Status);
-            }
-            if (!string.IsNullOrEmpty(ByApplyNo))
-            {
-                sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.RegisteredNo) : sortedList.OrderBy(p => p.RegisteredNo);
-            }
-            sortedList = sortedList.OrderByDescending(p => p.i_Id);
-            count = sortedList.Count();
-            return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
         }
 
         /// <summary>

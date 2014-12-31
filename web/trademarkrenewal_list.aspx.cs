@@ -20,9 +20,9 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
     public string returnurl = "";
     public string sb_type = "", days = "", uname = "", uaddress = "", sb_guoji = "0", sb_num = "", sb_regname = "", sb_passtime = "", utel = "", c_anjuanhao = "";
 
-    public string ByCaseNo, ByName, Bytype, ByTime,ByApplyNo;
+    public string ByCaseNo, ByName, Bytype, ByTime, ByApplyNo;
     public int? applyType;
-    public string qCaseNo,qApplyNo, qName;
+    public string qCaseNo, qApplyNo, qName;
     QueryModel querymodel = new QueryModel();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -231,7 +231,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         }
         return returnurl;
     }
-    
+
     private void Bind_Rpt_Trademark()//绑定列表
     {
         if (UserId != 0)
@@ -244,8 +244,10 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
             this.qName = this.txtApplyUser.Text.Trim();
             if (!string.IsNullOrEmpty(this.ddlApplyType.SelectedValue))
                 this.applyType = int.Parse(this.ddlApplyType.SelectedValue);
-
-            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, 1, applyType, ByCaseNo, ByName, Bytype, ByTime, ByApplyNo, qCaseNo, qApplyNo, qName, this.Stime, ref Ccount,querymodel);
+            if (!string.IsNullOrEmpty(Request.QueryString["tids"]) && !IsPostBack) //案件充充
+            { }
+            else
+                this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, 1, applyType, ByCaseNo, ByName, Bytype, ByTime, ByApplyNo, qCaseNo, qApplyNo, qName, this.Stime, ref Ccount, querymodel);
             this.Rp_sb_list.DataBind();
             AspNetPager1.RecordCount = Ccount;
             AspNetPager1.PageSize = PageSize;
@@ -258,7 +260,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         if (UserId != 0)
         {
             int Ccount = 0;
-            this.rptPrint.DataSource = mark.Trademark_web_SelectPage(1, int.MaxValue-1, UserId, 1, null, "", "", "", "", "", "", "", "", "", ref Ccount, null);
+            this.rptPrint.DataSource = mark.Trademark_web_SelectPage(1, int.MaxValue - 1, UserId, 1, null, "", "", "", "", "", "", "", "", "", ref Ccount, null);
             this.rptPrint.DataBind();
         }
     }
@@ -360,7 +362,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
     }
     private void toExecl(GridView GVId)
     {
-        string style = @"<style> .text { mso-number-format:\@; } </script> "; 
+        string style = @"<style> .text { mso-number-format:\@; } </script> ";
         DateTime dt = DateTime.Now;
         Response.Clear();
         Response.Buffer = true;
@@ -374,7 +376,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         System.IO.StringWriter oStringWriter = new System.IO.StringWriter();
         System.Web.UI.HtmlTextWriter oHtmlTextWriter = new System.Web.UI.HtmlTextWriter(oStringWriter);
         GVId.RenderControl(oHtmlTextWriter);
-        Response.Write(style); 
+        Response.Write(style);
         Response.Output.Write(oStringWriter.ToString());
         Response.Flush();
         Response.End();
@@ -427,7 +429,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
                 GridView1.DataSource = null;
                 GridView1.DataBind();
             }
-        }      
+        }
     }
     protected void btnQuery_Click(object sender, EventArgs e)
     {

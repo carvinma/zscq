@@ -138,7 +138,7 @@
                                                                         <%# Eval("StatusName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline">
-                                                                      &nbsp;&nbsp; <a href="trademark_list.aspx?t_r_id=<%# Eval("tids") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="1" ? "font-weight: bold;color: #ff0510;":""%>'>
+                                                                      &nbsp;&nbsp; <a href="trademark_list.aspx?tids=<%# Eval("tids") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="1" ? "font-weight: bold;color: #ff0510;":""%>'>
                                                                             <%# Eval("counts")%>个</a>
                                                                     </td>
                                                                 </tr>
@@ -199,7 +199,7 @@
                                                                         <%# Eval("StatusName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline" >
-                                                                      &nbsp;&nbsp; <a href="trademark_list.aspx?t_r_id=<%# Eval("tids") %>" class="ac_hei" style='<%#RenewalStyle(Eval("StatusValue"))%>'>
+                                                                      &nbsp;&nbsp; <a href="trademark_list.aspx?tids=<%# Eval("tids") %>" class="ac_hei" style='<%#RenewalStyle(Eval("StatusValue"))%>'>
                                                                             <%# Eval("counts")%>个</a>
                                                                     </td>
                                                                 </tr>
@@ -260,9 +260,9 @@
                                                                        <%# Eval("StatusName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
-                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsApply") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
+                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
                                                                             <%# Eval("countsApply")%>个</a>
-                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsRenewal") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
+                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
                                                                             <%# Eval("countsRenewal")%>个</a>
                                                                     </td>
                                                                 </tr>
@@ -313,9 +313,9 @@
                                                                         类别（<%# Eval("CategoryCode")%>）：
                                                                     </td>
                                                                     <td width="285" class="user_rightline">
-                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsApply") %>" class="ac_hei">
+                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei">
                                                                             <%# Eval("countsApply")%>个</a>
-                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsRenewal") %>" class="ac_hei">
+                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei">
                                                                             <%# Eval("countsRenewal")%>个</a>
                                                                     </td>
                                                                 </tr>
@@ -364,9 +364,9 @@
                                                                         <%# Eval("ApplyName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline">
-                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsApply") %>" class="ac_hei">
+                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei">
                                                                             <%# Eval("countsApply")%>个</a>
-                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?t_r_id=<%# Eval("tidsRenewal") %>" class="ac_hei">
+                                                                            &nbsp;&nbsp;续展案：<a href="trademark_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei">
                                                                             <%# Eval("countsRenewal")%>个</a>
                                                                     </td>
                                                                 </tr>

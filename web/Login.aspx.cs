@@ -78,7 +78,7 @@ public partial class Login : System.Web.UI.Page
             {
                 if (flag == "sb")
                 {
-                    Response.Redirect("user_sbtj.aspx");
+                    Response.Redirect("trademark_count.aspx");
                 }
             }
 
