@@ -188,11 +188,11 @@
                 <%if (flag[22][0].ToString() == "1")
                   { %>
                 <li class="menu-item">&nbsp;<a href="NewManage/Q_TrademarkOrder.aspx.aspx?Status=0" target="main">全部订单</a></li>
-                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=1" target="main">待付款订单</a></li>
+             <%--   <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=1" target="main">待付款订单</a></li>
                 <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=2" target="main">已付款订单</a></li>
                 <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=3" target="main">已审核</a></li>
                 <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=4" target="main">已完成订单</a></li>
-                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=5" target="main">无效订单</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=5" target="main">无效订单</a></li>--%>
                 <%} %>
               </ul>
             </li>
