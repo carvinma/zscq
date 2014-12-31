@@ -316,7 +316,7 @@ public partial class trademark_list : System.Web.UI.Page
         if (UserId != 0)
         {
             int Ccount = 0;
-            this.rptPrint.DataSource = mark.Trademark_web_SelectPage(1, int.MaxValue - 1, UserId, 0, null, "", "", "", "", "", "", "", null, ref Ccount, null);
+            this.rptPrint.DataSource = mark.Trademark_web_SelectPage(1, int.MaxValue - 1, UserId, 0, null, "", "", "", "", "", "", "", null, ref Ccount, null,"");
             this.rptPrint.DataBind();
         }
     }
