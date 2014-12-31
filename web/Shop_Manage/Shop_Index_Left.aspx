@@ -135,6 +135,7 @@
               </ul>
             </li>
             <%} %>
+          
           </ul>
         </li>
         <li class="explode" key="zl_5" name="menu">&nbsp;商标申请系统
@@ -196,6 +197,16 @@
               </ul>
             </li>
             <%} %>
+              <li class="explode menu-item1" key="zl_2_4" name="menu1">统计管理
+             <ul>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=0" target="main">商标统计</a></li>
+                <li class="menu-item">&nbsp;<a href="NewManage/Trademark_ApplyCount.aspx" target="main">商标个人统计</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=2" target="main">已付款订单</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=3" target="main">已审核</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=4" target="main">已完成订单</a></li>
+                <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=5" target="main">无效订单</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li class="explode" key="zl_3" name="menu">&nbsp;积分商城系统
