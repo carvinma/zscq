@@ -56,7 +56,7 @@ public partial class trademarkOrder_list : System.Web.UI.Page
         if (!string.IsNullOrEmpty(Request.QueryString["order"]) && !string.IsNullOrEmpty(Request.QueryString["tIds"]))
         { 
             int orderid = int.Parse(Request.QueryString["order"].ToString());
-            t_TrademarkOrder order = DALTO.TrademarkOrder_Select_Id(orderid);
+            t_NewTrademarkOrder order = DALTO.NewTrademarkOrder_Select_Id(orderid);
             if (order != null)
             {
                 order.i_Status = 3;//已取消

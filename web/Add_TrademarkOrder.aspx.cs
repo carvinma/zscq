@@ -78,7 +78,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             var iquery = mark.Trademark_web_Excel(arr_pid);
             sbnum = iquery.Count();
             #region 生成订单
-            t_TrademarkOrder OrderModer = new t_TrademarkOrder();
+            t_NewTrademarkOrder OrderModer = new t_NewTrademarkOrder();
             OrderModer.nvc_OrderNumber = DALTO.Set_OrderNo();
             OrderModer.dm_TrademarkMoney = iquery.Sum(p => p.TrademarkMoney); //商标金额
             OrderModer.dm_TMZhiNaJin = iquery.Sum(p => p.TrademarkLateFee);//滞纳金
@@ -224,7 +224,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             {
                 #region 生成订单详情
                 int trademarkid = model.i_Id;
-                t_TrademarkOrderDetails dModer = new t_TrademarkOrderDetails();
+                t_NewTrademarkOrderDetails dModer = new t_NewTrademarkOrderDetails();
                 dModer.i_OrderId = OrderModer.i_Id;
                 dModer.i_TrademarkId = trademarkid; //nvc_SBRegNum
                 dModer.nvc_SBRegNum = model.RegisteredNo; //申请-商标注册号为空 续展-商标注册号
@@ -309,7 +309,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     }
 
     #region 生成帐单
-    private void CreateWordToPDF_Total(t_TrademarkOrder OrderModer)
+    private void CreateWordToPDF_Total(t_NewTrademarkOrder OrderModer)
     {
 
         #region  生成总帐单
@@ -422,7 +422,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
 
     }
 
-    private void CreateWordToPDF_Detail(t_TrademarkOrder OrderModer, IQueryable<t_NewTradeMarkInfo> listMark)
+    private void CreateWordToPDF_Detail(t_NewTrademarkOrder OrderModer, IQueryable<t_NewTradeMarkInfo> listMark)
     {
         #region  生成分帐单
         int orderRank = 1;

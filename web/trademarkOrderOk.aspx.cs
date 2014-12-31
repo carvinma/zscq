@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Text;
 using zscq.DAL;
 using zscq.Model;
+using zscq.BLL;
 
 public partial class trademarkOrderOk : System.Web.UI.Page
 {
@@ -34,7 +35,7 @@ public partial class trademarkOrderOk : System.Web.UI.Page
             {
 
                 uId = Convert.ToInt32(Request.Cookies["hqhtshop"]["hqht_Sb_uid"]);
-                t_TrademarkOrder order = DALTO.TrademarkOrder_Select_Id(orderid);
+                t_NewTrademarkOrder order = DALTO.NewTrademarkOrder_Select_Id(orderid);
                 t_Member user = DALM.Member_Select_Id(order.i_MemberId);
                 if (order != null)
                 {
@@ -86,9 +87,12 @@ public partial class trademarkOrderOk : System.Web.UI.Page
             }
         }
     }
-    public string ConvertStatus(object obj)
+    public string ConvertStatus(object applyStatus)
     {
-        return DALTO.Set_TrademarkOrderState(obj);
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkOrderStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
+       // return DALTO.Set_TrademarkOrderState(obj);
     }
     public string GetGuojiName(int id)// 获得国籍
     {

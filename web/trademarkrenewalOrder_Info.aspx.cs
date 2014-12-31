@@ -53,7 +53,7 @@ public partial class trademarkrenewalOrder_Info : System.Web.UI.Page
             int orderid = int.Parse(Request.QueryString["order"].ToString());
             HF_oId.Value = orderid.ToString();
             Orderid = orderid.ToString();
-            var iquery = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderid);
+           // var iquery = new dal_TrademarkOrderDetails().NewOrderDetails_vw_Select_OrderId(orderid);
 
             #region 案件
             TrademarkIds = Request.QueryString["tIds"];
@@ -64,7 +64,7 @@ public partial class trademarkrenewalOrder_Info : System.Web.UI.Page
             rp_trademark.DataBind();
             #endregion
 
-            t_TrademarkOrder order = DALTO.TrademarkOrder_Select_Id(orderid);
+            t_NewTrademarkOrder order = DALTO.NewTrademarkOrder_Select_Id(orderid);
             t_Member user = DALM.Member_Select_Id(order.i_MemberId);
             if (order != null)
             {

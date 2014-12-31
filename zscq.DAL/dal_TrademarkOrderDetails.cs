@@ -33,6 +33,25 @@ namespace zscq.DAL
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 添加订单详情
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public int OrderDetails_Add(t_NewTrademarkOrderDetails model)
+        {
+            try
+            {
+                dodc.t_NewTrademarkOrderDetails.InsertOnSubmit(model);
+                dodc.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         /// <summary>
         /// 修改订单ID退货用到
         /// </summary>
@@ -83,6 +102,16 @@ namespace zscq.DAL
         public IQueryable<vw_TrademarkOrderDetails> OrderDetails_vw_Select_OrderId(int orderID)
         {
             var data = from i in dvdc.vw_TrademarkOrderDetails where i.i_OrderId == orderID select i;
+            return data;
+        }
+        /// <summary>
+        /// 根据订单ID获取订单该订单下的所有商品详细
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <returns></returns>
+        public IQueryable<vw_NewTrademarkOrderDetails> NewOrderDetails_vw_Select_OrderId(int orderID)
+        {
+            var data = from i in dvdc.vw_NewTrademarkOrderDetails where i.i_OrderId == orderID select i;
             return data;
         }
         /// <summary>

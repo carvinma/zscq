@@ -54,7 +54,7 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
             int orderid = int.Parse(Request.QueryString["order"].ToString());
             HF_oId.Value = orderid.ToString();
             Orderid = orderid.ToString();
-            var iquery = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderid);
+            //var iquery = new dal_TrademarkOrderDetails().NewOrderDetails_vw_Select_OrderId(orderid);
 
             #region 案件
             TrademarkIds = Request.QueryString["tIds"];
@@ -65,7 +65,7 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
             rp_trademark.DataBind();
             #endregion
 
-            t_TrademarkOrder order = DALTO.TrademarkOrder_Select_Id(orderid);
+            t_NewTrademarkOrder order = DALTO.NewTrademarkOrder_Select_Id(orderid);
             t_Member user = DALM.Member_Select_Id(order.i_MemberId);
             if (order != null)
             {
@@ -111,23 +111,23 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
                 UserNum = user.nvc_UserNum;
                 UserName = user.nvc_Name;
             }
-            int sbnum = 0, sbdailinum = 0;
-            foreach (var item in iquery)
-            {
-                t_Trademark model = DALT.Trademark_Select_Id(item.i_TrademarkId); ;
-                if (model != null)
-                {
-                    sbnum += 1;
-                    if (model.i_JiaoFeiType == 2)
-                    {
-                        sbdailinum += 1;
-                        if (model.i_ShengDays < 0)
-                        {
-                            zhinajinnum += 1;
-                        }
-                    }
-                }
-            }
+           // int sbnum = 0, sbdailinum = 0;
+            //foreach (var item in iquery)
+            //{
+            //    t_Trademark model = DALT.Trademark_Select_Id(item.i_TrademarkId); ;
+            //    if (model != null)
+            //    {
+            //        sbnum += 1;
+            //        if (model.i_JiaoFeiType == 2)
+            //        {
+            //            sbdailinum += 1;
+            //            if (model.i_ShengDays < 0)
+            //            {
+            //                zhinajinnum += 1;
+            //            }
+            //        }
+            //    }
+            //}
             t_TradeMarkSetup model1 = DALTS.TrademarkSetup_Select();//代理费用
             t_Member mm = DALM.Member_Select_Id(uId);
 

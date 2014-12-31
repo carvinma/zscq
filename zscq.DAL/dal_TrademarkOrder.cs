@@ -33,6 +33,25 @@ namespace zscq.DAL
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 插入广告订单表
+        /// </summary>
+        /// <param name="AdvTypeModel"></param>
+        /// <returns></returns>
+        public int TrademarkOrder_Add(t_NewTrademarkOrder model)
+        {
+            try
+            {
+                dsdc.t_NewTrademarkOrder.InsertOnSubmit(model);
+                dsdc.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         /// <summary>
         /// 删除指定广告订单
         /// </summary>
@@ -70,7 +89,24 @@ namespace zscq.DAL
                 return 0;
             }
         }
-
+        /// <summary>
+        /// 更新订单
+        /// </summary>
+        /// <param name="AdvModel"></param>
+        /// <returns></returns>
+        public int TrademarkOrder_Update(t_NewTrademarkOrder model)
+        {
+            try
+            {
+                t_NewTrademarkOrder Newmodel = dsdc.t_NewTrademarkOrder.SingleOrDefault(b => b.i_Id == model.i_Id);
+                dsdc.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         /// <summary>
         /// 根据Userid返回所有订单数据
         /// </summary>
@@ -97,6 +133,24 @@ namespace zscq.DAL
                 return null;
             }
         }
+
+        /// <summary>
+        /// 根据ID获取订单信息
+        /// </summary>
+        /// <param name="i_Id"></param>
+        /// <returns></returns>
+        public t_NewTrademarkOrder NewTrademarkOrder_Select_Id(int TId)
+        {
+            try
+            {
+                return dsdc.t_NewTrademarkOrder.FirstOrDefault(u => u.i_Id == TId);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public IQueryable<vw_TrademarkOrder> TrademarkOrder_Select_Status(int sid, string nationality)
         {
             var iquery = from i in dvdc.vw_TrademarkOrder where i.i_Status == sid && i.i_SendEmailOrder != sid select i;
@@ -506,7 +560,6 @@ namespace zscq.DAL
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
         }
 
-
         /// <summary>
         ///  商标前台订单分页数据lizx
         /// </summary>
@@ -521,9 +574,9 @@ namespace zscq.DAL
         /// <param name="orderdate"></param>
         /// <param name="orderstatus"></param>
         /// <returns></returns>
-        public IQueryable<vw_TrademarkOrder> TrademarkOrder_Web_New_SelectPage(int startIndex, int pageSize, int uid, ref int count, int caseType, string orderNo, string caseNo, string applyname, string orderdate, int orderstatus)
+        public IQueryable<vw_NewTrademarkOrder> TrademarkOrder_Web_New_SelectPage(int startIndex, int pageSize, int uid, ref int count, int caseType, string orderNo, string caseNo, string applyname, string orderdate, int orderstatus)
         {
-            Expression<Func<vw_TrademarkOrder, bool>> WhereExpr = PredicateExtensions.True<vw_TrademarkOrder>();
+            Expression<Func<vw_NewTrademarkOrder, bool>> WhereExpr = PredicateExtensions.True<vw_NewTrademarkOrder>();
             WhereExpr = WhereExpr.And(a => a.i_MemberId == uid).And(p => p.CaseType == caseType);
             if (!string.IsNullOrEmpty(orderNo))
                 WhereExpr = WhereExpr.And(p => p.nvc_OrderNumber.Contains(orderNo));
@@ -549,13 +602,11 @@ namespace zscq.DAL
             if (orderstatus >= 0)
                 WhereExpr = WhereExpr.And(p => p.i_Status == orderstatus);
 
-            var iquery = dvdc.vw_TrademarkOrder.Where(WhereExpr);
+            var iquery = dvdc.vw_NewTrademarkOrder.Where(WhereExpr);
             iquery = from i in iquery orderby i.i_Id descending select i;
             count = iquery.Count();
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
         }
-
-
 
 
 
