@@ -146,34 +146,32 @@
   <script type="text/javascript" src="../js/fucties.js"></script>
   <script type="text/javascript" src="../js/listtb.js"></script>
   <div class="form-div">
-    <%if (pageview)
-      {%>
+   
     <table width="100%" height="28" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#BBDDE5">
       <tr>
         <td width="1%" height="28">&nbsp; </td>
         <td height="29">
           <table border="0" align="left" cellpadding="0" cellspacing="0">
             <tr>
-              <td width="74" height="28" align="center" id="td0" runat="server"><a href="Shop_M_TrademarkOrder.aspx?status=0"><strong>全部订单</strong></a> </td>
+              <td width="74" height="28" align="center" id="td0" runat="server"><a href="Q_TrademarkApplyOrder.aspx?status=-1"><strong>全部订单</strong></a> </td>
               <td width="5" align="center"></td>
-              <td width="74" height="28" align="center" id="td1" runat="server"><a href="Shop_M_TrademarkOrder.aspx?status=1"><strong>待付款</strong></a> </td>
+              <td width="74" height="28" align="center" id="td1" runat="server"><a href="Q_TrademarkApplyOrder.aspx?status=0"><strong>未支付</strong></a> </td>
               <td width="5" align="center"></td>
-              <td width="74" height="28" align="center" id="td2" runat="server"><a href="Shop_M_TrademarkOrder.aspx?status=2"><strong>已付款</strong></a> </td>
+              <td width="74" height="28" align="center" id="td2" runat="server"><a href="Q_TrademarkApplyOrder.aspx?status=1"><strong>已支付</strong></a> </td>
               <td width="5" align="center"></td>
-              <td width="74" height="28" align="center" id="td3" runat="server"><a href="Shop_M_TrademarkOrder.aspx?status=3"><strong>已审核</strong></a> </td>
+              <td width="74" height="28" align="center" id="td3" runat="server"><a href="Q_TrademarkApplyOrder.aspx?status=2"><strong>处理中</strong></a> </td>
               <td width="5" align="center"></td>
-              <td width="74" height="28" align="center" id="td5" runat="server"><a href="Shop_M_TrademarkOrder.aspx?status=4"><strong>已完成</strong></a> </td>
+              <td width="74" height="28" align="center" id="td5" runat="server"><a href="Q_TrademarkApplyOrder.aspx?status=3"><strong>已取消</strong></a> </td>
               <td width="5" align="center"></td>
-              <td width="74" height="28" align="center" id="td6" runat="server"><a href="Shop_M_TrademarkOrder.aspx?status=5"><strong>取消</strong></a> </td>
+              <td width="74" height="28" align="center" id="td6" runat="server"><a href="Q_TrademarkApplyOrder.aspx?status=4"><strong>已完成</strong></a> </td>
               <td width="5" align="center"></td>
-                <td width="74" height="28" align="center" id="td7" runat="server"><a href="Shop_M_TrademarkOrder.aspx?status=6"><strong>无效</strong></a> </td> <%-- 这里是6 删除 --%>
            <td width="5" align="center"></td>
             </tr>
           </table>
         </td>
       </tr>
     </table>
-    <%} %>
+    
     <table border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td>关键词：
@@ -182,7 +180,7 @@
             <asp:ListItem Value="0">所有字段</asp:ListItem>
             <asp:ListItem Value="1">订单号</asp:ListItem>
             <asp:ListItem Value="2">商标注册号</asp:ListItem>
-            <%--<asp:ListItem Value="3">专利名称</asp:ListItem>--%>
+            <asp:ListItem Value="3">案件号</asp:ListItem>
             <asp:ListItem Value="4">支付方式</asp:ListItem>
             <asp:ListItem Value="5">会员名称</asp:ListItem>
             <asp:ListItem Value="6">会员编号</asp:ListItem>
@@ -198,11 +196,7 @@
               <asp:ListItem Value="6">无效</asp:ListItem>
           </asp:DropDownList>
           &nbsp;</td>
-        <td>注册类型：<asp:DropDownList ID="ddl_regtype" runat="server">
-          <asp:ListItem Value="0">请选择</asp:ListItem>
-          <asp:ListItem Value="1">国内</asp:ListItem>
-          <asp:ListItem Value="2">国外</asp:ListItem>
-        </asp:DropDownList>
+        <td> 
           商标类型：<asp:DropDownList ID="ddl_SbType" runat="server">
             <asp:ListItem Value="0">请选择</asp:ListItem>
             <asp:ListItem Value="1">个人</asp:ListItem>
@@ -232,6 +226,10 @@
         <th width="9%">
           订单号<a href="Shop_M_TrademarkOrder.aspx?ordernum=desc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="倒序" id="ordernumdaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
           <a href="Shop_M_TrademarkOrder.aspx?ordernum=asc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="正序" id="ordernumzhengxu" style="display: none;"><span class="sp2"></span></a>
+        </th>
+         <th width="9%">
+          案件号<a href="Shop_M_TrademarkOrder.aspx?ordernum=desc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="倒序" id="A1"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ordernum=asc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="正序" id="A2" style="display: none;"><span class="sp2"></span></a>
         </th>
         <th width="18%">
             商标注册号
@@ -273,6 +271,9 @@
               <asp:CheckBox ID="cbOrder" runat="server" ToolTip='<%#Eval("i_Id")%>' />
             </td>
             <td align="center"><a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
+              <%#Eval("nvc_OrderNumber")%>
+            </a></td>
+             <td align="center"><a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
               <%#Eval("nvc_OrderNumber")%>
             </a></td>
             <td align="center">

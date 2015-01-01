@@ -74,10 +74,6 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         if (Request.QueryString["SType"] != null && Request.QueryString["SType"] != "")
         {
             this.ddlType.SelectedValue = Request.QueryString["SType"].ToString();
-            //if (this.ddlType.SelectedValue == "2")
-            //{
-            //    this.labTitle.Text = Request.QueryString["Keyword"] + "的订单"; 
-            //}
         }
         if (Request.QueryString["TimeType"] != null && Request.QueryString["TimeType"] != "")
         {
@@ -146,20 +142,18 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
     {
         if (Request.QueryString["status"] != null)
         {
-            if (Request.QueryString["status"] == "0")
+            if (Request.QueryString["status"] == "-1")
                 td0.Attributes.Add("background", "images/ddbgs.jpg");
-            else if (Request.QueryString["status"] == "1")
+            else if (Request.QueryString["status"] == "0")
                 td1.Attributes.Add("background", "images/ddbgs.jpg");
-            else if (Request.QueryString["status"] == "2")
+            else if (Request.QueryString["status"] == "1")
                 td2.Attributes.Add("background", "images/ddbgs.jpg");
-            else if (Request.QueryString["status"] == "3")
+            else if (Request.QueryString["status"] == "2")
                 td3.Attributes.Add("background", "images/ddbgs.jpg");
-            else if (Request.QueryString["status"] == "4")
+            else if (Request.QueryString["status"] == "3")
                 td5.Attributes.Add("background", "images/ddbgs.jpg");
-            else if (Request.QueryString["status"] == "5")
+            else if (Request.QueryString["status"] == "4")
                 td6.Attributes.Add("background", "images/ddbgs.jpg");
-            else if (Request.QueryString["status"] == "6")
-                td7.Attributes.Add("background", "images/ddbgs.jpg");
         }
     }
 
@@ -207,25 +201,6 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
             {
                 typename = "中国企业";
             }
-            if (typeid == "3")
-            {
-                typename = "中国代理机构";
-            }
-        }
-        if (country == "2")
-        {
-            if (typeid == "1")
-            {
-                typename = "外国个人";
-            }
-            if (typeid == "2")
-            {
-                typename = "外国企业";
-            }
-            if (typeid == "3")
-            {
-                typename = "外国代理机构";
-            }
         }
         return typename;
 
@@ -248,16 +223,6 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
             if (cb.Checked)
             {
                 int orderID = Convert.ToInt32(cb.ToolTip);
-                //t_AdvOrder Order_Model = new dal_AdvOrder().AdvOrder_Select_Id(orderID);
-                //if (Order_Model != null)
-                //{
-                //    if (Order_Model.i_Status <8)
-                //    {
-                //        //#region 会员等级
-
-                //        //#endregion
-                //    }
-                //}
                 DALTO.TrademarkOrder_Del(orderID);
                 Manager.AddLog(0, "商标订单管理", "删除商标订单");
             }
