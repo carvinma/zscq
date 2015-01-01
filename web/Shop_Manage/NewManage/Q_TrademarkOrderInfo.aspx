@@ -328,7 +328,7 @@
                 <td align="center">
                     <asp:Button ID="lbtnDelete" runat="server" OnClientClick="return confirm('您确定进行删除操作吗？')" OnClick="lbtnDelete_Click" Text="删除订单" CssClass="button"></asp:Button>
                     <%# Eval("ApplyName")%>                    <%# Eval("TrademarkType")%>
-                    <input name="Submit8" type="button" value="返回" onclick="javascript:window.location='Shop_M_TrademarkOrder.aspx?<%=pageurl %>';" class="button" />
+                    <input name="Submit8" type="button" value="返回" onclick="javascript:window.location='Q_TrademarkApplyOrder.aspx?<%=pageurl %>';" class="button" />
                 </td>
             </tr>
         </table>
