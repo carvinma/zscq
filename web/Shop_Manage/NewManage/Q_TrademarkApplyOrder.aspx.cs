@@ -51,11 +51,34 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         HiddenDel.Value = "";
         if (!IsPostBack)
         {
-
+            BindDDLOrderStatsus();
             Bind_Page_value();
             Bind_Rpt_Order(ye);
             SetTabStatus();
         }
+    }
+    private void BindDDLOrderStatsus()
+    {
+        Dictionary<string, int?> dic = new Dictionary<string, int?>();
+        dic.Add("全部", -1);
+        for (int i = 0; i <= 1; i++)
+        {
+            string key = EnumManager.GetDescription(typeof(ApplyUserTypeEnum), i);
+            if (!string.IsNullOrEmpty(key))
+                dic.Add(key, i);
+        }
+
+        this.ddl_SbType.DataSource = dic;
+        this.ddl_SbType.DataTextField = "Key";
+        this.ddl_SbType.DataValueField = "Value";
+        this.ddl_SbType.DataBind();
+
+        List<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkOrderStatuslist.ToList();
+        tradeMarkStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = -1 });
+        this.ddlStatus.DataSource = tradeMarkStatuslist;
+        this.ddlStatus.DataTextField = "StatusName";
+        this.ddlStatus.DataValueField = "StatusValue";
+        this.ddlStatus.DataBind();
     }
     public void Bind_Page_value()
     {
@@ -140,17 +163,17 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         if (Request.QueryString["status"] != null)
         {
             if (Request.QueryString["status"] == "-1")
-                td0.Attributes.Add("background", "images/ddbgs.jpg");
+                td0.Attributes.Add("background", "../images/ddbgs.jpg");
             else if (Request.QueryString["status"] == "0")
-                td1.Attributes.Add("background", "images/ddbgs.jpg");
+                td1.Attributes.Add("background", "../images/ddbgs.jpg");
             else if (Request.QueryString["status"] == "1")
-                td2.Attributes.Add("background", "images/ddbgs.jpg");
+                td2.Attributes.Add("background", "../images/ddbgs.jpg");
             else if (Request.QueryString["status"] == "2")
-                td3.Attributes.Add("background", "images/ddbgs.jpg");
+                td3.Attributes.Add("background", "../images/ddbgs.jpg");
             else if (Request.QueryString["status"] == "3")
-                td5.Attributes.Add("background", "images/ddbgs.jpg");
+                td5.Attributes.Add("background", "../images/ddbgs.jpg");
             else if (Request.QueryString["status"] == "4")
-                td6.Attributes.Add("background", "images/ddbgs.jpg");
+                td6.Attributes.Add("background", "../images/ddbgs.jpg");
         }
     }
 
@@ -185,31 +208,16 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
             rep.DataBind();
         }
     }
-    public string GetSBtypeAndName(string country, string typeid)//获得商标类型
-    {
-        string typename = "";
-        if (country == "1")
-        {
-            if (typeid == "1")
-            {
-                typename = "中国个人";
-            }
-            if (typeid == "2")
-            {
-                typename = "中国企业";
-            }
-        }
-        return typename;
-
-    }
     protected void aspPage_PageChanged(object sender, EventArgs e)
     {
         Bind_Rpt_Order(((Wuqi.Webdiyer.AspNetPager)sender).CurrentPageIndex);
         ye = ((Wuqi.Webdiyer.AspNetPager)sender).CurrentPageIndex;
     }
-    public string ConvertStatus(object obj)
+    public string ConvertStatus(object applyStatus)
     {
-        return DALTO.Set_TrademarkOrderState(obj);
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkOrderStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
     }
 
     protected void btnDelete_Click(object sender, EventArgs e)//删除订单
