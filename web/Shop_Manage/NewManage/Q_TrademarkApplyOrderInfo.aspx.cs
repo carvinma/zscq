@@ -10,7 +10,7 @@ using zscq.BLL;
 using zscq.Model;
 using System.Text;
 
-public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
+public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
 {
     public bool update8 = Manager.GetManagerQX(21, 2);
     public bool del8 = Manager.GetManagerQX(21, 3);

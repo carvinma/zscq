@@ -261,7 +261,7 @@
                 <asp:HiddenField ID="hf_oid" runat="server" Value='<%# Eval("TrademarkIds") %>' />
             </td>
             <td align="center">
-            <a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&tIds=<%# Eval("TrademarkIds") %>">
+            <a href="Q_TrademarkRenewalOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&tIds=<%# Eval("TrademarkIds") %>">
               <%#Eval("nvc_OrderNumber")%>
             </a></td>
              <td align="center">
