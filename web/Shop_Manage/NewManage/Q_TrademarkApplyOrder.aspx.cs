@@ -11,7 +11,7 @@ using zscq.DAL;
 using System.Text;
 using System.IO;
 
-public partial class Q_TrademarkOrder : System.Web.UI.Page
+public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
 {
     public bool pageview = Manager.GetManagerQX(22, 0);
     public bool pageupdate = Manager.GetManagerQX(22, 2);

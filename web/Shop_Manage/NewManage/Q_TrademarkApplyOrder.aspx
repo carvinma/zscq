@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Q_TrademarkOrder.aspx.cs" Inherits="Q_TrademarkOrder" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Q_TrademarkApplyOrder.aspx.cs" Inherits="Q_TrademarkApplyOrder" %>
 
 <%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
