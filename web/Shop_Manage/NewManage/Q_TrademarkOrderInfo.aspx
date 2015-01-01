@@ -236,10 +236,10 @@
                                     <tr>
                                         <td height="59" align="right">
                                             <table width="440" border="0" cellspacing="0" cellpadding="0">
-                                                <%--<input name="inputPageid" onclick="Selbox(this)" type="checkbox" value='<%#Eval("i_Id") %>' />--%>
+                                               <%=Str_Money %>
                                             </table>
                                             <table width="440" border="0" cellspacing="0" cellpadding="0">
-                                                <%# Eval("CaseNo")%>
+                                                 <%=Str_AllMoney%>
                                             </table>
                                         </td>
                                         <td width="30">

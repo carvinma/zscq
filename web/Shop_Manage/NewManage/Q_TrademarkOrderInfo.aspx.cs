@@ -273,8 +273,13 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
                 trademarkStatus = 2;//申请中，已汇款
             }
             #endregion
+            #region 处理中
+            if (CType == 1)//处理中
+            {
+            }
+            #endregion
             #region 完成
-            if (CType == 3)
+            if (CType == 4)
             {
                 trademarkStatus = 2;//距续展期限大于90天
                 if (Order_Model.nvc_PayType == "线下汇款" && Order_Model.i_JiFen > 0)
@@ -292,7 +297,7 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
             }
             #endregion
             #region 取消订单
-            if (CType == 4)//取消订单  优惠券取消
+            if (CType == 3)//取消订单  优惠券取消
             {
                 trademarkStatus = 0;//已保存，未提交
                 if (Order_Model.i_IsUseYHQ == 1)
@@ -317,35 +322,38 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
             }
             #endregion
             #endregion
-
-            if (!string.IsNullOrEmpty(Request.QueryString["tIds"]) && trademarkStatus.HasValue)
+            if (CType != 2) //当订单为处理中时，保持申请中已汇款或申请中未汇款
             {
-                string[] tIds = Request.QueryString["tIds"].Split(',');
-                var iquery = mark.Trademark_web_Excel(tIds);
-                foreach (var t in iquery)
+                if (!string.IsNullOrEmpty(Request.QueryString["tIds"]) && trademarkStatus.HasValue)
                 {
-                    #region 完成订单：从申请转为续展，计算续展期限日
-                    if (CType == 3) //完成
+                    string[] tIds = Request.QueryString["tIds"].Split(',');
+
+                    var iquery = mark.Trademark_web_Excel(tIds);
+                    foreach (var t in iquery)
                     {
-                        trademarkStatus = 2;//距续展期限大于90天
-                        if (t.i_Type == 0) t.i_Type = 1;//从申请转为续展
-                       
-                        if (t.RenewalDate.HasValue)
+                        #region 完成订单：从申请转为续展，计算续展期限日
+                        if (CType == 3) //完成
                         {
-                            t.RenewalDate = t.RenewalDate.Value.AddYears(0); //续展期限日
+                            trademarkStatus = 2;//距续展期限大于90天
+                            if (t.i_Type == 0) t.i_Type = 1;//从申请转为续展
+
+                            if (t.RenewalDate.HasValue)
+                            {
+                                t.RenewalDate = t.RenewalDate.Value.AddYears(0); //续展期限日
+                            }
+                            else
+                            {
+                                DateTime dt = DateTime.Today;
+                                t.RegNoticeDate = dt; //注册公告日
+                                t.RenewalDate = dt.AddYears(10);//续展期限日
+                            }
+                            t.RestDays = Convert.ToInt32(HelpString.DateDiff(t.RegNoticeDate.Value, DateTime.Today, "day"));
                         }
-                        else
-                        { 
-                             DateTime dt=DateTime.Today;
-                             t.RegNoticeDate = dt; //注册公告日
-                             t.RenewalDate = dt.AddYears(10);//续展期限日
-                        }
-                        t.RestDays=Convert.ToInt32(HelpString.DateDiff(t.RegNoticeDate.Value, DateTime.Today, "day"));
+                        #endregion
+                        t.Status = trademarkStatus;
                     }
-                    #endregion
-                    t.Status = trademarkStatus;
+                    mark.Trademark_Submit();
                 }
-                mark.Trademark_Submit();
             }
             DALO.TrademarkOrder_Update(Order_Model);
             Manager.AddLog(0, "订单管理", "更改订单" + Order_Model.nvc_OrderNumber + "状态为" + ConvertStatus(Order_Model.i_Status));
