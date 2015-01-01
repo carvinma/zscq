@@ -119,10 +119,13 @@ public partial class Trademark_ApplyCount : System.Web.UI.Page
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
             Repeater rpt_1 = e.Item.FindControl("rept_list1") as Repeater;
+            Label lblTotal = e.Item.FindControl("lblTotal") as Label;
             int id = int.Parse(((HiddenField)e.Item.FindControl("Hi_Id")).Value);
 
-            //var result1 = from i in dzdc.t_Trademark where i.i_MemberId == id select new { i.i_GuoJiId, i.i_MemberId };
-            rpt_1.DataSource = proc.pro_Count_ApplyUser(id);
+            var appDs = proc.pro_Count_ApplyUser(id).ToList();
+            if (appDs != null && appDs.Count>0)
+                lblTotal.Text = appDs.Sum(p => p.countsApply + p.countsRenewal).ToString();
+            rpt_1.DataSource = appDs;
             rpt_1.DataBind();
         }
     }

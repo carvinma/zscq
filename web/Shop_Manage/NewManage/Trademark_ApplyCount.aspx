@@ -156,7 +156,7 @@
                                 <%#Eval("nvc_Name")%>
                             </td>
                             <td align="center">
-                                <%#GetPatentCountById(Eval("i_Id"))%>
+                                <asp:Label ID="lblTotal" runat="server" Text="0"></asp:Label>
                             </td>
                             <td align="center">
                                 <table cellspacing='1'>
