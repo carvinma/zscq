@@ -17,7 +17,7 @@
     <input type="hidden" id="Hi_OrderId" runat="server" value="0" />
     <input type="hidden" id="Hi_CheckPower" runat="server" value="0" />
     <h1>
-        <span class="action-span"><a href="Q_TrademarkApplyOrder.aspx?<%=pageurl %>">订单列表</a></span> <span class="action-span1"><a href="../Shop_Index_Main.aspx">管理中心</a> </span><span id="search_id" class="action-span1">- 订单信息 </span>
+        <span class="action-span"><a href="Q_TrademarkRenewalOrder.aspx?<%=pageurl %>">订单列表</a></span> <span class="action-span1"><a href="../Shop_Index_Main.aspx">管理中心</a> </span><span id="search_id" class="action-span1">- 订单信息 </span>
         <div style="clear: both">
         </div>
     </h1>
@@ -160,7 +160,7 @@
         </table>
         <table cellspacing='1' cellpadding='3'>
             <tr>
-                <th colspan="8">
+                <th colspan="9">
                     商标列表
                 </th>
             </tr>
@@ -171,16 +171,19 @@
                 <td width="12%" align="center">
                     案件号
                 </td>
+                 <td width="12%" align="center">
+                    注册号
+                </td>
                 <td width="12%" align="center">
                     申请人
                 </td>
-                <td width="14%" align="center">
+                <td width="10%" align="center">
                     图样
                 </td>
                 <td width="10%" align="center" height="25">
                     商标类别
                 </td>
-                <td width="20%" align="center" height="25">
+                <td width="15%" align="center" height="25">
                    金额
                 </td>
                 <td width="20%" align="center" height="25">
@@ -198,6 +201,9 @@
                         </td>
                         <td align="center">
                              <%# Eval("CaseNo")%>
+                        </td>
+                          <td align="center">
+                             <%# Eval("RegisteredNo")%>
                         </td>
                         <td align="center">
                             <%# Eval("ApplyName")%>

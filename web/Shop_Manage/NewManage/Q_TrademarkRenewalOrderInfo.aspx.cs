@@ -263,18 +263,18 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
             #region 未支付
             if (CType == 0)//未支付
             {
-                trademarkStatus = 1;//申请中，未汇款
+                trademarkStatus = 10;//已提交订单，尚未接收汇款
             }
             #endregion
             #region 已支付
             if (CType == 1)//已支付
             {
                 Order_Model.dt_PayTime = DateTime.Now;
-                trademarkStatus = 2;//申请中，已汇款
+                trademarkStatus =11;//申请中，已汇款
             }
             #endregion
             #region 处理中
-            if (CType == 1)//处理中
+            if (CType == 2)//处理中
             {
             }
             #endregion
@@ -299,7 +299,7 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
             #region 取消订单
             if (CType == 3)//取消订单  优惠券取消
             {
-                trademarkStatus = 0;//已保存，未提交
+                trademarkStatus = 12;//已保存，未提交
                 if (Order_Model.i_IsUseYHQ == 1)
                 {
                     if (Order_Model.nvc_YHQIdstr != null || Order_Model.nvc_YHQIdstr != "")
@@ -368,12 +368,9 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
         t_NewTrademarkOrder Order_Model = new dal_TrademarkOrder().NewTrademarkOrder_Select_Id(orderID);
         if (Order_Model != null)
         {
-            if (Order_Model.i_Status < 7)//已取消，已退款订单滚蛋，直接删
-            {
-                #region 会员等级
+            #region 会员等级
                 BLLMG.Member_UpdateGrade(Order_Model, 1);
                 #endregion
-            }
             new dal_TrademarkOrder().NewTrademarkOrder_Del(orderID);
             Manager.AddLog(0, "商标订单管理", "删除订单");
             Response.Redirect("Q_TrademarkApplyOrder.aspx?" + pageurl);
