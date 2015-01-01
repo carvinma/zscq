@@ -314,7 +314,7 @@
                                     target="_blank" class="ac5t">申请书下载</a>
                         </td>
                         <td>
-                           <%# GetApplyStatus(Eval("Status"))%>
+                           <%# GetApplyStatus(Eval("i_Type"),Eval("Status"))%>
                         </td>
                     </tr>
                 </ItemTemplate>

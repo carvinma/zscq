@@ -152,10 +152,15 @@ public partial class L_M_Trademark : System.Web.UI.Page
         ye = ((Wuqi.Webdiyer.AspNetPager)sender).CurrentPageIndex;
     }
 
-    public string GetApplyStatus(object applyStatus)
+    public string GetApplyStatus(object caseType,object applyStatus)
     {
         if (applyStatus != null)
-            return BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        {
+            if (caseType.ToString() == "0")
+                return BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+            else
+                return BaseDataUtil.tradeMarkRenewedStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        }
         return string.Empty;
     }
     public string ZTFileImg(object Uid,object zhuti, object sbid)
