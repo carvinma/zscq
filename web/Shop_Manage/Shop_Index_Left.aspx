@@ -187,8 +187,8 @@
               <ul>
                 <%if (flag[22][0].ToString() == "1")
                   { %>
-                <li class="menu-item">&nbsp;<a href="NewManage/Q_TrademarkApplyOrder.aspx?Status=0" target="main">申请案订单</a></li>
-                 <li class="menu-item">&nbsp;<a href="NewManage/Q_TrademarkRenewalOrder.aspx?Status=0" target="main">续展案订单</a></li>
+                <li class="menu-item">&nbsp;<a href="NewManage/Q_TrademarkApplyOrder.aspx?Status=-1" target="main">申请案订单</a></li>
+                 <li class="menu-item">&nbsp;<a href="NewManage/Q_TrademarkRenewalOrder.aspx?Status=-1" target="main">续展案订单</a></li>
              <%--   <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=1" target="main">待付款订单</a></li>
                 <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=2" target="main">已付款订单</a></li>
                 <li class="menu-item">&nbsp;<a href="Shop_M_TrademarkOrder.aspx?Status=3" target="main">已审核</a></li>
