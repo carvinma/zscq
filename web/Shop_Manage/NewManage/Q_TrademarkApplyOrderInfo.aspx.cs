@@ -274,7 +274,7 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
             }
             #endregion
             #region 处理中
-            if (CType == 1)//处理中
+            if (CType == 2)//处理中
             {
             }
             #endregion
