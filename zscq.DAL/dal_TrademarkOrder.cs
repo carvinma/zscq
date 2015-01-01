@@ -608,7 +608,233 @@ namespace zscq.DAL
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
         }
 
+        public IQueryable<vw_NewTrademarkOrder> TrademarkOrder_New_SelectPage(int startIndex, int pageSize, string Keyword, int SType, int status, int sbType, int TimeType, string STime, string ETime, string ordernum, string username, string cname, string cbianhao, string orderstate, string totalmoney, string addtime, string paytime, ref int count)
+        {
+            var iquery = from i in dvdc.vw_NewTrademarkOrder select i;
+            iquery = from i in iquery orderby i.i_Id descending select i;
+            if (status != 0)
+            {
+                iquery = from i in iquery where i.i_Status == status select i;
+            }
 
+            if (Keyword != "")
+            {
+                if (SType == 0)
+                {
+                    #region 商标注册号
+                    List<vw_NewTrademarkOrder> list = new List<vw_NewTrademarkOrder>();
+                    foreach (var v in iquery)
+                    {
+                        if (v.nvc_PayType != null && v.nvc_Name != null && v.nvc_UserNum != null)
+                        {
+                            if (v.nvc_OrderNumber.Contains(Keyword) || v.nvc_PayType.Contains(Keyword) || v.nvc_Name.Contains(Keyword) || v.nvc_UserNum.Contains(Keyword))
+                            {
+                                list.Add(v);
+                            }
+                            else
+                            {
+                                var result = DALTOD.OrderDetails_Select_OrderId(v.i_Id);
+                                foreach (var a in result)
+                                {
+                                    if (a.nvc_SBRegNum.Contains(Keyword))
+                                    {
+                                        list.Add(v);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    #endregion
+                    #region 操作备注
+                    foreach (var v in iquery)
+                    {
+                        var result = DALTOOI.OrderOperateInfo_Select_OrderID(v.i_Id);
+                        foreach (var a in result)
+                        {
+                            if (a.nvc_Info_1.Contains(Keyword))
+                            {
+                                list.Add(v);
+                                break;
+                            }
+                        }
+                    }
+                    list = list.Distinct().ToList();
+                    iquery = from i in list.AsQueryable() select i;
+                    #endregion
+                }
+                else if (SType == 1)
+                {
+                    iquery = from i in iquery where i.nvc_OrderNumber.Contains(Keyword) select i;
+                }
+                else if (SType == 2)
+                {
+                    #region 商标注册号
+                    List<vw_NewTrademarkOrder> list = new List<vw_NewTrademarkOrder>();
+                    foreach (var v in iquery)
+                    {
+                        var result = DALTOD.OrderDetails_Select_OrderId(v.i_Id);
+                        foreach (var a in result)
+                        {
+                            if (a.nvc_SBRegNum.Contains(Keyword))
+                            {
+                                list.Add(v);
+                                break;
+                            }
+                        }
+                    }
+                    iquery = from i in list.AsQueryable() select i;
+                    #endregion
+                }
+                else if (SType == 4)
+                {
+                    iquery = from i in iquery where i.nvc_PayType.Contains(Keyword) select i;
+                }
+                else if (SType == 5)
+                {
+                    iquery = from i in iquery where i.nvc_Name.Contains(Keyword) select i;
+                }
+                else if (SType == 6)
+                {
+                    iquery = from i in iquery where i.nvc_UserNum.Contains(Keyword) select i;
+                }
+                else if (SType == 7)
+                {
+                    #region 操作备注
+                    List<vw_NewTrademarkOrder> list = new List<vw_NewTrademarkOrder>();
+                    foreach (var v in iquery)
+                    {
+                        var result = DALTOOI.OrderOperateInfo_Select_OrderID(v.i_Id);
+                        foreach (var a in result)
+                        {
+                            if (a.nvc_Info_1.Contains(Keyword))
+                            {
+                                list.Add(v);
+                                break;
+                            }
+                        }
+                    }
+                    iquery = from i in list.AsQueryable() select i;
+                    #endregion
+                }
+            }
+            
+            if (sbType != 0)
+            {
+                iquery = from i in iquery where i.i_UserTypeId == sbType select i;
+            }
+
+            DateTime SDateTime = DateTime.Now.AddYears(-10);
+            if (STime != null && STime != "")
+            {
+                SDateTime = Convert.ToDateTime(STime);
+            }
+            DateTime EDateTime = DateTime.Now.AddDays(1);
+            if (ETime != null && ETime != "")
+            {
+                EDateTime = Convert.ToDateTime(ETime).AddDays(1);
+            }
+            if (TimeType == 1)
+            {
+                iquery = from i in iquery where SDateTime < i.dt_AddTime && i.dt_AddTime < EDateTime select i;
+            }
+            else if (TimeType == 2)
+            {
+                iquery = from i in iquery where SDateTime < i.dt_PayTime && i.dt_PayTime < EDateTime select i;
+            }
+            if (ordernum != "")
+            {
+                if (ordernum == "desc")
+                {
+                    iquery = from i in iquery orderby i.nvc_OrderNumber descending select i;
+                }
+                else
+                {
+                    iquery = from i in iquery orderby i.nvc_OrderNumber ascending select i;
+                }
+            }
+            if (username != "")
+            {
+                if (username == "desc")
+                {
+                    iquery = from i in iquery orderby i.nvc_Name descending select i;
+                }
+                else
+                {
+                    iquery = from i in iquery orderby i.nvc_Name ascending select i;
+                }
+            }
+            if (cname != "")
+            {
+                if (cname == "desc")
+                {
+                    iquery = from i in iquery orderby i.nvc_RealName descending select i;
+                }
+                else
+                {
+                    iquery = from i in iquery orderby i.nvc_RealName ascending select i;
+                }
+            }
+            if (cbianhao != "")
+            {
+                if (cbianhao == "desc")
+                {
+                    iquery = from i in iquery orderby i.nvc_UserNum descending select i;
+                }
+                else
+                {
+                    iquery = from i in iquery orderby i.nvc_UserNum ascending select i;
+                }
+            }
+            if (totalmoney != "")
+            {
+                if (totalmoney == "desc")
+                {
+                    iquery = from i in iquery orderby i.dm_TotalMoney descending select i;
+                }
+                else
+                {
+                    iquery = from i in iquery orderby i.dm_TotalMoney ascending select i;
+                }
+            }
+            if (orderstate != "")
+            {
+                if (orderstate == "desc")
+                {
+                    iquery = from i in iquery orderby i.i_Status descending select i;
+                }
+                else
+                {
+                    iquery = from i in iquery orderby i.i_Status ascending select i;
+                }
+            }
+            if (addtime != "")
+            {
+                if (addtime == "desc")
+                {
+                    iquery = from i in iquery orderby i.dt_AddTime descending select i;
+                }
+                else
+                {
+                    iquery = from i in iquery orderby i.dt_AddTime ascending select i;
+                }
+            }
+            if (paytime != "")
+            {
+                if (paytime == "desc")
+                {
+                    iquery = from i in iquery orderby i.dt_PayTime descending select i;
+                }
+                else
+                {
+                    iquery = from i in iquery orderby i.dt_PayTime ascending select i;
+                }
+            }
+            iquery = from i in iquery select i;
+            count = iquery.Count();
+            return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
+        }
 
         /// <summary>
         /// 返回一个订单号
