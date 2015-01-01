@@ -479,8 +479,7 @@
   <script type="text/javascript" src="../js/ss.js"></script>
   <div id="div_a" runat="server">
   </div>
-  </form>
-    <!-- #include file="push.html" -->  
+  </form> 
 </body>
 </html>
 <script type="text/javascript">
