@@ -19,6 +19,7 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
     public bool pagechu = Manager.GetManagerQX(22, 4);
     dal_TrademarkOrder DALTO = new dal_TrademarkOrder();
     dal_TrademarkOrderDetails DALTOD = new dal_TrademarkOrderDetails();
+    dal_NewTrademark mark = new dal_NewTrademark();
     public int syy = 0;
     public int xyy = 0;
     public int sumy = 0;
@@ -185,7 +186,7 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         Keyword = txtKeyword.Text; 
         SType = int.Parse(this.ddlType.SelectedValue);    
         TimeType = int.Parse(this.ddlTimeType.SelectedValue);
-        IQueryable query = DALTO.TrademarkOrder_New_SelectPage(pageCurrent, PageSize, Keyword, SType, State, int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value, ordernum, username, cname, cbianhao, orderstate, totalmoney, addtime, paytime, ref count);
+        IQueryable query = DALTO.TrademarkOrder_New_SelectPage(pageCurrent, PageSize,0, Keyword, SType, State, int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value, ordernum, username, cname, cbianhao, orderstate, totalmoney, addtime, paytime, ref count);
         this.repOrder.DataSource = query;
         this.repOrder.DataBind();
         aspPage.RecordCount = count;
@@ -201,10 +202,19 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
     {
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
-            Repeater rep = e.Item.FindControl("repProduct") as Repeater;
-            CheckBox cbid = (CheckBox)e.Item.FindControl("cbOrder");
-            int orderID = Convert.ToInt32(cbid.ToolTip);
-            rep.DataSource = new dal_TrademarkOrderDetails().OrderDetails_vw_Select_OrderId(orderID);
+           
+            //CheckBox cbid = (CheckBox)e.Item.FindControl("cbOrder");
+            //int orderID = Convert.ToInt32(cbid.ToolTip);
+
+            Repeater repCaseNo = e.Item.FindControl("repTrademark") as Repeater;//案件号
+            HiddenField oid = (HiddenField)e.Item.FindControl("hf_oid");
+            Repeater rep = e.Item.FindControl("repProduct") as Repeater; //商标注册号
+
+            var iquery = mark.Trademark_web_Excel(oid.Value.Split(','));
+            repCaseNo.DataSource = iquery;
+            repCaseNo.DataBind();
+
+            rep.DataSource = iquery;
             rep.DataBind();
         }
     }

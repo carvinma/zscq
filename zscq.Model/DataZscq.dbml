@@ -454,6 +454,7 @@
       <Column Name="dm_ShouXuFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_TMZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderDetails" Member="t_NewTrademarkOrderDetails" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_NewTrademarkOrderDetails" />
+      <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderOperateInfos" Member="t_NewTrademarkOrderOperateInfos" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_NewTrademarkOrderOperateInfos" />
     </Type>
   </Table>
   <Table Name="dbo.t_NewTrademarkOrderDetails" Member="t_NewTrademarkOrderDetails">
@@ -475,6 +476,17 @@
       <Column Name="dm_ZengZhiTax" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_ShouXuFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderDetails" Member="t_NewTrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_NewTrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_NewTrademarkOrderOperateInfos" Member="t_NewTrademarkOrderOperateInfos">
+    <Type Name="t_NewTrademarkOrderOperateInfos">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Info_1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderOperateInfos" Member="t_NewTrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_NewTrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

@@ -72,6 +72,11 @@ namespace zscq.DAL
             var iquery = from t in dc.t_TrademarkOrderOperateInfos where t.i_OrderId == orderID orderby t.dt_AddTime descending select t;
             return iquery;
         }
+        public IQueryable<t_NewTrademarkOrderOperateInfos> OrderOperateInfo_Select_New_OrderID(int orderID)
+        {
+            var iquery = from t in dc.t_NewTrademarkOrderOperateInfos where t.i_OrderId == orderID orderby t.dt_AddTime descending select t;
+            return iquery;
+        }
         /// <summary>
         /// 返回订单操作信息的状态
         /// </summary>

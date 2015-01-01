@@ -608,9 +608,10 @@ namespace zscq.DAL
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
         }
 
-        public IQueryable<vw_NewTrademarkOrder> TrademarkOrder_New_SelectPage(int startIndex, int pageSize, string Keyword, int SType, int status, int sbType, int TimeType, string STime, string ETime, string ordernum, string username, string cname, string cbianhao, string orderstate, string totalmoney, string addtime, string paytime, ref int count)
+        public IQueryable<vw_NewTrademarkOrder> TrademarkOrder_New_SelectPage(int startIndex, int pageSize, int caseType,string Keyword, int SType, int status, int sbType, int TimeType, string STime, string ETime, string ordernum, string username, string cname, string cbianhao, string orderstate, string totalmoney, string addtime, string paytime, ref int count)
         {
-            var iquery = from i in dvdc.vw_NewTrademarkOrder select i;
+            //caseType 0申请 1续展
+            var iquery = from i in dvdc.vw_NewTrademarkOrder.Where(p=>p.CaseType==caseType) select i;
             iquery = from i in iquery orderby i.i_Id descending select i;
             if (status != -1)
             {
@@ -625,22 +626,20 @@ namespace zscq.DAL
                     List<vw_NewTrademarkOrder> list = new List<vw_NewTrademarkOrder>();
                     foreach (var v in iquery)
                     {
-                        if (v.nvc_PayType != null && v.nvc_Name != null && v.nvc_UserNum != null)
+                        if (v.nvc_PayType != null && v.nvc_Name != null && v.nvc_UserNum != null )
                         {
-                            if (v.nvc_OrderNumber.Contains(Keyword) || v.nvc_PayType.Contains(Keyword) || v.nvc_Name.Contains(Keyword) || v.nvc_UserNum.Contains(Keyword))
+                            if (v.ApplyNo != null)
                             {
-                                list.Add(v);
+                                if (v.nvc_OrderNumber.Contains(Keyword) || v.CaseNo.Contains(Keyword) || v.ApplyNo.Contains(Keyword) || v.nvc_PayType.Contains(Keyword) || v.nvc_Name.Contains(Keyword) || v.nvc_UserNum.Contains(Keyword))
+                                {
+                                    list.Add(v);
+                                }
                             }
                             else
                             {
-                                var result = DALTOD.OrderDetails_Select_OrderId(v.i_Id);
-                                foreach (var a in result)
+                                if (v.nvc_OrderNumber.Contains(Keyword) || v.CaseNo.Contains(Keyword)|| v.nvc_PayType.Contains(Keyword) || v.nvc_Name.Contains(Keyword) || v.nvc_UserNum.Contains(Keyword))
                                 {
-                                    if (a.nvc_SBRegNum.Contains(Keyword))
-                                    {
-                                        list.Add(v);
-                                        break;
-                                    }
+                                    list.Add(v);
                                 }
                             }
                         }
@@ -650,7 +649,7 @@ namespace zscq.DAL
                     #region 操作备注
                     foreach (var v in iquery)
                     {
-                        var result = DALTOOI.OrderOperateInfo_Select_OrderID(v.i_Id);
+                        var result = DALTOOI.OrderOperateInfo_Select_New_OrderID(v.i_Id);
                         foreach (var a in result)
                         {
                             if (a.nvc_Info_1.Contains(Keyword))
@@ -670,26 +669,11 @@ namespace zscq.DAL
                 }
                 else if (SType == 2) //商标注册号
                 {
-                    #region 商标注册号
-                    List<vw_NewTrademarkOrder> list = new List<vw_NewTrademarkOrder>();
-                    foreach (var v in iquery)
-                    {
-                        var result = DALTOD.OrderDetails_Select_OrderId(v.i_Id);
-                        foreach (var a in result)
-                        {
-                            if (a.nvc_SBRegNum.Contains(Keyword))
-                            {
-                                list.Add(v);
-                                break;
-                            }
-                        }
-                    }
-                    iquery = from i in list.AsQueryable() select i;
-                    #endregion
+                    iquery = from i in iquery where i.ApplyNo.Contains(Keyword) select i;
                 }
                 else if (SType == 3) //案件号
                 {
-                    iquery = from i in iquery where i.nvc_PayType.Contains(Keyword) select i;
+                    iquery = from i in iquery where i.CaseNo.Contains(Keyword) select i;
                 }
                 else if (SType == 4) //支付方式
                 {
@@ -709,7 +693,7 @@ namespace zscq.DAL
                     List<vw_NewTrademarkOrder> list = new List<vw_NewTrademarkOrder>();
                     foreach (var v in iquery)
                     {
-                        var result = DALTOOI.OrderOperateInfo_Select_OrderID(v.i_Id);
+                        var result = DALTOOI.OrderOperateInfo_Select_New_OrderID(v.i_Id);
                         foreach (var a in result)
                         {
                             if (a.nvc_Info_1.Contains(Keyword))
@@ -724,10 +708,10 @@ namespace zscq.DAL
                 }
             }
             
-            if (sbType != -1)
-            {
-                iquery = from i in iquery where i.i_UserTypeId == sbType select i;
-            }
+            //if (sbType != -1)
+            //{
+            //    iquery = from i in iquery where i.i_UserTypeId == sbType select i;
+            //}
 
             DateTime SDateTime = DateTime.Now.AddYears(-10);
             if (STime != null && STime != "")

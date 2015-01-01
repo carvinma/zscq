@@ -189,7 +189,7 @@
           &nbsp;<asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="True">
           </asp:DropDownList>
           &nbsp;</td>
-        <td> 
+        <td style="display:none"> 
           商标类型：<asp:DropDownList ID="ddl_SbType" runat="server">
           </asp:DropDownList>
         </td>
@@ -217,8 +217,7 @@
           <a href="Q_TrademarkApplyOrder.aspx?ordernum=asc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="正序" id="ordernumzhengxu" style="display: none;"><span class="sp2"></span></a>
         </th>
          <th width="9%">
-          案件号<a href="Q_TrademarkApplyOrder.aspx?ordernum=desc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="倒序" id="A1"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Q_TrademarkApplyOrder.aspx?ordernum=asc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="正序" id="A2" style="display: none;"><span class="sp2"></span></a>
+          案件号 
         </th>
         <th width="18%">
             商标注册号
@@ -259,6 +258,7 @@
           <tr align="center">
             <td height="28" align="center">
               <asp:CheckBox ID="cbOrder" runat="server" ToolTip='<%#Eval("i_Id")%>' />
+                <asp:HiddenField ID="hf_oid" runat="server" Value='<%# Eval("TrademarkIds") %>' />
             </td>
             <td align="center">
             <a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
@@ -269,7 +269,8 @@
                     <ItemTemplate>
                     <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
 
-                        <a title="案件号<%# Eval("CaseNo") %>" href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>&orderlist=1" class="ac5t">
+                        <a title="案件号<%# Eval("CaseNo") %>" 
+                        href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>&orderlist=1" class="ac5t">
                                                         <%# Eval("CaseNo")%></a>
                     </div>
                     </ItemTemplate>
@@ -278,9 +279,7 @@
             <td align="center">
               <asp:Repeater runat="server" ID="repProduct">
                 <ItemTemplate>
-                    <a title="商标注册号：<%#Eval("nvc_SBRegNum")%>" href="Q_TrademarkOrderInfo.aspx?id=<%#Eval("i_TrademarkId")%>"><%#Eval("nvc_SBRegNum")%>
-                     </a>
-                    <br />
+                    <%#Eval("RegisteredNo")%>
                 </ItemTemplate>
               </asp:Repeater>
             </td>

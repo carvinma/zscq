@@ -90,6 +90,9 @@ namespace zscq.Model
     partial void Insertt_NewTrademarkOrderDetails(t_NewTrademarkOrderDetails instance);
     partial void Updatet_NewTrademarkOrderDetails(t_NewTrademarkOrderDetails instance);
     partial void Deletet_NewTrademarkOrderDetails(t_NewTrademarkOrderDetails instance);
+    partial void Insertt_NewTrademarkOrderOperateInfos(t_NewTrademarkOrderOperateInfos instance);
+    partial void Updatet_NewTrademarkOrderOperateInfos(t_NewTrademarkOrderOperateInfos instance);
+    partial void Deletet_NewTrademarkOrderOperateInfos(t_NewTrademarkOrderOperateInfos instance);
     #endregion
 		
 		public DataZscqDataContext() : 
@@ -279,6 +282,14 @@ namespace zscq.Model
 			get
 			{
 				return this.GetTable<t_NewTrademarkOrderDetails>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_NewTrademarkOrderOperateInfos> t_NewTrademarkOrderOperateInfos
+		{
+			get
+			{
+				return this.GetTable<t_NewTrademarkOrderOperateInfos>();
 			}
 		}
 	}
@@ -9363,6 +9374,8 @@ namespace zscq.Model
 		
 		private EntitySet<t_NewTrademarkOrderDetails> _t_NewTrademarkOrderDetails;
 		
+		private EntitySet<t_NewTrademarkOrderOperateInfos> _t_NewTrademarkOrderOperateInfos;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -9444,6 +9457,7 @@ namespace zscq.Model
 		public t_NewTrademarkOrder()
 		{
 			this._t_NewTrademarkOrderDetails = new EntitySet<t_NewTrademarkOrderDetails>(new Action<t_NewTrademarkOrderDetails>(this.attach_t_NewTrademarkOrderDetails), new Action<t_NewTrademarkOrderDetails>(this.detach_t_NewTrademarkOrderDetails));
+			this._t_NewTrademarkOrderOperateInfos = new EntitySet<t_NewTrademarkOrderOperateInfos>(new Action<t_NewTrademarkOrderOperateInfos>(this.attach_t_NewTrademarkOrderOperateInfos), new Action<t_NewTrademarkOrderOperateInfos>(this.detach_t_NewTrademarkOrderOperateInfos));
 			OnCreated();
 		}
 		
@@ -10180,6 +10194,19 @@ namespace zscq.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_NewTrademarkOrder_t_NewTrademarkOrderOperateInfos", Storage="_t_NewTrademarkOrderOperateInfos", ThisKey="i_Id", OtherKey="i_OrderId")]
+		public EntitySet<t_NewTrademarkOrderOperateInfos> t_NewTrademarkOrderOperateInfos
+		{
+			get
+			{
+				return this._t_NewTrademarkOrderOperateInfos;
+			}
+			set
+			{
+				this._t_NewTrademarkOrderOperateInfos.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -10207,6 +10234,18 @@ namespace zscq.Model
 		}
 		
 		private void detach_t_NewTrademarkOrderDetails(t_NewTrademarkOrderDetails entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_NewTrademarkOrder = null;
+		}
+		
+		private void attach_t_NewTrademarkOrderOperateInfos(t_NewTrademarkOrderOperateInfos entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_NewTrademarkOrder = this;
+		}
+		
+		private void detach_t_NewTrademarkOrderOperateInfos(t_NewTrademarkOrderOperateInfos entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_NewTrademarkOrder = null;
@@ -10649,6 +10688,229 @@ namespace zscq.Model
 					else
 					{
 						this._i_OrderId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("t_NewTrademarkOrder");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_NewTrademarkOrderOperateInfos")]
+	public partial class t_NewTrademarkOrderOperateInfos : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _i_Id;
+		
+		private int _i_OrderId;
+		
+		private int _i_Type;
+		
+		private string _nvc_Info_1;
+		
+		private int _i_ManagerId;
+		
+		private System.Nullable<System.DateTime> _dt_AddTime;
+		
+		private EntityRef<t_NewTrademarkOrder> _t_NewTrademarkOrder;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oni_IdChanging(int value);
+    partial void Oni_IdChanged();
+    partial void Oni_OrderIdChanging(int value);
+    partial void Oni_OrderIdChanged();
+    partial void Oni_TypeChanging(int value);
+    partial void Oni_TypeChanged();
+    partial void Onnvc_Info_1Changing(string value);
+    partial void Onnvc_Info_1Changed();
+    partial void Oni_ManagerIdChanging(int value);
+    partial void Oni_ManagerIdChanged();
+    partial void Ondt_AddTimeChanging(System.Nullable<System.DateTime> value);
+    partial void Ondt_AddTimeChanged();
+    #endregion
+		
+		public t_NewTrademarkOrderOperateInfos()
+		{
+			this._t_NewTrademarkOrder = default(EntityRef<t_NewTrademarkOrder>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this.Oni_IdChanging(value);
+					this.SendPropertyChanging();
+					this._i_Id = value;
+					this.SendPropertyChanged("i_Id");
+					this.Oni_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_OrderId", DbType="Int NOT NULL")]
+		public int i_OrderId
+		{
+			get
+			{
+				return this._i_OrderId;
+			}
+			set
+			{
+				if ((this._i_OrderId != value))
+				{
+					if (this._t_NewTrademarkOrder.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oni_OrderIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_OrderId = value;
+					this.SendPropertyChanged("i_OrderId");
+					this.Oni_OrderIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Type", DbType="Int NOT NULL")]
+		public int i_Type
+		{
+			get
+			{
+				return this._i_Type;
+			}
+			set
+			{
+				if ((this._i_Type != value))
+				{
+					this.Oni_TypeChanging(value);
+					this.SendPropertyChanging();
+					this._i_Type = value;
+					this.SendPropertyChanged("i_Type");
+					this.Oni_TypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Info_1", DbType="NVarChar(500)")]
+		public string nvc_Info_1
+		{
+			get
+			{
+				return this._nvc_Info_1;
+			}
+			set
+			{
+				if ((this._nvc_Info_1 != value))
+				{
+					this.Onnvc_Info_1Changing(value);
+					this.SendPropertyChanging();
+					this._nvc_Info_1 = value;
+					this.SendPropertyChanged("nvc_Info_1");
+					this.Onnvc_Info_1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_ManagerId", DbType="Int NOT NULL")]
+		public int i_ManagerId
+		{
+			get
+			{
+				return this._i_ManagerId;
+			}
+			set
+			{
+				if ((this._i_ManagerId != value))
+				{
+					this.Oni_ManagerIdChanging(value);
+					this.SendPropertyChanging();
+					this._i_ManagerId = value;
+					this.SendPropertyChanged("i_ManagerId");
+					this.Oni_ManagerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_AddTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dt_AddTime
+		{
+			get
+			{
+				return this._dt_AddTime;
+			}
+			set
+			{
+				if ((this._dt_AddTime != value))
+				{
+					this.Ondt_AddTimeChanging(value);
+					this.SendPropertyChanging();
+					this._dt_AddTime = value;
+					this.SendPropertyChanged("dt_AddTime");
+					this.Ondt_AddTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_NewTrademarkOrder_t_NewTrademarkOrderOperateInfos", Storage="_t_NewTrademarkOrder", ThisKey="i_OrderId", OtherKey="i_Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public t_NewTrademarkOrder t_NewTrademarkOrder
+		{
+			get
+			{
+				return this._t_NewTrademarkOrder.Entity;
+			}
+			set
+			{
+				t_NewTrademarkOrder previousValue = this._t_NewTrademarkOrder.Entity;
+				if (((previousValue != value) 
+							|| (this._t_NewTrademarkOrder.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_NewTrademarkOrder.Entity = null;
+						previousValue.t_NewTrademarkOrderOperateInfos.Remove(this);
+					}
+					this._t_NewTrademarkOrder.Entity = value;
+					if ((value != null))
+					{
+						value.t_NewTrademarkOrderOperateInfos.Add(this);
+						this._i_OrderId = value.i_Id;
+					}
+					else
+					{
+						this._i_OrderId = default(int);
 					}
 					this.SendPropertyChanged("t_NewTrademarkOrder");
 				}
