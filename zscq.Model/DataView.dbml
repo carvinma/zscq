@@ -1507,6 +1507,52 @@
       <Column Name="TrademarkIds" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.vw_NewTrademarkOrderDetails" Member="vw_NewTrademarkOrderDetails">
+    <Type Name="vw_NewTrademarkOrderDetails">
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nvc_SBFile" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="i_TrademarkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dt_PassTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_IsPayState" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_GuoJiId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_SbRegTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_ShenQingShu" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="nvc_WeituoFile" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="nvc_ZhuTiFile" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="nvc_SBRegNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBRegName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBRegEnName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_ShengDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_JiaoFeiType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_SbDaoqiTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_UserTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_NewTrademarkOrderOperateInfos" Member="vw_NewTrademarkOrderOperateInfos">
+    <Type Name="vw_NewTrademarkOrderOperateInfos">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Info_1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nvc_ManagerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_UserNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="nvc_RealName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="i_RegTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_GuoJiId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.vw_NewTrademarkOrder" Member="vw_NewTrademarkOrder">
     <Type Name="vw_NewTrademarkOrder">
       <Column Name="nvc_UserNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
@@ -1554,57 +1600,13 @@
       <Column Name="dm_TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_TMDaiLi" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="dm_TMZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ZengZhiTax" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ShouXuFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="CaseType" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CaseNo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ApplyNo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ApplyName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="TrademarkIds" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.vw_NewTrademarkOrderDetails" Member="vw_NewTrademarkOrderDetails">
-    <Type Name="vw_NewTrademarkOrderDetails">
-      <Column Name="i_OrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="nvc_SBFile" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="i_TrademarkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="dt_PassTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="i_MemberId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="i_State" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_IsPayState" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_GuoJiId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_SbRegTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_ShenQingShu" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="nvc_WeituoFile" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="nvc_ZhuTiFile" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="nvc_SBRegNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBRegName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBRegEnName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="i_ShengDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_JiaoFeiType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_SbDaoqiTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="i_UserTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.vw_NewTrademarkOrderOperateInfos" Member="vw_NewTrademarkOrderOperateInfos">
-    <Type Name="vw_NewTrademarkOrderOperateInfos">
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_Info_1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="nvc_ManagerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_UserNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_Name" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="nvc_RealName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="i_RegTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="i_Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_GuoJiId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

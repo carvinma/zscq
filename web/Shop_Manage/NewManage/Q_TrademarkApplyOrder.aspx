@@ -261,10 +261,10 @@
                 <asp:HiddenField ID="hf_oid" runat="server" Value='<%# Eval("TrademarkIds") %>' />
             </td>
             <td align="center">
-            <a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
+            <a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&tIds=<%# Eval("TrademarkIds") %>">
               <%#Eval("nvc_OrderNumber")%>
             </a></td>
-             <td align="center"><a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&tIds=<%# Eval("TrademarkIds") %>">
+             <td align="center">
                <asp:Repeater runat="server" ID="repTrademark">
                     <ItemTemplate>
                     <div style="text-align: center; width: 100%;height:30px;line-height:30px;">

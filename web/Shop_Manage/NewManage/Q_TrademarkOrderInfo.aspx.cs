@@ -158,6 +158,12 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
             return false;
         }
     }
+    public string ConvertStatus(object applyStatus)
+    {
+        if (applyStatus != null)
+            return BaseDataUtil.tradeMarkOrderStatuslist.Where(p => p.StatusValue == int.Parse(applyStatus.ToString())).First().StatusName;
+        return string.Empty;
+    }
     private void Bind_Page_Info()//绑定订单信息
     {
         if (Request.QueryString["orderid"] != null && Request.QueryString["orderid"].ToString() != "")
@@ -172,9 +178,9 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
 
                 //状态
                 OrderStatus = Order.i_Status;
-                this.Lb_OrderStatus.Text = DALO.Set_TrademarkOrderState(Order.i_Status);
+                this.Lb_OrderStatus.Text = ConvertStatus(Order.i_Status);
 
-                if (Order.i_Status ==0)
+                if (Order.i_Status == 0)
                 {
                     this.Lb_OrderStatus.ForeColor = System.Drawing.Color.Red;
                 }
@@ -220,92 +226,33 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
                     repSB.DataSource = iquery;
                     repSB.DataBind();
                 }
-                int sbdailinum = 0, zhinajinnum = 0;
-                //foreach (var item in iquery)
-                //{
-                //    t_NewTradeMarkInfo v = mark.Trademark_Select_Id(item.i_TrademarkId);
-                //    //if (v != null)
-                //    //{
-                //    //    if (v.i_JiaoFeiType == 2)
-                //    //    {
-                //    //        sbdailinum += 1;
-                //    //        if (v.i_ShengDays < 0)
-                //    //        {
-                //    //            zhinajinnum += 1;
-                //    //        }
-                //    //    }
-                //    //}
-                //}
-                t_TradeMarkSetup model = DALS.TrademarkSetup_Select();//代理费用
-                t_Member mm = DALU.Member_Select_Id(Order.i_MemberId);
-
-                #region 会员折扣 by chy
-                dazhe = mm.i_PowerDaZhe;
-                dal_UserGrade DALUG = new dal_UserGrade();
-                t_MemberGrade tmg = DALUG.UserGrade_Select_Id(mm.i_Grade);
-                if (tmg != null)
+                
+                if (Order.i_IsFaPiao == 1)
                 {
-                    dazhe1 = Convert.ToInt32(tmg.i_Discount);
-                }
-                #endregion
-
-                #region 会员折扣 by chy
-                decimal dalifee = model.dm_TMDaiLi;
-                if (dazhe != 0)
-                {
-                    dalifee = dalifee * dazhe / 100;
-                }
-                if (dazhe1 != 0)
-                {
-                    dalifee = dalifee * dazhe1 / 100;
-                }
-                #endregion
-                if (model != null)
-                {
-                    t_Nationality na = DALN.Nationality_Select_Id(Convert.ToInt32(Order.i_GuoJiId));
-                    if (na != null)
+                    tr_fapiao_1.Visible = true;
+                    tr_fapiao_2.Visible = true;
+                    tr_fapiao_3.Visible = true;
+                    tr_fapiao_4.Visible = true;
+                    //lb_fapiao.Text = "已开发票，发票抬头：" + Order.nvc_FaPiaoTaiTou + "</br>另加3.5%的税收：(" + Order.dm_FapiaoMoney + ")";
+                    lb_fapiao.Text = Order.nvc_FaPiaoTaiTou;
+                    lb_fapiaomoney.Text = Order.dm_TotalMoney.ToString("0.00");
+                    if (Order.i_IsYouJi == 1)
                     {
-                        string bizhong = "";
-                        // lb_huobi.Text = na.nvc_Currency;
-                        if (na.nvc_Name == "中国")
-                        {
-                            guoji = 1;
-                            bizhong = na.nvc_JFBizhong;
-                            string totalmoney = (((dalifee) * sbdailinum) + ((model.dm_TrademarkMoney) * sbdailinum) + ((model.dm_TMZhiNaJin) * zhinajinnum)).ToString("0.00");
-                            string shangbiao = (model.dm_TrademarkMoney * (iquery.Count())).ToString("0.00");
-                            string zhinajin = model.dm_TMZhiNaJin.ToString("0.00");
-
-                            if (Order.i_IsFaPiao == 1)
-                            {
-                                tr_fapiao_1.Visible = true;
-                                tr_fapiao_2.Visible = true;
-                                tr_fapiao_3.Visible = true;
-                                tr_fapiao_4.Visible = true;
-                                //lb_fapiao.Text = "已开发票，发票抬头：" + Order.nvc_FaPiaoTaiTou + "</br>另加3.5%的税收：(" + Order.dm_FapiaoMoney + ")";
-                                lb_fapiao.Text = Order.nvc_FaPiaoTaiTou;
-                                lb_fapiaomoney.Text = Order.dm_TotalMoney.ToString("0.00");
-                                if (Order.i_IsYouJi == 1)
-                                {
-                                    isyouji = true;
-                                    youjifei = Order.dm_YoujiFee.ToString();//国内快递费25
-                                }
-                            }
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">官方商标续展费用：</td><td width=\"110\"> " + Order.dm_TrademarkMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            if (zhinajinnum != 0)
-                            {
-                                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\"> " + Order.dm_TMZhiNaJin + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            }
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费用：</td><td width=\"110\">" + Order.dm_TMDaiLi + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">小计：</td><td width=\"30\">CNY</td><td width=\"100\" align=\"left\">" + totalmoney + "</td></tr>");
-
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">使用优惠券：</td><td width=\"110\">-" + Order.dm_YouHuiFee + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">发票费用：</td><td width=\"110\">" + Order.dm_FapiaoMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">邮寄费用：</td><td width=\"110\">" + youjifei + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                            Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总计：</td><td style='color:red;' width=\"30\"\">CNY</td><td style='color:red;' width=\"100\" id='allmoney'  align=\"left\">" + Order.dm_TotalMoney + "</td></tr>");
-                        }
+                        isyouji = true;
+                        //youjifei = Order.dm_YoujiFee.ToString();//国内快递费25
                     }
                 }
+                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\"> " + Order.dm_TrademarkMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+                if (Order.dm_TMZhiNaJin.HasValue && Order.dm_TMZhiNaJin>0)
+                {
+                    Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\"> " + Order.dm_TMZhiNaJin + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+                }
+                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费：</td><td width=\"110\">" + Order.dm_TMDaiLi + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\">" + Order.dm_ZengZhiTax + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\">" + Order.dm_ShouXuFee + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+                Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">优惠券：</td><td width=\"110\">-" + Order.dm_YouHuiFee + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+                Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总计：</td><td style='color:red;' width=\"30\"\">CNY</td><td style='color:red;' width=\"100\" id='allmoney'  align=\"left\">" + Order.dm_TotalMoney + "</td></tr>");
+
                 //支付方式
                 #region 绑定操作记录
                 repOperateDetail.DataSource = DALTOO.NewOrderOperateInfo_Select(orderid, 0);
@@ -427,7 +374,7 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
                         sb_model.i_XujiaoStates = 2;
                         DateTime t1 = Convert.ToDateTime(sb_model.nvc_SbDaoqiTime).AddYears(10).AddDays(0);
                         //DateTime f1 = Convert.ToDateTime(sb_model.nvc_SbDaoqiTime); 
-                        sb_model.i_ShengDays += Convert.ToInt32(HelpString.DateDiff(t1,Convert.ToDateTime(sb_model.nvc_SbDaoqiTime),  "day"));
+                        sb_model.i_ShengDays += Convert.ToInt32(HelpString.DateDiff(t1, Convert.ToDateTime(sb_model.nvc_SbDaoqiTime), "day"));
                         sb_model.nvc_SbDaoqiTime = t1.ToShortDateString();
                     }
                     DALT.Trademark_Update(sb_model);

@@ -70,6 +70,38 @@ namespace zscq.BLL
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 升级降级
+        /// </summary>
+        /// <param name="Order_Model"></param>
+        /// <param name="CType"></param>
+        /// <returns></returns>
+        public int Member_UpdateGrade(t_NewTrademarkOrder Order_Model, int CType)
+        {
+            try
+            {
+                t_Member Member = DALM.Member_Select_Id(Order_Model.i_MemberId);
+                if (Member != null)
+                {
+                    var iquery = from i in DALO.TrademarkOrder_Select_New_MemberId(Order_Model.i_MemberId) where i.i_Status == 4 select i;
+                    if (iquery.Count() > 0)
+                    {
+                    }
+                    else
+                    {
+                        Member.i_Grade = 1;
+                        DALM.Member_Update(Member);
+                        return 1;
+                    }
+                }
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         /// <summary>
         /// 获取会员级别
         /// </summary>

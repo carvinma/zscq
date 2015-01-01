@@ -137,6 +137,11 @@ namespace zscq.DAL
             var tables = from table in dsdc.t_TrademarkOrder where table.i_MemberId == id select table;
             return tables;
         }
+        public IQueryable<t_NewTrademarkOrder> TrademarkOrder_Select_New_MemberId(int id)
+        {
+            var tables = from table in dsdc.t_NewTrademarkOrder where table.i_MemberId == id select table;
+            return tables;
+        }
         /// <summary>
         /// 根据ID获取订单信息
         /// </summary>

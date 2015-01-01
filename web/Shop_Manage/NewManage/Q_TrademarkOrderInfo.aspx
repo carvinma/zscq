@@ -169,25 +169,25 @@
                     &nbsp;
                 </td>
                 <td width="12%" align="center">
-                    商标注册号
+                    案件号
                 </td>
                 <td width="12%" align="center">
-                    商标申请/委托书
+                    申请人
                 </td>
                 <td width="14%" align="center">
-                    主体资格证明/ 商标注册证书
+                    图样
                 </td>
                 <td width="10%" align="center" height="25">
                     商标类别
                 </td>
                 <td width="20%" align="center" height="25">
-                    商标注册人
+                   金额
                 </td>
                 <td width="20%" align="center" height="25">
-                    商标到期日
+                     申请书
                 </td>
                 <td width="20%" align="center" height="25">
-                    下载
+                    委托书
                 </td>
             </tr>
             <asp:Repeater runat="server" ID="repSB">
@@ -197,31 +197,25 @@
                             <%--<input name="inputPageid" onclick="Selbox(this)" type="checkbox" value='<%#Eval("i_Id") %>' />--%>
                         </td>
                         <td align="center">
-                            <%#Eval("nvc_SBRegNum")%>
+                             <%# Eval("CaseNo")%>
                         </td>
                         <td align="center">
-                            <%#BoolFileImg(Eval("nvc_ShenQingShu")) ? "<img src='../" + Eval("nvc_ShenQingShu") + "' width='60' title='申请书' />" : "未上传"%>
-                            <br />
-                            <%#BoolFileImg(Eval("nvc_WeituoFile")) ? "<img  src='../" + Eval("nvc_WeituoFile") + "' width='60' title='委托书' />" : "未上传"%>
+                            <%# Eval("ApplyName")%>
                         </td>
                         <td align="center">
-                            <%#ZTFileImg(Eval("i_MemberId"), Eval("i_TrademarkId")).Split(',')[0]%>
-                            <br />
-                            <%#BoolFileImg(Eval("nvc_SBFile")) ? "<a href='../" + Eval("nvc_SBFile") + "' target=\"_blank\"><img src='../" + Eval("nvc_SBFile") + "' width='60'  title='商标注册证书复印件' border='0'/></a>" : "未上传"%>
+                             <img alt="" src="../../<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                         </td>
                         <td height="25" align="center" style="color: #C80C1A">
-                            <%#Eval("nvc_SBType")%>
+                            <%# Eval("TrademarkType")%>
                         </td>
                         <td height="25" align="center">
-                            <%# GetGuojiName(Eval("i_GuoJiId")) != "中国" && Convert.ToInt32(Eval("i_UserTypeId")) == 3 ? Eval("nvc_SBRegName") + "<br>" + Eval("nvc_SBRegEnName") : Eval("nvc_SBRegName")%>
+                            <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
                         </td>
                         <td height="25" align="center">
-                            <%#Eval("nvc_SbDaoqiTime")%>
+                            <a href='<%#Eval("ApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
                         </td>
                         <td align="center">
-                            <%#BoolFileImg(Eval("nvc_ShenQingShu")) ? "<a href='../download.aspx?filename=" + Eval("nvc_ShenQingShu") + "' title='申请书'>商标申请书下载</a>" : "未上传"%>
-                            <br />
-                            <%#BoolFileImg(Eval("nvc_WeituoFile")) ? "<a href='../download.aspx?filename=" + Eval("nvc_WeituoFile") + "' title='委托书'>商标委托书下载</a>" : "未上传"%>
+                           <a href='<%#Eval("AgentBook")%>' title='点击下载' target='_blank'>下载</a> 
                         </td>
                     </tr>
                 </ItemTemplate>
