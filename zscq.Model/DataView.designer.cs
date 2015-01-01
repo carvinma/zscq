@@ -557,6 +557,14 @@ namespace zscq.Model
 				return this.GetTable<vw_NewTrademarkOrderDetails>();
 			}
 		}
+		
+		public System.Data.Linq.Table<vw_NewTrademarkOrderOperateInfos> vw_NewTrademarkOrderOperateInfos
+		{
+			get
+			{
+				return this.GetTable<vw_NewTrademarkOrderOperateInfos>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_Help")]
@@ -25214,6 +25222,303 @@ namespace zscq.Model
 				if ((this._i_UserTypeId != value))
 				{
 					this._i_UserTypeId = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_NewTrademarkOrderOperateInfos")]
+	public partial class vw_NewTrademarkOrderOperateInfos
+	{
+		
+		private int _i_Id;
+		
+		private int _i_OrderId;
+		
+		private int _i_Type;
+		
+		private string _nvc_Info_1;
+		
+		private int _i_ManagerId;
+		
+		private System.Nullable<System.DateTime> _dt_AddTime;
+		
+		private string _nvc_ManagerName;
+		
+		private string _nvc_UserNum;
+		
+		private string _nvc_Name;
+		
+		private string _nvc_RealName;
+		
+		private System.Nullable<int> _i_RegTypeId;
+		
+		private int _i_MemberId;
+		
+		private decimal _dm_TotalMoney;
+		
+		private string _nvc_OrderNumber;
+		
+		private int _i_Status;
+		
+		private int _i_GuoJiId;
+		
+		public vw_NewTrademarkOrderOperateInfos()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Id", DbType="Int NOT NULL")]
+		public int i_Id
+		{
+			get
+			{
+				return this._i_Id;
+			}
+			set
+			{
+				if ((this._i_Id != value))
+				{
+					this._i_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_OrderId", DbType="Int NOT NULL")]
+		public int i_OrderId
+		{
+			get
+			{
+				return this._i_OrderId;
+			}
+			set
+			{
+				if ((this._i_OrderId != value))
+				{
+					this._i_OrderId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Type", DbType="Int NOT NULL")]
+		public int i_Type
+		{
+			get
+			{
+				return this._i_Type;
+			}
+			set
+			{
+				if ((this._i_Type != value))
+				{
+					this._i_Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Info_1", DbType="NVarChar(500)")]
+		public string nvc_Info_1
+		{
+			get
+			{
+				return this._nvc_Info_1;
+			}
+			set
+			{
+				if ((this._nvc_Info_1 != value))
+				{
+					this._nvc_Info_1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_ManagerId", DbType="Int NOT NULL")]
+		public int i_ManagerId
+		{
+			get
+			{
+				return this._i_ManagerId;
+			}
+			set
+			{
+				if ((this._i_ManagerId != value))
+				{
+					this._i_ManagerId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dt_AddTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dt_AddTime
+		{
+			get
+			{
+				return this._dt_AddTime;
+			}
+			set
+			{
+				if ((this._dt_AddTime != value))
+				{
+					this._dt_AddTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_ManagerName", DbType="NVarChar(50)")]
+		public string nvc_ManagerName
+		{
+			get
+			{
+				return this._nvc_ManagerName;
+			}
+			set
+			{
+				if ((this._nvc_ManagerName != value))
+				{
+					this._nvc_ManagerName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_UserNum", DbType="NVarChar(50)")]
+		public string nvc_UserNum
+		{
+			get
+			{
+				return this._nvc_UserNum;
+			}
+			set
+			{
+				if ((this._nvc_UserNum != value))
+				{
+					this._nvc_UserNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_Name", DbType="NVarChar(150)")]
+		public string nvc_Name
+		{
+			get
+			{
+				return this._nvc_Name;
+			}
+			set
+			{
+				if ((this._nvc_Name != value))
+				{
+					this._nvc_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_RealName", DbType="NVarChar(150)")]
+		public string nvc_RealName
+		{
+			get
+			{
+				return this._nvc_RealName;
+			}
+			set
+			{
+				if ((this._nvc_RealName != value))
+				{
+					this._nvc_RealName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_RegTypeId", DbType="Int")]
+		public System.Nullable<int> i_RegTypeId
+		{
+			get
+			{
+				return this._i_RegTypeId;
+			}
+			set
+			{
+				if ((this._i_RegTypeId != value))
+				{
+					this._i_RegTypeId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_MemberId", DbType="Int NOT NULL")]
+		public int i_MemberId
+		{
+			get
+			{
+				return this._i_MemberId;
+			}
+			set
+			{
+				if ((this._i_MemberId != value))
+				{
+					this._i_MemberId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dm_TotalMoney", DbType="Decimal(18,2) NOT NULL")]
+		public decimal dm_TotalMoney
+		{
+			get
+			{
+				return this._dm_TotalMoney;
+			}
+			set
+			{
+				if ((this._dm_TotalMoney != value))
+				{
+					this._dm_TotalMoney = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_OrderNumber", DbType="NVarChar(50)")]
+		public string nvc_OrderNumber
+		{
+			get
+			{
+				return this._nvc_OrderNumber;
+			}
+			set
+			{
+				if ((this._nvc_OrderNumber != value))
+				{
+					this._nvc_OrderNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_Status", DbType="Int NOT NULL")]
+		public int i_Status
+		{
+			get
+			{
+				return this._i_Status;
+			}
+			set
+			{
+				if ((this._i_Status != value))
+				{
+					this._i_Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_GuoJiId", DbType="Int NOT NULL")]
+		public int i_GuoJiId
+		{
+			get
+			{
+				return this._i_GuoJiId;
+			}
+			set
+			{
+				if ((this._i_GuoJiId != value))
+				{
+					this._i_GuoJiId = value;
 				}
 			}
 		}

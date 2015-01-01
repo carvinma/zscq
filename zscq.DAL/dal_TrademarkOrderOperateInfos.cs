@@ -67,6 +67,22 @@ namespace zscq.DAL
             iquery = from i in iquery orderby i.dt_AddTime descending select i;
             return iquery;
         }
+        /// <summary>
+        /// 获取操作信息
+        /// </summary>
+        /// <param name="orderID"></param>
+        /// <param name="type">0全部,1发货人及收货人信息</param>
+        /// <returns></returns>
+        public IQueryable<vw_NewTrademarkOrderOperateInfos> NewOrderOperateInfo_Select(int orderID, int type)
+        {
+            var iquery = from t in dvdc.vw_NewTrademarkOrderOperateInfos where t.i_OrderId == orderID select t;
+            if (type != 0)
+            {
+                iquery = from i in iquery where i.i_Type == type select i;
+            }
+            iquery = from i in iquery orderby i.dt_AddTime descending select i;
+            return iquery;
+        }
         public IQueryable<t_TrademarkOrderOperateInfos> OrderOperateInfo_Select_OrderID(int orderID)
         {
             var iquery = from t in dc.t_TrademarkOrderOperateInfos where t.i_OrderId == orderID orderby t.dt_AddTime descending select t;

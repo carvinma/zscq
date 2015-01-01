@@ -71,6 +71,26 @@ namespace zscq.DAL
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 删除指定广告订单
+        /// </summary>
+        /// <param name="i_Id"></param>
+        /// <returns></returns>
+        public int NewTrademarkOrder_Del(int TId)
+        {
+            try
+            {
+                t_NewTrademarkOrder tmodel = dsdc.t_NewTrademarkOrder.FirstOrDefault(u => u.i_Id == TId);
+                dsdc.t_NewTrademarkOrder.DeleteOnSubmit(tmodel);
+                dsdc.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         /// <summary>
         /// 更新订单
         /// </summary>

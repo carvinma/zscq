@@ -17,7 +17,7 @@
     <input type="hidden" id="Hi_OrderId" runat="server" value="0" />
     <input type="hidden" id="Hi_CheckPower" runat="server" value="0" />
     <h1>
-        <span class="action-span"><a href="Q_TrademarkOrder.aspx.aspx?<%=pageurl %>">订单列表</a></span> <span class="action-span1"><a href="../Shop_Index_Main.aspx">管理中心</a> </span><span id="search_id" class="action-span1">- 订单信息 </span>
+        <span class="action-span"><a href="Q_TrademarkApplyOrder.aspx?<%=pageurl %>">订单列表</a></span> <span class="action-span1"><a href="../Shop_Index_Main.aspx">管理中心</a> </span><span id="search_id" class="action-span1">- 订单信息 </span>
         <div style="clear: both">
         </div>
     </h1>

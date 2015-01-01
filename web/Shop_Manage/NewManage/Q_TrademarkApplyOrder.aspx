@@ -16,7 +16,7 @@
     #aspPage_input { margin-bottom: 2px; }
   </style>
    <style type="text/css">
-    #listDiv a { text-decoration: none; }
+    /*#listDiv a { text-decoration: none; }*/ 
     #xuanzhong { color: Red; }
     #listDiv a .sp1 { background: url("../images/shengjiang.png") no-repeat scroll 0 0 transparent; display: inline-block; height: 11px; margin-top: 3px; overflow: hidden; width: 10px; background-position: 0 0px; }
     #listDiv a .sp2 { background: url("../images/shengjiang.png") no-repeat scroll 0 0 transparent; display: inline-block; height: 11px; margin-top: 3px; overflow: hidden; width: 10px; background-position: 0 -11px; }
@@ -264,7 +264,7 @@
             <a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
               <%#Eval("nvc_OrderNumber")%>
             </a></td>
-             <td align="center"><a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
+             <td align="center"><a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&tIds=<%# Eval("TrademarkIds") %>">
                <asp:Repeater runat="server" ID="repTrademark">
                     <ItemTemplate>
                     <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
