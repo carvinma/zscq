@@ -169,7 +169,7 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
                     repSB.DataSource = iquery;
                     repSB.DataBind();
                 }
-                
+
                 if (Order.i_IsFaPiao == 1)
                 {
                     tr_fapiao_1.Visible = true;
@@ -186,7 +186,7 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
                     }
                 }
                 Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\"> " + Order.dm_TrademarkMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-                if (Order.dm_TMZhiNaJin.HasValue && Order.dm_TMZhiNaJin>0)
+                if (Order.dm_TMZhiNaJin.HasValue && Order.dm_TMZhiNaJin > 0)
                 {
                     Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\"> " + Order.dm_TMZhiNaJin + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
                 }
@@ -242,7 +242,7 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
         t_NewTrademarkOrder Order_Model = DALO.NewTrademarkOrder_Select_Id(OrderId);//订单修改
         t_Member member = DALU.Member_Select_Id(Order_Model.i_MemberId);
         string comName = ((Button)sender).CommandName;
-        int? trademarkStatus=null;
+        int? trademarkStatus = null;
         if (!String.IsNullOrEmpty(comName))
         {
             int CType = Convert.ToInt32(comName);
@@ -368,12 +368,12 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
         t_NewTrademarkOrder Order_Model = new dal_TrademarkOrder().NewTrademarkOrder_Select_Id(orderID);
         if (Order_Model != null)
         {
-            if (Order_Model.i_Status < 7)//已取消，已退款订单滚蛋，直接删
-            {
-                #region 会员等级
-                BLLMG.Member_UpdateGrade(Order_Model, 1);
-                #endregion
-            }
+            //if (Order_Model.i_Status < 7)//已取消，已退款订单滚蛋，直接删
+            //{
+            //}
+            #region 会员等级
+            BLLMG.Member_UpdateGrade(Order_Model, 1);
+            #endregion
             new dal_TrademarkOrder().NewTrademarkOrder_Del(orderID);
             Manager.AddLog(0, "商标订单管理", "删除订单");
             Response.Redirect("Q_TrademarkApplyOrder.aspx?" + pageurl);
