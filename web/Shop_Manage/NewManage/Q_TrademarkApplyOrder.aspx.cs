@@ -87,10 +87,7 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         {
             this.txtEndDate.Value = Convert.ToDateTime(Request.QueryString["ETime"]).ToString("yyyy-MM-dd");
         }
-        if (Request.QueryString["RegType"] != null && Request.QueryString["RegType"] != "" && Request.QueryString["RegType"] != "0")
-        {
-            ddl_regtype.SelectedValue = Request.QueryString["RegType"].ToString();
-        }
+        
         if (Request.QueryString["SbType"] != null && Request.QueryString["SbType"] != "" && Request.QueryString["SbType"] != "0")
         {
             ddl_SbType.SelectedValue = Request.QueryString["SbType"].ToString();
@@ -285,7 +282,7 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         Keyword = txtKeyword.Text;
         SType = int.Parse(this.ddlType.SelectedValue);
         TimeType = int.Parse(this.ddlTimeType.SelectedValue);
-        GridView1.DataSource = DALTO.TrademarkOrder_SelectPage(1, 100000000, Keyword, SType, State, int.Parse(ddl_regtype.SelectedValue), int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value, ordernum, username, cname, cbianhao, orderstate, totalmoney, addtime, paytime, ref count);
+       // GridView1.DataSource = DALTO.TrademarkOrder_SelectPage(1, 100000000, Keyword, SType, State, int.Parse(ddl_regtype.SelectedValue), int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value, ordernum, username, cname, cbianhao, orderstate, totalmoney, addtime, paytime, ref count);
         GridView1.DataBind();
         toExecl(GridView1);
         GridView1.DataSource = null;

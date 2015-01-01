@@ -224,44 +224,44 @@
           
         </th>
         <th width="9%">
-          订单号<a href="Shop_M_TrademarkOrder.aspx?ordernum=desc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="倒序" id="ordernumdaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Shop_M_TrademarkOrder.aspx?ordernum=asc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="正序" id="ordernumzhengxu" style="display: none;"><span class="sp2"></span></a>
+          订单号<a href="Shop_M_TrademarkOrder.aspx?ordernum=desc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="倒序" id="ordernumdaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ordernum=asc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="正序" id="ordernumzhengxu" style="display: none;"><span class="sp2"></span></a>
         </th>
          <th width="9%">
-          案件号<a href="Shop_M_TrademarkOrder.aspx?ordernum=desc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="倒序" id="A1"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Shop_M_TrademarkOrder.aspx?ordernum=asc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="正序" id="A2" style="display: none;"><span class="sp2"></span></a>
+          案件号<a href="Shop_M_TrademarkOrder.aspx?ordernum=desc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="倒序" id="A1"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ordernum=asc&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>" title="正序" id="A2" style="display: none;"><span class="sp2"></span></a>
         </th>
         <th width="18%">
             商标注册号
         </th>  
         <th width="8%">
-          会员编号<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&cbianhao=desc" title="倒序" id="cbianhaodaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&cbianhao=asc" title="正序" id="cbianhaozhengxu" style="display: none;"><span class="sp2"></span></a>
+          会员编号<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&cbianhao=desc" title="倒序" id="cbianhaodaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&cbianhao=asc" title="正序" id="cbianhaozhengxu" style="display: none;"><span class="sp2"></span></a>
         </th>
         <th width="8%">
-          会员<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&username=desc" title="倒序" id="usernamedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&username=asc" title="正序" id="usernamezhengxu" style="display: none;"><span class="sp2"></span></a>
+          会员<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&username=desc" title="倒序" id="usernamedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&username=asc" title="正序" id="usernamezhengxu" style="display: none;"><span class="sp2"></span></a>
         </th>
        <th width="8%">
-          联系人姓名<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&cname=desc" title="倒序" id="cnamedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&cname=asc" title="正序" id="cnamezhengxu" style="display: none;"><span class="sp2"></span></a>
+          联系人姓名<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&cname=desc" title="倒序" id="cnamedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&cname=asc" title="正序" id="cnamezhengxu" style="display: none;"><span class="sp2"></span></a>
         </th>
         <th width="9%">
-          订单状态<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&orderstate=desc" title="倒序" id="orderstatedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&orderstate=asc" title="正序" id="orderstatezhengxu" style="display: none;"><span class="sp2"></span></a>
+          订单状态<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&orderstate=desc" title="倒序" id="orderstatedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&orderstate=asc" title="正序" id="orderstatezhengxu" style="display: none;"><span class="sp2"></span></a>
         </th>
         <th width="11%">
           是否使用优惠券
         </th>
         <th width="13%">
-          金额/支付方式<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&totalmoney=desc" title="倒序" id="totalmoneydaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&totalmoney=asc" title="正序" id="totalmoneyzhengxu" style="display: none;"><span class="sp2"></span></a>
+          金额/支付方式<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&totalmoney=desc" title="倒序" id="totalmoneydaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&totalmoney=asc" title="正序" id="totalmoneyzhengxu" style="display: none;"><span class="sp2"></span></a>
         </th>
         <th width="13%">
-          下单<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&addtime=desc" title="倒序" id="addtimedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
-          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&addtime=asc" title="正序" id="addtimezhengxu" style="display: none;"><span class="sp2"></span></a>
+          下单<a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&addtime=desc" title="倒序" id="addtimedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;
+          <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&addtime=asc" title="正序" id="addtimezhengxu" style="display: none;"><span class="sp2"></span></a>
           
-          /付款时间 <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&paytime=desc" title="倒序" id="paytimedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;  <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&paytime=asc" title="正序" id="paytimezhengxu" style="display: none;"><span class="sp2"></span></a>
+          /付款时间 <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&paytime=desc" title="倒序" id="paytimedaoxu"><span class="sp1"></span></a>&nbsp;&nbsp;  <a href="Shop_M_TrademarkOrder.aspx?ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>&paytime=asc" title="正序" id="paytimezhengxu" style="display: none;"><span class="sp2"></span></a>
         </th>
       </tr>
       <asp:Repeater ID="repOrder" runat="server" OnItemDataBound="repOrder_ItemDataBound">
@@ -270,11 +270,20 @@
             <td height="28" align="center">
               <asp:CheckBox ID="cbOrder" runat="server" ToolTip='<%#Eval("i_Id")%>' />
             </td>
-            <td align="center"><a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
+            <td align="center">
+            <a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
               <%#Eval("nvc_OrderNumber")%>
             </a></td>
-             <td align="center"><a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&RegType=<%=ddl_regtype.SelectedValue %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
-              <%#Eval("nvc_OrderNumber")%>
+             <td align="center"><a href="Q_TrademarkOrderInfo.aspx?orderid=<%#Eval("i_Id")%>&ye=<%=ye %>&Keyword=<%=Keyword %>&SType=<%=SType%>&status=<%=State %>&STime=<%=txtStartDate.Value %>&ETime=<%=txtEndDate.Value %>">
+               <asp:Repeater runat="server" ID="repTrademark">
+                    <ItemTemplate>
+                    <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
+
+                        <a title="案件号<%# Eval("CaseNo") %>" href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>&orderlist=1" class="ac5t">
+                                                        <%# Eval("CaseNo")%></a>
+                    </div>
+                    </ItemTemplate>
+                  </asp:Repeater>
             </a></td>
             <td align="center">
               <asp:Repeater runat="server" ID="repProduct">
