@@ -311,9 +311,8 @@
     <table cellpadding="3" cellspacing="1">
       <tr align="left">
         <td bgcolor="#FFFFFF" height="28">
-          <%if (pagedel)
-            { %><input type="checkbox" name="AllDel" value="isOk" onclick="CbxAll(this);" />&nbsp;<input type="button" id="btnDelete" runat="server" value="删除" onclick="xwshow()" class="button" /><%} if (pagechu)
-            { %><asp:Button ID="btnExport" runat="server" Text="导出订单列表" CssClass="button" OnClick="btnExport_Click" /><%} %>
+          <input type="checkbox" name="AllDel" value="isOk" onclick="CbxAll(this);" />&nbsp;<input type="button" id="btnDelete" runat="server" value="删除" onclick="xwshow()" class="button" />
+            <asp:Button ID="btnExport" runat="server" Text="导出订单列表" CssClass="button" OnClick="btnExport_Click" />
         </td>
       </tr>
     </table>

@@ -272,26 +272,6 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         Response.End();
     }
 
-    public string Set_OrderInfo(object OrderId)//返回文本版商品详情
-    {
-        if (OrderId != null)
-        {
-            dal_Trademark DALP = new dal_Trademark();
-            StringBuilder RefStr = new StringBuilder();
-            RefStr.Append("编号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数量&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小计<br/>");
-            IQueryable<t_TrademarkOrderDetails> OD = (IQueryable<t_TrademarkOrderDetails>)new dal_TrademarkOrder().TrademarkOrder_Select_Id(int.Parse(OrderId.ToString()));
-            foreach (var q in OD)
-            {
-                t_Trademark PInfo = DALP.Trademark_Select_Id(q.i_TrademarkId);
-                if (PInfo != null)
-                {
-                    RefStr.Append(PInfo.nvc_SBRegNum + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + PInfo.nvc_SBRegName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>");
-                }
-            }
-            return RefStr.ToString();
-        }
-        return "发生意外";
-    }
     protected void btnExport_Click(object sender, EventArgs e)
     {
         Manager.AddLog(0, "订单管理", "导出商标订单列表");
