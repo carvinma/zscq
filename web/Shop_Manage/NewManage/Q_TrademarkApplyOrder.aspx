@@ -179,8 +179,8 @@
           <asp:DropDownList ID="ddlType" runat="server">
             <asp:ListItem Value="0">所有字段</asp:ListItem>
             <asp:ListItem Value="1">订单号</asp:ListItem>
-            <asp:ListItem Value="2">商标注册号</asp:ListItem>
             <asp:ListItem Value="3">案件号</asp:ListItem>
+            <asp:ListItem Value="2">商标注册号</asp:ListItem>
             <asp:ListItem Value="4">支付方式</asp:ListItem>
             <asp:ListItem Value="5">会员名称</asp:ListItem>
             <asp:ListItem Value="6">会员编号</asp:ListItem>

@@ -111,7 +111,7 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
             this.txtEndDate.Value = Convert.ToDateTime(Request.QueryString["ETime"]).ToString("yyyy-MM-dd");
         }
         
-        if (Request.QueryString["SbType"] != null && Request.QueryString["SbType"] != "" && Request.QueryString["SbType"] != "0")
+        if (Request.QueryString["SbType"] != null && Request.QueryString["SbType"] != "" && Request.QueryString["SbType"] != "-1")
         {
             ddl_SbType.SelectedValue = Request.QueryString["SbType"].ToString();
         }

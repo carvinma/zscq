@@ -612,7 +612,7 @@ namespace zscq.DAL
         {
             var iquery = from i in dvdc.vw_NewTrademarkOrder select i;
             iquery = from i in iquery orderby i.i_Id descending select i;
-            if (status != 0)
+            if (status != -1)
             {
                 iquery = from i in iquery where i.i_Status == status select i;
             }
@@ -664,11 +664,11 @@ namespace zscq.DAL
                     iquery = from i in list.AsQueryable() select i;
                     #endregion
                 }
-                else if (SType == 1)
+                else if (SType == 1) //订单号
                 {
                     iquery = from i in iquery where i.nvc_OrderNumber.Contains(Keyword) select i;
                 }
-                else if (SType == 2)
+                else if (SType == 2) //商标注册号
                 {
                     #region 商标注册号
                     List<vw_NewTrademarkOrder> list = new List<vw_NewTrademarkOrder>();
@@ -687,19 +687,23 @@ namespace zscq.DAL
                     iquery = from i in list.AsQueryable() select i;
                     #endregion
                 }
-                else if (SType == 4)
+                else if (SType == 3) //案件号
                 {
                     iquery = from i in iquery where i.nvc_PayType.Contains(Keyword) select i;
                 }
-                else if (SType == 5)
+                else if (SType == 4) //支付方式
+                {
+                    iquery = from i in iquery where i.nvc_PayType.Contains(Keyword) select i;
+                }
+                else if (SType == 5) //会员名称
                 {
                     iquery = from i in iquery where i.nvc_Name.Contains(Keyword) select i;
                 }
-                else if (SType == 6)
+                else if (SType == 6) //会员编号
                 {
                     iquery = from i in iquery where i.nvc_UserNum.Contains(Keyword) select i;
                 }
-                else if (SType == 7)
+                else if (SType == 7) //操作备注
                 {
                     #region 操作备注
                     List<vw_NewTrademarkOrder> list = new List<vw_NewTrademarkOrder>();
@@ -720,7 +724,7 @@ namespace zscq.DAL
                 }
             }
             
-            if (sbType != 0)
+            if (sbType != -1)
             {
                 iquery = from i in iquery where i.i_UserTypeId == sbType select i;
             }
@@ -743,6 +747,9 @@ namespace zscq.DAL
             {
                 iquery = from i in iquery where SDateTime < i.dt_PayTime && i.dt_PayTime < EDateTime select i;
             }
+
+            #region 排序
+          
             if (ordernum != "")
             {
                 if (ordernum == "desc")
@@ -831,6 +838,7 @@ namespace zscq.DAL
                     iquery = from i in iquery orderby i.dt_PayTime ascending select i;
                 }
             }
+            #endregion
             iquery = from i in iquery select i;
             count = iquery.Count();
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
