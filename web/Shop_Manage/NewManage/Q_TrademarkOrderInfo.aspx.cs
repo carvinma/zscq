@@ -252,7 +252,7 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
             operateModel.i_OrderId = OrderId;
             operateModel.dt_AddTime = System.DateTime.Now;
             operateModel.i_ManagerId = Convert.ToInt32(Request.Cookies["zscqmanage"]["userid"]);
-            operateModel.i_Type = CType + 1;
+            operateModel.i_Type = CType;
             operateModel.nvc_Info_1 = area_beizhu.Value;
 
             DALTOO.NewOrderOperateInfos_Add(operateModel);
@@ -332,7 +332,7 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
                     foreach (var t in iquery)
                     {
                         #region 完成订单：从申请转为续展，计算续展期限日
-                        if (CType == 3) //完成
+                        if (CType == 4) //完成
                         {
                             trademarkStatus = 2;//距续展期限大于90天
                             if (t.i_Type == 0) t.i_Type = 1;//从申请转为续展
@@ -347,7 +347,7 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
                                 t.RegNoticeDate = dt; //注册公告日
                                 t.RenewalDate = dt.AddYears(10);//续展期限日
                             }
-                            t.RestDays = Convert.ToInt32(HelpString.DateDiff(t.RegNoticeDate.Value, DateTime.Today, "day"));
+                            t.RestDays = Convert.ToInt32(HelpString.DateDiff(t.RenewalDate.Value, DateTime.Today, "day"));
                         }
                         #endregion
                         t.Status = trademarkStatus;

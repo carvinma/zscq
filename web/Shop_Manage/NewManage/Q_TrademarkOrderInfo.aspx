@@ -314,7 +314,7 @@
                             <%#Eval("dt_AddTime")%>
                         </td>
                         <td>
-                            <%#Set_OperateState(Eval("i_Type"))%>
+                            <%#ConvertStatus(Eval("i_Type"))%>
                         </td>
                         <td>
                             <%#Eval("nvc_Info_1")%>
