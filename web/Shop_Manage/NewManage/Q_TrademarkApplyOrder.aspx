@@ -297,8 +297,7 @@
             <td>
               <%# Eval("i_IsUseYHQ").ToString()=="1"?Eval("nvc_YouHUIQuan").ToString():"未使用" %>
             </td>
-            <td align="center"><span style="color: #F00; font-weight: bold;">￥<%#Math.Round(Convert.ToDecimal(Eval("dm_TotalMoney")), 2)%></span><br />
-              <%#Eval("nvc_PayType") %></td>
+            <td align="center"><span style="color: #F00; font-weight: bold;">￥<%#Math.Round(Convert.ToDecimal(Eval("dm_TotalMoney")), 2)%></span><br /><%#Eval("nvc_PayType") %></td>
             <td>
               <%# "下单:"+Eval("dt_AddTime")%>
               <br />
@@ -353,7 +352,7 @@
         <td width="230px">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="11" height="27" background="images/ts_bg.jpg"><img src="../images/ts1.jpg" width="11" height="27" /></td>
+              <td width="11" height="27" background="../images/ts_bg.jpg"><img src="../images/ts1.jpg" width="11" height="27" /></td>
               <td align="left" background="../images/ts_bg.jpg" style="color: #FFF; font-size: 14px; line-height: 20px; font-weight: bold;">温馨提示 </td>
               <td width="34" background="../images/ts_bg.jpg"><img alt="取消" src="../images/dingdan2.gif" width="34" height="27" style="cursor: hand;" onclick="divoperation(2,'1')" /></td>
             </tr>
@@ -447,11 +446,6 @@
           <%# Eval("nvc_OrderNumber").ToString() %></ItemTemplate>
       </asp:TemplateField>
       <asp:BoundField DataField="nvc_UserNum" HeaderText="客户编号" />
-      <asp:TemplateField HeaderText="商标类型">
-        <ItemTemplate>
-          <%--<%# GetSBtypeAndName(Eval("i_CountryId").ToString(), Eval("i_UserTypeId").ToString())%>--%>
-        </ItemTemplate>
-      </asp:TemplateField>
       <asp:TemplateField HeaderText="订单状态">
         <ItemTemplate>
           <%# ConvertStatus(Eval("i_Status"))%></ItemTemplate>

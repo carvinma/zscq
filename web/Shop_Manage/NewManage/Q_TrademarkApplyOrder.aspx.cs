@@ -238,7 +238,7 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
             if (cb.Checked)
             {
                 int orderID = Convert.ToInt32(cb.ToolTip);
-                DALTO.TrademarkOrder_Del(orderID);
+                DALTO.NewTrademarkOrder_Del(orderID);
                 Manager.AddLog(0, "商标订单管理", "删除商标订单");
             }
         }
@@ -280,7 +280,8 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         Keyword = txtKeyword.Text;
         SType = int.Parse(this.ddlType.SelectedValue);
         TimeType = int.Parse(this.ddlTimeType.SelectedValue);
-       // GridView1.DataSource = DALTO.TrademarkOrder_SelectPage(1, 100000000, Keyword, SType, State, int.Parse(ddl_regtype.SelectedValue), int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value, ordernum, username, cname, cbianhao, orderstate, totalmoney, addtime, paytime, ref count);
+                             //  DALTO.TrademarkOrder_New_SelectPage(pageCurrent, PageSize, 0, Keyword, SType, State, int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value, ordernum, username, cname, cbianhao, orderstate, totalmoney, addtime, paytime, ref count);
+        GridView1.DataSource = DALTO.TrademarkOrder_New_SelectPage(1, 100000000,0, Keyword, SType, State, int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value, ordernum, username, cname, cbianhao, orderstate, totalmoney, addtime, paytime, ref count);
         GridView1.DataBind();
         toExecl(GridView1);
         GridView1.DataSource = null;
