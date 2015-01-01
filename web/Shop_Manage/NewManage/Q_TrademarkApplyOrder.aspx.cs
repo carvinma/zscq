@@ -165,7 +165,7 @@ public partial class Q_TrademarkApplyOrder : System.Web.UI.Page
         Keyword = txtKeyword.Text; 
         SType = int.Parse(this.ddlType.SelectedValue);    
         TimeType = int.Parse(this.ddlTimeType.SelectedValue);
-        IQueryable query = DALTO.TrademarkOrder_SelectPage(pageCurrent, PageSize, Keyword, SType, State, int.Parse(ddl_regtype.SelectedValue), int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value,ordernum,username,cname,cbianhao,orderstate,totalmoney,addtime,paytime, ref count);
+        IQueryable query = DALTO.TrademarkOrder_New_SelectPage(pageCurrent, PageSize, Keyword, SType, State, int.Parse(ddl_SbType.SelectedValue), TimeType, txtStartDate.Value, txtEndDate.Value, ordernum, username, cname, cbianhao, orderstate, totalmoney, addtime, paytime, ref count);
         this.repOrder.DataSource = query;
         this.repOrder.DataBind();
         aspPage.RecordCount = count;
