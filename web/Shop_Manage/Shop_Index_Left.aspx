@@ -178,7 +178,6 @@
                   <li class="menu-item">&nbsp;<a href="NewManage/L_M_TradeMark.aspx" target="main">商标列表</a></li>
                   <li class="menu-item">&nbsp;<a href="NewManage/M_A_TradeMark.aspx" target="main">申请添加</a></li>
                   <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=1" target="main">续展添加</a></li>
-                  <li class="menu-item">&nbsp;<a href="NewManage/TradeMarkStatus.aspx?type=1" target="main">案件统计</a></li>
               </ul>
             </li>
             <%} if (flag[52][0].ToString() == "1")
