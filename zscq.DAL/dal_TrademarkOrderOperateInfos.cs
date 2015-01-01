@@ -32,6 +32,23 @@ namespace zscq.DAL
         /// 插入数据
         /// </summary>
         /// <param name="model"></param>
+        public int NewOrderOperateInfos_Add(t_NewTrademarkOrderOperateInfos model)
+        {
+            try
+            {
+                dc.t_NewTrademarkOrderOperateInfos.InsertOnSubmit(model);
+                dc.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        /// <summary>
+        /// 插入数据
+        /// </summary>
+        /// <param name="model"></param>
         public int OrderOperateInfos_Add(int OrderId, int ManagerId, int Type, string Beizhu)
         {
             try

@@ -205,10 +205,10 @@
                         <td align="center">
                              <img alt="" src="../../<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                         </td>
-                        <td height="25" align="center" style="color: #C80C1A">
+                        <td height="25" align="center">
                             <%# Eval("TrademarkType")%>
                         </td>
-                        <td height="25" align="center">
+                        <td height="25" align="center" style="color: #C80C1A">
                             <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
                         </td>
                         <td height="25" align="center">
@@ -236,10 +236,10 @@
                                     <tr>
                                         <td height="59" align="right">
                                             <table width="440" border="0" cellspacing="0" cellpadding="0">
-                                                <%=Str_Money %>
+                                                <%--<input name="inputPageid" onclick="Selbox(this)" type="checkbox" value='<%#Eval("i_Id") %>' />--%>
                                             </table>
                                             <table width="440" border="0" cellspacing="0" cellpadding="0">
-                                                <%=Str_AllMoney%>
+                                                <%# Eval("CaseNo")%>
                                             </table>
                                         </td>
                                         <td width="30">
@@ -271,11 +271,21 @@
                     <strong>可执行操作：</strong>
                 </td>
                 <td>
-                    <asp:Button ID="Bt_Confirm" runat="server" Text="处理" CssClass="button" OnClick="btnOperate_Click" CommandName="0" Visible="false" OnClientClick="return scheck()" />
-                    <asp:Button ID="Bt_Pay" runat="server" Text="后台付款" CssClass="button" OnClick="btnOperate_Click" CommandName="1" Visible="false" OnClientClick="return scheck()" />
-                    <asp:Button ID="Bt_Ok" runat="server" Text="确认" CssClass="button" OnClick="btnOperate_Click" CommandName="2" Visible="false" OnClientClick="return scheck()" />
-                    <asp:Button ID="Bt_shenhe" runat="server" Text="已完成" CssClass="button" OnClick="btnOperate_Click" CommandName="3" Visible="false" OnClientClick="return scheck()" />
-                    <asp:Button ID="Bt_Esc" runat="server" Text="取消订单" CssClass="button" OnClick="btnOperate_Click" CommandName="4" Visible="false" OnClientClick="return scheck()" />
+                    <asp:Button ID="btnNoPay" runat="server" Text="未支付" CssClass="button" 
+                        OnClick="btnOperate_Click" CommandName="0"  
+                        OnClientClick="return scheck()" />
+                    <asp:Button ID="btnPay" runat="server" Text="已支付" CssClass="button" 
+                        OnClick="btnOperate_Click" CommandName="1"  
+                        OnClientClick="return scheck()" />
+                    <asp:Button ID="btnIdeal" runat="server" Text="处理中" CssClass="button" 
+                        OnClick="btnOperate_Click" CommandName="2"  
+                        OnClientClick="return scheck()" />
+                    <asp:Button ID="btnComplete" runat="server" Text="已完成" CssClass="button" 
+                        OnClick="btnOperate_Click" CommandName="4"  
+                        OnClientClick="return scheck()" />
+                    <asp:Button ID="btnEsc" runat="server" Text="取消订单" CssClass="button" 
+                        OnClick="btnOperate_Click" CommandName="3"   
+                        OnClientClick="return scheck()" />
                 </td>
             </tr>
         </table>
@@ -317,10 +327,7 @@
             <tr>
                 <td align="center">
                     <asp:Button ID="lbtnDelete" runat="server" OnClientClick="return confirm('您确定进行删除操作吗？')" OnClick="lbtnDelete_Click" Text="删除订单" CssClass="button"></asp:Button>
-                    <%--<input type="button" value="导出购物清单" class="button" onclick="daochuxls('gw','<%= Hi_OrderId.Value%>')" />
-          <input type="button" value="导出快递单"class="button"  onclick="daochuxls('kd','<%= Hi_OrderId.Value%>')" />--%>
-                    <%--<a id="dayina" href="Shop_OrderPrint.aspx?orderid=<%=Request.QueryString["orderid"] %>" target="_blank">
-          <input type="button" value="打印订单" class="button" onclick="javascript:document.getElementById('dayina').click();" /></a>--%>
+                    <%# Eval("ApplyName")%>                    <%# Eval("TrademarkType")%>
                     <input name="Submit8" type="button" value="返回" onclick="javascript:window.location='Shop_M_TrademarkOrder.aspx?<%=pageurl %>';" class="button" />
                 </td>
             </tr>

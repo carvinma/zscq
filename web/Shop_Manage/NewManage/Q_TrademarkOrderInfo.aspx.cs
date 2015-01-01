@@ -101,63 +101,6 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
             Bind_Page_Info();
         }
     }
-    public string ZTFileImg(object Uid, object tid)
-    {
-        string filestr = "未上传";
-        if (Uid != null)
-        {
-            var m = DALM.Member_Select_Id(int.Parse(Uid.ToString()));
-            if (m.i_UserTypeId == 3)
-            {
-                if (tid != null)
-                {
-                    t_Trademark t = DALT.Trademark_Select_Id(int.Parse(tid.ToString()));
-                    if (t != null)
-                    {
-                        if (t.nvc_ZhuTiFile != null)
-                        {
-                            filestr = "<a href='../" + t.nvc_ZhuTiFile + "' title='主体资格证明文件'><img src='../" + t.nvc_ZhuTiFile + "' width='60'  title='主体资格证书' border='0'/></a>";
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (m != null && !string.IsNullOrWhiteSpace(m.nvc_ZhuTiFile))
-                {
-                    filestr = "<a href='../" + m.nvc_ZhuTiFile + "' title='主体资格证明文件'><img src='../" + m.nvc_ZhuTiFile + "' width='60'  title='主体资格证书' border='0'/></a>";
-
-                }
-                else
-                {
-                    if (tid != null)
-                    {
-                        t_Trademark t = DALT.Trademark_Select_Id(int.Parse(tid.ToString()));
-                        if (t != null)
-                        {
-                            if (t.nvc_ZhuTiFile != null)
-                            {
-                                filestr = "<a href='../" + t.nvc_ZhuTiFile + "' title='主体资格证明文件'><img src='../" + t.nvc_ZhuTiFile + "' width='60'  title='主体资格证书' border='0'/></a>";
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
-        return filestr;
-    }
-    public bool BoolFileImg(object fileurl)
-    {
-        if (fileurl != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
     public string ConvertStatus(object applyStatus)
     {
         if (applyStatus != null)
@@ -263,24 +206,24 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
                 switch (OrderStatus)
                 {
                     case 0:
-                        this.Bt_Confirm.Visible = true;
-                        this.Bt_Esc.Visible = false;
+                        this.btnNoPay.Visible = true;
+                        this.btnEsc.Visible = false;
                         break;
                     case 1:
-                        this.Bt_Pay.Visible = true;
-                        this.Bt_Esc.Visible = true;
+                        this.btnPay.Visible = true;
+                        this.btnEsc.Visible = true;
 
                         break;
                     case 2:
-                        this.Bt_Ok.Visible = true;
-                        this.Bt_Esc.Visible = true;
+                        this.btnIdeal.Visible = true;
+                        this.btnEsc.Visible = true;
                         break;
                     case 3:
-                        this.Bt_shenhe.Visible = true;
-                        this.Bt_Esc.Visible = true;
+                        this.btnComplete.Visible = true;
+                        this.btnEsc.Visible = true;
                         break;
                     case 4:
-                        this.Bt_Esc.Visible = true;
+                        this.btnEsc.Visible = true;
                         break;
 
                 }
@@ -299,53 +242,44 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
         t_NewTrademarkOrder Order_Model = DALO.NewTrademarkOrder_Select_Id(OrderId);//订单修改
         t_Member member = DALU.Member_Select_Id(Order_Model.i_MemberId);
         string comName = ((Button)sender).CommandName;
+        int? trademarkStatus=null;
         if (!String.IsNullOrEmpty(comName))
         {
             int CType = Convert.ToInt32(comName);
 
             #region 订单操作记录
-            t_TrademarkOrderOperateInfos operateModel = new t_TrademarkOrderOperateInfos();
+            t_NewTrademarkOrderOperateInfos operateModel = new t_NewTrademarkOrderOperateInfos();
             operateModel.i_OrderId = OrderId;
             operateModel.dt_AddTime = System.DateTime.Now;
             operateModel.i_ManagerId = Convert.ToInt32(Request.Cookies["zscqmanage"]["userid"]);
             operateModel.i_Type = CType + 1;
             operateModel.nvc_Info_1 = area_beizhu.Value;
 
-            DALTOO.OrderOperateInfos_Add(operateModel);
+            DALTOO.NewOrderOperateInfos_Add(operateModel);
             #endregion
 
             #region 状态
-            Order_Model.i_Status = CType + 1;
-            #region 待付款
-            if (CType == 1)//待付款
+            Order_Model.i_Status = CType;
+            #region 未支付
+            if (CType == 0)//未支付
             {
-                var result = DALTOD.OrderDetails_vw_Select_OrderId(OrderId);
-                foreach (var r in result)
-                {
-                    t_Trademark sb_model = DALT.Trademark_Select_Id(r.i_TrademarkId);
-                    if (sb_model.i_IsPayState == 2)
-                    {
-                        sb_model.i_XujiaoStates = 2;
-                    }
-                    else
-                    {
-                        sb_model.i_IsPayState = 1;
-                    }
-                    DALT.Trademark_Update(sb_model);
-                }
+                trademarkStatus = 1;//申请中，未汇款
             }
             #endregion
-            #region 付款
-            if (CType == 2)//付款
+            #region 已支付
+            if (CType == 1)//已支付
             {
                 Order_Model.dt_PayTime = DateTime.Now;
+                trademarkStatus = 2;//申请中，已汇款
             }
             #endregion
             #region 完成
             if (CType == 3)
             {
+                trademarkStatus = 2;//距续展期限大于90天
                 if (Order_Model.nvc_PayType == "线下汇款" && Order_Model.i_JiFen > 0)
                 {
+                    //积分手机号码信息表 --商标用户ID
                     t_IntegralMobile im = DALIM.IntegralMobile_SelectByMemberId(Order_Model.i_MemberId);
                     if (im != null)
                     {
@@ -355,35 +289,12 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
                         Order_Model.i_JiFen = 0;
                     }
                 }
-
-                var result = DALTOD.OrderDetails_vw_Select_OrderId(OrderId);
-                foreach (var r in result)
-                {
-                    t_Trademark sb_model = DALT.Trademark_Select_Id(r.i_TrademarkId);
-                    if (sb_model.i_IsPayState == 2)
-                    {
-                        sb_model.i_XujiaoStates = 2;
-                        DateTime t1 = Convert.ToDateTime(sb_model.nvc_SbDaoqiTime).AddYears(10).AddDays(0);
-                        //DateTime f1 = Convert.ToDateTime(sb_model.nvc_SbDaoqiTime); 
-                        sb_model.i_ShengDays += Convert.ToInt32(HelpString.DateDiff(t1, Convert.ToDateTime(sb_model.nvc_SbDaoqiTime), "day"));
-                        sb_model.nvc_SbDaoqiTime = t1.ToShortDateString();
-                    }
-                    else
-                    {
-                        sb_model.i_IsPayState = 2;
-                        sb_model.i_XujiaoStates = 2;
-                        DateTime t1 = Convert.ToDateTime(sb_model.nvc_SbDaoqiTime).AddYears(10).AddDays(0);
-                        //DateTime f1 = Convert.ToDateTime(sb_model.nvc_SbDaoqiTime); 
-                        sb_model.i_ShengDays += Convert.ToInt32(HelpString.DateDiff(t1, Convert.ToDateTime(sb_model.nvc_SbDaoqiTime), "day"));
-                        sb_model.nvc_SbDaoqiTime = t1.ToShortDateString();
-                    }
-                    DALT.Trademark_Update(sb_model);
-                }
             }
             #endregion
             #region 取消订单
             if (CType == 4)//取消订单  优惠券取消
             {
+                trademarkStatus = 0;//已保存，未提交
                 if (Order_Model.i_IsUseYHQ == 1)
                 {
                     if (Order_Model.nvc_YHQIdstr != null || Order_Model.nvc_YHQIdstr != "")
@@ -403,62 +314,41 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
                         }
                     }
                 }
-                var result = DALTOD.OrderDetails_vw_Select_OrderId(OrderId);
-                foreach (var r in result)
-                {
-                    t_Trademark sb_model = DALT.Trademark_Select_Id(r.i_TrademarkId);
-                    sb_model.i_IsPayState = 4;
-                    DALT.Trademark_Update(sb_model);
-                }
-
             }
             #endregion
             #endregion
 
+            if (!string.IsNullOrEmpty(Request.QueryString["tIds"]) && trademarkStatus.HasValue)
+            {
+                string[] tIds = Request.QueryString["tIds"].Split(',');
+                var iquery = mark.Trademark_web_Excel(tIds);
+                foreach (var t in iquery)
+                {
+                    #region 完成订单：从申请转为续展，计算续展期限日
+                    if (CType == 3) //完成
+                    {
+                        trademarkStatus = 2;//距续展期限大于90天
+                        if (t.i_Type == 0) t.i_Type = 1;//从申请转为续展
+                       
+                        if (t.RenewalDate.HasValue)
+                        {
+                            t.RenewalDate = t.RenewalDate.Value.AddYears(0); //续展期限日
+                        }
+                        else
+                        { 
+                             DateTime dt=DateTime.Today;
+                             t.RegNoticeDate = dt; //注册公告日
+                             t.RenewalDate = dt.AddYears(10);//续展期限日
+                        }
+                        t.RestDays=Convert.ToInt32(HelpString.DateDiff(t.RegNoticeDate.Value, DateTime.Today, "day"));
+                    }
+                    #endregion
+                    t.Status = trademarkStatus;
+                }
+                mark.Trademark_Submit();
+            }
             DALO.TrademarkOrder_Update(Order_Model);
-            Manager.AddLog(0, "订单管理", "更改订单" + Order_Model.nvc_OrderNumber + "状态为" + DALO.Set_TrademarkOrderState(Order_Model.i_Status));
-
-            #region 发短信
-            //switch (CType)
-            //{
-            //    case 2:
-            //        {
-            //            t_SystemKey sk = DALSK.SystemKey_Select_Key("i_OrderPay");
-            //            if (sk.i_Value == 1)
-            //            {
-            //                sk = DALSK.SystemKey_Select_Key("nvc_OrderPay");
-            //                string smsContent = sk.nt_Value.Replace("Order", Order_Model.nvc_OrderNumber);
-            //                bool Tref = true;
-            //                BLLMS.Message_Add(Order_Model.nvc_Address_MobilePhone, smsContent, "订单付款", Order_Model.i_MemberId, ref Tref);
-            //            }
-            //        }
-            //        break;
-            //    case 4:
-            //        {
-            //            t_SystemKey sk = DALSK.SystemKey_Select_Key("i_OrderSendGood");
-            //            if (sk.i_Value == 1)
-            //            {
-            //                sk = DALSK.SystemKey_Select_Key("nvc_OrderSendGood");
-            //                string smsContent = sk.nt_Value.Replace("Order", Order_Model.nvc_OrderNumber);
-            //                bool Tref = true;
-            //                BLLMS.Message_Add(Order_Model.nvc_Address_MobilePhone, smsContent, "订单生产", Order_Model.i_MemberId, ref Tref);
-            //            }
-            //        }
-            //        break;
-            //    case 5:
-            //        {
-            //            t_SystemKey sk = DALSK.SystemKey_Select_Key("i_OrderGetGood");
-            //            if (sk.i_Value == 1)
-            //            {
-            //                sk = DALSK.SystemKey_Select_Key("nvc_OrderGetGood");
-            //                string smsContent = sk.nt_Value.Replace("Order", Order_Model.nvc_OrderNumber);
-            //                bool Tref = true;
-            //                BLLMS.Message_Add(Order_Model.nvc_Address_MobilePhone, smsContent, "订单配送", Order_Model.i_MemberId, ref Tref);
-            //            }
-            //        }
-            //        break;
-            //}
-            #endregion
+            Manager.AddLog(0, "订单管理", "更改订单" + Order_Model.nvc_OrderNumber + "状态为" + ConvertStatus(Order_Model.i_Status));
 
             Response.Redirect(Request.Url.ToString());
         }
@@ -484,132 +374,5 @@ public partial class Q_TrademarkOrderInfo : System.Web.UI.Page
     public string Set_OperateState(object obj)//操作信息的状态
     {
         return DALTOO.Set_OperateState(obj);
-    }
-    protected void Button2_Click(object sender, EventArgs e)
-    {
-    }
-    public void CreateExcel(DataTable dt, string FileName, HttpResponse response)
-    {
-        HttpResponse resp;
-        resp = response;
-        FileName = System.Web.HttpUtility.UrlEncode(System.Text.Encoding.UTF8.GetBytes(FileName));
-        resp.ContentEncoding = System.Text.Encoding.GetEncoding("gb2312");
-        resp.AppendHeader("Content-Disposition", "attachment;filename=" + FileName + ".txt");
-        //string colHeaders = "";
-        string ls_item = "";
-
-        //定义表对象与行对象，同时用DataSet对其值进行初始化 
-
-        DataRow[] myRow = dt.Select();//可以类似dt.Select("id>10")之形式达到数据目的
-        int i = 0;
-        int cl = dt.Columns.Count;
-
-        //取得数据表各列标题，各标题之间以t分割，最后一个列标题后加回车符 
-        //for (i = 0; i < cl; i++)
-        //{
-        //    if (i == (cl - 1))//最后一列，加n
-        //    {
-        //        colHeaders += dt.Columns[i].Caption.ToString().Replace("\n", " ").Replace("\"", "\"\"") + "\r\n";
-        //    }
-        //    else
-        //    {
-        //        colHeaders += dt.Columns[i].Caption.ToString().Replace("\n", " ").Replace("\"", "\"\"") + "\t";
-        //    }
-
-        //}
-        //resp.Write(colHeaders);
-        //向HTTP输出流中写入取得的数据信息 
-
-        //逐行处理数据   
-        foreach (DataRow row in myRow)
-        {
-            //当前行数据写入HTTP输出流，并且置空ls_item以便下行数据
-            for (i = 0; i < cl; i++)
-            {
-                if (i == (cl - 1))//最后一列，加n
-                {
-                    ls_item += row[i].ToString().Replace("\n", " ").Replace("\"", "\"\"") + "\r\n";
-                }
-                else
-                {
-                    ls_item += row[i].ToString().Replace("\n", " ").Replace("\"", "\"\"") + "\t";
-                }
-            }
-            resp.Write(ls_item);
-            ls_item = "";
-        }
-        resp.End();
-    }
-    public string Set_City(object CityId)
-    {
-        dal_Address DALA = new dal_Address();
-        if (CityId != null)
-        {
-            t_City city = DALA.City_Select_Id(Convert.ToInt32(CityId));
-            if (city != null)
-            {
-                if (city.cityName != null && city.cityName != "市辖区" && city.cityName != "县")
-                {
-                    return city.cityName;
-                }
-                else
-                {
-                    t_Province Pro = DALA.Province_Select_Id(city.provinceID);
-                    if (Pro != null)
-                    {
-                        return Pro.provinceName;
-                    }
-                }
-            }
-        }
-        return "";
-    }
-    public string Set_ProductGuigeValue(object GuigeType1, object Guige1, object GuigeType2, object Guige2, object GuigeType3, object Guige3)
-    {
-        string ret = "";
-        if (GuigeType1 != null)
-        {
-            ret += GuigeType1 + "：" + Guige1;
-        }
-        if (GuigeType2 != null)
-        {
-            ret += "&nbsp;&nbsp;" + GuigeType2 + "：" + Guige2;
-        }
-        if (GuigeType3 != null)
-        {
-            ret += "&nbsp;&nbsp;" + GuigeType3 + "：" + Guige3;
-        }
-        return ret;
-    }
-    public string Set_Return(object ReturnState, object ReturnNumber, object Returnyuanyin, object ReturnTime)
-    {
-        try
-        {
-            string ret = "";
-            if (ReturnState != null)
-            {
-                switch (ReturnState.ToString())
-                {
-                    case "1":
-                        ret += "（退货申请中）";
-                        break;
-                    case "2":
-                        ret += "（退货已通过）";
-                        break;
-                    case "3":
-                        ret += "（退货未通过）";
-                        break;
-                    case "4":
-                        ret += "（退货已取消）";
-                        break;
-                }
-                ret += "<br>退货数量：" + ReturnNumber.ToString();
-                ret += "<br>退货原因：" + Returnyuanyin.ToString();
-                ret += "</br>申请时间：" + ReturnTime;
-                return ret;
-            }
-        }
-        catch { }
-        return "";
     }
 }

@@ -84,6 +84,7 @@ namespace zscq.BLL
                 t_Member Member = DALM.Member_Select_Id(Order_Model.i_MemberId);
                 if (Member != null)
                 {
+                    //4，已完成
                     var iquery = from i in DALO.TrademarkOrder_Select_New_MemberId(Order_Model.i_MemberId) where i.i_Status == 4 select i;
                     if (iquery.Count() > 0)
                     {
