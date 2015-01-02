@@ -109,12 +109,12 @@
                     <%=bankpay%>
                 </td>
             </tr>
-            <tr>
+            <tr style="display:none">
                 <td height="25" align="right" id="huikuan" runat="server" visible="false">
                     汇款帐号：
                 </td>
                 <td>
-                    <asp:Literal ID="Ltl_PayType" runat="server"></asp:Literal>
+                    
                 </td>
             </tr>
             <tr id="tr_fapiao2" runat="server" visible="false">
@@ -158,6 +158,8 @@
                 </td>
             </tr>
         </table>
+         <table><tr><td><asp:Literal ID="Ltl_PayType" runat="server"></asp:Literal>
+        </td></tr></table>
         <table cellspacing='1' cellpadding='3'>
             <tr>
                 <th colspan="9">

@@ -131,17 +131,45 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
                 bankpay = Order.nvc_PayType;
                 if (Order.nvc_PayType == "线下汇款")
                 {
-                    huikuan.Visible = true;
-                    string str = "";
+                    //huikuan.Visible = true;
+                    //string str = "";
+                    //for (int i = 0; i < Order.nvc_BankId.Split(',').Length; i++)
+                    //{
+                    //    t_Bank tb = DALB.Bank_Select_Id(Convert.ToInt32(Order.nvc_BankId.Split(',')[i]));
+                    //    if (tb != null)
+                    //    {
+                    //        str += "&nbsp;开户行：" + tb.nvc_BankDetails + "&nbsp;用户：" + tb.nvc_AccountName + "&nbsp;卡号：" + tb.nvc_BankNumber + "<br/>";
+                    //    }
+                    //}
+                    //Ltl_PayType.Text = str;
+                    StringBuilder yinhang = new StringBuilder();
+                    #region 邮件中的银行信息
+                    yinhang.Append("<div class='list-div'>");
+                    yinhang.Append("<table width='100%'>");
+                    yinhang.Append("<tr><th colspan='4'>银行信息</td></tr>");
+                    yinhang.Append("<tr>");
+                    //yinhang.Append("<td width='25%' height='28' align='center'><strong>银行类型</strong></td>");
+                    yinhang.Append("<td width='40%' height='28' align='center'><strong>开户银行</strong></td>");
+                    yinhang.Append("<td width='30%' height='28' align='center'><strong>户名</strong></td>");
+                    yinhang.Append("<td width='30%' height='28' align='center'><strong>卡号</strong></td>");
+                    yinhang.Append("</tr>");
                     for (int i = 0; i < Order.nvc_BankId.Split(',').Length; i++)
                     {
                         t_Bank tb = DALB.Bank_Select_Id(Convert.ToInt32(Order.nvc_BankId.Split(',')[i]));
                         if (tb != null)
                         {
-                            str += "&nbsp;开户行：" + tb.nvc_BankDetails + "&nbsp;用户：" + tb.nvc_AccountName + "&nbsp;卡号：" + tb.nvc_BankNumber + "<br/>";
+                            yinhang.Append("<tr>");
+                            //yinhang.Append("<td width='25%' height='28' align='center'>" + tb.nvc_BankName + "</td>");
+                            yinhang.Append("<td width='40%' height='28' align='center'>" + tb.nvc_BankDetails + "</td>");
+                            yinhang.Append("<td width='30%' height='28' align='center'>" + tb.nvc_AccountName + "</td>");
+                            yinhang.Append("<td width='30%' height='28' align='center'>" + tb.nvc_BankNumber + "</td>");
+                            yinhang.Append("</tr>");
                         }
                     }
-                    Ltl_PayType.Text = str;
+                    yinhang.Append("</table>");
+                    yinhang.Append("</div>");
+                    #endregion
+                    Ltl_PayType.Text = "<br/>" + yinhang.ToString();
                 }
 
                 string message = "";
