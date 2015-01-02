@@ -3125,6 +3125,10 @@ namespace zscq.Model
 		
 		private System.Nullable<bool> _IsReceiveEmail;
 		
+		private System.Nullable<int> _i_SendEmail;
+		
+		private System.Nullable<int> _i_SendMessage;
+		
 		private string _Remark;
 		
 		private System.Nullable<int> _Status;
@@ -3227,6 +3231,10 @@ namespace zscq.Model
     partial void OnIsShowChanged();
     partial void OnIsReceiveEmailChanging(System.Nullable<bool> value);
     partial void OnIsReceiveEmailChanged();
+    partial void Oni_SendEmailChanging(System.Nullable<int> value);
+    partial void Oni_SendEmailChanged();
+    partial void Oni_SendMessageChanging(System.Nullable<int> value);
+    partial void Oni_SendMessageChanged();
     partial void OnRemarkChanging(string value);
     partial void OnRemarkChanged();
     partial void OnStatusChanging(System.Nullable<int> value);
@@ -4138,6 +4146,46 @@ namespace zscq.Model
 					this._IsReceiveEmail = value;
 					this.SendPropertyChanged("IsReceiveEmail");
 					this.OnIsReceiveEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_SendEmail", DbType="Int")]
+		public System.Nullable<int> i_SendEmail
+		{
+			get
+			{
+				return this._i_SendEmail;
+			}
+			set
+			{
+				if ((this._i_SendEmail != value))
+				{
+					this.Oni_SendEmailChanging(value);
+					this.SendPropertyChanging();
+					this._i_SendEmail = value;
+					this.SendPropertyChanged("i_SendEmail");
+					this.Oni_SendEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_SendMessage", DbType="Int")]
+		public System.Nullable<int> i_SendMessage
+		{
+			get
+			{
+				return this._i_SendMessage;
+			}
+			set
+			{
+				if ((this._i_SendMessage != value))
+				{
+					this.Oni_SendMessageChanging(value);
+					this.SendPropertyChanging();
+					this._i_SendMessage = value;
+					this.SendPropertyChanged("i_SendMessage");
+					this.Oni_SendMessageChanged();
 				}
 			}
 		}
