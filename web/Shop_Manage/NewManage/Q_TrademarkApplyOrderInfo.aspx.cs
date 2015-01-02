@@ -337,17 +337,19 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
                             trademarkStatus = 2;//距续展期限大于90天
                             if (t.i_Type == 0) t.i_Type = 1;//从申请转为续展
 
+                            DateTime dt = DateTime.Today;
                             if (t.RenewalDate.HasValue)
                             {
+                                dt = t.RenewalDate.Value;
                                 t.RenewalDate = t.RenewalDate.Value.AddYears(0); //续展期限日
                             }
                             else
                             {
-                                DateTime dt = DateTime.Today;
                                 t.RegNoticeDate = dt; //注册公告日
                                 t.RenewalDate = dt.AddYears(10);//续展期限日
                             }
                             t.RestDays = Convert.ToInt32(HelpString.DateDiff(t.RenewalDate.Value, DateTime.Today, "day"));
+                            addRegNoticeData(t.i_Id,dt, t.RenewalDate.Value);
                         }
                         #endregion
                         t.Status = trademarkStatus;
@@ -363,28 +365,21 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
     }
 
     //续展日期添加
-    private void addRegNoticeData(int trademarkid)
+    private void addRegNoticeData(int trademarkid, DateTime RegNoticeBeginDate, DateTime RegNoticeEndDate) 
     {
-        //string xzDate = hi_RegNoticeDate.Value.Trim();
-        //if (!string.IsNullOrEmpty(xzDate))
-        //{
-        //    List<t_NewTradeMarkRenewalInfo> list = new List<t_NewTradeMarkRenewalInfo>();
-        //    string[] liststr = xzDate.Split('|');
-        //    for (int i = 0; i < liststr.Length - 1; i++)
-        //    {
-        //        t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
-        //        string[] RenewalDate = liststr[i].Split('_');
-        //        renewalModel.TradeMarkId = trademarkid;
-        //        renewalModel.RenewalDate = DateTime.Parse(RenewalDate[0]);
-        //        renewalModel.IsFinish = RenewalDate[1] == "1" ? true : false;
-        //        list.Add(renewalModel);
-        //    }
-        //    if (list.Count > 0)
-        //    {
-        //        mark.TrademarkRenewalDate_Add(list, trademarkid);
-        //    }
-
-        //}
+        List<t_NewTradeMarkRenewalInfo> list = new List<t_NewTradeMarkRenewalInfo>();
+        for (DateTime dt = RegNoticeBeginDate; dt <= RegNoticeEndDate; dt.AddYears(10))
+        {
+            t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
+            renewalModel.TradeMarkId = trademarkid;
+            renewalModel.RenewalDate = dt;
+            renewalModel.IsFinish = dt == RegNoticeEndDate? false:true;
+            list.Add(renewalModel);
+        }
+        if (list.Count > 0)
+        {
+            mark.TrademarkRenewalDate_Add(list, trademarkid);
+        }
     }
 
     protected void lbtnDelete_Click(object sender, EventArgs e)//删除订单
