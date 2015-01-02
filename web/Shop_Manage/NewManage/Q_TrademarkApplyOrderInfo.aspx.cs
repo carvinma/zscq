@@ -205,26 +205,26 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
                 #region 按钮设置
                 switch (OrderStatus)
                 {
-                    case 0:
-                        this.btnNoPay.Visible = true;
-                        this.btnEsc.Visible = false;
-                        break;
-                    case 1:
-                        this.btnPay.Visible = true;
-                        this.btnEsc.Visible = true;
+                    //case 0:
+                    //    this.btnNoPay.Visible = true;
+                    //    this.btnEsc.Visible = false;
+                    //    break;
+                    //case 1:
+                    //    this.btnPay.Visible = true;
+                    //    this.btnEsc.Visible = true;
 
-                        break;
-                    case 2:
-                        this.btnIdeal.Visible = true;
-                        this.btnEsc.Visible = true;
-                        break;
-                    case 3:
-                        this.btnComplete.Visible = true;
-                        this.btnEsc.Visible = true;
-                        break;
-                    case 4:
-                        this.btnEsc.Visible = true;
-                        break;
+                    //    break;
+                    //case 2:
+                    //    this.btnIdeal.Visible = true;
+                    //    this.btnEsc.Visible = true;
+                    //    break;
+                    //case 3:
+                    //    this.btnComplete.Visible = true;
+                    //    this.btnEsc.Visible = true;
+                    //    break;
+                    //case 4:
+                    //    this.btnEsc.Visible = true;
+                    //    break;
 
                 }
                 #endregion
@@ -340,8 +340,9 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
                             DateTime dt = DateTime.Today;
                             if (t.RenewalDate.HasValue)
                             {
-                                dt = t.RenewalDate.Value;
-                                t.RenewalDate = t.RenewalDate.Value.AddYears(0); //续展期限日
+                                if (t.RegNoticeDate.HasValue)
+                                    dt = t.RegNoticeDate.Value;
+                                t.RenewalDate = t.RenewalDate.Value.AddYears(10); //续展期限日
                             }
                             else
                             {
@@ -368,7 +369,7 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
     private void addRegNoticeData(int trademarkid, DateTime RegNoticeBeginDate, DateTime RegNoticeEndDate) 
     {
         List<t_NewTradeMarkRenewalInfo> list = new List<t_NewTradeMarkRenewalInfo>();
-        for (DateTime dt = RegNoticeBeginDate; dt <= RegNoticeEndDate; dt.AddYears(10))
+        for (DateTime dt = RegNoticeBeginDate; dt <= RegNoticeEndDate; dt=dt.AddYears(10))
         {
             t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
             renewalModel.TradeMarkId = trademarkid;
