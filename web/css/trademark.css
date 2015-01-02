@@ -1,0 +1,102 @@
+﻿ .clearfix:before, .clearfix:after{content:"\0020";display:block;height:0;overflow:hidden;}
+.clearfix:after{clear:both;}
+.clearfix{zoom:1;}
+
+
+.carLeft{float: left;width: 350px;}
+.carLeft .box,.carRight .box{background: #FFF;border: 0px solid #DDD;border-top: 0px solid #0470B1;box-shadow: 0 0px 0px #DDD;margin-top: 10px;}
+.carLeft .search,.carRight .slider{margin-top: 0;}
+.carLeft h2.hd,.carRight h2.hd{background: #FFF;border-bottom: 1px solid #DDD;color: #333;height: 34px;line-height: 34px;overflow: hidden;padding: 0 10px;}
+.carLeft h2.hd b,.carRight h2.hd b{display: inline-block;font: bold 14px/34px "微软雅黑","宋体",Arial;}
+.carLeft h2.hd span{background: url(../images/arrowbg.gif) no-repeat 0 -514px;float: right;padding-left: 10px;}
+.carLeft .content{padding: 5px 10px;}
+
+/*搜索*/
+.carLeft .search{height: 50px;width:350px;float:none}
+.carLeft .search .content{padding: 10px;}
+.carLeft .search .sFrom li{float: left;height: 28px;line-height: 28px;margin-bottom: 12px;position: relative;width: 260px;}
+.carLeft .search .sFrom li label{color: #333;float: left;width: 85px;padding-right: 1px;}
+.carLeft .search .sFrom li.btn{height: 32px;margin-bottom: 0;overflow: hidden;}
+.carLeft .search .sFrom li .inputText{background: url(../images/inputbg.gif) no-repeat right -33px;border: 0;color: #666;float: left;height: 26px;line-height: 26px;padding: 2px 5px 2px 5px;width: 155px;}
+.carLeft .search .sFrom li .drop{background-position: right 0;padding: 2px 25px 2px 5px;width: 135px;}
+.carLeft .search .sFrom li .date{background-position: right -66px;font-family: Arial;padding: 2px 25px 2px 5px;width: 135px;}
+.carLeft .search .searchBtn{background: url(../images/inputbg.gif.gif) no-repeat 0 0;border: 0;cursor: pointer;display: inline-block;float: left;height: 32px;width: 120px;}
+.carLeft .search .searchBtn:hover{background-position: 0 -42px;}
+.carLeft .dropDown{float: left;position: relative;}
+.carLeft .dropDown dl{background: #FFF;border: 1px solid #DCDCDC;border-top: 0;border-left: 1px solid #B9B9B9;display: none;height: auto;position: absolute;left: 0;top: 27px;width: 163px;}
+.carLeft .dropDown dd{border-top: 1px solid #DCDCDC;color: #777;cursor: pointer;height: 27px;line-height: 27px;overflow: hidden;padding: 0 5px;}
+.carLeft .dropDown dd:hover{background: #F0F0F0;color: #333;}
+
+/*a:link,a:visited,a:active{color:#666;text-decoration:none;}*/
+a:hover{color:#F60;}
+
+ #suggest{width:200px;}
+ .gray{color:gray;}
+ .ac_results {background:#fff;border:1px solid #7f9db9;position:absolute; z-index: 9999;display: none;width:200px;}
+ .ac_results ul{margin:0;padding:0;list-style:none;}
+ .ac_results li a{white-space: nowrap;text-decoration:none;display:block;color:#05a;padding:1px 3px;}
+.ac_results li{border:1px solid #fff;height: 28px;line-height: 28px;position: relative;margin:0 !important;padding: 0 !important;}
+.ac_over,.ac_results li a:hover {background:#c8e3fc;}
+.ac_results li a span{float:right;}
+.ac_result_tip{border-bottom:1px dashed #666;padding:3px;}
+
+
+.inputstext400{width:400px;height:137px;line-height:18px;}
+.inputstext400:hover{width:400px;height:137px;line-height:18px;border:solid 2px #eb8a3d;}
+
+.mainhelp_main {
+	margin-left:20px;
+	padding-top:20px;
+	width:980px;
+	height:23px;
+}
+.mainhelp_main ul {
+	list-style:none;
+	width:980px;
+	height:23px;
+	line-height:23px;
+}
+.mainhelp_main ul li {
+	float:left;
+	height:23px;
+}
+
+.input1 {
+	width:300px;
+	height:20px;
+	border:1px solid #ccc;
+	margin-right:20px;
+	line-hegiht:20px;
+}
+
+.select1 {
+	width:100px;
+	height:23px;
+	border:1px #ccc solid;
+	margin-right:10px;
+	margin-top: 1px;
+}
+.mainhelp_foot {
+	clear:both;
+	margin:20px 10px 10px 10px;
+}
+.nowstyle {
+margin: 10px 30px;
+}
+
+/*Tab切换样式*/
+.ui-tabs-nav{/**/}
+.ui-tabs-nav li{float: left;text-align: center;}
+.ui-tabs-nav li a{display: block;}
+.ui-tabs-nav li.ui-tabs-selected{/**/}
+.ui-tabs-panel{/**/}
+.ui-tabs-hide{display: none;}
+ 
+
+.show .infoMain{border: 1px solid #EEE;box-shadow: 0 3px 5px #E5E5E5;margin-top: 10px;}
+.infoMain .ui-tabs-nav{background-color: #f4f4f4;border-bottom: 2px solid #0470B1;height: 32px;line-height: 32px;}
+.infoMain .ui-tabs-nav li{width: 174px;text-align: center;background-color:#404040;}
+.infoMain .ui-tabs-nav li a{border-right: 1px solid #EEE;font-size: 13px;padding: 0 15px;color: #ffffff;font-weight: bold;text-decoration:none;}
+.infoMain .ui-tabs-nav li.ui-tabs-selected{ background-color:#bf2831}
+.infoMain .ui-tabs-nav li.ui-tabs-selected a{color: #FFF;}
+.infoMain .ui-tabs-panel{line-height: 20px;overflow: visible;padding: 10px;width: 100%;}
