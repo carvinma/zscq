@@ -188,6 +188,18 @@ namespace zscq.DAL
             }
             return iquery;
         }
+        public IQueryable<vw_NewTrademarkOrder> NewTrademarkOrder_Select_Status(int sid, string nationality)
+        {
+            var iquery = from i in dvdc.vw_NewTrademarkOrder where i.i_Status == sid && i.i_SendEmailOrder != sid select i;
+            switch (nationality)
+            {
+                case "cn": iquery = from i in iquery where i.i_GuoJiId == 1 select i; break;
+                case "jp": iquery = from i in iquery where i.i_GuoJiId == 9 select i; break;
+                case "kr": iquery = from i in iquery where i.i_GuoJiId == 5 select i; break;
+                case "en": iquery = from i in iquery where i.i_GuoJiId != 5 && i.i_GuoJiId != 1 && i.i_GuoJiId != 9 select i; break;
+            }
+            return iquery;
+        }
         public IQueryable<vw_TrademarkOrder> TrademarkOrder_Select_StatusAndIsSend(int sid, string nationality)
         {
             var iquery = from i in dvdc.vw_TrademarkOrder where i.i_IsSend == 1 && i.i_Status == sid && i.i_SendPhoneOrder != sid select i;

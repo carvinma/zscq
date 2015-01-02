@@ -90,6 +90,7 @@
 
         #region 新商标
 
+        //商标续展案要有期限提醒邮件，商标申请案和续展案要有订单邮件。
         gs.SendEmail_New_SB("sb_status0", "txt_sb_con0", 1);
         gs.SendEmail_New_SB("sb_status15", "txt_sb_con15", 2);
         gs.SendEmail_New_SB("sb_status30", "txt_sb_con30", 3);

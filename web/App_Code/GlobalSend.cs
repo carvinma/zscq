@@ -902,7 +902,7 @@ public class GlobalSend
 
                 t_SystemKey model_11 = DALSK.SystemKey_Select_Key(keyValue, "cn");
                 send_fromcontent = model_11.nt_Value;
-                IQueryable<vw_TrademarkOrder> iquery = DALTO.TrademarkOrder_Select_Status(status, "cn");//根据状态得到要发送的Email
+                IQueryable<vw_NewTrademarkOrder> iquery = DALTO.NewTrademarkOrder_Select_Status(status, "cn");//根据状态得到要发送的Email
                 foreach (var i in iquery)
                 {
                     if (i.nvc_Email != null && i.nvc_Email != "")
@@ -913,7 +913,7 @@ public class GlobalSend
                         send_fromcontent = send_fromcontent.Replace("UserName", i.nvc_Name);
                         send_fromcontent = send_fromcontent.Replace("UserNumber", i.nvc_UserNum);
                         string s = Email.Mail(send_from, send_fromname, send_fromto, send_fromtitle, send_fromcontent, send_fromloginname, send_frompwd, send_fromserver, "");//发送
-                        t_TrademarkOrder tto = DALTO.TrademarkOrder_Select_Id(i.i_Id);
+                        t_NewTrademarkOrder tto = DALTO.NewTrademarkOrder_Select_Id(i.i_Id);
                         tto.i_SendEmailOrder = status;
                         DALTO.TrademarkOrder_Update(tto);
                         #region 插入流水
