@@ -879,13 +879,10 @@ public class GlobalSend
 
     public void SendEmail_New_SbOrder(string key, string keyValue, int status)
     {
+        //i_SbStatus11", "nvc_SbStatus11", 1
         if (dt.Hour >= 9 && dt.Hour <= 18)
         {
             t_SystemKey model_1 = DALSK.SystemKey_Select_Key(key, "cn");
-            t_SystemKey model_2 = DALSK.SystemKey_Select_Key(key, "en");
-            t_SystemKey model_3 = DALSK.SystemKey_Select_Key(key, "jp");
-            t_SystemKey model_4 = DALSK.SystemKey_Select_Key(key, "kr");
-
             #region 中文
             if (model_1.i_Value == 1)//判断要不要发送
             {
