@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body id="index" onload="checkpay(1);change();">
+<body id="index" onload="checkpay(1);">
     <form id="form1" runat="server" method="post">
     <input type="hidden" runat="server" id="input_payway" value="" />
     <input type="hidden" runat="server" id="bank" value="" />
@@ -797,6 +797,7 @@
         $(".tr_fp1").hide();
         $(".tr_fp4").hide();
         $(".tr_fp3").hide();
+        change();
     });
     var isfacheck = false;
     var isnofacheck = false;
