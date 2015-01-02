@@ -701,7 +701,7 @@ public partial class Shop_Manage_shop_shezhi : System.Web.UI.Page
         model_txcon6.nt_Value = txt_zl_con.Text;
 
         #endregion
-        #region 商标状态
+        #region 商标状态 
         t_SystemKey model_sb_s1 = DALSK.SystemKey_Select_Key("i_SbStatus11", language);
         model_sb_s1.i_Value = cb_sb_s1.Checked ? 1 : 0;
         t_SystemKey model_sb_content1 = DALSK.SystemKey_Select_Key("nvc_SbStatus11", language);

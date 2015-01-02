@@ -4,11 +4,11 @@
     {
         //在应用程序启动时运行的代码
         //定义定时器
-        System.Timers.Timer myTimer = new System.Timers.Timer(1000*60*30);//毫秒多久执行一次
+        System.Timers.Timer myTimer = new System.Timers.Timer(1000 * 60 * 30);//毫秒多久执行一次
         myTimer.Elapsed += new System.Timers.ElapsedEventHandler(myTimer_Elapsed);
         myTimer.Enabled = true;
         myTimer.AutoReset = true;
-        
+
         zscq.BLL.BaseDataUtil data = new zscq.BLL.BaseDataUtil();
         data.InitData(); //初始化商标下拉框状态
     }
@@ -82,11 +82,26 @@
         gs.SendMessage_SB("sb_status_60", "txt_sb_con_60", 3);
         gs.SendMessage_SB("sb_status_90", "txt_sb_con_90", 2);
         gs.SendMessage_SB("sb_status_s", "txt_sb_con_s", 1);
-        
+
         gs.SendMessage_SbOrder("i_SbStatus1", "nvc_SbStatus1", 1);
         gs.SendMessage_SbOrder("i_SbStatus2", "nvc_SbStatus2", 2);
         gs.SendMessage_SbOrder("i_SbStatus3", "nvc_SbStatus3", 3);
         gs.SendMessage_SbOrder("i_SbStatus4", "nvc_SbStatus4", 4);
+
+        #region 新商标
+
+        gs.SendEmail_New_SB("sb_status0", "txt_sb_con0", 1);
+        gs.SendEmail_New_SB("sb_status15", "txt_sb_con15", 2);
+        gs.SendEmail_New_SB("sb_status30", "txt_sb_con30", 3);
+        gs.SendEmail_New_SB("sb_status60", "txt_sb_con60", 4);
+        gs.SendEmail_New_SB("sb_status90", "txt_sb_con90", 5);
+        gs.SendEmail_New_SB("sb_status", "txt_sb_con", 6);
+
+        gs.SendEmail_New_SbOrder("i_SbStatus11", "nvc_SbStatus11", 1);
+        gs.SendEmail_New_SbOrder("i_SbStatus22", "nvc_SbStatus22", 2);
+        gs.SendEmail_New_SbOrder("i_SbStatus33", "nvc_SbStatus33", 3);
+        gs.SendEmail_New_SbOrder("i_SbStatus44", "nvc_SbStatus44", 4);
+        #endregion
     }
     void Application_End(object sender, EventArgs e)
     {

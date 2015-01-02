@@ -749,6 +749,202 @@ public class GlobalSend
     /// <param name="keyValue"></param>
     /// <param name="status"></param>
     /// <param name="language"></param>
+    public void SendEmail_New_SB(string key, string keyValue, int status)
+    {
+        //"sb_status0", "txt_sb_con0", 1
+        if (dt.Hour >= 9 && dt.Hour <= 18)
+        {
+            t_SystemKey model_1 = DALSK.SystemKey_Select_Key(key, "cn");
+
+            #region 中文
+            if (model_1.i_Value == 1)//判断要不要发送
+            {
+                t_SystemKey model = DALSK.SystemKey_Select_Key("smtp", "cn");
+                string send_fromserver = model.nt_Value;//邮件服务器
+                model = DALSK.SystemKey_Select_Key("smtp_username", "cn");
+                string send_fromloginname = model.nt_Value;//邮件登录名
+                model = DALSK.SystemKey_Select_Key("smtp_password", "cn");
+                string send_frompwd = model.nt_Value;//邮件密码
+                model = DALSK.SystemKey_Select_Key("smtp_email", "cn");
+                string send_from = model.nt_Value;//发送人邮件地址
+                model = DALSK.SystemKey_Select_Key("smtp_name", "cn");
+                string send_fromname = model.nt_Value;//发送人显示名称
+                string send_fromto = "";//发送给谁（邮件地址）
+                string send_fromtitle = "商标期限提醒";//标题
+                string send_fromcontent = "";//内容
+
+                t_SystemKey model_11 = DALSK.SystemKey_Select_Key(keyValue, "cn"); //发送消息
+                send_fromcontent = model_11.nt_Value;
+                IQueryable<t_Member> iquery = DALM.Member_Select_All(2, "cn", 1);//需要发送邮件的商标客户
+                if (iquery.Count() > 0)
+                {
+                    foreach (var v in iquery)
+                    {
+                        StringBuilder sb_start = new StringBuilder();
+                        StringBuilder sb_body = new StringBuilder();
+                        StringBuilder sb_end = new StringBuilder();
+                        int dazhe = 0, dazhe1 = 0;
+                        #region 会员折扣 by chy
+                        dazhe = v.i_PowerDaZhe;
+                        t_MemberGrade tmg = DALUG.UserGrade_Select_Id(v.i_Grade);
+                        if (tmg != null)
+                        {
+                            dazhe1 = Convert.ToInt32(tmg.i_Discount);
+                        }
+                        #endregion
+                        sb_start.Append("<table width='600' border='0' cellspacing='1' cellpadding='1' bgcolor='#d0d0d0' >");
+                        sb_start.Append("<tr>");
+                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标注册号</td>");
+                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标大类</td>");
+                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>申请人姓名</td>");
+                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>到期日</td>");
+                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>缴费金额</td>");
+                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>币种</td>");
+                        sb_start.Append("</tr>");
+                        sb_end.Append("</table>");
+                        IQueryable<t_NewTradeMarkInfo> result = DALT.NewTrademark_SelectAllByStatus(v.i_Id, status, 1);//需要发送邮件的商标
+                        foreach (var i in result)
+                        {
+                            string paybizhong = "CNY";
+                           
+                            #region 会员折扣 by chy
+                            decimal dalifee = i.TrademarkAgencyFee.Value;
+                            if (dazhe != 0)
+                            {
+                                dalifee = dalifee * dazhe / 100;
+                            }
+                            if (dazhe1 != 0)
+                            {
+                                dalifee = dalifee * dazhe1 / 100;
+                            }
+                            #endregion
+                            string totalmoney = (dalifee + i.TrademarkLateFee.Value + i.TrademarkMoney.Value).ToString("0.00");
+                            paybizhong = "CNY";
+                
+                            sb_body.Append("<tr>");
+                            sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.RegisteredNo + "</td>");
+                            sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.TrademarkType + "</td>");
+                            sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + i.ApplyName + "</td>");
+                            sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + i.RenewalDate + "</td>");
+                            sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + totalmoney + "</td>");
+                            sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + paybizhong + "</td>");
+                            sb_body.Append("</tr>");
+
+                        }
+                        if (result.Count() > 0)
+                        {
+                            //=============================//
+                            send_fromcontent = send_fromcontent.Replace("UserName", v.nvc_Name);
+                            send_fromcontent = send_fromcontent.Replace("UserNumber", v.nvc_UserNum);
+                            string neirong = sb_start.ToString() + sb_body.ToString() + sb_end.ToString() + "<br/>" + send_fromcontent;
+                            string youxiang = v.nt_BYEmail + "|" + v.nvc_Email;
+                            string[] ArrEmail = youxiang.Split('|');
+                            string returns = "发送失败";
+                            for (int j = 0; j < ArrEmail.Length; j++)
+                            {
+                                if (ArrEmail[j] != null && ArrEmail[j] != "")
+                                {
+                                    //所有的邮箱发送完之后再修改状态
+                                    send_fromto = ArrEmail[j];
+                                    returns = Email.Mail(send_from, send_fromname, send_fromto, send_fromtitle, neirong, send_fromloginname, send_frompwd, send_fromserver, "");//发送
+                                    #region 插入流水
+                                    t_EmailNote ten = new t_EmailNote();
+                                    ten.nvc_Email = send_fromto;
+                                    ten.nvc_MemberName = v.nvc_Name;
+                                    ten.nvc_Title = send_fromtitle;
+                                    ten.nvc_EmailContent = neirong;
+                                    ten.nvc_EmailState = returns;
+                                    ten.i_systemType = 2;
+                                    ten.i_MemberId = Convert.ToInt32(v.i_Id);
+                                    ten.nvc_Language = "cn";
+                                    DALE.EmailNote_Add(ten);
+                                    #endregion
+                                }
+                            }
+
+                           dal_NewTrademark mak = new dal_NewTrademark();
+                            foreach (var r in result)
+                            {
+                                t_NewTradeMarkInfo tt = mak.Trademark_Select_Id(r.i_Id); 
+                                tt.i_SendEmail = status;
+                            }
+                            mak.Trademark_Submit();
+                        }
+                    }
+                }
+            }
+            #endregion
+        }
+    }
+
+    public void SendEmail_New_SbOrder(string key, string keyValue, int status)
+    {
+        if (dt.Hour >= 9 && dt.Hour <= 18)
+        {
+            t_SystemKey model_1 = DALSK.SystemKey_Select_Key(key, "cn");
+            t_SystemKey model_2 = DALSK.SystemKey_Select_Key(key, "en");
+            t_SystemKey model_3 = DALSK.SystemKey_Select_Key(key, "jp");
+            t_SystemKey model_4 = DALSK.SystemKey_Select_Key(key, "kr");
+
+            #region 中文
+            if (model_1.i_Value == 1)//判断要不要发送
+            {
+                t_SystemKey model = DALSK.SystemKey_Select_Key("smtp", "cn");
+                string send_fromserver = model.nt_Value;//邮件服务器
+                model = DALSK.SystemKey_Select_Key("smtp_username", "cn");
+                string send_fromloginname = model.nt_Value;//邮件登录名
+                model = DALSK.SystemKey_Select_Key("smtp_password", "cn");
+                string send_frompwd = model.nt_Value;//邮件密码
+                model = DALSK.SystemKey_Select_Key("smtp_email", "cn");
+                string send_from = model.nt_Value;//发送人邮件地址
+                model = DALSK.SystemKey_Select_Key("smtp_name", "cn");
+                string send_fromname = model.nt_Value;//发送人显示名称
+                string send_fromto = "";//发送给谁（邮件地址）
+                string send_fromtitle = "商标订单状态提醒";//标题
+                string send_fromcontent = "";//内容
+
+                t_SystemKey model_11 = DALSK.SystemKey_Select_Key(keyValue, "cn");
+                send_fromcontent = model_11.nt_Value;
+                IQueryable<vw_TrademarkOrder> iquery = DALTO.TrademarkOrder_Select_Status(status, "cn");//根据状态得到要发送的Email
+                foreach (var i in iquery)
+                {
+                    if (i.nvc_Email != null && i.nvc_Email != "")
+                    {
+                        //send_fromtitle = i.nvc_Number;
+                        send_fromto = i.nvc_Email;
+                        send_fromcontent = send_fromcontent.Replace("Order", i.nvc_OrderNumber);
+                        send_fromcontent = send_fromcontent.Replace("UserName", i.nvc_Name);
+                        send_fromcontent = send_fromcontent.Replace("UserNumber", i.nvc_UserNum);
+                        string s = Email.Mail(send_from, send_fromname, send_fromto, send_fromtitle, send_fromcontent, send_fromloginname, send_frompwd, send_fromserver, "");//发送
+                        t_TrademarkOrder tto = DALTO.TrademarkOrder_Select_Id(i.i_Id);
+                        tto.i_SendEmailOrder = status;
+                        DALTO.TrademarkOrder_Update(tto);
+                        #region 插入流水
+                        t_EmailNote ten = new t_EmailNote();
+                        ten.nvc_Email = send_fromto;
+                        ten.nvc_MemberName = i.nvc_Name;
+                        ten.nvc_Title = send_fromtitle;
+                        ten.nvc_EmailContent = send_fromcontent;
+                        ten.nvc_EmailState = s;
+                        ten.i_systemType = 2;
+                        ten.i_MemberId = Convert.ToInt32(i.i_MemberId);
+                        ten.nvc_Language = "cn";
+                        DALE.EmailNote_Add(ten);
+                        #endregion
+                    }
+                }
+            }
+            #endregion
+        }
+    }
+
+    /// <summary>
+    /// 商标期限提醒
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="keyValue"></param>
+    /// <param name="status"></param>
+    /// <param name="language"></param>
     public void SendEmail_SB(string key, string keyValue, int status)
     {
         if (dt.Hour >= 9 && dt.Hour <= 18)
