@@ -55,9 +55,9 @@ public partial class PayGo : System.Web.UI.Page
                     }
                 }
             }
-            else//商标
+            else if (oType == 2)//旧商标
             {
-                t_NewTrademarkOrder model = DALTO.NewTrademarkOrder_Select_Id(oId);
+                t_TrademarkOrder model = DALTO.TrademarkOrder_Select_Id(oId);
                 if (model != null)
                 {
                     if (model.dt_PayTime == null)
@@ -72,6 +72,33 @@ public partial class PayGo : System.Web.UI.Page
                             else if (model.nvc_PayType == "财付通支付")
                             {
                                 Response.Redirect("tenpay/payRequest.aspx?tType=2&oId=" + model.i_Id);
+                            }
+                        }
+                        else
+                        {
+                            Response.Write("<script>alert('发生意外!');window.location='" + url + "';</script>");
+                            return;
+                        }
+                    }
+                }
+            }
+            else if (oType == 3)//新商标
+            {
+                t_NewTrademarkOrder model = DALTO.NewTrademarkOrder_Select_Id(oId);
+                if (model != null)
+                {
+                    if (model.dt_PayTime == null)
+                    {
+                        t_Member User = DALU.Member_Select_Id(model.i_MemberId);
+                        if (User != null)
+                        {
+                            if (model.nvc_PayType == "支付宝支付" || model.nvc_PayType == "网银支付")
+                            {
+                                url = "alipay/alipay.aspx?action=submit&tType=3&oId=" + model.i_Id;
+                            }
+                            else if (model.nvc_PayType == "财付通支付")
+                            {
+                                Response.Redirect("tenpay/payRequest.aspx?tType=3&oId=" + model.i_Id);
                             }
                         }
                         else
