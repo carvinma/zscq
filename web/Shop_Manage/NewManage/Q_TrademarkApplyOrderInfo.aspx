@@ -236,15 +236,117 @@
                                     <tr>
                                         <td height="59" align="right">
                                             <table width="440" border="0" cellspacing="0" cellpadding="0">
-                                               <%=Str_Money %>
+                                             <tbody>
+                                                <tr align="left">
+                                                    <td width="200" align="right">
+                                                        商标局规费：
+                                                    </td>
+                                                    <td width="110">
+                                                        <asp:Label ID="Lal_GuanFei" runat="server"></asp:Label>
+                                                        <asp:TextBox ID="Txt_GuanFei" runat="server" CssClass="inputs60text" Visible="false" onkeyup="GetTotalFee()"></asp:TextBox>
+                                                    </td>
+                                                    <td width="30">
+                                                    </td>
+                                                    <td style="width: 100px;">
+                                                    </td>
+                                                </tr>
+                                                <tr align="left">
+                                                    <td width="200" align="right">
+                                                        滞纳金：
+                                                    </td>
+                                                    <td width="110">
+                                                        <asp:Label ID="Lal_zhinajin" runat="server"></asp:Label>
+                                                        <asp:TextBox ID="Txt_Zhinajin" runat="server" CssClass="inputs60text" 
+                                                            Visible="false" onkeyup="GetTotalFee()"></asp:TextBox>
+                                                    </td>
+                                                    <td width="30">
+                                                    </td>
+                                                    <td width="100">
+                                                    </td>
+                                                </tr>
+                                                <tr align="left">
+                                                    <td width="200" align="right">
+                                                        代理费：
+                                                    </td>
+                                                    <td width="110">
+                                                        <asp:Label ID="Lal_DaiLiFei" runat="server"></asp:Label>
+                                                        <asp:TextBox ID="Txt_DaiLiFei" runat="server" CssClass="inputs60text" Visible="false" onkeyup="GetTotalFee()"></asp:TextBox>
+                                                    </td>
+                                                    <td width="30">
+                                                    </td>
+                                                    <td style="width: 100px;">
+                                                    </td>
+                                                </tr>
+                                                <tr align="left">
+                                                    <td width="200" align="right">
+                                                       增值税：
+                                                    </td>
+                                                    <td width="110">
+                                                        <asp:Label ID="Lal_ZengzhiTax" runat="server"></asp:Label>
+                                                        <asp:TextBox ID="Txt_ZengzhiTax" runat="server" CssClass="inputs60text" 
+                                                            Visible="false" onkeyup="GetTotalFee()"></asp:TextBox>
+                                                    </td>
+                                                    <td width="30">
+                                                    </td>
+                                                    <td style="width: 100px;">
+                                                    </td>
+                                                </tr>
+                                                <tr align="left">
+                                                    <td width="200" align="right">
+                                                        手续费：</td>
+                                                    <td width="110">
+                                                        <asp:Label ID="Lal_ShouxuFei" runat="server"></asp:Label>
+                                                        <asp:TextBox ID="Txt_ShouxuFei" runat="server" CssClass="inputs60text" 
+                                                            Visible="false" onkeyup="GetTotalFee()"></asp:TextBox>
+                                                    </td>
+                                                    <td width="30">
+                                                        &nbsp;</td>
+                                                    <td style="width: 100px;">
+                                                        &nbsp;</td>
+                                                </tr>
+                                                <tr align="left">
+                                                    <td width="200" align="right">
+                                                        优惠券：</td>
+                                                    <td width="110">
+                                                        -<asp:Label ID="Lal_Youhui" runat="server"></asp:Label>
+                                                        <asp:TextBox ID="Txt_Youhui" runat="server" CssClass="inputs60text" 
+                                                            Visible="false" onkeyup="GetTotalFee()"></asp:TextBox>
+                                                    </td>
+                                                    <td width="30">
+                                                        &nbsp;</td>
+                                                    <td style="width: 100px;">
+                                                        &nbsp;</td>
+                                                </tr>
+                                                <tr align="left">
+                                                    <td width="200" align="right">
+                                                    </td>
+                                                    <td width="110" align="right">
+                                                        总计：
+                                                    </td>
+                                                    <td width="30">
+                                                        <asp:Label ID="Lal_BiZhong" runat="server" CssClass="inputs60text" ForeColor="Red">CNY</asp:Label>
+                                                    </td>
+                                                    <td align="left" style="width: 100px;">
+                                                        <asp:Label ID="Lal_TotalMoney" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                                        <asp:TextBox ID="Txt_TotalMoney" runat="server" CssClass="inputs60text" 
+                                                            Visible="false"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                                <%--<input name="inputPageid" onclick="Selbox(this)" type="checkbox" value='<%#Eval("i_Id") %>' />--%>
                                             </table>
                                             <table width="440" border="0" cellspacing="0" cellpadding="0">
-                                                 <%=Str_AllMoney%>
+                                                 <%# Eval("CaseNo")%>
                                             </table>
                                         </td>
                                         <td width="30">
                                         </td>
                                     </tr>
+                                    <tr><td align="right">
+                                        <asp:Button ID="Btn_EditFee" runat="server" Text="修改费用" CssClass="button" OnClick="Btn_EditFee_Click" />
+                                        </td>
+                                        <td>
+                                        </td></tr>
                                 </table>
                             </td>
                         </tr>
@@ -327,7 +429,7 @@
             <tr>
                 <td align="center">
                     <asp:Button ID="lbtnDelete" runat="server" OnClientClick="return confirm('您确定进行删除操作吗？')" OnClick="lbtnDelete_Click" Text="删除订单" CssClass="button"></asp:Button>
-                    <%# Eval("ApplyName")%>                    <%# Eval("TrademarkType")%>
+                    <%# Eval("ApplyName")%><%# Eval("TrademarkType")%>
                     <input name="Submit8" type="button" value="返回" onclick="javascript:window.location='Q_TrademarkApplyOrder.aspx?<%=pageurl %>';" class="button" />
                 </td>
             </tr>
@@ -562,6 +664,17 @@
 <script type="text/javascript" language="javascript">
     function scheck() {
         if (!confirm('确认进行该操作吗？')) return false;
+    }
+    function GetTotalFee() {
+       
+        var a = $('#Txt_GuanFei').val();
+        var b = $('#Txt_Zhinajin').val();
+        var c = $('#Txt_DaiLiFei').val();
+        var d = $('#Txt_ZengzhiTax').val();
+        var e = $('#Txt_ShouxuFei').val();
+        var f = $('#Txt_Youhui').val();
+        var t = parseFloat(a) + parseFloat(b) + parseFloat(c) + parseFloat(d) + parseFloat(e) - parseFloat(f);
+        $('#Txt_TotalMoney').attr('value', t.toFixed(2));
     }
     function alls() {
         var n;

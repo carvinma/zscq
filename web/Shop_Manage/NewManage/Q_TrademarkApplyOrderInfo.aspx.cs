@@ -185,6 +185,28 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
                         //youjifei = Order.dm_YoujiFee.ToString();//国内快递费25
                     }
                 }
+                this.Lal_GuanFei.Text = Order.dm_TrademarkMoney.ToString();
+                this.Txt_GuanFei.Text = Order.dm_TrademarkMoney.ToString();
+
+                this.Lal_zhinajin.Text = Order.dm_TMZhiNaJin > 0 ? Order.dm_TMZhiNaJin.ToString() : "0";
+                this.Txt_Zhinajin.Text = Order.dm_TMZhiNaJin > 0 ? Order.dm_TMZhiNaJin.ToString() : "0";
+
+                this.Lal_DaiLiFei.Text = Order.dm_TMDaiLi.ToString();
+                this.Txt_DaiLiFei.Text = Order.dm_TMDaiLi.ToString();
+
+                this.Lal_ZengzhiTax.Text = Order.dm_ZengZhiTax.ToString();
+                this.Txt_ZengzhiTax.Text = Order.dm_ZengZhiTax.ToString();
+
+                this.Lal_ShouxuFei.Text = Order.dm_ShouXuFee.ToString();
+                this.Txt_ShouxuFei.Text = Order.dm_ShouXuFee.ToString();
+
+                this.Lal_Youhui.Text = Order.dm_YouHuiFee.ToString();
+                this.Txt_Youhui.Text = Order.dm_YouHuiFee.ToString();
+
+                this.Lal_TotalMoney.Text = Order.dm_TotalMoney.ToString();
+                this.Txt_TotalMoney.Text = Order.dm_TotalMoney.ToString();
+
+                /*
                 Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\"> " + Order.dm_TrademarkMoney + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
                 if (Order.dm_TMZhiNaJin.HasValue && Order.dm_TMZhiNaJin > 0)
                 {
@@ -195,6 +217,7 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
                 Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\">" + Order.dm_ShouXuFee + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
                 Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">优惠券：</td><td width=\"110\">-" + Order.dm_YouHuiFee + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
                 Str_AllMoney.Append("<tr align=\"left\"><td width=\"200\" align=\"right\"></td><td width=\"110\" align=\"right\">总计：</td><td style='color:red;' width=\"30\"\">CNY</td><td style='color:red;' width=\"100\" id='allmoney'  align=\"left\">" + Order.dm_TotalMoney + "</td></tr>");
+                */
 
                 //支付方式
                 #region 绑定操作记录
@@ -350,7 +373,7 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
                                 t.RenewalDate = dt.AddYears(10);//续展期限日
                             }
                             t.RestDays = Convert.ToInt32(HelpString.DateDiff(t.RenewalDate.Value, DateTime.Today, "day"));
-                            addRegNoticeData(t.i_Id,dt, t.RenewalDate.Value);//更改续展日期到数据库（2015-01-12 是 否 完成）
+                            addRegNoticeData(t.i_Id, dt, t.RenewalDate.Value);//更改续展日期到数据库（2015-01-12 是 否 完成）
                         }
                         #endregion
                         t.Status = trademarkStatus;
@@ -366,15 +389,15 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
     }
 
     //续展日期添加
-    private void addRegNoticeData(int trademarkid, DateTime RegNoticeBeginDate, DateTime RegNoticeEndDate) 
+    private void addRegNoticeData(int trademarkid, DateTime RegNoticeBeginDate, DateTime RegNoticeEndDate)
     {
         List<t_NewTradeMarkRenewalInfo> list = new List<t_NewTradeMarkRenewalInfo>();
-        for (DateTime dt = RegNoticeBeginDate; dt <= RegNoticeEndDate; dt=dt.AddYears(10))
+        for (DateTime dt = RegNoticeBeginDate; dt <= RegNoticeEndDate; dt = dt.AddYears(10))
         {
             t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
             renewalModel.TradeMarkId = trademarkid;
             renewalModel.RenewalDate = dt;
-            renewalModel.IsFinish = dt == RegNoticeEndDate? false:true;
+            renewalModel.IsFinish = dt == RegNoticeEndDate ? false : true;
             list.Add(renewalModel);
         }
         if (list.Count > 0)
@@ -403,5 +426,52 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
     public string Set_OperateState(object obj)//操作信息的状态
     {
         return DALTOO.Set_OperateState(obj);
+    }
+    protected void Btn_EditFee_Click(object sender, EventArgs e)
+    {
+        bool flag = false;
+        if (Txt_GuanFei.Visible == false)
+        {
+            flag = true;
+        }
+        this.Txt_GuanFei.Visible = flag;
+        this.Txt_Zhinajin.Visible = flag;
+        this.Txt_DaiLiFei.Visible = flag;
+        this.Txt_ZengzhiTax.Visible = flag;
+        this.Txt_ShouxuFei.Visible = flag;
+        this.Txt_Youhui.Visible = flag;
+        this.Txt_TotalMoney.Visible = flag;
+
+        this.Lal_GuanFei.Visible = !flag;
+        this.Lal_zhinajin.Visible = !flag;
+        this.Lal_DaiLiFei.Visible = !flag;
+        this.Lal_ZengzhiTax.Visible = !flag;
+        this.Lal_ShouxuFei.Visible = !flag;
+        this.Lal_Youhui.Visible = !flag;
+
+        if (!flag)
+        {
+            t_NewTrademarkOrder order = DALO.NewTrademarkOrder_Select_Id(Convert.ToInt32(Hi_OrderId.Value));
+
+            order.dm_TrademarkMoney = Convert.ToDecimal(Txt_GuanFei.Text);
+            order.dm_TMZhiNaJin = Convert.ToDecimal(Txt_Zhinajin.Text);
+
+            order.dm_TMDaiLi = Convert.ToDecimal(Txt_DaiLiFei.Text);
+            order.dm_ZengZhiTax = Convert.ToDecimal(Txt_ZengzhiTax.Text);
+
+            order.dm_ShouXuFee = Convert.ToDecimal(Txt_ShouxuFei.Text);
+            order.dm_YouHuiFee = Convert.ToDecimal(Txt_Youhui.Text);
+            order.dm_TotalMoney = Convert.ToDecimal(Txt_TotalMoney.Text);
+
+            DALO.TrademarkOrder_Update(order);
+            div_a.InnerHtml = "<script>alert('修改成功')</script>";
+            Lal_GuanFei.Text = Txt_GuanFei.Text;
+            Lal_zhinajin.Text = Txt_Zhinajin.Text;
+            Lal_DaiLiFei.Text = Txt_DaiLiFei.Text;
+            Lal_ZengzhiTax.Text = Txt_ZengzhiTax.Text;
+            Lal_ShouxuFei.Text = Txt_ShouxuFei.Text;
+            Lal_Youhui.Text = Txt_Youhui.Text;
+            Lal_TotalMoney.Text = Txt_TotalMoney.Text;
+        }
     }
 }
