@@ -365,26 +365,26 @@ public partial class Q_TrademarkApplyOrderInfo : System.Web.UI.Page
     //续展日期添加
     private void addRegNoticeData(int trademarkid)
     {
-        string xzDate = hi_RegNoticeDate.Value.Trim();
-        if (!string.IsNullOrEmpty(xzDate))
-        {
-            List<t_NewTradeMarkRenewalInfo> list = new List<t_NewTradeMarkRenewalInfo>();
-            string[] liststr = xzDate.Split('|');
-            for (int i = 0; i < liststr.Length - 1; i++)
-            {
-                t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
-                string[] RenewalDate = liststr[i].Split('_');
-                renewalModel.TradeMarkId = trademarkid;
-                renewalModel.RenewalDate = DateTime.Parse(RenewalDate[0]);
-                renewalModel.IsFinish = RenewalDate[1] == "1" ? true : false;
-                list.Add(renewalModel);
-            }
-            if (list.Count > 0)
-            {
-                mark.TrademarkRenewalDate_Add(list, trademarkid);
-            }
+        //string xzDate = hi_RegNoticeDate.Value.Trim();
+        //if (!string.IsNullOrEmpty(xzDate))
+        //{
+        //    List<t_NewTradeMarkRenewalInfo> list = new List<t_NewTradeMarkRenewalInfo>();
+        //    string[] liststr = xzDate.Split('|');
+        //    for (int i = 0; i < liststr.Length - 1; i++)
+        //    {
+        //        t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
+        //        string[] RenewalDate = liststr[i].Split('_');
+        //        renewalModel.TradeMarkId = trademarkid;
+        //        renewalModel.RenewalDate = DateTime.Parse(RenewalDate[0]);
+        //        renewalModel.IsFinish = RenewalDate[1] == "1" ? true : false;
+        //        list.Add(renewalModel);
+        //    }
+        //    if (list.Count > 0)
+        //    {
+        //        mark.TrademarkRenewalDate_Add(list, trademarkid);
+        //    }
 
-        }
+        //}
     }
 
     protected void lbtnDelete_Click(object sender, EventArgs e)//删除订单
