@@ -47,6 +47,7 @@ public partial class alipay_alipay : System.Web.UI.Page
             string body = "";// TxtBody.Text.Trim();
             //订单总金额，显示在支付宝收银台里的“应付总额”里
             string total_fee = "";
+            string out_trade_type="";//是新商标3还是旧商标2
 
 
 
@@ -62,6 +63,7 @@ public partial class alipay_alipay : System.Web.UI.Page
             if (Request["tType"] != null && Request["tType"].ToString() != "" && Request["oId"] != null && Request["oId"].ToString() != "")
             {
                 int oType = Convert.ToInt32(Request["tType"]);
+                out_trade_type=oType.ToString();
                 int oId = Convert.ToInt32(Request["oId"]);
                 if (oType == 1)
                 {
@@ -308,6 +310,7 @@ public partial class alipay_alipay : System.Web.UI.Page
             sParaTemp.Add("payment_type", "1");
             sParaTemp.Add("show_url", show_url);
             sParaTemp.Add("out_trade_no", out_trade_no);
+            sParaTemp.Add("out_trade_type", out_trade_type);
             sParaTemp.Add("subject", subject);
             sParaTemp.Add("body", body);
             sParaTemp.Add("total_fee", total_fee);

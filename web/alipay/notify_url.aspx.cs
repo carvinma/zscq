@@ -52,6 +52,7 @@ public partial class notify_url : System.Web.UI.Page
                 //获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
                 string trade_no = Request.Form["trade_no"];         //支付宝交易号
                 string order_no = Request.Form["out_trade_no"];     //获取订单号
+                string trade_type = Request.QueryString["out_trade_type"];      //是新商标3还是旧商标2
                 string total_fee = Request.Form["total_fee"];       //获取总金额
                 string subject = Request.Form["subject"];           //商品名称、订单名称
                 string body = Request.Form["body"];                 //商品描述、订单备注、描述
@@ -128,81 +129,155 @@ public partial class notify_url : System.Web.UI.Page
                     }
                     else if (StrIndex == "S")
                     {
-                        #region 商标订单
-                        dal_TrademarkOrder DALTO = new dal_TrademarkOrder();
-                        //dal_Trademark DALT = new dal_Trademark();
-                        dal_NewTrademark mark = new dal_NewTrademark();
-                        dal_TrademarkOrderDetails DALTOD = new dal_TrademarkOrderDetails();
-                        t_TrademarkOrder model = DALTO.TrademarkOrder_Select_Number(order_no);
-                        if (model != null)
+                        if (trade_type == "2")
                         {
-                            if (model.i_Status == 0)//未支付
+                            #region 旧 商标订单
+                            dal_TrademarkOrderDetails DALTOD = new dal_TrademarkOrderDetails();
+                            dal_Trademark DALT = new dal_Trademark();
+                            dal_TrademarkOrder DALTO = new dal_TrademarkOrder();
+                            t_TrademarkOrder model = DALTO.TrademarkOrder_Select_Number(order_no);
+                            if (model != null)
                             {
-                                model.i_Status = 1;//已支付
-                                model.dt_PayTime = DateTime.Now;
-                                //DALTO.TrademarkOrder_Update(model);
-                                //if (model.i_RebateIntegral > 0)
-                                //{
-                                //    BLLUIN.UserIntegralNote_Add(model.i_MemberId, "付款成功", model.i_RebateIntegral, model.i_Id, 0);
-                                //}
-
-                                var result = DALTOD.OrderDetails_vw_Select_OrderId(model.i_Id);
-                                foreach (var r in result)
+                                if (model.i_Status < 2)
                                 {
-                                    //t_Trademark sb_model = DALT.Trademark_Select_Id(r.i_TrademarkId);
-                                    //sb_model.i_IsPayState = 2;
-                                    //DALT.Trademark_Update(sb_model);
-
-                                    var markModel = mark.Trademark_Select_Id(r.i_TrademarkId);
-                                    if (markModel.i_Type == 0) //申请案
-                                        markModel.Status = 2;//申请中，已汇款
-                                    else //续展案
-                                        markModel.Status = 11;//已提交订单，续展中
-                                }
-
-                                #region 赠送积分
-                                if (model.i_JiFen > 0)
-                                {
+                                    model.i_Status = 2;
+                                    model.dt_PayTime = DateTime.Now;
+                                    //DALTO.TrademarkOrder_Update(model);
+                                    //if (model.i_RebateIntegral > 0)
+                                    //{
+                                    //    BLLUIN.UserIntegralNote_Add(model.i_MemberId, "付款成功", model.i_RebateIntegral, model.i_Id, 0);
+                                    //}
+                                    var result = DALTOD.OrderDetails_vw_Select_OrderId(model.i_Id);
+                                    foreach (var r in result)
+                                    {
+                                        t_Trademark sb_model = DALT.Trademark_Select_Id(r.i_TrademarkId);
+                                        sb_model.i_IsPayState = 2;
+                                        DALT.Trademark_Update(sb_model);
+                                    }
+                                    #region 赠送积分
                                     dal_IntegralMobile DALIM = new dal_IntegralMobile();
                                     bll_UserIntegralNote BLLUIN = new bll_UserIntegralNote();
                                     //dal_SystemSetup DALS = new dal_SystemSetup();
                                     //t_SystemSetup setup = DALS.SystemSetup_Select();
 
                                     //注册手机号直接赠送积分  
-                                    var m = DALIM.IntegralMobile_SelectByMemberId(model.i_MemberId);
-                                    if (m != null)
+                                    if (model.i_JiFen > 0)
                                     {
-                                        //int setIntegral = DALTOD.OrderDetails_Select_Count(model.i_Id) * setup.i_SbIntergral;
-                                        //m.i_Integral += setIntegral;
-                                        //DALIM.IntegralMobile_Updata(m);
-                                        BLLUIN.UserIntegralNote_Add(model.i_MemberId, "商标下单", model.i_JiFen);//+员积分并且生成流水 
-                                        model.i_JiFen = 0;
+                                        var m = DALIM.IntegralMobile_SelectByMemberId(model.i_MemberId);
+                                        if (m != null)
+                                        {
+                                            //int setIntegral = DALTOD.OrderDetails_Select_Count(model.i_Id) * setup.i_SbIntergral;
+                                            //m.i_Integral += setIntegral;
+                                            //DALIM.IntegralMobile_Updata(m);
+                                            BLLUIN.UserIntegralNote_Add(model.i_MemberId, "商标下单", model.i_JiFen);//+员积分并且生成流水 
+                                            model.i_JiFen = 0;
+                                        }
                                     }
+                                    #endregion
+
+                                    DALTO.TrademarkOrder_Update(model);
+
+                                    #region 操作记录
+                                    UserLog.AddUserLog(model.i_MemberId, "商标", "客户在线支付成功");
+                                    #endregion
+
+                                    #region 发短信
+                                    //dal_SystemKey DALSK = new dal_SystemKey();
+                                    //t_SystemKey sk = DALSK.SystemKey_Select_Key("i_OrderPay");
+                                    //if (sk.i_Value == 1)
+                                    //{
+                                    //    sk = DALSK.SystemKey_Select_Key("nvc_OrderPay");
+                                    //    string smsContent = sk.nt_Value.Replace("Order", model.nvc_OrderNumber);
+                                    //    bool Tref = true;
+                                    //    bll_Message BLLMS = new bll_Message();
+                                    //    BLLMS.Message_Add(model.nvc_Address_MobilePhone, smsContent, "会员付款", model.i_MemberId, ref Tref);
+                                    //}
+                                    #endregion
+
+                                    Response.Redirect("../PaySuccess.aspx?tType=2&oId=" + order_no);
+                                    //结束
                                 }
-                                #endregion
-
-                                DALTO.TrademarkOrder_Update(model);
-
-                                #region 操作记录
-                                UserLog.AddUserLog(model.i_MemberId, "商标", "客户在线支付成功");
-                                #endregion
-
-                                #region 发短信
-                                //dal_SystemKey DALSK = new dal_SystemKey();
-                                //t_SystemKey sk = DALSK.SystemKey_Select_Key("i_OrderPay");
-                                //if (sk.i_Value == 1)
-                                //{
-                                //    sk = DALSK.SystemKey_Select_Key("nvc_OrderPay");
-                                //    string smsContent = sk.nt_Value.Replace("Order", model.nvc_OrderNumber);
-                                //    bool Tref = true;
-                                //    bll_Message BLLMS = new bll_Message();
-                                //    BLLMS.Message_Add(model.nvc_Address_MobilePhone, smsContent, "会员付款", model.i_MemberId, ref Tref);
-                                //}
-                                #endregion
-                                //Response.Redirect("../PaySuccess.aspx?oid=" + order_no); ;
+                                Response.Redirect("../PaySuccess.aspx?tType=2&oId=" + order_no);
                             }
+                            #endregion
                         }
-                        #endregion
+                        else
+                        {
+                            #region 新 商标订单
+                            dal_TrademarkOrderDetails DALTOD = new dal_TrademarkOrderDetails();
+                            dal_NewTrademark mark = new dal_NewTrademark();
+                            dal_TrademarkOrder DALTO = new dal_TrademarkOrder();
+                            t_NewTrademarkOrder model = DALTO.NewTrademarkOrder_Select_Number(order_no);
+                            if (model != null)
+                            {
+                                if (model.i_Status == 0)//未支付
+                                {
+                                    model.i_Status = 1;//已支付
+                                    model.dt_PayTime = DateTime.Now;
+                                    //DALTO.TrademarkOrder_Update(model);
+                                    //if (model.i_RebateIntegral > 0)
+                                    //{
+                                    //    BLLUIN.UserIntegralNote_Add(model.i_MemberId, "付款成功", model.i_RebateIntegral, model.i_Id, 0);
+                                    //}
+                                    var result = DALTOD.NewOrderDetails_vw_Select_OrderId(model.i_Id);
+                                    foreach (var r in result)
+                                    {
+                                        var markModel = mark.Trademark_Select_Id(r.i_TrademarkId);
+                                        if (markModel.i_Type == 0) //申请案
+                                            markModel.Status = 2;//申请中，已汇款
+                                        else //续展案
+                                            markModel.Status = 11;//已提交订单，续展中
+                                        mark.Trademark_Update(markModel);
+                                    }
+                                    //mark.Trademark_Submit();
+
+                                    #region 赠送积分
+                                    dal_IntegralMobile DALIM = new dal_IntegralMobile();
+                                    bll_UserIntegralNote BLLUIN = new bll_UserIntegralNote();
+                                    //dal_SystemSetup DALS = new dal_SystemSetup();
+                                    //t_SystemSetup setup = DALS.SystemSetup_Select();
+
+                                    //注册手机号直接赠送积分  
+                                    if (model.i_JiFen > 0)
+                                    {
+                                        var m = DALIM.IntegralMobile_SelectByMemberId(model.i_MemberId);
+                                        if (m != null)
+                                        {
+                                            //int setIntegral = DALTOD.OrderDetails_Select_Count(model.i_Id) * setup.i_SbIntergral;
+                                            //m.i_Integral += setIntegral;
+                                            //DALIM.IntegralMobile_Updata(m);
+                                            BLLUIN.UserIntegralNote_Add(model.i_MemberId, "商标下单", model.i_JiFen);//+员积分并且生成流水 
+                                            model.i_JiFen = 0;
+                                        }
+                                    }
+                                    #endregion
+
+                                    DALTO.TrademarkOrder_Update(model);
+
+                                    #region 操作记录
+                                    UserLog.AddUserLog(model.i_MemberId, "商标", "客户在线支付成功");
+                                    #endregion
+
+                                    #region 发短信
+                                    //dal_SystemKey DALSK = new dal_SystemKey();
+                                    //t_SystemKey sk = DALSK.SystemKey_Select_Key("i_OrderPay");
+                                    //if (sk.i_Value == 1)
+                                    //{
+                                    //    sk = DALSK.SystemKey_Select_Key("nvc_OrderPay");
+                                    //    string smsContent = sk.nt_Value.Replace("Order", model.nvc_OrderNumber);
+                                    //    bool Tref = true;
+                                    //    bll_Message BLLMS = new bll_Message();
+                                    //    BLLMS.Message_Add(model.nvc_Address_MobilePhone, smsContent, "会员付款", model.i_MemberId, ref Tref);
+                                    //}
+                                    #endregion
+
+                                    Response.Redirect("../PaySuccess.aspx?tType=3&oId=" + order_no);
+                                    //结束
+                                }
+                                Response.Redirect("../PaySuccess.aspx?tType=3&oId=" + order_no);
+                            }
+                            #endregion
+                        }
                     }
                     Response.Write("success");  //请不要修改或删除
                     //结束
