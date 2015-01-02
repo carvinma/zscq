@@ -253,5 +253,23 @@ namespace zscq.DAL
                 return 0;
             }
         }
+        /// <summary>
+        /// 根据订单OID获取数量
+        /// </summary>
+        /// <param name="OrderId"></param>
+        /// <param name="ProductId"></param>
+        /// <returns></returns>
+        public int NewOrderDetails_Select_Count(int OrderId)
+        {
+            try
+            {
+                var iquery = from i in dodc.t_NewTrademarkOrderDetails where i.i_OrderId == OrderId select i;
+                return iquery.Count();
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

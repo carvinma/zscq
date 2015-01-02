@@ -211,6 +211,17 @@ namespace zscq.DAL
                 return null;
             }
         }
+        public t_NewTrademarkOrder NewTrademarkOrder_Select_Number(string num)
+        {
+            try
+            {
+                return dsdc.t_NewTrademarkOrder.FirstOrDefault(u => u.nvc_OrderNumber == num);
+            }
+            catch
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 根据ID获取商标订单信息
         /// </summary>
@@ -227,7 +238,17 @@ namespace zscq.DAL
                 return null;
             }
         }
-
+        public vw_NewTrademarkOrder NewTrademarkOrder_vw_Select_Id(int TId)
+        {
+            try
+            {
+                return dvdc.vw_NewTrademarkOrder.FirstOrDefault(u => u.i_Id == TId);
+            }
+            catch
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 商标订单分页数据
         /// </summary>
