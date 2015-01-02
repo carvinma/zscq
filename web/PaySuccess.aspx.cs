@@ -99,8 +99,29 @@ public partial class PaySuccess : System.Web.UI.Page
                     setIntegral = DALTOD.OrderDetails_Select_Count(tModel.i_Id) * model.i_ZlIntergral;
                     AllPrice = tModel.dm_TotalMoney.ToString();
                     OId = tModel.i_Id;
+                    //lqurl = "user_sbsetIntegral.aspx";
+                    leapurl = "user_sbddck.aspx?order=" + OId;
+                }
+                else
+                {
+                    Response.Redirect("index.aspx");
+                }
+            }
+            else if (oType == 3)
+            {
+                t_Member member = DALU.Member_Select_Id(int.Parse(Request.Cookies["hqhtshop"]["hqht_sb_uid"]));
+                if (member != null && member.i_IntegralMobileId != 0)
+                {
+                    Ishave = true;
+                }
+                t_NewTrademarkOrder tModel = DALTO.NewTrademarkOrder_Select_Number(OrderNumer);
+                if (tModel != null && tModel.dt_PayTime > DateTime.Now.AddMinutes(-5))
+                {
+                    setIntegral = DALTOD.NewOrderDetails_Select_Count(tModel.i_Id) * model.i_ZlIntergral;
+                    AllPrice = tModel.dm_TotalMoney.ToString();
+                    OId = tModel.i_Id;
 
-                    var orderInfo = DALTO.TrademarkOrder_vw_Select_Id(tModel.i_Id);
+                    var orderInfo = DALTO.NewTrademarkOrder_vw_Select_Id(tModel.i_Id);
                     if (orderInfo.CaseType == 1) //续展
                     {
                         leapurl = "trademarkrenewalOrder_Info.aspx?order=" + OId + "&tIds=" + orderInfo.TrademarkIds; //续展
