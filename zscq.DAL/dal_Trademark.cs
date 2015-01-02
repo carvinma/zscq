@@ -16,6 +16,7 @@ namespace zscq.DAL
     {
         DataZscqDataContext dzdc = new DataZscqDataContext();
         DataViewDataContext dvdc = new DataViewDataContext();
+        DataTradeMarkDataContext mark = new DataTradeMarkDataContext();
 
         /// 插入数据
         /// </summary>
@@ -802,6 +803,40 @@ namespace zscq.DAL
                     break;
                 case 6:
                     iquery = from i in iquery where i.i_ShengDays < 0 select i;
+                    break;
+            }
+            return iquery;
+        }
+        public IQueryable<t_NewTradeMarkInfo> NewTrademark_SelectAllByStatus(int memberid, int sid, int flag)
+        {
+            var iquery = from i in mark.t_NewTradeMarkInfo where i.i_MemberId == memberid select i;
+            if (flag == 1)
+            {
+                iquery = from i in iquery where i.i_SendEmail != sid select i;
+            }
+            else
+            {
+                iquery = from i in iquery where i.i_SendMessage != sid select i;
+            }
+            switch (sid)
+            {
+                case 1:
+                    iquery = from i in iquery where i.RestDays > 90 select i;
+                    break;
+                case 2:
+                    iquery = from i in iquery where i.RestDays >= 61 && i.RestDays <= 90 select i;
+                    break;
+                case 3:
+                    iquery = from i in iquery where i.RestDays >= 31 && i.RestDays <= 60 select i;
+                    break;
+                case 4:
+                    iquery = from i in iquery where i.RestDays >= 16 && i.RestDays <= 30 select i;
+                    break;
+                case 5:
+                    iquery = from i in iquery where i.RestDays >= 0 && i.RestDays <= 15 select i;
+                    break;
+                case 6:
+                    iquery = from i in iquery where i.RestDays < 0 select i;
                     break;
             }
             return iquery;
