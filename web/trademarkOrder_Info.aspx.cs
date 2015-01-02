@@ -224,7 +224,7 @@ public partial class trademarkOrder_Info : System.Web.UI.Page
             int uid = Convert.ToInt32(Request.Cookies["hqhtshop"]["hqht_sb_uid"]);
             if (HF_oId.Value != "0" && uid != 0)
             {
-                Response.Redirect("PayGo.aspx?tType=2&oId=" + HF_oId.Value);
+                Response.Redirect("PayGo.aspx?tType=3&oId=" + HF_oId.Value);
             }
         }
     }

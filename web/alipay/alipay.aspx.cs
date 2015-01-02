@@ -131,7 +131,7 @@ public partial class alipay_alipay : System.Web.UI.Page
                     }
                     #endregion
                 }
-                else
+                else if(oType==2)
                 {
                     #region 商标
                     t_TrademarkOrder Omodel = DALO.TrademarkOrder_Select_Id(oId);
@@ -141,17 +141,68 @@ public partial class alipay_alipay : System.Web.UI.Page
                         string OrderName = "";
                         string nvc_Name = "";
                         DataZscqDataContext dpdc = new DataZscqDataContext();
+
+                        foreach (var qy in OrderD)
+                        {
+                            var query_1 = from i in dpdc.t_Trademark
+                                          where i.i_Id == qy.i_TrademarkId
+                                          select i;
+                            foreach (var qy1 in query_1)
+                            {
+                                OrderName += "," + qy1.nvc_SBRegName; //商标注册名称
+                            }
+                        }
+
+                        nvc_Name = OrderName.Length > 1 ? OrderName.Substring(1, OrderName.Length - 1) : "";
+
+                        //订单号
+                        out_trade_no = Omodel.nvc_OrderNumber;
+                        //订单名称，显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里。
+                        subject = Omodel.nvc_OrderNumber;// TxtSubject.Text.Trim();
+                        //订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里
+                        body = nvc_Name;// TxtBody.Text.Trim();
+                        //订单总金额，显示在支付宝收银台里的“应付总额”里
+                        total_fee = Omodel.dm_TotalMoney.ToString();
+                        //total_fee = Math.Round(Omodel.dm_SumMoney - Omodel.dm_OkMoney, 2).ToString();
+
+                        //扩展功能参数——默认支付方式//
+
+                        //默认支付方式，代码见“即时到帐接口”技术文档
+                        paymethod = "";
+                        //默认网银代号，代号列表见“即时到帐接口”技术文档“附录”→“银行列表”
+                        defaultbank = "";
+                        pay_mode = "directPay";
+                        if (Omodel.nvc_PayType != "支付宝支付")
+                        {
+                            pay_mode = Bind_Bank(Omodel.nvc_Bank);
+                        }
+                        if (pay_mode == "directPay")
+                        {
+                            paymethod = "directPay";//默认支付方式，代码见“即时到帐接口”技术文档
+                            defaultbank = "";//默认网银代号，代号列表见“即时到帐接口”技术文档“附录”→“银行列表”
+                        }
+                        else
+                        {
+                            paymethod = "bankPay";//默认支付方式，代码见“即时到帐接口”技术文档
+                            defaultbank = pay_mode;//默认网银代号，代号列表见“即时到帐接口”技术文档“附录”→“银行列表”
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("../index.aspx");
+                    }
+                    #endregion
+                }
+                else if (oType == 3) //新商标
+                {
+                    #region 商标
+                    t_NewTrademarkOrder Omodel = DALO.NewTrademarkOrder_Select_Id(oId);
+                    if (Omodel != null && Omodel.i_Status == 0)//未支付
+                    {
+                        IQueryable<t_NewTrademarkOrderDetails> OrderD = (IQueryable<t_NewTrademarkOrderDetails>)DALOD.NewOrderDetails_Select_OrderId(Omodel.i_Id);
+                        string OrderName = "";
+                        string nvc_Name = "";
                         DataTradeMarkDataContext markdc = new DataTradeMarkDataContext();
-                        //foreach (var qy in OrderD)
-                        //{
-                        //    var query_1 = from i in dpdc.t_Trademark
-                        //                  where i.i_Id == qy.i_TrademarkId
-                        //                  select i;
-                        //    foreach (var qy1 in query_1)
-                        //    {
-                        //        OrderName += "," + qy1.nvc_SBRegName; //商标注册名称
-                        //    }
-                        //}
 
                         foreach (var qy in OrderD)
                         {

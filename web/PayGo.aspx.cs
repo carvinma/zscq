@@ -57,7 +57,7 @@ public partial class PayGo : System.Web.UI.Page
             }
             else//商标
             {
-                t_TrademarkOrder model = DALTO.TrademarkOrder_Select_Id(oId);
+                t_NewTrademarkOrder model = DALTO.NewTrademarkOrder_Select_Id(oId);
                 if (model != null)
                 {
                     if (model.dt_PayTime == null)

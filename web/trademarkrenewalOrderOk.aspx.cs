@@ -107,7 +107,7 @@ public partial class trademarkrenewalOrderOk : System.Web.UI.Page
     {
         if (sbOrderId != "0" && uId!=0)
         {
-            Response.Redirect("PayGo.aspx?tType=2&oId=" +sbOrderId);
+            Response.Redirect("PayGo.aspx?tType=3&oId=" +sbOrderId);
         }
     }
 }
