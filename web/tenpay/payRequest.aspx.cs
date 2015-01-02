@@ -22,6 +22,7 @@ public partial class _Default : System.Web.UI.Page
     string date = DateTime.Now.ToString("yyyyMMdd");
     //订单号，此处用时间和随机数生成，商户根据自己调整，保证唯一
     string out_trade_no = "20120810153509479";
+    string out_trade_type;//业务类别 1专利 2旧商标 3新商标
     //tiger自定义变量金额
     string money = "1";
     //tiger自定义变量商品描述
@@ -42,6 +43,7 @@ public partial class _Default : System.Web.UI.Page
                 {
                     //订单号
                     out_trade_no = pModel.nvc_OrderNumber;
+                    out_trade_type = oType.ToString();
                     //订单金额
                     money = Convert.ToInt32(pModel.dm_TotalMoney * 100).ToString();
                     //商品描述
@@ -65,9 +67,9 @@ public partial class _Default : System.Web.UI.Page
                 }
                 #endregion
             }
-            else
+            else if(oType==2)
             {
-                #region 商标
+                #region 旧 商标
                 t_TrademarkOrder tModel = DALTO.TrademarkOrder_Select_Id(oId);
                 if (tModel != null && tModel.dt_PayTime == null)
                 {
@@ -88,6 +90,25 @@ public partial class _Default : System.Web.UI.Page
                     //    }
                     //}
                     //body = OrderName.Length > 1 ? OrderName.Substring(1, OrderName.Length - 1) : "";
+                    body = "商标";
+                }
+                else
+                {
+                    Response.Redirect("../index.aspx");
+                }
+                #endregion
+            }
+            else if (oType == 3)
+            {
+                #region 新 商标
+                t_NewTrademarkOrder tModel = DALTO.NewTrademarkOrder_Select_Id(oId);
+                if (tModel != null && tModel.dt_PayTime == null)
+                {
+                    //订单号
+                    out_trade_no = tModel.nvc_OrderNumber;
+                    out_trade_type = oType.ToString();
+                    //订单金额
+                    money = Convert.ToInt32(tModel.dm_TotalMoney * 100).ToString();
                     body = "商标";
                 }
                 else
@@ -122,6 +143,7 @@ public partial class _Default : System.Web.UI.Page
         //reqHandler.setParameter("return_url", "");
         reqHandler.setParameter("partner", partner);//商户号
         reqHandler.setParameter("out_trade_no", out_trade_no);//订单号
+        reqHandler.setParameter("out_trade_type", out_trade_type);//业务类别 1专利 2旧商标 3新商标
         reqHandler.setParameter("notify_url", "http://www.hqht-online.com/tenpay/payNotifyUrl.aspx");
         reqHandler.setParameter("attach", "123");//附加数据
         reqHandler.setParameter("body", body);//商品描述
