@@ -47,7 +47,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     public int dazhe = 0, dazhe1 = 0;
     public decimal TMDaiLi = 0, TrademarkMoney = 0, TMZhiNaJin = 0;
     public string ids;
-    public string membername, linkMan;
+    public string membername, linkMan,membernum;
     protected void Page_Load(object sender, EventArgs e)
     {
         href = Request.Url.ToString();
@@ -296,7 +296,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                         huikuanbankinfo = str1;
                     }
 
-                    // BLLE.Email_Add(emalladdress, "商标缴费订单", "您好！您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
+                    BLLE.Email_Add(emalladdress, "商标缴费订单", membername + "客户(" + membernum + ")，您好！<br/>您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
                 }
                 Response.Redirect("trademarkOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber + "&tIds=" + patentid);
             }
@@ -586,6 +586,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             if (muser != null)
             {
                 membername = muser.nvc_Name;
+                membernum = muser.nvc_UserNum;
                 linkMan = muser.nvc_LinkName;
                 if (muser.i_UserTypeId == 3)
                 {

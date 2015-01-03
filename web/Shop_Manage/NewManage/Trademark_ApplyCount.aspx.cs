@@ -151,12 +151,12 @@ public partial class Trademark_ApplyCount : System.Web.UI.Page
     }
     protected void btTest_Click(object sender, EventArgs e)
     {
-        GlobalSend gs = new GlobalSend();
+        //GlobalSend gs = new GlobalSend();
 
-        gs.SendEmail_New_SbOrder("i_SbStatus11", "nvc_SbStatus11", 1);
-        gs.SendEmail_New_SbOrder("i_SbStatus22", "nvc_SbStatus22", 2);
-        gs.SendEmail_New_SbOrder("i_SbStatus33", "nvc_SbStatus33", 3);
-        gs.SendEmail_New_SbOrder("i_SbStatus44", "nvc_SbStatus44", 4);
+        //gs.SendEmail_New_SbOrder("i_SbStatus11", "nvc_SbStatus11", 0);//待付款--未支付 0
+        //gs.SendEmail_New_SbOrder("i_SbStatus22", "nvc_SbStatus22", 1);//已付款--已支付 1
+        //gs.SendEmail_New_SbOrder("i_SbStatus33", "nvc_SbStatus33", 2);//待审核--处理中 2
+        //gs.SendEmail_New_SbOrder("i_SbStatus44", "nvc_SbStatus44", 4);//已完成--已完成 4
 
         //gs.SendEmail_New_SB("sb_status0", "txt_sb_con0", 6);
         //gs.SendEmail_New_SB("sb_status15", "txt_sb_con15", 5);

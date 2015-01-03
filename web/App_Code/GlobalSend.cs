@@ -780,9 +780,9 @@ public class GlobalSend
                 {
                     foreach (var v in iquery)
                     {
-                        if (v.i_Id == 191)
-                        {
-                            StringBuilder sb_start = new StringBuilder();
+                    //if (v.i_Id == 191)
+                    //{
+                        StringBuilder sb_start = new StringBuilder();
                             StringBuilder sb_body = new StringBuilder();
                             StringBuilder sb_end = new StringBuilder();
                             int dazhe = 0, dazhe1 = 0;
@@ -876,7 +876,7 @@ public class GlobalSend
                                 }
                                 mak.Trademark_Submit();
                             }
-                        }
+                       // }
                     }
                 }
             }
