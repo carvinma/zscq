@@ -47,7 +47,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     public int dazhe = 0, dazhe1 = 0;
     public decimal TMDaiLi = 0, TrademarkMoney = 0, TMZhiNaJin = 0;
     public string ids;
-    public string membername, linkMan,membernum;
+    public string membername, linkMan, membernum, emailAttachments;
     protected void Page_Load(object sender, EventArgs e)
     {
         href = Request.Url.ToString();
@@ -281,8 +281,11 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 DALTO.TrademarkOrder_Update(OrderModer);
             }
 
-            CreateWordToPDF_Total(OrderModer);
-            CreateWordToPDF_Detail(OrderModer, iquery);
+            string emailAttachments1= CreateWordToPDF_Total(OrderModer);
+            string emailAttachments2 = CreateWordToPDF_Detail(OrderModer, iquery);
+            if (!string.IsNullOrEmpty(emailAttachments1) && !string.IsNullOrEmpty(emailAttachments2))
+                emailAttachments = emailAttachments1 + ";" + emailAttachments2;
+
             if (sbnum == 0)
             {
                 div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='trademark_list.aspx';</script>";
@@ -323,7 +326,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     strzl.Append("</table><br/><br/>");
 
                     #endregion
-                    BLLE.Email_Add(emalladdress, "商标缴费订单", membername + "客户(" + membernum + ")，您好！<br/>您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + strzl.ToString() + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
+                    BLLE.Email_Add(emalladdress, "商标缴费订单", membername + "客户(" + membernum + ")，您好！<br/>您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + strzl.ToString() + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn", emailAttachments);
                 }
                 Response.Redirect("trademarkOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber + "&tIds=" + patentid);
             }
@@ -336,7 +339,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     }
 
     #region 生成帐单
-    private void CreateWordToPDF_Total(t_NewTrademarkOrder OrderModer)
+    private string CreateWordToPDF_Total(t_NewTrademarkOrder OrderModer)
     {
 
         #region  生成总帐单
@@ -445,11 +448,12 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
 
         string pdfPath = Server.MapPath("File_Zscq/AccountPDF/TotalBill" + OrderModer.nvc_OrderNumber + ".pdf");
         doc.Save(pdfPath, SaveFormat.Pdf);
+        return pdfPath;
         #endregion
 
     }
 
-    private void CreateWordToPDF_Detail(t_NewTrademarkOrder OrderModer, IQueryable<t_NewTradeMarkInfo> listMark)
+    private string CreateWordToPDF_Detail(t_NewTrademarkOrder OrderModer, IQueryable<t_NewTradeMarkInfo> listMark)
     {
         #region  生成分帐单
         int orderRank = 1;
@@ -578,8 +582,11 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     dstDoc.AppendDocument(srcDoc, ImportFormatMode.KeepSourceFormatting);
                 }
             }
-            dstDoc.Save(Server.MapPath("File_Zscq/AccountPDF/SeparateBill" + OrderModer.nvc_OrderNumber + ".pdf"));
+            string docPath = Server.MapPath("File_Zscq/AccountPDF/SeparateBill" + OrderModer.nvc_OrderNumber + ".pdf");
+            dstDoc.Save(docPath);
+            return docPath;
         }
+        return "";
     }
     #endregion
     void Bind_Drp_YouHuiQuan()
