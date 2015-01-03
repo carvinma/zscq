@@ -74,8 +74,8 @@
 </div>
 <div id="divshow1" class="divshow">
     <table width="571" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-            <td height="38" align="left" valign="top" style="background-image: url(images/faq_bg1.gif);">
+        <tr>                                          
+            <td height="38" align="left" valign="top" style="background-image: url('<%= ResolveUrl("~/images/faq_bg1.gif")%>');">
                 <table width="700" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td width="662" height="38">&nbsp;
@@ -83,14 +83,14 @@
                         </td>
                         <td width="38">
                             <a href="#">
-                                <img src="images/faq_close.gif" width="38" height="38" border="0" onclick="hidedivbox('divshow1');" /></a>
+                                <img src='<%= ResolveUrl("~/images/faq_close.gif")%>' width="38" height="38" border="0" onclick="hidedivbox('divshow1');" /></a>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
-            <td height="150" align="left" valign="top" style="background-image: url(images/faq_bg2.gif);">
+            <td height="150" align="left" valign="top" style="background-image: url('<%= ResolveUrl("~/images/faq_bg2.gif")%>');">
                 <table width="700" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td height="36">&nbsp;
@@ -121,7 +121,7 @@
         </tr>
         <tr>
             <td height="15">
-                <img src="images/faq_bg3.gif" width="700" height="20" />
+                <img src='<%= ResolveUrl("~/images/faq_bg3.gif")%>' width="700" height="20" />
             </td>
         </tr>
     </table>
@@ -129,7 +129,7 @@
 <div id="divshow2" class="divshow">
     <table width="571" border="0" cellspacing="0" cellpadding="0">
         <tr>
-            <td height="38" align="left" valign="top" style="background-image: url(images/faq_bg1.gif);">
+            <td height="38" align="left" valign="top" style="background-image: url('<%= ResolveUrl("~/images/faq_bg1.gif")%>');">
                 <table width="700" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td width="662" height="38">&nbsp;
@@ -137,14 +137,14 @@
                         </td>
                         <td width="38">
                             <a href="#">
-                                <img src="images/faq_close.gif" width="38" height="38" border="0" onclick="hidedivbox('divshow2');" /></a>
+                                <img src='<%= ResolveUrl("~/images/faq_close.gif")%>' width="38" height="38" border="0" onclick="hidedivbox('divshow2');" /></a>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
-            <td height="150" align="left" valign="top" style="background-image: url(images/faq_bg2.gif);">
+            <td height="150" align="left" valign="top" style="background-image: url('<%= ResolveUrl("~/images/faq_bg2.gif")%>');">
                 <table width="700" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td height="36">&nbsp;
@@ -175,13 +175,13 @@
         </tr>
         <tr>
             <td height="15">
-                <img src="images/faq_bg3.gif" width="700" height="20" />
+                <img src='<%= ResolveUrl("~/images/faq_bg3.gif")%>' width="700" height="20" />
             </td>
         </tr>
     </table>
 </div>
 <div id="divshow3" class="divshow">
-    <table width="571" height="299" border="0" cellspacing="0" cellpadding="0" style="background-image: url(images/faq_bg.png);">
+    <table width="571" height="299" border="0" cellspacing="0" cellpadding="0" style="background-image: url('<%= ResolveUrl("~/images/faq_bg.gif")%>');">
         <tr>
             <td height="299" align="left" valign="top">
                 <table width="571" border="0" cellspacing="0" cellpadding="0">
@@ -194,7 +194,7 @@
                         </td>
                         <td width="55" align="right" valign="top">
                             <a href="javascript:void(0);">
-                                <img src="images/faq_close.gif" width="38" height="38" border="0" onclick="hidedivbox('divshow3');" />
+                                <img src='<%= ResolveUrl("~/images/faq_close.gif")%>' width="38" height="38" border="0" onclick="hidedivbox('divshow3');" />
                             </a>
                         </td>
                     </tr>
@@ -235,7 +235,7 @@
                                 </tr>
                                 <tr>
                                     <td height="30" colspan="2" align="center">
-                                        <img src="images/faq3.gif" style="border: 0px; width: 118px; height: 29px; cursor: pointer;" onclick="if(checkfaq())sendMsg();" />
+                                        <img src='<%= ResolveUrl("~/images/faq3.gif")%>' style="border: 0px; width: 118px; height: 29px; cursor: pointer;" onclick="if(checkfaq())sendMsg();" />
                                     </td>
                                 </tr>
                             </table>
@@ -263,7 +263,7 @@
 <div id="divshow4" class="divshow">
     <table width="571" border="0" cellspacing="0" cellpadding="0">
         <tr>
-            <td height="38" align="left" valign="top" style="background-image: url(images/faq_bg1.gif);">
+            <td height="38" align="left" valign="top" style="background-image: url('<%= ResolveUrl("~/images/faq_bg1.gif")%>');">
                 <table width="700" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td width="662" height="38">&nbsp;
@@ -271,14 +271,14 @@
                         </td>
                         <td width="38">
                             <a href="#">
-                                <img src="images/faq_close.gif" width="38" height="38" border="0" onclick="hidedivbox('divshow4');" /></a>
+                                <img src='<%= ResolveUrl("~/images/faq_close.gif")%>' width="38" height="38" border="0" onclick="hidedivbox('divshow4');" /></a>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
-            <td height="150" align="left" valign="top" style="background-image: url(images/faq_bg2.gif);">
+            <td height="150" align="left" valign="top" style="background-image: url('<%= ResolveUrl("~/images/faq_bg2.gif")%>');">
                 <table width="700" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td height="36">&nbsp;
@@ -309,7 +309,7 @@
         </tr>
         <tr>
             <td height="15">
-                <img src="images/faq_bg3.gif" width="700" height="20" />
+                <img src='<%= ResolveUrl("~/images/faq_bg3.gif")%>' width="700" height="20" />
             </td>
         </tr>
     </table>
@@ -387,7 +387,7 @@
                     <tr>
                         <td height="56" align="right" valign="top">
                             <a href="javascript:void(0)" onclick="openkefu();">
-                                <img src="images/hqht_kf1s.gif" width="32" height="108" border="0" /></a>
+                                <img src='<%= ResolveUrl("~/images/hqht_kf1s.gif")%>' width="32" height="108" border="0" /></a>
                         </td>
                     </tr>
                 </table>
@@ -403,7 +403,7 @@
                     <tr>
                         <td height="56" align="right" valign="top">
                             <a href="javascript:void(0)" onclick="esckefu();">
-                                <img src="images/hqht_kf1.jpg" width="32" height="108" border="0" /></a>
+                                <img src='<%= ResolveUrl("~/images/hqht_kf1.jpg")%>' width="32" height="108" border="0" /></a>
                         </td>
                     </tr>
                 </table>
@@ -414,7 +414,7 @@
                     </tr>
                     <tr>
                         <td height="40" align="center">
-                            <img src="images/hqht_kf2.jpg" width="109" height="24" />
+                            <img src='<%= ResolveUrl("~/images/hqht_kf2.jpg")%>' width="109" height="24" />
                         </td>
                     </tr>
                     <tr>
@@ -431,13 +431,13 @@
                     <tr>
                         <td height="33" align="center">
                             <a href="javascript:openboxBg(1);showdivbox('divshow3');">
-                                <img src="images/hqht_kf3.jpg" width="109" height="24" border="0" /></a>
+                                <img src='<%= ResolveUrl("~/images/hqht_kf3.jpg")%>' width="109" height="24" border="0" /></a>
                         </td>
                     </tr>
                     <tr>
                         <td height="33" align="center">
                             <a href="javascript:void(0)" onclick="kk2();this.blur();">
-                                <img src="images/hqht_kf4.jpg" width="109" height="24" border="0" /></a>
+                                <img src='<%= ResolveUrl("~/images/hqht_kf4.jpg")%>' width="109" height="24" border="0" /></a>
                         </td>
                     </tr>
                     <tr id="kefu2" style="display: none">
@@ -446,7 +446,7 @@
                                 <tr>
                                     <td height="33" align="center">
                                         <a href="http://wpa.qq.com/msgrd?V=1&Uin=331236387&Site=www.hqht-online.com&Menu=yes" target="_blank">
-                                            <img src="images/hqht_kf7.jpg" width="109" height="27" border="0" /></a>
+                                            <img src='<%= ResolveUrl("~/images/hqht_kf7.jpg")%>' width="109" height="27" border="0" /></a>
                                     </td>
                                 </tr>
                                 <%-- <tr>
@@ -455,7 +455,7 @@
                                 <tr>
                                     <td height="33" align="center">
                                         <a href="skype:zourilan612?call" target="_blank" onclick="return skypeCheck();">
-                                            <img src="images/hqht_kf9.jpg" width="109" height="27" border="0" /></a>
+                                            <img src='<%= ResolveUrl("~/images/hqht_kf9.jpg")%>' width="109" height="27" border="0" /></a>
                                     </td>
                                 </tr>
                             </table>
@@ -463,7 +463,7 @@
                     </tr>
                     <tr>
                         <td height="35" align="center">
-                            <img src="images/hqht_kf5.jpg" width="109" height="24" />
+                            <img src='<%= ResolveUrl("~/images/hqht_kf5.jpg")%>' width="109" height="24" />
                         </td>
                     </tr>
                     <tr>
@@ -488,8 +488,8 @@
                     </tr>
                     <tr>
                         <td height="30" align="center" valign="bottom">
-                            <a href="faq.aspx">
-                                <img src="images/hqht_kf6.jpg" width="109" height="24" border="0" /></a>
+                            <a href='<%= ResolveUrl("~/faq.aspx")%>'>
+                                <img src='<%= ResolveUrl("~/images/hqht_kf6.jpg")%>' width="109" height="24" border="0" /></a>
                         </td>
                     </tr>
                     <tr>

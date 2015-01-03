@@ -37,6 +37,7 @@
           <td width="86" align="center" id="td8" runat="server"><a href="?pagetype=zlpay"><strong>专利付款事项</strong></a></td>
           <td width="20">&nbsp;</td>
           <td width="86" align="center" id="td9" runat="server"><a href="?pagetype=sbpay"><strong>商标付款事项</strong></a></td>
+          <td width="86" align="center" id="td11" runat="server"><a href="?pagetype=sblogin"><strong>&nbsp;商标登陆事项</strong></a></td>
           <td width="20">&nbsp;</td>
         </tr>
       </table>
