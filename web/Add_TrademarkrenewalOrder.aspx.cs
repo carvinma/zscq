@@ -47,7 +47,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
     public int dazhe = 0, dazhe1 = 0;
     public decimal TMDaiLi = 0, TrademarkMoney = 0, TMZhiNaJin = 0;
     public string ids;
-    public string membername, linkMan;
+    public string membername, linkMan ,membernum, emailAttachments;
     protected void Page_Load(object sender, EventArgs e)
     {
         href = Request.Url.ToString();
@@ -71,6 +71,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
     {
         if (!string.IsNullOrEmpty(hi_ids.Value))
         {
+            StringBuilder emailMarktable = new StringBuilder();
             string patentid = hi_ids.Value;
             string[] arr_pid = patentid.Split(',');
             string emalladdress = "";
@@ -259,6 +260,18 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                 model.Status = 10;//申请中，未汇款
                 //DALT.Trademark_Update(model);
                 #endregion
+
+                #region 邮件中替换的商标信息表格
+                emailMarktable.Append("<tr>");
+                emailMarktable.Append("<td height='32' align='center' bgcolor='#FFFFFF' >" + model.CaseNo + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF' class='tooltip'>" + model.RegisteredNo + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF' class='tooltip'>" + model.ApplyName + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF'>" + model.TrademarkType + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF'>" + model.RenewalDate.Value.ToString("yyyy-MM-dd") + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF'>" + (model.TrademarkMoney.Value + model.TrademarkAgencyFee.Value + model.TrademarkLateFee.Value).ToString("0.00") + "</td>");
+                emailMarktable.Append("</tr>");
+                #endregion
+
                 UserLog.AddUserLog(uId, "商标系统", "提交订单");
             }
             mark.Trademark_Submit();
@@ -271,8 +284,10 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                 DALTO.TrademarkOrder_Update(OrderModer);
             }
 
-            CreateWordToPDF_Total(OrderModer);
-            CreateWordToPDF_Detail(OrderModer, iquery);
+            string emailAttachments1 = CreateWordToPDF_Total(OrderModer);
+            string emailAttachments2 = CreateWordToPDF_Detail(OrderModer, iquery);
+            if (!string.IsNullOrEmpty(emailAttachments1) && !string.IsNullOrEmpty(emailAttachments2))
+                emailAttachments = emailAttachments1 + ";" + emailAttachments2;
             if (sbnum == 0)
             {
                 div_a.InnerHtml = "<script>alert('没有要交费的商标！');localtion.href='trademark_list.aspx';</script>";
@@ -281,6 +296,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             {
                 if (emalladdress != "")
                 {
+                    bool states = false;
                     string huikuanbankinfo = "";
                     if (input_payway.Value == "线下汇款")
                     {
@@ -295,7 +311,24 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                         }
                         huikuanbankinfo = str1;
                     }
+                    #region 邮件中的商标订单清单和费用
+                    StringBuilder strzl = new StringBuilder();
+                    StringBuilder zongji = new StringBuilder();
 
+                    strzl.Append("<table width='689' border='0' cellspacing='1' cellpadding='1' bgcolor='#d0d0d0'>");
+                    strzl.Append("<tr>");
+                    strzl.Append("<td width='131' height='35' align='center' bgcolor='#FFFFFF'>案件号</td>");
+                    strzl.Append("<td width='130' align='center' bgcolor='#FFFFFF'>申请号</td>");
+                    strzl.Append("<td width='100' align='center' bgcolor='#FFFFFF'>申请人</td>");
+                    strzl.Append("<td width='130' align='center' bgcolor='#FFFFFF'>类别</td>");
+                    strzl.Append("<td width='100' align='center' bgcolor='#FFFFFF'>期限日</td>");
+                    strzl.Append("<td width='100' align='center' bgcolor='#FFFFFF'>金额</td>");
+                    strzl.Append("</tr>");
+                    strzl.Append(emailMarktable);
+                    strzl.Append("</table><br/><br/>");
+
+                    #endregion
+                    BLLE.Email_Add(emalladdress, "商标缴费订单", membername + "客户(" + membernum + ")，您好！<br/>您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + strzl.ToString() + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn", emailAttachments);
                     // BLLE.Email_Add(emalladdress, "商标缴费订单", "您好！您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
                 }
                 Response.Redirect("trademarkrenewalOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber+"&tIds=" + patentid);
@@ -309,7 +342,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
     }
 
     #region 生成帐单
-    private void CreateWordToPDF_Total(t_NewTrademarkOrder OrderModer)
+    private string CreateWordToPDF_Total(t_NewTrademarkOrder OrderModer)
     {
 
         #region  生成总帐单
@@ -425,11 +458,12 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
 
         string pdfPath = Server.MapPath("File_Zscq/AccountPDF/TotalBill" + OrderModer.nvc_OrderNumber + ".pdf");
         doc.Save(pdfPath, SaveFormat.Pdf);
+        return pdfPath;
         #endregion
 
     }
 
-    private void CreateWordToPDF_Detail(t_NewTrademarkOrder OrderModer, IQueryable<t_NewTradeMarkInfo> listMark)
+    private string CreateWordToPDF_Detail(t_NewTrademarkOrder OrderModer, IQueryable<t_NewTradeMarkInfo> listMark)
     {
         #region  生成分帐单
         int orderRank = 1;
@@ -565,8 +599,11 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                     dstDoc.AppendDocument(srcDoc, ImportFormatMode.KeepSourceFormatting);
                 }
             }
-            dstDoc.Save(Server.MapPath("File_Zscq/AccountPDF/SeparateBill" + OrderModer.nvc_OrderNumber + ".pdf"));
+            string pdfPath = Server.MapPath("File_Zscq/AccountPDF/SeparateBill" + OrderModer.nvc_OrderNumber + ".pdf");
+            dstDoc.Save(pdfPath);
+            return pdfPath;
         }
+        return "";
     }
     #endregion
     void Bind_Drp_YouHuiQuan()
@@ -601,6 +638,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             {
                 membername = muser.nvc_Name;
                 linkMan = muser.nvc_LinkName;
+                membernum = muser.nvc_UserNum;
                 if (muser.i_UserTypeId == 3)
                 {
                     if ((muser.nvc_DaiLiName == "" || muser.nvc_DaiLiName == null) || (muser.nvc_RealName == "" || muser.nvc_RealName == null) || (muser.nvc_TelPhone == "" || muser.nvc_TelPhone == null) || (muser.nvc_Address == "" || muser.nvc_Address == null) || (muser.nvc_ZipCode == "" || muser.nvc_ZipCode == null))

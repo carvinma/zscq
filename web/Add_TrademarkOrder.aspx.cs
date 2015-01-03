@@ -309,7 +309,6 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                         }
                         huikuanbankinfo = str1;
                     }
-                    string ss = hi_feeinfo.Value;
                     #region 邮件中的商标订单清单和费用
                     StringBuilder strzl = new StringBuilder();
                     StringBuilder zongji = new StringBuilder();

@@ -67,7 +67,7 @@ namespace zscq.BLL
                     for (int i = 0; i < attachments.Length; i++)
                     {
                         if (attachments[i].Length > 0)
-                        {
+                        {  
                             mail.Attachments.Add(new Attachment(attachments[i]));
                         }
                     }
