@@ -91,12 +91,12 @@
         #region 新商标
 
         //商标续展案要有期限提醒邮件，商标申请案和续展案要有订单邮件。
-        gs.SendEmail_New_SB("sb_status0", "txt_sb_con0", 1);
-        gs.SendEmail_New_SB("sb_status15", "txt_sb_con15", 2);
-        gs.SendEmail_New_SB("sb_status30", "txt_sb_con30", 3);
-        gs.SendEmail_New_SB("sb_status60", "txt_sb_con60", 4);
-        gs.SendEmail_New_SB("sb_status90", "txt_sb_con90", 5);
-        gs.SendEmail_New_SB("sb_status", "txt_sb_con", 6);
+        gs.SendEmail_New_SB("sb_status0", "txt_sb_con0", 6);
+        gs.SendEmail_New_SB("sb_status15", "txt_sb_con15", 5);
+        gs.SendEmail_New_SB("sb_status30", "txt_sb_con30", 4);
+        gs.SendEmail_New_SB("sb_status60", "txt_sb_con60", 3);
+        gs.SendEmail_New_SB("sb_status90", "txt_sb_con90", 2);
+        gs.SendEmail_New_SB("sb_status", "txt_sb_con", 1);
 
         gs.SendEmail_New_SbOrder("i_SbStatus11", "nvc_SbStatus11", 1);
         gs.SendEmail_New_SbOrder("i_SbStatus22", "nvc_SbStatus22", 2);
