@@ -71,6 +71,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     {
         if (!string.IsNullOrEmpty(hi_ids.Value))
         {
+            StringBuilder emailMarktable = new StringBuilder();
             string patentid = hi_ids.Value;
             string[] arr_pid = patentid.Split(',');
             string emalladdress = "";
@@ -258,6 +259,16 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 model.Status = 1;//申请中，未汇款
                 //DALT.Trademark_Update(model);
                 #endregion
+
+                #region 邮件中替换的商标信息表格
+                emailMarktable.Append("<tr>");
+                emailMarktable.Append("<td height='32' align='center' bgcolor='#FFFFFF' >" + model.CaseNo + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF' class='tooltip'>" + model.RegisteredNo + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF' class='tooltip'>" + model.ApplyName + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF'>" +  model.TrademarkType + "</td>");
+                emailMarktable.Append("<td align='center' bgcolor='#FFFFFF'>" + (model.TrademarkMoney.Value+model.TrademarkAgencyFee.Value+model.TrademarkLateFee.Value).ToString("0.00") + "</td>");
+                emailMarktable.Append("</tr>");
+                #endregion
                 UserLog.AddUserLog(uId, "商标系统", "提交订单");
             }
             mark.Trademark_Submit();
@@ -295,8 +306,24 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                         }
                         huikuanbankinfo = str1;
                     }
+                    string ss = hi_feeinfo.Value;
+                    #region 邮件中的商标订单清单和费用
+                    StringBuilder strzl = new StringBuilder();
+                    StringBuilder zongji = new StringBuilder();
 
-                    BLLE.Email_Add(emalladdress, "商标缴费订单", membername + "客户(" + membernum + ")，您好！<br/>您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
+                    strzl.Append("<table width='689' border='0' cellspacing='1' cellpadding='1' bgcolor='#d0d0d0'>");
+                    strzl.Append("<tr>");
+                    strzl.Append("<td width='131' height='35' align='center' bgcolor='#FFFFFF'>案件号</td>");
+                    strzl.Append("<td width='130' align='center' bgcolor='#FFFFFF'>申请号</td>");
+                    strzl.Append("<td width='100' align='center' bgcolor='#FFFFFF'>申请人</td>");
+                    strzl.Append("<td width='130' align='center' bgcolor='#FFFFFF'>类别</td>");
+                    strzl.Append("<td width='100' align='center' bgcolor='#FFFFFF'>金额</td>");
+                    strzl.Append("</tr>");
+                    strzl.Append(emailMarktable);
+                    strzl.Append("</table><br/><br/>");
+
+                    #endregion
+                    BLLE.Email_Add(emalladdress, "商标缴费订单", membername + "客户(" + membernum + ")，您好！<br/>您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + strzl.ToString() + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
                 }
                 Response.Redirect("trademarkOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber + "&tIds=" + patentid);
             }
