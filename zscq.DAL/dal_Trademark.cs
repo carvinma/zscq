@@ -809,7 +809,7 @@ namespace zscq.DAL
         }
         public IQueryable<t_NewTradeMarkInfo> NewTrademark_SelectAllByStatus(int memberid, int sid, int flag)
         {
-            var iquery = from i in mark.t_NewTradeMarkInfo where i.i_MemberId == memberid select i;
+            var iquery = from i in mark.t_NewTradeMarkInfo where i.i_MemberId == memberid && i.i_Type==1 select i;
             if (flag == 1)
             {
                 iquery = from i in iquery where i.i_SendEmail != sid select i;

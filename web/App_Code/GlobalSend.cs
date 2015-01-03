@@ -780,95 +780,99 @@ public class GlobalSend
                 {
                     foreach (var v in iquery)
                     {
-                        StringBuilder sb_start = new StringBuilder();
-                        StringBuilder sb_body = new StringBuilder();
-                        StringBuilder sb_end = new StringBuilder();
-                        int dazhe = 0, dazhe1 = 0;
-                        #region 会员折扣 by chy
-                        dazhe = v.i_PowerDaZhe;
-                        t_MemberGrade tmg = DALUG.UserGrade_Select_Id(v.i_Grade);
-                        if (tmg != null)
+                        if (v.i_Id == 191)
                         {
-                            dazhe1 = Convert.ToInt32(tmg.i_Discount);
-                        }
-                        #endregion
-                        sb_start.Append("<table width='600' border='0' cellspacing='1' cellpadding='1' bgcolor='#d0d0d0' >");
-                        sb_start.Append("<tr>");
-                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标注册号</td>");
-                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标大类</td>");
-                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>申请人姓名</td>");
-                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>到期日</td>");
-                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>缴费金额</td>");
-                        sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>币种</td>");
-                        sb_start.Append("</tr>");
-                        sb_end.Append("</table>");
-                        IQueryable<t_NewTradeMarkInfo> result = DALT.NewTrademark_SelectAllByStatus(v.i_Id, status, 1);//需要发送邮件的商标
-                        foreach (var i in result)
-                        {
-                            string paybizhong = "CNY";
-                           
+                            StringBuilder sb_start = new StringBuilder();
+                            StringBuilder sb_body = new StringBuilder();
+                            StringBuilder sb_end = new StringBuilder();
+                            int dazhe = 0, dazhe1 = 0;
                             #region 会员折扣 by chy
-                            decimal dalifee = i.TrademarkAgencyFee.Value;
-                            if (dazhe != 0)
+                            dazhe = v.i_PowerDaZhe;
+                            string ss = v.nvc_Name;
+                            t_MemberGrade tmg = DALUG.UserGrade_Select_Id(v.i_Grade);
+                            if (tmg != null)
                             {
-                                dalifee = dalifee * dazhe / 100;
-                            }
-                            if (dazhe1 != 0)
-                            {
-                                dalifee = dalifee * dazhe1 / 100;
+                                dazhe1 = Convert.ToInt32(tmg.i_Discount);
                             }
                             #endregion
-                            string totalmoney = (dalifee + i.TrademarkLateFee.Value + i.TrademarkMoney.Value).ToString("0.00");
-                            paybizhong = "CNY";
-                
-                            sb_body.Append("<tr>");
-                            sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.RegisteredNo + "</td>");
-                            sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.TrademarkType + "</td>");
-                            sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + i.ApplyName + "</td>");
-                            sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + i.RenewalDate + "</td>");
-                            sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + totalmoney + "</td>");
-                            sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + paybizhong + "</td>");
-                            sb_body.Append("</tr>");
-
-                        }
-                        if (result.Count() > 0)
-                        {
-                            //=============================//
-                            send_fromcontent = send_fromcontent.Replace("UserName", v.nvc_Name);
-                            send_fromcontent = send_fromcontent.Replace("UserNumber", v.nvc_UserNum);
-                            string neirong = sb_start.ToString() + sb_body.ToString() + sb_end.ToString() + "<br/>" + send_fromcontent;
-                            string youxiang = v.nt_BYEmail + "|" + v.nvc_Email;
-                            string[] ArrEmail = youxiang.Split('|');
-                            string returns = "发送失败";
-                            for (int j = 0; j < ArrEmail.Length; j++)
+                            sb_start.Append("<table width='600' border='0' cellspacing='1' cellpadding='1' bgcolor='#d0d0d0' >");
+                            sb_start.Append("<tr>");
+                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标注册号</td>");
+                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标大类</td>");
+                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>申请人姓名</td>");
+                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>到期日</td>");
+                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>缴费金额</td>");
+                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>币种</td>");
+                            sb_start.Append("</tr>");
+                            sb_end.Append("</table>");
+                            IQueryable<t_NewTradeMarkInfo> result = DALT.NewTrademark_SelectAllByStatus(v.i_Id, status, 1);//需要发送邮件的商标
+                            foreach (var i in result)
                             {
-                                if (ArrEmail[j] != null && ArrEmail[j] != "")
+                                string paybizhong = "CNY";
+
+                                #region 会员折扣 by chy
+                                decimal dalifee = i.TrademarkAgencyFee.Value;
+                                if (dazhe != 0)
                                 {
-                                    //所有的邮箱发送完之后再修改状态
-                                    send_fromto = ArrEmail[j];
-                                    returns = Email.Mail(send_from, send_fromname, send_fromto, send_fromtitle, neirong, send_fromloginname, send_frompwd, send_fromserver, "");//发送
-                                    #region 插入流水
-                                    t_EmailNote ten = new t_EmailNote();
-                                    ten.nvc_Email = send_fromto;
-                                    ten.nvc_MemberName = v.nvc_Name;
-                                    ten.nvc_Title = send_fromtitle;
-                                    ten.nvc_EmailContent = neirong;
-                                    ten.nvc_EmailState = returns;
-                                    ten.i_systemType = 2;
-                                    ten.i_MemberId = Convert.ToInt32(v.i_Id);
-                                    ten.nvc_Language = "cn";
-                                    DALE.EmailNote_Add(ten);
-                                    #endregion
+                                    dalifee = dalifee * dazhe / 100;
                                 }
-                            }
+                                if (dazhe1 != 0)
+                                {
+                                    dalifee = dalifee * dazhe1 / 100;
+                                }
+                                #endregion
+                                string totalmoney = (dalifee + i.TrademarkLateFee.Value + i.TrademarkMoney.Value).ToString("0.00");
+                                paybizhong = "CNY";
 
-                           dal_NewTrademark mak = new dal_NewTrademark();
-                            foreach (var r in result)
-                            {
-                                t_NewTradeMarkInfo tt = mak.Trademark_Select_Id(r.i_Id); 
-                                tt.i_SendEmail = status;
+                                sb_body.Append("<tr>");
+                                sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.RegisteredNo + "</td>");
+                                sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.TrademarkType + "</td>");
+                                sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + i.ApplyName + "</td>");
+                                sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + i.RenewalDate + "</td>");
+                                sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + totalmoney + "</td>");
+                                sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + paybizhong + "</td>");
+                                sb_body.Append("</tr>");
+
                             }
-                            mak.Trademark_Submit();
+                            if (result.Count() > 0)
+                            {
+                                //=============================//
+                                send_fromcontent = send_fromcontent.Replace("UserName", v.nvc_Name);
+                                send_fromcontent = send_fromcontent.Replace("UserNumber", v.nvc_UserNum);
+                                string neirong = sb_start.ToString() + sb_body.ToString() + sb_end.ToString() + "<br/>" + send_fromcontent;
+                                string youxiang = v.nt_BYEmail + "|" + v.nvc_Email;
+                                string[] ArrEmail = youxiang.Split('|');
+                                string returns = "发送失败";
+                                for (int j = 0; j < ArrEmail.Length; j++)
+                                {
+                                    if (ArrEmail[j] != null && ArrEmail[j] != "")
+                                    {
+                                        //所有的邮箱发送完之后再修改状态
+                                        send_fromto = ArrEmail[j];
+                                        returns = Email.Mail(send_from, send_fromname, send_fromto, send_fromtitle, neirong, send_fromloginname, send_frompwd, send_fromserver, "");//发送
+                                        #region 插入流水
+                                        t_EmailNote ten = new t_EmailNote();
+                                        ten.nvc_Email = send_fromto;
+                                        ten.nvc_MemberName = v.nvc_Name;
+                                        ten.nvc_Title = send_fromtitle;
+                                        ten.nvc_EmailContent = neirong;
+                                        ten.nvc_EmailState = returns;
+                                        ten.i_systemType = 2;
+                                        ten.i_MemberId = Convert.ToInt32(v.i_Id);
+                                        ten.nvc_Language = "cn";
+                                        DALE.EmailNote_Add(ten);
+                                        #endregion
+                                    }
+                                }
+
+                                dal_NewTrademark mak = new dal_NewTrademark();
+                                foreach (var r in result)
+                                {
+                                    t_NewTradeMarkInfo tt = mak.Trademark_Select_Id(r.i_Id);
+                                    tt.i_SendEmail = status;
+                                }
+                                mak.Trademark_Submit();
+                            }
                         }
                     }
                 }

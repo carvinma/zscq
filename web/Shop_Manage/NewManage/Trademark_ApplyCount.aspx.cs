@@ -149,4 +149,14 @@ public partial class Trademark_ApplyCount : System.Web.UI.Page
         var result = from i in dzdc.t_Trademark where i.i_MemberId == Convert.ToInt32(id) && i.i_GuoJiId == Convert.ToInt32(gid) select i;
         return result.Count();
     }
+    protected void btTest_Click(object sender, EventArgs e)
+    {
+        GlobalSend gs = new GlobalSend();
+        gs.SendEmail_New_SB("sb_status0", "txt_sb_con0", 6);
+        gs.SendEmail_New_SB("sb_status15", "txt_sb_con15", 5);
+        gs.SendEmail_New_SB("sb_status30", "txt_sb_con30", 4);
+        gs.SendEmail_New_SB("sb_status60", "txt_sb_con60", 3);
+        gs.SendEmail_New_SB("sb_status90", "txt_sb_con90", 2);
+        gs.SendEmail_New_SB("sb_status", "txt_sb_con", 1);
+    }
 }

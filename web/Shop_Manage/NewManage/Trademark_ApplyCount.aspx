@@ -123,6 +123,8 @@
                     </td>
                     <td class="style1">
                         <asp:Button ID="btSelect" runat="server" Text="搜索" class="button" OnClick="btSelect_Click" />
+                        <asp:Button ID="btTest" runat="server" Text="搜索" class="button" onclick="btTest_Click" 
+                             />
                     </td>
                 </tr>
             </table>
