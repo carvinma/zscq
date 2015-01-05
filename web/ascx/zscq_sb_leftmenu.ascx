@@ -48,7 +48,7 @@
                                     <%= unumber%>
                                 </td>
                                 <td rowspan="2">
-                                    <img src="~/<%= grageImg%>" width="45" height="45" />
+                                    <img src="<%=grageImg%>" width="45" height="45" />
                                 </td>
                             </tr>
                             <tr>
@@ -102,7 +102,7 @@
                                     
                                 </td>
                                 <td height="30" align="left" style="border-bottom: 1px solid #d3d3d3;">
-                                    <a href="user_sblb.aspx" <% if (myurl=="trademarkorderok"|| myurl == "trademarkorder_list" ||  myurl == "trademarkrenewalorder_list"||myurl == "user_sblb"  ||  myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_trademarkzixing"){ %> class="font12bd44147" <%}else{%> class="" <%} %>>·我的商标</a>
+                                    <a href="javascript:void(0)" <% if (myurl=="trademarkorderok"|| myurl == "trademarkorder_list" ||  myurl == "trademarkrenewalorder_list"||myurl == "user_sblb"  ||  myurl == "user_sbck" || myurl == "user_sbupdate" || myurl == "user_sbjs" || myurl == "user_sbadd" || myurl == "user_sbadd1" || myurl == "user_sbadd2" || myurl == "user_sbaddok" || myurl == "user_sbtj" || myurl == "user_trademarkzixing"){ %> class="font12bd44147" <%}else{%> class="" <%} %>>·我的商标</a>
                                 </td>
                                 <td style="border-bottom: 1px solid #d3d3d3;">&nbsp;
                                     
