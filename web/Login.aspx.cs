@@ -30,6 +30,8 @@ public partial class Login : System.Web.UI.Page
         Bind_Page_Title();
         Bind_Page_Adv();
         Bind_Page_Login();
+        //trademark_count.aspx
+        //user_sbtj.aspx
     }
     public void Bind_Page_Title()
     {
@@ -123,7 +125,7 @@ public partial class Login : System.Web.UI.Page
                             Response.Cookies["hqhtshop"]["hqht_sb_uname"] = System.Web.HttpUtility.UrlEncode(model.nvc_Name);
                             Response.Cookies["hqhtshop"]["hqht_sb_ukey"] = System.Web.HttpUtility.UrlEncode(password);
                             Response.Cookies["hqhtshop"]["hqht_user_type"] = "sb";
-                            Response.Redirect("user_sbtj.aspx");
+                            Response.Redirect("trademark_count.aspx");
                             UserLog.AddUserLog(model.i_Id, "商标系统", "登录商标系统");
                         }
                     }
@@ -185,7 +187,7 @@ public partial class Login : System.Web.UI.Page
         if (flag == "sb")
         {
             _typeid = "102";
-            Hf_Href.Value = "user_sbtj.aspx";
+            Hf_Href.Value = "trademark_count.aspx";
             Hf_Href2.Value = "user_sbzl.aspx";
             flag = "sb";
             pageflag = "images/sb_login2.gif";
