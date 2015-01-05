@@ -8,7 +8,7 @@ using System.ComponentModel;
 using zscq.Model;
 using zscq.DAL;
 
-public partial class ascx_zscqtop2 : System.Web.UI.UserControl
+public partial class _zscqtop2 : System.Web.UI.UserControl
 {
     dal_SinglePage DALSP = new dal_SinglePage();
     private string _keywords = "";
@@ -44,6 +44,4 @@ public partial class ascx_zscqtop2 : System.Web.UI.UserControl
         }
         return aa;
     }
-
-
 }

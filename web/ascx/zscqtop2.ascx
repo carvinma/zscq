@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="zscqtop2.ascx.cs" Inherits="ascx_zscqtop2" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true"   CodeFile="zscqtop2.ascx.cs" Inherits="_zscqtop2" %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 0 auto; height: 112px;">
   <tr>
     <td height="109" valign="top" align="center">
