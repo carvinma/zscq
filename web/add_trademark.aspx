@@ -897,7 +897,7 @@
                                                             <td align="center" valign="top">
                                                                 <table width="400" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
-                                                                        <td width="100">
+                                                                        <td width="100" style="display:none">
                                                                              <a href="trademark_preview.aspx?t_r_id=" id="aPreview">预  览</a>
                                                                             <asp:Button ID="btnPreview" CssClass="BtnShow" runat="server" Text="预  览" 
                                                                                 onclick="btnPreview_Click" />
