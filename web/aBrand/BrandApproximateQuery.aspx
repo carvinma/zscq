@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-      <link rel="stylesheet" type="text/css" href="css/style.css" />
+      <link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -57,13 +57,6 @@
            </div>
         </td>
      </tr>
-    </table>
-    <table width="915" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
-    <tr><td height="20px"></td></tr>
-    <tr>
-       <td align="center"><a href="../Register.aspx?flag=sb" class="BtnShowhref"  style="width:80px">新会员注册</a></td>
-       <td align="center"><a href="../Login.aspx?flag=sb" class="BtnShowhref" style="width:80px">已有账号登录</a> </td>
-    </tr>
     </table>
     </div>
       <uc2:zscqfoot ID="zscqfoot1" runat="server" />
