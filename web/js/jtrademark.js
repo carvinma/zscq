@@ -679,7 +679,7 @@ function addmarkRenewalCheck_data() {
 * 
 */
 function submitCheck_ApplyUser() {
-    if (check_ApplyUser("name_div") && check_ApplyUser("cardno_div") && check_ApplyUser("phone_div")
+    if (check_ApplyUser("name_div") && check_ApplyUser("cardno_div") && check_ApplyUser("phone_div") && check_ApplyUser("ContactPerson_div")
     && check_ApplyUser("fax_div") && check_ApplyUser("address_div") && check_ApplyUser("postcode_div")
     && check_ApplyUser("email_div") && check_ApplyUser("mobile_div")) {
         if (check_ApplyUser("ZhuTiZiGePdf_div")) {
