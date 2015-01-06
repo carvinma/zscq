@@ -558,7 +558,7 @@
                                                                             <strong>身份证件名称：</strong></td>
                                                                         <td align="left">
                                                                              <select id="Select1" name="live_prov" onchange="">
-                                                                             <option value="0">身份证：</option></select>
+                                                                             <option value="0">身份证</option></select>
                                                                      </td>
                                                                     </tr>
                                                                     <tr style="display:none" class="appusertype">
@@ -608,11 +608,11 @@
                                                                         </td>
                                                                         <td align="left">
                                                                          <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                   <select id="live_city" name="live_city" onchange="SelArea(this.value);">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                   <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                     <span style="color: Red;">*</span>
                                    <span class="status error" id="area_div_error"></span>
                                     <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />
@@ -950,7 +950,7 @@
                                                                                 Text="确认提交" onclick="btnSubmit_Click" OnClientClick="return addmarkRenewalCheck_data()"/>
                                                                         </td>
                                                                         <td width="100">
-                                                                          <a  href="javascript:void(0)" id="linkDel" class="BtnShowhref"  onclick="cancleSumbit('1')">放弃提交</a>
+                                                                          <a  href="javascript:void(0)" id="linkDel" class="BtnShowhref"  style="width:70px"  onclick="cancleSumbit('1')">放弃提交</a>
                                                                         </td>
                                                                     </tr>
                                                                 </table>

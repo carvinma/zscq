@@ -292,7 +292,7 @@ public class HandlerCode
     {
         var iquery = Darea.Province_SelectAll();
         StringBuilder sb = new StringBuilder();
-        sb.Append("<option value=\"\">请选择：</option>");
+        sb.Append("<option value=\"\">请选择</option>");
         foreach (var v in iquery)
         {
             sb.Append("<option value=\"" + v.i_ID + "\">" + v.provinceName + "</option>");
@@ -304,7 +304,7 @@ public class HandlerCode
         int provinceid = Convert.ToInt32(context.Request["provinceid"]);
         var iquery = Darea.City_Select_ProvinceId(provinceid);
         StringBuilder sb = new StringBuilder();
-        sb.Append("<option value=\"\">请选择：</option>");
+        sb.Append("<option value=\"\">请选择</option>");
         foreach (var v in iquery)
         {
             sb.Append("<option value=\"" + v.i_ID + "\">" + v.cityName + "</option>");
@@ -316,7 +316,7 @@ public class HandlerCode
         int cityid = Convert.ToInt32(context.Request["cityid"]);
         var iquery = Darea.Area_Select_CityId(cityid);
         StringBuilder sb = new StringBuilder();
-        sb.Append("<option value=\"\">请选择：</option>");
+        sb.Append("<option value=\"\">请选择</option>");
         foreach (var v in iquery)
         {
             sb.Append("<option value=\"" + v.i_ID + "\">" + v.areaName + "</option>");
