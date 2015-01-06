@@ -67,65 +67,6 @@ public partial class appUserInfoEdit : System.Web.UI.Page
             Response.Redirect("Login.aspx?flag=sb&pageurl=" + HttpUtility.UrlEncode(Request.Url.ToString()));
         }
     }
-    protected void Bt_AddAddress_Click(object sender, EventArgs e)
-    {
-        t_ReceiveAddress model = new t_ReceiveAddress();
-        if (Hi_AddressId.Value != "0")
-        {
-            model = DALRA.ReceiveAddress_Select_Id(Convert.ToInt32(Hi_AddressId.Value));
-        }
-        // model.nvc_Consignee = text_shouhuoren.Value;
-        //// model.i_Gid=Convert.ToInt32(this.ddl_guojia.SelectedValue);
-        // //model.i_PId = Convert.ToInt32(this.ddl_sheng.SelectedValue);
-        // //model.i_CId = Convert.ToInt32(this.ddl_shi.SelectedValue);
-        // //model.i_AId = Convert.ToInt32(this.ddl_qu.SelectedValue);
-        // model.nvc_StreetAddress = text_shouhuodizhi.Value;
-        // model.nvc_ZipCode = text_youzhengbianma.Value;
-        // model.nvc_MobilePhone = text_shoujihaoma.Value;
-        // model.nvc_TelPhone = text_gudingdianhua.Value;
-        // model.nvc_Email = text_dianziyoujian.Value;
-        // model.i_MemberId = int.Parse(Hi_MemberId.Value);
-        if (Hi_AddressId.Value == "0")
-        {
-            switch (DALRA.ReceiveAddress_Add(model))
-            {
-                case 0:
-                    div_a.InnerHtml = "<script>alert('发生意外，暂时无法添加地址!');</script>";
-                    break;
-                case 1:
-                    //if (ismr.Checked)
-                    //{
-                    //    DALRA.ReceiveAddress_Update_Mr(model.i_Id);
-                    //}
-                    UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加地址");
-                    div_a.InnerHtml = "<script>alert('添加成功！'); window.location='user_sbdz.aspx'</script>";
-                    break;
-                case 2:
-                    div_a.InnerHtml = "<script>alert('您已经有相同收货人和相同地址信息，不需要重复添加!');</script>";
-                    break;
-            }
-        }
-        else
-        {
-            switch (DALRA.ReceiveAddress_Update(model))
-            {
-                case 0:
-                    div_a.InnerHtml = "<script>alert('发生意外，暂时无法修改地址!');</script>";
-                    break;
-                case 1:
-                    //if (ismr.Checked)
-                    //{
-                    //    DALRA.ReceiveAddress_Update_Mr(model.i_Id);
-                    //}
-                    UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加地址");
-                    div_a.InnerHtml = "<script>alert('修改成功！'); window.location='user_sbdz.aspx'</script>";
-                    break;
-                case 2:
-                    div_a.InnerHtml = "<script>alert('您已经有相同收货人和相同地址信息，不需要重复添加!');</script>";
-                    break;
-            }
-        }
-    }
     protected void Bt_AddAddress_Click(object sender, ImageClickEventArgs e)
     {
         string filePath = "File_Zscq/File_ShangBiao/";
@@ -235,26 +176,4 @@ public partial class appUserInfoEdit : System.Web.UI.Page
 
     }
 
-    public int UpfileLoad(FileUpload fileup, string pathname, string filename, ref string urlname)
-    {
-        string exname = Path.GetExtension(fileup.FileName).ToLower();
-        string fileNameExt = System.IO.Path.GetExtension(fileup.PostedFile.FileName).ToLower();
-        if (fileNameExt == ".jpg" || fileNameExt == ".gif" || fileNameExt == ".png" || fileNameExt == ".pdf")
-        {
-            if (fileup.PostedFile.ContentLength > 1024 * 1024 * 0.5)
-            {
-                return 1;
-            }
-            string toFileName = DateTime.Now.ToString("HHmmssff") + new Random().Next(100) + fileNameExt;//fileup.FileName;
-            string path = System.AppDomain.CurrentDomain.BaseDirectory + pathname + filename + toFileName;
-            fileup.SaveAs(path);
-            urlname = pathname + filename + toFileName;
-        }
-        else
-        {
-
-            return 2;
-        }
-        return 0;
-    }
 }

@@ -19,6 +19,7 @@
      <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
     <script src="js/jquery.uploadify.min.js" type="text/javascript"></script>
+    <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript">
 
       $(function () {
