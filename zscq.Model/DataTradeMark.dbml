@@ -1,28 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_zscq" Class="DataTradeMarkDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.t_Apply" Member="t_Apply">
-    <Type Name="t_Apply">
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ApplyType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ApplyName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ApplyPinYin" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="ApplyCardNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="PhoneNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="FaxNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="provinceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="cityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="areaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="PostCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="MobilePhone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="QQ" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MainQualificationPath" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="CardNoPath" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.t_GoodsMainCategory" Member="t_GoodsMainCategory">
     <Type Name="t_GoodsMainCategory">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -54,13 +31,6 @@
       <Column Name="GoodsRemark" Type="System.String" CanBeNull="false" />
       <Column Name="MainCategoryCode" Type="System.String" CanBeNull="false" />
       <Column Name="MainCategoryID" Type="System.Int32" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_CaseNoOrder" Member="t_CaseNoOrder">
-    <Type Name="t_CaseNoOrder">
-      <Column Name="i_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="SystemDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="OrderNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_NewTradeMarkStatus" Member="t_NewTradeMarkStatus">
@@ -218,6 +188,37 @@
       <Column Name="TradeMarkId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TradeMarkStatusId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TradeMarkDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Apply" Member="t_Apply">
+    <Type Name="t_Apply">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MemberID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApplyType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApplyName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplyPinYin" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ApplyCardNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PhoneNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContactPerson" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FaxNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="provinceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="areaID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PostCode" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="QQ" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MainQualificationPath" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CardNoPath" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_CaseNoOrder" Member="t_CaseNoOrder">
+    <Type Name="t_CaseNoOrder">
+      <Column Name="i_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SystemDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="OrderNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
