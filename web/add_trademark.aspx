@@ -437,10 +437,12 @@
                                 <tr>
                                     <td width="25" height="28">
                                         &nbsp;
+                                        <span id="HelpDoc"></span>
                                     </td>
                                     <td width="691" align="right" class="font12bd44147">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="aBrand/BrandApproximateQuery.aspx" class="font12bd44147" target="_blank">【商标近似查询】</a>【填写说明】
+                                        <a href="aBrand/BrandApproximateQuery.aspx" class="font12bd44147" target="_blank">【商标近似查询】</a>
+                                         <a href="aBrand/BrandHelpDoc.aspx"  class="font12bd44147" target="_blank">【填写说明】</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -755,7 +757,7 @@
                                                                             &nbsp;
                                                                         </td>
                                                                         <td valign="middle">
-                                                                            <a href="">【更多说明】</a>
+                                                                            <a href="#HelpDoc">【更多说明】</a>
                                                                         </td>
                                                                         <td valign="middle">
                                                                             &nbsp;

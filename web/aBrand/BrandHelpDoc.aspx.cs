@@ -14,7 +14,7 @@ public partial class BrandHelpDoc : System.Web.UI.Page
         if (!IsPostBack)
         {
             dal_SinglePage DALSP = new dal_SinglePage();
-            t_SinglePage model = DALSP.SinglePage_Select_Key("sblogin", "cn");
+            t_SinglePage model = DALSP.SinglePage_Select_Key("sbhelpdoc", "cn");
             if (model != null)
             {
                 Ltl_LoginInfo.Text = model.nt_Value;
