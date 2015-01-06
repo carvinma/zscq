@@ -192,27 +192,32 @@ public partial class appUserInfoAdd : System.Web.UI.Page
         //    model.CardNoPath = urlname;
         //}
         string fileName = this.HiUpZhuTiZiGe.Value;//主体资格证明
-        if (fileName.Contains("File_ShangBiao"))
+        if (!string.IsNullOrEmpty(fileName))
         {
-            model.MainQualificationPath = fileName;
+            if (fileName.Contains("File_ShangBiao"))
+            {
+                model.MainQualificationPath = fileName;
+            }
+            else
+            {
+                System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+                   HttpContext.Current.Server.MapPath(filePath + fileName));
+                model.MainQualificationPath = filePath + fileName;
+            }
         }
-        else
-        {
-            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-               HttpContext.Current.Server.MapPath(filePath + fileName));
-            model.MainQualificationPath = filePath + fileName;
-        }
-
         fileName = this.hiUpCardNo.Value;//身份证
-        if (fileName.Contains("File_ShangBiao"))
+        if (!string.IsNullOrEmpty(fileName))
         {
-            model.CardNoPath = fileName;
-        }
-        else
-        {
-            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-               HttpContext.Current.Server.MapPath(filePath + fileName));
-            model.CardNoPath = filePath + fileName;
+            if (fileName.Contains("File_ShangBiao"))
+            {
+                model.CardNoPath = fileName;
+            }
+            else
+            {
+                System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+                   HttpContext.Current.Server.MapPath(filePath + fileName));
+                model.CardNoPath = filePath + fileName;
+            }
         }
         #endregion
 

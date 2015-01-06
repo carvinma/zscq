@@ -581,7 +581,7 @@
                                                                         </td>
                                                                         <td align="left">
                                                                            <span class="fl selected-address" id="areaNameTxt"></span>
-                                                                            <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" style="ime-mode: disabled;" id="txt_address" maxlength="50" type="text" 
+                                                                            <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" id="txt_address" maxlength="50" type="text" 
                                                                                name="" value=""/>
                                                                                <span style="color: Red;">*</span> 
                                                                                 <span class="status error" id="address_div_error"></span>
@@ -660,7 +660,7 @@
                                                         <tr>
                                                             <td height="115" align="left" valign="top">
                                                                 <table width="689" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tr>
+                                                                    <tr style="display:none">
                                                                         <td height="32" width="360" align="right" valign="middle">
                                                                             <strong><span>我公司案件号</span></strong>：
                                                                         </td>
@@ -741,6 +741,7 @@
                                                                                 <br />
                                                                                 (4)商标为外文或者包含外文的，应当说明含义
                                                                                <br />
+                                                                                 <span style="color: Red;">*</span> <br />
                                                                                 <span class="status error" id="remark_div_error"></span>
                                                                             </div>
                                                                         </td>
@@ -765,6 +766,7 @@
                                                                              <input type="hidden" id="sortGoods" runat="server"/>
                                                                         </td>
                                                                         <td valign="middle">
+                                                                         <span style="color: Red;">*</span>  
                                                                             <span class="status error" id="sortarr_div_error"></span>
                                                                         </td>
                                                                     </tr>

@@ -65,7 +65,7 @@
               'onUploadSuccess': function (file, data, response) {
                   $.jBox.closeTip();
                   $("#aZhuTiZiGePdf").show();
-                  $("#hiUpZhuTiZiGe").val(data);
+                  $("#HiUpZhuTiZiGe").val(data);
               },
               'onSelect': function (file) {
                   $.jBox.tip("正在上传文件，请稍后...", 'loading');
@@ -255,7 +255,7 @@
                               <td height="32" align="right"><strong><span style="color: #f00;">*</span>详细地址：</strong></td>
                               <td align="left">
                               <span class="fl selected-address" id="areaNameTxt"></span>
-                                <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" style="ime-mode: disabled;" id="txt_address" maxlength="50" type="text" 
+                                <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" id="txt_address" maxlength="50" type="text" 
                                       name="" value=""/>
                                  <span class="status error" id="address_div_error"></span></td>
                             </tr>
@@ -287,7 +287,7 @@
                                       type="text" name="" value="" placeholder="" onkeypress="event.returnValue=IsDigit();" style="ime-mode: disabled;"  /></td>
                             </tr>
                             <tr>
-                              <td height="32" align="right"><strong>主体资格证明：</strong> </td>
+                              <td height="32" align="right"><strong><span style="color: #f00;">*</span>主体资格证明：</strong> </td>
                              <td align="left">
                                                                             <table><tr><td> <div id="upZhuTiZiGePdf"></div></td>
                                                                            <td>
@@ -296,11 +296,13 @@
                                                                            </tr></table>
                                                                           
                                                                             <div>
-                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span></div>
+                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span> 
+                                                                                <br />
+                                                                                <span class="status error" id="ZhuTiZiGePdf_div_error"></span></div>
                                                                                 </td>
                             </tr>
                             <tr style="display:none" class="appusertype">
-                              <td height="32" align="right"><strong>身份证证件证明：</strong></td>
+                              <td height="32" align="right"><strong><span style="color: #f00;">*</span>身份证证件证明：</strong></td>
                               <td align="left">
                                                                             <table><tr><td> <div id="upCardNoPdf"></div></td>
                                                                            <td>
@@ -309,7 +311,8 @@
                                                                            </tr></table>
                                                                           
                                                                             <div>
-                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span></div>
+                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span> <br />
+                                                                                <span class="status error" id="ApplyCardPdf_div_error"></span></div>
                                                                                 </td>
                             </tr>
                               <tr>

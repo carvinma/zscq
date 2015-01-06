@@ -89,57 +89,59 @@ function del_onegoods(startnum) {
 
 //获取选中数据的value值
 function addgoods() {
-    var strval = new Array();
-    $("input[name='chkItem']:checked").each(function () {
-        //strval.push($(this).val());
-        strval.push([$(this).val(), $(this).parent().next().html(), $(this).parent().next().next().html()]);
-    });
-    if (strval.length == 0) {
-        return false;
-    }
-    //获取选中的商品服务所有的分类和类似群
     var sel_sortid = $("#sel_sortid").text();
-    var sel_groupid = $("#sel_groupid").text();
-
-    //获取已经选择分类
-    var sortarr = $("#sortarr").val();
-    if (sortarr == '') {
-        $("#sortarr").val(sel_sortid);
-    }
-    else {
-        var parr = new Array();
-        parr = sortarr.split(",");
-        //判断是否已经存在选择的类
-        var state = 0;
-        for (var i = 0; i < parr.length; i++) {
-            if (parr[i] == sel_sortid) {
-                state = 1;
-                break;
+    if (!isEmpty(sel_sortid)) {
+        var strval = new Array();
+        $("input[name='chkItem']:checked").each(function () {
+            //strval.push($(this).val());
+            //010061	氨
+            strval.push([$(this).val(), $(this).parent().next().html(), $(this).parent().next().next().html()]);
+        });
+        if (strval.length == 0) {
+            return false;
+        }
+        //获取选中的商品服务所有的分类和类似群
+        //var sel_sortid = $("#sel_sortid").text();
+        var sel_groupid = $("#sel_groupid").text();
+        //获取已经选择分类
+        var sortarr = $("#sortarr").val();
+        if (sortarr == '') {
+            $("#sortarr").val(sel_sortid);
+        }
+        else {
+            var parr = new Array();
+            parr = sortarr.split(",");
+            //判断是否已经存在选择的类
+            var state = 0;
+            for (var i = 0; i < parr.length; i++) {
+                if (parr[i] == sel_sortid) {
+                    state = 1;
+                    break;
+                }
             }
+            if (state == 0) {
+                parr.push(sel_sortid);
+            }
+            //排序
+            parr.sort();
+            var qarr = parr.join(",");
+            $("#sortarr").val(qarr);
         }
-        if (state == 0) {
-            parr.push(sel_sortid);
-        }
-        //排序
-        parr.sort();
-        var qarr = parr.join(",");
-        $("#sortarr").val(qarr);
-    }
-    //获取已经选择的商品服务的sid
-    var arr_goods = new Array();
-    //获取以下数组的长度
-    $("tr[classname='arr_goods']").each(function () {
-        //arr_goods.push($(this).val());
-        //alert($(this).attr("val"));
-        arr_goods.push($(this).attr("val"));
-        goodscalc.add($(this).find("td:eq(1)").text(), 1);
-    });
-    var endnum = $("tr[classname='arr_goods']").length;
-    $.each(strval, function (i, n) {
-        if ($.inArray(n[0], arr_goods) == '-1') {
-            endnum = endnum + parseInt(1);
-            goodscalc.add(sel_sortid, 1);
-            $("#th_box").after('<tr classname="arr_goods" name="arr_goods[]" val="' + n[0] + '" id="arr_goods' +
+        //获取已经选择的商品服务的sid
+        var arr_goods = new Array();
+        //获取以下数组的长度
+        $("tr[classname='arr_goods']").each(function () {
+            //arr_goods.push($(this).val());
+            //alert($(this).attr("val"));
+            arr_goods.push($(this).attr("val"));
+            goodscalc.add($(this).find("td:eq(1)").text(), 1);
+        });
+        var endnum = $("tr[classname='arr_goods']").length;
+        $.each(strval, function (i, n) {
+            if ($.inArray(n[0], arr_goods) == '-1') {
+                endnum = endnum + parseInt(1);
+                goodscalc.add(sel_sortid, 1);
+                $("#th_box").after('<tr classname="arr_goods" name="arr_goods[]" val="' + n[0] + '" id="arr_goods' +
       endnum + '"><td height="25" align="center" bgcolor="#FFFFFF" id="4' + endnum + '">' + endnum + '</td><td align="center" bgcolor="#FFFFFF" id="3' + endnum
       + '"><input type="hidden" classname="hid_classsort" name="hid_sort[]" value="' +
       sel_sortid + '">' + sel_sortid +
@@ -149,9 +151,79 @@ function addgoods() {
        + n[1] + '">' + n[1] + '</td><td align="center" bgcolor="#FFFFFF" id="0' + endnum + '"><input type="hidden" name="hid_goodsname[]" classname="'
        + sel_sortid + '" value="' + n[2] + '">'
        + n[2] + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(' + endnum + ')">删除</a></td></tr>');
+            }
+        });
+        goodscalc.toChangeDisplay();
+    }
+    else {
+        Queryaddgoods();
+    }
+}
+
+function Queryaddgoods() {
+        
+        var strval = new Array();
+        $("input[name='chkItem']:checked").each(function () {
+            //strval.push($(this).val());
+            //010061	氨
+            strval.push([$(this).val(), $(this).parent().next().html(), $(this).parent().next().next().html(),
+            $(this).parent().next().next().next().text(), $(this).parent().next().next().next().next().text()]);
+            var sortarr = $("#sortarr").val();
+            var sel_sortid = $(this).parent().next().html();
+            if (sortarr == '') {
+                $("#sortarr").val(sel_sortid);
+            }
+            else {
+                var parr = new Array();
+                parr = sortarr.split(",");
+                //判断是否已经存在选择的类
+                var state = 0;
+                for (var i = 0; i < parr.length; i++) {
+                    if (parr[i] == sel_sortid) {
+                        state = 1;
+                        break;
+                    }
+                }
+                if (state == 0) {
+                    parr.push(sel_sortid);
+                }
+                //排序
+                parr.sort();
+                var qarr = parr.join(",");
+                $("#sortarr").val(qarr);
+            }
+        });
+
+        //alert(strval);
+        if (strval.length == 0) {
+            return false;
         }
-    });
-    goodscalc.toChangeDisplay();
+        
+        //获取已经选择的商品服务的sid
+        var arr_goods = new Array();
+        //获取以下数组的长度
+        $("tr[classname='arr_goods']").each(function () {
+            arr_goods.push($(this).attr("val"));
+            goodscalc.add($(this).find("td:eq(1)").text(), 1);
+        });
+        var endnum = $("tr[classname='arr_goods']").length;
+        $.each(strval, function (i, n) {
+            if ($.inArray(n[0], arr_goods) == '-1') {
+                endnum = endnum + parseInt(1);
+                goodscalc.add(n[1], 1);
+                $("#th_box").after('<tr classname="arr_goods" name="arr_goods[]" val="' + n[0] + '" id="arr_goods' +
+      endnum + '"><td height="25" align="center" bgcolor="#FFFFFF" id="4' + endnum + '">' + endnum + '</td><td align="center" bgcolor="#FFFFFF" id="3' + endnum
+      + '"><input type="hidden" classname="hid_classsort" name="hid_sort[]" value="' +
+      n[1] + '">' + n[1] +
+      '</td><td align="center" bgcolor="#FFFFFF" id="2' + endnum + '"><input type="hidden" name="hid_group[]" value="' +
+       n[2] + '">' + n[2] +
+       '</td><td align="center" bgcolor="#FFFFFF" id="1' + endnum + '"><input type="hidden" name="hid_goods[]" value="'
+       + n[3] + '">' + n[3] + '</td><td align="center" bgcolor="#FFFFFF" id="0' + endnum + '"><input type="hidden" name="hid_goodsname[]" classname="'
+       + n[1] + '" value="' + n[4] + '">'
+       + n[4] + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" style="color:red;" onclick="del_onegoods(' + endnum + ')">删除</a></td></tr>');
+            }
+        });
+        goodscalc.toChangeDisplay();
 }
 //编辑时重新显示商品
 function editgoods() {
@@ -220,11 +292,11 @@ function searchdetail() {
         data: "flag=searchgoodsdetail&key=" + key + "&maincategoryid=" + sort,
         dataType: "json",
         success: function (data) {
-            alert(data);
             var html = '';
             var tmp = '';
             for (var i = 0; i < data.length; i++) {
-                tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chkItem" value="' + data[i].id + '"></td><td align="center" bgcolor="#FFFFFF">' + data[i].MainCategoryCode + '</td><td align="center" bgcolor="#FFFFFF">' + data[i].DetailCategoryCode + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSelectGoods(' + "'" + data[i].id + "')" + '"' + ">" + data[i].GoodsCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].GoodsRemark + '</td></tr>';
+               // tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chkItem" value="' + data[i].id + '"></td><td align="center" bgcolor="#FFFFFF">' + data[i].MainCategoryCode + '</td><td align="center" bgcolor="#FFFFFF">' + data[i].DetailCategoryCode + '</td><td align="center" bgcolor="#FFFFFF"><a href="javascript:;" onclick="showSelectGoods(' + "'" + data[i].id + "')" + '"' + ">" + data[i].GoodsCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].GoodsRemark + '</td></tr>';
+                tmp = tmp + '<tr><td height="32" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="chkItem" value="' + data[i].id + '"></td><td align="center" bgcolor="#FFFFFF">' + data[i].MainCategoryCode + '</td><td align="center" bgcolor="#FFFFFF">' + data[i].DetailCategoryCode + '</td><td align="center" bgcolor="#FFFFFF">' + data[i].GoodsCode + '</a></td>' + '<td align="center" bgcolor="#FFFFFF">' + data[i].GoodsRemark + '</td></tr>';
             }
             if (tmp == '')
                 tmp = '<tr><td align="center" bgcolor="#FFFFFF" colspan="5" style="color:red;">没有相关数据，请确认您输入的关键字是否正确！<td></tr>';
@@ -610,8 +682,16 @@ function addmarkRenewalCheck_data() {
 function submitCheck_ApplyUser() {
     if (check_ApplyUser("name_div") && check_ApplyUser("cardno_div") && check_ApplyUser("phone_div")
     && check_ApplyUser("fax_div") && check_ApplyUser("address_div") && check_ApplyUser("postcode_div")
-    && check_ApplyUser("email_div")&& check_ApplyUser("mobile_div"))
-        return true;
+    && check_ApplyUser("email_div") && check_ApplyUser("mobile_div")) {
+        if (check_ApplyUser("ZhuTiZiGePdf_div")) {
+            if ($("#Hi_ApplyType").val() == 1) {
+                if (check_ApplyUser("ApplyCardPdf_div"))
+                    return true;
+                else return false;
+            }
+            return true;
+        }
+    }
     return false;
 }
 function check_ApplyUser(divId) {
@@ -619,7 +699,7 @@ function check_ApplyUser(divId) {
     var errorMessage = null;
     var value = null;
     if (divId == "name_div") {
-        value = $("#txt_applyname").val().replace('中文/拼音','');
+        value = $("#txt_applyname").val().replace('中文/拼音', '');
         if (isEmpty(value)) {
             errorFlag = true;
             errorMessage = "请您填写申请人名称";
@@ -633,7 +713,7 @@ function check_ApplyUser(divId) {
             errorMessage = "申请人名称中含有非法字符";
         }
     }
-   else if (divId == "cardno_div") {
+    else if (divId == "cardno_div") {
         if (!$(".appusertype").is(":hidden")) {
             value = $("#txt_applyCardNo").val();
             if (isEmpty(value)) {
@@ -658,7 +738,7 @@ function check_ApplyUser(divId) {
             errorFlag = true;
             errorMessage = "请您填写电话号码";
         }
-         else {
+        else {
             if (!is_forbid(value)) {
                 errorFlag = true;
                 errorMessage = "固定电话号码中含有非法字符";
@@ -669,7 +749,7 @@ function check_ApplyUser(divId) {
             }
         }
     }
-     else if (divId == "fax_div") {
+    else if (divId == "fax_div") {
         value = $("#txt_fax").val();
         if (!isEmpty(value)) {
             if (!check_fax(value)) {
@@ -696,18 +776,18 @@ function check_ApplyUser(divId) {
                     errorMessage = "邮箱格式不正确";
                 }
             }
-        }  
+        }
     }
     else if (divId == "address_div") {
         var areavalue = $("#areaNameTxt").text();
-         value = $("#txt_address").val();
-         if (isEmpty(areavalue)) {
-            divId="area_div";
+        value = $("#txt_address").val();
+        if (isEmpty(areavalue)) {
+            divId = "area_div";
             errorFlag = true;
             errorMessage = "请您选择行政区划";
         }
         else {
-           $("#area_div_error").html("");
+            $("#area_div_error").html("");
             if (isEmpty(value)) {
                 errorFlag = true;
                 errorMessage = "请您填写申请人详细地址";
@@ -728,7 +808,7 @@ function check_ApplyUser(divId) {
             errorFlag = true;
             errorMessage = "请您填写邮政编码";
         }
-         else {
+        else {
             if (!is_forbid(value)) {
                 errorFlag = true;
                 errorMessage = "邮政编码中含有非法字符";
@@ -739,7 +819,7 @@ function check_ApplyUser(divId) {
             }
         }
     }
-    
+
     else if (divId == "mobile_div") {
         value = $("#txt_mobile").val();
         if (!isEmpty(value)) {
@@ -792,7 +872,20 @@ function check_ApplyUser(divId) {
             errorMessage = "请您输入注册公告日";
         }
     }
-
+    else if (divId == "ZhuTiZiGePdf_div") { 
+     value = $("#HiUpZhuTiZiGe").val();
+        if (isEmpty(value)) {
+            errorFlag = true;
+            errorMessage = "请您上传资格证明";
+        }
+    }
+    else if (divId == "ApplyCardPdf_div") {
+        value = $("#hiUpCardNo").val();
+        if (isEmpty(value)) {
+            errorFlag = true;
+            errorMessage = "请您上传身份证件";
+        }
+    }
     if (errorFlag) {
         $("#" + divId + "_error").html(errorMessage);
         $("#" + divId).addClass("message");
@@ -1009,7 +1102,7 @@ function SelProv(proviceid, cityid, areaid) {
 function SelCity(val, cityid, areaid) {
     var provinceName = isEmpty(val) ? "" : $("#live_prov").find("option:selected").text();
     $("#areaNameTxt").html(provinceName); 
-    $("#live_country").html("<option selected=\"\" value=\"\">请选择：</option>");
+    $("#live_country").html("<option selected=\"\" value=\"\">请选择</option>");
     var provinceId = $("#live_prov").find("option:selected").val();
     $("#Hi_prov").val(provinceId);
 
@@ -1027,8 +1120,8 @@ function SelCity(val, cityid, areaid) {
                 }
             }
             if (val == null || val == "") {
-                $("#live_city").html("<option selected=\"\" value=\"\">请选择：</option>");
-                $("#live_country").html("<option selected=\"\" value=\"\">请选择：</option>");
+                $("#live_city").html("<option selected=\"\" value=\"\">请选择</option>");
+                $("#live_country").html("<option selected=\"\" value=\"\">请选择</option>");
                 return;
             }
         }
@@ -1063,7 +1156,7 @@ function SelArea(val,areaid) {
                 SetAddress(areaid);
             }
             if (val == null || val == "") {
-                $("#live_country").html("<option selected=\"\" value=\"\">请选择：</option>");
+                $("#live_country").html("<option selected=\"\" value=\"\">请选择</option>");
                 return;
             }
         }
