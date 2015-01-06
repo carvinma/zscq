@@ -540,7 +540,7 @@ function GetApplysDDL(userid, applytype) {
                 if (i <= 9)
                     commonapplys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin);
                 newapplys[i] = new Array(data[i].i_Id, data[i].ApplyName, data[i].ApplyPinYin, data[i].ApplyPinYin, data[i].MainQualificationPath, data[i].provinceID, data[i].cityID, data[i].areaID, data[i].Address,
-                 data[i].PhoneNo, data[i].FaxNo, data[i].PostCode, data[i].ApplyCardNo, data[i].CardNoPath);
+                 data[i].PhoneNo, data[i].FaxNo, data[i].PostCode, data[i].ApplyCardNo, data[i].CardNoPath, data[i].ContactPerson);
             }
             applys = newapplys;
             $("#txt_applyname").suggest(newapplys, { hot_list: commonapplys, dataContainer: '#applyname_3word',
@@ -593,6 +593,7 @@ function DisplaySelectedApplyInfo(applys) {
    $("#name_div_error").hide();
    $("#Hi_city").val(findArray[6]);
    $("#Hi_country").val(findArray[7]);
+   $("#txt_ContactPerson").val(findArray[14]);
 }
 
 /*商标信息添加验证
