@@ -37,8 +37,24 @@
           <td width="86" align="center" id="td8" runat="server"><a href="?pagetype=zlpay"><strong>专利付款事项</strong></a></td>
           <td width="20">&nbsp;</td>
           <td width="86" align="center" id="td9" runat="server"><a href="?pagetype=sbpay"><strong>商标付款事项</strong></a></td>
-          <td width="86" align="center" id="td11" runat="server"><a href="?pagetype=sblogin"><strong>&nbsp;商标登陆事项</strong></a></td>
+          <td width="86" align="center" id="td11" runat="server"><a href="?pagetype=sblogin"><strong>商标登陆事项</strong></a></td>
           <td width="20">&nbsp;</td>
+        </tr>
+         <tr>
+          <td align="center" id="td12" runat="server"><a href="?pagetype=sbquery"><strong>商标近拟查询</strong></a></td>
+          <td align="center" id="td13" runat="server"><a href="?pagetype=sbhelpdoc"><strong>帮助文档说明</strong></a></td>
+          <td align="center" id="td14" runat="server"></td>
+          <td align="center" id="td15" runat="server"></td>
+          <td align="center" id="td16" runat="server"></td>
+          <td align="center" id="td17" runat="server"></td>
+          <td align="center" id="td18" runat="server"></td>
+          <td align="center" id="td19" runat="server"></td>
+          <td>&nbsp;</td>
+          <td align="center" id="td20" runat="server"></td>
+          <td>&nbsp;</td>
+          <td align="center" id="td21" runat="server"></td>
+          <td align="center" id="td22" runat="server"></td>
+          <td>&nbsp;</td>
         </tr>
       </table>
     </div>

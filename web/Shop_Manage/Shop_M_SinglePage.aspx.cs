@@ -79,6 +79,12 @@ public partial class Shop_Manage_shop_shezhi : System.Web.UI.Page
             case "sblogin":
                 td11.Attributes.Add("background", "images/ddbgs2.jpg");
                 break;
+            case "sbquery":
+                td12.Attributes.Add("background", "images/ddbgs2.jpg");
+                break;
+            case "sbhelpdoc":
+                td13.Attributes.Add("background", "images/ddbgs2.jpg");
+                break;
         }
     }
     void Bind_Page_Info()
