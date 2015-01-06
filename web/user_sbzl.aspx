@@ -188,7 +188,8 @@
                                                                     maxlength="30" runat="server" /><%if (guoji == 0 && usertype == 2)
                                                           { %><%} %><%else { %><span style="color: Red;">*</span>
                                                                     <asp:CustomValidator ID="CustomValidator6" runat="server" ClientValidationFunction="validate11"
-                                                                    ControlToValidate="c_company" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true"></asp:CustomValidator><span id="s_c_company" style="display: none"><img src='images/tOk.gif' /></span> <%} %>
+                                                                    ControlToValidate="c_company" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true"></asp:CustomValidator>
+                                                                    <span id="s_c_company" style="display: none"><img src='images/tOk.gif' /></span> <%} %>
                                                             </td>
                                                         </tr>
                                                         <%} %>

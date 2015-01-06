@@ -597,7 +597,6 @@ function DisplaySelectedApplyInfo(applys) {
 
 /*商标信息添加验证
 */
-
 function addmarkCheck_data() {
 
     //获取以下选择商品的ID
@@ -628,10 +627,10 @@ function addmarkCheck_data() {
         alert("请上传商标图样1");
         return false;
     }
-    if (check_ApplyUser("name_div") && check_ApplyUser("address_div")
-    && check_ApplyUser("ContactPerson_div") && check_ApplyUser("phone_div")
-    && check_ApplyUser("postcode_div")
-    && check_ApplyUser("remark_div") && check_ApplyUser("sortarr_div"))
+    if (check_ApplyUser("name_div",1) && check_ApplyUser("address_div",1)
+    && check_ApplyUser("ContactPerson_div", 1) && check_ApplyUser("phone_div", 1)
+    && check_ApplyUser("postcode_div", 1)
+    && check_ApplyUser("remark_div", 1) && check_ApplyUser("sortarr_div", 1))
         return true;
     
     return false;
@@ -666,10 +665,10 @@ function addmarkRenewalCheck_data() {
         alert("请上传商标图样");
         return false;
     }
-    if (check_ApplyUser("name_div") && check_ApplyUser("address_div")
-    && check_ApplyUser("ContactPerson_div") && check_ApplyUser("phone_div")
-    && check_ApplyUser("postcode_div")
-    && check_ApplyUser("sortarr_div") && check_ApplyUser("regno_div") && check_ApplyUser("regdate_div"))
+    if (check_ApplyUser("name_div", 1) && check_ApplyUser("address_div", 1)
+    && check_ApplyUser("ContactPerson_div", 1) && check_ApplyUser("phone_div", 1)
+    && check_ApplyUser("postcode_div", 1)
+    && check_ApplyUser("sortarr_div", 1) && check_ApplyUser("regno_div", 1) && check_ApplyUser("regdate_div"), 1)
         return true;
 
     return false;
@@ -694,7 +693,7 @@ function submitCheck_ApplyUser() {
     }
     return false;
 }
-function check_ApplyUser(divId) {
+function check_ApplyUser(divId,isAlert) {
     var errorFlag = false;
     var errorMessage = null;
     var value = null;
@@ -889,6 +888,11 @@ function check_ApplyUser(divId) {
     if (errorFlag) {
         $("#" + divId + "_error").html(errorMessage);
         $("#" + divId).addClass("message");
+        if (!isEmpty(isAlert)) {
+            if (isAlert == 1) {
+                alert(errorMessage);
+            }
+        }
         return false;
     } else {
         $("#" + divId).removeClass("message");

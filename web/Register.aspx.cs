@@ -94,7 +94,8 @@ public partial class Register : System.Web.UI.Page
     void Bind_Drp_PGuoJiaType()// 绑定国籍
     {
         dal_Nationality DALN = new dal_Nationality();
-        var iquery = DALN.Nationality_SelectAll();
+        int[] nas = new int[] { 1,11,40};
+        var iquery = DALN.Nationality_SelectAll().Where(p => nas.Contains(p.i_Id));
         foreach (var q in iquery)
         {
             ListItem li = new ListItem(q.nvc_Name, q.i_Id.ToString());

@@ -67,7 +67,7 @@ public partial class user_sbzl : System.Web.UI.Page
         t_Member model = DALM.Member_Select_Id(int.Parse(Hi_MemberId.Value));
         if (model != null)
         {
-            if (model.i_GuoJiId == 1)//中国
+            if (model.i_GuoJiId == 1 || model.i_GuoJiId == 11 || model.i_GuoJiId == 40)//中国
             {
                 guoji = 1;
                 hi_guoji.Value = "1";
@@ -293,4 +293,8 @@ public partial class user_sbzl : System.Web.UI.Page
     //    DALB.Area_Bind_DDL_CId(DropDownList4, DropDownList3.SelectedValue);
     //}
 
+    protected void Bt_Submit_Click(object sender, ImageClickEventArgs e)
+    {
+
+    }
 }
