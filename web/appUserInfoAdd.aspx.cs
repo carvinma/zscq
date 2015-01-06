@@ -143,6 +143,7 @@ public partial class appUserInfoAdd : System.Web.UI.Page
         model.PhoneNo = txt_phone.Value.Trim();
         if (!string.IsNullOrEmpty(txt_fax.Value))
             model.FaxNo = txt_fax.Value.Trim();
+        model.ContactPerson= this.txt_ContactPerson.Value.Trim();
 
         if (!string.IsNullOrEmpty(Hi_prov.Value))
             model.provinceID = int.Parse(Hi_prov.Value.Trim());

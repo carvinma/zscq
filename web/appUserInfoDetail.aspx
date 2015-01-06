@@ -121,6 +121,11 @@
                                   </tr>
                                   
                                   <tr>
+                                    <td height="32" align="right"><strong>常用联系人：</strong></td>
+                                    <td align="left"> <%=model.ContactPerson %></td>
+                                  </tr>
+                                  
+                                  <tr>
                                     <td height="32" align="right"><strong>传真(含地区号)：</strong> </td>
                                     <td align="left">
                                       <%=model.FaxNo %>

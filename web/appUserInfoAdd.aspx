@@ -230,6 +230,15 @@
                               </td>
                             </tr>
                             <tr>
+                              <td height="32" align="right"><strong><span style="color: #f00;">*</span>常用联系人：</strong></td>
+                              <td align="left">
+                                <input runat="server" id="txt_ContactPerson" type="text" 
+                                      onblur="check_ApplyUser('link_div')" name="" value="" placeholder="" 
+                                      class="font12000" maxlength="50"/>
+                                       <span class="status error" id="ContactPerson_div_error"></span>
+                                      </td>
+                            </tr>
+                            <tr>
                               <td height="32" align="right"><strong>传真(含地区号)： </strong></td>
                               <td align="left">
                                  <input runat="server" id="txt_fax" onblur="check_ApplyUser('fax_div')" class="font12000" type="text" name="" value="" placeholder="" maxlength="20" />
