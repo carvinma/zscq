@@ -7,14 +7,14 @@ using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
 
-public partial class trademarkApproximateQuery : System.Web.UI.Page
+public partial class BrandApproximateQuery : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
             dal_SinglePage DALSP = new dal_SinglePage();
-            t_SinglePage model = DALSP.SinglePage_Select_Key("sblogin", "cn");
+            t_SinglePage model = DALSP.SinglePage_Select_Key("sbquery", "cn");
             if (model != null)
             {
                 Ltl_LoginInfo.Text = model.nt_Value;
