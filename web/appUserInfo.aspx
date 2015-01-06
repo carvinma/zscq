@@ -215,6 +215,7 @@
                                   <td align="center" bgcolor="#FFFFFF">
                                     <%#GetProvinceName(Eval("provinceID"))%></td>
                                   <td align="center" bgcolor="#FFFFFF">
+                                  <a href="appUserInfoEdit.aspx?id=<%# Eval("i_Id")%>" class="ac5t">修改</a>
                                   <a  href="javascript:void(0)" id="linkDel<%# Eval("i_Id")%>" class="ac5t"  onclick="showDelDailog(<%# Eval("i_Id")%>)">删除</a>
                                   </td>
                                 </tr>

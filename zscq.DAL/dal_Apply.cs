@@ -70,6 +70,24 @@ namespace zscq.DAL
                 return 0;
             }
         }
+
+        /// <summary>
+        /// 修改商标
+        /// </summary>
+        /// <param name="Model"></param>
+        public int Apply_Submit()
+        {
+            try
+            {
+                mark.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
         /// <summary>
         /// 获取全部申请人
         /// </summary>

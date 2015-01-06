@@ -22,15 +22,19 @@
   <script type="text/javascript">
 
       $(function () {
-          var appUserType = getUrlParam('flag');
-          if (appUserType == "1") {
-              $("#Hi_ApplyType").val(1);
-              $(".appusertype").show();
+          var id = getUrlParam('id');
+          if (id > 0) //编辑
+          {
+              var appUserType = $("#Hi_ApplyType").val();
+              if (appUserType == "1") {
+                  $(".appusertype").show();
+              }
+
+              var porviceid = $("#Hi_prov").val();
+              var cityid = $("#Hi_city").val();
+              var areaid = $("#Hi_country").val();
+              EditProCityArea(porviceid, cityid, areaid);
           }
-          else {
-              $("#Hi_ApplyType").val(0);
-          }
-          InitProCityArea();
       });
       $(document).ready(function () {
           var accordion_head = $('.accordion > li > a'),
@@ -138,6 +142,7 @@
   <form id="form1" runat="server">
   <asp:ScriptManager ID="ScriptManager1" runat="server">
   </asp:ScriptManager>
+   <input type="hidden" runat="server" id="Hi_id" value="0" />
   <input type="hidden" runat="server" id="Hi_MemberId" value="0" />
   <input type="hidden" runat="server" id="Hi_AddressId" value="0" />
   <input type="hidden" runat="server" id="Hi_Mr" value="0" />
@@ -192,7 +197,7 @@
                                   <tr>
                                     <td width="10" height="20">&nbsp; </td>
                                     <td width="115" align="center" class="font12bt">
-                                      <asp:Literal runat="server" ID="lit_type" Text="新增申请人"></asp:Literal>
+                                      <asp:Literal runat="server" ID="lit_type" Text="修改申请人"></asp:Literal>
                                     </td>
                                     <td width="7"></td>
                                   </tr>
@@ -300,7 +305,7 @@
                              <td align="left">
                                                                             <table><tr><td> <div id="upZhuTiZiGePdf"></div></td>
                                                                            <td>
-                                                                             <span id="aZhuTiZiGePdf"  style="display:none">主题资格证明已上传</span>
+                                                                             <span id="aZhuTiZiGePdf" runat="server"  visible="false">主题资格证明已上传</span>
                                                                            </td>
                                                                            </tr></table>
                                                                           
@@ -315,7 +320,7 @@
                               <td align="left">
                                                                             <table><tr><td> <div id="upCardNoPdf"></div></td>
                                                                            <td>
-                                                                             <span id="aCardNoPdf"  style="display:none">身份证件扫已上传</span>
+                                                                             <span id="aCardNoPdf" runat="server"  visible="false">身份证件扫已上传</span>
                                                                            </td>
                                                                            </tr></table>
                                                                           

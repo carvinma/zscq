@@ -225,7 +225,7 @@ public partial class appUserInfoAdd : System.Web.UI.Page
         switch (bllmark.Apply_Add(model))
         {
             case 0:
-                div_a.InnerHtml = "<script>alert('发生意外，暂时无法常用联系人!');</script>";
+                div_a.InnerHtml = "<script>alert('发生意外，暂时无法添加常用联系人!');</script>";
                 break;
             case 1:
                 //UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加常用联系人！");
