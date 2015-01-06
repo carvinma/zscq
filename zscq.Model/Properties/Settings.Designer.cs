@@ -26,8 +26,8 @@ namespace zscq.Model.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa;Passw" +
-            "ord=sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=db_zscqTest;Persist Security Info=True;User ID=zscq" +
+            ";Password=xch21wa20sz203i0")]
         public string db_zscqConnectionString {
             get {
                 return ((string)(this["db_zscqConnectionString"]));
@@ -37,7 +37,7 @@ namespace zscq.Model.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Persist Security Info=True;User ID=sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Persist Security Info=True;User ID=zscq")]
         public string DataSourceConnectionString {
             get {
                 return ((string)(this["DataSourceConnectionString"]));
@@ -47,8 +47,8 @@ namespace zscq.Model.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa;Passw" +
-            "ord=sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=db_zscqTest;Persist Security Info=True;User ID=zscq" +
+            ";Password=xch21wa20sz203i0")]
         public string DataSourceConnectionString1 {
             get {
                 return ((string)(this["DataSourceConnectionString1"]));
