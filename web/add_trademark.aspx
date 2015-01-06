@@ -201,6 +201,7 @@
                 'queueSizeLimit': 1,
                 'onUploadSuccess': function (file, data, response) {
                     $.jBox.closeTip();
+                    $("#spWav").show();
                     $("#upSound").val(data);
                 },
                 'onSelect': function (file) {
@@ -714,7 +715,10 @@
                                                                         <td valign="middle">
                                                                            <div id="upWav"></div>
                                                                             <div>
-                                                                                <span style="color: Red;">样本格式为mp3或wav，大小不超过5M</span></div>
+                                                                             <span id="spWav" runat="server"  style="display:none">声音文件已上传</span>
+                                                                             <br />
+                                                                                <span style="color: Red;">样本格式为mp3或wav，大小不超过5M</span>
+                                                                                </div>
                                                                         </td>
                                                                         <td valign="middle">
                                                                         </td>

@@ -240,11 +240,11 @@
                               <td height="32" align="right"><strong><span style="color: #f00;">*</span>行政区划：</strong></td>
                               <td align="left">
                                   <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                   <select id="live_city" name="live_city" onchange="SelArea(this.value);">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                   <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                    <span class="status error" id="area_div_error"></span>
                                     <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />
                                     <input type="hidden" runat="server" id="Hi_city" clientidmode="Static" />

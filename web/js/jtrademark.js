@@ -854,7 +854,7 @@ function check_ApplyUser(divId,isAlert) {
         value = $("#sortarr").val();
         if (isEmpty(value)) {
             errorFlag = true;
-            errorMessage = "请您输入商标类别";
+            errorMessage = "请您选择商标类别";
         }
     }
     else if (divId == "regno_div") {
