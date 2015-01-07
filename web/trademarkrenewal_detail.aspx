@@ -443,14 +443,14 @@
                                           <td width="260" height="32" align="right"><strong>商标注册申请书：
                                           </strong></td>
                                           <td width="429" align="left">
-                                            <%=model.ApplyBook%>
+                                            <%=model.ApplyUpBook%>
                                           </td>
                                         </tr>
                                         <tr>
                                           <td width="260" height="32" align="right"><strong>商标申请委托书：
                                           </strong></td>
                                           <td width="429" align="left">
-                                            <%=model.AgentBook%>
+                                            <%=model.AgentUpBook%>
                                           </td>
                                         </tr>
                                        
@@ -458,14 +458,14 @@
                                           <td width="260" height="32" align="right"><strong>商标续展申请书：
                                           </strong></td>
                                           <td width="429" align="left">
-                                               <%=model.RenewalApplyBook%></td>
+                                               <%=model.RenewalApplyUpBook%></td>
                                         </tr>
                                        
                                         <tr>
                                           <td width="260" height="32" align="right"><strong>商标续展委托书：
                                           </strong></td>
                                           <td width="429" align="left">
-                                               <%=model.RenewalAgentBook%></td>
+                                               <%=model.RenewalAgentUpBook%></td>
                                         </tr>
                                        
                                         <tr>

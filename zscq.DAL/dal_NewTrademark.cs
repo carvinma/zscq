@@ -113,6 +113,25 @@ namespace zscq.DAL
             }
         }
 
+        /// <summary>
+        /// 根据案件号返回一条商标信息
+        /// </summary>
+        /// <param name="caseNo">案件号</param>
+        /// <returns></returns>
+        public t_NewTradeMarkInfo Trademark_Select_ByCaseNo(string caseNo)
+        {
+            try
+            {
+                t_NewTradeMarkInfo m =mark.t_NewTradeMarkInfo.First(p => p.CaseNo == caseNo);
+                //t_NewTradeMarkInfo m = (from a in mark.t_NewTradeMarkInfo where (a.CaseNo == caseNo) select a).FirstOrDefault();
+                return m;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
 
         /// <summary>
         /// 前台TradeMarkList导出商标

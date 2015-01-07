@@ -395,14 +395,14 @@
                                           <td width="260" height="32" align="right"><strong><span>商标注册申请书</span>：<br />
                                           </strong></td>
                                           <td width="429" align="left">
-                                            <%=model.ApplyBook%>
+                                            <%=model.ApplyUpBook%>
                                           </td>
                                         </tr>
                                         <tr>
                                           <td width="260" height="32" align="right"><strong>商标申请委托书：<br />
                                           </strong></td>
                                           <td width="429" align="left">
-                                            <%=model.AgentBook%>
+                                            <%=model.AgentUpBook%>
                                           </td>
                                         </tr>
                                        

@@ -94,15 +94,15 @@ public partial class trademark_detail : System.Web.UI.Page
         if (model.Status != null)
             status = BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
 
-        if (!string.IsNullOrEmpty(model.ApplyBook))
-            model.ApplyBook = "<a href='" + model.ApplyBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
+        if (!string.IsNullOrEmpty(model.ApplyUpBook))
+            model.ApplyUpBook = "<a href='" + model.ApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
         else
-            model.ApplyBook = "未上传";
+            model.ApplyUpBook = "未上传";
 
-        if (!string.IsNullOrEmpty(model.AgentBook))
-            model.AgentBook = "<a href='" + model.AgentBook + "' title='点击查看' target='_blank'>委托书已上传</a>";
+        if (!string.IsNullOrEmpty(model.AgentUpBook))
+            model.AgentUpBook = "<a href='" + model.AgentUpBook + "' title='点击查看' target='_blank'>委托书已上传</a>";
         else
-            model.AgentBook = "未上传";
+            model.AgentUpBook = "未上传";
 
         if (!string.IsNullOrEmpty(model.SoundFile))
             model.SoundFile = "<a href='" + model.SoundFile + "' title='点击查看' target='_blank'>声音文件已上传</a>";

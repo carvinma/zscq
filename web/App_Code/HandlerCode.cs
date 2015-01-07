@@ -33,6 +33,7 @@ public class HandlerCode
     dal_Address Darea = new dal_Address();
     dal_Apply apply = new dal_Apply();
     dal_Goods goods = new dal_Goods();
+    dal_NewTrademark mark = new dal_NewTrademark();
     public HandlerCode()
     {
         //
@@ -270,6 +271,9 @@ public class HandlerCode
     {
         context.Response.ContentType = "text/plain";
         string fileName = context.Request["filename"];//
+        string caseType = context.Request["caseType"];//0申请 1续展
+        string bookType = context.Request["bookType"];//0申请书 1-委托书
+        string caseNo = context.Request["caseNo"];//案件号
         // context.Request["flag"]
         if (!string.IsNullOrEmpty(fileName))
         {
@@ -279,6 +283,25 @@ public class HandlerCode
             {
                 file.CopyTo(HttpContext.Current.Server.MapPath(filePath + fileName),true);
                 file.Delete();
+                var model= mark.Trademark_Select_ByCaseNo(caseNo);
+                if (caseType == "0")
+                {
+                    switch (bookType)
+                    {
+                        case "0": model.ApplyUpBook = filePath + fileName; break;
+                        case "1": model.AgentUpBook = filePath + fileName; break;
+                    }
+                    mark.Trademark_Submit();
+                }
+                else if (caseType == "1")
+                {
+                    switch (bookType)
+                    {
+                        case "0": model.RenewalApplyUpBook = filePath + fileName; break;
+                        case "1": model.RenewalAgentUpBook = filePath + fileName; break;
+                    }
+                    mark.Trademark_Submit();
+                }
                 context.Response.Write("1");
             }
             else

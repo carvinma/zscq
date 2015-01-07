@@ -6,9 +6,9 @@
         var html = '<table width="100%"><tr><td height="120px" align="center">';
         html += '<input id="file_upload" name="file_upload" type="file" multiple="true"></td><tr>';
         html += '<td align="center"><div id="fileQueue"></div></td></tr></table>';
-        html += '<input id="caseType" type="hidden" name="caseType" value="">';
-        html += '<input id="bookType" type="hidden" name="bookType" value="">';
-        html += '<input id="caseno" type="hidden" name="caseno" value="">';
+        html += '<input id="filecaseType" type="hidden" name="caseType" value="">';
+        html += '<input id="filebookType" type="hidden" name="bookType" value="">';
+        html += '<input id="filecaseno" type="hidden" name="caseno" value="">';
         $.jBox(html, { title: "文件上传", width: 500, height: 300, submit: submit, buttons: { '确定': 1, '取消': 0} });
         file_url('*.doc; *.docx', '2MB', caseType, bookType, caseno);
     });
@@ -16,13 +16,16 @@
     var submit = function (v, h, f) {
         if (v == 1) {
             var filename = h.find("#fileQueue").html(); //文件名
+            $("#filecaseType").val(caseType);
+            $("#filebookType").val(bookType);
+            $("#filecaseno").val(caseNo);
             if (filename != '') {
-                alert(filename);
+               // alert(filename);
                 $.ajax({
                     type: "POST",
                     url: "Handler.ashx",
                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                    data: 'flag=movebook&filename=' + filename,
+                    data: 'flag=movebook&filename=' + filename+'&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo',
                     success: function (data) {
                         if (data == "1") {
                         }
@@ -53,6 +56,9 @@ function file_url(file_type, file_size, caseType, bookType, caseNo) {
         'onUploadSuccess': function (file, data, response) {
             $('#' + file.id).find('.data').html(' 上传完毕');
             $("#fileQueue").html(data);
+            $("#filecaseType").val(caseType);
+            $("#filebookType").val(bookType);
+            $("#filecaseno").val(caseNo);
         },
         //返回一个错误，选择文件的时候触发
         'onSelectError': function (file, errorCode, errorMsg) {
