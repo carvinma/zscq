@@ -175,7 +175,7 @@ public partial class trademarkrenewalOrder_Info : System.Web.UI.Page
                 if (ra != null)
                 {
                     string tel = "";
-                    if (ra.nvc_MobilePhone != null)
+                    if (!string.IsNullOrEmpty(ra.nvc_MobilePhone))
                     {
                         tel = ra.nvc_MobilePhone;
                     }
