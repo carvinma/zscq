@@ -15,6 +15,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
     private dal_NewTrademark mark = new dal_NewTrademark();
     private dal_CaseNoOrder caseNo = new dal_CaseNoOrder();
     private dal_Address address = new dal_Address();
+    private dal_Nationality DALN = new dal_Nationality();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -326,6 +327,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
 
         dal_SystemSetup systemSetup = new dal_SystemSetup();
         t_SystemSetup systemModel = systemSetup.SystemSetup_Select();
+      
+           
 
         foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
         {
@@ -336,6 +339,8 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
                     agentPeople = model.ApplyName + "(" + model.CardNo + ")";
                 mark.Text = agentPeople;
             }
+            if (mark.Name == "applynationality")
+                mark.Text = DALN.Nationality_Select_Id(model.i_MemberId).nvc_Name;
             if (mark.Name == "applyaddress")
                 mark.Text = division.Replace(" ", "") + model.Address;
             if (mark.Name == "postcode")
