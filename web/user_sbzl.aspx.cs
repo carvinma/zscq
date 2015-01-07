@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
 using System.IO;
+using zscq.BLL;
 public partial class user_sbzl : System.Web.UI.Page
 {
     DataMemberDataContext dmdc = new DataMemberDataContext();
@@ -14,7 +15,8 @@ public partial class user_sbzl : System.Web.UI.Page
     dal_Address DALB = new dal_Address();
     dal_Nationality DALN = new dal_Nationality();
     dal_ReceiveAddress DALRA = new dal_ReceiveAddress();
-    public string UserName = "",userbianhao="";
+    dal_Apply apply = new dal_Apply();
+    public string UserName = "", userbianhao = "";
     public string TitleOrKeyword = "";
     public string ShopName = "环球汇通";
     public string ShopKeywords = "";
@@ -41,14 +43,15 @@ public partial class user_sbzl : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         div_a.InnerHtml = "";
-        Bind_Page_Title();
-        Bind_Page_Member();
+       
 
         if (!IsPostBack)
-        {
+        { Bind_Page_Title();
+        Bind_Page_Member();
             Bind_Drp_PGuoJiaType();
-            Bind_Page_Info();
+             Bind_Page_Info();
         }
+       
     }
     public void Bind_Page_Member()//绑定ID和用户名
     {
@@ -67,12 +70,12 @@ public partial class user_sbzl : System.Web.UI.Page
         t_Member model = DALM.Member_Select_Id(int.Parse(Hi_MemberId.Value));
         if (model != null)
         {
-            if (model.i_GuoJiId == 1 || model.i_GuoJiId == 11 || model.i_GuoJiId == 40)//中国
+            if (model.i_GuoJiId == 1)//中国
             {
                 guoji = 1;
                 hi_guoji.Value = "1";
             }
-            if (model.i_UserTypeId != null)
+            if (model.i_UserTypeId != null) //1代表个人，2代表企业，3代表代理机构
             {
                 if (model.i_UserTypeId == 1)
                 {
@@ -101,7 +104,12 @@ public partial class user_sbzl : System.Web.UI.Page
             //DropDownList3.SelectedValue = model.i_CityId.ToString();
             //DropDownList3_SelectedIndexChanged(null, null);
             //DropDownList4.SelectedValue = model.i_AreaId.ToString();
-            text_Address.Value = model.nvc_Address;
+
+            Hi_prov.Value = model.i_ProvinceId.ToString();
+            Hi_city.Value = model.i_CityId.ToString();
+            Hi_country.Value = model.i_AreaId.ToString();
+
+            txt_address.Value = model.nvc_Address;
             c_addressEn.Value = model.nvc_EnAddress;
             c_company.Value = model.nvc_Company;
             c_companyEn.Value = model.nvc_EnCompany;
@@ -126,7 +134,51 @@ public partial class user_sbzl : System.Web.UI.Page
         }
     }
 
-    protected void Bt_Submit_Click(object sender, EventArgs e)
+    private void InsertApplyUser(t_Member memberModel)
+    {
+        t_Apply model = new t_Apply();
+        model.MemberID = int.Parse(Hi_MemberId.Value);
+        model.ApplyType = memberModel.i_UserTypeId.Value == 1 ? 1 : 0;
+        string applyName = memberModel.i_UserTypeId.Value == 1 ? memberModel.nvc_RealName : memberModel.nvc_Company;
+        model.ApplyName = applyName;
+        model.ApplyPinYin = PinYinConverter.Get(applyName);
+        if (!string.IsNullOrEmpty(memberModel.nvc_IDCard))
+            model.ApplyCardNo = memberModel.nvc_IDCard;
+        model.PhoneNo = memberModel.nvc_TelPhone;
+        if (!string.IsNullOrEmpty(memberModel.nvc_FaxNumber))
+            model.FaxNo = memberModel.nvc_FaxNumber;
+        model.ContactPerson = memberModel.nvc_RealName;
+
+        if (!string.IsNullOrEmpty(Hi_prov.Value))
+            model.provinceID = int.Parse(Hi_prov.Value.Trim());
+        if (!string.IsNullOrEmpty(Hi_city.Value))
+            model.cityID = int.Parse(Hi_city.Value.Trim());
+        if (!string.IsNullOrEmpty(Hi_country.Value))
+            model.areaID = int.Parse(Hi_country.Value.Trim());
+        model.Address = memberModel.nvc_Address;
+        model.PostCode = memberModel.nvc_ZipCode;
+        model.Email = memberModel.nvc_Email;
+        if (!string.IsNullOrEmpty(memberModel.nvc_LinkManQQ))
+            model.QQ = int.Parse(memberModel.nvc_LinkManQQ);
+
+        model.MainQualificationPath = memberModel.nvc_ZhuTiFile;//主体资格证明
+        //model.CardNoPath=   //身份证
+        apply.myInfoApplyAdd(model);
+    }
+    void Bind_Drp_PGuoJiaType()// 绑定国籍
+    {
+        Drp_GuoJi.Items.Clear();
+        ListItem item = new ListItem("请选择", "0");
+        Drp_GuoJi.Items.Add(item);
+        var iquery = DALN.Nationality_SelectAll();
+        foreach (var q in iquery)
+        {
+            ListItem li = new ListItem(q.nvc_Name, q.i_Id.ToString());
+            Drp_GuoJi.Items.Add(li);
+        }
+    }
+
+    protected void Bt_Submit_Click(object sender, ImageClickEventArgs e)
     {
         try
         {
@@ -139,14 +191,14 @@ public partial class user_sbzl : System.Web.UI.Page
                 return;
             }
             var result2 = from r in dmdc.t_Member where r.i_MemberType == 2 && r.nvc_MobilePhone.Trim() == c_phone.Value && r.i_Id != model.i_Id select r;
-            if (c_phone.Value !="")
+            if (c_phone.Value != "")
             {
-            if (result2.Count() > 0)
-            {
-                div_a.InnerHtml = "<script>alert('手机号已经被使用！');</script>";
-                return;
+                if (result2.Count() > 0)
+                {
+                    div_a.InnerHtml = "<script>alert('手机号已经被使用！');</script>";
+                    return;
+                }
             }
-        }
             if (hi_guoji.Value == "1")
             {
                 model.nvc_IDCard = c_Idcard.Value;
@@ -155,18 +207,19 @@ public partial class user_sbzl : System.Web.UI.Page
             {
                 model.nvc_IDCard = c_youxiao.Value;
             }
-            model.nvc_Company= c_company.Value;
-             model.nvc_EnCompany = c_companyEn.Value;
+            model.nvc_Company = c_company.Value;
+            model.nvc_EnCompany = c_companyEn.Value;
             model.nvc_DaiLiName = c_dailiName.Value;
             model.nvc_RealName = c_Name.Value;
             model.nvc_EnglishName = c_NameEn.Value;
+            model.nvc_IDCard = c_Idcard.Value.Trim();
 
             model.i_IsSend = RadioButtonList2.SelectedValue.GetInt();
-            //model.i_GuoJiId = int.Parse(Drp_GuoJi.SelectedValue);
-            //model.i_ProvinceId = int.Parse(DropDownList2.SelectedValue);//添加省
-            //model.i_CityId = int.Parse(DropDownList3.SelectedValue);//添加市
-            //model.i_AreaId = int.Parse(DropDownList4.SelectedValue);//添加县
-            model.nvc_Address = text_Address.Value;
+            model.i_ProvinceId = int.Parse(Hi_prov.Value.Trim());
+            model.i_CityId = int.Parse(Hi_city.Value.Trim());
+            model.i_AreaId = int.Parse(Hi_country.Value.Trim());
+
+            model.nvc_Address = txt_address.Value;
             model.nvc_EnAddress = c_addressEn.Value;
             model.nvc_ZipCode = c_youbian.Value;
             model.nvc_MobilePhone = c_phone.Value;
@@ -181,9 +234,10 @@ public partial class user_sbzl : System.Web.UI.Page
             {
                 string exname = Path.GetExtension(FileUpload3.FileName).ToLower();
                 string fileNameExt = System.IO.Path.GetExtension(FileUpload3.PostedFile.FileName).ToLower();
-                if (fileNameExt == ".jpg" || fileNameExt == ".gif" || fileNameExt == ".png" || fileNameExt == ".pdf")
+                //if (fileNameExt == ".jpg" || fileNameExt == ".gif" || fileNameExt == ".png" || fileNameExt == ".pdf")
+                if (fileNameExt == ".pdf")
                 {
-                    if (FileUpload3.PostedFile.ContentLength > 1024 * 1024 * 0.5)
+                    if (FileUpload3.PostedFile.ContentLength > 1024 * 1024 *1)
                     {
                         MessageBox.Show(this.Page, "文件大小不能超过 500KB");
                         // div_a.InnerHtml = "<script>alert('文件大小不能超过 512KB');</script>";
@@ -200,60 +254,13 @@ public partial class user_sbzl : System.Web.UI.Page
                 }
                 else
                 {
-                    MessageBox.ShowAndRedirect(this.Page,"文件格式错误！","user_sbzl.aspx");
+                    MessageBox.ShowAndRedirect(this.Page, "文件格式错误！", "user_sbzl.aspx");
                     return;
                 }
             }
             DALM.Member_Update(model);
-
-            //#region 添加到我的地址薄
-            //IQueryable<t_ReceiveAddress> iquery = DALRA.ReceiveAddress_Select_MemberId(int.Parse(Hi_MemberId.Value));
-            //if (iquery.Count() > 0)
-            //{
-            //    foreach (var v in iquery)
-            //    {
-            //        if (v.nvc_Consignee != c_Name.Value
-            //            && v.i_Gid != Convert.ToInt32(this.Drp_GuoJi.SelectedValue)
-            //             && v.i_PId != Convert.ToInt32(this.DropDownList2.SelectedValue)
-            //             && v.i_CId != Convert.ToInt32(this.DropDownList3.SelectedValue)
-            //             && v.i_AId != Convert.ToInt32(this.DropDownList4.SelectedValue)
-            //             && v.nvc_StreetAddress != text_Address.Value
-            //             && v.nvc_ZipCode != text_Email.Value
-            //             && v.nvc_MobilePhone != c_phone.Value
-            //             && v.nvc_TelPhone != text_Call.Value
-            //            )
-            //        {
-            //            t_ReceiveAddress tra = new t_ReceiveAddress();
-            //            tra.nvc_Consignee = c_Name.Value;
-            //            tra.i_Gid = Convert.ToInt32(this.Drp_GuoJi.SelectedValue);
-            //            tra.i_PId = Convert.ToInt32(this.DropDownList2.SelectedValue);
-            //            tra.i_CId = Convert.ToInt32(this.DropDownList3.SelectedValue);
-            //            tra.i_AId = Convert.ToInt32(this.DropDownList4.SelectedValue);
-            //            tra.nvc_StreetAddress = text_Address.Value;
-            //            tra.nvc_ZipCode = text_Email.Value;
-            //            tra.nvc_MobilePhone = c_phone.Value;
-            //            tra.nvc_TelPhone = text_Call.Value;
-            //            tra.i_MemberId = int.Parse(Hi_MemberId.Value);
-            //            DALRA.ReceiveAddress_Add(tra);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    t_ReceiveAddress tra = new t_ReceiveAddress();
-            //    tra.nvc_Consignee = c_Name.Value;
-            //    tra.i_Gid = Convert.ToInt32(this.Drp_GuoJi.SelectedValue);
-            //    tra.i_PId = Convert.ToInt32(this.DropDownList2.SelectedValue);
-            //    tra.i_CId = Convert.ToInt32(this.DropDownList3.SelectedValue);
-            //    tra.i_AId = Convert.ToInt32(this.DropDownList4.SelectedValue);
-            //    tra.nvc_StreetAddress = text_Address.Value;
-            //    tra.nvc_ZipCode = text_Email.Value;
-            //    tra.nvc_MobilePhone = c_phone.Value;
-            //    tra.nvc_TelPhone = text_Call.Value;
-            //    tra.i_MemberId = int.Parse(Hi_MemberId.Value);
-            //    DALRA.ReceiveAddress_Add(tra);
-            //}
-            //#endregion
+            //插入申请人
+            InsertApplyUser(model);
             UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "修改用户信息");
             // div_a.InnerHtml = "<script>alert('修改成功！');location.href='user_sbzl.aspx';</script>";
             ScriptManager.RegisterStartupScript(UpdatePanel2, this.GetType(), "", "<script>alert('修改成功！');location.href='user_sbzl.aspx';</script>", false);
@@ -263,38 +270,5 @@ public partial class user_sbzl : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(UpdatePanel2, this.GetType(), "", "<script>alert('参数有误，请核对后在提交！');location.href='user_sbzl.aspx';</script>", false);
             //div_a.InnerHtml = "<script>alert('参数有误，请核对后在提交！');location.href='user_sbzl.aspx';</script>";
         }
-    }
-
-    void Bind_Drp_PGuoJiaType()// 绑定国籍
-    {
-        Drp_GuoJi.Items.Clear();
-        ListItem item = new ListItem("请选择", "0");
-        Drp_GuoJi.Items.Add(item);
-        var iquery = DALN.Nationality_SelectAll();
-        foreach (var q in iquery)
-        {
-            ListItem li = new ListItem(q.nvc_Name, q.i_Id.ToString());
-            Drp_GuoJi.Items.Add(li);
-        }
-    }
-    //protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    DALB.City_Bind_DDL_PId(DropDownList3, DropDownList2.SelectedValue);
-    //    DALB.Area_Bind_DDL_CId(DropDownList4, DropDownList3.SelectedValue);
-    //}
-    //protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    DALB.Area_Bind_DDL_CId(DropDownList4, DropDownList3.SelectedValue);
-    //}
-    //protected void Drp_GuoJi_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    DALN.Provice_Bind_DDL_NId(DropDownList2, Drp_GuoJi.SelectedValue);
-    //    DALB.City_Bind_DDL_PId(DropDownList3, DropDownList2.SelectedValue);
-    //    DALB.Area_Bind_DDL_CId(DropDownList4, DropDownList3.SelectedValue);
-    //}
-
-    protected void Bt_Submit_Click(object sender, ImageClickEventArgs e)
-    {
-
     }
 }

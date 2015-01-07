@@ -583,7 +583,7 @@
                                                                         </td>
                                                                         <td align="left">
                                                                            <span class="fl selected-address" id="areaNameTxt"></span>
-                                                                            <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" style="ime-mode: disabled;" id="txt_address" maxlength="50" type="text" 
+                                                                            <input class="font12000" onblur="check_ApplyUser('address_div')" runat="server" id="txt_address" maxlength="50" type="text" 
                                                                                name="" value=""/>
                                                                                <span style="color: Red;">*</span> 
                                                                                 <span class="status error" id="address_div_error"></span>

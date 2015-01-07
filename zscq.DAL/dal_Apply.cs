@@ -72,7 +72,7 @@ namespace zscq.DAL
         }
 
         /// <summary>
-        /// 修改商标
+        /// 修改申请人
         /// </summary>
         /// <param name="Model"></param>
         public int Apply_Submit()
@@ -80,6 +80,36 @@ namespace zscq.DAL
             try
             {
                 mark.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 修改资料时，添加我的申请人
+        /// </summary>
+        /// <returns></returns>
+        public int myInfoApplyAdd(t_Apply model)
+        {
+            try
+            {
+                var findmodel = mark.t_Apply.Where(p => p.MemberID == model.MemberID && p.ApplyName == model.ApplyName).ToList();
+                if (findmodel == null || findmodel.Count() == 0)
+                {
+                    model.AddTime = DateTime.Now;
+                    mark.t_Apply.InsertOnSubmit(model);
+                    mark.SubmitChanges(ConflictMode.ContinueOnConflict);
+                }
+                else
+                {
+                    mark.t_Apply.DeleteOnSubmit(findmodel[0]);
+                    model.AddTime = DateTime.Now;
+                    mark.t_Apply.InsertOnSubmit(model);
+                    mark.SubmitChanges();
+                }
                 return 1;
             }
             catch

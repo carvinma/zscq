@@ -17,7 +17,7 @@ public partial class Register : System.Web.UI.Page
     public string ShopKeywords = "";
     public string ShopDescription = "";
     private string _typeid = "101";
-    public string _Adv = "", radioinfo1 = "自然人", radioinfo2 = "企业单位", radioinfo3 = "事务所";
+    public string _Adv = "", radioinfo1 = "自然人", radioinfo2 = "法人或其他组织", radioinfo3 = "事务所";
     dal_Adv DALADV = new dal_Adv();
     dal_SinglePage DALSP = new dal_SinglePage();
     public void Bind_Page_Title()
@@ -60,7 +60,7 @@ public partial class Register : System.Web.UI.Page
                 Bind_XY("regxy", "cn");
                 _typeid = "103";
                 radioinfo1 = "自然人";
-                radioinfo2 = "企业单位";
+                radioinfo2 = "法人或其他组织";
                 radioinfo3 = "代理机构";
                 pageflag = "images/reg2.gif";
                 Hf_PageFlag.Value = "sb";

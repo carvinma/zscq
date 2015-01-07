@@ -165,7 +165,7 @@
 						                            <input type="text" id="applytypeName" class="inputText drop" readonly="readonly" value="不限">
 						                            <dl class="clearfix" id="applytypedl" style="display: none;">
 							                            <dd val="-1">不限</dd>
-							                            <dd val="0">企业单位</dd>
+							                            <dd val="0">法人或其他组织</dd>
 							                            <dd val="1">自然人</dd>
 						                            </dl>
 					                            </div>
@@ -203,7 +203,7 @@
                                   <td height="32" align="center" bgcolor="#FFFFFF">
                                      <%# Container.ItemIndex + 1%></td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                       <%# Eval("ApplyType").ToString()=="0" ? "企业单位":"自然人" %>
+                                       <%# Eval("ApplyType").ToString() == "0" ? "法人或其他组织" : "自然人"%>
                                   </td>
                                   <td align="center" bgcolor="#FFFFFF">
                                      <a href="appUserInfoDetail.aspx?u_a_id=<%# Eval("i_Id") %>&ApplyType=<%# Eval("ApplyType")%>" class="ac5t"> <%# Eval("ApplyName")%></a>

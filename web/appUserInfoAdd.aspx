@@ -224,7 +224,7 @@
                                      <span class="status error" id="cardno_div_error"></span></td>
                             </tr>
                             <tr>
-                              <td height="32" align="right"><strong><span style="color: #f00;">*</span>固定电话：</strong> </td>
+                              <td height="32" align="right"><strong><span style="color: #f00;">*</span>联系人电话：</strong> </td>
                               <td align="left">
                               <input runat="server" id="txt_phone" onblur="check_ApplyUser('phone_div')" class="font12000" type="text" name="" value="" placeholder="" maxlength="20" />
                                  <span class="status error" id="phone_div_error"></span>

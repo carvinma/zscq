@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
     <script src="jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
+    <script src="js/jtrademark.js" type="text/javascript"></script>
     <link href="jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         #mails
@@ -68,6 +69,15 @@
             width: 201px;
         }
     </style>
+    <script type="text/javascript">
+        $(function () {
+            var porviceid = $("#Hi_prov").val();
+            var cityid = $("#Hi_city").val();
+            var areaid = $("#Hi_country").val();
+            EditProCityArea(porviceid, cityid, areaid);
+        });
+       
+    </script>
 </head>
 <body id="index" onload="Disentend();">
     <form id="form1" runat="server">
@@ -192,8 +202,7 @@
                                                                     <span id="s_c_company" style="display: none"><img src='images/tOk.gif' /></span> <%} %>
                                                             </td>
                                                         </tr>
-                                                        <%} %>
-                                                        <%if (guoji == 0 && usertype == 2)
+                                                        <%} %>                                                        <%if (guoji == 0 && usertype == 2)
                                                           { %>
                                                         <tr>
                                                             <td height="32" align="right">
@@ -206,8 +215,7 @@
                                                                     ControlToValidate="c_companyEn" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true"></asp:CustomValidator><span id="s_c_companyEn" style="display: none"><img src='images/tOk.gif' /></span>
                                                             </td>
                                                         </tr>
-                                                        <%} %>
-                                                        <%if (usertype == 3)
+                                                        <%} %>                                                        <%if (usertype == 3)
                                                           { %>
                                                         <tr>
                                                             <td height="32" align="right">
@@ -265,8 +273,7 @@
                                                                     ControlToValidate="c_NameEn" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true"></asp:CustomValidator><span id="s_c_NameEn" style="display: none"><img src='images/tOk.gif' />
                                                             </td>
                                                         </tr>
-                                                        <%} %>
-                                                        <%if (guoji == 1 && usertype == 1)
+                                                        <%} %>                                                        <%if (guoji == 1 && usertype == 1)
                                                           { %>
                                                         <tr>
                                                             <td height="32" align="right">
@@ -279,8 +286,7 @@
                                                                     ControlToValidate="c_Idcard" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true"></asp:CustomValidator><span id="s_c_Idcard" style="display: none"><img src='images/tOk.gif' /></span>
                                                             </td>
                                                         </tr>
-                                                        <%} %>
-                                                        <%if (guoji == 0 && usertype == 1)
+                                                        <%} %>                                                        <%if (guoji == 0 && usertype == 1)
                                                           { %>
                                                         <tr>
                                                             <td height="32" align="right">
@@ -316,13 +322,38 @@
                                                         </tr>
                                                         <tr>
                                                             <td height="32" align="right">
+                                                                <strong>行政区划：</strong></td>
+                                                            <td align="left">
+                                                                 <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
+                                  <option value="">请选择</option></select>
+                                  <select id="live_city" name="live_city" onchange="SelArea(this.value);">
+                                  <option value="">请选择</option></select>
+                                  <select id="live_country" name="live_country" runat="server" onchange="SetAddress(this.value)">
+                                  <option value="">请选择</option></select>
+                                    <span style="color: Red;">*</span>
+                                   <span class="status error" id="area_div_error"></span>
+                                    <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />
+                                    <input type="hidden" runat="server" id="Hi_city" clientidmode="Static" />
+                                    <input type="hidden" runat="server" id="Hi_country" clientidmode="Static" />
+                                    <asp:CustomValidator ID="CustomValidator13" runat="server" ClientValidationFunction="chkddl"
+                                                                    ControlToValidate="live_country" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true">
+                                                                    </asp:CustomValidator>
+                                    <span id="s_c_country" style="display: none"><img src='images/tOk.gif' /></span>
+                                    </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td height="32" align="right">
                                                                 <strong>联系人地址：</strong>
                                                             </td>
                                                             <td align="left">
-                                                                <textarea rows="2" name="s6" id="text_Address" style="width: 300px; height: 40px;" class="font12000" maxlength="250" runat="server"> </textarea><%if (guoji == 0 && usertype != 3)
+                                                             <span class="fl selected-address" id="areaNameTxt"></span><br />
+                                                                <textarea rows="2" name="s6" id="txt_address" 
+                                                                    style="width: 300px; height: 40px;" class="font12000" maxlength="250" 
+                                                                    runat="server"> </textarea><%if (guoji == 0 && usertype != 3)
                                                           { %><%} %><%else { %><span style="color: Red;">*</span>
                                                                 <asp:CustomValidator ID="CustomValidator4" runat="server" ClientValidationFunction="validate4"
-                                                                    ControlToValidate="text_Address" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true"></asp:CustomValidator><span id="s_text_Address" style="display: none"><img src='images/tOk.gif' /></span><%} %>
+                                                                    ControlToValidate="txt_address" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true"></asp:CustomValidator>
+                                                                    <span id="s_text_Address" style="display: none"><img src='images/tOk.gif' /></span><%} %>
                                                             </td>
                                                         </tr>
                                                         <%if (guoji == 0 && usertype != 3)
@@ -437,7 +468,7 @@
                                                                 <%=zhutiwenjian %><br>
                                                                 <asp:FileUpload ID="FileUpload3" runat="server" Width="150px" />
                                                                 <br>
-                                                                <span style="color: Red;">文件格式为.jpg .gif .png .pdf 不大于500K</span>
+                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -821,6 +852,19 @@
             }
             else {
                 $("#s_c_NameEn").hide();
+                source.innerHTML = "<img src='images/tError.gif' />";
+                arguments.IsValid = false;
+            }
+        }
+    }
+    function chkddl(source, arguments) {
+        if (ut == "3" || ut == "2" || ut == "1") {
+            if (arguments.Value != "") {
+                $("#s_c_country").show();
+                arguments.IsValid = true;
+            }
+            else {
+                $("#s_c_country").hide();
                 source.innerHTML = "<img src='images/tError.gif' />";
                 arguments.IsValid = false;
             }
