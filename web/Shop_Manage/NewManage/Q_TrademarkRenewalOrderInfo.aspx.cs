@@ -181,6 +181,7 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
                 if (dizhi != null)
                 {
                     labZipCode.Text = dizhi.nvc_ZipCode;
+                    labPhone.Text = !string.IsNullOrEmpty(dizhi.nvc_MobilePhone) ? dizhi.nvc_MobilePhone : dizhi.nvc_TelPhone;
                 }
                 labMobile.Text = Order.nvc_MobilePhone;
                 labTel.Text = Order.nvc_TelPhone;

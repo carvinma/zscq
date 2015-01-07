@@ -157,6 +157,13 @@
                     <asp:Label ID="labZipCode" runat="server"></asp:Label>
                 </td>
             </tr>
+            <tr id="tr_fapiao_4" runat="server" visible="false">
+                <td height="25" align="right">
+                    电话：</td>
+                <td>
+                    <asp:Label ID="labPhone" runat="server"></asp:Label>
+                </td>
+            </tr>
         </table>
         <table><tr><td><asp:Literal ID="Ltl_PayType" runat="server"></asp:Literal>
         </td></tr></table>

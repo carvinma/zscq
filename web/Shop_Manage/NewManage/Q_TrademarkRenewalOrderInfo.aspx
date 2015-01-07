@@ -157,6 +157,13 @@
                     <asp:Label ID="labZipCode" runat="server"></asp:Label>
                 </td>
             </tr>
+            <tr id="tr_fapiao_4" runat="server" visible="false">
+                <td height="25" align="right">
+                    电话：</td>
+                <td>
+                    <asp:Label ID="labPhone" runat="server"></asp:Label>
+                </td>
+            </tr>
         </table>
          <table><tr><td><asp:Literal ID="Ltl_PayType" runat="server"></asp:Literal>
         </td></tr></table>
@@ -341,10 +348,10 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                               <%=Str_Money %>
+                                                <%--<input name="inputPageid" onclick="Selbox(this)" type="checkbox" value='<%#Eval("i_Id") %>' />--%>
                                             </table>
                                             <table width="440" border="0" cellspacing="0" cellpadding="0">
-                                                 <%=Str_AllMoney%>
+                                                 <%# Eval("CaseNo")%>
                                             </table>
                                         </td>
                                         <td width="30">
@@ -437,7 +444,7 @@
             <tr>
                 <td align="center">
                     <asp:Button ID="lbtnDelete" runat="server" OnClientClick="return confirm('您确定进行删除操作吗？')" OnClick="lbtnDelete_Click" Text="删除订单" CssClass="button"></asp:Button>
-                    <%# Eval("ApplyName")%>                    <%# Eval("TrademarkType")%>
+                    <%# Eval("RegisteredNo")%><%# Eval("ApplyName")%>
                     <input name="Submit8" type="button" value="返回" onclick="javascript:window.location='Q_TrademarkRenewalOrder.aspx?<%=pageurl %>';" class="button" />
                 </td>
             </tr>
