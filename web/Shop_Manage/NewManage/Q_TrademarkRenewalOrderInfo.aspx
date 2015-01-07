@@ -157,7 +157,7 @@
                     <asp:Label ID="labZipCode" runat="server"></asp:Label>
                 </td>
             </tr>
-            <tr id="tr_fapiao_4" runat="server" visible="false">
+            <tr id="tr_fapiao_5" runat="server" visible="false">
                 <td height="25" align="right">
                     电话：</td>
                 <td>
