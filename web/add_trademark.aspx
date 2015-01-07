@@ -715,10 +715,13 @@
                                                                             <strong>声音文件</strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                           <div id="upWav"></div>
-                                                                            <div>
+                                                                         <table><tr><td> <div id="upWav"></div></td>
+                                                                           <td>
                                                                              <span id="spWav" runat="server"  style="display:none">声音文件已上传</span>
-                                                                             <br />
+                                                                           </td>
+                                                                           </tr></table>
+                                                                          
+                                                                            <div>
                                                                                 <span style="color: Red;">样本格式为mp3或wav，大小不超过5M</span>
                                                                                 </div>
                                                                         </td>
