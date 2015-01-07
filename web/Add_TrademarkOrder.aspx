@@ -195,8 +195,8 @@
                                                                                 <br />
                                                                                 提示语：
                                                                                 <br />
-                                                                                电子申请：请下载商标申请委托书，签字/盖章后上传到相应商标信息中，否则我司将视本申请未委托我司，不承担任何责任；要求彩色扫描，格式为pdf，大小不超过1M。 纸件申请：请下载商标注册申请书和商标申请委托书，签字/盖章后随同身份证明文件和主体资格证明文件及图样一起邮寄到我司，否则我司将视本申请未委托我司，不承担任何责任。
-                                                                                以上两种方式，选择一种即可。
+                                                                                电子申请：请下载商标申请委托书，签字/盖章后上传到相应商标信息中，否则我司将视本申请未委托我司，不承担任何责任；要求彩色扫描，格式为pdf，大小不超过1M。 <br />纸件申请：请下载商标注册申请书和商标申请委托书，签字/盖章后随同身份证明文件和主体资格证明文件及图样一起邮寄到我司，否则我司将视本申请未委托我司，不承担任何责任。
+                                                                                 <br />以上两种方式，选择一种即可。
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -237,8 +237,8 @@
                                                                 是否开票：
                                                             </td>
                                                             <td align="left" style="line-height: 21px;">
-                                                                <input type="radio" name="v" id="aa" value="" onclick="fpshow()" runat="server" checked="true" />&nbsp;暂不需要发票
-                                                                <input id="checkfp" name="v" type="radio" value="" onclick="fpshow()" runat="server" />&nbsp;需要发票(官费加3.3%的增值税)
+                                                                <input type="radio" name="v" id="aa" value="" onclick="fpshow();calcTotalMoney();" runat="server" checked="true" />&nbsp;暂不需要发票
+                                                                <input id="checkfp" name="v" type="radio" value="" onclick="fpshow();calcTotalMoney();" runat="server" />&nbsp;需要发票(官费加3.3%的增值税)
                                                             </td>
                                                         </tr>
                                                         <tr class="tr_fp  tr_fp1">
