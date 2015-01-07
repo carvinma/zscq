@@ -708,7 +708,7 @@
                                                         <tr>
                                                             <td height="115" align="left" valign="top">
                                                                 <table width="689" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tr>
+                                                                    <tr style="display:none">
                                                                         <td height="32" width="360" align="right" valign="middle">
                                                                             <strong><span>我公司案件号</span></strong>：
                                                                         </td>
