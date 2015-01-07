@@ -42,8 +42,8 @@
         </tr>
          <tr>
           <td align="center" id="td12" runat="server"><a href="?pagetype=sbquery"><strong>商标近拟查询</strong></a></td>
-          <td align="center" id="td13" runat="server"><a href="?pagetype=sbhelpdoc"><strong>帮助文档说明</strong></a></td>
-          <td align="center" id="td14" runat="server"></td>
+          <td align="center" id="td13" runat="server"><a href="?pagetype=sbhelpdoc"><strong>商标注册文档说明</strong></a></td>
+          <td align="center" id="td14" runat="server"><a href="?pagetype=sbrenewalhelpdoc"><strong>商标续展文档说明</strong></a></td>
           <td align="center" id="td15" runat="server"></td>
           <td align="center" id="td16" runat="server"></td>
           <td align="center" id="td17" runat="server"></td>
