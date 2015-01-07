@@ -48,7 +48,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     public int dazhe = 0, dazhe1 = 0;
     public decimal TMDaiLi = 0, TrademarkMoney = 0, TMZhiNaJin = 0;
     public string ids;
-    public string membername, linkMan, membernum, emailAttachments;
+    public string membername, memberPhone,memberPostcode,memberAddress, membernum, emailAttachments;
     protected void Page_Load(object sender, EventArgs e)
     {
         href = Request.Url.ToString();
@@ -64,7 +64,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 //Delete_Patent();
                 Bind_Page_PayWay();
                 Bind_Drp_YouHuiQuan();
-                GetDefaultAddress(uId);
+                hi_address.Value=GetDefaultAddress(uId);
             }
         }
     }
@@ -375,10 +375,12 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 mark.Text = OrderModer.dm_TotalMoney.ToString();
 
             //string address= GetDefaultAddress(this.uId);
-            if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
-                mark.Text = OrderModer.nvc_Address;
-            if (mark.Name == "LinkMan" && !string.IsNullOrEmpty(linkMan))
-                mark.Text = linkMan;
+            if (mark.Name == "address" && !string.IsNullOrEmpty(hi_address.Value))
+                mark.Text = hi_address.Value;
+            if (mark.Name == "phone" && !string.IsNullOrEmpty(memberPhone))
+                mark.Text = memberPhone;
+            if (mark.Name == "postcode" && !string.IsNullOrEmpty(memberPostcode))
+                mark.Text = memberPostcode;
         }
 
 
@@ -507,10 +509,12 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 if (mark.Name == "totalMoney")
                     mark.Text = (item.TrademarkMoney + item.TrademarkAgencyFee + tax + shouxuFee - youhimoney).Value.ToString("0.00");
                 //string address= GetDefaultAddress(this.uId);
-                if (mark.Name == "address" && !string.IsNullOrEmpty(OrderModer.nvc_Address))
-                    mark.Text = OrderModer.nvc_Address;
-                if (mark.Name == "LinkMan" && !string.IsNullOrEmpty(linkMan))
-                    mark.Text = linkMan;
+                if (mark.Name == "address" && !string.IsNullOrEmpty(hi_address.Value))
+                    mark.Text = hi_address.Value;
+                if (mark.Name == "phone" && !string.IsNullOrEmpty(memberPhone))
+                    mark.Text = memberPhone;
+                if (mark.Name == "postcode" && !string.IsNullOrEmpty(memberPostcode))
+                    mark.Text = memberPostcode;
             }
 
 
@@ -624,7 +628,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             {
                 membername = muser.nvc_Name;
                 membernum = muser.nvc_UserNum;
-                linkMan = muser.nvc_LinkName;
+                memberPhone = muser.nvc_MobilePhone;
+                memberPostcode = muser.nvc_ZipCode;
                 if (muser.i_UserTypeId == 3)
                 {
                     if ((muser.nvc_DaiLiName == "" || muser.nvc_DaiLiName == null) || (muser.nvc_RealName == "" || muser.nvc_RealName == null) || (muser.nvc_TelPhone == "" || muser.nvc_TelPhone == null) || (muser.nvc_Address == "" || muser.nvc_Address == null) || (muser.nvc_ZipCode == "" || muser.nvc_ZipCode == null))
@@ -758,19 +763,26 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
     }
     string GetDefaultAddress(int uid)
     {
-        string address = "";
+         dal_Address address = new dal_Address();
+         //string address = string.Empty;
         t_Member model = DALM.Member_Select_Id(uid);
-        vw_ReceiveAddress dizhi = DALRA.ReceiveAddress_vw_Select_Id(model.i_DefaultAddress);
-        if (dizhi != null)
+        if (model.i_ProvinceId > 0 && model.i_CityId > 0 && model.i_AreaId > 0)
         {
-            address = dizhi.provinceName + " " + dizhi.cityName + " " + dizhi.areaName + " " + dizhi.nvc_StreetAddress;
-            //Ltl_DefaultAddress.Text = address;
+            string division = address.Set_AddressName_PId_CId_AId(model.i_ProvinceId, model.i_CityId, model.i_AreaId);
+           
+            //vw_ReceiveAddress dizhi = DALRA.ReceiveAddress_vw_Select_Id(model.i_DefaultAddress);
+            //if (dizhi != null)
+            //{
+            //    address = dizhi.provinceName + " " + dizhi.cityName + " " + dizhi.areaName + " " + dizhi.nvc_StreetAddress;
+            //    //Ltl_DefaultAddress.Text = address;
+            //}
+            //else
+            //{
+            //    // s_adress.Style["display"] = "block";
+            //}
+            return division;
         }
-        else
-        {
-            // s_adress.Style["display"] = "block";
-        }
-        return address;
+        return string.Empty;
     }
 
     protected void ImageButton2_Click(object sender, ImageClickEventArgs e)

@@ -29,6 +29,7 @@
 </head>
 <body id="index" onload="checkpay(1);">
     <form id="form1" runat="server" method="post">
+     <input type="hidden" runat="server" id="hi_address" value="" />
     <input type="hidden" runat="server" id="input_payway" value="" />
     <input type="hidden" runat="server" id="bank" value="" />
     <input type="hidden" runat="server" id="hi_hui" value="1" />

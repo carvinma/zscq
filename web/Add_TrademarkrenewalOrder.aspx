@@ -29,6 +29,7 @@
 </head>
 <body id="index" onload="checkpay(1);">
     <form id="form1" runat="server" method="post">
+    <input type="hidden" runat="server" id="hi_address" value="" />
     <input type="hidden" runat="server" id="input_payway" value="" />
     <input type="hidden" runat="server" id="bank" value="" />
     <input type="hidden" runat="server" id="hi_hui" value="1" />
@@ -168,7 +169,7 @@
                                                                                  <td height="35" align="center" bgcolor="#FFFFFF">
                                                                                         <span style="display:none"><%# Eval("i_Id") %></span>
                                                                                         <a href="javascript:void(0)"
-                                                                                          onclick="orderCaseDetail(<%# Eval("i_Id") %>,1)"   class="ac5t">
+                                                                                          onclick="orderCaseDetail(<%# Eval("i_Id") %>,1)"   class="ac5t" target="_blank">
                                                                                             <%# Eval("CaseNo")%></a>
                                                                                     </td>
                                                                                     <td height="35" align="center" bgcolor="#FFFFFF">
