@@ -32,6 +32,7 @@
             var ody3 = $("#Hi_orderby3").val().split('_');
             var ody4 = $("#Hi_orderby4").val().split('_');
             var ody5 = $("#Hi_orderby5").val().split('_');
+            var ody6 = $("#Hi_orderby6").val().split('_');
 
             if (ody1[1] == "1") {
                 orderby(ody1[0], 1);
@@ -47,6 +48,9 @@
             }
             if (ody5[1] == "5") {
                 orderby(ody5[0], 5);
+            }
+            if (ody6[1] == "6") {
+                orderby(ody6[0], 6);
             }
         });
         function orderby(ody, index) {
@@ -205,6 +209,7 @@
     <input type="hidden" id="Hi_orderby3" runat="server" value="0" />
     <input type="hidden" id="Hi_orderby4" runat="server" value="0" />
     <input type="hidden" id="Hi_orderby5" runat="server" value="0" />
+    <input type="hidden" id="Hi_orderby6" runat="server" value="0" />
     <input type="hidden" id="hi_time" runat="server" value="0" />
     <input type="hidden" id="hi_trademark" runat="server" value="" />
     <input type="hidden" id="HF_ORDERBY" runat="server" value="" />
@@ -402,18 +407,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td width="90" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                <table width="90" height="42" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tr>
-                                                                        <td width="12">
-                                                                        </td>
-                                                                        <td width="78" align="left">
-                                                                            <span>类别</span><a href="trademarkrenewal_list.aspx?sbtype=desc_3" title="倒序" id="daoxu3">↑</a><a
-                                                                                href='trademarkrenewal_list.aspx?sbtype=asc_3' title="正序" id="zhengxu3" style="display: none;">↓</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
+                                                          
                                                             <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 <span>期限日</span><a href="trademarkrenewal_list.aspx?sbtime=desc_4" title="倒序" id="daoxu4">↑</a>
                                                                 <a href="trademarkrenewal_list.aspx?sbtime=asc_4" title="正序" id="zhengxu4" style="display: none;">
@@ -425,7 +419,20 @@
                                                             <td width="40" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 委托书
                                                             </td>
-                                                            <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                          
+                                                              <td width="90" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                <table width="90" height="42" border="0" cellspacing="0" cellpadding="0">
+                                                                    <tr>
+                                                                        <td width="12">
+                                                                        </td>
+                                                                        <td width="78" align="left">
+                                                                            <span>状态</span><a href="trademarkrenewal_list.aspx?sbstatus=desc_6" title="倒序" id="daoxu6">↑</a><a
+                                                                                href='trademarkrenewal_list.aspx?sbstatus=asc_6' title="正序" id="zhengxu6" style="display: none;">↓</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                              <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 <input type="checkbox" onclick="doSelect()" id="selectall" />
                                                             </td>
                                                         </tr>
@@ -436,7 +443,7 @@
                                                                         <a href="trademarkrenewal_detail.aspx?t_r_id=<%# Eval("i_Id") %>" class="ac5t">
                                                                             <%# Eval("CaseNo")%></a>
                                                                     </td>
-                                                                    <td height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                    <td height="42" align="center" bgcolor="#FFFFFF">
                                                                         <%# Eval("RegisteredNo")%>
                                                                     </td>
                                                                     <td height="42" align="center" bgcolor="#FFFFFF">
@@ -444,8 +451,6 @@
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                         <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
-                                                                        <td align="center" bgcolor="#FFFFFF">
-                                                                            <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF">
                                                                             <%# string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%>
@@ -453,12 +458,16 @@
                                                                         <td align="center" bgcolor="#FFFFFF" class="font12b4e">
                                                                          <a href="javascript:void(0)" casetype="1" booktype="0" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
                                                                         <p></p>
-                                                                     <a href='<%# Eval("RenewalApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
+                                                                         <a href='<%# Eval("RenewalApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF" class="font12b4e">
                                                                          <a href="javascript:void(0)" casetype="1" booktype="1" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
                                                                           <p></p>
                                                                      <a href='<%# Eval("RenewalAgentBook")%>' title='点击下载' target='_blank'>下载</a> 
+                                                                        </td>
+                                                                        
+                                                                        <td align="center" bgcolor="#FFFFFF">
+                                                                           <%# GetApplyStatus(Eval("Status"))%>
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF">
                                                                             <input name="chkItem" type="checkbox" status="<%#Eval("Status")%>" value="<%#Eval("i_Id")%>"

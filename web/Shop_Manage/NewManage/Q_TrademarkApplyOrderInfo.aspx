@@ -8,6 +8,15 @@
     <link href="../styles/main.css" rel="stylesheet" type="text/css" />
     <script src="../js/jquery-1.4.4.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript" src="../js/Calendar.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var orderNo = $("#labOrderNum").text();
+            if (orderNo != null && orderNo != "") {
+                $("#downAll").attr("href", "File_Zscq/AccountPDF/TotalBill" + orderNo + ".pdf");
+                $("#downDetail").attr("href", "File_Zscq/AccountPDF/SeparateBill" + orderNo + ".pdf");
+            }
+        });
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -351,11 +360,15 @@
                                         <td width="30">
                                         </td>
                                     </tr>
-                                    <tr><td align="right">
+                                    <tr>
+                                        <td align="center">
+                                        <a href="#" id="downAll" target="_blank">下载总帐单</a>
+                                         <a href="#" id="downDetail" target="_blank">下载分帐单</a>  &nbsp;  &nbsp;  &nbsp;
                                         <asp:Button ID="Btn_EditFee" runat="server" Text="修改费用" CssClass="button" OnClick="Btn_EditFee_Click" />
                                         </td>
-                                        <td>
-                                        </td></tr>
+                                        <td align="left"> 
+                                            &nbsp;</td>
+                                        </tr>
                                 </table>
                             </td>
                         </tr>

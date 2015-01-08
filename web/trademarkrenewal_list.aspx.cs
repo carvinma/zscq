@@ -20,7 +20,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
     public string returnurl = "";
     public string sb_type = "", days = "", uname = "", uaddress = "", sb_guoji = "0", sb_num = "", sb_regname = "", sb_passtime = "", utel = "", c_anjuanhao = "";
 
-    public string ByCaseNo, ByName, Bytype, ByTime, ByApplyNo;
+    public string ByCaseNo, ByName, Bytype,ByStatus, ByTime, ByApplyNo;
     public int? applyType;
     public string qCaseNo, qApplyNo, qName;
     QueryModel querymodel = new QueryModel();
@@ -89,6 +89,12 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
             this.ByTime = Request.QueryString["sbtime"].ToString().Split('_')[0];
             Hi_orderby4.Value = Request.QueryString["sbtime"].ToString();
             HF_ORDERBY.Value = Request.QueryString["sbtime"].ToString();//BY CHY
+        }
+        if (Request.QueryString["sbstatus"] != null && Request.QueryString["sbstatus"] != "")
+        {
+            this.ByStatus = Request.QueryString["sbstatus"].ToString().Split('_')[0];
+            Hi_orderby6.Value = Request.QueryString["sbstatus"].ToString();
+            HF_ORDERBY.Value = Request.QueryString["sbstatus"].ToString();//BY CHY
         }
         if (Request.QueryString["sbapplyno"] != null && Request.QueryString["sbapplyno"] != "")
         {
@@ -280,7 +286,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
                 tids = "";
             }
 
-            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, 1, applyType, ByCaseNo, ByName, Bytype, ByTime, ByApplyNo, qCaseNo, qApplyNo, qName, this.Stime, ref Ccount, querymodel, tids);
+            this.Rp_sb_list.DataSource = mark.Trademark_web_SelectPage(pageCurrent, PageSize, UserId, 1, applyType, ByCaseNo, ByName, Bytype,ByStatus, ByTime, ByApplyNo, qCaseNo, qApplyNo, qName, this.Stime, ref Ccount, querymodel, tids);
             this.Rp_sb_list.DataBind();
             AspNetPager1.RecordCount = Ccount;
             AspNetPager1.PageSize = PageSize;
@@ -293,7 +299,7 @@ public partial class trademarkrenewal_list : System.Web.UI.Page
         if (UserId != 0)
         {
             int Ccount = 0;
-            this.rptPrint.DataSource = mark.Trademark_web_SelectPage(1, int.MaxValue - 1, UserId, 1, null, "", "", "", "", "", "", "", "", "", ref Ccount, null, "");
+            this.rptPrint.DataSource = mark.Trademark_web_SelectPage(1, int.MaxValue - 1, UserId, 1, null, "", "", "", "","", "", "", "", "", "", ref Ccount, null, "");
             this.rptPrint.DataBind();
         }
     }

@@ -277,7 +277,7 @@ namespace zscq.DAL
         /// <returns></returns>
         public IQueryable<vw_NewTradeMark> Trademark_web_SelectPage(int PageIndex, int PageSize,
             int userid, int i_type, int? applyType,
-            string ByCaseNo, string ByName, string Bytype, string ByTime, string ByApplyNo,
+            string ByCaseNo, string ByName, string Bytype, string ByStatus, string ByTime, string ByApplyNo,
             string qCaseNo, string qApplyNo, string qName, string qRestDays, ref int count, QueryModel queryModel, string tids = "")
         {
 
@@ -413,6 +413,10 @@ namespace zscq.DAL
             if (!string.IsNullOrEmpty(Bytype))
             {
                 sortedList = Bytype == "desc" ? sortedList.OrderByDescending(p => p.ApplyType) : sortedList.OrderBy(p => p.ApplyType);
+            }
+            if (!string.IsNullOrEmpty(ByStatus))
+            {
+                sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.Status) : sortedList.OrderBy(p => p.Status);
             }
             if (!string.IsNullOrEmpty(ByTime))
             {
