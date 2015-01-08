@@ -305,14 +305,14 @@
                              <td align="left">
                                                                             <table><tr><td> <div id="upZhuTiZiGePdf"></div></td>
                                                                            <td>
-                                                                             <span id="aZhuTiZiGePdf" runat="server"  visible="false">主题资格证明已上传</span>
+                                                                             <span id="aZhuTiZiGePdf" runat="server"  visible="false">主题资格证明已上传</span>&nbsp;&nbsp;
+                                                                               <span class="status error" id="ZhuTiZiGePdf_div_error"></span>
                                                                            </td>
                                                                            </tr></table>
                                                                           
                                                                             <div>
                                                                                 <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span> 
-                                                                                <br />
-                                                                                <span class="status error" id="ZhuTiZiGePdf_div_error"></span></div>
+                                                                              </div>
                                                                                 </td>
                             </tr>
                             <tr style="display:none" class="appusertype">
@@ -320,13 +320,14 @@
                               <td align="left">
                                                                             <table><tr><td> <div id="upCardNoPdf"></div></td>
                                                                            <td>
-                                                                             <span id="aCardNoPdf" runat="server"  visible="false">身份证件扫已上传</span>
+                                                                             <span id="aCardNoPdf" runat="server"  visible="false">身份证件扫已上传</span>&nbsp;&nbsp;
+                                                                              <span class="status error" id="ApplyCardPdf_div_error"></span>
                                                                            </td>
                                                                            </tr></table>
                                                                           
                                                                             <div>
-                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span> <br />
-                                                                                <span class="status error" id="ApplyCardPdf_div_error"></span></div>
+                                                                                <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span> 
+                                                                               </div>
                                                                                 </td>
                             </tr>
                               <tr>
