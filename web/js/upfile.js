@@ -16,18 +16,18 @@
     var submit = function (v, h, f) {
         if (v == 1) {
             var filename = h.find("#fileQueue").html(); //文件名
-            $("#filecaseType").val(caseType);
-            $("#filebookType").val(bookType);
-            $("#filecaseno").val(caseNo);
+            var caseType = h.find("#filecaseType").val();
+            var bookType = h.find("#filebookType").val();
+            var caseNo = h.find("#filecaseno").val();
             if (filename != '') {
-               // alert(filename);
                 $.ajax({
                     type: "POST",
                     url: "Handler.ashx",
                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                    data: 'flag=movebook&filename=' + filename+'&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo,
+                    data: 'flag=movebook&filename=' + filename + '&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo,
                     success: function (data) {
                         if (data == "1") {
+                            return true;
                         }
                     }
                 });
@@ -83,8 +83,8 @@ function file_url(file_type, file_size, caseType, bookType, caseNo) {
 //单击上传文件的取消按钮时，判断该文件是否已经上传过，如果已经上传过，需要做清理工作
 $("#fileQueue .cancel").live("click", function () {
     $(".upfile").uploadify('cancel', '*');
-    
-   // $("#fileQueue").uploadifyCancel(queueID);
+
+    // $("#fileQueue").uploadifyCancel(queueID);
     //    //取得本次取消的上传文件ID号
     //    var fileId = $(this).parents(".uploadify-queue-item").attr("id");
     //    var fileInfo = null;
