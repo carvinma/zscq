@@ -122,11 +122,19 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         {
             model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
         }
+        model.TrademarkLateFee = 0;//滞纳金
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
         {
             model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
             TimeSpan ts = DateTime.Parse(txt_RenewalDate.Value) - DateTime.Today;
             model.RestDays = ts.Days; //剩于天数
+            #region 计算滞纳金
+            if (ts.Days <= 0)
+            {
+                var latefeeModel = goods.CategoryFees_Select_ByType(4);
+                model.TrademarkLateFee = latefeeModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
+            }
+            #endregion
         }
         if (!string.IsNullOrEmpty(this.upRegisteCertificate.Value))
         {
@@ -144,7 +152,8 @@ public partial class add_trademark_renewal : System.Web.UI.Page
 
         var agencyModel = goods.CategoryFees_Select_ByType(3);
         model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
-        model.TrademarkLateFee = 0;//滞纳金
+       
+       
 
         fileName = this.upPattern1.Value;//图样
         System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
