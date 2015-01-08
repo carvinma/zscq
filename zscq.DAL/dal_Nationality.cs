@@ -84,6 +84,15 @@ namespace zscq.DAL
                 return null;
             }
         }
+        public t_Nationality Nationality_Select_ByMemberId(int uid)
+        {   
+            DataMemberDataContext daMem=new DataMemberDataContext();
+            var iquery = from a in daMem.t_Member
+                         join b in dzdc.t_Nationality on a.i_GuoJiId equals b.i_Id
+                         select b;
+            return iquery.First();
+            
+        }
         public t_Nationality Nationality_Select_Name(string name, string flag)
         {
             try

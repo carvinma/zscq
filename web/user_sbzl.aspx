@@ -465,9 +465,9 @@
                                                                 <strong>主体资格证明文件：</strong>
                                                             </td>
                                                             <td valign="top" style="line-height: 20px;">
-                                                                <%=zhutiwenjian %><br>
+                                                                <%=zhutiwenjian %><br/>
                                                                 <asp:FileUpload ID="FileUpload3" runat="server" Width="150px" />
-                                                                <br>
+                                                                <br/>
                                                                 <span style="color: Red;">本人签字后彩色扫描上传，格式为pdf，大小不超过1M</span>
                                                             </td>
                                                         </tr>

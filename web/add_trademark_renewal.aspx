@@ -777,8 +777,11 @@
                                                                         <td  height="32" align="right" valign="middle">
                                                                             <strong>商标注册证书：</strong></td>
                                                                         <td colspan="2" valign="middle">
-                                                                            <div id="upfileRegisteCertificate"></div>
-                                                                             <span id="aRegisteCertificate"  style="display:none">商标注册证书已上传</span>
+                                                                        <table><tr><td>  <div id="upfileRegisteCertificate"></div>
+                                                                        </td><td> <span id="aRegisteCertificate"  style="display:none">商标注册证书已上传</span>
+                                                                        </td></tr>
+                                                                        </table>
+                                                                            
                                                                              <div>
                                                                                 <span style="color: Red;">请将商标注册证书扫描为彩色上传，格式为pdf，大小不超过2M</span>
                                                                                 </div>
