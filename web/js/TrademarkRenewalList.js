@@ -19,7 +19,7 @@ function DelTrademarkListDailog() {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
             if (status == "0" || status == "1" || status == "10" || status == "11") {
-                $.jBox.info("商标状态为：<br/>无需我司监管<br/>放弃续费<br/>已提交订单，尚未接收汇款<br/>已提交订单，续展中<br/>的续展案不能删除！<br/>---------------------------<br/>请重新选择！", "提示");
+                $.jBox.info("商标状态为：<br/>无需我司监管<br/>放弃续费<br/>已提交,未汇款<br/>已提交,续展中<br/>的续展案不能删除！<br/>---------------------------<br/>请重新选择！", "提示");
                 strval = [];
                 return false;
             }
