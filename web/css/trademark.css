@@ -94,7 +94,8 @@ margin: 10px 30px;
  
 
 .show .infoMain{border: 1px solid #EEE;box-shadow: 0 3px 5px #E5E5E5;margin-top: 10px;}
-.infoMain .ui-tabs-nav{background-color: #f4f4f4;border-bottom: 2px solid #0470B1;height: 32px;line-height: 32px;}
+.infoMain .ui-tabs-nav{background-color: #f4f4f4;border-bottom: 2px solid #0470B1;height: 32px;line-height: 32px;
+                       padding-left:20px;}
 .infoMain .ui-tabs-nav li{width: 174px;text-align: center;background-color:#404040;}
 .infoMain .ui-tabs-nav li a{border-right: 1px solid #EEE;font-size: 13px;padding: 0 15px;color: #ffffff;font-weight: bold;text-decoration:none;}
 .infoMain .ui-tabs-nav li.ui-tabs-selected{ background-color:#bf2831}

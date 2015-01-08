@@ -85,6 +85,7 @@
       </td>
       <td align="left" valign="top">
         <div class="infoMain">
+         <div style="height:23px"></div>
 					<ul class="ui-tabs-nav clearfix">
 						<li class="ui-tabs-selected"><a href="javascript:;">商标信息</a></li>
 						<li><a href="javascript:;">商标状态</a></li>

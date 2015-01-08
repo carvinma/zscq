@@ -81,11 +81,13 @@
   </table>
 
   <table width="1001" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto; background-color: #fff;">
+ 
     <tr>
     <td width="260" height="618" align="left" valign="top" style="background-image: url(images/server2.gif);">
         <uc1:zscq_sb_leftmenu ID="zscq_sb_leftmenu1" runat="server" />
       </td>
       <td align="left" valign="top">
+      <div style="height:23px"></div>
         <div class="infoMain">
 					<ul class="ui-tabs-nav clearfix">
 						<li class="ui-tabs-selected"><a href="javascript:;">商标信息</a></li>
