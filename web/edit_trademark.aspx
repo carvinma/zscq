@@ -439,8 +439,8 @@
                                         &nbsp;
                                     </td>
                                     <td width="691" align="right" class="font12bd44147">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="" class="font12bd44147">【商标近似查询】</a>【填写说明】
+                                      <a href="aBrand/BrandApproximateQuery.aspx" class="font12bd44147" target="_blank">【商标近似查询】</a>
+                                         <a href="aBrand/BrandHelpDoc.aspx"  class="font12bd44147" target="_blank">【填写说明】</a>
                                     </td>
                                 </tr>
                                 <tr>

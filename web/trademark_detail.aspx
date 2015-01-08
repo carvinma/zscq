@@ -23,12 +23,13 @@
                 $("#hrefBack").attr("href", "Add_TrademarkOrder.aspx?ids=" + ids);
             }
             else if (getUrlParam('orderlist') == "1") {
+                $("#hrefedit").hide();
                 $("#hrefBack").attr("href", "trademarkOrder_list.aspx?");
             }
             else if (getUrlParam('orderinfo') == "1") {
                 var orderid = getUrlParam('order');
                 var tIds = getUrlParam('tIds');
-
+                $("#hrefedit").hide();
                 $("#hrefBack").attr("href", "trademarkOrder_info.aspx?order=" + orderid + "&tIds=" + tIds);
             }
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
@@ -114,11 +115,13 @@
                                  } 
                               </script>
                               </td>
-                            <td><a href="edit_trademark.aspx?t_r_id=<%=trademarkId %>">
-                             <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a></td>
+                            <td>
+                               <a href="edit_trademark.aspx?t_r_id=<%=trademarkId %>" id="hrefedit" runat="server">
+                                <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a>
+                             </td>
                             <td> 
                             <a href="trademark_list.aspx" id="hrefBack">
-                            <img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>
+                               <img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>
                             </tr></table>
                            
                            </td></tr>

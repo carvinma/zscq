@@ -626,9 +626,10 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             t_Member muser = DALM.Member_Select_Id(uId);
             if (muser != null)
             {
-                membername = muser.nvc_Name;
+                //1代表个人，2代表企业，3代表代理机构
+                membername = muser.i_UserTypeId == 1 ? muser.nvc_RealName : muser.nvc_Company;
                 membernum = muser.nvc_UserNum;
-                memberPhone = muser.nvc_MobilePhone;
+                memberPhone = muser.nvc_TelPhone;
                 memberPostcode = muser.nvc_ZipCode;
                 if (muser.i_UserTypeId == 3)
                 {

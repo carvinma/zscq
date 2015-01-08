@@ -301,7 +301,6 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status = 12;
         model.RenewalAgentBook = CreateAgentBook(model);
         model.RenewalApplyBook = CreateApplyBook(model);
         if (mark.Trademark_Submit() > 0)
@@ -385,17 +384,8 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         {
             if (mark.Name == "client")
             {
-                //string agentPeople = model.ApplyName;
-                //if (model.ApplyType == 1)
-                //    agentPeople = model.ApplyName + "("+model.CardNo+")";
-                //mark.Text = agentPeople.PadRight(38,' ');
             }
-            //if (mark.Name == "pattern")
-            //{
-            //    //builder.MoveToBookmark("pattern");
-            //    //builder.InsertImage(Server.MapPath(model.TrademarkPattern1), 40, 20);
-            //    mark.Text =model.TrademarkDescribe;
-            //}
+        
             if (mark.Name == "address")
                 mark.Text = (division.Replace(" ", "") + model.Address).PadRight(26, ' ');
             if (mark.Name == "linkman")

@@ -87,12 +87,17 @@ public partial class trademark_detail : System.Web.UI.Page
     private void Bind_Page_Info(int trademarkId)// 绑定商标详细数据
     {
         model = mark.Trademark_Select_Id(trademarkId);
+        
         if (model.ProvinceId > 0 && model.CityId > 0 && model.AreaId > 0)
         {
             division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
         }
         if (model.Status != null)
+        {
+            if(model.Status.Value!=0)
+               hrefedit.Visible = false;
             status = BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
+        }
 
         if (!string.IsNullOrEmpty(model.ApplyUpBook))
             model.ApplyUpBook = "<a href='" + model.ApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";

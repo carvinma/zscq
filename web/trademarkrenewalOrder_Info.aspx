@@ -265,7 +265,7 @@ body {
                                                     </table>
                                                     <table width="689" border="0" cellspacing="0" cellpadding="0">
                                                         <tr>
-                                                            <td height="115" align="left" valign="top">
+                                                            <td align="left" valign="top">
                                                                 <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                                                                     <tr>
                                                                      <td width="100" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">

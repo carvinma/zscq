@@ -23,9 +23,11 @@
                 $("#hrefBack").attr("href", "Add_TrademarkrenewalOrder.aspx?ids=" + ids);
             }
             else if (getUrlParam('orderlist') == "1") {
+                $("#hrefedit").hide();
                 $("#hrefBack").attr("href", "trademarkrenewalOrder_list.aspx?");
             }
             else if (getUrlParam('orderinfo') == "1") {
+                $("#hrefedit").hide();
                 var orderid = getUrlParam('order');
                 var tIds = getUrlParam('tIds');
 
@@ -112,10 +114,10 @@
                                      $("#printGoods").hide();
                                      newWin.document.location.reload();
                                      newWin.print();
-                                 } 
-                              </script>
+                                 }
+                             </script>
                               </td>
-                            <td><a href="edit_trademark_renewal.aspx?t_r_id=<%=trademarkId %>">
+                            <td><a href="edit_trademark_renewal.aspx?t_r_id=<%=trademarkId %>" id="hrefedit" runat="server">
                              <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a></td>
                             <td> <a href="trademarkrenewal_list.aspx" id="hrefBack">
                                <img src="images/user_zl_b13.gif" width="85" height="29" border="0" /></a></td>

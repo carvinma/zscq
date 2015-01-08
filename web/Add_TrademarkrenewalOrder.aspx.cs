@@ -61,10 +61,10 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             Bind_PatentList();
             if (!IsPostBack)
             {
-               // Delete_Patent();
+                // Delete_Patent();
                 Bind_Page_PayWay();
                 Bind_Drp_YouHuiQuan();
-                hi_address.Value= GetDefaultAddress(uId);
+                hi_address.Value = GetDefaultAddress(uId);
             }
         }
     }
@@ -240,9 +240,9 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                     dModer.nvc_SbDaoqiTime = model.RenewalDate.Value.ToString("yyyy-MM-dd");//到期时间
                 dModer.dm_TrademarkMoney = model.TrademarkMoney;
                 dModer.dm_TMDaiLi = model.TrademarkAgencyFee;//代理费
-                dModer.dm_ZhiNaJin= model.TrademarkLateFee;   //滞纳金
+                dModer.dm_ZhiNaJin = model.TrademarkLateFee;   //滞纳金
 
-                decimal? tax = this.checkfp.Checked ? ((model.TrademarkMoney + model.TrademarkAgencyFee+model.TrademarkLateFee) * 0.033m) : 0;
+                decimal? tax = this.checkfp.Checked ? ((model.TrademarkMoney + model.TrademarkAgencyFee + model.TrademarkLateFee) * 0.033m) : 0;
                 dModer.dm_ZengZhiTax = tax;//增值税
 
                 decimal point = 0;
@@ -254,8 +254,8 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                 {
                     point = 0.01m;
                 }
-                dModer.dm_ShouXuFee = (model.TrademarkMoney + model.TrademarkAgencyFee+model.TrademarkLateFee+ tax) * point;
-                dModer.dm_TotalMoney = dModer.dm_ShouXuFee + dModer.dm_ZengZhiTax + model.TrademarkMoney + model.TrademarkAgencyFee+model.TrademarkLateFee;
+                dModer.dm_ShouXuFee = (model.TrademarkMoney + model.TrademarkAgencyFee + model.TrademarkLateFee + tax) * point;
+                dModer.dm_TotalMoney = dModer.dm_ShouXuFee + dModer.dm_ZengZhiTax + model.TrademarkMoney + model.TrademarkAgencyFee + model.TrademarkLateFee;
 
                 int ok = DALTOD.OrderDetails_Add(dModer);
                 model.Status = 10;//申请中，未汇款
@@ -329,12 +329,13 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                     strzl.Append("</table><br/><br/>");
 
                     #endregion
-                    Task.Factory.StartNew(()=>{
-                    BLLE.Email_Add(emalladdress, "商标缴费订单", membername + "客户(" + membernum + ")，您好！<br/>您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + strzl.ToString() + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn", emailAttachments);
+                    Task.Factory.StartNew(() =>
+                    {
+                        BLLE.Email_Add(emalladdress, "商标缴费订单", membername + "客户(" + membernum + ")，您好！<br/>您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + strzl.ToString() + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn", emailAttachments);
                     });
                     // BLLE.Email_Add(emalladdress, "商标缴费订单", "您好！您要缴费的订单号：" + OrderModer.nvc_OrderNumber + " <br/>  下单时间为：" + OrderModer.dt_AddTime + "  <br/>  您选择" + input_payway.Value + "支付，" + huikuanbankinfo + " <br/><br/> 支付商标费用详情：<br/>" + hi_feeinfo.Value + "<br/>请于工作日的24小时内付费！如有问题，请与环球汇通联系！<br/>咨询电话：86-10-84505596<br/>E-MAIL：pat-annuity@hqht-online.com", uId, ref states, "cn");
                 }
-                Response.Redirect("trademarkrenewalOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber+"&tIds=" + patentid);
+                Response.Redirect("trademarkrenewalOrderOk.aspx?order=" + OrderModer.i_Id + "&orderNo=" + OrderModer.nvc_OrderNumber + "&tIds=" + patentid);
             }
         }
         else
@@ -364,7 +365,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
                 mark.Text = ConvertStatus(OrderModer.i_Status);
             if (mark.Name == "DateLimit")
                 mark.Text = OrderModer.dt_AddTime.Value.AddDays(3).ToString("yyyy-MM-dd"); //延长三天后的日期
-            
+
             if (mark.Name == "guiFee")
                 mark.Text = OrderModer.dm_TrademarkMoney.ToString();
             if (mark.Name == "zhinaJin")
@@ -477,7 +478,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
         {
             string tmppath = Server.MapPath("File_Zscq/template/trademarkRenewalDetail.doc");
             Document doc = new Document(tmppath); //载入模板 
-            decimal? tax = this.checkfp.Checked ? ((item.TrademarkMoney+item.TrademarkAgencyFee+item.TrademarkLateFee) * 0.033m) : 0;//增值税
+            decimal? tax = this.checkfp.Checked ? ((item.TrademarkMoney + item.TrademarkAgencyFee + item.TrademarkLateFee) * 0.033m) : 0;//增值税
             decimal? shouxuFee = 0;
             decimal youhimoney = 0;
             decimal point = 0;
@@ -489,8 +490,8 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             {
                 point = 0.01m;
             }
-            shouxuFee = (item.TrademarkMoney +item.TrademarkAgencyFee+item.TrademarkLateFee+ tax) * point;
-           
+            shouxuFee = (item.TrademarkMoney + item.TrademarkAgencyFee + item.TrademarkLateFee + tax) * point;
+
             foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
             {
                 if (mark.Name == "ClientName")
@@ -515,14 +516,14 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
 
                 if (mark.Name == "shouxuFee" && shouxuFee.HasValue)
                     mark.Text = shouxuFee.Value.ToString("0.00");
-           
+
                 if (mark.Name == "youhuiMoney")
                 {
                     youhimoney = orderRank == 1 ? OrderModer.dm_YouHuiFee : 0;
                     mark.Text = youhimoney > 0 ? ("-" + youhimoney.ToString()) : "0";
                 }
                 if (mark.Name == "totalMoney")
-                    mark.Text = (item.TrademarkMoney + item.TrademarkAgencyFee+item.TrademarkLateFee + tax + shouxuFee - youhimoney).Value.ToString("0.00");
+                    mark.Text = (item.TrademarkMoney + item.TrademarkAgencyFee + item.TrademarkLateFee + tax + shouxuFee - youhimoney).Value.ToString("0.00");
                 if (mark.Name == "address" && !string.IsNullOrEmpty(hi_address.Value))
                     mark.Text = hi_address.Value;
                 if (mark.Name == "phone" && !string.IsNullOrEmpty(memberPhone))
@@ -583,14 +584,14 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             builder.Write(item.ApplyName);
             builder.MoveToCell(tableIndex, rownum, 4, 0);
             builder.Write(item.RenewalDate.Value.ToString("yyyy-MM-dd"));
-            builder.MoveToCell(tableIndex, rownum,5, 0);
-            builder.Write((item.TrademarkMoney+item.TrademarkAgencyFee+item.TrademarkLateFee).ToString());
+            builder.MoveToCell(tableIndex, rownum, 5, 0);
+            builder.Write((item.TrademarkMoney + item.TrademarkAgencyFee + item.TrademarkLateFee).ToString());
 
             string pdfPath = "File_Zscq/AccountPDF/SeparateBill" + OrderModer.nvc_OrderNumber + "-" + orderRank + ".doc";
             allDetailPath.Add(pdfPath);
             doc.Save(Server.MapPath(pdfPath));
             orderRank++;
-        } 
+        }
         #endregion
         if (allDetailPath.Count > 0)
         {
@@ -642,9 +643,10 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             t_Member muser = DALM.Member_Select_Id(uId);
             if (muser != null)
             {
-                membername = muser.nvc_Name;
+                //1代表个人，2代表企业，3代表代理机构
+                membername = muser.i_UserTypeId == 1 ? muser.nvc_RealName : muser.nvc_Company;
                 membernum = muser.nvc_UserNum;
-                memberPhone = muser.nvc_MobilePhone;
+                memberPhone = muser.nvc_TelPhone;
                 memberPostcode = muser.nvc_ZipCode;
                 if (muser.i_UserTypeId == 3)
                 {
@@ -714,7 +716,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">商标局规费：</td><td width=\"110\" id='guifei'>" + iquery.Sum(p => p.TrademarkMoney).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">滞纳金：</td><td width=\"110\" id='zhinajin'>" + iquery.Sum(p => p.TrademarkLateFee).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">代理费：</td><td width=\"110\" id='dailifei'>" + iquery.Sum(p => p.TrademarkAgencyFee).Value.ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
-            Str_Money.Append(" <tr class='FP' style='display:none;' align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\" id='tax'>" + (iquery.Sum(p => p.TrademarkMoney + p.TrademarkAgencyFee+ p.TrademarkLateFee).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
+            Str_Money.Append(" <tr class='FP' style='display:none;' align=\"left\"><td width=\"200\" align=\"right\">增值税：</td><td width=\"110\" id='tax'>" + (iquery.Sum(p => p.TrademarkMoney + p.TrademarkAgencyFee + p.TrademarkLateFee).Value * 0.033m).ToString("0.00") + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             Str_Money.Append(" <tr align=\"left\"><td width=\"200\" align=\"right\">手续费：</td><td width=\"110\"  id='shouxufei'>" + "0" + "</td><td width=\"30\"></td><td width=\"100\"></td></tr>");
             string totalmoney = string.Empty;
             totalmoney = (iquery.Sum(p => p.TrademarkMoney + p.TrademarkAgencyFee + p.TrademarkLateFee).Value).ToString("0.00");

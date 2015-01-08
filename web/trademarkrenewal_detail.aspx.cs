@@ -92,7 +92,11 @@ public partial class trademarkrenewal_detail : System.Web.UI.Page
             division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
         }
         if (model.Status != null)
+        {
+            if (model.Status.Value != 10 && model.Status.Value != 11)
+                hrefedit.Visible = false;
             status = BaseDataUtil.tradeMarkRenewedStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
+        }
 
         if (!string.IsNullOrEmpty(model.ApplyUpBook))
             model.ApplyUpBook = "<a href='" + model.ApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";

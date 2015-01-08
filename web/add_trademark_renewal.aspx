@@ -488,7 +488,6 @@
                                         &nbsp;
                                     </td>
                                     <td width="691" align="right" class="font12bd44147">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                          <a href="aBrand/BrandRenewalHelpDoc.aspx"  class="font12bd44147" target="_blank">【填写说明】</a>
                                     </td>
                                 </tr>

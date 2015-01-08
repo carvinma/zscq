@@ -19,7 +19,7 @@ function DelTrademarkListDailog() {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
             if (status != "0") {
-                $.jBox.info("只有保存状态的商标才能删除！<br/>请重新选择！", "提示");
+                $.jBox.info("已选择案件中至少有一件已提交过订单，不能删除！<br/>请重新选择！", "提示");
                 strval = [];
                 return false;
             }
@@ -69,7 +69,7 @@ function SubmitTrademarkListDailog() {
         var status = $(this).attr("status");
         if (!isEmpty(status)) {
             if (status != "0") {
-                $.jBox.info("只有保存状态的商标才能提交！<br/>请重新选择！", "提示");
+                $.jBox.info("已选择案件中至少有一件已提交过订单，不能重复提交！<br/>请重新选择！", "提示");
                 strval = [];
                 return false;
             }

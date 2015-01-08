@@ -266,7 +266,7 @@ body {
                                                     </table>
                                                     <table width="689" border="0" cellspacing="0" cellpadding="0">
                                                         <tr>
-                                                            <td height="115" align="left" valign="top">
+                                                            <td align="left" valign="top">
                                                                 <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                                                                     <tr>
                                                                         <td width="106" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
@@ -325,7 +325,7 @@ body {
                                                         </tr>
                                                          <tr>
                                                                             <td class="font12bd44147">
-                                                                                <br />
+                                                                             <br />
                                                                                 提示语：
                                                                                 <br />
                                                                                 电子申请：请下载电子申请，请下载商标注册申请书（申请书）及商标注册代理委托书（委托书），签字盖章后从列表中上传（全部商标信息→商标申请案）到相应的商标信息中，否则我司将视本申请未委托我司，不承担任何责任；要求彩色扫描，格式为pdf，大小不超过1M。 <br />纸件申请：请下载商标注册申请书和商标申请委托书，签字/盖章后随同身份证明文件和主体资格证明文件及图样一起邮寄到我司，否则我司将视本申请未委托我司，不承担任何责任。
