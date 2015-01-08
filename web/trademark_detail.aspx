@@ -440,14 +440,14 @@
                                           <td width="260" height="32" align="right"><strong>商标局规费：
                                           </strong></td>
                                           <td width="429" align="left">
-                                            <%=model.TrademarkMoney%>
+                                            <%=model.TrademarkMoney%>元
                                           </td>
                                         </tr>
                                         <tr>
                                           <td width="260" height="32" align="right"><strong>代理费： 
                                           </strong></td>
                                           <td width="429" align="left">
-                                            <%=model.TrademarkAgencyFee%>
+                                            <%=model.TrademarkAgencyFee%>元
                                           </td>
                                         </tr>
                                         </table>
