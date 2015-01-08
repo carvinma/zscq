@@ -122,6 +122,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         {
             model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
         }
+        model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
         model.TrademarkLateFee = 0;//滞纳金
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
         {
@@ -144,7 +145,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
             model.TrademarkRegBook = filePath + fileName;
         }
         //model.TrademarkRemark = txt_remark.Value.Trim();
-        model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
+      
         //model.TrademarkGoods = sortGoods.Value.Trim();
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
