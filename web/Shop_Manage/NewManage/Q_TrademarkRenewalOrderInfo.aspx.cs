@@ -206,6 +206,7 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
                     tr_fapiao_2.Visible = true;
                     tr_fapiao_3.Visible = true;
                     tr_fapiao_4.Visible = true;
+                    tr_fapiao_5.Visible = true;
                     //lb_fapiao.Text = "已开发票，发票抬头：" + Order.nvc_FaPiaoTaiTou + "</br>另加3.5%的税收：(" + Order.dm_FapiaoMoney + ")";
                     lb_fapiao.Text = Order.nvc_FaPiaoTaiTou;
                     lb_fapiaomoney.Text = Order.dm_TotalMoney.ToString("0.00");
