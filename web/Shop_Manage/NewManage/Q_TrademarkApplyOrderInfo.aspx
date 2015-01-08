@@ -12,8 +12,8 @@
         $(document).ready(function () {
             var orderNo = $("#labOrderNum").text();
             if (orderNo != null && orderNo != "") {
-                $("#downAll").attr("href", "File_Zscq/AccountPDF/TotalBill" + orderNo + ".pdf");
-                $("#downDetail").attr("href", "File_Zscq/AccountPDF/SeparateBill" + orderNo + ".pdf");
+                $("#downAll").attr("href", "../../File_Zscq/AccountPDF/TotalBill" + orderNo + ".pdf");
+                $("#downDetail").attr("href", "../../File_Zscq/AccountPDF/SeparateBill" + orderNo + ".pdf");
             }
         });
     </script>
