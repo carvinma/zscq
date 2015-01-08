@@ -243,6 +243,12 @@
                                 <table width="689" border="0" cellspacing="0" cellpadding="0">
                                 
                                      <tr id="dailifei">                                   
+                                    <td width="260" height="32" align="right" ><strong>案件号：</strong></td>  
+                                     <td> 
+                                         <%=model.CaseNo%> </td>
+                                     </tr>
+                                
+                                     <tr id="dailifei">                                   
                                     <td width="260" height="32" align="right" ><strong>商标类别：</strong>
                                     </td>  
                                      <td> 
