@@ -346,10 +346,10 @@
                                                                 <strong>联系人地址：</strong>
                                                             </td>
                                                             <td align="left">
-                                                             <span class="fl selected-address" id="areaNameTxt"></span><br />
-                                                                <textarea rows="2" name="s6" id="txt_address" 
-                                                                    style="width: 300px; height: 40px;" class="font12000" maxlength="250" 
-                                                                    runat="server"> </textarea><%if (guoji == 0 && usertype != 3)
+                                                             <span class="fl selected-address" id="areaNameTxt"></span>
+                                                                <input type="text" name="s6" id="txt_address" 
+                                                                    class="font12000" maxlength="100" 
+                                                                    runat="server"/><%if (guoji == 0 && usertype != 3)
                                                           { %><%} %><%else { %><span style="color: Red;">*</span>
                                                                 <asp:CustomValidator ID="CustomValidator4" runat="server" ClientValidationFunction="validate4"
                                                                     ControlToValidate="txt_address" ValidateEmptyText="true" Display="Dynamic" ValidationGroup="a" SetFocusOnError="true"></asp:CustomValidator>
