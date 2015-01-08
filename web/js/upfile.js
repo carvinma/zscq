@@ -5,7 +5,7 @@
         var caseno = $(this).attr("caseno");
         var html = '<table width="100%"><tr><td height="120px" align="center">';
         html += '<input id="file_upload" name="file_upload" type="file" multiple="true"></td><tr>';
-        html += '<td align="center"><div id="fileQueue"></div></td></tr><tr><td height="40px" align="center">彩色扫描，PDF格式，大小不超过1M</td></tr></table>';
+        html += '<td align="center"><div id="fileQueue"></div></td></tr><tr><td height="40px" align="center" style="color: Red;font-size:larger">彩色扫描，PDF格式，大小不超过1M</td></tr></table>';
         html += '<input id="filecaseType" type="hidden" name="caseType" value="">';
         html += '<input id="filebookType" type="hidden" name="bookType" value="">';
         html += '<input id="filecaseno" type="hidden" name="caseno" value="">';
