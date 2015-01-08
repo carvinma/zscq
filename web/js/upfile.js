@@ -25,7 +25,7 @@
                     type: "POST",
                     url: "Handler.ashx",
                     contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                    data: 'flag=movebook&filename=' + filename+'&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo',
+                    data: 'flag=movebook&filename=' + filename+'&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo,
                     success: function (data) {
                         if (data == "1") {
                         }
