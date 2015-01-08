@@ -378,12 +378,12 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td width="66" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
+                                                            <td width="92" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                <table width="92" height="42" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
                                                                         <td width="6">
                                                                         </td>
-                                                                        <td width="60" align="left">
+                                                                        <td width="86" align="left">
                                                                             <span>申请人</span><a href="trademarkrenewal_list.aspx?sbname=desc_2" title="倒序" id="daoxu2">↑</a>
                                                                             <a href="trademarkrenewal_list.aspx?sbname=asc_2" title="正序" id="zhengxu2" style="display: none;">
                                                                                 ↓</a>
@@ -419,10 +419,10 @@
                                                                 <a href="trademarkrenewal_list.aspx?sbtime=asc_4" title="正序" id="zhengxu4" style="display: none;">
                                                                     ↓</a>
                                                             </td>
-                                                            <td width="53" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                            <td width="40" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 申请书
                                                             </td>
-                                                            <td width="53" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                            <td width="40" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 委托书
                                                             </td>
                                                             <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
@@ -452,10 +452,12 @@
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF">
                                                                          <a href="javascript:void(0)" casetype="1" booktype="0" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                         <br />
                                                                      <a href='<%# Eval("RenewalApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF">
                                                                          <a href="javascript:void(0)" casetype="1" booktype="1" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                           <br />
                                                                      <a href='<%# Eval("RenewalAgentBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF">

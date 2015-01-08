@@ -368,9 +368,6 @@
                                 </table>
                               </td>
                             </tr>
-                            <tr>
-                              <td align="left">&nbsp;</td>
-                            </tr>
                           </table>
                           
                                 <table width="689" border="0" cellspacing="0" cellpadding="0">
@@ -412,6 +409,46 @@
                                           <div id="test" style="width:300px;height:80px;border:#eee solid 1px;overflow:auto;">
                                              <%=model.Remark%>
                                           </div></td>
+                                        </tr>
+                                        </table>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td align="left">&nbsp; </td>
+                                  </tr>
+                                </table>
+
+                                 <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                  <tr>
+                                    <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
+                                      <table width="114" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                          <td width="10" height="20">&nbsp; </td>
+                                          <td width="98" align="center" class="font12bt">费用信息 </td>
+                                          <td width="6"></td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td height="18" align="left"></td>
+                                  </tr>
+                                  <tr>
+                                    <td height="115" align="left" valign="top">
+                                      <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>商标局规费：
+                                          </strong></td>
+                                          <td width="429" align="left">
+                                            <%=model.TrademarkMoney%>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td width="260" height="32" align="right"><strong>代理费： 
+                                          </strong></td>
+                                          <td width="429" align="left">
+                                            <%=model.TrademarkAgencyFee%>
+                                          </td>
                                         </tr>
                                         </table>
                                     </td>
