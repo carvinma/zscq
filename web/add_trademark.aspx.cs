@@ -340,7 +340,11 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
                 mark.Text = agentPeople;
             }
             if (mark.Name == "applynationality")
-                mark.Text = DALN.Nationality_Select_ByMemberId(model.i_MemberId).nvc_Name;
+            {
+                t_Nationality na = DALN.Nationality_Select_ByMemberId(model.i_MemberId);
+                if(na!=null)
+                    mark.Text = na.nvc_Name;
+            }
             if (mark.Name == "applyaddress")
                 mark.Text = division.Replace(" ", "") + model.Address;
             if (mark.Name == "postcode")

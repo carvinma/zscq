@@ -87,11 +87,12 @@ namespace zscq.DAL
         public t_Nationality Nationality_Select_ByMemberId(int uid)
         {   
             DataMemberDataContext daMem=new DataMemberDataContext();
-            var iquery = from a in daMem.t_Member
-                         join b in dzdc.t_Nationality on a.i_GuoJiId equals b.i_Id
-                         select b;
-            return iquery.First();
-            
+            t_Member member= daMem.t_Member.First(p => p.i_Id == uid);
+            if (member.i_GuoJiId>0)
+            {
+               return dzdc.t_Nationality.First(p => p.i_Id == member.i_GuoJiId);
+            }
+            return null;
         }
         public t_Nationality Nationality_Select_Name(string name, string flag)
         {
