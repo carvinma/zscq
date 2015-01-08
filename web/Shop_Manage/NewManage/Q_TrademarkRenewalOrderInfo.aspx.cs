@@ -176,12 +176,13 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
                 message = Order.nvc_OrderNumber;
                 this.labOrderNum.Text = message;
                 this.labAddTime.Text = Order.dt_AddTime.ToString();
-                this.labAddress.Text = DALA.Set_AddressName_Gid_PId_CId_AId(Order.i_Address_Gid, Order.i_Address_PId, Order.i_Address_CId, Order.i_Address_AId) + Order.nvc_Address + "(收件人：" + Order.nvc_RealName + ")";
+                this.labAddress.Text = DALA.Set_AddressName_Gid_PId_CId_AId(Order.i_Address_Gid, Order.i_Address_PId, Order.i_Address_CId, Order.i_Address_AId) + Order.nvc_Address;
                 t_ReceiveAddress dizhi = DALRA.ReceiveAddress_Select_Id(Order.i_AddressId);
                 if (dizhi != null)
                 {
                     labZipCode.Text = dizhi.nvc_ZipCode;
                     labPhone.Text = !string.IsNullOrEmpty(dizhi.nvc_MobilePhone) ? dizhi.nvc_MobilePhone : dizhi.nvc_TelPhone;
+                    this.labAddress.Text = this.labAddress.Text + "(收件人：" + dizhi.nvc_Consignee + ")";
                 }
                 labMobile.Text = Order.nvc_MobilePhone;
                 labTel.Text = Order.nvc_TelPhone;
