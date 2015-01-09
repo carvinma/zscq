@@ -308,11 +308,11 @@
                                     <td width="260" height="32" align="right" valign="middle"><strong>行政区划：</strong></td>
                                     <td width="429" valign="middle">
                                        <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                   <select id="live_city" name="live_city" onchange="SelArea(this.value);">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                   <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
-                                  <option value="">请选择：</option></select>&nbsp;
+                                  <option value="">请选择</option></select>&nbsp;
                                    <span class="status error" id="area_div_error"></span>
                                     <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />
                                     <input type="hidden" runat="server" id="Hi_city" clientidmode="Static" />
@@ -385,7 +385,7 @@
                                        <strong>是否三维商标：</strong></td>
                                     <td align="left" valign="middle">
                                         <asp:DropDownList ID="ddl3D" runat="server">
-                                            <asp:ListItem>全部</asp:ListItem>
+                                            <asp:ListItem Value="">全部</asp:ListItem>
                                             <asp:ListItem Value="1">是</asp:ListItem>
                                             <asp:ListItem Value="0">否</asp:ListItem>
                                         </asp:DropDownList>
@@ -396,7 +396,7 @@
                                         <strong>是否颜色组合商标：</strong></td>
                                     <td align="left" valign="middle">
                                         <asp:DropDownList ID="ddlColor" runat="server">
-                                            <asp:ListItem>全部</asp:ListItem>
+                                            <asp:ListItem Value="">全部</asp:ListItem>
                                             <asp:ListItem Value="1">是</asp:ListItem>
                                             <asp:ListItem Value="0">否</asp:ListItem>
                                         </asp:DropDownList>
@@ -407,7 +407,7 @@
                                        <strong>是否声音商标：</strong></td>
                                     <td align="left" valign="middle" class="style1">
                                         <asp:DropDownList ID="ddlSound" runat="server">
-                                            <asp:ListItem>全部</asp:ListItem>
+                                            <asp:ListItem Value="">全部</asp:ListItem>
                                             <asp:ListItem Value="1">是</asp:ListItem>
                                             <asp:ListItem Value="0">否</asp:ListItem>
                                         </asp:DropDownList>

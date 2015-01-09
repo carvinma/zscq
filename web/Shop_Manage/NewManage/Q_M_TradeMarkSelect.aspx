@@ -125,11 +125,11 @@
                     <td height="26" width="200" align="right">行政区划：</td>
                     <td height="26">
                         <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
-                        <option value="">请选择：</option></select>
+                        <option value="">请选择</option></select>
                         <select id="live_city" name="live_city" onchange="SelArea(this.value);">
-                        <option value="">请选择：</option></select>
+                        <option value="">请选择</option></select>
                         <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
-                        <option value="">请选择：</option></select>
+                        <option value="">请选择</option></select>
                         <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />
                             <input type="hidden" runat="server" id="Hi_city" clientidmode="Static" />
                             <input type="hidden" runat="server" id="Hi_country" clientidmode="Static" />
@@ -155,7 +155,8 @@
                     <td align="right" valign="top">案件分类：</td>
                     <td>     
                         <asp:DropDownList ID="Drp_CaseType" runat="server" 
-                            onselectedindexchanged="Drp_CaseType_SelectedIndexChanged">
+                            onselectedindexchanged="Drp_CaseType_SelectedIndexChanged" 
+                            AutoPostBack="True">
                             <asp:ListItem Value="-1" Selected="True">全部</asp:ListItem>
                             <asp:ListItem Value="0">申请</asp:ListItem>
                             <asp:ListItem Value="1">续展</asp:ListItem>

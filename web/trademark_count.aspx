@@ -116,7 +116,7 @@
                                                                 申请案状态统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=ApplyTotal%></b>
+                                                                <b>申请案商标总数:<%=ApplyTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -177,7 +177,7 @@
                                                                 续展案状态统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=RenewalTotal%></b>
+                                                                <b>续展案商标总数:<%=RenewalTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -238,7 +238,7 @@
                                                                 订单统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=OrderTotal%></b>
+                                                                <b>商标订单总数:<%=OrderTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -291,7 +291,7 @@
                                                                 类别统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=TypeTotal%></b>
+                                                                <b>商标总数（按类别）:<%=TypeTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>
@@ -342,7 +342,7 @@
                                                                 常用申请人统计
                                                             </td>
                                                             <td align="right">
-                                                                <b>商标总数:<%=ApplyUserTotal%></b>
+                                                                <b>申请人商标总数:<%=ApplyUserTotal%></b>
                                                             </td>
                                                             <td>
                                                             </td>

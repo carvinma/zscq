@@ -122,7 +122,15 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         {
             model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
         }
-        model.TrademarkType = sortarr.Value.Replace('，', ',').Trim();
+        //输入类别，不够俩位补全2位，例：2->02
+        string[] trademarkTypes = sortarr.Value.Replace('，', ',').Trim().Split(',');
+        string markType = trademarkTypes.Aggregate((current, next) =>
+        {
+            return (current.Length == 1 ? current.PadLeft(2, '0') : current) + "," +
+                (next.Length == 1 ? next.PadLeft(2, '0') : next);
+        });
+
+        model.TrademarkType = markType;
         model.TrademarkLateFee = 0;//滞纳金
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
         {

@@ -53,7 +53,7 @@ public partial class Q_M_TradeMarkSelect : System.Web.UI.Page
 
     void Bind_Drp()// 绑定状态
     {
-        Drp_Status.Items.Clear();
+        Drp_Status.Items.Clear(); //0申请 1续展
         List<t_NewTradeMarkStatus> tradeMarkapplyStatuslist;
         tradeMarkapplyStatuslist = BaseDataUtil.tradeMarkApplyStatuslist.ToList();
         tradeMarkapplyStatuslist.Insert(0, new t_NewTradeMarkStatus { StatusName = "全部", StatusValue = null });

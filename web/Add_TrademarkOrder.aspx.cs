@@ -381,6 +381,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 mark.Text = memberPhone;
             if (mark.Name == "postcode" && !string.IsNullOrEmpty(memberPostcode))
                 mark.Text = memberPostcode;
+            if (mark.Name == "payway")
+                mark.Text = "支付方式：" + OrderModer.nvc_PayType;
         }
 
 
@@ -420,11 +422,17 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         }
         else
         {
-            tableIndex = 4;
+          
+            Aspose.Words.Tables.Table tableBank = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, 2, true);
+            tableBank.Remove();
+            Aspose.Words.Tables.Table tableBank2 = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, 2, true);
+            tableBank2.Remove();
+            tableIndex = 2;
         }
         DocumentBuilder builder = new DocumentBuilder(doc);
         var orderDetailsList = DALTOD.NewOrderDetails_Select_OrderId(OrderModer.i_Id);
         int rownum = 1;
+
         Aspose.Words.Tables.Table table = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, tableIndex, true);
         foreach (var detail in orderDetailsList)
         {
@@ -515,6 +523,8 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                     mark.Text = memberPhone;
                 if (mark.Name == "postcode" && !string.IsNullOrEmpty(memberPostcode))
                     mark.Text = memberPostcode;
+                if (mark.Name == "payway")
+                    mark.Text = "支付方式：" + OrderModer.nvc_PayType;
             }
 
 
@@ -551,6 +561,13 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 }
 
 
+            }
+            else
+            {
+                Aspose.Words.Tables.Table tableBank = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, 3, true);
+                tableBank.Remove();
+                Aspose.Words.Tables.Table tableBank2 = (Aspose.Words.Tables.Table)doc.GetChild(NodeType.Table, 3, true);
+                tableBank2.Remove();
             }
             tableIndex = 1;
             DocumentBuilder builder = new DocumentBuilder(doc);
@@ -770,7 +787,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
         if (model.i_ProvinceId > 0 && model.i_CityId > 0 && model.i_AreaId > 0)
         {
             string division = address.Set_AddressName_PId_CId_AId(model.i_ProvinceId, model.i_CityId, model.i_AreaId);
-           
+            division = division + model.nvc_Address;
             //vw_ReceiveAddress dizhi = DALRA.ReceiveAddress_vw_Select_Id(model.i_DefaultAddress);
             //if (dizhi != null)
             //{

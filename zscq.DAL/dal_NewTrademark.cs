@@ -183,7 +183,7 @@ namespace zscq.DAL
                     if (!string.IsNullOrEmpty(queryModel.qtmcaseno))
                         WhereExpr = WhereExpr.And(a => a.CaseNo.Contains(queryModel.qtmcaseno));
                     if (!string.IsNullOrEmpty(queryModel.qtmtype))
-                        WhereExpr = WhereExpr.And(a => a.TrademarkType.Split(',').Contains(queryModel.qtmtype));
+                        WhereExpr = WhereExpr.And(a => a.TrademarkType.Contains(queryModel.qtmtype));
                     if (!string.IsNullOrEmpty(queryModel.qtmapplyname))
                         WhereExpr = WhereExpr.And(a => a.ApplyName.Contains(queryModel.qtmapplyname));
                     if (!string.IsNullOrEmpty(queryModel.qtmmemberno))
@@ -263,7 +263,7 @@ namespace zscq.DAL
                 sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.RegisteredNo) : sortedList.OrderBy(p => p.RegisteredNo);
             }
             #endregion
-            sortedList = sortedList.OrderByDescending(p => p.i_Id);
+           // sortedList = sortedList.OrderByDescending(p => p.i_Id);
             count = sortedList.Count();
             return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
 
@@ -342,7 +342,7 @@ namespace zscq.DAL
                     if (!string.IsNullOrEmpty(queryModel.qtmcaseno))
                         WhereExpr = WhereExpr.And(a => a.CaseNo.Contains(queryModel.qtmcaseno));
                     if (!string.IsNullOrEmpty(queryModel.qtmtype))
-                        WhereExpr = WhereExpr.And(a => a.TrademarkType.Split(',').Contains(queryModel.qtmtype));
+                        WhereExpr = WhereExpr.And(a => a.TrademarkType.Contains(queryModel.qtmtype));
                     if (!string.IsNullOrEmpty(queryModel.qtmapplyname))
                         WhereExpr = WhereExpr.And(a => a.ApplyName.Contains(queryModel.qtmapplyname));
                     if (!string.IsNullOrEmpty(queryModel.qtmmemberno))
@@ -428,7 +428,7 @@ namespace zscq.DAL
             }
             #endregion
 
-            sortedList = sortedList.OrderByDescending(p => p.i_Id);
+            //sortedList = sortedList.OrderByDescending(p => p.i_Id);
             count = sortedList.Count();
             return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
 

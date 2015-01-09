@@ -22,7 +22,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
     public bool pagechu = Manager.GetManagerQX(21, 4);
     dal_DataOrder DALD = new dal_DataOrder();
     dal_Trademark DALT = new dal_Trademark();
-    dal_Member DALM=new dal_Member ();
+    dal_Member DALM = new dal_Member();
     dal_Nationality DALN = new dal_Nationality();
 
     dal_NewTrademark dalmark = new dal_NewTrademark();
@@ -32,7 +32,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
     public string Keyword = "";
     public int state = 0;
     public string usercount = "0";
-    public string weituocount = "0",zixingjiaofei="0";
+    public string weituocount = "0", zixingjiaofei = "0";
     public string weituoJiaofeiOKcount = "0";
     public int StockState = 0;
     public int ye = 1;
@@ -53,9 +53,9 @@ public partial class L_M_Trademark : System.Web.UI.Page
 
     public int jiaofeitypezt = -1;
 
- public string zhuangtai = "";
+    public string zhuangtai = "";
 
- public string returnurl = "";
+    public string returnurl = "";
 
 
     protected void Page_Load(object sender, EventArgs e)
@@ -73,7 +73,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
             Response.Write("无权限访问！");
             Response.End();
         }
-      
+
         HiddenDel.Value = "";
         div_a.InnerHtml = "";
         hi_true.Value = pageupdate ? "1" : "0";//鼠标移动修改
@@ -84,8 +84,8 @@ public partial class L_M_Trademark : System.Web.UI.Page
         }
     }
 
-  
-     
+
+
     public void Bind_Page_value()
     {
         if (Request.QueryString["userid"] != null && Request.QueryString["userid"] != "")
@@ -152,7 +152,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
         ye = ((Wuqi.Webdiyer.AspNetPager)sender).CurrentPageIndex;
     }
 
-    public string GetApplyStatus(object caseType,object applyStatus)
+    public string GetApplyStatus(object caseType, object applyStatus)
     {
         if (applyStatus != null)
         {
@@ -163,7 +163,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
         }
         return string.Empty;
     }
-    public string ZTFileImg(object Uid,object zhuti, object sbid)
+    public string ZTFileImg(object Uid, object zhuti, object sbid)
     {
         string aa = "未上传";
         var m = DALM.Member_Select_Id(int.Parse(Uid.ToString()));
@@ -205,14 +205,14 @@ public partial class L_M_Trademark : System.Web.UI.Page
             return false;
         }
     }
-   
+
     private void Bind_Rpt_Product(int pageCurrent)//绑定列表
     {
         ye = pageCurrent;
         int Ccount = 0;
         int PageSize = 20;
 
-        this.rep_brand.DataSource =Patent_SelectPage(pageCurrent, PageSize, ref Ccount);
+        this.rep_brand.DataSource = Patent_SelectPage(pageCurrent, PageSize, ref Ccount);
         this.rep_brand.DataBind();
         aspPage.RecordCount = Ccount;
         aspPage.PageSize = PageSize;
@@ -235,7 +235,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
         {
             var iquery = from i in mark.vw_NewTradeMark select i;
             #region 查询参数
-            
+
             if (Request["qnvc_UserNum"] != null)
             {
                 iquery = from i in iquery where i.nvc_UserNum.Contains(Request["qnvc_UserNum"]) select i;
@@ -286,15 +286,24 @@ public partial class L_M_Trademark : System.Web.UI.Page
             }
             if (Request["qIs3D"] != null)
             {
-                iquery = from i in iquery where i.Is3D == (Request["qIs3D"]=="1" ?true:false) select i;
+                if (Request["qIs3D"] == "1")
+                    iquery = from i in iquery where i.Is3D == true select i;
+                else
+                    iquery = from i in iquery where i.Is3D == null || i.Is3D == false select i;
             }
             if (Request["qIsColor"] != null)
             {
-                iquery = from i in iquery where i.IsColor == (Request["qIsColor"] == "1" ? true : false) select i;
+                if (Request["qIsColor"] == "1")
+                    iquery = from i in iquery where i.IsColor == true select i;
+                else
+                    iquery = from i in iquery where i.IsColor == null || i.IsColor == false select i;
             }
             if (Request["qIsSound"] != null)
             {
-                iquery = from i in iquery where i.IsSound == (Request["qIsSound"] == "1" ? true : false) select i;
+                if (Request["qIsSound"] == "1")
+                    iquery = from i in iquery where i.IsSound == true select i;
+                else
+                    iquery = from i in iquery where i.IsSound == null || i.IsSound == false select i;
             }
             if (Request["qApplyDate"] != null)
             {
@@ -323,7 +332,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
             if (Request["qAdminStatus"] != null)
             {
                 iquery = from i in iquery where i.AdminStatus == Convert.ToInt32(Request["qAdminStatus"]) select i;
-            }            
+            }
             if (Request["qnvc_OrderNumber"] != null)
             {
                 iquery = from i in iquery where i.nvc_OrderNum.Contains(Request["qnvc_OrderNumber"]) select i;
@@ -336,7 +345,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
             {
                 caseno = Request.QueryString["caseno"].ToString();
                 this.hi_CaseNo.Value = caseno;
-                if(caseno=="asc")
+                if (caseno == "asc")
                     iquery = from i in iquery orderby i.CaseNo ascending select i;
                 else
                     iquery = from i in iquery orderby i.CaseNo descending select i;
@@ -445,7 +454,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
         Bind_Rpt_Product(aspPage.CurrentPageIndex);
         HiddenDel.Value = "del";
     }
-    
+
     protected void rep_brand_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         DataZscqDataContext dzdc = new DataZscqDataContext();
@@ -467,14 +476,18 @@ public partial class L_M_Trademark : System.Web.UI.Page
                 }
                 else
                 {
-                    if (q.i_State == 0) { q.i_State = 1;
-                    q.dt_PassTime = DateTime.Now;
+                    if (q.i_State == 0)
+                    {
+                        q.i_State = 1;
+                        q.dt_PassTime = DateTime.Now;
                     }
-                    else { q.i_State = 0;
-                    q.dt_PassTime = DateTime.Now;//取消时间
-                    } 
+                    else
+                    {
+                        q.i_State = 0;
+                        q.dt_PassTime = DateTime.Now;//取消时间
+                    }
                 }
-            } 
+            }
             dzdc.SubmitChanges();
             Manager.AddLog(0, "商标管理", "修改了商标[ <font color=\"red\">" + q.nvc_SBRegNum + "</font> ]的信息");
         }
