@@ -3,14 +3,14 @@
         var caseType = $(this).attr("casetype");
         var bookType = $(this).attr("booktype");
         var caseno = $(this).attr("caseno");
-        var html = '<table width="100%"><tr><td height="120px" align="center">';
-        html += '<input id="file_upload" name="file_upload" type="file" multiple="true"></td><tr>';
-        html += '<td align="center"><div id="fileQueue"></div></td></tr><tr><td height="40px" align="center" style="color: Red;font-size:larger">彩色扫描，PDF格式，大小不超过1M</td></tr></table>';
+        var html = '<table width="100%"><tr><td height="90px" align="center">';
+        html += '<input id="file_upload" name="file_upload" type="file" multiple="true"></td><tr height="80px">';
+        html += '<td align="center"><div id="fileQueue" style="display:none"></div><div id="upSucessImg" style="display:none"><img src="img/duigou.gif" width="40" height="40"/></div></td></tr><tr><td height="30px" align="center" style="color: Red;font-size:larger">彩色扫描，PDF格式，大小不超过1M</td></tr></table>';
         html += '<input id="filecaseType" type="hidden" name="caseType" value="">';
         html += '<input id="filebookType" type="hidden" name="bookType" value="">';
         html += '<input id="filecaseno" type="hidden" name="caseno" value="">';
         $.jBox(html, { title: "文件上传", width: 500, height: 300, submit: submit, buttons: { '确定': 1, '取消': 0} });
-        file_url('*.doc; *.docx', '2MB', caseType, bookType, caseno);
+        file_url('*.pdf;*.*', '1MB', caseType, bookType, caseno);
     });
 
     var submit = function (v, h, f) {
@@ -49,13 +49,14 @@ function file_url(file_type, file_size, caseType, bookType, caseNo) {
         'progressData': 'percentage', //上传显示
         'overrideEvents': ['onDialogClose'],
         'fileSizeLimit': file_size, 	//最大值
-        'fileTypeExts': file_type, //文件类型
+         'fileTypeExts': file_type, //文件类型
         'removeCompleted': false,   //上传完成后是否自动消失
         'swf': 'js/SWF/uploadify.swf',
         'uploader': 'Handler.ashx?flag=uploadbookfile&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo,
         'onUploadSuccess': function (file, data, response) {
             $('#' + file.id).find('.data').html(' 上传完毕');
             $("#fileQueue").html(data);
+            $("#upSucessImg").show();
             $("#filecaseType").val(caseType);
             $("#filebookType").val(bookType);
             $("#filecaseno").val(caseNo);
