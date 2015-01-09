@@ -175,7 +175,7 @@
                               <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">金额</td>
                               <td width="90" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">下单日期</td>
                               <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单状态</td>
-                               <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
+                              <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
                             </tr>
                             <asp:Repeater ID="rp_orderlist" runat="server" OnItemDataBound="rp_orderlist_ItemDataBound">
                               <ItemTemplate>
