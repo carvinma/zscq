@@ -224,7 +224,10 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         if (!string.IsNullOrEmpty(txt_RegNoticeDate.Value))
         {
             model.RegNoticeDate = DateTime.Parse(this.txt_RegNoticeDate.Value);
-            
+        }
+        if (!string.IsNullOrEmpty(txt_PublicDate.Value))
+        {
+            model.PublicPreliminaryDate = DateTime.Parse(this.txt_PublicDate.Value);
         }
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
         {

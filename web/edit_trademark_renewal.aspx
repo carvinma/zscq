@@ -594,7 +594,7 @@
                                                                             <strong><span>营业执照副本（中文）</span>：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                           <%-- <asp:FileUpload ID="FileUpload5" runat="server" Width="200px" />--%>
+                                                                            <%-- <asp:FileUpload ID="FileUpload5" runat="server" Width="200px" />--%>
                                                                            <table><tr><td> <div id="upBusinessLicense"></div></td>
                                                                            <td>
                                                                              <span id="aBusinessLicense" runat="server"  style="display:none">营业执照副本已上传</span>
@@ -792,6 +792,17 @@
                                                                             <input type="text" name="s6" runat="server" id="txt_applydate" onblur="checkOk('txt_applydate');"  
                                                                             class="font12000" readonly="readonly" style="background-image:url(images/user_js_date.gif); 
                                                                                 background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/></td>
+                                                                        <td valign="middle">
+                                                                            &nbsp;</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td  height="32" align="right" valign="middle">
+                                                                             <strong>初审公告日：</strong></td>
+                                                                        <td valign="middle">
+                                                                            <input type="text" name="s8" runat="server" id="txt_PublicDate"
+                                                                            class="font12000" readonly="readonly" style="background-image:url(images/user_js_date.gif); 
+                                                                                background-repeat:no-repeat; background-position:right;" 
+                                                                                onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"/></td>
                                                                         <td valign="middle">
                                                                             &nbsp;</td>
                                                                     </tr>
