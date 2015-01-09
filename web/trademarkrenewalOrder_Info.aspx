@@ -13,7 +13,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <script language="javascript">
+    <link href="css/downBill.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
         function switchTag1(tag, content, k) {
             for (i = 1; i < 3; i++) {
                 if (i == k)
@@ -45,81 +46,6 @@
 
         }
     </script>
-    <style type="text/css">
-*{margin:0;padding:0;border:0;}
-body {
- font-family: arial, 宋体, serif;
-        font-size:12px;
-}
-
-#nav {
-  line-height: 24px;  list-style-type: none; background:#666;
-}
-
-#nav span{
-  background: url(images/arrowbg.gif) no-repeat 0px -552px;float: right;padding-left: 10px;}
-}
-
-#nav a {
- display: block; width: 95px; text-align:center;font-weight:bold;
-}
-
-#nav a:link  {
- color:#fff; text-decoration:none;font-weight:bold;
-}
-#nav a:visited  {
- color:#fff;text-decoration:none;font-weight:bold;
-}
-#nav a:hover  {
- color:#FFF;text-decoration:none;font-weight:bold;
-}
-
-#nav li {
- float: left; width: 95px; background:#d34245;
-}
-#nav li a:hover{
- 
-}
-#nav li a{
- text-align:center; padding-left:15px;
-}
-
-#nav li ul {
- line-height: 27px;  list-style-type: none;text-align:left;
- left: -999em; width: 95px; position: absolute;
-}
-#nav li ul li{
- float: left; width: 95px;
- background: #F6F6F6;
-}
-
-
-#nav li ul a{
- display: block; width: 80px;_width: 80px;height:auto; margin:0 auto;text-align:left; padding-left:15px;
-}
-
-#nav li ul a:link  {
- color:#666; text-decoration:none;
-}
-#nav li ul a:visited  {
- color:#666;text-decoration:none;
-}
-#nav li ul a:hover  {
- color:#F3F3F3;text-decoration:none;font-weight:normal;
- background:#fa9b3d;
-}
-
-#nav li:hover ul {
- left: auto;
-}
-#nav li.sfhover ul {
- left: auto;
-}
-#content {
- clear: left;
-}
-
-    </style>
 </head>
 <body id="index">
     <form id="form1" runat="server">
@@ -600,8 +526,8 @@ body {
                                                                                     &nbsp;&nbsp;
                                                                         </td>
                                                                         <td style="width:150px" valign="top" align="center">
-                                                                         <ul id="nav" style="width: 95px">
-                                                                                <li><a href="javascript:void(0)">下载帐单</a><span>&nbsp;</span>
+                                                                         <ul id="nav">
+                                                                                <li><a href="javascript:void(0)">下载帐单<span>&nbsp;</span></a>
                                                                                     <ul>
                                                                                         <li><a href="#" id="downAll" target="_blank">下载总帐单</a> </li>
                                                                                         <li><a href="#" id="downDetail" target="_blank">下载分帐单</a> </li>

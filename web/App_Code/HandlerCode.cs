@@ -281,15 +281,16 @@ public class HandlerCode
             FileInfo file = new FileInfo(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName));
             if (file.Exists)
             {
-                file.CopyTo(HttpContext.Current.Server.MapPath(filePath + fileName),true);
+                string newPath = filePath + "Up" + fileName;
+                file.CopyTo(HttpContext.Current.Server.MapPath(newPath), true);
                 file.Delete();
                 var model= mark.Trademark_Select_ByCaseNo(caseNo);
                 if (caseType == "0")
                 {
                     switch (bookType)
                     {
-                        case "0": model.ApplyUpBook = filePath + fileName; break;
-                        case "1": model.AgentUpBook = filePath + fileName; break;
+                        case "0": model.ApplyUpBook = newPath; break;
+                        case "1": model.AgentUpBook = newPath; break;
                     }
                     mark.Trademark_Submit();
                 }
@@ -297,8 +298,8 @@ public class HandlerCode
                 {
                     switch (bookType)
                     {
-                        case "0": model.RenewalApplyUpBook = filePath + fileName; break;
-                        case "1": model.RenewalAgentUpBook = filePath + fileName; break;
+                        case "0": model.RenewalApplyUpBook = newPath; break;
+                        case "1": model.RenewalAgentUpBook = newPath; break;
                     }
                     mark.Trademark_Submit();
                 }
