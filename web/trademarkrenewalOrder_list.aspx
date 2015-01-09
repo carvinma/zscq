@@ -168,14 +168,14 @@
                           </table>
                           <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                             <tr>
-                              <td width="108" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单号</td>
-                              <td width="108" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请号</td>
-                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请人</td>
-                              <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">图样</td>
+                              <td width="90" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单号</td>
+                              <td width="105" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请号</td>
+                              <td width="140" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请人</td>
+                              <td width="58" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">图样</td>
                               <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">金额</td>
-                              <td width="88" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">下单日期</td>
-                              <td width="88" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单状态</td>
-                               <td width="100" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
+                              <td width="90" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">下单日期</td>
+                              <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单状态</td>
+                               <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
                             </tr>
                             <asp:Repeater ID="rp_orderlist" runat="server" OnItemDataBound="rp_orderlist_ItemDataBound">
                               <ItemTemplate>
@@ -207,7 +207,7 @@
                                   <td align="center" bgcolor="#FFFFFF">
                                    <asp:Repeater runat="server" ID="repPattern">
                                       <ItemTemplate>
-                                        <div style="text-align: center; width: 100%;;height:30px;line-height:30px;">
+                                        <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
                                             <img alt="无" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
                                         </div>
                                       </ItemTemplate>
