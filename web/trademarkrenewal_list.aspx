@@ -359,36 +359,18 @@
                                                     <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                                                         <tr>
                                                             <td width="76" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tr>
-                                                                        <td width="12">
-                                                                        </td>
-                                                                        <td align="left">
-                                                                            <span>案件号</span><a href="trademarkrenewal_list.aspx?sbcaseno=desc_1" title="倒序" id="daoxu1">↑</a><a
+                                                                <span>案件号</span><a href="trademarkrenewal_list.aspx?sbcaseno=desc_1" title="倒序" id="daoxu1">↑</a><a
                                                                                 href="trademarkrenewal_list.aspx?sbcaseno=asc_1" title="正序" id="zhengxu1" style="display: none;">↓</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
                                                             </td>
                                                             <td width="76" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                <table width="66" height="42" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tr>
-                                                                        <td width="6">
-                                                                        </td>
-                                                                        <td width="70" align="left">
-                                                                            <span>申请号</span><a href="trademarkrenewal_list.aspx?sbapplyno=desc_5" title="倒序"
+                                                                <span>申请号</span><a href="trademarkrenewal_list.aspx?sbapplyno=desc_5" title="倒序"
                                                                                 id="daoxu5">↑</a> <a href="trademarkrenewal_list.aspx?sbapplyno=asc_5" title="正序"
                                                                                     id="zhengxu5" style="display: none;">↓</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
                                                             </td>
-                                                            <td width="92" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                <table width="92" height="42" border="0" cellspacing="0" cellpadding="0">
+                                                            <td width="160" height="42" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                <table width="100%" height="42" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
-                                                                        <td width="6">
-                                                                        </td>
-                                                                        <td width="86" align="left">
+                                                                        <td align="center">
                                                                             <span>申请人</span><a href="trademarkrenewal_list.aspx?sbname=desc_2" title="倒序" id="daoxu2">↑</a>
                                                                             <a href="trademarkrenewal_list.aspx?sbname=asc_2" title="正序" id="zhengxu2" style="display: none;">
                                                                                 ↓</a>
@@ -397,11 +379,9 @@
                                                                 </table>
                                                             </td>
                                                             <td width="55" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                <table width="55" height="42" border="0" cellspacing="0" cellpadding="0">
+                                                                <table width="100%" height="42" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
-                                                                        <td width="6">
-                                                                        </td>
-                                                                        <td width="44" align="left">
+                                                                        <td  align="center">
                                                                             图样
                                                                         </td>
                                                                     </tr>
@@ -421,18 +401,10 @@
                                                             </td>
                                                           
                                                               <td width="90" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
-                                                                <table width="90" height="42" border="0" cellspacing="0" cellpadding="0">
-                                                                    <tr>
-                                                                        <td width="12">
-                                                                        </td>
-                                                                        <td width="78" align="left">
-                                                                            <span>状态</span><a href="trademarkrenewal_list.aspx?sbstatus=desc_6" title="倒序" id="daoxu6">↑</a><a
+                                                               <span>状态</span><a href="trademarkrenewal_list.aspx?sbstatus=desc_6" title="倒序" id="daoxu6">↑</a><a
                                                                                 href='trademarkrenewal_list.aspx?sbstatus=asc_6' title="正序" id="zhengxu6" style="display: none;">↓</a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
                                                             </td>
-                                                              <td width="37" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                              <td width="25" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                 <input type="checkbox" onclick="doSelect()" id="selectall" />
                                                             </td>
                                                         </tr>
