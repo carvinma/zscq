@@ -20,9 +20,9 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         if (!IsPostBack)
         {
             Bind_Page_Member();
-            
+
             hi_MainFees.Value = goods.CategoryFees_Select_All().First(p => p.i_Type == 1).MainFees.ToString();//续展每个大类费用
-            hi_tradeMarkdesc.Value= mark.TrademarkRenewalWriteSample();
+            hi_tradeMarkdesc.Value = mark.TrademarkRenewalWriteSample();
             this.Sb_miaosu.Value = hi_tradeMarkdesc.Value;
         }
     }
@@ -122,6 +122,8 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         {
             model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
         }
+        if (!string.IsNullOrEmpty(txt_PublicDate.Value))
+            model.PublicPreliminaryDate = DateTime.Parse(txt_PublicDate.Value);
         //输入类别，不够俩位补全2位，例：2->02
         string[] trademarkTypes = sortarr.Value.Replace('，', ',').Trim().Split(',');
         string markType = trademarkTypes.Aggregate((current, next) =>
@@ -153,7 +155,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
             model.TrademarkRegBook = filePath + fileName;
         }
         //model.TrademarkRemark = txt_remark.Value.Trim();
-      
+
         //model.TrademarkGoods = sortGoods.Value.Trim();
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
@@ -161,8 +163,8 @@ public partial class add_trademark_renewal : System.Web.UI.Page
 
         var agencyModel = goods.CategoryFees_Select_ByType(3);
         model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
-       
-       
+
+
 
         fileName = this.upPattern1.Value;//图样
         System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
@@ -186,7 +188,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                 string[] RenewalDate = liststr[i].Split('_');
                 renewalModel.TradeMarkId = trademarkid;
                 renewalModel.RenewalDate = DateTime.Parse(RenewalDate[0]);
-                renewalModel.IsFinish = RenewalDate[1]=="1" ?true:false ;
+                renewalModel.IsFinish = RenewalDate[1] == "1" ? true : false;
                 list.Add(renewalModel);
             }
             if (list.Count > 0)
@@ -341,7 +343,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                 mark.Text = model.Phone;
             if (mark.Name == "agentgroup")
                 mark.Text = systemModel.nvc_DLCNName;
-            
+
             if (mark.Name == "applyno")
             {
                 mark.Text = !string.IsNullOrEmpty(model.RegisteredNo) ? model.RegisteredNo : "";
@@ -354,5 +356,5 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         doc.Save(Server.MapPath(docPath));
         return docPath;
     }
-  
+
 }
