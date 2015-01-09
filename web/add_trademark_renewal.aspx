@@ -808,6 +808,7 @@
                                                                            onclick="WdatePicker({el:'txt_RegNoticeDate',dateFmt:'yyyy-MM-dd',onpicked:calcRegnoticeDate});"/>
                                                                            </td>
                                                                         <td valign="middle">
+                                                                         <span style="color: Red;" id="Span1">*</span>
                                                                             <span class="status error" id="regdate_div_error"></span></td>
                                                                     </tr>
                                                                     <tr>
