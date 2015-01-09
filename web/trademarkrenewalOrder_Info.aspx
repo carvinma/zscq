@@ -61,14 +61,14 @@ body {
 }
 
 #nav a {
- display: block; width: 95px; text-align:center;
+ display: block; width: 95px; text-align:center;font-weight:bold;
 }
 
 #nav a:link  {
- color:#fff; text-decoration:none;
+ color:#fff; text-decoration:none;font-weight:bold;
 }
 #nav a:visited  {
- color:#666;text-decoration:none;
+ color:#fff;text-decoration:none;font-weight:bold;
 }
 #nav a:hover  {
  color:#FFF;text-decoration:none;font-weight:bold;

@@ -44,9 +44,9 @@ public partial class trademark_query : System.Web.UI.Page
     }
     protected void bt_kuaijiansuo_Click(object sender, EventArgs e)
     {
-        string qtmcaseno = txt_CaseNo0.Value;
-        string qtmtype = txt_TrademarkType0.Value;
-        string qtmapplyname = txt_applyName0.Value;
+        string qtmcaseno = txt_CaseNo0.Value.Trim();
+        string qtmtype = txt_TrademarkType0.Value.Trim();
+        string qtmapplyname = txt_applyName0.Value.Trim();
         string data = "";
         if (qtmcaseno != "")
         {
@@ -80,8 +80,8 @@ public partial class trademark_query : System.Web.UI.Page
     }
     protected void bt_jiansuoAll_Click(object sender, EventArgs e)
     {
-        string qtmcaseno = txt_CaseNo.Value;
-        string qtmtype = txt_TrademarkType.Value;
+        string qtmcaseno = txt_CaseNo.Value.Trim();
+        string qtmtype = txt_TrademarkType.Value.Trim();
         string qtmapplyname = txt_applyName.Value.Trim();
 
 
@@ -105,8 +105,8 @@ public partial class trademark_query : System.Web.UI.Page
         string qtmpublicDate = txt_publicdate.Value.Trim();
         string qtmRegNoticeBeginDate = txt_regDateBegin.Value.Trim();
         string qtmRegNoticeEndDate = txt_regDateEnd.Value.Trim();
-        string qtmRenewalBeginDate = txt_regDateBegin.Value.Trim();
-        string qtmRenewalEndDate = txt_regDateEnd.Value.Trim();
+        string qtmRenewalBeginDate = txt_renewalDateBegin.Value.Trim();
+        string qtmRenewalEndDate = txt_renewalDateEnd.Value.Trim();
         string qtmrestDays = txt_restDays.Value.Trim();
         string qtmadminStatus = ddlAdminStatus.SelectedValue;
 

@@ -149,7 +149,7 @@
                               <td height="32" align="right"><strong>商品大类别：</strong></td>
                               <td align="left">
                                 <input type="text" name="s3" id="txt_TrademarkType0" class="font12000" 
-                                      maxlength="50" runat="server" /></td>
+                                      maxlength="50" runat="server" /> <span style="color:Red">俩位数字</span> </td>
                             </tr>
                             <tr>
                               <td height="32" align="right">
@@ -248,7 +248,7 @@
                                     <td align="right" class="style1"><strong>商品大类别：</strong></td>
                                     <td align="left" class="style1">
                                       <input type="text" name="s5" id="txt_TrademarkType" class="font12000" 
-                                            maxlength="50" runat="server" /></td>
+                                            maxlength="50" runat="server" /> <span style="color:Red">俩位数字</span> </td>
                                   </tr>
                                   <tr>
                                     <td height="32" align="right"><strong>申请人名称：</strong></td>
@@ -271,7 +271,7 @@
                             </tr>
                           </table>
 
-                           <table width="630" border="0" cellspacing="0" cellpadding="0">
+                           <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td width="639" height="20" align="left" valign="top" style="border-bottom: 1px solid #d34245;">
                                 <table width="114" border="0" cellspacing="0" cellpadding="0">
@@ -288,7 +288,7 @@
                             </tr>
                             <tr>
                               <td height="115" align="left" valign="top">
-                                <table width="630" border="0" cellspacing="0" cellpadding="0">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                   <tr style="display:none">
                                     <td width="260" height="32" align="right" valign="middle"><strong>会员编号：</strong></td>
                                     <td width="429" valign="middle">
@@ -303,10 +303,9 @@
                                             maxlength="20" />
                                     </td>
                                   </tr>
-                                
                                   <tr>
                                     <td width="260" height="32" align="right" valign="middle"><strong>行政区划：</strong></td>
-                                    <td width="429" valign="middle">
+                                    <td width="*" valign="middle">
                                        <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
                                   <option value="">请选择</option></select>
                                   <select id="live_city" name="live_city" onchange="SelArea(this.value);">
@@ -329,7 +328,7 @@
                                        <strong>联系人：</strong></td>
                                     <td width="429" valign="middle">                                
                                       <input type="text" runat="server" id="txt_contactPerson" class="font12000" 
-                                            maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
+                                            maxlength="50"/></td>
                                   </tr>
                                     <tr>
                                     <td width="260" align="right" valign="middle" class="style1">
