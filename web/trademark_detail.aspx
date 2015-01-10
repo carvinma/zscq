@@ -274,8 +274,8 @@
                                                             </tr>
                                                               <asp:Repeater ID="Rpt_goods" runat="server">
                                                                <ItemTemplate>
-                                                               <tr classname="arr_goods" name="arr_goods[]" val="<%# Eval("id")%>" id="arr_goods<%#Container.ItemIndex%>">
-                                                               <td height="25" align="center" bgcolor="#FFFFFF" id="4<%# goodsItemCount- Container.ItemIndex%>"><%# goodsItemCount- Container.ItemIndex%></td>
+                                                               <tr classname="arr_goods" name="arr_goods[]" val="<%# Eval("id")%>" id="arr_goods<%#goodsItemCount-Container.ItemIndex%>">
+                                                               <td height="25" align="center" bgcolor="#FFFFFF" id="4<%# goodsItemCount- Container.ItemIndex%>"><%#Container.ItemIndex+1%></td>
                                                                <td align="center" bgcolor="#FFFFFF" id="3<%# goodsItemCount- Container.ItemIndex%>">
                                                                 <input type="hidden" classname="hid_classsort" name="hid_sort[]" value='<%# Eval("MainCategoryCode")%>'><%# Eval("MainCategoryCode")%></td>
                                                                <td align="center" bgcolor="#FFFFFF" id="2<%# goodsItemCount- Container.ItemIndex%>">
