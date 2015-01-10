@@ -172,6 +172,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         model.TrademarkPattern1 = filePath + fileName;
         model.Remark = txt_remark.Value.Trim();
         model.IsShow = true;
+        model.IsReceiveEmail = true;
         return model;
     }
     private void addRegNoticeData(int trademarkid)
