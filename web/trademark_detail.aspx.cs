@@ -43,6 +43,7 @@ public partial class trademark_detail : System.Web.UI.Page
         if (Request.QueryString["t_r_id"] != null && Request.QueryString["t_r_id"].ToString() != "")
         {
             trademarkId = int.Parse(Request.QueryString["t_r_id"].ToString());
+            hrefedit.HRef = "edit_trademark.aspx?t_r_id=" + trademarkId;
             Bind_Page_Info(trademarkId);
             Bind_TradeMarkStatus();
             Bind_Message();

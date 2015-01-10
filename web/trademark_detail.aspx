@@ -117,7 +117,7 @@
                               </script>
                               </td>
                             <td>
-                               <a href="edit_trademark.aspx?t_r_id=<%=trademarkId %>" id="hrefedit" runat="server">
+                               <a href="#" id="hrefedit" runat="server">
                                 <img src="images/user_zl_b12.gif" width="85" height="29" border="0" runat="server" id="ImgShow" /></a>
                              </td>
                             <td> 
