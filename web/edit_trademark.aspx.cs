@@ -208,7 +208,7 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         model.Fax = txt_fax.Value.Trim();
         model.PostCode = txt_postcode.Value.Trim();
         //日期+本日的序号，6位+3位，例如：141016001
-        model.CaseNo = caseNo.GetTodayMaxCaseNo();
+        //model.CaseNo = caseNo.GetTodayMaxCaseNo();
         model.Is3D = Radio3DNo.Checked ? false : true;
         model.IsColor = rdoColorNO.Checked ? false : true;
         model.IsSound = chkSound.Checked ? true : false;
