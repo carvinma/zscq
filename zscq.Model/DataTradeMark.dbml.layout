@@ -50,12 +50,6 @@
         <elementListCompartment Id="a4f98f32-cc0a-4c9e-a3f5-067622cc899a" absoluteBounds="3.14, 4.085, 1.9700000000000002, 1.1620992024739583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="0a36b933-bd51-490d-baf0-d68ac1984bac" isExpanded="false" absoluteBounds="5.875, 3.25, 2, 0.45">
-      <DataClassMoniker Name="/DataTradeMarkDataContext/vw_NewTradeMark" />
-      <nestedChildShapes>
-        <elementListCompartment Id="778f4f96-4b6c-426f-a300-5b920a05371b" absoluteBounds="5.89, 3.71, 1.9700000000000002, 9.2930399576822911" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="ff9bc8f4-a9ca-4b87-b2d7-8dd0c63c9585" isExpanded="false" absoluteBounds="3.25, 2.375, 2, 0.45">
       <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkRenewalInfo" />
       <nestedChildShapes>
@@ -84,6 +78,12 @@
       <DataClassMoniker Name="/DataTradeMarkDataContext/t_NewTradeMarkInfo" />
       <nestedChildShapes>
         <elementListCompartment Id="d96fa7ea-717f-4c5f-992c-1b100c0fe26e" absoluteBounds="0.88999999999999968, 2.835, 1.9700000000000002, 10.401804606119791" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c644fad5-83fc-49ab-994b-d1e81d203a8d" isExpanded="false" absoluteBounds="6.125, 3.625, 2, 0.45">
+      <DataClassMoniker Name="/DataTradeMarkDataContext/vw_NewTradeMark" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3f0372d8-63dd-47df-ab6a-d0896e4dabaf" absoluteBounds="6.14, 4.085, 1.9700000000000002, 10.217010498046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
