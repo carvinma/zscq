@@ -202,6 +202,7 @@
                 'queueSizeLimit': 1,
                 'onUploadSuccess': function (file, data, response) {
                     $.jBox.closeTip();
+                    $("#spWav").show();
                     $("#upSound").val(data);
                 },
                 'onSelect': function (file) {
@@ -533,7 +534,7 @@
                                                                         <td align="left">
                                                                             <table><tr><td> <div id="upCardNoPdf"></div></td>
                                                                            <td>
-                                                                             <span id="aCardNoPdf" runat="server"  style="display:none">身份证件扫已上传</span>
+                                                                             <span id="aCardNoPdf" runat="server"  visible="false">身份证件扫已上传</span>
                                                                            </td>
                                                                            </tr></table>
                                                                           
@@ -546,10 +547,9 @@
                                                                             <strong><span>营业执照副本（中文）</span>：</strong>
                                                                         </td>
                                                                         <td align="left">
-                                                                           <%-- <asp:FileUpload ID="FileUpload5" runat="server" Width="200px" />--%>
                                                                            <table><tr><td> <div id="upBusinessLicense"></div></td>
                                                                            <td>
-                                                                             <span id="aBusinessLicense" runat="server"  style="display:none">营业执照副本已上传</span>
+                                                                             <span id="aBusinessLicense" runat="server"  visible="false">营业执照副本已上传</span>
                                                                            </td>
                                                                            </tr></table>
                                                                           
@@ -709,12 +709,17 @@
                                                                         <td valign="middle">
                                                                         </td>
                                                                     </tr>
-                                                                    <tr id="soundfiles" runat="server" style="display:none">
+                                                                    <tr id="soundfiles" runat="server" visible="false">
                                                                         <td height="32" align="right"  valign="middle" >
                                                                             <strong>声音文件</strong>：
                                                                         </td>
                                                                         <td valign="middle">
-                                                                           <div id="upWav"></div>
+                                                                         <table><tr><td> <div id="upWav"></div></td>
+                                                                           <td>
+                                                                             <span id="spWav" runat="server"  visible="false">声音文件已上传</span>
+                                                                           </td>
+                                                                           </tr></table>
+                                                                          
                                                                             <div>
                                                                                 <span style="color: Red;">样本格式为mp3或wav，大小不超过5M</span></div>
                                                                         </td>

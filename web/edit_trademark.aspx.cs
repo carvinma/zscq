@@ -15,6 +15,7 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
     private dal_NewTrademark mark = new dal_NewTrademark();
     private dal_CaseNoOrder caseNo = new dal_CaseNoOrder();
     private dal_Address address = new dal_Address();
+    private dal_Nationality DALN = new dal_Nationality();
     public int goodsItemCount;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -86,7 +87,11 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         chkSound.Checked = model.IsSound == true ? true : false;
         if (model.IsSound != null && model.IsSound.Value == true)
             soundfiles.Visible = true;
-        upSound.Value = model.SoundFile;
+        if (!string.IsNullOrEmpty(model.SoundFile))
+        {
+            upSound.Value = model.SoundFile;
+            spWav.Visible = true;
+        }
         txt_remark.Value = model.TrademarkRemark;
         sortarr.Value = model.TrademarkType;
         sortGoods.Value = model.TrademarkGoods;
@@ -361,6 +366,7 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
             if (mark.Name == "postcode")
                 mark.Text = model.PostCode.PadRight(29, ' ');
         }
+
         string docPath = "File_Zscq/AccountPDF/TrademarkAgent" + model.CaseNo + ".doc";
         doc.Save(Server.MapPath(docPath));
         return docPath;
@@ -379,6 +385,8 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         dal_SystemSetup systemSetup = new dal_SystemSetup();
         t_SystemSetup systemModel = systemSetup.SystemSetup_Select();
 
+
+
         foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
         {
             if (mark.Name == "applyname")
@@ -387,6 +395,12 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
                 if (model.ApplyType == 1)
                     agentPeople = model.ApplyName + "(" + model.CardNo + ")";
                 mark.Text = agentPeople;
+            }
+            if (mark.Name == "applynationality")
+            {
+                t_Nationality na = DALN.Nationality_Select_ByMemberId(model.i_MemberId);
+                if (na != null)
+                    mark.Text = na.nvc_Name;
             }
             if (mark.Name == "applyaddress")
                 mark.Text = division.Replace(" ", "") + model.Address;
@@ -438,7 +452,7 @@ public partial class aBrand_edit_trademark : System.Web.UI.Page
         }
 
         //doc.Range.Bookmarks["table"].Text = "";    // 清掉标示  
-        string docPath ="File_Zscq/AccountPDF/TrademarkApply" + model.CaseNo + ".doc";
+        string docPath = "File_Zscq/AccountPDF/TrademarkApply" + model.CaseNo + ".doc";
         doc.Save(Server.MapPath(docPath));
         return docPath;
     }
