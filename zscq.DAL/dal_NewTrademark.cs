@@ -242,6 +242,7 @@ namespace zscq.DAL
             }
             #region 排序
 
+            sortedList = sortedList.OrderByDescending(p => p.i_Id);
             if (!string.IsNullOrEmpty(ByCaseNo))
             {
                 sortedList = ByCaseNo == "desc" ? sortedList.OrderByDescending(p => p.CaseNo) : sortedList.OrderBy(p => p.CaseNo);
@@ -263,7 +264,6 @@ namespace zscq.DAL
                 sortedList = ByStatus == "desc" ? sortedList.OrderByDescending(p => p.RegisteredNo) : sortedList.OrderBy(p => p.RegisteredNo);
             }
             #endregion
-           // sortedList = sortedList.OrderByDescending(p => p.i_Id);
             count = sortedList.Count();
             return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
 
@@ -401,7 +401,7 @@ namespace zscq.DAL
             }
 
             #region  排序
-
+            sortedList = sortedList.OrderByDescending(p => p.i_Id);
             if (!string.IsNullOrEmpty(ByCaseNo))
             {
                 sortedList = ByCaseNo == "desc" ? sortedList.OrderByDescending(p => p.CaseNo) : sortedList.OrderBy(p => p.CaseNo);
@@ -428,7 +428,7 @@ namespace zscq.DAL
             }
             #endregion
 
-            //sortedList = sortedList.OrderByDescending(p => p.i_Id);
+           
             count = sortedList.Count();
             return sortedList.Skip((PageIndex - 1) * PageSize).Take(PageSize);
 
