@@ -581,7 +581,7 @@
                                                                         <td align="left">
                                                                             <table><tr><td> <div id="upCardNoPdf"></div></td>
                                                                            <td>
-                                                                             <span id="aCardNoPdf" runat="server"  style="display:none">身份证件扫已上传</span>
+                                                                             <span id="aCardNoPdf" runat="server" visible="false">身份证件扫已上传</span>
                                                                            </td>
                                                                            </tr></table>
                                                                           
@@ -597,7 +597,7 @@
                                                                             <%-- <asp:FileUpload ID="FileUpload5" runat="server" Width="200px" />--%>
                                                                            <table><tr><td> <div id="upBusinessLicense"></div></td>
                                                                            <td>
-                                                                             <span id="aBusinessLicense" runat="server"  style="display:none">营业执照副本已上传</span>
+                                                                             <span id="aBusinessLicense" runat="server"  visible="false">营业执照副本已上传</span>
                                                                            </td>
                                                                            </tr></table>
                                                                           
