@@ -212,7 +212,7 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         model.Fax = txt_fax.Value.Trim();
         model.PostCode = txt_postcode.Value.Trim();
         //日期+本日的序号，6位+3位，例如：141016001
-        model.CaseNo = caseNo.GetTodayMaxCaseNo();
+        //model.CaseNo = caseNo.GetTodayMaxCaseNo();
         model.RegisteredNo = txt_RegNo.Value.Trim();
         int desctype = 0;
         if (RadioButton2.Checked) desctype = 1;
