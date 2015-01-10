@@ -66,16 +66,15 @@ function del_onegoods(startnum) {
     var p_arr = new Array();
     //获取以下数组的长度
     $("tr[classname='arr_goods']").each(function () {
-
         p_arr.push($(this).val());
-
     });
     if (p_arr.length > 0) {
         var mrr = new Array();
         for (var i = 0; i < p_arr.length; i++) {
             var j = parseInt(i) + parseInt(1);
-            if ($.inArray($("#" + 3 + j + "").text(), mrr) == -1) {
-                mrr.push($("#" + 3 + j + "").text());
+            var maintype = $.trim($("#" + 3 + j + "").text());
+            if ($.inArray(maintype, mrr) == -1) {
+                mrr.push(maintype);
             }
         }
         mrr.sort();
