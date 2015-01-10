@@ -212,6 +212,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
             model.TrademarkPattern2 = filePath + fileName;
         }
         model.IsShow = true;
+        model.IsReceiveEmail = true;
         return model;
     }
     protected void btnSave_Click(object sender, EventArgs e)
