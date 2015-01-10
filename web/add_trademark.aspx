@@ -674,16 +674,16 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td height="32" align="right" valign="middle">
+                                                                        <td height="32"  width="360" align="right" valign="middle">
                                                                             <strong><span>是否三维标志</span></strong>：
                                                                         </td>
-                                                                        <td valign="middle">
+                                                                        <td  valign="middle">
                                                                             <input id="Radio3DNo" name="rdo3D" runat="server" checked="true" type="radio" />
                                                                             否&nbsp;&nbsp;
                                                                             <input id="Radio3DYES" name="rdo3D" runat="server" type="radio" />
                                                                             是
                                                                         </td>
-                                                                        <td valign="middle">
+                                                                        <td width="429" valign="middle" >
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
