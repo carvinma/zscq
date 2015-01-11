@@ -268,6 +268,7 @@
                     var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td> <input id="Radio1" name="rdoGroup" type="radio" value="1" class="chkregdate"/>是<input id="chkdate" name="rdoGroupNO" type="radio"  checked="checked" value="0" class="chkregdate"/>否</td></tr>'
                     $("#tbdate tr").each(function () {
                         var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                        tmpdate = tmpdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
                         if (new Date(tmpdate) > new Date(regdate)) {
                             flag = false;
                             return;
