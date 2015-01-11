@@ -512,8 +512,50 @@ namespace zscq.DAL
         /// <returns></returns>
         public IQueryable<t_NewTradeMarkMessage> trademarkMessage_Select_id(int trademarkid)
         {
-            var iquery = from i in mark.t_NewTradeMarkMessage where i.TradeMarkId == trademarkid select i;
+            var iquery = from i in mark.t_NewTradeMarkMessage where i.TradeMarkId == trademarkid
+                         orderby i.AddTime descending select i;
             return iquery;
+        }
+        /// 插入商标留言
+        /// </summary>
+        /// <param name="model"></param>
+        public int trademarkMessage_Add(t_NewTradeMarkMessage model)
+        {
+            try
+            {
+                mark.t_NewTradeMarkMessage.InsertOnSubmit(model);
+                mark.SubmitChanges();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        /// <summary>
+        /// 删除商标留言
+        /// </summary>
+        /// <param name="id"></param>
+        public int trademarkMessage_Del(int id)
+        {
+            try
+            {
+                t_NewTradeMarkMessage msg = mark.t_NewTradeMarkMessage.SingleOrDefault(b => b.i_Id == id);
+                if (msg != null)
+                {
+                    mark.t_NewTradeMarkMessage.DeleteOnSubmit(msg);
+                    mark.SubmitChanges();
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         public int trademarkStatusdateSumbit(t_NewTradeMarkStatusDate model)
