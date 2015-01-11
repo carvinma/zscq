@@ -22,7 +22,7 @@
        $(function () {
            InitProCityArea();
            $(".intinput").bind("input propertychange paste", function () {
-               $(this).val($(this).val().replace(/[^\d]/g, ''));
+               $(this).val($(this).val().replace(/[^-\d]/g, ''));
            }).css("ime-mode", "disabled");
 
        $('input[type=radio][name="Quick0"]').change(function () {
@@ -466,7 +466,7 @@
                                         <strong>所剩天数：</strong></td>
                                     <td align="left" valign="middle">
                                       <input type="text" runat="server" id="txt_restDays" class="font12000 intinput" 
-                                            maxlength="50"   onkeyup="value=value.replace(/[^\w]/ig,'')" /></td>
+                                            maxlength="50" /></td>
                                   </tr>
                                   <tr>
                                     <td  height="32" align="right" valign="middle">
