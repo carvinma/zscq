@@ -257,7 +257,19 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         var agencyModel = goods.CategoryFees_Select_ByType(3);
         model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
         model.TrademarkLateFee = 0;//滞纳金
-
+        if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
+        {
+            model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
+            TimeSpan ts = DateTime.Parse(txt_RenewalDate.Value) - DateTime.Today;
+            model.RestDays = ts.Days; //剩于天数
+            #region 计算滞纳金
+            if (ts.Days <= 0)
+            {
+                var latefeeModel = goods.CategoryFees_Select_ByType(4);
+                model.TrademarkLateFee = latefeeModel.MainFees * model.TrademarkType.Split(',').Length;
+            }
+            #endregion
+        }
         //model.TrademarkGoods = sortGoods.Value.Trim();
         fileName = this.upPattern1.Value;//图样
         if (!string.IsNullOrEmpty(fileName))

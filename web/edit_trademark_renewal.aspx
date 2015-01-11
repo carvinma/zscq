@@ -262,6 +262,7 @@
             });
             $(".chkregdate").live("click", function () {
                 var regdate = $(this).parent().prev().find("span").text().replace('年', '-').replace('月', '-');
+                var newRegDate = regdate;
                 regdate = regdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
                 if ($(this).val() == "1") {
                     var flag = true;
@@ -296,7 +297,7 @@
                             $(this).remove();
                         }
                     });
-                    $("#txt_RenewalDate").val(regdate);
+                    $("#txt_RenewalDate").val(newRegDate);
                 }
                 recordRegnoticeDate();
             });
