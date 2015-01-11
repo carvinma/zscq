@@ -582,8 +582,10 @@
                                               <td width="807" height="28" align="left"><strong><%# string.Format("{0:yyyy-MM-dd}",Eval("AddTime"))%></strong></td>
                                             </tr>
                                             <tr>
-                                              <td width="807" height="28" align="left" valign="top" style="line-height: 21px;"><strong></strong>
+                                              <td width="807" height="28" align="left" valign="top" style="line-height: 21px;">
+                                               <div style="width:689px;word-wrap:break-word;overflow:auto;">
                                                 <%#Eval("Message")%>
+                                                </div>
                                               </td>
                                             </tr>
                                           </table>
