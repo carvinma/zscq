@@ -262,6 +262,7 @@
             });
             $(".chkregdate").live("click", function () {
                 var regdate = $(this).parent().prev().find("span").text().replace('年', '-').replace('月', '-');
+                regdate = regdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
                 if ($(this).val() == "1") {
                     var flag = true;
                     var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td> <input id="Radio1" name="rdoGroup" type="radio" value="1" class="chkregdate"/>是<input id="chkdate" name="rdoGroupNO" type="radio"  checked="checked" value="0" class="chkregdate"/>否</td></tr>'
@@ -289,6 +290,7 @@
                 else {
                     $("#tbdate tr").each(function () {
                         var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                        tmpdate = tmpdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
                         if (new Date(tmpdate) > new Date(regdate)) {
                             $(this).remove();
                         }
@@ -324,13 +326,15 @@
             var s = '';
             $("#tbdate tr").each(function () {
                 var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                //tmpdate = tmpdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
                 var chked = $(this).find('input:radio:checked').val();
                 s += tmpdate + "_" + chked + "|"
             });
             $("#hi_RegNoticeDate").val(s);
          }
         function calcRegnoticeDate() {
-           var regdate =$dp.cal.getNewDateStr();
+            var regdate = $dp.cal.getNewDateStr();
+            regdate = regdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
            var tbdate = $("#tbdate");
            tbdate.empty();
            var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td> <input id="Radio1" name="rdoGroup" type="radio" value="1" class="chkregdate"/>是<input id="chkdate" name="rdoGroupNO" type="radio"  checked="checked" value="0" class="chkregdate"/>否</td></tr>'
