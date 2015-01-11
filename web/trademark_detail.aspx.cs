@@ -72,7 +72,7 @@ public partial class trademark_detail : System.Web.UI.Page
             var result = from a in BaseDataUtil.tradeMarkStatuslist
                             join b in adminstatusDate
                             on a.i_Id equals b.TradeMarkStatusId into  temp
-                            from t in temp.DefaultIfEmpty()
+                            from t in temp
                             select new 
                             {
                                 i_Id = t==null? 0:t.i_Id,
