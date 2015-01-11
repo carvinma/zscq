@@ -5,9 +5,120 @@ using System.Web;
 using System.Linq;
 using zscq.Model;
 using zscq.DAL;
+using Aspose.Words;
 
 public class M_A_TradeMark : IHttpHandler
 {
+    private dal_Address address = new dal_Address();
+    /// <summary>
+    /// 商标续展代理委托书
+    /// </summary>
+    private string CreateAgentBook(t_NewTradeMarkInfo model)
+    {
+        string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
+
+        string tmppath = HttpContext.Current.Server.MapPath("../../File_Zscq/template/BookTrademarkRenewalAgent.doc");
+        Aspose.Words.Document doc = new Aspose.Words.Document(tmppath); //载入模板 
+        Aspose.Words.DocumentBuilder builder = new Aspose.Words.DocumentBuilder(doc);
+
+        Aspose.Words.NodeCollection shapeCollection = doc.GetChildNodes(Aspose.Words.NodeType.Shape, true);
+
+        // Since we will be adding/removing nodes, it is better to copy all collection
+        // into a fixed size array, otherwise iterator will be invalidated.
+        Aspose.Words.Node[] shapes = shapeCollection.ToArray();
+
+        int k = 0;
+        foreach (Aspose.Words.Drawing.Shape shape in shapes)
+        {
+            if (shape.ShapeType.Equals(Aspose.Words.Drawing.ShapeType.TextBox))//委托人 //商标
+            {
+                string value = string.Empty;
+                if (k == 0)
+                {
+                    value = model.ApplyName;
+                    if (model.ApplyType == 1)
+                        value = model.ApplyName + "(" + model.CardNo + ")";
+                }
+                else if (k == 1)
+                {
+                    value = model.TrademarkDescribe;
+                }
+                shape.AppendChild(new Aspose.Words.Paragraph(doc));
+                Aspose.Words.Paragraph para = shape.FirstParagraph;
+                para.ParagraphFormat.Alignment = Aspose.Words.ParagraphAlignment.Center;
+
+                Aspose.Words.Run run = new Aspose.Words.Run(doc);
+                run.Text = value;
+                run.Font.Name = "宋体";
+                run.Font.Size = 12;
+                para.AppendChild(run);
+                if (k == 1) break;
+                k++;
+            }
+        }
+        foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
+        {
+            if (mark.Name == "client")
+            {
+            }
+            if (mark.Name == "address")
+                mark.Text = (division.Replace(" ", "") + model.Address).PadRight(26, ' ');
+            if (mark.Name == "linkman")
+                mark.Text = model.ContactPerson.PadRight(29, ' ');
+            if (mark.Name == "tel")
+                mark.Text = model.Phone.PadRight(29, ' ');
+            if (mark.Name == "postcode")
+                mark.Text = model.PostCode.PadRight(29, ' ');
+        }
+        string docPath = "File_Zscq/AccountPDF/TrademarkRenewalAgent" + model.CaseNo + ".doc";
+        doc.Save(HttpContext.Current.Server.MapPath("../../"+docPath));
+        return docPath;
+    }
+    /// <summary>
+    /// 商标续展注册申请书
+    /// </summary>
+    private string CreateApplyBook(t_NewTradeMarkInfo model)
+    {
+        string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
+
+        string tmppath = HttpContext.Current.Server.MapPath("../../File_Zscq/template/BookTrademarkRenewalApply.doc");
+        Document doc = new Document(tmppath); //载入模板 
+        DocumentBuilder builder = new DocumentBuilder(doc);
+
+        dal_SystemSetup systemSetup = new dal_SystemSetup();
+        t_SystemSetup systemModel = systemSetup.SystemSetup_Select();
+
+        foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
+        {
+            if (mark.Name == "applyname")
+            {
+                string agentPeople = model.ApplyName;
+                if (model.ApplyType == 1)
+                    agentPeople = model.ApplyName + "(" + model.CardNo + ")";
+                mark.Text = agentPeople;
+            }
+            if (mark.Name == "applyaddress")
+                mark.Text = division.Replace(" ", "") + model.Address;
+            if (mark.Name == "postcode")
+                mark.Text = model.PostCode;
+            if (mark.Name == "linkman")
+                mark.Text = model.ContactPerson;
+            if (mark.Name == "tel")
+                mark.Text = model.Phone;
+            if (mark.Name == "agentgroup")
+                mark.Text = systemModel.nvc_DLCNName;
+
+            if (mark.Name == "applyno")
+            {
+                mark.Text = !string.IsNullOrEmpty(model.RegisteredNo) ? model.RegisteredNo : "";
+            }
+            if (mark.Name == "marktype")
+                mark.Text = model.TrademarkType;
+        }
+        string docPath = "File_Zscq/AccountPDF/TrademarkRenewalApply" + model.CaseNo + ".doc";
+        doc.Save(HttpContext.Current.Server.MapPath("../../"+docPath));
+        return docPath;
+    }
     public void ProcessRequest(HttpContext context)
     {
         context.Response.ContentType = "text/plain";
@@ -34,30 +145,46 @@ public class M_A_TradeMark : IHttpHandler
 
                     if (mark.trademarkStatusdateSumbit(model) > 0)
                     {
-                        if (!string.IsNullOrEmpty(dtime))
+                        if (!string.IsNullOrEmpty(dtime) && tradeMarkStatusValue>=0)
                         {
+                            var find = mark.Trademark_Select_Id(tradeMarkId);
+                            find.AdminStatus = tradeMarkStatusValue;
                             if (tradeMarkStatusValue == 0)//商标注册待审中 X年X月X日 →商标申请日
                             {
-                                var find = mark.Trademark_Select_Id(tradeMarkId);
                                 find.ApplyDate = DateTime.Parse(dtime);
-                                mark.Trademark_Submit();
                             }
                             else if (tradeMarkStatusValue == 1)//初步审定 X年X月X日 →初审公告日
                             {
-                                var find = mark.Trademark_Select_Id(tradeMarkId);
                                 find.PublicPreliminaryDate = DateTime.Parse(dtime);
-                                mark.Trademark_Submit();
                             }
                             else if (tradeMarkStatusValue == 4)//已注册 X年X月X日 →注册公告日 当状态为“已注册”时，此案件自动转到商标续展列表中，不在商标申请列表中显示
                             {
-                                var find = mark.Trademark_Select_Id(tradeMarkId);
                                 find.RegNoticeDate = DateTime.Parse(dtime);
                                 find.i_Type = 1;//此案件自动转到商标续展列表中
                                 find.Status = 2;//距续展期限大于90天  当“商标状态”中产生已注册后
-                                //find.RenewalDate=
-                                //find.RestDays=
-                                mark.Trademark_Submit();
+                                if (find.RenewalDate.HasValue)
+                                {
+                                    find.RenewalDate = find.RenewalDate.Value.AddYears(10);
+                                }
+                                else
+                                {
+                                    find.RenewalDate = find.RegNoticeDate.Value.AddYears(10).AddDays(-1);
+                                }
+                                TimeSpan ts = find.RenewalDate.Value - DateTime.Today;
+                                find.RestDays = ts.Days; //剩于天数
+                                find.RenewalAgentBook = CreateAgentBook(find);
+                                find.RenewalApplyBook = CreateApplyBook(find); 
+                                
+                                System.Collections.Generic.List<t_NewTradeMarkRenewalInfo> list = new System.Collections.Generic.List<t_NewTradeMarkRenewalInfo>();
+                                t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
+                                renewalModel.TradeMarkId = tradeMarkId;
+                                renewalModel.RenewalDate = find.RenewalDate;
+                                renewalModel.IsFinish = false;
+                                list.Add(renewalModel);
+                                mark.TrademarkRenewalDate_Add(list, tradeMarkId);
+                                
                             }
+                            mark.Trademark_Submit();
                         }
                         context.Response.Write("ok");
                     }
