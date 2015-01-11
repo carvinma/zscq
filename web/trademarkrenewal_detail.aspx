@@ -481,7 +481,7 @@
                                         <tr>
                                           <td height="32" align="right"><strong>备注：</strong></td>
                                           <td align="left">
-                                          <div id="test" style="width:300px;height:80px;border:#eee solid 1px;overflow:auto;">
+                                          <div id="test" style="width:300px;height:80px;word-wrap:break-word;overflow:auto;">
                                              <%=model.Remark%>
                                           </div></td>
                                         </tr>
