@@ -270,9 +270,8 @@
                         </td>
                         
                         <td align="center">
-                          <%#upFileInfo(Eval("i_Type"), Eval("ApplyUpBook"), Eval("RenewalApplyUpBook"))%><br />
-                          <%#upFileInfo(Eval("i_Type"),Eval("AgentUpBook"),Eval("RenewalAgentUpBook"))%>
-                         
+                          <%#upFileInfo(Eval("i_Type"), Eval("ApplyUpBook"), Eval("RenewalApplyUpBook"),0)%><br />
+                          <%#upFileInfo(Eval("i_Type"),Eval("AgentUpBook"),Eval("RenewalAgentUpBook"),1)%>
                         </td>
                         <td align="center"> 
                           <a href='<%# Eval("i_Type").ToString()=="0"? "M_E_TradeMark.aspx?id="+ Eval("i_Id"):"M_E_TradeMarkRenewal.aspx?id="+Eval("i_Id")%>'>

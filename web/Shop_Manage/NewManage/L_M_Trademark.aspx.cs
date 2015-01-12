@@ -205,12 +205,24 @@ public partial class L_M_Trademark : System.Web.UI.Page
             return false;
         }
     }
-    public string upFileInfo(object i_Type, object fileurl,object renwalfileurl)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="i_Type"></param>
+    /// <param name="fileurl">ApplyUpBook 申请案上传</param>
+    /// <param name="renwalfileurl">RenewalApplyUpBook 续展案上传</param>
+    /// <param name="booktype"></param>
+    /// <returns></returns>
+    public string upFileInfo(object i_Type, object fileurl,object renwalfileurl,object booktype)
     {
+        string downlinkname=booktype.ToString()=="0" ? "商标申请书":"商标委托书";
+        string downlinknameNo = booktype.ToString() == "0" ? "申请书未上传" : "委托书未上传";
         switch (i_Type.ToString())
         {
-            case "0": return fileurl == null ? "未上传" : "<a href='../../" + fileurl.ToString() + "' title='点击下载' target='_blank'>申请书下载</a>";
-            case "1": return renwalfileurl == null ? "未上传" : "<a href='../../" + renwalfileurl.ToString() + "' title='点击下载' target='_blank'>商标委托书</a>";
+            case "0":
+                return fileurl == null ? downlinknameNo : "<a href='../../" + fileurl.ToString() + "' title='点击下载' target='_blank'>" + downlinkname + "</a>";
+
+            case "1": return renwalfileurl == null ? downlinknameNo : "<a href='../../" + renwalfileurl.ToString() + "' title='点击下载' target='_blank'>" + downlinkname + "</a>";
         }
         return "未上传";
     }
