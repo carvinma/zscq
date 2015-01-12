@@ -255,7 +255,10 @@ public partial class L_M_Trademark : System.Web.UI.Page
         {
             var iquery = from i in mark.vw_NewTradeMark select i;
             #region 查询参数
-
+            if (Request["listid"] != null)
+            {
+                iquery = from i in iquery where i.i_Id == int.Parse(Request["listid"]) select i;
+            }
             if (Request["qnvc_UserNum"] != null)
             {
                 iquery = from i in iquery where i.nvc_UserNum.Contains(Request["qnvc_UserNum"]) select i;
@@ -446,6 +449,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
             #endregion
             count = iquery.Count();
             return iquery.Skip((pageindex - 1) * pagesiz).Take(pagesiz);
+             
         }
         catch
         {
