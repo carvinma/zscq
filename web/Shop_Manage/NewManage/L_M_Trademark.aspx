@@ -282,6 +282,8 @@
                         </td>
                         <td align="center" style="color: #FF0000">
                             <%# Eval("ApplyName")%>
+                               <a href="../../<%# Eval("Businesslicense") %>" target="_blank">下载1</a>
+                               <a href="../../<%# Eval("CardNoPDF") %>" target="_blank">下载2</a>
                         </td>
                         <td align="center" style="color: #FF0000">
                             <%# Eval("nvc_UserNum")%>
