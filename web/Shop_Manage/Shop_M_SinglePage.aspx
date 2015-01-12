@@ -8,8 +8,8 @@
   <link href="styles/main.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="js/vcom.js"></script>
   <script src="js/jquery-1.4.4.js" type="text/javascript"></script>
+  <script type="text/javascript" src="../ueditor/ueditor.all.min.js"></script>
   <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-  <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
 </head>
 <body>
   <form id="form1" runat="server">
