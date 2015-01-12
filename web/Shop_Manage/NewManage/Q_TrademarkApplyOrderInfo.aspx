@@ -215,7 +215,8 @@
                             <%--<input name="inputPageid" onclick="Selbox(this)" type="checkbox" value='<%#Eval("i_Id") %>' />--%>
                         </td>
                         <td align="center">
-                             <%# Eval("CaseNo")%>
+                          <a href="L_M_Trademark.aspx?listid=<%# Eval("i_Id") %>"> 
+                             <%# Eval("CaseNo")%> </a>
                         </td>
                         <td align="center">
                             <%# Eval("ApplyName")%>
@@ -230,10 +231,12 @@
                             <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
                         </td>
                         <td height="25" align="center">
-                            <a href='<%#Eval("ApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
+                            <a href='../../<%#Eval("ApplyBook")%>' title='点击下载' target='_blank'>原始下载</a> 
+                             <a href='../../<%#Eval("ApplyUpBook")%>' title='点击下载' target='_blank'>原件下载</a> 
                         </td>
                         <td align="center">
-                           <a href='<%#Eval("AgentBook")%>' title='点击下载' target='_blank'>下载</a> 
+                           <a href='../../<%#Eval("AgentBook")%>' title='点击下载' target='_blank'>原始下载</a> 
+                            <a href='../../<%#Eval("ApplyUpBook")%>' title='点击下载' target='_blank'>原件下载</a> 
                         </td>
                     </tr>
                 </ItemTemplate>
