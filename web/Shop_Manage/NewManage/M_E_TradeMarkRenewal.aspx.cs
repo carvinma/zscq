@@ -234,7 +234,7 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
     private void Bind_Bills(int did)
     {
         int Ccount = 0;
-        reptlist.DataSource = DALDO.DataOrder_SelectPage(1, 10000, did, 2, "", "", ref Ccount);
+        reptlist.DataSource = DALDO.DataOrder_SelectPage(1, 10000, did, 3, "", "", ref Ccount);
         reptlist.DataBind();
     }
 

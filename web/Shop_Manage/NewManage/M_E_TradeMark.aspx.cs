@@ -216,7 +216,7 @@ public partial class M_E_TradeMark : System.Web.UI.Page
     private void Bind_Bills(int did)
     {
         int Ccount = 0;
-        reptlist.DataSource = DALDO.DataOrder_SelectPage(1, 10000, did, 2, "", "", ref Ccount);
+        reptlist.DataSource = DALDO.DataOrder_SelectPage(1, 10000, did, 3, "", "", ref Ccount);
         reptlist.DataBind();
     }
 
@@ -359,7 +359,7 @@ public partial class M_E_TradeMark : System.Web.UI.Page
                     string[] lname = liststr[i].Split('_');
                     if (lname[0].ToString() != "")
                     {
-                        model.i_OrderType = 2;//商标
+                        model.i_OrderType =3;//商标
                         model.i_DataId = Id;//商标id
                         model.nvc_OrderNum = lname[0].ToString();
                         if (lname[1].ToString() != "")
@@ -579,7 +579,7 @@ public partial class M_E_TradeMark : System.Web.UI.Page
                         string[] lname = liststr[i].Split('_');
                         if (lname[0].ToString() != "")
                         {
-                            model.i_OrderType = 2;//2对应的是商标 订单  1 对应的是专利订单
+                            model.i_OrderType = 3;//3-新商标 2对应的是商标 订单  1 对应的是专利订单
                             model.i_DataId = Id;//商标id
                             model.nvc_OrderNum = lname[0].ToString();
                             if (lname[1].ToString() != "")
