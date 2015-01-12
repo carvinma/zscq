@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_zscq" Class="DataZscqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_zscqTest" Class="DataZscqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscqTest;Persist Security Info=True;User ID=zscq" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.t_PatentOperateNote" Member="t_PatentOperateNote">
     <Type Name="t_PatentOperateNote">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -415,10 +415,43 @@
       <Association Name="t_TrademarkOrder_t_TrademarkOrderDetails" Member="t_TrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_TrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
+  <Table Name="dbo.t_NewTrademarkOrderDetails" Member="t_NewTrademarkOrderDetails">
+    <Type Name="t_NewTrademarkOrderDetails">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="i_TrademarkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_SBRegNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBRegName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_SBRegEnName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="i_ShengDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_JiaoFeiType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_SbDaoqiTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_TMDaiLi" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ZengZhiTax" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="dm_ShouXuFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderDetails" Member="t_NewTrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_NewTrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_NewTrademarkOrderOperateInfos" Member="t_NewTrademarkOrderOperateInfos">
+    <Type Name="t_NewTrademarkOrderOperateInfos">
+      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nvc_Info_1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderOperateInfos" Member="t_NewTrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_NewTrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.t_NewTrademarkOrder" Member="t_NewTrademarkOrder">
     <Type Name="t_NewTrademarkOrder">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="i_MemberId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CaseType" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="nvc_OrderNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="dm_TotalMoneyGY" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
       <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
@@ -455,38 +488,6 @@
       <Column Name="dm_TMZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderDetails" Member="t_NewTrademarkOrderDetails" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_NewTrademarkOrderDetails" />
       <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderOperateInfos" Member="t_NewTrademarkOrderOperateInfos" ThisKey="i_Id" OtherKey="i_OrderId" Type="t_NewTrademarkOrderOperateInfos" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_NewTrademarkOrderDetails" Member="t_NewTrademarkOrderDetails">
-    <Type Name="t_NewTrademarkOrderDetails">
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="i_OrderId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="i_TrademarkId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_SBRegNum" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBRegName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_SBRegEnName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="i_ShengDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_JiaoFeiType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_SbDaoqiTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="dm_TotalMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="dm_TrademarkMoney" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="dm_ZhiNaJin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="dm_TMDaiLi" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="dm_ZengZhiTax" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="dm_ShouXuFee" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderDetails" Member="t_NewTrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_NewTrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_NewTrademarkOrderOperateInfos" Member="t_NewTrademarkOrderOperateInfos">
-    <Type Name="t_NewTrademarkOrderOperateInfos">
-      <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="i_OrderId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="i_Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nvc_Info_1" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="i_ManagerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="dt_AddTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="t_NewTrademarkOrder_t_NewTrademarkOrderOperateInfos" Member="t_NewTrademarkOrder" ThisKey="i_OrderId" OtherKey="i_Id" Type="t_NewTrademarkOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>
