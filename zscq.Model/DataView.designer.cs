@@ -22,7 +22,7 @@ namespace zscq.Model
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="db_zscq")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="db_zscqTest")]
 	public partial class DataViewDataContext : System.Data.Linq.DataContext
 	{
 		
