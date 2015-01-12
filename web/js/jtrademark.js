@@ -661,10 +661,6 @@ function addmarkRenewalCheck_data() {
         return false;
     }
     
-    if ($("#upPattern1").val() == null || $("#upPattern1").val() == "") {
-        alert("请上传商标图样");
-        return false;
-    }
     if (check_ApplyUser("name_div", 1) && check_ApplyUser("address_div", 1)
     && check_ApplyUser("ContactPerson_div", 1) && check_ApplyUser("phone_div", 1)
     && check_ApplyUser("postcode_div", 1)
