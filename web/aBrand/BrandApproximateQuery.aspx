@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="BrandApproximateQuery.aspx.cs" Inherits="BrandApproximateQuery" %>
-<%@ Register Src="../ascx/zscqfoot.ascx" TagName="zscqfoot" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,7 +22,7 @@
                       <td height="103">&nbsp;</td>
                     </tr>
                     <tr>
-                      <td align="left">&nbsp;<a href="../index.aspx">返回首页&gt;&gt;</a></td>
+                      <td align="left"></td>
                     </tr>
                   </table></td>
                   <td width="248" align="left" valign="top">
@@ -49,17 +48,16 @@
       <td height="3"></td>
     </tr>
   </table>
-    <table width="915" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto; background-color: #fff;">
+    <table width="400" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto; background-color: #fff;">
     <tr>
         <td colspan="2" align="left" valign="top" style="line-height:21px;word-break:break-all;word-wrap:break-word;"> 
-          <div style="min-height: 355px;*+height:100%;_height:355px;">
+          <div style="min-height: 500px;*+height:100%;_height:500px;">
            <asp:Literal ID="Ltl_LoginInfo" runat="server" ></asp:Literal>
            </div>
         </td>
      </tr>
     </table>
     </div>
-      <uc2:zscqfoot ID="zscqfoot1" runat="server" />
     </form>
 </body>
 </html>
