@@ -24,7 +24,7 @@
             }
             else if (getUrlParam('orderlist') == "1") {
                 $("#hrefedit").hide();
-                $("#hrefBack").attr("href", "trademarkOrder_list.aspx?");
+                $("#hrefBack").attr("href", "trademarkOrder_list.aspx");
             }
             else if (getUrlParam('orderinfo') == "1") {
                 var orderid = getUrlParam('order');
