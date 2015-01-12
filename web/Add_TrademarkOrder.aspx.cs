@@ -480,7 +480,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             decimal? shouxuFee = 0;
             decimal youhimoney = 0;
             decimal point = 0;
-            if (OrderModer.nvc_PayType == "支付宝支付" || OrderModer.nvc_PayType == "网银直接支付")
+            if (OrderModer.nvc_PayType == "支付宝支付" || OrderModer.nvc_PayType == "网银支付")
             {
                 point = 0.012m;
             }
