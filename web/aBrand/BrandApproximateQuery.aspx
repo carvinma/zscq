@@ -14,19 +14,8 @@
       <td height="127" valign="top" align="center">
         <table width="915" border="0" align="center" cellpadding="0" cellspacing="0" style="margin: 0 auto;">
           <tr>
-            <td height="127" align="left" valign="top">
-              <table width="915" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td width="667" height="52" align="left" valign="top"><table width="200" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                      <td height="103">&nbsp;</td>
-                    </tr>
-                    <tr>
-                      <td align="left"></td>
-                    </tr>
-                  </table></td>
-                  <td width="248" align="left" valign="top">
-                    <table width="248" border="0" cellspacing="0" cellpadding="0">
+            <td height="127" align="center" valign="top">
+              <table width="248" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         <td width="248" height="65" colspan="7"></td>
                       </tr>
@@ -34,9 +23,6 @@
                         <td height="62" colspan="7" align="right" valign="top"><a href="../index.aspx"><img src="../images/logo1.gif" width="236" height="62" border="0" /></a> </td>
                       </tr>
                     </table>
-                  </td>
-                </tr>
-              </table>
             </td>
           </tr>
         </table>
