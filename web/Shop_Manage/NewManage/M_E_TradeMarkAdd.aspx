@@ -20,8 +20,6 @@
     <script src="../../js/jquery.uploadify.min.js" type="text/javascript"></script>
     <link href="../../jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <link href="../../css/trademark.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../../ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" src="../../ueditor/ueditor.all.js"></script>
     <script src="../../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
     <script type="text/javascript" src="../js/vcom.js"></script>
     <script type="text/javascript">
