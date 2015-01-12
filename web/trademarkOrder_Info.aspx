@@ -439,21 +439,6 @@
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <%} %>
-                                                                                            <%if (isfapiao == 1)
-                                                                                              { %>
-                                                                                            <tr align="left">
-                                                                                                <td width="200" align="right">
-                                                                                                    增值税金额：
-                                                                                                </td>
-                                                                                                <td width="110" id="suidian">
-                                                                                                    <%=fapiaosui%>
-                                                                                                </td>
-                                                                                                <td width="30">
-                                                                                                </td>
-                                                                                                <td width="100">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <%} %>
                                                                                         </table>
                                                                                         <table width="440" border="0" cellspacing="0" cellpadding="0">
                                                                                             <%=Str_AllMoney%>
