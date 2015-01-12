@@ -189,7 +189,7 @@
                 <td width="12%" align="center">
                     案件号
                 </td>
-                <td width="12%" align="center">
+                <td width="22%" align="center">
                     申请人
                 </td>
                 <td width="14%" align="center">
@@ -198,10 +198,10 @@
                 <td width="10%" align="center" height="25">
                     商标类别
                 </td>
-                <td width="20%" align="center" height="25">
+                <td width="10%" align="center" height="25">
                    金额
                 </td>
-                <td width="20%" align="center" height="25">
+                <td width="15%" align="center" height="25">
                      申请书
                 </td>
                 <td width="20%" align="center" height="25">
@@ -236,7 +236,7 @@
                         </td>
                         <td align="center">
                            <a href='../../<%#Eval("AgentBook")%>' title='点击下载' target='_blank'>原始下载</a> 
-                            <a href='../../<%#Eval("ApplyUpBook")%>' title='点击下载' target='_blank'>原件下载</a> 
+                            <a href='../../<%#Eval("AgentUpBook")%>' title='点击下载' target='_blank'>原件下载</a> 
                         </td>
                     </tr>
                 </ItemTemplate>
