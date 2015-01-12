@@ -30,6 +30,24 @@ public class Shop_A_Patent : IHttpHandler {
               
             }
         }
+        if (context.Request["getmemberid"] != null && context.Request["getmemberid"].ToString() != "")
+        {
+            string usermember = context.Request["getmemberid"].ToString().Trim();
+            DataMemberDataContext dmdc = new DataMemberDataContext();
+            var result = from r in dmdc.t_Member where r.nvc_UserNum == usermember select r;
+            if (result.Count() <= 0)
+            {
+                context.Response.Write("no");
+            }
+            else
+            {
+                foreach (var item in result.Take(1))
+                {
+                    context.Response.Write(item.i_Id);//当会员编号存在时，返回会员Id
+                }
+
+            }
+        }
        // 会员Id
         if (context.Request["memberId"] != null && context.Request["memberId"].ToString() != "")
         {

@@ -36,8 +36,15 @@
 	        });
 	        $input.click(function () {
 	            var q = $.trim($(this).val());
-	            displayItems(q);
-	            $(this).select();
+	            if ($.trim(q) == '中文/拼音') {
+	                $(this).val('').css('color', '#000');
+	            }
+	            if ($.trim($(this).val()) == '') {
+	                displayItems(''); //显示热门城市列表
+	            }
+
+	            //displayItems(q);
+	            //$(this).select();
 	        });
 
 	        // help IE users if possible
@@ -109,6 +116,7 @@
 	            displayItems(q);
 	        }
 	        function displayItems(items) {
+
 	            var html = '';
 	            if (items == '') {//热门城市遍历
 	                for (h in options.hot_list) {

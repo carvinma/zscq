@@ -57,22 +57,19 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         }
         if (!IsPostBack)
         {
-            Bind_Page_Type();
-
             t_GoodsCategoryFees fees = goods.CategoryFees_Select_ByType(0);
             hi_MainFees.Value = fees.MainFees.Value.ToString();
             hi_ItemNum.Value = fees.ItemNum.Value.ToString();
             hi_ExceedFees.Value = fees.ExceedFees.Value.ToString();
-        }
+        }  
+       // Bind_Page_Type();
     }
     public void Bind_Page_Type()// 绑定页面信息
     {
-
-        if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
+        if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
         {
-            int trademarkId = int.Parse(Request.QueryString["id"].ToString());
-            hi_TradeMarkId.Value = trademarkId.ToString();
-            Bind_Admin_Status(0);
+            int trademarkId = int.Parse(hi_TradeMarkId.Value);
+            Bind_Admin_Status(trademarkId);
         }
     }
 
@@ -103,7 +100,12 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         {
             System.IO.Directory.CreateDirectory(Server.MapPath("../../" + filePath));
         }
-        t_NewTradeMarkInfo model = mark.Trademark_Select_Id(int.Parse(hi_TradeMarkId.Value));
+        t_NewTradeMarkInfo model = new t_NewTradeMarkInfo();
+        if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
+        {
+            model = mark.Trademark_Select_Id(int.Parse(hi_TradeMarkId.Value));
+        }
+        model.i_MemberId = int.Parse(Hi_MemberId.Value);
         model.ApplyName = txt_applyname.Value.Trim();
         model.ApplyType = this.RdoPeople.Checked ? 1 : 0;
         if (!string.IsNullOrEmpty(this.txt_applyNum.Value))
@@ -150,7 +152,9 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         model.Phone = txt_phone.Value.Trim();
         model.Fax = txt_fax.Value.Trim();
         model.PostCode = txt_postcode.Value.Trim();
-        //model.CaseNo = this.lblCaseNo.Text; 
+        //model.CaseNo = this.lblCaseNo.Text;
+        if (string.IsNullOrEmpty(hi_TradeMarkId.Value))
+            model.CaseNo = caseNo.GetTodayMaxCaseNo();
         model.Is3D = Radio3DNo.Checked ? false : true;
         model.IsColor = rdoColorNO.Checked ? false : true;
         model.IsSound = chkSound.Checked ? true : false;
@@ -219,69 +223,22 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         return model;
     }
 
-    private void InitPaymodel(int id)
-    {
-        try
-        {
-            t_DataOrder model = new t_DataOrder();
-            string data = HI_ATT.Value;
-
-            int Id = id;
-            if (data != "")
-            {
-                string[] liststr = data.Split('|');
-                for (int i = 0; i < liststr.Length - 1; i++)
-                {
-                    string[] lname = liststr[i].Split('_');
-                    if (lname[0].ToString() != "")
-                    {
-                        model.i_OrderType = 2;//商标
-                        model.i_DataId = Id;//商标id
-                        model.nvc_OrderNum = lname[0].ToString();
-                        if (lname[1].ToString() != "")
-                        {
-                            model.dt_AddOrderTime = DateTime.Parse(lname[1].ToString());
-                        }
-                        if (lname[2].ToString() != "")
-                        {
-                            model.dt_ShouKuanTime = DateTime.Parse(lname[2].ToString());
-                        }
-                        if (lname[3].ToString() != "")
-                        {
-                            model.dt_JiaoFeiTime = DateTime.Parse(lname[3].ToString());
-                        }
-                        if (lname[4].ToString() != "")
-                        {
-                            model.dt_SendInfoTime = DateTime.Parse(lname[4].ToString());
-                        }
-                        if (lname[5].ToString() != "")
-                        {
-                            model.dt_KaiJuTime = DateTime.Parse(lname[5].ToString());
-                        }
-                        model.nvc_Info1 = lname[6].ToString();
-                        model.nvc_Info2 = lname[7].ToString();
-                        model.dt_Addtime = DateTime.Now;
-                        dal_DataOrder DALDO = new dal_DataOrder();
-                        int ss = DALDO.DataOrder_Add(model);
-                        //Response.Redirect(Request.Url.ToString());
-                    }
-                }
-            }
-        }
-        catch { }
-    }
     protected void btOK_Click(object sender, EventArgs e)
     {
         var model = InitModel();
         if (model != null)
         {
             model.i_Type = 0;
+            model.Status = 0;
             model.AgentBook = CreateAgentBook(model);
             model.ApplyBook = CreateApplyBook(model);
-            mark.Trademark_Submit();
-            InitPaymodel(model.i_Id);
+            if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
+                mark.Trademark_Submit();
+            else
+                mark.Trademark_Add(model);
             hi_TradeMarkId.Value = model.i_Id.ToString();
-            Response.Redirect("L_M_Trademark.aspx");
+            Bind_Page_Type();
+           // Response.Redirect("L_M_Trademark.aspx");
         }
     }
 
@@ -363,8 +320,6 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         dal_SystemSetup systemSetup = new dal_SystemSetup();
         t_SystemSetup systemModel = systemSetup.SystemSetup_Select();
 
-
-
         foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
         {
             if (mark.Name == "applyname")
@@ -437,77 +392,4 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
 
     #endregion
 
-    //帐单提交数据
-    protected void btnBill_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            t_DataOrder model = new t_DataOrder();
-            string data = HI_ATT.Value;
-            if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
-            {
-                int Id = int.Parse(Request.QueryString["id"].ToString());
-                if (!string.IsNullOrEmpty(data))
-                {
-                    string[] liststr = data.Split('|');
-                    for (int i = 0; i < liststr.Length - 1; i++)
-                    {
-                        string[] lname = liststr[i].Split('_');
-                        if (lname[0].ToString() != "")
-                        {
-                            model.i_OrderType = 2;//2对应的是商标 订单  1 对应的是专利订单
-                            model.i_DataId = Id;//商标id
-                            model.nvc_OrderNum = lname[0].ToString();
-                            if (lname[1].ToString() != "")
-                            {
-                                model.dt_AddOrderTime = DateTime.Parse(lname[1].ToString());
-                            }
-                            if (lname[2].ToString() != "")
-                            {
-                                model.dt_ShouKuanTime = DateTime.Parse(lname[2].ToString());
-                            }
-                            if (lname[3].ToString() != "")
-                            {
-                                model.dt_JiaoFeiTime = DateTime.Parse(lname[3].ToString());
-                            }
-                            if (lname[4].ToString() != "")
-                            {
-                                model.dt_SendInfoTime = DateTime.Parse(lname[4].ToString());
-                            }
-                            if (lname[5].ToString() != "")
-                            {
-                                model.dt_KaiJuTime = DateTime.Parse(lname[5].ToString());
-                            }
-                            model.nvc_Info1 = lname[6].ToString();
-                            model.nvc_Info2 = lname[7].ToString();
-                            model.dt_Addtime = DateTime.Now;
-                            int ss = DALDO.DataOrder_Add(model);
-                            Response.Redirect(Request.Url.ToString());
-                        }
-                    }
-                }
-            }
-        }
-        catch { }
-    }
-
-    protected void btnDel_Click(object sender, EventArgs e)
-    {
-        if (Request.Form["inputPageid"] != null)
-        {
-            string[] IDList = Request.Form["inputPageid"].ToString().Split(',');
-            for (int i = 0; i < IDList.Length; i++)
-            {
-                DALDO.DataOrder_Del(int.Parse(IDList[i]));
-            }
-            Manager.AddLog(0, "商标账单管理", "删除商标账单");
-        }
-
-        if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
-        {
-            int Id = int.Parse(Request.QueryString["id"].ToString());
-            //Bind_Bills(Id);
-        }
-        HiddenDel.Value = "del";
-    }
 }

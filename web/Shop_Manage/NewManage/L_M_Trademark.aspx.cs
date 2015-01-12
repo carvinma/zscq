@@ -163,48 +163,6 @@ public partial class L_M_Trademark : System.Web.UI.Page
         }
         return string.Empty;
     }
-    public string ZTFileImg(object Uid, object zhuti, object sbid)
-    {
-        string aa = "未上传";
-        var m = DALM.Member_Select_Id(int.Parse(Uid.ToString()));
-        if (m != null)
-        {
-            if (m.i_UserTypeId == 3)
-            {
-                if (zhuti != null && zhuti != "")
-                {
-                    return "<a href='../" + zhuti + "' target='_blank'><img src='../" + zhuti + "'  width='20' title='主体资格证明文件' border='0'/></a>";
-                }
-                else
-                {
-                    return "未上传";
-                }
-            }
-            else
-            {
-                if (!string.IsNullOrWhiteSpace(m.nvc_ZhuTiFile))
-                {
-                    return "<a href='../" + m.nvc_ZhuTiFile + "'  target='_blank'><img src='../" + m.nvc_ZhuTiFile + "'  width='20' title='主体资格证明文件' border='0'/></a>";
-                }
-                else
-                {
-                    return "未上传";
-                }
-            }
-        }
-        return aa;
-    }
-    public bool BoolFileImg(object fileurl)
-    {
-        if (fileurl != null)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
     /// <summary>
     /// 
     /// </summary>

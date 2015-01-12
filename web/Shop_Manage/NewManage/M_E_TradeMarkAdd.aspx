@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="M_E_TradeMarkAdd.aspx.cs" ValidateRequest="false"
-    Inherits="M_E_TradeMarkAdd" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="M_E_TradeMarkAdd.aspx.cs"
+    ValidateRequest="false" Inherits="M_E_TradeMarkAdd" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -47,30 +47,7 @@
     <script type="text/javascript">
         var tmptoCity, tmptoCityCode;
         $(function () {
-            var userid = $('#Hi_MemberId').val();
-            var trademarkid = getUrlParam('id');
-            if (trademarkid > 0) //编辑
-            {
-                if ($("#RdoPeople").is(':checked')) {
-                    $(".appusertype").show();
-                    GetApplysDDL(userid, "1")
-                }
-                else
-                    GetApplysDDL(userid, "0");
-
-                var porviceid = $("#Hi_prov").val();
-                var cityid = $("#Hi_city").val();
-                var areaid = $("#Hi_country").val();
-                EditProCityArea(porviceid, cityid, areaid);
-                editgoods();
-            }
-            else { //增加
-                InitProCityArea();
-                if (userid > 0) {
-                    GetApplysDDL(userid, "0"); //初始化企业单位申请人
-                }
-            }
-
+            InitProCityArea();
             $("#txt_applyname").focus(function () {
                 tmptoCity = $("#txt_applyname").val();
                 $("#txt_applyname").val('');
@@ -94,7 +71,7 @@
 
             $('input[type=radio][name="person"]').change(function () {
                 var applyType = $('input:radio[name="person"]:checked').val();
-                //var userid = $('#Hi_MemberId').val();
+                var userid = $('#Hi_MemberId').val();
                 if (userid > 0) {
                     GetApplysDDL(userid, applyType);
                 }
@@ -108,6 +85,7 @@
 
 
             $("#chkSound").click(function () {
+
                 var state = $(this).is(':checked');
                 if (state == false) {
                     $("#soundfiles").hide();
@@ -220,6 +198,7 @@
                 'queueSizeLimit': 1,
                 'onUploadSuccess': function (file, data, response) {
                     $.jBox.closeTip();
+                    $("#spWav").show();
                     $("#upSound").val(data);
                 },
                 'onSelect': function (file) {
@@ -511,7 +490,7 @@
     </asp:ScriptManager>
     <input id="hi_money" type="hidden" runat="server" value="0" />
     <input type="hidden" id="hi_RegNoticeDate" runat="server" value="0" />
-    <input type="hidden" id="hi_TradeMarkId" runat="server" value="0" />
+    <input type="hidden" id="hi_TradeMarkId" runat="server" value="" />
     <input type="hidden" id="hd_userId" runat="server" value="0" />
     <input type="hidden" id="hi_n_a" runat="server" value="" />
     <input type="hidden" id="Hi_MemberId" runat="server" value="" />
@@ -552,16 +531,17 @@
                     <tr>
                         <td colspan="2">
                             <table width="689" cellspacing="1" cellpadding="3">
-                                 <tr>
-                                <td width="276" height="26" align="right"><strong>会员编号：</strong></td>
-                                <td  height="26">
-                                <input type="text" runat="server" id="txt_MemberId" class="input" maxlength="11" onblur="checknull('txt_MemberId','txt_MemberIdFont');CheckUserMember();" />
-                                    <font color="red" >*</font>
-                                <font id="txt_MemberIdFont" class="alertfont" style="display:none;">
-                                    <img alt="警告" src="../images/caozuo_3.jpg" width="15" />不能为空
-                                </font>    
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td width="276" height="26" align="right">
+                                        <strong>会员编号：</strong>
+                                    </td>
+                                    <td height="26">
+                                        <input type="text" runat="server" id="txt_MemberId" class="input" maxlength="11"
+                                            onblur="checknull('txt_MemberId','txt_MemberIdFont');CheckUserMember();" />
+                                        <span style="color: Red;">*</span><font id="txt_MemberIdFont" class="alertfont" style="display: none;">
+                                            <img alt="警告" src="../images/caozuo_3.jpg" width="15" />不能为空 </font>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td align="right">
                                         <strong>申请人类别</strong>：
@@ -620,7 +600,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <span id="aCardNoPdf" runat="server" visible="false">身份证件扫已上传</span>
+                                                    <span id="aCardNoPdf" style="display:none">身份证件扫已上传</span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -640,7 +620,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <span id="aBusinessLicense" runat="server" visible="false">营业执照副本已上传</span>
+                                                    <span id="aBusinessLicense" style="display:none" >营业执照副本已上传</span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -654,13 +634,13 @@
                                     </td>
                                     <td align="left">
                                         <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
-                                            <option value="">请选择：</option>
+                                            <option value="">请选择</option>
                                         </select>
                                         <select id="live_city" name="live_city" onchange="SelArea(this.value);">
-                                            <option value="">请选择：</option>
+                                            <option value="">请选择</option>
                                         </select>
                                         <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
-                                            <option value="">请选择：</option>
+                                            <option value="">请选择</option>
                                         </select>
                                         <span style="color: Red;">*</span> <span class="status error" id="Span1"></span>
                                         <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static" />
@@ -718,7 +698,7 @@
                                     </td>
                                     <td align="left" style="text-li: left;">
                                         <input class="font12000" onblur="check_ApplyUser('postcode_div')" runat="server"
-                                            onkeypress="event.returnValue=IsDigit();" style="ime-mode: disabled;" id="txt_postcode"
+                                            onkeypress="event.returnValue=IsDigit();"  id="txt_postcode"
                                             maxlength="6" type="text" name="" value="" placeholder="" />
                                         <span style="color: Red;">*</span> <span class="status error" id="postcode_div_error">
                                         </span>
@@ -738,7 +718,7 @@
                                 <tr>
                                     <td height="115" align="left" valign="top">
                                         <table width="689" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
+                                            <tr style="display:none">
                                                 <td height="32" width="276" align="right">
                                                     <strong><span>我公司案件号</span></strong>：
                                                 </td>
@@ -797,7 +777,7 @@
                                                 <td valign="middle">
                                                 </td>
                                             </tr>
-                                            <tr id="soundfiles" runat="server" visible="false">
+                                            <tr id="soundfiles" style="display:none" >
                                                 <td height="32" align="right">
                                                     <strong>声音文件</strong>：
                                                 </td>
@@ -809,7 +789,7 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <span id="spWav" runat="server" visible="false">声音文件已上传</span>
+                                                                <span id="spWav" style="display:none">声音文件已上传</span>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1089,7 +1069,7 @@
                                                     <strong>所剩天数：</strong>
                                                 </td>
                                                 <td height="32">
-                                                    <span id="spRestDays"  runat="server"></span>
+                                                    <span id="spRestDays" runat="server"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1168,156 +1148,6 @@
                                                         MaxLength="180" TextMode="MultiLine"></asp:TextBox>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <div class="list-div" id="Div1">
-                                                        <table cellspacing='1' cellpadding='3' id="tblData" width="669px">
-                                                            <tr>
-                                                                <th width="2%">
-                                                                </th>
-                                                                <th width="10%">
-                                                                    账单号
-                                                                </th>
-                                                                <th width="10%">
-                                                                    添加时间
-                                                                </th>
-                                                                <th width="10%">
-                                                                    收款时间
-                                                                </th>
-                                                                <th width="10%">
-                                                                    缴费时间
-                                                                </th>
-                                                                <th width="10%">
-                                                                    发送时间
-                                                                </th>
-                                                                <th width="10%">
-                                                                    收据时间
-                                                                </th>
-                                                                <th width="12%">
-                                                                    备注1
-                                                                </th>
-                                                                <th width="12%">
-                                                                    备注2
-                                                                </th>
-                                                                <th width="5%">
-                                                                    操作
-                                                                </th>
-                                                            </tr>
-                                                            <asp:Repeater ID="reptlist" runat="server">
-                                                                <ItemTemplate>
-                                                                    <tr>
-                                                                        <td height="26" align="center">
-                                                                            <input name="inputPageid" onclick="Selbox(this)" type="checkbox" value='<%#Eval("i_Id") %>' />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input type="text" id='txt_orderNum<%# Eval("i_Id")%>' class="inputs110text" value='<%#Eval("nvc_OrderNum")%>' />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input type="text" id='dt_addtime<%# Eval("i_Id") %>' class="inputs110text" value='<%# Convert.ToDateTime(Eval("dt_AddOrderTime")).ToShortDateString() %>'
-                                                                                readonly="readonly" style="background-image: url(../images/user_js_date.gif);
-                                                                                background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input type="text" id='dt_shoutime<%# Eval("i_Id") %>' class="inputs110text" value='<%# Convert.ToDateTime(Eval("dt_ShouKuanTime")).ToShortDateString() %>'
-                                                                                readonly="readonly" style="background-image: url(../images/user_js_date.gif);
-                                                                                background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input type="text" id='dt_jiaofeitime<%# Eval("i_Id") %>' class="inputs110text" value='<%# Convert.ToDateTime(Eval("dt_JiaoFeiTime")).ToShortDateString() %>'
-                                                                                readonly="readonly" style="background-image: url(../images/user_js_date.gif);
-                                                                                background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input type="text" id='dt_sendtime<%# Eval("i_Id") %>' class="inputs110text" value='<%# Convert.ToDateTime(Eval("dt_SendInfoTime")).ToShortDateString() %>'
-                                                                                readonly="readonly" style="background-image: url(../images/user_js_date.gif);
-                                                                                background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input type="text" id='dt_shoujutime<%# Eval("i_Id") %>' class="inputs110text" value='<%# Convert.ToDateTime(Eval("dt_KaiJuTime")).ToShortDateString() %>'
-                                                                                readonly="readonly" style="background-image: url(../images/user_js_date.gif);
-                                                                                background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input type="text" id='t_info1<%# Eval("i_Id") %>' class="inputs130text" value='<%#Eval("nvc_Info1") %>' />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input type="text" id='t_info2<%# Eval("i_Id") %>' class="inputs130text" value='<%#Eval("nvc_Info2") %>' />
-                                                                        </td>
-                                                                        <td align="center">
-                                                                            <input id="Btn_Update" type="button" class="inputicoeditbutton" onclick="Edit(<%#Eval("i_Id") %>)" />
-                                                                            <%--     <input type="button" title="修改" class="inputicoeditbutton" />
-                                                                            --%>
-                                                                            <%-- <asp:Button ID="Btn_Update" runat="server" Text="修改" CssClass="button" CommandName='<%#Eval("i_Id") %>'  OnCommand='Edit'/>--%>
-                                                                        </td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                            <tr id="tRow0">
-                                                                <td height="26" align="center" width="2%">
-                                                                </td>
-                                                                <td align="center" width="10%">
-                                                                    <input type="text" onblur="bb();checkBillNum(this.value);" name='txt_orderNum' class="inputs110text"
-                                                                        value='' />
-                                                                </td>
-                                                                <td align="center" width="10%">
-                                                                    <input type="text" name='dt_addtime' class="inputs110text" value='' readonly="readonly"
-                                                                        style="background-image: url(../../images/user_js_date.gif); background-repeat: no-repeat;
-                                                                        background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                </td>
-                                                                <td align="center" width="10%">
-                                                                    <input type="text" name='dt_shoutime' class="inputs110text" value='' readonly="readonly"
-                                                                        style="background-image: url(../../images/user_js_date.gif); background-repeat: no-repeat;
-                                                                        background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                </td>
-                                                                <td align="center" width="10%">
-                                                                    <input type="text" name='dt_jiaofeitime' class="inputs110text" value='' readonly="readonly"
-                                                                        style="background-image: url(../../images/user_js_date.gif); background-repeat: no-repeat;
-                                                                        background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                </td>
-                                                                <td align="center" width="10%">
-                                                                    <input type="text" name='dt_sendtime' class="inputs110text" value='' readonly="readonly"
-                                                                        style="background-image: url(../../images/user_js_date.gif); background-repeat: no-repeat;
-                                                                        background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                </td>
-                                                                <td align="center" width="10%">
-                                                                    <input type="text" name='dt_shoujutime' class="inputs110text" value='' readonly="readonly"
-                                                                        style="background-image: url(../../images/user_js_date.gif); background-repeat: no-repeat;
-                                                                        background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
-                                                                </td>
-                                                                <td align="center" width="10%">
-                                                                    <input type="text" name='t_info1' class="inputs130text" value='' />
-                                                                </td>
-                                                                <td align="center" width="10%">
-                                                                    <input type="text" name='t_info2' class="inputs130text" value='' />
-                                                                </td>
-                                                                <td align="center" width="5%">
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                        <table cellspacing='1' cellpadding='3' style="width: 100%">
-                                                            <tr>
-                                                                <td height="25" width="40%" align="right">
-                                                                    <input type="hidden" id="hidNum" name="hidNum" value="0" />
-                                                                    <input type="button" id="btnAdd" runat="server" class="button" style="display: none;"
-                                                                        value="增加一条明细" />
-                                                                </td>
-                                                                <td align="left">
-                                                                    <asp:Button ID="btnBill" runat="server" CssClass="button" Text="提交数据" OnClientClick="return dalclick();"
-                                                                        OnClick="btnBill_Click" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                        <table cellspacing='1' cellpadding='3'>
-                                                            <tr align="left">
-                                                                <td height="25">
-                                                                    <input name="checkall" id="checkall" type="checkbox" onclick="SelAll()" value='' />&nbsp;
-                                                                    <input type="button" id="btnDel" runat="server" value="删除" onclick="xwshow()" class="button" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </td>
-                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
@@ -1332,7 +1162,7 @@
             <div style="width: 100%; position: fixed; left: 0; bottom: 0px; height: 30px; background: #dfeef5;">
                 <%# Eval("DetailCategoryCode")%>
                 <asp:Button ID="btOK" runat="server" Text="提交" class="button" OnClick="btOK_Click"
-                    OnClientClick="addmarkCheck_data();" Style="margin-left: 350px;" />
+                    OnClientClick="return addmarkCheck_data();" Style="margin-left: 350px;" />
                 <%# Eval("GoodsCode")%>
                 <%# Eval("GoodsRemark")%><input type="button" id="Button3" value="返回" class="button"
                     style="display: none" onclick="javascript:window.location='Shop_M_Trademark.aspx?<%=returnurl %>';" />
@@ -1360,9 +1190,9 @@
                                 </td>
                                 <td align="center">
                                     <input type="text" id='dt_statustime<%#Eval("TradeMarkStatusId") %>' class="inputs110text"
-                                    value='<%#string.Format("{0:yyyy-MM-dd}",Eval("TradeMarkDate")) %>'
-                                        readonly="readonly" style="background-image: url(../../images/user_js_date.gif);
-                                        background-repeat: no-repeat; background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
+                                        value='<%#string.Format("{0:yyyy-MM-dd}",Eval("TradeMarkDate")) %>' readonly="readonly"
+                                        style="background-image: url(../../images/user_js_date.gif); background-repeat: no-repeat;
+                                        background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
                                 </td>
                                 <td align="center">
                                     <input id="Btn_Update" type="button" class="inputicoeditbutton" onclick="AdminStatusEdit(<%#Eval("TradeMarkStatusId") %>,<%#Eval("TradeMarkStatusValue") %>)" />
@@ -1374,32 +1204,35 @@
             </div>
         </div>
         <div class="ui-tabs-panel ui-tabs-hide">
-          <div class="list-div" id="Div4" style="width: 689px">
-            <table width="100%">
-                <tr>
-                    <td valign="middle" align="right">
-                        <b>留言内容：</b>
-                    </td>
-                    <td align="left">
-                        <textarea name="txtMessage" id="txtMessage" class="area" maxlength='200' style="height: 80px;
-                            width: 100%"></textarea>
-                    </td>
-                    <td align="center" width="150px">
-                        <p style="padding: 6px 0;">
-                            <input onclick="addMessage();" id="submit1" type="button" class="subBtn" value="提交" /></p>
-                        <p style="padding: 6px 0;">字数必须小于200字</p>
-                    </td>
-                </tr>
-            </table>
-            <p></p>
-              <p></p>
+            <div class="list-div" id="Div4" style="width: 689px">
+                <table width="100%">
+                    <tr>
+                        <td valign="middle" align="right">
+                            <b>留言内容：</b>
+                        </td>
+                        <td align="left">
+                            <textarea name="txtMessage" id="txtMessage" class="area" maxlength='200' style="height: 80px;
+                                width: 100%"></textarea>
+                        </td>
+                        <td align="center" width="150px">
+                            <p style="padding: 6px 0;">
+                                <input onclick="addMessage();" id="submit1" type="button" class="subBtn" value="提交" /></p>
+                            <p style="padding: 6px 0;">
+                                字数必须小于200字</p>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                </p>
+                <p>
+                </p>
                 <table cellspacing='1' cellpadding='3' width="100%">
                     <tr align="center" id="tabMsg">
                         <th width="90px">
                             时间
                         </th>
                         <th width="569px">
-                             内容
+                            内容
                         </th>
                         <th width="30px">
                             删除
@@ -1409,139 +1242,24 @@
                         <ItemTemplate>
                             <tr align="center" id="message<%#Eval("i_Id")%>">
                                 <td>
-                                   <strong><%# string.Format("{0:yyyy-MM-dd}",Eval("AddTime"))%></strong>
+                                    <strong>
+                                        <%# string.Format("{0:yyyy-MM-dd}",Eval("AddTime"))%></strong>
                                 </td>
                                 <td>
-                                 <div style="width:569px;word-wrap:break-word;overflow:auto;">
-                                      <%#Eval("Message")%></div>
+                                    <div style="width: 569px; word-wrap: break-word; overflow: auto;">
+                                        <%#Eval("Message")%></div>
                                 </td>
                                 <td>
-                                     <a href="javascript:void(0)" onclick="delMessage('<%#Eval("i_Id")%>')">删除</a>
+                                    <a href="javascript:void(0)" onclick="delMessage('<%#Eval("i_Id")%>')">删除</a>
                                 </td>
                             </tr>
                         </ItemTemplate>
                     </asp:Repeater>
                 </table>
-      </div>
+            </div>
         </div>
     </div>
     <input type="hidden" id="HiddenDel" value="" runat="server" />
-    <div id="divbox3" style="position: fixed; _position: absolute; left: 0; top: 250px;
-        height: 40px; text-align: center; width: 100%; display: none;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-                <td width="40%">
-                </td>
-                <td style="border: 1px solid #578ece; height: 30px; background: #dfeef5; color: Red;
-                    padding: 5px; width: 15%; font-size: 14px;">
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td width="40%" align="right">
-                                <img alt="" width="30" src="../images/caozuo_2.jpg" />
-                            </td>
-                            <td width="60%" align="left" style="font-size: 14px;">
-                                &nbsp;删除成功
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td width="45%">
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div id="divbox1" style="position: fixed; _position: absolute; left: 0; top: 223px;
-        height: 100px; text-align: center; width: 100%; display: none;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-                <td>
-                    &nbsp;
-                </td>
-                <td width="230px">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td width="11" height="27" background="../images/ts_bg.jpg">
-                                <img src="../images/ts1.jpg" width="11" height="27" />
-                            </td>
-                            <td align="left" background="../images/ts_bg.jpg" style="color: #FFF; font-size: 14px;
-                                line-height: 20px; font-weight: bold;">
-                                温馨提示
-                            </td>
-                            <td width="34" background="../images/ts_bg.jpg">
-                                <img alt="取消" src="../images/dingdan2.gif" width="34" height="27" style="cursor: hand;"
-                                    onclick="divoperation(2,'1')" />
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    &nbsp;
-                </td>
-            </tr>
-            <tr>
-                <td>
-                </td>
-                <td style="border-style: solid; border-width: 1px 1px 0px 1px; border-color: #578ece;
-                    background: #dfeef5; height: 30px; padding: 5px; font-size: 14px;">
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td width="20%" align="right" style="text-align: right">
-                                <img alt="" width="30" src="../images/caozuo_1.jpg" />
-                            </td>
-                            <td width="80%" align="left" style="font-size: 14px;">
-                                &nbsp;确认要进行删除操作吗？
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                </td>
-                <td style="border-style: solid; border-width: 0px 1px 1px 1px; border-color: #578ece;
-                    background: #dfeef5; color: Red; padding: 5px; font-size: 14px; text-align: center;">
-                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td style="font-size: 14px;">
-                                <a>
-                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="btnDel_Click">确认</asp:LinkButton></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                        href="###" style="cursor: hand;" onclick="divoperation(2,'1')">取消</a>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div id="divbox2" style="position: fixed; _position: absolute; left: 0; top: 250px;
-        height: 40px; text-align: center; width: 100%; display: none;">
-        <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-                <td>
-                    &nbsp;
-                </td>
-                <td style="border: 1px solid #578ece; height: 30px; background: #dfeef5; color: Red;
-                    padding: 5px; width: 200px; font-size: 16px;">
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td width="25%" align="right">
-                                <img alt="" width="30" src="../images/caozuo_3.jpg" />
-                            </td>
-                            <td width="75%" align="left" style="font-size: 14px;">
-                                &nbsp;请选中您要删除的记录
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td width="40%">
-                </td>
-            </tr>
-        </table>
-    </div>
     <img style="position: absolute; display: none; border: solid 2px #578ece;" id="xsimg"
         alt="" src="../images/noimage.jpg" width="164" />
     <div id="div_a" runat="server">
@@ -1594,160 +1312,8 @@
             });
         }
     }
-    function checkBillNum(currentnum) {
-        if (currentnum == "") {
-            alert("请填写账单号");
-            return false;
-        }
-        var num = [];
-        var datanum = document.getElementsByName('txt_orderNum');
-        for (var i = 0; i < datanum.length; i++) {
-            num.push(datanum[i].value);
-        }
-        var newNum = num.sort();
-        for (var i = 0; i < newNum.length - 1; i++) {
-            if (newNum[i] == newNum[i + 1]) {
-                alert("账单号重复！");
-                return false;
-            }
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "../Shop_A_DataOrder.ashx",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: "flag=SbDataNum&data=" + currentnum,
-            success: function (msg) {
-                if (msg == "0") {
-                    alert("账单号重复！");
-                    return false;
-                }
-            }
-        });
-    }
-    function bb() {
-        var lname = document.getElementById('btnAdd');
-        lname.style.display = "block";
-    }
-    function checknull() {
-        var lname = document.getElementById('btnAdd');
-        lname.style.display = "block";
-    }
-    var s = "";
-    function dalclick() {
-        var datanum = document.getElementsByName('txt_orderNum');
-        var addtime = document.getElementsByName('dt_addtime');
-        var shoutime = document.getElementsByName('dt_shoutime');
-        var jiaofeitime = document.getElementsByName('dt_jiaofeitime');
-        var sendtime = document.getElementsByName('dt_sendtime');
-        var shoujutime = document.getElementsByName('dt_shoujutime');
-        var info1 = document.getElementsByName('t_info1');
-        var info2 = document.getElementsByName('t_info2');
-        var hi = document.getElementById('HI_ATT');
-
-        for (var i = 0; i < datanum.length; i++) {
-            if (addtime[i].value == "") {
-                alert("请填写添加时间");
-                return false;
-            }
-            if (shoutime[i].value == "") {
-                alert("请填写收款时间");
-                return false;
-            }
-            if (jiaofeitime[i].value == "") {
-                alert("请填写缴费时间");
-                return false;
-            }
-            if (sendtime[i].value == "") {
-                alert("请填写发送时间");
-                return false;
-            }
-            if (shoujutime[i].value == "") {
-                alert("请填写收据时间");
-                return false;
-            }
-            else {
-                if (datanum[i].value != "") {
-                    s += datanum[i].value + "_" + addtime[i].value + "_" + shoutime[i].value + "_" + jiaofeitime[i].value + "_" + sendtime[i].value + "_" + shoujutime[i].value + "_" + info1[i].value + "_" + info2[i].value + "|";
-                }
-            }
-        }
-        hi.value = s;
-    }
-
-
 </script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#btnAdd").click(function () {
-            var num = $("#hidNum").val(); //
-            num = parseInt(num);
-            num++; //点击自加
-            $("#hidNum").val(num); //重新赋值          
-            $("#tRow0").clone(true).attr("id", "tRow" + num).appendTo("#tblData"); //clone tr 并重新给定ID,装到table
-            $("#tRow" + num + " td").each(function () {//循环克隆的新行里面的td
-                $(this).find("input[type='text']").val(""); //清空克隆行的数据
-            });
-        });
-
-    });
-</script>
-<script type="text/javascript">
-    function SelAll() {
-        var inputs = document.getElementsByTagName("input");
-        var checkall = document.getElementById("checkall");
-        for (var i = 0; i < inputs.length; i++) {
-            if (inputs[i].type == "checkbox") {
-                inputs[i].checked = checkall.checked;
-            }
-        }
-    }
-    function Selbox(obj) {
-        var inputs = document.getElementsByName("inputPageid");
-        var checkall = document.getElementById("checkall");
-        if (obj.checked == false) {
-            checkall.checked = false;
-        }
-        else {
-            for (var i = 0; i < inputs.length; i++) {
-                if (inputs[i].checked == false) {
-                    checkall.checked = false;
-                    return;
-                }
-                else {
-                    checkall.checked = true;
-                }
-            }
-        }
-    }
-
-
-    function Edit(obj) {
-        var data1 = $("#txt_orderNum" + obj).val();
-        var data2 = $("#dt_addtime" + obj).val();
-        var data3 = $("#dt_shoutime" + obj).val();
-        var data4 = $("#dt_jiaofeitime" + obj).val();
-        var data5 = $("#dt_sendtime" + obj).val();
-        var data6 = $("#dt_shoujutime" + obj).val();
-        var data7 = $("#t_info1" + obj).val();
-        var data8 = $("#t_info2" + obj).val();
-        var datastr = data1 + "|" + data2 + "|" + data3 + "|" + data4 + "|" + data5 + "|" + data6 + "|" + data7 + "|" + data8;
-        $.ajax({
-            type: "POST",
-            url: "../Shop_A_DataOrder.ashx",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: "flag=dataOrder&id=" + obj + "&data=" + datastr,
-            success: function (msg) {
-                if (msg == "ok") {
-                    alert("修改成功");
-                }
-                if (msg == "0") {
-                    alert("账单号重复！");
-                }
-            }
-        });
-    }
-
     function AdminStatusEdit(obj, statusvalue) {
         var data1 = $("#dt_statustime" + obj).val();
         var tradeMarkId = $("#hi_TradeMarkId").val();
@@ -1816,8 +1382,6 @@
     }
 </script>
 <script type="text/javascript">
-
-
     function miaoshutype() {
         var rb1 = document.getElementById("RadioButton1");
         var rb2 = document.getElementById("RadioButton2");
@@ -1875,16 +1439,16 @@
             type: "POST",
             url: "../Shop_A_Trademark.ashx",
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            data: "member=" + member,
-            success: function (msg) {
-
-                if (msg == "no") {
+            data: "getmemberid=" + member,
+            success: function (memberid) {
+                if (memberid == "no") {
                     alert("请输入正确的用户编号");
                     document.getElementById("txt_MemberId").value = "";
                     document.getElementById("txt_MemberId").focus();
                 }
                 else {
-                    document.getElementById("hi_n_a").value = msg;
+                    $('#Hi_MemberId').val(memberid);
+                    GetApplysDDL(memberid, "0");
                 }
             }
         });
