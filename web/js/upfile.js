@@ -5,7 +5,7 @@
         var caseno = $(this).attr("caseno");
         var html = '<table width="100%"><tr><td height="90px" align="center">';
         html += '<input id="file_upload" name="file_upload" type="file" multiple="true"></td><tr height="80px">';
-        html += '<td align="center"><div id="fileQueue" style="display:none"></div><div id="upSucessImg" style="display:none"><img src="img/duigou.gif" width="40" height="40"/></div></td></tr><tr><td height="30px" align="center" style="color: Red;font-size:larger">彩色扫描，PDF格式，大小不超过1M</td></tr></table>';
+        html += '<td align="center"><div id="newfilename" style="display:none"></div><div id="fileQueue"></div><div id="upSucessImg" style="display:none"><img src="img/duigou.gif" width="40" height="40"/></div></td></tr><tr><td height="30px" align="center" style="color: Red;font-size:larger">彩色扫描，PDF格式，大小不超过1M</td></tr></table>';
         html += '<input id="filecaseType" type="hidden" name="caseType" value="">';
         html += '<input id="filebookType" type="hidden" name="bookType" value="">';
         html += '<input id="filecaseno" type="hidden" name="caseno" value="">';
@@ -15,7 +15,7 @@
 
     var submit = function (v, h, f) {
         if (v == 1) {
-            var filename = h.find("#fileQueue").html(); //文件名
+            var filename = h.find("#newfilename").html(); //文件名
             var caseType = h.find("#filecaseType").val();
             var bookType = h.find("#filebookType").val();
             var caseNo = h.find("#filecaseno").val();
@@ -55,7 +55,8 @@ function file_url(file_type, file_size, caseType, bookType, caseNo) {
         'uploader': 'Handler.ashx?flag=uploadbookfile&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo,
         'onUploadSuccess': function (file, data, response) {
             $('#' + file.id).find('.data').html(' 上传完毕');
-            $("#fileQueue").html(data);
+            $("#fileQueue").html("");
+            $("#newfilename").html(data);
             $("#upSucessImg").show();
             $("#filecaseType").val(caseType);
             $("#filebookType").val(bookType);
