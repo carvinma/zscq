@@ -33,7 +33,6 @@
     <style type="text/css">
         #listDiv a
         {
-            text-decoration: none;
         }
         #xuanzhong
         {
@@ -194,10 +193,10 @@
                 <th width="2%">
                  <input name="checkall" id="checkall2" type="checkbox" onclick="SelAll(this)" /> 
                 </th>
-                <th>
+                <th width="7%">
                 商标申请书<br />委托书
                 </th>
-                <th width="10%" align="center">
+                <th width="7%" align="center">
                     案件号 <a href="L_M_Trademark.aspx?<%=returnurl %>&caseno=desc"
                         title="倒序" id="casenoAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&caseno=asc"
@@ -221,13 +220,13 @@
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&memberno=asc"
                             title="正序" id="membernoDesc"><span class="sp2"></span></a>
                 </th>
-                <th width="10%">
+                <th width="7%">
                     会员名称<a href="L_M_Trademark.aspx?<%=returnurl %>&membername=desc"
                         title="倒序" id="membernameAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&membername=asc"
                             title="正序" id="membernameDesc"><span class="sp2"></span></a>
                 </th>
-                <th width="6%">
+                <th width="5%">
                     图样
                 </th>
                 <th width="5%">
@@ -236,23 +235,23 @@
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&trademarktype=asc"
                             title="正序" id="trademarktypeDesc"><span class="sp2"></span></a>
                 </th>
-                <th width="6%">
+                <th width="7%">
                     期限日
                     <a href="L_M_Trademark.aspx?<%=returnurl %>&timelimit=desc"
                         title="倒序" id="timelimitAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&timelimit=asc"
                             title="正序" id="timelimitDesc"><span class="sp2"></span></a>
                 </th>
-                <th width="6%">
+                <th width="5%">
                     案件分类<%--<a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=desc"
                         title="倒序" id="timeaddAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=asc"
                             title="正序"><span class="sp2" id="timeaddDesc"></span></a>--%>
                 </th>
-                <th width="8%">
+                <th width="6%">
                     商标详情
                 </th>
-                <th width="8%">
+                <th width="7%">
                     文件操作
                 </th>
                  <th width="8%">
@@ -271,14 +270,13 @@
                         </td>
                         
                         <td align="center">
-                           <%#BoolFileImg(Eval("ApplyBook")) ? "<a href='" + Eval("ApplyBook") + "' title='申请书'>商标申请书</a>" : "未上传"%>
-                            <br />
-                            <%#BoolFileImg(Eval("AgentBook")) ? "<a href='" + Eval("AgentBook") + "' title='委托书'>商标委托书</a>" : "未上传"%>
+                          <%#upFileInfo(Eval("i_Type"), Eval("ApplyUpBook"), Eval("RenewalApplyUpBook"))%><br />
+                          <%#upFileInfo(Eval("i_Type"),Eval("AgentUpBook"),Eval("RenewalAgentUpBook"))%>
+                         
                         </td>
                         <td align="center"> 
-                            <a href="M_A_TradeMark.aspx?id=<%#Eval("i_Id")%>">
-                                <%# Eval("CaseNo")%>
-                            </a>
+                          <a href='<%# Eval("i_Type").ToString()=="0"? "M_E_TradeMark.aspx?id="+ Eval("i_Id"):"M_E_TradeMarkRenewal.aspx?id="+Eval("i_Id")%>'>
+                          <%# Eval("CaseNo")%></a>  
                         </td>
                         <td align="center">
                             <%#Eval("RegisteredNo")%>
@@ -293,7 +291,8 @@
                             <%# Eval("nvc_Name")%>
                         </td>
                         <td align="center">
-                             <img alt="" src="<%# Eval("TrademarkPattern1") %>" width="50" height="30" />
+                             <a href="../../<%# Eval("TrademarkPattern1") %>" target="_blank">
+                             <img alt="" src="../../<%# Eval("TrademarkPattern1") %>" width="50" height="30" /></a>
                         </td>
                         <td align="center">
                             <%# Eval("TrademarkType")%>
@@ -305,13 +304,12 @@
                           <%# Eval("i_Type").ToString() == "0" ? "申请":"续展"%>
                         </td>
                         <td align="center">
-                              <a href="Shop_M_TrademarkInfo.aspx?id=<%#Eval("i_Id")%>"
-                                style="color: Red;">详情 </a>
+                              <a href="Shop_M_TrademarkInfo.aspx?id=<%#Eval("i_Id")%>">详情 </a>
                         </td>
                         <td align="center" style="color: #FF0000">
-                            <a href="../user_World_sbweituo.aspx?id=<%#Eval("i_Id")%>&type=2" target="_blank"
-                                class="ac5t">委托书下载</a> <a href="../user_World_sb.aspx?id=<%#Eval("i_Id")%>&type=3"
-                                    target="_blank" class="ac5t">申请书下载</a>
+                            <a href='../../<%# Eval("i_Type").ToString()=="0"?  Eval("ApplyBook"):Eval("RenewalApplyBook")%>' title='点击下载' target='_blank'>申请书下载</a>  
+                             <br />
+                            <a href='../../<%#  Eval("i_Type").ToString()=="0"? Eval("AgentBook"):Eval("RenewalAgentBook")%>' title='点击下载' target='_blank'>委托书下载</a> 
                         </td>
                         <td>
                            <%# GetApplyStatus(Eval("i_Type"),Eval("Status"))%>

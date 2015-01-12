@@ -205,7 +205,15 @@ public partial class L_M_Trademark : System.Web.UI.Page
             return false;
         }
     }
-
+    public string upFileInfo(object i_Type, object fileurl,object renwalfileurl)
+    {
+        switch (i_Type.ToString())
+        {
+            case "0": return fileurl == null ? "未上传" : "<a href='../../" + fileurl.ToString() + "' title='点击下载' target='_blank'>申请书下载</a>";
+            case "1": return renwalfileurl == null ? "未上传" : "<a href='../../" + renwalfileurl.ToString() + "' title='点击下载' target='_blank'>商标委托书</a>";
+        }
+        return "未上传";
+    }
     private void Bind_Rpt_Product(int pageCurrent)//绑定列表
     {
         ye = pageCurrent;
@@ -323,7 +331,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
             }
             if (Request["qrestDays"] != null)
             {
-                iquery = from i in iquery where i.RestDays == Convert.ToInt32(Request["qrestDays"]) select i;
+                iquery = from i in iquery where i.RestDays <= Convert.ToInt32(Request["qrestDays"]) select i;
             }
             if (Request["qStatus"] != null)
             {
@@ -340,6 +348,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
             #endregion
 
             #region 排序参数
+            iquery = from i in iquery orderby i.i_Id descending select i;
 
             if (Request.QueryString["caseno"] != null && Request.QueryString["caseno"] != "")
             {

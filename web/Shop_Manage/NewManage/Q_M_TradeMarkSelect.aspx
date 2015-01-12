@@ -13,7 +13,7 @@
         $(function () {
             InitProCityArea();
             $(".intinput").bind("input propertychange paste", function () {
-                $(this).val($(this).val().replace(/[^\d]/g, ''));
+                $(this).val($(this).val().replace(/[^-\d]/g, ''));
             }).css("ime-mode", "disabled");
             });
        </script>

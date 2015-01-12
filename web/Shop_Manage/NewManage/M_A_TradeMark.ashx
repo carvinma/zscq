@@ -9,6 +9,7 @@ using Aspose.Words;
 
 public class M_A_TradeMark : IHttpHandler
 {
+    #region 
     private dal_Address address = new dal_Address();
     /// <summary>
     /// 商标续展代理委托书
@@ -119,12 +120,50 @@ public class M_A_TradeMark : IHttpHandler
         doc.Save(HttpContext.Current.Server.MapPath("../../"+docPath));
         return docPath;
     }
+    #endregion
+    
     public void ProcessRequest(HttpContext context)
     {
         context.Response.ContentType = "text/plain";
         if (context.Request["flag"] != null && context.Request["flag"].ToString() != "")
         {
             string flagtype = context.Request["flag"].ToString();
+            if (flagtype == "addSBmsg")//增加商标留言
+            {
+                try
+                {
+                    int tradeMarkId = int.Parse(context.Request["TradeMarkId"].ToString());
+                    string message =context.Request["message"].ToString();
+                    if (!string.IsNullOrEmpty(message))
+                    {
+                        dal_NewTrademark mark = new dal_NewTrademark();
+                        t_NewTradeMarkMessage Model = new t_NewTradeMarkMessage();
+                        Model.TradeMarkId = tradeMarkId;
+                        Model.AddTime = DateTime.Today;
+                        Model.Message = message.Trim();
+                        mark.trademarkMessage_Add(Model);
+                        context.Response.Write(Model.i_Id + "|" + DateTime.Today.ToString("yyyy-MM-dd"));
+                    }
+                }
+                catch
+                {
+                    context.Response.Write("no");
+                }
+            }
+            if (flagtype == "delSBmsg") //删除商标留言
+            {
+                try
+                {
+                    int messageid = int.Parse(context.Request["messageid"].ToString());
+                    dal_NewTrademark mark = new dal_NewTrademark();
+                    mark.trademarkMessage_Del(messageid);
+                    context.Response.Write("ok");
+                }
+                catch
+                {
+                    context.Response.Write("no");
+                }
+            }
             if (flagtype == "adminstatusDate")//商标状态日期
             {
                 try
