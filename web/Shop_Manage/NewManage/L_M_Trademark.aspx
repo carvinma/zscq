@@ -284,7 +284,8 @@
                             <%# Eval("ApplyName")%>
                             <br />
                                <a href="../../<%# Eval("Businesslicense") %>" target="_blank">下载1</a>
-                               <a href="../../<%# Eval("CardNoPDF") %>" target="_blank">下载2</a>
+                               <%# Eval("CardNoPDF") == null ? "<a href='javascript:void(0)'>下载2</a>" : "<a href='../../" + Eval("CardNoPDF") + "' target='_blank'>下载2</a>"%>
+                              
                         </td>
                         <td align="center" style="color: #FF0000">
                             <%# Eval("nvc_UserNum")%>
