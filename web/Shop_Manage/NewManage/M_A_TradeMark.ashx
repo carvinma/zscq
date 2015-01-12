@@ -212,8 +212,25 @@ public class M_A_TradeMark : IHttpHandler
                                 TimeSpan ts = find.RenewalDate.Value - DateTime.Today;
                                 find.RestDays = ts.Days; //剩于天数
                                 find.RenewalAgentBook = CreateAgentBook(find);
-                                find.RenewalApplyBook = CreateApplyBook(find); 
-                                
+                                find.RenewalApplyBook = CreateApplyBook(find);
+                                #region 计算费用
+                                dal_Goods goods = new dal_Goods();
+                                var goodsModels = goods.CategoryFees_Select_All();
+                                var mainModel = goodsModels.First(p => p.i_Type == 1);
+                                find.TrademarkMoney =mainModel.MainFees* find.TrademarkType.Split(',').Length; //费用
+                                var agencyModel = goodsModels.First(p => p.i_Type == 3);
+                                find.TrademarkAgencyFee = agencyModel.MainFees * find.TrademarkType.Split(',').Length;//代理费
+                                find.TrademarkLateFee = 0;//滞纳金
+
+                                    #region 计算滞纳金
+                                    if (ts.Days <= 0)
+                                    {
+                                        var latefeeModel = goodsModels.First(p => p.i_Type == 4);
+                                        find.TrademarkLateFee = latefeeModel.MainFees * find.TrademarkType.Split(',').Length;
+                                    }
+                                    #endregion
+                                #endregion
+
                                 System.Collections.Generic.List<t_NewTradeMarkRenewalInfo> list = new System.Collections.Generic.List<t_NewTradeMarkRenewalInfo>();
                                 t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
                                 renewalModel.TradeMarkId = tradeMarkId;
