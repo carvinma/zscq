@@ -554,6 +554,16 @@
                     <tr>
                         <td colspan="2">
                             <table width="689" cellspacing="1" cellpadding="3">
+                                 <tr>
+                                <td width="276" height="26" align="right"><strong>会员编号：</strong></td>
+                                <td  height="26">
+                                <input type="text" runat="server" id="txt_MemberId" class="input" maxlength="11" onblur="checknull('txt_MemberId','txt_MemberIdFont');CheckUserMember();" />
+                                    <font color="red" >*</font>
+                                <font id="txt_MemberIdFont" class="alertfont" style="display:none;">
+                                    <img alt="警告" src="../images/caozuo_3.jpg" width="15" />不能为空
+                                </font>    
+                                </td>
+                            </tr>
                                 <tr>
                                     <td align="right">
                                         <strong>申请人类别</strong>：

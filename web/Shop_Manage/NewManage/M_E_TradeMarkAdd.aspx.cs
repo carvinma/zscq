@@ -59,7 +59,6 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         {
             Bind_Page_Type();
 
-
             t_GoodsCategoryFees fees = goods.CategoryFees_Select_ByType(0);
             hi_MainFees.Value = fees.MainFees.Value.ToString();
             hi_ItemNum.Value = fees.ItemNum.Value.ToString();
@@ -73,18 +72,10 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         {
             int trademarkId = int.Parse(Request.QueryString["id"].ToString());
             hi_TradeMarkId.Value = trademarkId.ToString();
-            Bind_Page_Info(trademarkId);
-            Bind_Bills(trademarkId);
-            Bind_Admin_Status(trademarkId);
-            Bind_Message(trademarkId);
+            Bind_Admin_Status(0);
         }
+    }
 
-    }
-    private void Bind_Message(int trademarkId)
-    {
-        this.RptMessage.DataSource = mark.trademarkMessage_Select_id(trademarkId);
-        this.RptMessage.DataBind();
-    }
     public void Bind_Admin_Status(int trademarkId)
     {
         var adminstatusDate = mark.trademarkStatusdate_Select_id(trademarkId).ToList();
@@ -103,122 +94,7 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         RptAdminStatus.DataSource = result;
         RptAdminStatus.DataBind();
     }
-    private void Bind_Page_Info(int trademarkId)
-    {
-        PageType = "修改商标";
-        t_NewTradeMarkInfo model = mark.Trademark_Select_Id(trademarkId);
-        if (model != null)
-        {
-            spStatus.InnerText = BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
-            Hi_MemberId.Value = model.i_MemberId.ToString();
-            if (model.ApplyType == 0)
-            {
-                this.RdoPeople.Checked = false;
-                this.RdoCorp.Checked = true;
-            }
-            else
-            {
-                this.RdoPeople.Checked = true;
-                this.RdoCorp.Checked = false;
-            }
-            txt_applyname.Value = model.ApplyName;
-            txt_applyCardNo.Value = model.CardNo;
-            if (!string.IsNullOrEmpty(model.CardNoPDF))
-            {
-                hiUpCardNo.Value = model.CardNoPDF;
-                aCardNoPdf.Visible = true;
-            }
-            if (!string.IsNullOrEmpty(model.Businesslicense))
-            {
-                upBusinessLinces.Value = model.Businesslicense;
-                aBusinessLicense.Visible = true;
-            }
-            Hi_prov.Value = model.ProvinceId.ToString();////
-            Hi_city.Value = model.CityId.ToString();
-            Hi_country.Value = model.AreaId.ToString();
-            this.txt_address.Value = model.Address;
-            this.txt_ContactPerson.Value = model.ContactPerson;
-            this.txt_phone.Value = model.Phone;
-            this.txt_fax.Value = model.Fax;
-            this.txt_postcode.Value = model.PostCode;
-            this.lblCaseNo.Text = model.CaseNo;
 
-            if (model.Is3D == true) Radio3DYES.Checked = true;
-            else Radio3DNo.Checked = true;
-            if (model.IsColor == true) rdoColorYes.Checked = true;
-            else rdoColorNO.Checked = true;
-            chkSound.Checked = model.IsSound == true ? true : false;
-            if (model.IsSound != null && model.IsSound.Value == true)
-                soundfiles.Visible = true;
-            if (!string.IsNullOrEmpty(model.SoundFile))
-            {
-                upSound.Value = model.SoundFile;
-                spWav.Visible = true;
-            }
-            txt_remark.Value = model.TrademarkRemark;
-            sortarr.Value = model.TrademarkType;
-            sortGoods.Value = model.TrademarkGoods;
-            hi_money.Value = model.TrademarkMoney.ToString();
-            //
-            if (!string.IsNullOrEmpty(model.TrademarkPattern1))
-            {
-                Image1.ImageUrl = "../../" + model.TrademarkPattern1;
-                upPattern1.Value = model.TrademarkPattern1;
-            }
-            if (!string.IsNullOrEmpty(model.TrademarkPattern2))
-            {
-                Image2.ImageUrl = "../../" + model.TrademarkPattern2;
-                upPattern2.Value = model.TrademarkPattern2;
-            }
-            if (!string.IsNullOrEmpty(model.TrademarkType) && !string.IsNullOrEmpty(model.TrademarkGoods))
-            {
-                //根据商品ID查找商品的信息
-                string[] goodIds = model.TrademarkGoods.Split(',');
-                var result = goods.Goods_Select_MultipleId(goodIds);
-                if (result != null && result.Count() > 0)
-                {
-                    goodsItemCount = result.Count();
-                    this.Rpt_goods.DataSource = result;
-                    this.Rpt_goods.DataBind();
-                }
-            }
-            cb_Show.Checked = model.IsShow == true ? true : false;
-            cb_ReceiveEmail.Checked = model.IsReceiveEmail == true ? true : false;
-            if (!string.IsNullOrEmpty(model.ApplyUpBook))
-            {
-                ApplyUpBook = "<a href='" + model.ApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
-            }
-            if (!string.IsNullOrEmpty(model.AgentUpBook))
-            {
-                AgentUpBook = "<a href='" + model.AgentUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
-            }
-
-            if (model.ApplyDate.HasValue)
-                spApplydate.InnerText = model.ApplyDate.Value.ToString("yyyy-MM-dd");
-            if (model.PublicPreliminaryDate.HasValue)
-                spPublicPreliminaryDate.InnerText = model.PublicPreliminaryDate.Value.ToString("yyyy-MM-dd");
-            if (model.RegNoticeDate.HasValue)
-                spRegNoticeDate.InnerText = model.RegNoticeDate.Value.ToString("yyyy-MM-dd");
-            if (model.RenewalDate.HasValue)
-                spRenewalDate.InnerText = model.RenewalDate.Value.ToString("yyyy-MM-dd");
-            if (model.RestDays.HasValue)
-                spRestDays.InnerText = model.RestDays.Value.ToString();
-
-            hd_userId.Value = model.i_MemberId.ToString();
-            t_Member mm = DALM.Member_Select_Id(int.Parse(model.i_MemberId.ToString()));
-            if (mm != null)
-            {
-                // txt_MemberId.Value = mm.nvc_UserNum.ToString();
-            }
-        }
-    }
-
-    private void Bind_Bills(int did)
-    {
-        int Ccount = 0;
-        reptlist.DataSource = DALDO.DataOrder_SelectPage(1, 10000, did, 2, "", "", ref Ccount);
-        reptlist.DataBind();
-    }
 
     private t_NewTradeMarkInfo InitModel()
     {
@@ -630,7 +506,7 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
         if (Request.QueryString["id"] != null && Request.QueryString["id"].ToString() != "")
         {
             int Id = int.Parse(Request.QueryString["id"].ToString());
-            Bind_Bills(Id);
+            //Bind_Bills(Id);
         }
         HiddenDel.Value = "del";
     }
