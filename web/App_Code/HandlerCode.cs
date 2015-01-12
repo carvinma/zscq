@@ -308,7 +308,7 @@ public class HandlerCode
             else
                 context.Response.Write("0");
         }
-        context.Response.Write("0");
+       // context.Response.Write("0");
     }
 
     #region 省市区

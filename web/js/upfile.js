@@ -27,7 +27,11 @@
                     data: 'flag=movebook&filename=' + filename + '&caseType=' + caseType + '&bookType=' + bookType + '&caseNo=' + caseNo,
                     success: function (data) {
                         if (data == "1") {
-                            return true;
+                            if (bookType == 0)
+                                $("#upAppbook" + $.trim(caseNo)).css("color", "");
+                            else
+                                $("#upAgebook" + $.trim(caseNo)).css("color", "");
+                            return false;
                         }
                     }
                 });

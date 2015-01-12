@@ -397,13 +397,15 @@
                                                                         <%# GetApplyTypeName(Eval("ApplyType"))%>
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
-                                                                     <a href="javascript:void(0)" casetype="0" booktype="0" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                     <a href="javascript:void(0)" casetype="0" booktype="0" caseno="<%# Eval("CaseNo")%>" class="upfile">
+                                                                       <span id='upAppbook<%#Eval("CaseNo") %>' style="<%#Eval("ApplyUpBook")==null? "color:red":""%>">上传</span> </a>
                                                                      <p></p>
                                                                      <a href='<%# Eval("ApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
-                                                                        
                                                                     </td>
                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
-                                                                     <a href="javascript:void(0)" casetype="0" booktype="1" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                     <a href="javascript:void(0)" casetype="0" booktype="1" caseno="<%# Eval("CaseNo")%>" class="upfile">
+                                                                     <span id='upAgebook<%#Eval("CaseNo") %>' style="<%#Eval("AgentUpBook")==null? "color:red":""%>">上传</span> 
+                                                                     </a>
                                                                     <p></p>
                                                                      <a href='<%# Eval("AgentBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                     </td>
