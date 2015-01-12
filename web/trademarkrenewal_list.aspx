@@ -428,12 +428,16 @@
                                                                             <%# string.Format("{0:yyyy-MM-dd}",Eval("RenewalDate"))%>
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF" class="font12b4e">
-                                                                         <a href="javascript:void(0)" casetype="1" booktype="0" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                         <a href="javascript:void(0)" casetype="1" booktype="0" caseno="<%# Eval("CaseNo")%>" class="upfile">
+                                                                          <span id='upAppbook<%#Eval("CaseNo") %>' style="<%#Eval("RenewalApplyBook")==null? "color:red":""%>">上传</span>
+                                                                         </a>
                                                                         <p></p>
                                                                          <a href='<%# Eval("RenewalApplyBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                         </td>
                                                                         <td align="center" bgcolor="#FFFFFF" class="font12b4e">
-                                                                         <a href="javascript:void(0)" casetype="1" booktype="1" caseno="<%# Eval("CaseNo")%>" class="upfile">上传</a>
+                                                                         <a href="javascript:void(0)" casetype="1" booktype="1" caseno="<%# Eval("CaseNo")%>" class="upfile">
+                                                                          <span id='upAgebook<%#Eval("CaseNo") %>' style="<%#Eval("RenewalAgentBook")==null? "color:red":""%>">上传</span> 
+                                                                         </a>
                                                                           <p></p>
                                                                      <a href='<%# Eval("RenewalAgentBook")%>' title='点击下载' target='_blank'>下载</a> 
                                                                         </td>
