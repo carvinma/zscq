@@ -39,20 +39,27 @@ public class M_A_TradeMark : IHttpHandler
                     value = model.ApplyName;
                     if (model.ApplyType == 1)
                         value = model.ApplyName + "(" + model.CardNo + ")";
+                    shape.AppendChild(new Aspose.Words.Paragraph(doc));
+                    Aspose.Words.Paragraph para = shape.FirstParagraph;
+                    para.ParagraphFormat.Alignment = Aspose.Words.ParagraphAlignment.Center;
+                    Aspose.Words.Run run = new Aspose.Words.Run(doc);
+
+                    run.Text = value;
+                    run.Font.Name = "宋体";
+                    run.Font.Size = 12;
+                    para.AppendChild(run);
                 }
                 else if (k == 1)
                 {
                     value = model.TrademarkDescribe;
+                    builder.MoveToBookmark("pattern");
+                    builder.InsertImage(HttpContext.Current.Server.MapPath("../../" + model.TrademarkPattern1), 40, 20);
                 }
-                shape.AppendChild(new Aspose.Words.Paragraph(doc));
-                Aspose.Words.Paragraph para = shape.FirstParagraph;
-                para.ParagraphFormat.Alignment = Aspose.Words.ParagraphAlignment.Center;
-
-                Aspose.Words.Run run = new Aspose.Words.Run(doc);
-                run.Text = value;
-                run.Font.Name = "宋体";
-                run.Font.Size = 12;
-                para.AppendChild(run);
+               
+               // builder.MoveToBookmark("pattern");
+               // builder.InsertImage(HttpContext.Current.Server.MapPath(model.TrademarkPattern1), 40, 20);
+                
+             
                 if (k == 1) break;
                 k++;
             }

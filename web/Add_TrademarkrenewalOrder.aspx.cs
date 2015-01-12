@@ -81,6 +81,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             sbnum = iquery.Count();
             #region 生成订单
             t_NewTrademarkOrder OrderModer = new t_NewTrademarkOrder();
+            OrderModer.CaseType = 1;
             OrderModer.nvc_OrderNumber = DALTO.Set_OrderNo();
             OrderModer.dm_TrademarkMoney = iquery.Sum(p => p.TrademarkMoney); //商标金额
             OrderModer.dm_TMZhiNaJin = iquery.Sum(p => p.TrademarkLateFee);//滞纳金
