@@ -174,7 +174,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
     public string upFileInfo(object i_Type, object fileurl,object renwalfileurl,object booktype)
     {
         string downlinkname=booktype.ToString()=="0" ? "商标申请书":"商标委托书";
-        string downlinknameNo = booktype.ToString() == "0" ? "申请书未上传" : "委托书未上传";
+        string downlinknameNo = booktype.ToString() == "0" ? "申请未上传" : "委托未上传";
         switch (i_Type.ToString())
         {
             case "0":

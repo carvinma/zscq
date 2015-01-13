@@ -243,18 +243,18 @@
                             title="正序" id="timelimitDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="5%">
-                    案件分类<%--<a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=desc"
+                    分类<%--<a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=desc"
                         title="倒序" id="timeaddAsc"><span class="sp1"></span></a>
                         <a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=asc"
                             title="正序"><span class="sp2" id="timeaddDesc"></span></a>--%>
                 </th>
-                <th width="6%">
-                    商标详情
+                <th width="5%">
+                    商标<br />详情
                 </th>
-                <th width="7%">
+                <th width="8%">
                     文件操作
                 </th>
-                 <th width="8%">
+                 <th width="7%">
                     状态
                     <a href="L_M_Trademark.aspx?<%=returnurl %>&status=desc"
                         title="倒序" id="statusAsc"><span class="sp1"></span></a>
