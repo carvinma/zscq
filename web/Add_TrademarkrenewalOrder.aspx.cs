@@ -167,7 +167,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             t_Member user = DALM.Member_Select_Id(uId);
             if (user != null)
             {
-                emalladdress = user.nvc_Email;
+                emalladdress = user.nvc_Email + ";" + user.nt_BYEmail.Replace("|", ";");
             }
             // OrderModer.nvc_YouHUiQuan = "0";
             if (input_payway.Value == "网银支付")
