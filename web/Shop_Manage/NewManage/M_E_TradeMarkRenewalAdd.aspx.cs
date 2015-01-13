@@ -61,8 +61,8 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             hi_MainFees.Value = fees.MainFees.Value.ToString();
             hi_ItemNum.Value = fees.ItemNum.Value.ToString();
             hi_ExceedFees.Value = fees.ExceedFees.Value.ToString();
-        }  
-       // Bind_Page_Type();
+        }
+        // Bind_Page_Type();
     }
     public void Bind_Page_Type()// 绑定页面信息
     {
@@ -155,26 +155,22 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
         //model.CaseNo = this.lblCaseNo.Text;
         if (string.IsNullOrEmpty(hi_TradeMarkId.Value))
             model.CaseNo = caseNo.GetTodayMaxCaseNo();
-        model.Is3D = Radio3DNo.Checked ? false : true;
-        model.IsColor = rdoColorNO.Checked ? false : true;
-        model.IsSound = chkSound.Checked ? true : false;
+        
         if (!string.IsNullOrEmpty(this.upSound.Value))
         {
-            fileName = this.upSound.Value;//声音
-            if (fileName.Contains("File_ShangBiao"))
-            {
-                model.SoundFile = fileName;
-            }
-            else
-            {
-                System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
-                       HttpContext.Current.Server.MapPath("../../" + filePath + fileName));
-                model.SoundFile = filePath + fileName;
-            }
+            System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
+                   HttpContext.Current.Server.MapPath("../../" + filePath + fileName));
+            model.SoundFile = filePath + fileName;
         }
         model.TrademarkRemark = txt_remark.Value.Trim();
-        model.TrademarkType = sortarr.Value.Trim();
-        model.TrademarkGoods = sortGoods.Value.Trim();
+        //输入类别，不够俩位补全2位，例：2->02
+        string[] trademarkTypes = sortarr.Value.Replace('，', ',').Trim().Split(',');
+        string markType = trademarkTypes.Aggregate((current, next) =>
+        {
+            return (current.Length == 1 ? current.PadLeft(2, '0') : current) + "," +
+                (next.Length == 1 ? next.PadLeft(2, '0') : next);
+        });
+        model.TrademarkType = markType;
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
         model.TrademarkMoney = money;
@@ -182,34 +178,28 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
         model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
         model.TrademarkLateFee = 0;//滞纳金
 
-        fileName = this.upPattern1.Value;//图样1
-        if (fileName.Contains("File_ShangBiao"))
+        if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
         {
-            model.TrademarkPattern1 = fileName;
+            model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
+            TimeSpan ts = DateTime.Parse(txt_RenewalDate.Value) - DateTime.Today;
+            model.RestDays = ts.Days; //剩于天数
+            #region 计算滞纳金
+            if (ts.Days <= 0)
+            {
+                var latefeeModel = goods.CategoryFees_Select_ByType(4);
+                model.TrademarkLateFee = latefeeModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
+            }
+            #endregion
         }
-        else
+
+
+        fileName = this.upPattern1.Value;//图样1
+        if (!string.IsNullOrEmpty(fileName))
         {
             System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
                    HttpContext.Current.Server.MapPath("../../" + filePath + fileName));
             model.TrademarkPattern1 = filePath + fileName;
         }
-
-
-        if (!string.IsNullOrEmpty(this.upPattern2.Value))
-        {
-            fileName = this.upPattern2.Value;//图样2
-            if (fileName.Contains("File_ShangBiao"))
-            {
-                model.TrademarkPattern2 = fileName;
-            }
-            else
-            {
-                System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
-                       HttpContext.Current.Server.MapPath("../../" + filePath + fileName));
-                model.TrademarkPattern2 = filePath + fileName;
-            }
-        }
-
         int type = 0;
         if (this.RadioButton2.Checked) type = 1;
         else if (this.RadioButton3.Checked) type = 2;
@@ -222,23 +212,47 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
 
         return model;
     }
+    private void addRegNoticeData(int trademarkid)
+    {
+        //续展日期
+        string xzDate = hi_RegNoticeDate.Value.Trim();
+        if (!string.IsNullOrEmpty(xzDate))
+        {
+            List<t_NewTradeMarkRenewalInfo> list = new List<t_NewTradeMarkRenewalInfo>();
+            string[] liststr = xzDate.Split('|');
+            for (int i = 0; i < liststr.Length - 1; i++)
+            {
+                t_NewTradeMarkRenewalInfo renewalModel = new t_NewTradeMarkRenewalInfo();
+                string[] RenewalDate = liststr[i].Split('_');
+                renewalModel.TradeMarkId = trademarkid;
+                renewalModel.RenewalDate = DateTime.Parse(RenewalDate[0]);
+                renewalModel.IsFinish = RenewalDate[1] == "1" ? true : false;
+                list.Add(renewalModel);
+            }
+            if (list.Count > 0)
+            {
+                mark.TrademarkRenewalDate_Add(list, trademarkid);
+            }
 
+        }
+    }
     protected void btOK_Click(object sender, EventArgs e)
     {
         var model = InitModel();
         if (model != null)
         {
-            model.i_Type = 0;
-            model.Status = 0;
+            model.i_Type = 1;
+            model.Status = 12;
             model.AgentBook = CreateAgentBook(model);
             model.ApplyBook = CreateApplyBook(model);
             if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
                 mark.Trademark_Submit();
             else
                 mark.Trademark_Add(model);
+            addRegNoticeData(model.i_Id);
             hi_TradeMarkId.Value = model.i_Id.ToString();
             Bind_Page_Type();
-           // Response.Redirect("L_M_Trademark.aspx");
+            // Response.Redirect("L_M_Trademark.aspx");
         }
     }
 

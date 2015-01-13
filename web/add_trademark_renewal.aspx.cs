@@ -167,8 +167,11 @@ public partial class add_trademark_renewal : System.Web.UI.Page
 
 
         fileName = this.upPattern1.Value;//图样
-        System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
-               HttpContext.Current.Server.MapPath(filePath + fileName));
+        if (!string.IsNullOrEmpty(fileName))
+        {
+            System.IO.File.Move(HttpContext.Current.Server.MapPath("UploadTemp\\" + fileName),
+                   HttpContext.Current.Server.MapPath(filePath + fileName));
+        }
         model.TrademarkPattern1 = filePath + fileName;
         model.Remark = txt_remark.Value.Trim();
         model.IsShow = true;
