@@ -416,7 +416,7 @@
                                                                     class="font12000" maxlength="11" runat="server" /><span></span>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr style="display:none">
                                                             <td height="32" align="right">
                                                                 <strong>开启到期短信提醒：</strong>
                                                             </td>
@@ -433,13 +433,14 @@
                                                                 <strong>电子邮箱：</strong>
                                                             </td>
                                                             <td align="left">
-                                                                <table width="282" border="0" cellspacing="0" cellpadding="0">
+                                                                <table width="433" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
-                                                                        <td width="201" align="left" class="style1">
+                                                                        <td width="201" align="left">
                                                                             <input type="text" name="text_Email" id="text_Email" runat="server" maxlength="80"
-                                                                                class="font12000" onblur="ClientValidateEmail();" /><span style="color: Red;" id="text_Email1">*</span>
+                                                                                class="font12000" onblur="ClientValidateEmail();" />
                                                                         </td>
-                                                                        <td width="81" align="left">
+                                                                        <td  align="left">
+                                                                            <span style="color: Red;" id="text_Email1">*</span>
                                                                             <img id="mail_add_show" src="images/addmail.jpg" />
                                                                         </td>
                                                                     </tr>
