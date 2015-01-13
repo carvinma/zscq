@@ -552,7 +552,7 @@
                                                                             <span style="color: Red;">*</span>  <span class="status error" id="name_div_error"></span>
                                                                             <input type="hidden" name="applyname_3word" runat="server" clientidmode="Static"
                                                                                 id="applyname_3word" value="CAN" /><br />
-                                                                            <div id="suggest" class="ac_results" style="width: 173px;">
+                                                                            <div id="suggest" class="ac_results" style="width: 297px;">
                                                                             </div>
                                                                         </td>
                                                                     </tr>

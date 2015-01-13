@@ -120,7 +120,7 @@
 	            var html = '';
 	            if (items == '') {//热门城市遍历
 	                for (h in options.hot_list) {
-	                    html += '<li rel="' + options.hot_list[h][0] + '"><a href="#' + h + '"><span>' + options.hot_list[h][2] + '</span>' + options.hot_list[h][1] + '</a></li>';
+	                    html += '<li rel="' + options.hot_list[h][0] + '"><a href="#' + h + '"><span style="display:none">' + options.hot_list[h][2] + '</span>' + options.hot_list[h][1] + '</a></li>';
 	                }
 	                html = '<div class="gray ac_result_tip">请输入中文/拼音或者↑↓选择</div><ul>' + html + '</ul>';
 	            }
@@ -134,7 +134,7 @@
 	                for (var i = 0; i < options.source.length; i++) {//国内城市匹配
 	                    var reg = new RegExp('^' + items + '.*$', 'im');
 	                    if (reg.test(options.source[i][0]) || reg.test(options.source[i][1]) || reg.test(options.source[i][2]) || reg.test(options.source[i][3])) {
-	                        html += '<li rel="' + options.source[i][0] + '"><a href="#' + i + '"><span>' + options.source[i][2] + '</span>' + options.source[i][1] + '</a></li>';
+	                        html += '<li rel="' + options.source[i][0] + '"><a href="#' + i + '"><span style="display:none">' + options.source[i][2] + '</span>' + options.source[i][1] + '</a></li>';
 	                    }
 	                }
 	                if (html == '') {
@@ -179,7 +179,7 @@
 	            $currentResult = getCurrentResult();
 	            if ($currentResult) {
 
-	                $input.val($currentResult.children('a').html().replace(/<span>.+?<\/span>/i, ''));
+	                $input.val($currentResult.children('a').html().replace(/<span style="display:none">.+?<\/span>/i, ''));
 	                $results.hide();
 
 	                if ($(options.dataContainer)) {
