@@ -975,7 +975,7 @@ function check_fax(faxno)
 }
 function check_postcode(postcode)
 {
-     var reg= /^[1-9][0-9]{5}$/;
+     var reg= /^[0-9]{6}$/;
      if(!reg.test(postcode)) return false;
      return true;
 }

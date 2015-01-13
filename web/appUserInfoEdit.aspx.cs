@@ -100,7 +100,6 @@ public partial class appUserInfoEdit : System.Web.UI.Page
             if (!string.IsNullOrEmpty(model.MainQualificationPath))
             {
                 this.HiUpZhuTiZiGe.Value = model.MainQualificationPath;
-                aZhuTiZiGePdf.Visible = true;
             }
 
             if (!string.IsNullOrEmpty(model.CardNoPath))
