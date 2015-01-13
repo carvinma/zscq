@@ -16,6 +16,7 @@
 
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+       <script src="js/tooltips.js" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <style type="text/css">
     .aspnetpager a { display: block; float: left; padding: 2px 10px; background: #fff; text-align: center; line-height: 20px; border: 1px solid #ccc; color: #0065DB; margin: 0 3px; }
@@ -164,14 +165,14 @@
                           </table>
                           <table width="689" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                             <tr>
-                              <td width="108" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单号</td>
-                              <td width="108" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">案件号</td>
-                              <td width="120" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请人</td>
-                              <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">图样</td>
-                              <td width="78" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">金额</td>
-                              <td width="88" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">下单日期</td>
-                              <td width="88" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单状态</td>
-                               <td width="100" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
+                              <td width="80" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单号</td>
+                              <td width="65" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">案件号</td>
+                              <td width="210" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">申请人</td>
+                              <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">图样</td>
+                              <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">金额</td>
+                              <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">下单日期</td>
+                              <td width="60" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">订单状态</td>
+                              <td width="65" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">操作</td>
                             </tr>
                             <asp:Repeater ID="rp_orderlist" runat="server" OnItemDataBound="rp_orderlist_ItemDataBound">
                               <ItemTemplate>
@@ -194,8 +195,8 @@
                                   <td align="center" bgcolor="#FFFFFF">
                                    <asp:Repeater runat="server" ID="repApply">
                                       <ItemTemplate>
-                                        <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
-                                          <%#Eval("ApplyName")%>
+                                        <div title="<%#Eval("ApplyName")%>" style="text-align: center; width: 210px;height:30px;line-height:30px;overflow: hidden; text-overflow:ellipsis">
+                                          <nobr><%#Eval("ApplyName")%></nobr>
                                         </div>
                                       </ItemTemplate>
                                     </asp:Repeater>
@@ -213,7 +214,7 @@
                                     <%# Eval("dm_TotalMoney")%>
                                     </td>
                                   <td align="center" bgcolor="#FFFFFF">
-                                   <%# Eval("dt_AddTime") %>
+                                       <%# Eval("dt_AddTime") %>
                                    </td>
                                   <td align="center" bgcolor="#FFFFFF"> <%#ConvertStatus(Eval("i_Status"))%></td>
                                     <td align="center" bgcolor="#FFFFFF">
