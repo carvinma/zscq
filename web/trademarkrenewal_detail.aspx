@@ -250,6 +250,12 @@
                                      </tr>
                                 
                                      <tr id="dailifei">                                   
+                                    <td width="260" height="32" align="right" ><strong>申请号：</strong></td>  
+                                     <td> 
+                                           <%=model.RegisteredNo%></td>
+                                     </tr>
+                                
+                                     <tr id="dailifei">                                   
                                     <td width="260" height="32" align="right" ><strong>商标类别：</strong>
                                     </td>  
                                      <td> 
