@@ -55,7 +55,7 @@ public partial class User_PatentCoupon : System.Web.UI.Page
         {
             div_Coupon1.Append("<tr><td height=\"25\" align=\"center\" bgcolor=\"#FFFFFF\">" + i.nvc_Code + "</td>");
             div_Coupon1.Append("<td align=\"center\" bgcolor=\"#FFFFFF\">" + i.nvc_Name + "</td>");
-            div_Coupon1.Append("<td align=\"center\" bgcolor=\"#FFFFFF\"><span style=\"color:#860242;\">" + paybizhong + ":" + DALPO.GetPayMoneyByHuiLv(Convert.ToDecimal(i.i_Money), "CNY", paybizhong).ToString("0.00") + "</span></td>");
+            div_Coupon1.Append("<td align=\"center\" bgcolor=\"#FFFFFF\"><span style=\"color:#860242;\">" + paybizhong + ":" + DALPO.GetPayMoneyByHuiLv(Convert.ToDecimal(i.i_Money), "USD", paybizhong).ToString("0.00") + "</span></td>");
             div_Coupon1.Append("<td align=\"center\" bgcolor=\"#FFFFFF\">" + (i.nvc_From.Length > 5 ? ("<a title=\"" + i.nvc_From + "\">" + i.nvc_From.Substring(0, 5) + "</a>") : i.nvc_From) + "</td>");
             div_Coupon1.Append("<td align=\"center\" bgcolor=\"#FFFFFF\">" + DateTime.Parse(i.dt_AddTime.ToString()).ToString("yyyy-MM-dd") + "至" + DateTime.Parse(i.dt_ExpireTime.ToString()).ToString("yyyy-MM-dd") + "</td>");
         }
@@ -73,7 +73,7 @@ public partial class User_PatentCoupon : System.Web.UI.Page
         {
             div_Coupon2.Append("<tr><td height=\"25\" align=\"center\" bgcolor=\"#FFFFFF\">" + i.nvc_Code + "</td>");
             div_Coupon2.Append("<td align=\"center\" bgcolor=\"#FFFFFF\">" + i.nvc_Name + "</td>");
-            div_Coupon2.Append("<td align=\"center\" bgcolor=\"#FFFFFF\"><span style=\"color:#860242;\">" + paybizhong + ":" + DALPO.GetPayMoneyByHuiLv(Convert.ToDecimal(i.i_Money), "CNY", paybizhong).ToString("0.00") + "</span></td>");
+            div_Coupon2.Append("<td align=\"center\" bgcolor=\"#FFFFFF\"><span style=\"color:#860242;\">" + paybizhong + ":" + DALPO.GetPayMoneyByHuiLv(Convert.ToDecimal(i.i_Money), "USD", paybizhong).ToString("0.00") + "</span></td>");
             div_Coupon2.Append("<td align=\"center\" bgcolor=\"#FFFFFF\">" + (i.nvc_From.Length > 5 ? ("<a title=\"" + i.nvc_From + "\">" + i.nvc_From.Substring(0, 5) + "</a>") : i.nvc_From) + "</td>");
             div_Coupon2.Append("<td align=\"center\" bgcolor=\"#FFFFFF\">" + DateTime.Parse(i.dt_AddTime.ToString()).ToString("yyyy-MM-dd") + "至" + DateTime.Parse(i.dt_ExpireTime.ToString()).ToString("yyyy-MM-dd") + "</td>");
             div_Coupon2.Append("<td align=\"center\" bgcolor=\"#FFFFFF\">" + DateTime.Parse(i.dt_UpdateStateTime.ToString()).ToString("yyyy-MM-dd") + "</td></tr>");
