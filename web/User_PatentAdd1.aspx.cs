@@ -210,7 +210,7 @@ public partial class User_PatentAdd1 : System.Web.UI.Page
         model.i_ReceiveEmail = 1;
         if (txt_jianmian1.Value != "")
         {
-            model.i_JianMian1 = Convert.ToInt32(txt_jianmian1.Value);
+            model.i_JianMian1 = Convert.ToInt32(txt_jianmian1.Value.Replace("%",""));
         }
         model.i_JianMian2 = 0;
         //if (txt_jianmian1.Value != "")
