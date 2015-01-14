@@ -160,6 +160,7 @@ public partial class M_E_TradeMark : System.Web.UI.Page
             sortarr.Value = model.TrademarkType;
             sortGoods.Value = model.TrademarkGoods;
             hi_money.Value = model.TrademarkMoney.ToString();
+            t_SBmiaosu.Value = model.TrademarkDescribe;
             //
             if (!string.IsNullOrEmpty(model.TrademarkPattern1))
             {

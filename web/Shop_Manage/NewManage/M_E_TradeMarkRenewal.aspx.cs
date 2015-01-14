@@ -167,6 +167,7 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
             sortarr.Value = model.TrademarkType;
             sortGoods.Value = model.TrademarkGoods;
             hi_money.Value = model.TrademarkMoney.ToString();
+            t_SBmiaosu.Value= model.TrademarkDescribe;
             //
             if (!string.IsNullOrEmpty(model.TrademarkPattern1))
             {
@@ -516,16 +517,28 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
                 else if (k == 1)
                 {
                     value = model.TrademarkDescribe;
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        System.IO.FileInfo file = new System.IO.FileInfo(HttpContext.Current.Server.MapPath("../../"+model.TrademarkPattern1));
+                        if (file.Exists)
+                        {
+                            builder.MoveToBookmark("pattern");
+                            builder.InsertImage(HttpContext.Current.Server.MapPath("../../"+model.TrademarkPattern1), 40, 20);
+                        }
+                    }
                 }
-                shape.AppendChild(new Paragraph(doc));
-                Paragraph para = shape.FirstParagraph;
-                para.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    shape.AppendChild(new Paragraph(doc));
+                    Paragraph para = shape.FirstParagraph;
+                    para.ParagraphFormat.Alignment = ParagraphAlignment.Center;
 
-                Run run = new Run(doc);
-                run.Text = value;
-                run.Font.Name = "宋体";
-                run.Font.Size = 12;
-                para.AppendChild(run);
+                    Run run = new Run(doc);
+                    run.Text = value;
+                    run.Font.Name = "宋体";
+                    run.Font.Size = 12;
+                    para.AppendChild(run);
+                }
                 if (k == 1) break;
                 k++;
             }
