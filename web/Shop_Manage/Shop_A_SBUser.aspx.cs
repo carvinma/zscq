@@ -74,6 +74,10 @@ public partial class Shop_Manage_Shop_A_SBUser : System.Web.UI.Page
         //model.i_ProvinceId = int.Parse(DropDownList2.SelectedValue);//添加省
         //model.i_CityId = int.Parse(DropDownList3.SelectedValue);//添加市
         //model.i_AreaId = int.Parse(DropDownList4.SelectedValue);//添加县
+
+        model.i_ProvinceId = int.Parse(Hi_prov.Value);//添加省
+        model.i_CityId = int.Parse(Hi_city.Value);//添加市
+        model.i_AreaId = int.Parse(Hi_country.Value);//添加县
         model.nvc_Address = text_Address.Value;
         model.nvc_EnAddress = c_addressEn.Value;
         model.nvc_ZipCode = c_youbian.Value;

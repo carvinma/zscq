@@ -11,15 +11,26 @@
         function IsDigit() {
             return ((event.keyCode >= 48) && (event.keyCode <= 57));
         }
+        function isEmpty(value) {
+
+            if (value == null || value == "" || value == "undefined" || value == undefined || value == "null") {
+                return true;
+            }
+            else {
+                value = value.toString();
+                value = value.replace(/\s/g, "");
+                if (value == "") {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         //编辑时初始化行政区划
         function EditProCityArea(proviceid, cityid, areaid) {
             SelProv(proviceid, cityid, areaid);
         }
-
-        //添加时初始化行政区划
-        function InitProCityArea() {
-            SelProv();
-        }
+        
         function SelProv(proviceid, cityid, areaid) {
             $.ajax({
                 type: "POST",
@@ -71,7 +82,7 @@
             $("#Hi_city").val(cityId);
             $.ajax({
                 type: "POST",
-                url: "Handler.ashx",
+                url: "../Handler.ashx",
                 contentType: "application/x-www-form-urlencoded; charset=utf-8",
                 data: "flag=selarea&cityid=" + val,
                 success: function (data) {
