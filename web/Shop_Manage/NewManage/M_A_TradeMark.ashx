@@ -208,14 +208,15 @@ public class M_A_TradeMark : IHttpHandler
                                 find.RegNoticeDate = DateTime.Parse(dtime);
                                 find.i_Type = 1;//此案件自动转到商标续展列表中
                                 find.Status = 2;//距续展期限大于90天  当“商标状态”中产生已注册后
-                                if (find.RenewalDate.HasValue)
-                                {
-                                    find.RenewalDate = find.RenewalDate.Value.AddYears(10);
-                                }
-                                else
-                                {
-                                    find.RenewalDate = find.RegNoticeDate.Value.AddYears(10).AddDays(-1);
-                                }
+                                find.RenewalDate = find.RegNoticeDate.Value.AddYears(10).AddDays(-1);
+                                //if (find.RenewalDate.HasValue)
+                                //{
+                                //    find.RenewalDate = find.RenewalDate.Value.AddYears(10);
+                                //}
+                                //else
+                                //{
+                                //    find.RenewalDate = find.RegNoticeDate.Value.AddYears(10).AddDays(-1);
+                                //}
                                 TimeSpan ts = find.RenewalDate.Value - DateTime.Today;
                                 find.RestDays = ts.Days; //剩于天数
                                 find.RenewalAgentBook = CreateAgentBook(find);

@@ -326,7 +326,7 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
         if (!string.IsNullOrEmpty(hi_RenewalDate.Value))
         {
             model.RenewalDate = DateTime.Parse(hi_RenewalDate.Value);
-            TimeSpan ts = DateTime.Parse(spRenewalDate.Text) - DateTime.Today;
+            TimeSpan ts = DateTime.Parse(hi_RenewalDate.Value) - DateTime.Today;
             model.RestDays = ts.Days; //剩于天数
             #region 计算滞纳金
             if (ts.Days <= 0)
