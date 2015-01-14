@@ -111,8 +111,8 @@
           <td align="right">邮编：</td>
           <td>
             <input type="text" id="Txt_VipZipCode" runat="server" class="inputs200text" maxlength="6" />
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="Txt_VipZipCode" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="^[1-9]\d*$">
-            </asp:RegularExpressionValidator>
+        <%--    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="Txt_VipZipCode" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="^[1-9]\d*$">
+            </asp:RegularExpressionValidator>--%>
           </td>
         </tr>
         <tr>
