@@ -225,20 +225,28 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
 
     protected void btOK_Click(object sender, EventArgs e)
     {
-        var model = InitModel();
-        if (model != null)
+        try
         {
-            model.i_Type = 0;
-            model.Status = 0;
-            model.AgentBook = CreateAgentBook(model);
-            model.ApplyBook = CreateApplyBook(model);
-            if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
-                mark.Trademark_Submit();
-            else
-                mark.Trademark_Add(model);
-            hi_TradeMarkId.Value = model.i_Id.ToString();
-            Bind_Page_Type();
-           // Response.Redirect("L_M_Trademark.aspx");
+            var model = InitModel();
+            if (model != null)
+            {
+                model.i_Type = 0;
+                model.Status = 0;
+                model.AgentBook = CreateAgentBook(model);
+                model.ApplyBook = CreateApplyBook(model);
+                if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
+                    mark.Trademark_Submit();
+                else
+                    mark.Trademark_Add(model);
+                hi_TradeMarkId.Value = model.i_Id.ToString();
+                Bind_Page_Type();
+                div_a.InnerHtml = "<script>alert('商标申请添加成功!');<script>";
+                // Response.Redirect("L_M_Trademark.aspx");
+            }
+        }
+        catch
+        {
+            div_a.InnerHtml = "<script>alert('商标申请添加失败!');<script>";
         }
     }
 

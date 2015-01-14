@@ -23,6 +23,41 @@
     <script src="../../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
     <script type="text/javascript" src="../js/vcom.js"></script>
     <script type="text/javascript">
+
+        function M_addmarkCheck_data() {
+            //获取以下选择商品的ID
+            var goodsids = new Array();
+            $("tr[classname='arr_goods']").each(function () {
+                goodsids.push($(this).attr("val"));
+            });
+            $("#sortGoods").val(goodsids.join(','));
+            var obj = $('input:radio[name="person"]:checked').val();
+            if (obj == "" || obj == null) {
+                alert("请选择申请人类别");
+                return false;
+            }
+            if (!$(".appusertype").is(":hidden")) { //当申请人为自然人时，需要上传
+                if (!check_ApplyUser("cardno_div")) {
+                    return false;
+                }
+                if ($("#hiUpCardNo").val() == "") {
+                    alert("请上传身份证扫描件");
+                    return false;
+                }
+            }
+            if ($("#upPattern1").val() == null || $("#upPattern1").val() == "") {
+                alert("请上传商标图样1");
+                return false;
+            }
+            if (check_ApplyUser("name_div", 1) && check_ApplyUser("address_div", 1)
+    && check_ApplyUser("ContactPerson_div", 1) && check_ApplyUser("phone_div", 1)
+    && check_ApplyUser("postcode_div", 1)
+    && check_ApplyUser("remark_div", 1) && check_ApplyUser("sortarr_div", 1))
+                return true;
+
+            return false;
+        }
+
         $(document).ready(function () {
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
                 if (e.target == this) {
@@ -1162,7 +1197,7 @@
             <div style="width: 100%; position: fixed; left: 0; bottom: 0px; height: 30px; background: #dfeef5;">
                 <%# Eval("DetailCategoryCode")%>
                 <asp:Button ID="btOK" runat="server" Text="提交" class="button" OnClick="btOK_Click"
-                    OnClientClick="return addmarkCheck_data();" Style="margin-left: 350px;" />
+                    OnClientClick="return M_addmarkCheck_data();" Style="margin-left: 350px;" />
                 <%# Eval("GoodsCode")%>
                 <%# Eval("GoodsRemark")%><input type="button" id="Button3" value="返回" class="button"
                     style="display: none" onclick="javascript:window.location='Shop_M_Trademark.aspx?<%=returnurl %>';" />
