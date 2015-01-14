@@ -1322,7 +1322,7 @@
             <div style="width: 100%; position: fixed; left: 0; bottom: 0px; height: 30px; background: #dfeef5;">
                 <%# Eval("DetailCategoryCode")%>
                 <asp:Button ID="btOK" runat="server" Text="提交" class="button" OnClick="btOK_Click"
-                    OnClientClick="addmarkCheck_data();" Style="margin-left: 350px;" />
+                    OnClientClick="return addmarkCheck_data();" Style="margin-left: 350px;" />
                 <%# Eval("GoodsCode")%>
                 <%# Eval("GoodsRemark")%><input type="button" id="Button3" value="返回" class="button"
                     style="display: none" onclick="javascript:window.location='Shop_M_Trademark.aspx?<%=returnurl %>';" />
