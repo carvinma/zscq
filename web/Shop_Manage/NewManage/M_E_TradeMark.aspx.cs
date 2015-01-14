@@ -142,6 +142,7 @@ public partial class M_E_TradeMark : System.Web.UI.Page
             this.txt_fax.Value = model.Fax;
             this.txt_postcode.Value = model.PostCode;
             this.lblCaseNo.Text = model.CaseNo;
+            this.txt_applyNum.Value = model.RegisteredNo;
 
             if (model.Is3D == true) Radio3DYES.Checked = true;
             else Radio3DNo.Checked = true;
