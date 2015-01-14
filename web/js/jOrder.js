@@ -35,10 +35,20 @@ var delCaseSubmitRenewal = function (v, h, f) {
     if (v == "ok") {
         var id = h.find("div:hidden").html();
         var totalmoney = $("#guifei").html();
-        var money = $("#ordertr" + id).find("td:eq(6)").text();
-        var nowemoney = parseFloat(totalmoney) - parseFloat(money);
+        var dailimoney = $("#dailifei").html();
+        var zhinamoney = $("#zhinajin").html();
+
+        var typeMoney = $("#moeny1" + id).text();
+        var agentMoney = $("#moeny2" + id).text();
+        var lateMoney = $("#moeny3" + id).text();
+        var nowemoney = parseFloat(totalmoney) - parseFloat(typeMoney);
         $("#guifei").html(nowemoney.toFixed(2));
-        $("#tax").html((nowemoney * 0.033).toFixed(2))
+        var newdailifee = dailimoney - parseFloat(agentMoney);
+        $("#dailifei").html(newdailifee.toFixed(2));
+        var zhinafee = zhinamoney - parseFloat(lateMoney);
+        $("#zhinajin").html(zhinafee.toFixed(2));
+
+        $("#tax").html((nowemoney + newdailifee + zhinafee * 0.033).toFixed(2))
 
         $("#ordertr" + id).remove();
         if ($("#tabOrder tr").length == 2) {

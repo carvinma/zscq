@@ -177,7 +177,8 @@
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF" class="font12b4e">
                                                                                         <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
-                                                                                        <span id="moeny1<%# Eval("i_Id")%>" style="display:none"> <%# Eval("TrademarkMoney")%></span> <span id="moeny2<%# Eval("i_Id")%>" style="display:none"> <%# Eval("TrademarkAgencyFee")%></span>
+                                                                                        <span id="moeny1<%# Eval("i_Id")%>" style="display:none"> <%# Eval("TrademarkMoney")%></span>
+                                                                                        <span id="moeny2<%# Eval("i_Id")%>" style="display:none"> <%# Eval("TrademarkAgencyFee")%></span>
                                                                                     </td>
                                                                                     <td align="center" bgcolor="#FFFFFF">
                                                                                       <a href='<%#Eval("ApplyBook")%>' title='点击下载' target='_blank'>下载</a>
