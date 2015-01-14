@@ -8,14 +8,18 @@ var delCaseSubmit = function (v, h, f) {
     if (v == "ok") {
         var id = h.find("div:hidden").html();
         var totalmoney = $("#guifei").html();
-        var money = $("#ordertr" + id).find("td:eq(4)").text();
-        //h.find('#amount').val();
-        var nowemoney = parseFloat(totalmoney) - parseFloat(money);
+        var dailimoney = $("#dailifei").html();
+
+        var typeMoney = $("#moeny1" + id).text();
+        var agentMoney = $("#moeny2" + id).text();
+        var nowemoney = parseFloat(totalmoney) - parseFloat(typeMoney);
         $("#guifei").html(nowemoney.toFixed(2));
-        $("#tax").html((nowemoney * 0.033).toFixed(2))
+        var newdailifee = dailimoney - parseFloat(agentMoney);
+        $("#dailifei").html(newdailifee.toFixed(2));
+        $("#tax").html((nowemoney + newdailifee * 0.033).toFixed(2))
 
         $("#ordertr" + id).remove();
-        if ($("#tabOrder tr").length ==2) {
+        if ($("#tabOrder tr").length == 2) {
             $("#guifei").html(0);
             $("#zhinajin").html(0);
             $("#dailifei").html(0);
