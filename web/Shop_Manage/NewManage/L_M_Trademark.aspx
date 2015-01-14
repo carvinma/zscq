@@ -75,6 +75,7 @@
             var membername = $("#hi_membername");
             var trademarktype = $("#hi_trademarktype");
             var timelimit = $("#hi_timelimit");
+            var casetype = $("#hi_casetype");
             var timeadd = $("#hi_timeadd");
             var status = $("#hi_status");
 
@@ -137,6 +138,15 @@
                 $("#timelimitAsc").show();
                 $("#timelimitDesc").hide();
             }
+            if (casetype.val() == "desc") {
+                $("#casetypeAsc").hide();
+                $("#casetypeDesc").show();
+            }
+            else {
+                $("#casetypeAsc").show();
+                $("#casetypeDesc").hide();
+            }
+
             if (timeadd.val() == "desc") {
                 $("#timeaddAsc").hide();
                 $("#timeaddDesc").show();
@@ -171,6 +181,7 @@
     <input type="hidden" id="hi_membername" runat="server" value="0" />
     <input type="hidden" id="hi_trademarktype" runat="server" value="0" />
     <input type="hidden" id="hi_timelimit" runat="server" value="0" />
+    <input type="hidden" id="hi_casetype" runat="server" value="0" />
     <input type="hidden" id="hi_timeadd" runat="server" value="0" />
     <input type="hidden" id="hi_status" runat="server" value="0" />
   
@@ -243,10 +254,10 @@
                             title="正序" id="timelimitDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="5%">
-                    分类<%--<a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=desc"
-                        title="倒序" id="timeaddAsc"><span class="sp1"></span></a>
-                        <a href="L_M_Trademark.aspx?<%=returnurl %>&timeadd=asc"
-                            title="正序"><span class="sp2" id="timeaddDesc"></span></a>--%>
+                    分类<a href="L_M_Trademark.aspx?<%=returnurl %>&casetype=desc"
+                        title="倒序" id="casetypeAsc"><span class="sp1"></span></a>
+                        <a href="L_M_Trademark.aspx?<%=returnurl %>&casetype=asc"
+                            title="正序"  id="casetypeDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="5%">
                     商标<br />详情

@@ -563,11 +563,11 @@
                                                                         </td>
                                                                         <td align="left">
                                                                          <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                   <select id="live_city" name="live_city" onchange="SelArea(this.value);">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                   <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
-                                  <option value="">请选择：</option></select>
+                                  <option value="">请选择</option></select>
                                     <span style="color: Red;">*</span>
                                    <span class="status error" id="area_div_error"></span>
                                     <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />

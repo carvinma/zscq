@@ -48,6 +48,7 @@ public partial class L_M_Trademark : System.Web.UI.Page
     public string membername = "";
     public string trademarktype = "";
     public string timelimit = "";
+    public string casetype = "";
     public string timeadd = "";
     public string status = "";
 
@@ -133,6 +134,11 @@ public partial class L_M_Trademark : System.Web.UI.Page
         {
             this.timelimit = Request.QueryString["timelimit"].ToString();
             hi_timelimit.Value = timelimit;
+        }
+        if (Request.QueryString["casetype"] != null && Request.QueryString["casetype"] != "")
+        {
+            this.casetype = Request.QueryString["casetype"].ToString();
+            hi_casetype.Value = casetype;
         }
         if (Request.QueryString["timeadd"] != null && Request.QueryString["timeadd"] != "")
         {
@@ -385,6 +391,15 @@ public partial class L_M_Trademark : System.Web.UI.Page
                     iquery = from i in iquery orderby i.RenewalDate ascending select i;
                 else
                     iquery = from i in iquery orderby i.RenewalDate descending select i;
+            }
+            if (Request.QueryString["casetype"] != null && Request.QueryString["casetype"] != "")
+            {
+                this.casetype = Request.QueryString["casetype"].ToString();
+                hi_casetype.Value = casetype;
+                if (casetype == "asc")
+                    iquery = from i in iquery orderby i.i_Type ascending select i;
+                else
+                    iquery = from i in iquery orderby i.i_Type descending select i;
             }
             if (Request.QueryString["timeadd"] != null && Request.QueryString["timeadd"] != "")
             {

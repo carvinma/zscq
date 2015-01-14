@@ -11,6 +11,98 @@
         function IsDigit() {
             return ((event.keyCode >= 48) && (event.keyCode <= 57));
         }
+        //编辑时初始化行政区划
+        function EditProCityArea(proviceid, cityid, areaid) {
+            SelProv(proviceid, cityid, areaid);
+        }
+
+        //添加时初始化行政区划
+        function InitProCityArea() {
+            SelProv();
+        }
+        function SelProv(proviceid, cityid, areaid) {
+            $.ajax({
+                type: "POST",
+                url: "../Handler.ashx",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                data: "flag=selprov",
+                success: function (date) {
+                    $("#live_prov").html(date);
+                    if (!isEmpty(proviceid)) {
+                        $("#live_prov").val(proviceid).attr("selected", "selected");
+                        SelCity(proviceid, cityid, areaid);
+                    }
+                }
+            });
+        }
+
+
+        function SelCity(val, cityid, areaid) {
+            var provinceName = isEmpty(val) ? "" : $("#live_prov").find("option:selected").text();
+            $("#live_country").html("<option selected=\"\" value=\"\">请选择</option>");
+            var provinceId = $("#live_prov").find("option:selected").val();
+            $("#Hi_prov").val(provinceId);
+
+            $.ajax({
+                type: "POST",
+                url: "../Handler.ashx",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                data: "flag=selcity&provinceid=" + val,
+                success: function (data) {
+                    $("#live_city").html(data);
+                    if (!isEmpty(cityid)) {
+                        $("#live_city").val(cityid).attr("selected", "selected");
+                        if (!isEmpty(areaid)) {
+                            SelArea(cityid, areaid);
+                        }
+                    }
+                    if (val == null || val == "") {
+                        $("#live_city").html("<option selected=\"\" value=\"\">请选择</option>");
+                        $("#live_country").html("<option selected=\"\" value=\"\">请选择</option>");
+                        return;
+                    }
+                }
+            });
+        }
+        function SelArea(val, areaid) {
+            var provinceName = $("#live_prov").find("option:selected").text();
+            var cityName = isEmpty(val) ? "" : $("#live_city").find("option:selected").text().replace("市辖区", "").replace("县", "");
+            var cityId = $("#live_city").find("option:selected").val();
+            $("#Hi_city").val(cityId);
+            $.ajax({
+                type: "POST",
+                url: "Handler.ashx",
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                data: "flag=selarea&cityid=" + val,
+                success: function (data) {
+                    $("#live_country").html(data);
+                    if (areaid != null) {
+                        $("#live_country").val(areaid).attr("selected", "selected");
+                        SetAddress(areaid);
+                    }
+                    if (val == null || val == "") {
+                        $("#live_country").html("<option selected=\"\" value=\"\">请选择</option>");
+                        return;
+                    }
+                }
+            });
+        }
+        function SetAddress(val) {
+            var provinceName = $("#live_prov").find("option:selected").text();
+            var cityName = $("#live_city").find("option:selected").text().replace("市辖区", "").replace("县", "");
+            var countyName = isEmpty(val) ? "" : $("#live_country").find("option:selected").text();
+            //    var provinceId = $("#live_prov").find("option:selected").val();
+            //    var cityId = $("#live_city").find("option:selected").val();
+            var countyId = $("#live_country").find("option:selected").val();
+            $("#Hi_country").val(countyId);
+            //$("#areaNameTxt").text(trimAll(provinceName) + trimAll(cityName) + trimAll(countyName));
+        }
+        $(function () {
+            var porviceid = $("#Hi_prov").val();
+            var cityid = $("#Hi_city").val();
+            var areaid = $("#Hi_country").val();
+            EditProCityArea(porviceid, cityid, areaid);
+        });
     </script>
 </head>
 <body onload="checktype();">
@@ -29,7 +121,7 @@
         <div class="list-div">
             <table cellspacing='1' cellpadding='3'>
                 <tr align="center">
-                    <th colspan="4">
+                    <th colspan="2">
                         <%=UserName %>&nbsp;会员资料
                     </th>
                 </tr>
@@ -169,6 +261,22 @@
                 </tr>
                  <tr>
                     <td align="right">
+                        行政区划：</td>
+                    <td>
+                        <select id="live_prov" name="live_prov" onchange="SelCity(this.value);">
+                                  <option value="">请选择</option></select>
+                                  <select id="live_city" name="live_city" onchange="SelArea(this.value);">
+                                  <option value="">请选择</option></select>
+                                  <select id="live_country" name="live_country" onchange="SetAddress(this.value)">
+                                  <option value="">请选择</option></select>
+                                   <span class="status error" id="area_div_error"></span>
+                                    <input type="hidden" runat="server" id="Hi_prov" clientidmode="Static"  />
+                                    <input type="hidden" runat="server" id="Hi_city" clientidmode="Static" />
+                                    <input type="hidden" runat="server" id="Hi_country" clientidmode="Static" />
+                                    </td>
+                </tr>
+                 <tr>
+                    <td align="right">
                         联系人地址：
                     </td>
                     <td>
@@ -176,6 +284,7 @@
                             class="font12000" maxlength="250" runat="server"> </textarea>
                     </td>
                 </tr>
+                
                 <tr id="addressEn" style="display: none;">
                     <td height="32" align="right">
                         联系人英文地址：
@@ -264,7 +373,7 @@
                     </td>
                 </tr>
                 <tr align="center">
-                    <th colspan="4">
+                    <th colspan="2">
                         费用信息
                     </th>
                 </tr>

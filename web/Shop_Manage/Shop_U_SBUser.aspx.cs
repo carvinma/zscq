@@ -105,6 +105,10 @@ public partial class Shop_Manage_Shop_U_SBUser : System.Web.UI.Page
             //DropDownList3.SelectedValue = model.i_CityId.ToString();
             //DropDownList3_SelectedIndexChanged(null, null);
             //DropDownList4.SelectedValue = model.i_AreaId.ToString();
+
+            Hi_prov.Value = model.i_ProvinceId.ToString();
+            Hi_city.Value = model.i_CityId.ToString();
+            Hi_country.Value = model.i_AreaId.ToString();
             text_Address.Value = model.nvc_Address;
             c_addressEn.Value = model.nvc_EnAddress;
             c_company.Value = model.nvc_Company;
