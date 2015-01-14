@@ -14,7 +14,7 @@ var delCaseSubmit = function (v, h, f) {
         var agentMoney = $("#moeny2" + id).text();
         var nowemoney = parseFloat(totalmoney) - parseFloat(typeMoney);
         $("#guifei").html(nowemoney.toFixed(2));
-        var newdailifee = dailimoney - parseFloat(agentMoney);
+        var newdailifee = parseFloat(dailimoney) - parseFloat(agentMoney);
         $("#dailifei").html(newdailifee.toFixed(2));
         $("#tax").html((nowemoney + newdailifee * 0.033).toFixed(2))
 
@@ -43,9 +43,9 @@ var delCaseSubmitRenewal = function (v, h, f) {
         var lateMoney = $("#moeny3" + id).text();
         var nowemoney = parseFloat(totalmoney) - parseFloat(typeMoney);
         $("#guifei").html(nowemoney.toFixed(2));
-        var newdailifee = dailimoney - parseFloat(agentMoney);
+        var newdailifee = parseFloat(dailimoney) - parseFloat(agentMoney);
         $("#dailifei").html(newdailifee.toFixed(2));
-        var zhinafee = zhinamoney - parseFloat(lateMoney);
+        var zhinafee = parseFloat(zhinamoney) - parseFloat(lateMoney);
         $("#zhinajin").html(zhinafee.toFixed(2));
 
         $("#tax").html((nowemoney + newdailifee + zhinafee * 0.033).toFixed(2))
