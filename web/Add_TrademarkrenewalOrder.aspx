@@ -132,34 +132,34 @@
                                                                 <div id="trademarkinfo">
                                                                     <table width="689" id="tabOrder" border="0" cellspacing="1" cellpadding="1" bgcolor="#d0d0d0">
                                                                         <tr>
-                                                                            <td width="120" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="65" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 案件号
                                                                             </td>
-                                                                            <td width="120" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="80" height="35" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 申请号
                                                                             </td>
-                                                                            <td width="90" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td  width="150" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 申请人
                                                                             </td>
                                                                             <td width="52" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 图样
                                                                             </td>
-                                                                            <td width="180" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="80" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 类别
                                                                             </td>
-                                                                             <td width="92" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                             <td width="70" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 到期日
                                                                             </td>
-                                                                            <td width="85" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="75" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 金额
                                                                             </td>
-                                                                            <td width="77" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="50" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 申请书
                                                                             </td>
-                                                                            <td width="77" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="50" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 委托书
                                                                             </td>
-                                                                            <td width="77" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
+                                                                            <td width="40" align="center" bgcolor="#FFFFFF" class="font12b4e user_zlbottomline">
                                                                                 操作
                                                                             </td>
                                                                         </tr>
