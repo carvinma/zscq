@@ -239,7 +239,7 @@ public partial class user_sbzl : System.Web.UI.Page
                 {
                     if (FileUpload3.PostedFile.ContentLength > 1024 * 1024 *1)
                     {
-                        MessageBox.Show(this.Page, "文件大小不能超过 500KB");
+                        MessageBox.Show(this.Page, "文件大小不能超过 1M");
                         // div_a.InnerHtml = "<script>alert('文件大小不能超过 512KB');</script>";
                         return;
                     }
