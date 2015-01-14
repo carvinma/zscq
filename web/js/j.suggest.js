@@ -178,8 +178,7 @@
 	        function selectCurrentResult() {
 	            $currentResult = getCurrentResult();
 	            if ($currentResult) {
-
-	                $input.val($currentResult.children('a').html().replace(/<span style="display:none">.+?<\/span>/i, ''));
+	                $input.val($currentResult.children('a').html().replace(/<SPAN style="DISPLAY: none">.+?<\/SPAN>/i, '').replace(/<span style="display:none">.+?<\/span>/i, ''));
 	                $results.hide();
 
 	                if ($(options.dataContainer)) {
