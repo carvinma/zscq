@@ -21,8 +21,35 @@
     <link href="../../jBox/Skins/Red/jbox.css" rel="stylesheet" type="text/css" />
     <link href="../../css/trademark.css" rel="stylesheet" type="text/css" />
     <script src="../../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../js/vcom.js"></script>
     <script type="text/javascript">
+        function M_addmarkRenewalCheck_data() {
+            var obj = $('input:radio[name="person"]:checked').val();
+            if (obj == "" || obj == null) {
+                alert("请选择注册人类别");
+                return false;
+            }
+            if (!$(".appusertype").is(":hidden")) { //当注册人为自然人时，需要上传
+                if (!check_ApplyUser("cardno_div")) {
+                    return false;
+                }
+                if ($("#hiUpCardNo").val() == "") {
+                    alert("请上传身份证扫描件");
+                    return false;
+                }
+            }
+            if ($("#upRegisteCertificate").val() == "") {
+                alert("请上传商标注册证书");
+                return false;
+            }
+
+            if (check_ApplyUser("name_div", 1) && check_ApplyUser("address_div", 1)
+    && check_ApplyUser("ContactPerson_div", 1) && check_ApplyUser("phone_div", 1)
+    && check_ApplyUser("postcode_div", 1)&& check_ApplyUser("sortarr_div", 1) 
+    && check_ApplyUser("regno_div", 1) && check_ApplyUser("regdate_div", 1))
+                return true;
+            return false;
+        }
+
         $(document).ready(function () {
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
                 if (e.target == this) {
@@ -94,6 +121,48 @@
                 }
             });
 
+            $(".chkregdate").live("click", function () {
+                var regdate = $(this).parent().prev().find("span").text().replace('年', '-').replace('月', '-');
+                regdate = regdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
+                //if ($(this).is(":checked")) {
+                if ($(this).val() == "1") {
+                    var flag = true;
+                    // var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
+                    var html = '<tr><td width="200"><span>yyyy年mm月dd</span>日之前是否续展完成</td><td> <input id="Radio1" name="rdoGroup" type="radio"  value="1" class="chkregdate"/>是<input id="chkdate" name="rdoGroupNO" type="radio" value="0" checked="checked" class="chkregdate"/>否</td></tr>'
+                    $("#tbdate tr").each(function () {
+                        var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                        tmpdate = tmpdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
+                        if (new Date(tmpdate) > new Date(regdate)) {
+                            flag = false;
+                            return;
+                        }
+                    });
+                    if (flag) {
+                        var d = new Date(regdate);
+                        d.setYear(d.getFullYear() + parseInt(10));
+                        var month = d.getMonth() + 1;
+                        if (parseInt(month) < 10)
+                            month = "0" + month;
+                        var day = d.getDate();
+                        if (parseInt(day) < 10)
+                            day = "0" + day;
+                        var ndate = (d.getFullYear()) + "-" + month + "-" + day;
+                        $("#txt_RenewalDate").val(ndate);
+                        $("#tbdate").append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day).replace('rdoGroup', 'rdoGroup' + d.getFullYear()).replace("rdoGroupNO", "rdoGroup" + d.getFullYear()));
+                    }
+                }
+                else {
+                    $("#tbdate tr").each(function () {
+                        var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+                        tmpdate = tmpdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
+                        if (new Date(tmpdate) > new Date(regdate)) {
+                            $(this).remove();
+                        }
+                    });
+                    $("#txt_RenewalDate").val(regdate);
+                }
+                recordRegnoticeDate();
+            });
             $("#upCardNoPdf").uploadify({
                 'swf': '../../js/SWF/uploadify.swf',
                 'uploader': '../../Handler.ashx?flag=uploadimage',
@@ -690,11 +759,12 @@
                                                     <strong>申请号</strong>：
                                                 </td>
                                                 <td>
-                                                    <input class="font12000" runat="server" id="txt_applyNum" maxlength="50" type="text"
+                                                    <input class="font12000" runat="server" id="txt_RegNo" maxlength="50" type="text"
                                                         name="" value="" />
                                                 </td>
                                                 <td width="429">
-                                                    &nbsp;
+                                                   <span style="color: Red;">*</span>
+                                                                            <span class="status error" id="regno_div_error"></span>
                                                 </td>
                                             </tr>
                                             <tr id="soundfiles">
@@ -776,7 +846,7 @@
                                                 </td>
                                                 <td valign="middle">
                                                     <input id="sortarr" type="text" runat="server" class="font12000"
-                                                        onblur="check_ApplyUser('sortarr_div')"/>
+                                                        onblur="check_ApplyUser('sortarr_div');calcsortarr();"/>
                                                 </td>
                                                 <td align="left">
                                                     <span class="status error" id="sortarr_div_error"></span>
@@ -957,7 +1027,7 @@
             <div style="width: 100%; position: fixed; left: 0; bottom: 0px; height: 30px; background: #dfeef5;">
                 <%# Eval("DetailCategoryCode")%>
                 <asp:Button ID="btOK" runat="server" Text="提交" class="button" OnClick="btOK_Click"
-                    OnClientClick="return addmarkCheck_data();" Style="margin-left: 350px;" />
+                    OnClientClick="return M_addmarkRenewalCheck_data();" Style="margin-left: 350px;" />
                 <%# Eval("GoodsCode")%>
                 <%# Eval("GoodsRemark")%><input type="button" id="Button3" value="返回" class="button"
                     style="display: none" onclick="javascript:window.location='Shop_M_Trademark.aspx?<%=returnurl %>';" />
@@ -984,13 +1054,18 @@
                                     <%# Eval("StatusName")%>
                                 </td>
                                 <td align="center">
-                                    <input type="text" id='dt_statustime<%#Eval("TradeMarkStatusId") %>' class="inputs110text"
+                                 <%# Eval("TradeMarkStatusValue").ToString() != "4" ? 
+                                     "<input type='text' id='dt_statustime"+Eval("TradeMarkStatusId")+"' class='inputs110text' value='"+string.Format("{0:yyyy-MM-dd}",Eval("TradeMarkDate"))+"' readonly='readonly' style='background-image: url(../../images/user_js_date.gif);background-repeat: no-repeat; background-position: right;' onclick=WdatePicker({dateFmt:'yyyy-MM-dd'}); />"
+                                     :"<span id='adminsatusRenewalDate'>"+string.Format("{0:yyyy-MM-dd}",Eval("TradeMarkDate"))+"</span>"  %>
+                                   <%-- <input type="text" id='dt_statustime<%#Eval("TradeMarkStatusId") %>' class="inputs110text"
                                         value='<%#string.Format("{0:yyyy-MM-dd}",Eval("TradeMarkDate")) %>' readonly="readonly"
                                         style="background-image: url(../../images/user_js_date.gif); background-repeat: no-repeat;
-                                        background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />
+                                        background-position: right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});" />--%>
                                 </td>
                                 <td align="center">
-                                    <input id="Btn_Update" type="button" class="inputicoeditbutton" onclick="AdminStatusEdit(<%#Eval("TradeMarkStatusId") %>,<%#Eval("TradeMarkStatusValue") %>)" />
+                                <%# Eval("TradeMarkStatusValue").ToString() != "4" ? 
+                                "<input id='Btn_Update' type='button' class='inputicoeditbutton' onclick='AdminStatusEdit("+Eval("TradeMarkStatusId")+","+Eval("TradeMarkStatusValue")+")'/>":"" %>
+                                   <%-- <input id="Btn_Update" type="button" class="inputicoeditbutton" onclick="AdminStatusEdit(<%#Eval("TradeMarkStatusId") %>,<%#Eval("TradeMarkStatusValue") %>)" />--%>
                                 </td>
                             </tr>
                         </ItemTemplate>
@@ -1057,9 +1132,7 @@
     <input type="hidden" id="HiddenDel" value="" runat="server" />
     <img style="position: absolute; display: none; border: solid 2px #578ece;" id="xsimg"
         alt="" src="../images/noimage.jpg" width="164" />
-    <div id="div_a" runat="server">
-    </div>
-    </form>
+    </form> 
 </body>
 </html>
 <script type="text/javascript">
@@ -1156,7 +1229,7 @@
         tbdate.empty();
         regdate = regdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$1/$2/$3");
         //var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td><input id="chkdate" type="checkbox" class="chkregdate"/></td></tr>'
-        var html = '<tr><td><span>yyyy年mm月dd</span>日之前是否续展完成</td><td> <input id="Radio1" name="rdoGroup" type="radio" value="1" class="chkregdate"/>是<input id="chkdate" name="rdoGroupNO" type="radio"  checked="checked" value="0" class="chkregdate"/>否</td></tr>'
+        var html = '<tr><td width="200"><span>yyyy年mm月dd</span>日之前是否续展完成</td><td> <input id="Radio1" name="rdoGroup" type="radio" value="1" class="chkregdate"/>是<input id="chkdate" name="rdoGroupNO" type="radio"  checked="checked" value="0" class="chkregdate"/>否</td></tr>'
         var d = new Date(regdate);
         d.setYear(d.getFullYear() + parseInt(10));
         d.setDate(d.getDate() - parseInt(1));
@@ -1172,6 +1245,29 @@
         //var newhmtl=
         tbdate.append(html.replace('yyyy', d.getFullYear()).replace('mm', month).replace('dd', day).replace('rdoGroup', 'rdoGroup' + d.getFullYear()).replace('rdoGroupNO', 'rdoGroup' + d.getFullYear()));
         $("#hi_RegNoticeDate").val(ndate + "_" + "0" + "|");
+    }
+    function recordRegnoticeDate() {
+        var s = '';
+        $("#tbdate tr").each(function () {
+            var tmpdate = $(this).find("span").text().replace('年', '-').replace('月', '-');
+            var chked = $(this).find('input:radio:checked').val();
+            s += tmpdate + "_" + chked + "|"
+        });
+        $("#hi_RegNoticeDate").val(s);
+    }
+    function calcsortarr() {
+        var goodstype = $("#sortarr").val();
+        if (!isEmpty(goodstype)) {
+            var parr = new Array();
+            parr = goodstype.replace(/，/g, ',').split(",");
+            var totolmoney = parr.length * parseFloat($("#hi_MainFees").val());
+            //$("#lbltotalCost").text("包含" + parr.length + "类，共计规费:" + totolmoney + "元");
+            // $("#lbltotalCost").show();
+            $("#hi_money").val(totolmoney);
+        }
+        else {
+           // $("#lbltotalCost").hide();
+        }
     }
 </script>
 <script type="text/javascript">

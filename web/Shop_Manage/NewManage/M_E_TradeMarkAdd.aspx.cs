@@ -240,13 +240,13 @@ public partial class M_E_TradeMarkAdd : System.Web.UI.Page
                     mark.Trademark_Add(model);
                 hi_TradeMarkId.Value = model.i_Id.ToString();
                 Bind_Page_Type();
-                div_a.InnerHtml = "<script>alert('商标申请添加成功!');<script>";
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "alert1", "alert('商标申请添加成功!');", true); 
                 // Response.Redirect("L_M_Trademark.aspx");
             }
         }
         catch
         {
-            div_a.InnerHtml = "<script>alert('商标申请添加失败!');<script>";
+            Page.ClientScript.RegisterStartupScript(Page.GetType(), "alert1", "alert('商标申请添加失败!');", true); 
         }
     }
 

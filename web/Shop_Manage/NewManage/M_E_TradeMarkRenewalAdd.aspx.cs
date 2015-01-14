@@ -50,7 +50,6 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             Response.Write("无权限访问！");
             Response.End();
         }
-        div_a.InnerHtml = "";
         if (Request.Url.ToString().IndexOf('?') > -1)
         {
             returnurl = Request.Url.ToString().Split('?')[1];
@@ -108,9 +107,9 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
         model.i_MemberId = int.Parse(Hi_MemberId.Value);
         model.ApplyName = txt_applyname.Value.Trim();
         model.ApplyType = this.RdoPeople.Checked ? 1 : 0;
-        if (!string.IsNullOrEmpty(this.txt_applyNum.Value))
+        if (!string.IsNullOrEmpty(this.txt_RegNo.Value))
         {
-            model.RegisteredNo = this.txt_applyNum.Value.Trim();
+            model.RegisteredNo = this.txt_RegNo.Value.Trim();
         }
         string fileName = string.Empty;
         if (model.ApplyType == 1)
@@ -155,7 +154,7 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
         //model.CaseNo = this.lblCaseNo.Text;
         if (string.IsNullOrEmpty(hi_TradeMarkId.Value))
             model.CaseNo = caseNo.GetTodayMaxCaseNo();
-        
+
         if (!string.IsNullOrEmpty(this.upSound.Value))
         {
             System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
@@ -174,7 +173,7 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
         model.TrademarkMoney = money;
-        var agencyModel = goods.CategoryFees_Select_ByType(2);
+        var agencyModel = goods.CategoryFees_Select_ByType(3);
         model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
         model.TrademarkLateFee = 0;//滞纳金
 
@@ -187,11 +186,15 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             if (ts.Days <= 0)
             {
                 var latefeeModel = goods.CategoryFees_Select_ByType(4);
-                model.TrademarkLateFee = latefeeModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
+                model.TrademarkLateFee = latefeeModel.MainFees * model.TrademarkType.Split(',').Length;//滞纳金
             }
             #endregion
         }
 
+        if (!string.IsNullOrEmpty(txt_RegNoticeDate.Value))
+            model.RegNoticeDate = DateTime.Parse(txt_RegNoticeDate.Value);
+        if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
+            model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
 
         fileName = this.upPattern1.Value;//图样1
         if (!string.IsNullOrEmpty(fileName))
@@ -238,74 +241,88 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
     }
     protected void btOK_Click(object sender, EventArgs e)
     {
-        var model = InitModel();
-        if (model != null)
+        try
         {
-            model.i_Type = 1;
-            model.Status = 12;
-            model.AgentBook = CreateAgentBook(model);
-            model.ApplyBook = CreateApplyBook(model);
-            if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
-                mark.Trademark_Submit();
-            else
-                mark.Trademark_Add(model);
-            addRegNoticeData(model.i_Id);
-            hi_TradeMarkId.Value = model.i_Id.ToString();
-            Bind_Page_Type();
-            // Response.Redirect("L_M_Trademark.aspx");
+            var model = InitModel();
+            if (model != null)
+            {
+                model.i_Type = 1;
+                model.Status = 12;
+                model.AgentBook = CreateAgentBook(model);
+                model.ApplyBook = CreateApplyBook(model);
+                if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
+                    mark.Trademark_Submit();
+                else
+                    mark.Trademark_Add(model);
+                addRegNoticeData(model.i_Id);
+                hi_TradeMarkId.Value = model.i_Id.ToString();
+                if (model.RegNoticeDate.HasValue)
+                {
+                    t_NewTradeMarkStatusDate sdmodel = new t_NewTradeMarkStatusDate();
+                    sdmodel.TradeMarkId = model.i_Id;
+                    sdmodel.TradeMarkStatusId = 31;
+                    sdmodel.TradeMarkDate = model.RegNoticeDate;
+                    mark.trademarkStatusdateSumbit(sdmodel);
+                }
+                Bind_Page_Type();
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "alert1", "alert('商标续展添加成功!');", true); 
+                // Response.Redirect("L_M_Trademark.aspx");
+            }
+        }
+        catch
+        {
+            Page.ClientScript.RegisterStartupScript(Page.GetType(), "alert1", "alert('商标续展添加失败!');", true); 
         }
     }
 
-    #region 生成书
     /// <summary>
-    /// 商标申请代理委托书
+    /// 商标续展代理委托书
     /// </summary>
     private string CreateAgentBook(t_NewTradeMarkInfo model)
     {
         string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
 
-        string tmppath = Server.MapPath("../../File_Zscq/template/BookTrademarkAgent.doc");
+        string tmppath = Server.MapPath("../../File_Zscq/template/BookTrademarkRenewalAgent.doc");
         Document doc = new Document(tmppath); //载入模板 
         DocumentBuilder builder = new DocumentBuilder(doc);
 
         NodeCollection shapeCollection = doc.GetChildNodes(NodeType.Shape, true);
 
+        // Since we will be adding/removing nodes, it is better to copy all collection
+        // into a fixed size array, otherwise iterator will be invalidated.
         Node[] shapes = shapeCollection.ToArray();
 
+        int k = 0;
         foreach (Shape shape in shapes)
         {
-            if (shape.ShapeType.Equals(ShapeType.TextBox))//委托人
+            if (shape.ShapeType.Equals(ShapeType.TextBox))//委托人 //商标
             {
-                string agentPeople = model.ApplyName;
-                if (model.ApplyType == 1)
-                    agentPeople = model.ApplyName + "(" + model.CardNo + ")";
-
+                string value = string.Empty;
+                if (k == 0)
+                {
+                    value = model.ApplyName;
+                    if (model.ApplyType == 1)
+                        value = model.ApplyName + "(" + model.CardNo + ")";
+                }
+                else if (k == 1)
+                {
+                    value = model.TrademarkDescribe;
+                }
                 shape.AppendChild(new Paragraph(doc));
                 Paragraph para = shape.FirstParagraph;
                 para.ParagraphFormat.Alignment = ParagraphAlignment.Center;
 
                 Run run = new Run(doc);
-                run.Text = agentPeople;
+                run.Text = value;
                 run.Font.Name = "宋体";
                 run.Font.Size = 12;
                 para.AppendChild(run);
-                break;
+                if (k == 1) break;
+                k++;
             }
         }
         foreach (Aspose.Words.Bookmark mark in doc.Range.Bookmarks)
         {
-            if (mark.Name == "client")
-            {
-                //string agentPeople = model.ApplyName;
-                //if (model.ApplyType == 1)
-                //    agentPeople = model.ApplyName + "("+model.CardNo+")";
-                //mark.Text = agentPeople.PadRight(38,' ');
-            }
-            if (mark.Name == "pattern")
-            {
-                builder.MoveToBookmark("pattern");
-                builder.InsertImage(Server.MapPath("../../" + model.TrademarkPattern1), 40, 20);
-            }
             if (mark.Name == "address")
                 mark.Text = (division.Replace(" ", "") + model.Address).PadRight(26, ' ');
             if (mark.Name == "linkman")
@@ -315,19 +332,18 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             if (mark.Name == "postcode")
                 mark.Text = model.PostCode.PadRight(29, ' ');
         }
-
-        string docPath = "../../File_Zscq/AccountPDF/TrademarkAgent" + model.CaseNo + ".doc";
-        doc.Save(Server.MapPath(docPath));
+        string docPath = "File_Zscq/AccountPDF/TrademarkRenewalAgent" + model.CaseNo + ".doc";
+        doc.Save(Server.MapPath("../../" + docPath));
         return docPath;
     }
     /// <summary>
-    /// 商标注册申请书
+    /// 商标续展注册申请书
     /// </summary>
     private string CreateApplyBook(t_NewTradeMarkInfo model)
     {
         string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
 
-        string tmppath = Server.MapPath("../../File_Zscq/template/BookTrademarkApply.doc");
+        string tmppath = Server.MapPath("../../File_Zscq/template/BookTrademarkRenewalApply.doc");
         Document doc = new Document(tmppath); //载入模板 
         DocumentBuilder builder = new DocumentBuilder(doc);
 
@@ -343,12 +359,6 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
                     agentPeople = model.ApplyName + "(" + model.CardNo + ")";
                 mark.Text = agentPeople;
             }
-            if (mark.Name == "applynationality")
-            {
-                t_Nationality na = DALN.Nationality_Select_ByMemberId(model.i_MemberId);
-                if (na != null)
-                    mark.Text = na.nvc_Name;
-            }
             if (mark.Name == "applyaddress")
                 mark.Text = division.Replace(" ", "") + model.Address;
             if (mark.Name == "postcode")
@@ -359,51 +369,18 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
                 mark.Text = model.Phone;
             if (mark.Name == "agentgroup")
                 mark.Text = systemModel.nvc_DLCNName;
-            if (mark.Name == "is3D")
-            {
-                if (model.Is3D == null || !model.Is3D.Value)
-                    mark.Text = "  ";
-            }
-            if (mark.Name == "isColor")
-            {
-                if (model.IsColor == null || !model.IsColor.Value)
-                    mark.Text = "  ";
-            }
-            if (mark.Name == "isSound")
-            {
-                if (model.IsSound == null || !model.IsSound.Value)
-                    mark.Text = "  ";
-            }
+
             if (mark.Name == "applyno")
             {
                 mark.Text = !string.IsNullOrEmpty(model.RegisteredNo) ? model.RegisteredNo : "";
             }
-            if (mark.Name == "image")
-            {
-                builder.MoveToBookmark("image");
-                builder.InsertImage(Server.MapPath("../../" + model.TrademarkPattern1), 283, 280);
-            }
-            if (mark.Name == "remark")
-                mark.Text = model.TrademarkRemark;
+            if (mark.Name == "marktype")
+                mark.Text = model.TrademarkType;
         }
-        builder.MoveToBookmark("marktype");
-        IQueryable<t_GoodsSearch> find = goods.Goods_Select_MultipleId(model.TrademarkGoods.Split(','));
-        foreach (string type in model.TrademarkType.Split(','))
-        {
-            builder.InsertBreak(BreakType.LineBreak);
-            builder.Writeln("类别：" + type);
-            var q = find.Where(p => p.MainCategoryCode == type)
-                .Select(p => p.GoodsRemark).ToArray().Aggregate((current, next) => String.Format("{0}、{1}", current, next));
-            builder.Writeln("商品/服务项目：" + q + " 截止");
-
-        }
-
         //doc.Range.Bookmarks["table"].Text = "";    // 清掉标示  
-        string docPath = "../../File_Zscq/AccountPDF/TrademarkApply" + model.CaseNo + ".doc";
-        doc.Save(Server.MapPath(docPath));
+        string docPath = "File_Zscq/AccountPDF/TrademarkRenewalApply" + model.CaseNo + ".doc";
+        doc.Save(Server.MapPath("../../" + docPath));
         return docPath;
     }
-
-    #endregion
 
 }

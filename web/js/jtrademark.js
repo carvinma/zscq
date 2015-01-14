@@ -664,7 +664,7 @@ function addmarkRenewalCheck_data() {
     if (check_ApplyUser("name_div", 1) && check_ApplyUser("address_div", 1)
     && check_ApplyUser("ContactPerson_div", 1) && check_ApplyUser("phone_div", 1)
     && check_ApplyUser("postcode_div", 1)
-    && check_ApplyUser("sortarr_div", 1) && check_ApplyUser("regno_div", 1) && check_ApplyUser("regdate_div"), 1)
+    && check_ApplyUser("sortarr_div", 1) && check_ApplyUser("regno_div", 1) && check_ApplyUser("regdate_div", 1))
         return true;
 
     return false;
