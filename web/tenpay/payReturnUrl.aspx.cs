@@ -233,7 +233,7 @@ public partial class payReturnUrl : System.Web.UI.Page
                                         //int setIntegral = DALTOD.OrderDetails_Select_Count(model.i_Id) * setup.i_SbIntergral;
                                         //m.i_Integral += setIntegral;
                                         //DALIM.IntegralMobile_Updata(m);
-                                        BLLUIN.UserIntegralNote_Add(model.i_MemberId, "商标下单", model.i_JiFen);//+员积分并且生成流水 
+                                        BLLUIN.UserIntegralNote_Add(model.i_MemberId, model.CaseType == 0 ? "商标申请下单" : "商标续展下单", model.i_JiFen);//+员积分并且生成流水 
                                         model.i_JiFen = 0;
                                         DALTO.TrademarkOrder_Update(model);
                                     }
