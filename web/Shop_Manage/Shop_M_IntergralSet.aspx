@@ -49,6 +49,22 @@
                 </asp:RegularExpressionValidator>
           </td>
       </tr>
+      <tr>
+        <td align="right">新商标申请：</td>
+        <td>
+            一个商标<asp:TextBox ID="txt_NewApply" class="inputs80text" runat="server" MaxLength="6"></asp:TextBox>积分
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="RequiredFieldValidator" ValidationGroup="a" ControlToValidate="txt_NewApply" Display="Dynamic" SetFocusOnError="true" Text="不能为空！"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_NewApply" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[0-9]{1,6}">
+                </asp:RegularExpressionValidator></td>
+      </tr>
+      <tr>
+        <td align="right">新商标续展：</td>
+        <td>
+            一个商标<asp:TextBox ID="txt_NewRenewal" class="inputs80text" runat="server" MaxLength="6"></asp:TextBox>积分
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="RequiredFieldValidator" ValidationGroup="a" ControlToValidate="txt_NewRenewal" Display="Dynamic" SetFocusOnError="true" Text="不能为空！"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="RegularExpressionValidator" ValidationGroup="a" ControlToValidate="txt_NewRenewal" Text="您输入的信息格式有误，请核实！" Display="Dynamic" SetFocusOnError="true" ValidationExpression="[0-9]{1,6}">
+                </asp:RegularExpressionValidator></td>
+      </tr>
     </table>
   </div>
   <br />
