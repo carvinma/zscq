@@ -318,7 +318,7 @@
                           <%# Eval("i_Type").ToString() == "0" ? "申请":"续展"%>
                         </td>
                         <td align="center">
-                              <a href="Shop_M_TrademarkInfo.aspx?id=<%#Eval("i_Id")%>">详情 </a>
+                              <a href="M_TrademarkInfo.aspx?id=<%#Eval("i_Id")%>">详情 </a>
                         </td>
                         <td align="center" style="color: #FF0000">
                             <a href='../../<%# Eval("i_Type").ToString()=="0"?  Eval("ApplyBook"):Eval("RenewalApplyBook")%>' title='点击下载' target='_blank'>申请书下载</a>  

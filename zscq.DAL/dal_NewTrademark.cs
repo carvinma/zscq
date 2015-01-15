@@ -434,6 +434,24 @@ namespace zscq.DAL
 
         }
 
+        /// <summary>
+        /// 根据id返回一条商标信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public vw_NewTradeMark Trademark_vw_Select_Id(int id)
+        {
+            try
+            {
+                vw_NewTradeMark m = (from a in mark.vw_NewTradeMark where (a.i_Id == id) select a).FirstOrDefault();
+                return m;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         #region 商标状态管理
 
         public IQueryable<t_NewTradeMarkStatus> rademarkStatus_Select_All()

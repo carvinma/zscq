@@ -214,7 +214,6 @@
                         <td width="20%" align="right" valign="top">信用等级:</td>
                         <td width="30%" >   
                             <asp:Image ID="Ltl_VipXinYong" runat="server" Width="50" Height="50" />  
-                       
                         </td>
                     </tr>
                    </table>
