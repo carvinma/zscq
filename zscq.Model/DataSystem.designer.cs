@@ -8056,17 +8056,21 @@ namespace zscq.Model
 		
 		private string _nvc_DLFaxNumber;
 		
-		private string _nvc_DLPostCode;
-		
-		private string _nvc_DLAddress;
-		
 		private string _nvc_DLCNName;
 		
 		private string _nvc_DLENName;
 		
+		private string _nvc_DLPostCode;
+		
+		private string _nvc_DLAddress;
+		
 		private int _i_ZlIntergral;
 		
 		private int _i_SbIntergral;
+		
+		private System.Nullable<int> _i_NewSbApply;
+		
+		private System.Nullable<int> _i_NewSbRenewal;
 		
 		private string _nvc_ZLBook;
 		
@@ -8128,18 +8132,22 @@ namespace zscq.Model
     partial void Onnvc_DLTelChanged();
     partial void Onnvc_DLFaxNumberChanging(string value);
     partial void Onnvc_DLFaxNumberChanged();
-    partial void Onnvc_DLPostCodeChanging(string value);
-    partial void Onnvc_DLPostCodeChanged();
-    partial void Onnvc_DLAddressChanging(string value);
-    partial void Onnvc_DLAddressChanged();
     partial void Onnvc_DLCNNameChanging(string value);
     partial void Onnvc_DLCNNameChanged();
     partial void Onnvc_DLENNameChanging(string value);
     partial void Onnvc_DLENNameChanged();
+    partial void Onnvc_DLPostCodeChanging(string value);
+    partial void Onnvc_DLPostCodeChanged();
+    partial void Onnvc_DLAddressChanging(string value);
+    partial void Onnvc_DLAddressChanged();
     partial void Oni_ZlIntergralChanging(int value);
     partial void Oni_ZlIntergralChanged();
     partial void Oni_SbIntergralChanging(int value);
     partial void Oni_SbIntergralChanged();
+    partial void Oni_NewSbApplyChanging(System.Nullable<int> value);
+    partial void Oni_NewSbApplyChanged();
+    partial void Oni_NewSbRenewalChanging(System.Nullable<int> value);
+    partial void Oni_NewSbRenewalChanged();
     partial void Onnvc_ZLBookChanging(string value);
     partial void Onnvc_ZLBookChanged();
     partial void Onnvc_SBBookChanging(string value);
@@ -8455,46 +8463,6 @@ namespace zscq.Model
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_DLPostCode", DbType="NVarChar(50)")]
-		public string nvc_DLPostCode
-		{
-			get
-			{
-				return this._nvc_DLPostCode;
-			}
-			set
-			{
-				if ((this._nvc_DLPostCode != value))
-				{
-					this.Onnvc_DLPostCodeChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_DLPostCode = value;
-					this.SendPropertyChanged("nvc_DLPostCode");
-					this.Onnvc_DLPostCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_DLAddress", DbType="NVarChar(50)")]
-		public string nvc_DLAddress
-		{
-			get
-			{
-				return this._nvc_DLAddress;
-			}
-			set
-			{
-				if ((this._nvc_DLAddress != value))
-				{
-					this.Onnvc_DLAddressChanging(value);
-					this.SendPropertyChanging();
-					this._nvc_DLAddress = value;
-					this.SendPropertyChanged("nvc_DLAddress");
-					this.Onnvc_DLAddressChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_DLCNName", DbType="NVarChar(50)")]
 		public string nvc_DLCNName
 		{
@@ -8535,6 +8503,46 @@ namespace zscq.Model
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_DLPostCode", DbType="NVarChar(50)")]
+		public string nvc_DLPostCode
+		{
+			get
+			{
+				return this._nvc_DLPostCode;
+			}
+			set
+			{
+				if ((this._nvc_DLPostCode != value))
+				{
+					this.Onnvc_DLPostCodeChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_DLPostCode = value;
+					this.SendPropertyChanged("nvc_DLPostCode");
+					this.Onnvc_DLPostCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_DLAddress", DbType="NVarChar(50)")]
+		public string nvc_DLAddress
+		{
+			get
+			{
+				return this._nvc_DLAddress;
+			}
+			set
+			{
+				if ((this._nvc_DLAddress != value))
+				{
+					this.Onnvc_DLAddressChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_DLAddress = value;
+					this.SendPropertyChanged("nvc_DLAddress");
+					this.Onnvc_DLAddressChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_ZlIntergral", DbType="Int NOT NULL")]
 		public int i_ZlIntergral
 		{
@@ -8571,6 +8579,46 @@ namespace zscq.Model
 					this._i_SbIntergral = value;
 					this.SendPropertyChanged("i_SbIntergral");
 					this.Oni_SbIntergralChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_NewSbApply", DbType="Int")]
+		public System.Nullable<int> i_NewSbApply
+		{
+			get
+			{
+				return this._i_NewSbApply;
+			}
+			set
+			{
+				if ((this._i_NewSbApply != value))
+				{
+					this.Oni_NewSbApplyChanging(value);
+					this.SendPropertyChanging();
+					this._i_NewSbApply = value;
+					this.SendPropertyChanged("i_NewSbApply");
+					this.Oni_NewSbApplyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_i_NewSbRenewal", DbType="Int")]
+		public System.Nullable<int> i_NewSbRenewal
+		{
+			get
+			{
+				return this._i_NewSbRenewal;
+			}
+			set
+			{
+				if ((this._i_NewSbRenewal != value))
+				{
+					this.Oni_NewSbRenewalChanging(value);
+					this.SendPropertyChanging();
+					this._i_NewSbRenewal = value;
+					this.SendPropertyChanged("i_NewSbRenewal");
+					this.Oni_NewSbRenewalChanged();
 				}
 			}
 		}

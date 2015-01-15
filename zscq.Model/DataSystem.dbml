@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="db_zscq" Class="DataSystemDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=sa" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=db_zscq;Persist Security Info=True;User ID=zscq" SettingsObjectName="zscq.Model.Properties.Settings" SettingsPropertyName="db_zscqConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.t_PSTime" Member="t_PSTime">
     <Type Name="t_PSTime">
       <Column Name="i_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -418,12 +418,14 @@
       <Column Name="nvc_DLName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="nvc_DLTel" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="nvc_DLFaxNumber" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_DLPostCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="nvc_DLAddress" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="nvc_DLCNName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="nvc_DLENName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_DLPostCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="nvc_DLAddress" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="i_ZlIntergral" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="i_SbIntergral" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="i_NewSbApply" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="i_NewSbRenewal" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="nvc_ZLBook" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
       <Column Name="nvc_SBBook" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
       <Column Name="nvc_ShopBook" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
