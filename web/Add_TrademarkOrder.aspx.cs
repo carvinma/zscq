@@ -220,7 +220,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
                 }
             }
             #endregion
-            DALTO.TrademarkOrder_Update(OrderModer);
+            //DALTO.TrademarkOrder_Update(OrderModer);
             #endregion
             #endregion
             foreach (var model in iquery)
@@ -279,7 +279,7 @@ public partial class Add_TrademarkOrder : System.Web.UI.Page
             t_SystemSetup ts = DALS.SystemSetup_Select();
             if (ts != null)
             {
-                OrderModer.i_JiFen = DALTOD.OrderDetails_Select_Count(OrderModer.i_Id) * ts.i_SbIntergral; //一个商标赠送积分
+                OrderModer.i_JiFen = DALTOD.NewOrderDetails_Select_Count(OrderModer.i_Id) * ts.i_NewSbApply.Value; //一个商标赠送积分
                 DALTO.TrademarkOrder_Update(OrderModer);
             }
 

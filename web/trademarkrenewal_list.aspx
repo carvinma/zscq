@@ -321,19 +321,19 @@
                                                                 <strong>案件号</strong>
                                                             </td>
                                                             <td align="left">
-                                                                <asp:TextBox ID="txtCaseNo" runat="server" Width="70px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtCaseNo" runat="server" style="width:70px"></asp:TextBox>
                                                             </td>
                                                             <td align="center" nowrap="nowrap">
                                                                 <strong>申请号</strong>
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="txtApplyNo" runat="server" Width="70px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtApplyNo" runat="server" style="width:70px"></asp:TextBox>
                                                             </td>
                                                             <td align="center" nowrap="nowrap">
                                                                 <strong>申请人</strong>
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="txtApplyUser" runat="server" Width="70px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtApplyUser" runat="server" style="width:70px"></asp:TextBox>
                                                             </td>
                                                             <td width="30" align="center" nowrap="nowrap">
                                                                 <strong>类别</strong>

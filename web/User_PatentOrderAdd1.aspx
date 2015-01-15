@@ -279,8 +279,8 @@
                                       <asp:Repeater ID="rp_youhui" runat="server">
                                         <ItemTemplate>
                                         
-            <DIV style="FLOAT: left; WIDTH: 270px;height:25px;"><input type="checkbox" name="inputPageid" lang="<%#DALPO.GetPayMoneyByHuiLv(Convert.ToDecimal(Eval("i_Money")),"CNY",hi_paybizhong.Value)%>" onclick="CheckYouhui('cb_youhui<%#Eval("i_Id") %>');"
-                                                                                            id="cb_youhui<%#Eval("i_Id") %>" value='<%# Eval("i_Id")%>'>&nbsp;<%# Eval("nvc_Name")%> (<%=hi_paybizhong.Value %>:<%#DALPO.GetPayMoneyByHuiLv(Convert.ToDecimal(Eval("i_Money")),"CNY",hi_paybizhong.Value).ToString("0.00")%>)</DIV>
+            <DIV style="FLOAT: left; WIDTH: 270px;height:25px;"><input type="checkbox" name="inputPageid" lang="<%#DALPO.GetPayMoneyByHuiLv(Convert.ToDecimal(Eval("i_Money1")),"USD",hi_paybizhong.Value)%>" onclick="CheckYouhui('cb_youhui<%#Eval("i_Id") %>');"
+                                                                                            id="cb_youhui<%#Eval("i_Id") %>" value='<%# Eval("i_Id")%>'>&nbsp;<%# Eval("nvc_Name")%> (<%=hi_paybizhong.Value %>:<%#DALPO.GetPayMoneyByHuiLv(Convert.ToDecimal(Eval("i_Money1")), "USD", hi_paybizhong.Value).ToString("0.00")%>)</DIV>
                                                                                     </ItemTemplate>
                                                                                 </asp:Repeater>
                                                                             </span></DIV></DIV></DIV>

@@ -119,7 +119,6 @@ namespace zscq.DAL
             try
             {
                 t_NewTrademarkOrder Newmodel = dsdc.t_NewTrademarkOrder.SingleOrDefault(b => b.i_Id == model.i_Id);
-                Newmodel = model;
                 dsdc.SubmitChanges();
                 return 1;
             }

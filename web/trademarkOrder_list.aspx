@@ -123,26 +123,26 @@
                                                                 <strong>订单号</strong>
                                                             </td>
                                                             <td align="left">
-                                                                <asp:TextBox ID="txtOrder" runat="server" Width="70px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtOrder" runat="server" style="width:70px"></asp:TextBox>
                                                             </td>
                                                             <td width="40" height="29" align="right" nowrap="nowrap">
                                                                 <strong>案件号</strong>
                                                             </td>
                                                             <td align="left">
-                                                                <asp:TextBox ID="txtCaseNo" runat="server" Width="70px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtCaseNo" runat="server" style="width:70px"></asp:TextBox>
                                                             </td>
                                                             <td width="40" align="center" nowrap="nowrap">
                                                                 <strong>申请人</strong>
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="txtApplyUser" runat="server" Width="70px"></asp:TextBox>
+                                                                <asp:TextBox ID="txtApplyUser" runat="server" style="width:70px"></asp:TextBox>
                                                             </td>
                                                             <td width="52" align="center" nowrap="nowrap">
                                                                 <strong>下单日期</strong>
                                                             </td>
                                                             <td>
-                                                                <asp:TextBox ID="txtOrderDate" runat="server" Width="85px"
-                                                                  style="background-image:url(images/user_js_date.gif); 
+                                                                <asp:TextBox ID="txtOrderDate" runat="server"
+                                                                  style="width:85px;background-image:url(images/user_js_date.gif); 
                                                                                 background-repeat:no-repeat; background-position:right;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"> </asp:TextBox>
                                                                 
                                                             </td>

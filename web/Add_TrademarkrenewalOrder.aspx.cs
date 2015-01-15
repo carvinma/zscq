@@ -282,7 +282,7 @@ public partial class Add_TrademarkrenewalOrder : System.Web.UI.Page
             t_SystemSetup ts = DALS.SystemSetup_Select();
             if (ts != null)
             {
-                OrderModer.i_JiFen = DALTOD.OrderDetails_Select_Count(OrderModer.i_Id) * ts.i_SbIntergral; //一个商标赠送积分
+                OrderModer.i_JiFen = DALTOD.NewOrderDetails_Select_Count(OrderModer.i_Id) * ts.i_NewSbRenewal.Value; //一个商标赠送积分
                 DALTO.TrademarkOrder_Update(OrderModer);
             }
 
