@@ -96,7 +96,7 @@ public partial class PaySuccess : System.Web.UI.Page
                 t_TrademarkOrder tModel = DALTO.TrademarkOrder_Select_Number(OrderNumer);
                 if (tModel != null && tModel.dt_PayTime > DateTime.Now.AddMinutes(-5))
                 {
-                    setIntegral = DALTOD.OrderDetails_Select_Count(tModel.i_Id) * model.i_ZlIntergral;
+                    setIntegral = DALTOD.OrderDetails_Select_Count(tModel.i_Id) * model.i_SbIntergral;
                     AllPrice = tModel.dm_TotalMoney.ToString();
                     OId = tModel.i_Id;
                     //lqurl = "user_sbsetIntegral.aspx";
