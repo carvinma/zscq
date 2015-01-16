@@ -74,6 +74,7 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
         {
             int trademarkId = int.Parse(Request.QueryString["id"].ToString());
             hi_TradeMarkId.Value = trademarkId.ToString();
+            Bind_Status();
             Bind_Page_Info(trademarkId);
             Bind_Bills(trademarkId);
             Bind_RenewalDate(trademarkId);
@@ -81,6 +82,13 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
             Bind_Message(trademarkId);
         }
 
+    }
+    private void Bind_Status()
+    {
+        this.ddlTradeMarkStatus.DataSource = BaseDataUtil.tradeMarkRenewedStatuslist.ToList();
+        this.ddlTradeMarkStatus.DataTextField = "StatusName";
+        this.ddlTradeMarkStatus.DataValueField = "StatusValue";
+        this.ddlTradeMarkStatus.DataBind();
     }
     private void Bind_RenewalDate(int trademarkId)
     {
@@ -116,7 +124,8 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
         t_NewTradeMarkInfo model = mark.Trademark_Select_Id(trademarkId);
         if (model != null)
         {
-            spStatus.InnerText = BaseDataUtil.tradeMarkRenewedStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
+            //spStatus.InnerText = BaseDataUtil.tradeMarkRenewedStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
+            this.ddlTradeMarkStatus.SelectedValue = model.Status.ToString();
             Hi_MemberId.Value = model.i_MemberId.ToString();
             if (model.ApplyType == 0)
             {
@@ -149,7 +158,7 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
             this.txt_fax.Value = model.Fax;
             this.txt_postcode.Value = model.PostCode;
             this.lblCaseNo.Text = model.CaseNo;
-            this.txt_applyNum.Value = model.RegisteredNo;
+            this.txt_RegNo.Value = model.RegisteredNo;
 
             if (model.Is3D == true) Radio3DYES.Checked = true;
             else Radio3DNo.Checked = true;
@@ -195,19 +204,19 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
             cb_ReceiveEmail.Checked = model.IsReceiveEmail == true ? true : false;
             if (!string.IsNullOrEmpty(model.ApplyUpBook))
             {
-                ApplyUpBook = "<a href='" + model.ApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
+                ApplyUpBook = "<a href='../../" + model.ApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
             }
             if (!string.IsNullOrEmpty(model.AgentUpBook))
             {
-                AgentUpBook = "<a href='" + model.AgentUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
+                AgentUpBook = "<a href='../../" + model.AgentUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
             }
             if (!string.IsNullOrEmpty(model.RenewalApplyUpBook))
             {
-                RenewalApplyUpBook = "<a href='" + model.RenewalApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
+                RenewalApplyUpBook = "<a href='../../" + model.RenewalApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
             }
             if (!string.IsNullOrEmpty(model.RenewalAgentUpBook))
             {
-                RenewalAgentUpBook = "<a href='" + model.RenewalAgentUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
+                RenewalAgentUpBook = "<a href='../../" + model.RenewalAgentUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
             }
 
             if (model.ApplyDate.HasValue)
@@ -250,9 +259,9 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
         t_NewTradeMarkInfo model = mark.Trademark_Select_Id(int.Parse(hi_TradeMarkId.Value));
         model.ApplyName = txt_applyname.Value.Trim();
         model.ApplyType = this.RdoPeople.Checked ? 1 : 0;
-        if (!string.IsNullOrEmpty(this.txt_applyNum.Value))
+        if (!string.IsNullOrEmpty(this.txt_RegNo.Value))
         {
-            model.RegisteredNo = this.txt_applyNum.Value.Trim();
+            model.RegisteredNo = this.txt_RegNo.Value.Trim();
         }
         string fileName = string.Empty;
         if (model.ApplyType == 1)
@@ -373,7 +382,7 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
         model.IsShow = cb_Show.Checked ? true : false;
         model.IsReceiveEmail = cb_ReceiveEmail.Checked ? true : false;
         model.Remark = t_Remark.Text.Trim();
-        
+        model.Status = int.Parse(this.ddlTradeMarkStatus.SelectedValue);
         return model;
     }
     private void addRegNoticeData(int trademarkid)

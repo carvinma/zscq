@@ -23,6 +23,34 @@
     <script src="../../My97DatePicker/WdatePicker.js" type="text/javascript"></script>
     <script type="text/javascript" src="../js/vcom.js"></script>
     <script type="text/javascript">
+        function M_addmarkRenewalCheck_data() {
+            var obj = $('input:radio[name="person"]:checked').val();
+            if (obj == "" || obj == null) {
+                alert("请选择注册人类别");
+                return false;
+            }
+            if (!$(".appusertype").is(":hidden")) { //当注册人为自然人时，需要上传
+                if (!check_ApplyUser("cardno_div")) {
+                    return false;
+                }
+                if ($("#hiUpCardNo").val() == "") {
+                    alert("请上传身份证扫描件");
+                    return false;
+                }
+            }
+            if ($("#upRegisteCertificate").val() == "") {
+                alert("请上传商标注册证书");
+                return false;
+            }
+
+            if (check_ApplyUser("name_div", 1) && check_ApplyUser("address_div", 1)
+    && check_ApplyUser("ContactPerson_div", 1) && check_ApplyUser("phone_div", 1)
+    && check_ApplyUser("postcode_div", 1) && check_ApplyUser("sortarr_div", 1)
+    && check_ApplyUser("regno_div", 1) && check_ApplyUser("regdate_div", 1))
+                return true;
+            return false;
+        }
+
         $(document).ready(function () {
             $('.ui-tabs-nav > li > a').click(function (e) { //Tab切换
                 if (e.target == this) {
@@ -745,11 +773,12 @@
                                                     <strong>申请号</strong>：
                                                 </td>
                                                 <td>
-                                                    <input class="font12000" runat="server" id="txt_applyNum" maxlength="50" type="text"
+                                                    <input class="font12000" runat="server" id="txt_RegNo" maxlength="50" type="text"
                                                         name="" value="" />
                                                 </td>
                                                 <td width="429">
-                                                    &nbsp;
+                                                   <span style="color: Red;">*</span>
+                                                                            <span class="status error" id="regno_div_error"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1104,6 +1133,8 @@
                                                 </td>
                                                 <td height="32">
                                                     <span id="spStatus" runat="server"></span>
+                                                     <asp:DropDownList ID="ddlTradeMarkStatus" runat="server">
+                                                                </asp:DropDownList>
                                                 </td>
                                             </tr>
                                         </table>
@@ -1339,7 +1370,7 @@
             <div style="width: 100%; position: fixed; left: 0; bottom: 0px; height: 30px; background: #dfeef5;">
                 <%# Eval("DetailCategoryCode")%>
                 <asp:Button ID="btOK" runat="server" Text="提交" class="button" OnClick="btOK_Click"
-                    OnClientClick="return addmarkCheck_data();" Style="margin-left: 350px;" />
+                    OnClientClick="return M_addmarkRenewalCheck_data();" Style="margin-left: 350px;" />
                 <%# Eval("GoodsCode")%>
                 <%# Eval("GoodsRemark")%><input type="button" id="Button3" value="返回" class="button"
                     style="display: none" onclick="javascript:window.location='Shop_M_Trademark.aspx?<%=returnurl %>';" />

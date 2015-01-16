@@ -73,11 +73,21 @@ public partial class M_E_TradeMark : System.Web.UI.Page
         {
             int trademarkId = int.Parse(Request.QueryString["id"].ToString());
             hi_TradeMarkId.Value = trademarkId.ToString();
+            BindStatus();
             Bind_Page_Info(trademarkId);
             Bind_Bills(trademarkId);
             Bind_Admin_Status(trademarkId);
             Bind_Message(trademarkId);
         }
+
+    }
+    private void BindStatus()
+    {
+        //IList<t_NewTradeMarkStatus> tradeMarkStatuslist = BaseDataUtil.tradeMarkApplyStatuslist.ToList();
+        this.ddlTradeMarkStatus.DataSource = BaseDataUtil.tradeMarkApplyStatuslist.ToList();
+        this.ddlTradeMarkStatus.DataTextField = "StatusName";
+        this.ddlTradeMarkStatus.DataValueField = "StatusValue";
+        this.ddlTradeMarkStatus.DataBind();
 
     }
     private void Bind_Message(int trademarkId)
@@ -109,7 +119,8 @@ public partial class M_E_TradeMark : System.Web.UI.Page
         t_NewTradeMarkInfo model = mark.Trademark_Select_Id(trademarkId);
         if (model != null)
         {
-            spStatus.InnerText = BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
+            ddlTradeMarkStatus.SelectedValue = model.Status.ToString();
+            //spStatus.InnerText = BaseDataUtil.tradeMarkApplyStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
             Hi_MemberId.Value = model.i_MemberId.ToString();
             if (model.ApplyType == 0)
             {
@@ -188,11 +199,11 @@ public partial class M_E_TradeMark : System.Web.UI.Page
             cb_ReceiveEmail.Checked = model.IsReceiveEmail == true ? true : false;
             if (!string.IsNullOrEmpty(model.ApplyUpBook))
             {
-                ApplyUpBook = "<a href='" + model.ApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
+                ApplyUpBook = "<a href='../../" + model.ApplyUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
             }
             if (!string.IsNullOrEmpty(model.AgentUpBook))
             {
-                AgentUpBook = "<a href='" + model.AgentUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
+                AgentUpBook = "<a href='../../" + model.AgentUpBook + "' title='点击查看' target='_blank'>申请书已上传</a>";
             }
 
             if (model.ApplyDate.HasValue)
@@ -341,7 +352,7 @@ public partial class M_E_TradeMark : System.Web.UI.Page
         model.IsShow = cb_Show.Checked ? true : false;
         model.IsReceiveEmail = cb_ReceiveEmail.Checked ? true : false;
         model.Remark = t_Remark.Text.Trim();
-
+        model.Status = int.Parse(this.ddlTradeMarkStatus.SelectedValue);
         return model;
     }
 

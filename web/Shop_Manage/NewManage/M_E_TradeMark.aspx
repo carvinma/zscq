@@ -1087,7 +1087,9 @@
                                                     <strong>最近状态：</strong>
                                                 </td>
                                                 <td height="32">
-                                                    <span id="spStatus" runat="server"></span>
+                                                <%--<span id="spStatus" runat="server"></span>--%>
+                                                      <asp:DropDownList ID="ddlTradeMarkStatus" runat="server">
+                                                                </asp:DropDownList>
                                                 </td>
                                             </tr>
                                         </table>
@@ -1802,7 +1804,7 @@
         $("#hi_RegNoticeDate").val(ndate + "_" + "0" + "|");
         var today = new Date();
         $("#spRestDays").text(Math.ceil((d - today) / (24 * 60 * 60 * 1000)) + "天"); //剩于天数
-        $("#spStatus").text();
+        //$("#spStatus").text();
     }
 </script>
 <script type="text/javascript">
