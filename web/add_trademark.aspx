@@ -850,7 +850,7 @@
                                                                                 <span style="color: Red;">格式为.jpg.gif.png,不大于500K</span></div>
                                                                         </td>
                                                                         <td>
-                                                                            请按照下的面的图样说明选择图样
+                                                                            请按照下面的图样说明选择图样
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
