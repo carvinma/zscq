@@ -199,7 +199,7 @@
                                                                         <%# Eval("StatusName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline" >
-                                                                      &nbsp;&nbsp; <a href="trademark_list.aspx?tids=<%# Eval("tids") %>" class="ac_hei" style='<%#RenewalStyle(Eval("StatusValue"))%>'>
+                                                                      &nbsp;&nbsp; <a href="trademarkrenewal_list.aspx?tids=<%# Eval("tids") %>" class="ac_hei" style='<%#RenewalStyle(Eval("StatusValue"))%>'>
                                                                             <%# Eval("counts")%>个</a>
                                                                     </td>
                                                                 </tr>
