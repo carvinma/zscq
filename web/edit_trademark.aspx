@@ -922,9 +922,7 @@
                                                                 <table width="400" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
                                                                         <td width="100">
-                                                                            <asp:Button ID="btnPreview" CssClass="BtnShow" runat="server" Text="预  览" 
-                                                                                onclick="btnPreview_Click" Visible="false" />
-                                                                        </td>
+                                                                            &nbsp;</td>
                                                                         <td width="100">
                                                                             <asp:Button ID="btnSave" CssClass="BtnShow" runat="server" Text="保  存" 
                                                                                 onclick="btnSave_Click"  OnClientClick="return addmarkCheck_data()"/>

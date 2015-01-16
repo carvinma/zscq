@@ -279,7 +279,7 @@
             <td align="center">
               <asp:Repeater runat="server" ID="repProduct">
                 <ItemTemplate>
-                    <%#Eval("RegisteredNo")%>
+                    <%#Eval("RegisteredNo")%><br />
                 </ItemTemplate>
               </asp:Repeater>
             </td>
