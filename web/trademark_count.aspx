@@ -138,8 +138,10 @@
                                                                         <%# Eval("StatusName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline">
-                                                                      &nbsp;&nbsp; <a href="trademark_list.aspx?tids=<%# Eval("tids") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="1" ? "font-weight: bold;color: #ff0510;":""%>'>
-                                                                            <%# Eval("counts")%>个</a>
+                                                                      &nbsp;&nbsp; 
+                                                                    <%# Eval("counts").ToString() != "0" ? "<a href='trademark_list.aspx?tids=" + Eval("tids") + "' class='ac_hei' style='" +(Eval("StatusValue").ToString()=="1" ? "font-weight: bold;color: #ff0510;":"")+  "'>" + Eval("counts") + "个</a>" : "<a href='javascript:void(0)' class='ac_hei'>0个</a>"%>
+                                                                   <%--   <a href="trademark_list.aspx?tids=<%# Eval("tids") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="1" ? "font-weight: bold;color: #ff0510;":""%>'>
+                                                                            <%# Eval("counts")%>个</a>--%>
                                                                     </td>
                                                                 </tr>
                                                             </ItemTemplate>
@@ -199,8 +201,11 @@
                                                                         <%# Eval("StatusName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline" >
-                                                                      &nbsp;&nbsp; <a href="trademarkrenewal_list.aspx?tids=<%# Eval("tids") %>" class="ac_hei" style='<%#RenewalStyle(Eval("StatusValue"))%>'>
-                                                                            <%# Eval("counts")%>个</a>
+                                                                      &nbsp;&nbsp;
+                                                              
+                                                                            <%# Eval("counts").ToString() != "0" ? "<a href='trademarkrenewal_list.aspx?tids=" + Eval("tids") + "' class='ac_hei' style='" + RenewalStyle(Eval("StatusValue")) + "'>" + Eval("counts") + "个</a>" : "<a href='javascript:void(0)' class='ac_hei'>0个</a>"%>
+                                                                      <%-- <a href="trademarkrenewal_list.aspx?tids=<%# Eval("tids") %>" class="ac_hei" style='<%#RenewalStyle(Eval("StatusValue"))%>'>
+                                                                            <%# Eval("counts")%>个</a>--%>
                                                                     </td>
                                                                 </tr>
                                                             </ItemTemplate>
@@ -260,10 +265,14 @@
                                                                        <%# Eval("StatusName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
-                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
-                                                                            <%# Eval("countsApply")%>个</a>
-                                                                            &nbsp;&nbsp;续展案：<a href="trademarkrenewal_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
-                                                                            <%# Eval("countsRenewal")%>个</a>
+                                                                       &nbsp;&nbsp; 
+                                                                       申请案：  <%# Eval("countsApply").ToString() != "0" ? "<a href='trademark_list.aspx?tids=" + Eval("tidsApply") + "' class='ac_hei' style='" + (Eval("StatusValue").ToString() == "1" ? "font-weight: bold;color: #ff0510;" : "") + "'>" + Eval("countsApply") + "个</a>" : "<a href='javascript:void(0)' class='ac_hei'>0个</a>"%>
+                                                                       <%--<a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
+                                                                            <%# Eval("countsApply")%>个</a>--%>
+                                                                            &nbsp;&nbsp;
+                                                                            续展案： <%# Eval("countsRenewal").ToString() != "0" ? "<a href='trademarkrenewal_list.aspx?tids=" + Eval("tidsRenewal") + "' class='ac_hei' style='" + (Eval("StatusValue").ToString() == "1" ? "font-weight: bold;color: #ff0510;" : "") + "'>" + Eval("countsRenewal") + "个</a>" : "<a href='javascript:void(0)' class='ac_hei'>0个</a>"%>
+                                                                            <%--<a href="trademarkrenewal_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei" style='<%# Eval("StatusValue").ToString()=="0" ? "font-weight: bold;color: #ff0510;":""%>'>
+                                                                            <%# Eval("countsRenewal")%>个</a>--%>
                                                                     </td>
                                                                 </tr>
                                                             </ItemTemplate>
@@ -313,10 +322,14 @@
                                                                         类别（<%# Eval("CategoryCode")%>）：
                                                                     </td>
                                                                     <td width="285" class="user_rightline">
-                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei">
-                                                                            <%# Eval("countsApply")%>个</a>
-                                                                            &nbsp;&nbsp;续展案：<a href="trademarkrenewal_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei">
-                                                                            <%# Eval("countsRenewal")%>个</a>
+                                                                       &nbsp;&nbsp; 申请案：
+                                                                        <%# Eval("countsApply").ToString() != "0" ? "<a href='trademark_list.aspx?tids=" + Eval("tidsApply") + "' class='ac_hei'>" + Eval("countsApply") + "个</a>" : "<a href='javascript:void(0)' class='ac_hei'>0个</a>"%>
+                                                                       <%--<a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei">
+                                                                            <%# Eval("countsApply")%>个</a>--%>
+                                                                            &nbsp;&nbsp;续展案：
+                                                                              <%# Eval("countsRenewal").ToString() != "0" ? "<a href='trademarkrenewal_list.aspx?tids=" + Eval("tidsRenewal") + "' class='ac_hei'>" + Eval("countsRenewal") + "个</a>" : "<a href='javascript:void(0)' class='ac_hei'>0个</a>"%>
+                                                                           <%-- <a href="trademarkrenewal_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei">
+                                                                            <%# Eval("countsRenewal")%>个</a>--%>
                                                                     </td>
                                                                 </tr>
                                                             </ItemTemplate>
@@ -364,10 +377,14 @@
                                                                         <%# Eval("ApplyName")%>：
                                                                     </td>
                                                                     <td width="285" class="user_rightline">
-                                                                       &nbsp;&nbsp; 申请案：<a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei">
-                                                                            <%# Eval("countsApply")%>个</a>
-                                                                            &nbsp;&nbsp;续展案：<a href="trademarkrenewal_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei">
-                                                                            <%# Eval("countsRenewal")%>个</a>
+                                                                       &nbsp;&nbsp; 申请案：
+                                                                           <%# Eval("countsApply").ToString() != "0" ? "<a href='trademark_list.aspx?tids=" + Eval("tidsApply") + "' class='ac_hei'>" + Eval("countsApply") + "个</a>" : "<a href='javascript:void(0)' class='ac_hei'>0个</a>"%>
+                                                                     <%--  <a href="trademark_list.aspx?tids=<%# Eval("tidsApply") %>" class="ac_hei">
+                                                                            <%# Eval("countsApply")%>个</a>--%>
+                                                                           &nbsp;&nbsp;续展案： 
+                                                                               <%# Eval("countsRenewal").ToString() != "0" ? "<a href='trademarkrenewal_list.aspx?tids=" + Eval("tidsRenewal") + "' class='ac_hei'>" + Eval("countsRenewal") + "个</a>" : "<a href='javascript:void(0)' class='ac_hei'>0个</a>"%>
+                                                                           <%--<a href="trademarkrenewal_list.aspx?tids=<%# Eval("tidsRenewal") %>" class="ac_hei">
+                                                                            <%# Eval("countsRenewal")%>个</a>--%>
                                                                     </td>
                                                                 </tr>
                                                             </ItemTemplate>
