@@ -272,6 +272,8 @@ public partial class add_trademark_renewal : System.Web.UI.Page
                 else if (k == 1)
                 {
                     value = model.TrademarkDescribe;
+                    if (string.IsNullOrEmpty(value))
+                        value = "商标注册号为"+model.RegisteredNo;
                 }
                 shape.AppendChild(new Paragraph(doc));
                 Paragraph para = shape.FirstParagraph;
