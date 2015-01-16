@@ -103,7 +103,6 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         sortarr.Value = model.TrademarkType;
         sortGoods.Value = model.TrademarkGoods;
         hi_money.Value = model.TrademarkMoney.ToString();
-
         if (model.TrademarkDescribeType == 0)
             this.RadioButton1.Checked = true;
         else if (model.TrademarkDescribeType == 1)
@@ -131,24 +130,7 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
 
     }
     #endregion
-    protected void btnPreview_Click(object sender, EventArgs e)
-    {
-        txt_applyname.Value.Trim();
-        Hi_prov.Value.Trim();
-        Hi_city.Value.Trim();
-        Hi_country.Value.Trim();
-        txt_address.Value.Trim();
-        txt_ContactPerson.Value.Trim();
-        txt_phone.Value.Trim();
-        txt_fax.Value.Trim();
-        txt_postcode.Value.Trim();
-        txt_remark.Value.Trim();
-
-        sortarr.Value.Trim();//商标类别
-
-        //Radio3DNo.Checked
-        //chkSound.Checked
-    }
+   
     private t_NewTradeMarkInfo InitModel()
     {
         string filePath = "File_Zscq/File_ShangBiao/";
@@ -254,6 +236,7 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         decimal money = 0;
         decimal.TryParse(hi_money.Value, out money);
         model.TrademarkMoney = money;
+        model.TrademarkMoney = model.TrademarkType.Split(',').Length * decimal.Parse(hi_MainFees.Value);
         var agencyModel = goods.CategoryFees_Select_ByType(3);
         model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
         model.TrademarkLateFee = 0;//滞纳金
