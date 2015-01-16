@@ -399,13 +399,14 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
                             else
                             {
                                 t.RegNoticeDate = dt; //注册公告日
-                                t.RenewalDate = dt.AddYears(10);//续展期限日
+                                t.RenewalDate = dt.AddYears(10).AddDays(-1);//续展期限日
                             }
                             //这个案件10年后再续展的话就要上传新的申请书和委托书了
                             t.RenewalAgentUpBook = null;
                             t.RenewalApplyUpBook = null;
                             t.RestDays = Convert.ToInt32(HelpString.DateDiff(t.RenewalDate.Value, DateTime.Today, "day"));
-                            addRegNoticeData(t.i_Id, dt, t.RenewalDate.Value);//更改续展日期到数据库（2015-01-12 是 否 完成）
+                            addRegNoticeData(t.i_Id, dt.AddYears(10).AddDays(-1), t.RenewalDate.Value);
+                            //addRegNoticeData(t.i_Id, dt, t.RenewalDate.Value);//更改续展日期到数据库（2015-01-12 是 否 完成）
                         }
                         #endregion
                         t.Status = trademarkStatus;
