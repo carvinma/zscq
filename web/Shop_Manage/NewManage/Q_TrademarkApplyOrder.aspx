@@ -268,9 +268,8 @@
                <asp:Repeater runat="server" ID="repTrademark">
                     <ItemTemplate>
                     <div style="text-align: center; width: 100%;height:30px;line-height:30px;">
-
                         <a title="案件号<%# Eval("CaseNo") %>" 
-                        href="trademark_detail.aspx?t_r_id=<%# Eval("i_Id") %>&orderlist=1" class="ac5t">
+                        href="M_TrademarkInfo.aspx?id=<%# Eval("i_Id") %>" class="ac5t">
                                                         <%# Eval("CaseNo")%></a>
                     </div>
                     </ItemTemplate>
