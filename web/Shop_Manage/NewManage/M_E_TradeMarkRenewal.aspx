@@ -1132,7 +1132,7 @@
                                                     <strong>最近状态：</strong>
                                                 </td>
                                                 <td height="32">
-                                                    <span id="spStatus" runat="server"></span>
+                                                  <%--  <span id="spStatus" runat="server"></span>--%>
                                                      <asp:DropDownList ID="ddlTradeMarkStatus" runat="server">
                                                                 </asp:DropDownList>
                                                 </td>
