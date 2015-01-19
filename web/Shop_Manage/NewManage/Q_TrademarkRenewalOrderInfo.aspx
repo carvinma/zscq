@@ -234,7 +234,7 @@
                             <%# Eval("TrademarkType")%>
                         </td>
                         <td height="25" align="center" style="color: #C80C1A">
-                            <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString())%>
+                            <%# decimal.Parse(Eval("TrademarkMoney").ToString()) + decimal.Parse(Eval("TrademarkAgencyFee").ToString()) + decimal.Parse(Eval("TrademarkLateFee").ToString())%>
                         </td>
                         <td height="25" align="center">
                              <a href='../../<%#Eval("ApplyBook")%>' title='点击下载' target='_blank'>原始下载</a> 

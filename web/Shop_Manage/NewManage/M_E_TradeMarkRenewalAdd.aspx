@@ -249,7 +249,8 @@
                 }
             });
 
-            $("#upWav").uploadify({
+
+            $("#upfileRegisteCertificate").uploadify({
                 'swf': '../../js/SWF/uploadify.swf',
                 'uploader': '../../Handler.ashx?flag=uploadimage',
                 //'buttonImg': "images/aboutus1s.gif",
@@ -259,16 +260,16 @@
                 'width': '80',
                 'height': '32',
                 'overrideEvents': ['onDialogClose'],
-                'fileTypeDesc': '选择文件(*.mp3 *.wav)',
-                'fileTypeExts': '*.mp3;*.wav',
+                'fileTypeDesc': '浏览文件(*pdf)',
+                'fileTypeExts': '*.pdf',
                 'auto': true,
                 'multi': false,
-                'fileSizeLimit': '5MB',
+                'fileSizeLimit': '2MB',
                 'queueSizeLimit': 1,
                 'onUploadSuccess': function (file, data, response) {
                     $.jBox.closeTip();
-                    $("#spWav").show();
-                    $("#upSound").val(data);
+                    $("#aRegisteCertificate").show();
+                    $("#upRegisteCertificate").val(data);
                 },
                 'onSelect': function (file) {
                     $.jBox.tip("正在上传文件，请稍后...", 'loading');
@@ -277,10 +278,10 @@
                 'onSelectError': function (file, errorCode, errorMsg) {
                     switch (errorCode) {
                         case -100:
-                            alert("上传的文件数量已经超出系统限制的" + $('#upWav').uploadify('settings', 'queueSizeLimit') + "个文件！");
+                            alert("上传的文件数量已经超出系统限制的" + $('#upRegisteCertificate').uploadify('settings', 'queueSizeLimit') + "个文件！");
                             break;
                         case -110:
-                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upWav').uploadify('settings', 'fileSizeLimit') + "大小！");
+                            alert("文件 [" + file.name + "] 大小超出系统限制的" + $('#upRegisteCertificate').uploadify('settings', 'fileSizeLimit') + "大小！");
                             break;
                         case -120:
                             alert("文件 [" + file.name + "] 大小异常！");
@@ -531,6 +532,7 @@
     <input type="hidden" runat="server" id="upSound" />
     <input type="hidden" runat="server" id="upPattern1" />
     <input type="hidden" runat="server" id="HI_ATT" value="" />
+    <input type="hidden" runat="server"  id="upRegisteCertificate" />
     <h1>
         <span class="action-span"><a href="L_M_Trademark.aspx?<%=returnurl %>">申请列表</a></span>
         <span class="action-span1"><a href="../Shop_Index_Main.aspx">管理中心</a> </span><span
@@ -775,16 +777,16 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <div id="upWav">
+                                                                <div id="upfileRegisteCertificate">
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <span id="spWav" style="display:none">声音文件已上传</span>
+                                                                <span id="aRegisteCertificate" style="display:none">商标注册证书已上传</span>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                     <div>
-                                                        <span style="color: Red;">样本格式为mp3或wav，大小不超过5M</span></div>
+                                                        <span style="color: Red;">请将商标注册证书扫描为彩色上传，格式为pdf，大小不超过2M</span></div>
                                                 </td>
                                                 <td>
                                                 </td>

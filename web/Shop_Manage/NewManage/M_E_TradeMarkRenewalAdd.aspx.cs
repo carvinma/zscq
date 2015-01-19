@@ -196,6 +196,14 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
             model.RenewalDate = DateTime.Parse(txt_RenewalDate.Value);
 
+        if (!string.IsNullOrEmpty(this.upRegisteCertificate.Value))
+        {
+            fileName = this.upRegisteCertificate.Value;//注册证书
+            System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
+                   HttpContext.Current.Server.MapPath("../../"+filePath + fileName));
+            model.TrademarkRegBook = filePath + fileName;
+        }
+
         fileName = this.upPattern1.Value;//图样1
         if (!string.IsNullOrEmpty(fileName))
         {
