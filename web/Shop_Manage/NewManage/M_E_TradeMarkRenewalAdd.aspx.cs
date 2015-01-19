@@ -315,6 +315,16 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
                 else if (k == 1)
                 {
                     value = model.TrademarkDescribe;
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        value = "商标注册号为" + model.RegisteredNo;
+                        //System.IO.FileInfo file = new System.IO.FileInfo(HttpContext.Current.Server.MapPath(model.TrademarkPattern1));
+                        //if (file.Exists)
+                        //{
+                        //    builder.MoveToBookmark("pattern");
+                        //    builder.InsertImage(HttpContext.Current.Server.MapPath(model.TrademarkPattern1), 40, 20);
+                        //}
+                    }
                 }
                 shape.AppendChild(new Paragraph(doc));
                 Paragraph para = shape.FirstParagraph;
