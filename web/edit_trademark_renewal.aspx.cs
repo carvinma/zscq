@@ -11,6 +11,7 @@ using Aspose.Words.Drawing;
 
 public partial class edit_trademark_renewal : System.Web.UI.Page
 {
+    private dal_Member DALU = new dal_Member();
     private dal_Goods goods = new dal_Goods();
     private dal_NewTrademark mark = new dal_NewTrademark();
     private dal_CaseNoOrder caseNo = new dal_CaseNoOrder();
@@ -237,8 +238,14 @@ public partial class edit_trademark_renewal : System.Web.UI.Page
         decimal.TryParse(hi_money.Value, out money);
         model.TrademarkMoney = money;
         model.TrademarkMoney = model.TrademarkType.Split(',').Length * decimal.Parse(hi_MainFees.Value);
+
+        t_Member Membermodel = DALU.Member_Select_Id(model.i_MemberId);
+        int disCount = Membermodel.i_PowerDaZhe;
         var agencyModel = goods.CategoryFees_Select_ByType(3);
-        model.TrademarkAgencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
+        decimal? agencyFee = agencyModel.MainFees * model.TrademarkType.Split(',').Length;//代理费
+        if (disCount > 0) agencyFee = agencyFee * (disCount / 100.0m); //打折
+        model.TrademarkAgencyFee = agencyFee;//代理费
+
         model.TrademarkLateFee = 0;//滞纳金
         if (!string.IsNullOrEmpty(txt_RenewalDate.Value))
         {

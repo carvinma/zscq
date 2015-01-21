@@ -23,7 +23,7 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
     dal_TrademarkOrder DALTO = new dal_TrademarkOrder();
     dal_TrademarkOrderDetails DALTOD = new dal_TrademarkOrderDetails();
     dal_Member DALM = new dal_Member();
-    public string PageType = "添加申请";
+    public string PageType = "添加续展";
     public StringBuilder img_color = new StringBuilder();
     public string returnurl = "";
 
@@ -129,15 +129,18 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             }
         }
         fileName = this.upBusinessLinces.Value;//营业执照
-        if (fileName.Contains("File_ShangBiao"))
+        if (!string.IsNullOrEmpty(fileName))
         {
-            model.Businesslicense = fileName;
-        }
-        else
-        {
-            System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
-                    HttpContext.Current.Server.MapPath("../../" + filePath + fileName));
-            model.Businesslicense = filePath + fileName;
+            if (fileName.Contains("File_ShangBiao"))
+            {
+                model.Businesslicense = fileName;
+            }
+            else
+            {
+                System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
+                        HttpContext.Current.Server.MapPath("../../" + filePath + fileName));
+                model.Businesslicense = filePath + fileName;
+            }
         }
 
         model.ProvinceId = int.Parse(Hi_prov.Value);

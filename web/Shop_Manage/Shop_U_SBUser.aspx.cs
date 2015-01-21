@@ -344,7 +344,12 @@ public partial class Shop_Manage_Shop_U_SBUser : System.Web.UI.Page
             #endregion
             model.nvc_Power = vip_power;
             model.nt_BeiZhu = Text_VipBeiZhu.Value;
-            model.i_PowerDaZhe = Convert.ToInt32(Txt_VipPowerDaZhe.Text);
+            if (!string.IsNullOrEmpty(Txt_VipPowerDaZhe.Text))
+            {
+                model.i_PowerDaZhe = Convert.ToInt32(Txt_VipPowerDaZhe.Text);
+            }
+            else
+                model.i_PowerDaZhe = 0;
             if (Txt_UserPassword.Value != "")
             {
                 Response.Write(Txt_UserPassword.Value.Trim() + "dd");
