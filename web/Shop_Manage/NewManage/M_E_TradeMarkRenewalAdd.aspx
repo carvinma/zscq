@@ -744,7 +744,7 @@
                                 </tr>
                                 <tr>
                                     <td height="115" align="left" valign="top">
-                                        <table width="689" border="0" cellspacing="0" cellpadding="0">
+                                        <table width="689" cellspacing="1" cellpadding="3">
                                             <tr style="display:none">
                                                 <td height="32" width="276" align="right">
                                                     <strong><span>我公司案件号</span></strong>：
@@ -762,10 +762,10 @@
                                                 </td>
                                                 <td>
                                                     <input class="font12000" runat="server" id="txt_RegNo" maxlength="50" type="text"
-                                                        name="" value="" />
+                                                        name="" value="" />  <span style="color: Red;">*</span>
                                                 </td>
                                                 <td width="429">
-                                                   <span style="color: Red;">*</span>
+                                                 
                                                                             <span class="status error" id="regno_div_error"></span>
                                                 </td>
                                             </tr>

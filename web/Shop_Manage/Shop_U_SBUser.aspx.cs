@@ -252,9 +252,16 @@ public partial class Shop_Manage_Shop_U_SBUser : System.Web.UI.Page
             //model.i_CityId = int.Parse(DropDownList3.SelectedValue);//添加市
             //model.i_AreaId = int.Parse(DropDownList4.SelectedValue);//添加县
 
-            model.i_ProvinceId = int.Parse(Hi_prov.Value);//添加省
-            model.i_CityId = int.Parse(Hi_city.Value);//添加市
-            model.i_AreaId = int.Parse(Hi_country.Value);//添加县
+            int prov = 0, city = 0, country = 0;
+            if (int.TryParse(Hi_prov.Value, out prov) && int.TryParse(Hi_city.Value, out city) && int.TryParse(Hi_country.Value, out country))
+            {
+                model.i_ProvinceId = prov;//添加省
+                model.i_CityId = city;//添加市
+                model.i_AreaId = country;//添加县
+                //model.i_ProvinceId = int.Parse(Hi_prov.Value);//添加省
+                //model.i_CityId = int.Parse(Hi_city.Value);//添加市
+                //model.i_AreaId = int.Parse(Hi_country.Value);//添加县
+            }
 
             model.nvc_Address = text_Address.Value;
             model.nvc_EnAddress = c_addressEn.Value;
