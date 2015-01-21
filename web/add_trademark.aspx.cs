@@ -166,12 +166,14 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
             model.Businesslicense = filePath + fileName;
         }
 
-        model.ProvinceId = int.Parse(Hi_prov.Value);
-        int cityid, areaid;
-        if (int.TryParse(Hi_city.Value, out cityid))
-            model.CityId = cityid;
-        if (int.TryParse(Hi_country.Value, out areaid))
-            model.AreaId = areaid;
+        int provid = 0, cityid = 0, areaid = 0;
+        int.TryParse(Hi_prov.Value, out provid);
+        int.TryParse(Hi_city.Value, out cityid);
+        int.TryParse(Hi_country.Value, out areaid);
+        model.ProvinceId = provid;
+        model.CityId = cityid;
+        model.AreaId = areaid;
+
         model.Address = txt_address.Value.Trim();
         model.ContactPerson = txt_ContactPerson.Value.Trim();
         model.Phone = txt_phone.Value.Trim();
