@@ -149,9 +149,10 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
                 upBusinessLinces.Value = model.Businesslicense;
                 aBusinessLicense.Visible = true;
             }
-            Hi_prov.Value = model.ProvinceId.ToString();////
-            Hi_city.Value = model.CityId.ToString();
-            Hi_country.Value = model.AreaId.ToString();
+            Hi_prov.Value = model.ProvinceId.HasValue ? model.ProvinceId.ToString():"0";////
+            Hi_city.Value = model.CityId.HasValue ? model.CityId.ToString() : "0";
+            Hi_country.Value = model.AreaId.HasValue ? model.AreaId.ToString() : "0";
+
             this.txt_address.Value = model.Address;
             this.txt_ContactPerson.Value = model.ContactPerson;
             this.txt_phone.Value = model.Phone;
@@ -292,12 +293,14 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
             model.Businesslicense = filePath + fileName;
         }
 
-        model.ProvinceId = int.Parse(Hi_prov.Value);
-        int cityid, areaid;
-        if (int.TryParse(Hi_city.Value, out cityid))
-            model.CityId = cityid;
-        if (int.TryParse(Hi_country.Value, out areaid))
-            model.AreaId = areaid;
+        int provid = 0, cityid = 0, areaid = 0;
+        int.TryParse(Hi_prov.Value, out provid);
+        int.TryParse(Hi_city.Value, out cityid);
+        int.TryParse(Hi_country.Value, out areaid);
+        model.ProvinceId = provid;
+        model.CityId = cityid;
+        model.AreaId = areaid;
+
         model.Address = txt_address.Value.Trim();
         model.ContactPerson = txt_ContactPerson.Value.Trim();
         model.Phone = txt_phone.Value.Trim();

@@ -143,12 +143,14 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             }
         }
 
-        model.ProvinceId = int.Parse(Hi_prov.Value);
-        int cityid, areaid;
-        if (int.TryParse(Hi_city.Value, out cityid))
-            model.CityId = cityid;
-        if (int.TryParse(Hi_country.Value, out areaid))
-            model.AreaId = areaid;
+        int provid = 0, cityid = 0, areaid = 0;
+        int.TryParse(Hi_prov.Value, out provid);
+        int.TryParse(Hi_city.Value, out cityid);
+        int.TryParse(Hi_country.Value, out areaid);
+        model.ProvinceId = provid;
+        model.CityId = cityid;
+        model.AreaId = areaid;
+
         model.Address = txt_address.Value.Trim();
         model.ContactPerson = txt_ContactPerson.Value.Trim();
         model.Phone = txt_phone.Value.Trim();
@@ -203,7 +205,7 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
         {
             fileName = this.upRegisteCertificate.Value;//注册证书
             System.IO.File.Move(HttpContext.Current.Server.MapPath("../../UploadTemp\\" + fileName),
-                   HttpContext.Current.Server.MapPath("../../"+filePath + fileName));
+                   HttpContext.Current.Server.MapPath("../../" + filePath + fileName));
             model.TrademarkRegBook = filePath + fileName;
         }
 
@@ -276,13 +278,13 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
                     mark.trademarkStatusdateSumbit(sdmodel);
                 }
                 Bind_Page_Type();
-                Page.ClientScript.RegisterStartupScript(Page.GetType(), "alert1", "alert('商标续展添加成功!');", true); 
+                Page.ClientScript.RegisterStartupScript(Page.GetType(), "alert1", "alert('商标续展添加成功!');", true);
                 // Response.Redirect("L_M_Trademark.aspx");
             }
         }
         catch
         {
-            Page.ClientScript.RegisterStartupScript(Page.GetType(), "alert1", "alert('商标续展添加失败!');", true); 
+            Page.ClientScript.RegisterStartupScript(Page.GetType(), "alert1", "alert('商标续展添加失败!');", true);
         }
     }
 
@@ -291,7 +293,10 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
     /// </summary>
     private string CreateAgentBook(t_NewTradeMarkInfo model)
     {
-        string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
+        int proId = model.ProvinceId.HasValue ? model.ProvinceId.Value : 0;
+        int cityId = model.CityId.HasValue ? model.CityId.Value : 0;
+        int areaId = model.AreaId.HasValue ? model.AreaId.Value : 0;
+        string division = address.Set_AddressName_PId_CId_AId(proId, cityId, areaId);
 
         string tmppath = Server.MapPath("../../File_Zscq/template/BookTrademarkRenewalAgent.doc");
         Document doc = new Document(tmppath); //载入模板 
@@ -362,7 +367,10 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
     /// </summary>
     private string CreateApplyBook(t_NewTradeMarkInfo model)
     {
-        string division = address.Set_AddressName_PId_CId_AId(model.ProvinceId.Value, model.CityId.Value, model.AreaId.Value);
+        int proId = model.ProvinceId.HasValue ? model.ProvinceId.Value : 0;
+        int cityId = model.CityId.HasValue ? model.CityId.Value : 0;
+        int areaId = model.AreaId.HasValue ? model.AreaId.Value : 0;
+        string division = address.Set_AddressName_PId_CId_AId(proId, cityId, areaId);
 
         string tmppath = Server.MapPath("../../File_Zscq/template/BookTrademarkRenewalApply.doc");
         Document doc = new Document(tmppath); //载入模板 
