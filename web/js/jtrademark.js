@@ -803,16 +803,16 @@ function check_ApplyUser(divId,isAlert) {
             errorFlag = true;
             errorMessage = "请您填写邮政编码";
         }
-        else {
-            if (!is_forbid(value)) {
-                errorFlag = true;
-                errorMessage = "邮政编码中含有非法字符";
-            }
-            if (!check_postcode(value)) {
-                errorFlag = true;
-                errorMessage = "邮政编码格式不正确";
-            }
-        }
+//        else {
+//            if (!is_forbid(value)) {
+//                errorFlag = true;
+//                errorMessage = "邮政编码中含有非法字符";
+//            }
+//            if (!check_postcode(value)) {
+//                errorFlag = true;
+//                errorMessage = "邮政编码格式不正确";
+//            }
+//        }
     }
 
     else if (divId == "mobile_div") {
