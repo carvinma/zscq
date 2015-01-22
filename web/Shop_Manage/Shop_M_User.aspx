@@ -343,6 +343,16 @@
             <%#GetUserTrademarkCountByUserId(Convert.ToInt32(Eval("i_Id")))%>
             </ItemTemplate>
         </asp:TemplateField>
+          <asp:TemplateField HeaderText="申请案数">
+            <ItemTemplate>
+            <%#GetUserNewTrademarkCountByUserId(Convert.ToInt32(Eval("i_Id")),0)%>
+            </ItemTemplate>
+        </asp:TemplateField>
+          <asp:TemplateField HeaderText="续展案数">
+            <ItemTemplate>
+            <%#GetUserNewTrademarkCountByUserId(Convert.ToInt32(Eval("i_Id")),1)%>
+            </ItemTemplate>
+        </asp:TemplateField>
     </Columns>    
   </asp:GridView>
   <input type="hidden" id="HiddenDel" value="" runat="server" />

@@ -227,10 +227,23 @@ function Queryaddgoods() {
 //编辑时重新显示商品
 function editgoods() {
     var arr_goods = new Array();
-    $("tr[classname='arr_goods']").each(function () {
-        goodscalc.add($(this).find("td:eq(1)").text(), 1);
-    });
-    goodscalc.toChangeDisplay();
+    if ($("tr[classname='arr_goods']").length > 0) { //申请案
+        $("tr[classname='arr_goods']").each(function () {
+            goodscalc.add($(this).find("td:eq(1)").text(), 1);
+        });
+        goodscalc.toChangeDisplay();
+    }
+    else {  //续展案
+        var goodstype = $("#sortarr").val();
+        if (!isEmpty(goodstype)) {
+            var parr = new Array();
+            parr = goodstype.replace(/，/g, ',').split(",");
+            var totolmoney = parr.length * parseFloat($("#hi_MainFees").val());
+            //$("#lbltotalCost").text("包含" + parr.length + "类，共计规费:" + totolmoney + "元");
+            //alert(totolmoney);
+            $("#hi_money").val(totolmoney);
+        }
+    }
 }
 var goodscalc = {
     v: new Array(),
@@ -247,7 +260,7 @@ var goodscalc = {
         var ItemNum = $("#hi_ItemNum").val(); var ExceedFees = $("#hi_ExceedFees").val();
         var sum = 0; var totalgoods = 0;
         for (var k in this.v) {
-            totalgoods+=this.v[k];
+            totalgoods += this.v[k];
             if (this.v[k] > ItemNum) {
                 var cost = parseFloat(MainFees) + (parseFloat(this.v[k]) - parseFloat(ItemNum)) * parseFloat(ExceedFees);
                 sum += cost;
