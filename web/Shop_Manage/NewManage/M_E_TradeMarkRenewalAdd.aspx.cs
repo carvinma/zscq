@@ -261,8 +261,8 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             {
                 model.i_Type = 1;
                 model.Status = 12;
-                model.AgentBook = CreateAgentBook(model);
-                model.ApplyBook = CreateApplyBook(model);
+                model.RenewalAgentBook = CreateAgentBook(model);
+                model.RenewalApplyBook = CreateApplyBook(model);
                 if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))
                     mark.Trademark_Submit();
                 else

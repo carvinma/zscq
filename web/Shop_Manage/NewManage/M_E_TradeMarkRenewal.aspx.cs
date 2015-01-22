@@ -469,8 +469,8 @@ public partial class M_E_TradeMarkRenewal : System.Web.UI.Page
         if (model != null)
         {
             model.i_Type = 1;
-            model.AgentBook = CreateAgentBook(model);
-            model.ApplyBook = CreateApplyBook(model);
+            model.RenewalAgentBook = CreateAgentBook(model);
+            model.RenewalApplyBook = CreateApplyBook(model);
             if(model.RestDays>90)
                 model.Status = 2;
             else if (model.RestDays <= 90 && model.RestDays >=61)
