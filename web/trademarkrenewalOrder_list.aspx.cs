@@ -66,7 +66,22 @@ public partial class trademarkrenewalOrder_list : System.Web.UI.Page
             var result = mark.Trademark_web_Excel(tIds);
             foreach (var r in result)
             {
-                r.Status = 12;//已保存，未提交
+                if (r.RestDays > 90)
+                    r.Status = 2;
+                else if (r.RestDays <= 90 && r.RestDays >= 61)
+                    r.Status = 3;
+                else if (r.RestDays <= 60 && r.RestDays >= 31)
+                    r.Status = 4;
+                else if (r.RestDays <= 30 && r.RestDays >= 16)
+                    r.Status = 5;
+                else if (r.RestDays <= 15 && r.RestDays >= 0)
+                    r.Status = 6;
+                else if (r.RestDays < 0)
+                    r.Status = 7;
+                else if (r.RestDays < 0 && r.RestDays >= -30)
+                    r.Status = 8;
+                else if (r.RestDays < -30 && r.RestDays >= -150)
+                    r.Status = 8;
             }
             mark.Trademark_Submit();
             dal_Coupon DALCOU = new dal_Coupon(); //优惠券信息表

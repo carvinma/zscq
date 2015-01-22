@@ -226,6 +226,23 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
         model.IsReceiveEmail = cb_ReceiveEmail.Checked ? true : false;
         model.Remark = t_Remark.Text.Trim();
 
+        if (model.RestDays > 90)
+            model.Status = 2;
+        else if (model.RestDays <= 90 && model.RestDays >= 61)
+            model.Status = 3;
+        else if (model.RestDays <= 60 && model.RestDays >= 31)
+            model.Status = 4;
+        else if (model.RestDays <= 30 && model.RestDays >= 16)
+            model.Status = 5;
+        else if (model.RestDays <= 15 && model.RestDays >= 0)
+            model.Status = 6;
+        else if (model.RestDays < 0)
+            model.Status = 7;
+        else if (model.RestDays < 0 && model.RestDays >= -30)
+            model.Status = 8;
+        else if (model.RestDays < -30 && model.RestDays >= -150)
+            model.Status = 8;
+
         return model;
     }
     private void addRegNoticeData(int trademarkid)
@@ -260,7 +277,6 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             if (model != null)
             {
                 model.i_Type = 1;
-                model.Status = 12;
                 model.RenewalAgentBook = CreateAgentBook(model);
                 model.RenewalApplyBook = CreateApplyBook(model);
                 if (!string.IsNullOrEmpty(hi_TradeMarkId.Value))

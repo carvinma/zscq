@@ -183,6 +183,24 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         model.Remark = txt_remark.Value.Trim();
         model.IsShow = true;
         model.IsReceiveEmail = true;
+
+        if (model.RestDays > 90)
+            model.Status = 2;
+        else if (model.RestDays <= 90 && model.RestDays >= 61)
+            model.Status = 3;
+        else if (model.RestDays <= 60 && model.RestDays >= 31)
+            model.Status = 4;
+        else if (model.RestDays <= 30 && model.RestDays >= 16)
+            model.Status = 5;
+        else if (model.RestDays <= 15 && model.RestDays >= 0)
+            model.Status = 6;
+        else if (model.RestDays < 0)
+            model.Status = 7;
+        else if (model.RestDays < 0 && model.RestDays >= -30)
+            model.Status = 8;
+        else if (model.RestDays < -30 && model.RestDays >= -150)
+            model.Status = 8;
+
         return model;
     }
     private void addRegNoticeData(int trademarkid)
@@ -212,7 +230,6 @@ public partial class add_trademark_renewal : System.Web.UI.Page
     protected void btnSave_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status = 12;
         model.RenewalAgentBook = CreateAgentBook(model);
         model.RenewalApplyBook = CreateApplyBook(model);
         if (mark.Trademark_Add(model) > 0)
@@ -230,7 +247,6 @@ public partial class add_trademark_renewal : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         var model = InitModel();
-        model.Status = 12;//已保存，未提交
         model.RenewalAgentBook = CreateAgentBook(model);
         model.RenewalApplyBook = CreateApplyBook(model);
         if (mark.Trademark_Add(model) > 0)

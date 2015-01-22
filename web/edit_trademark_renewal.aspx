@@ -362,7 +362,7 @@
                parr = goodstype.replace(/，/g, ',').split(",");
                var totalmoney= parr.length * parseFloat($("#hi_MainFees").val());
                $("#lbltotalCost").text("包含" + parr.length + "类，共计规费:" + totalmoney + "元");
-               $("#lbltotalCost").show();
+              // $("#lbltotalCost").show();
                $("#hi_money").val(totalmoney);
            }
            else {
