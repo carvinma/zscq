@@ -94,7 +94,8 @@ public partial class trademarkrenewal_detail : System.Web.UI.Page
         }
         if (model.Status != null)
         {
-            if (model.Status.Value != 10 && model.Status.Value != 11 && model.Status.Value != 12)
+            //已提交，未汇款10  已提交，续展中11
+            if (model.Status.Value != 10 && model.Status.Value != 11)
                 hrefedit.Visible = false;
             status = BaseDataUtil.tradeMarkRenewedStatuslist.Where(p => p.StatusValue == model.Status).First().StatusName;
         }
