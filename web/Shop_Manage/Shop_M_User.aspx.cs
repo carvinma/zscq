@@ -13,6 +13,7 @@ using System.IO;
 public partial class Shop_Manage_shop_user : System.Web.UI.Page
 {
     DataZscqDataContext dzdc = new DataZscqDataContext();
+    DataTradeMarkDataContext mark = new DataTradeMarkDataContext();
     dal_Address DALB = new dal_Address();
     dal_Member soldal = new dal_Member();
     dal_Collection DALR = new dal_Collection();
@@ -418,6 +419,11 @@ public partial class Shop_Manage_shop_user : System.Web.UI.Page
     protected string GetUserTrademarkCountByUserId(int userid)
     {
         var TrademarkList = from o in dzdc.t_Trademark where o.i_MemberId == userid select o.i_Id;
+        return TrademarkList.Count().ToString();
+    }
+    protected string GetUserNewTrademarkCountByUserId(int userid,int caseType)
+    {
+        var TrademarkList = from o in mark.t_NewTradeMarkInfo where o.i_MemberId == userid && o.i_Type == caseType select o.i_Id;
         return TrademarkList.Count().ToString();
     }
     public int getUserIntegral(object oid)

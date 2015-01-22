@@ -219,6 +219,17 @@ public partial class L_M_Trademark : System.Web.UI.Page
         {
             var iquery = from i in mark.vw_NewTradeMark select i;
             #region 查询参数
+            #region 客户列表
+            if (Request.QueryString["userid"] != null)
+            {
+                iquery = from i in iquery where i.i_MemberId == int.Parse(Request["userid"]) select i;
+            }
+            if (Request.QueryString["caseType"] != null)
+            {
+                iquery = from i in iquery where i.i_Type == int.Parse(Request["caseType"]) select i;
+            }
+            #endregion
+
             if (Request["listid"] != null)
             {
                 iquery = from i in iquery where i.i_Id == int.Parse(Request["listid"]) select i;
