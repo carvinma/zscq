@@ -226,7 +226,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
-            UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
+            UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加商标内容");
             Response.Redirect("trademark_list.aspx");
         }
         else
@@ -243,7 +243,7 @@ public partial class aBrand_add_trademark : System.Web.UI.Page
         if (mark.Trademark_Add(model) > 0)
         {
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
-            UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
+            UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加商标内容");
             Response.Redirect("Add_TrademarkOrder.aspx?ids=" + model.i_Id);
         }
         else

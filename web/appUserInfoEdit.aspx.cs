@@ -214,7 +214,7 @@ public partial class appUserInfoEdit : System.Web.UI.Page
                     div_a.InnerHtml = "<script>alert('发生意外，暂时无法常修改用联系人!');</script>";
                     break;
                 case 1:
-                    //UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加常用联系人！");
+                    UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "修改常用联系人！");
                     div_a.InnerHtml = "<script>alert('修改成功！'); window.location='appUserInfo.aspx'</script>";
                     break;
             }

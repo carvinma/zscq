@@ -236,7 +236,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         {
             addRegNoticeData(model.i_Id);
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
-            UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
+            UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加商标内容");
             Response.Redirect("trademarkrenewal_list.aspx");
         }
         else
@@ -253,7 +253,7 @@ public partial class add_trademark_renewal : System.Web.UI.Page
         {
             addRegNoticeData(model.i_Id);
             div_a.InnerHtml = "<script>alert('信息添加成功!');<script>";
-            UserLog.AddUserLog(model.i_Id, "商标系统", "添加商标内容");
+            UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加商标内容");
             Response.Redirect("Add_TrademarkrenewalOrder.aspx?ids=" + model.i_Id);
         }
         else

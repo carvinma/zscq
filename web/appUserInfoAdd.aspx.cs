@@ -228,7 +228,7 @@ public partial class appUserInfoAdd : System.Web.UI.Page
                 div_a.InnerHtml = "<script>alert('发生意外，暂时无法添加常用联系人!');</script>";
                 break;
             case 1:
-                //UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加常用联系人！");
+                UserLog.AddUserLog(Hi_MemberId.Value, "商标系统", "添加常用联系人！");
                 div_a.InnerHtml = "<script>alert('添加成功！'); window.location='appUserInfo.aspx'</script>";
                 break;
         }
