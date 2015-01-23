@@ -148,18 +148,19 @@
         <th width="9%">
           商标数量
         </th>
-        <%} %>
-        <th width="9%">
-          申请案数量
+       
+        <th width="5%">
+          申请
+        </th>
+        <th width="5%">
+          续展
+        </th>
+         <%} %>
+        <th width="5%">
+          优惠券
         </th>
         <th width="9%">
-          续展案数量
-        </th>
-        <th width="9%">
-          优惠券数
-        </th>
-        <th width="9%">
-          是否接收邮件
+          接收邮件
         </th>
         <th width="9%">
           <asp:LinkButton ID="Lbtn_8" runat="server" OnCommand="Ob8">注册时间↑</asp:LinkButton>
@@ -211,11 +212,12 @@
               { %>
             <td align="center"><a href="Shop_M_Trademark.aspx?userid=<%# Eval("i_Id") %>" title="点击查看属于我的商标">
               <%#GetUserTrademarkCountByUserId(Convert.ToInt32(Eval("i_Id")))%></a></td>
-            <%} %>
+           
              <td height="25" align="center"><a href="NewManage/L_M_Trademark.aspx?userid=<%# Eval("i_Id") %>&caseType=0">
               <%#GetUserNewTrademarkCountByUserId(Convert.ToInt32(Eval("i_Id")),0)%></a></td>
              <td height="25" align="center"><a href="NewManage/L_M_Trademark.aspx?userid=<%# Eval("i_Id") %>&caseType=1">
               <%#GetUserNewTrademarkCountByUserId(Convert.ToInt32(Eval("i_Id")),1)%></a></td>
+               <%} %>
             <td height="25" align="center"><a href="Shop_M_Coupon.aspx?uid=<%# Eval("i_Id") %>&keyword=<%#Eval("nvc_Name")%>&SType=2">
             <%# Set_Coupon(Eval("i_Id"))%></a></td>
             <td align="center">
