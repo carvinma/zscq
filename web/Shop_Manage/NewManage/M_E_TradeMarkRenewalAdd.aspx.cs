@@ -242,7 +242,7 @@ public partial class M_E_TradeMarkRenewalAdd : System.Web.UI.Page
             model.Status = 8;
         else if (model.RestDays < -30 && model.RestDays >= -150)
             model.Status = 8;
-
+        model.i_SendEmail = 0;
         return model;
     }
     private void addRegNoticeData(int trademarkid)
