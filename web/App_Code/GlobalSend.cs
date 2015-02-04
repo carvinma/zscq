@@ -795,14 +795,14 @@ public class GlobalSend
                                 dazhe1 = Convert.ToInt32(tmg.i_Discount);
                             }
                             #endregion
-                            sb_start.Append(v.nvc_Name).Append("客户(").Append(v.nvc_UserNum).Append(")，您好！<br/>");
+                            sb_start.Append(v.nvc_Name).Append("客户(").Append(v.nvc_UserNum).Append(")，您好！<br/><br/>");
                             sb_start.Append("<table width='700' border='0' cellspacing='1' cellpadding='1' bgcolor='#d0d0d0'>");
                             sb_start.Append("<tr>");
                             sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>案件号</td>");
                             sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标注册号</td>");
-                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标大类</td>");
-                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>申请人姓名</td>");
-                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>到期日</td>");
+                            sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>商标类别</td>");
+                            sb_start.Append("<td width='180' height='35' align='center' bgcolor='#FFFFFF'>申请人姓名</td>");
+                            sb_start.Append("<td width='120' height='35' align='center' bgcolor='#FFFFFF'>缴费期限日</td>");
                             sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>缴费金额</td>");
                             sb_start.Append("<td width='100' height='35' align='center' bgcolor='#FFFFFF'>币种</td>");
                             sb_start.Append("</tr>");
