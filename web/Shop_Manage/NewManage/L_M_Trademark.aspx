@@ -254,9 +254,9 @@
                             title="正序" id="timelimitDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="5%">
-                    分类<a href="L_M_Trademark.aspx?<%=returnurl %>&casetype=desc"
+                    分类<a href="L_M_Trademark.aspx?<%=returnurl %>&lcasetype=desc"
                         title="倒序" id="casetypeAsc"><span class="sp1"></span></a>
-                        <a href="L_M_Trademark.aspx?<%=returnurl %>&casetype=asc"
+                        <a href="L_M_Trademark.aspx?<%=returnurl %>&lcasetype=asc"
                             title="正序"  id="casetypeDesc"><span class="sp2"></span></a>
                 </th>
                 <th width="5%">

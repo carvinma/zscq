@@ -352,7 +352,7 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
             #region 取消订单
             if (CType == 3)//取消订单  优惠券取消
             {
-                trademarkStatus = 12;//已保存，未提交
+               // trademarkStatus = 12;//已保存，未提交
                 if (Order_Model.i_IsUseYHQ == 1)
                 {
                     if (Order_Model.nvc_YHQIdstr != null || Order_Model.nvc_YHQIdstr != "")
@@ -407,6 +407,27 @@ public partial class Q_TrademarkRenewalOrderInfo : System.Web.UI.Page
                             t.RestDays = Convert.ToInt32(HelpString.DateDiff(t.RenewalDate.Value, DateTime.Today, "day"));
                             addRegNoticeData(t.i_Id, dt.AddYears(10).AddDays(-1), t.RenewalDate.Value);
                             //addRegNoticeData(t.i_Id, dt, t.RenewalDate.Value);//更改续展日期到数据库（2015-01-12 是 否 完成）
+                        }
+                        #endregion
+                        #region 取消订单  优惠券取消
+                        if (CType == 3)//取消订单  优惠券取消
+                        {
+                            if (t.RestDays > 90)
+                                trademarkStatus = 2;
+                            else if (t.RestDays <= 90 && t.RestDays >= 61)
+                                trademarkStatus = 3;
+                            else if (t.RestDays <= 60 && t.RestDays >= 31)
+                                trademarkStatus= 4;
+                            else if (t.RestDays <= 30 && t.RestDays >= 16)
+                                trademarkStatus = 5;
+                            else if (t.RestDays <= 15 && t.RestDays >= 0)
+                                trademarkStatus = 6;
+                            else if (t.RestDays < 0)
+                                trademarkStatus= 7;
+                            else if (t.RestDays < 0 && t.RestDays >= -30)
+                                trademarkStatus = 8;
+                            else if (t.RestDays < -30 && t.RestDays >= -150)
+                                trademarkStatus = 8;
                         }
                         #endregion
                         t.Status = trademarkStatus;
