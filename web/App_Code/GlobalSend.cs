@@ -745,9 +745,9 @@ public class GlobalSend
     /// <summary>
     /// 商标期限提醒
     /// </summary>
-    /// <param name="key"></param>
-    /// <param name="keyValue"></param>
-    /// <param name="status"></param>
+    /// <param name="key">sb_status15</param>
+    /// <param name="keyValue">txt_sb_con15</param>
+    /// <param name="status">2</param>
     /// <param name="language"></param>
     public void SendEmail_New_SB(string key, string keyValue, int status)
     {
@@ -827,13 +827,13 @@ public class GlobalSend
                                 paybizhong = "CNY";
 
                                 sb_body.Append("<tr>");
-                                sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.CaseNo + "</td>");
-                                sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.RegisteredNo + "</td>");
-                                sb_body.Append("<td width='100' height='32' align='center' bgcolor='#FFFFFF' >" + i.TrademarkType + "</td>");
-                                sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + i.ApplyName + "</td>");
-                                sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" +(i.RenewalDate.HasValue ? i.RenewalDate.Value.ToString("yyyy-MM-dd"):"") + "</td>");
-                                sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + totalmoney + "</td>");
-                                sb_body.Append("<td width='100' align='center' bgcolor='#FFFFFF'>" + paybizhong + "</td>");
+                                sb_body.Append("<td height='32' align='center' bgcolor='#FFFFFF' >" + i.CaseNo + "</td>");
+                                sb_body.Append("<td height='32' align='center' bgcolor='#FFFFFF' >" + i.RegisteredNo + "</td>");
+                                sb_body.Append("<td height='32' align='center' bgcolor='#FFFFFF' >" + i.TrademarkType + "</td>");
+                                sb_body.Append("<td align='center' bgcolor='#FFFFFF'>" + i.ApplyName + "</td>");
+                                sb_body.Append("<td align='center' bgcolor='#FFFFFF'>" +(i.RenewalDate.HasValue ? i.RenewalDate.Value.ToString("yyyy-MM-dd"):"") + "</td>");
+                                sb_body.Append("<td align='center' bgcolor='#FFFFFF'>" + totalmoney + "</td>");
+                                sb_body.Append("<td align='center' bgcolor='#FFFFFF'>" + paybizhong + "</td>");
                                 sb_body.Append("</tr>");
 
                             }
