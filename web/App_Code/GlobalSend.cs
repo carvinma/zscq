@@ -814,14 +814,14 @@ public class GlobalSend
 
                                 #region 会员折扣 by chy
                                 decimal dalifee = i.TrademarkAgencyFee.Value;
-                                if (dazhe != 0)
-                                {
-                                    dalifee = dalifee * dazhe / 100;
-                                }
-                                if (dazhe1 != 0)
-                                {
-                                    dalifee = dalifee * dazhe1 / 100;
-                                }
+                                //if (dazhe != 0)
+                                //{
+                                //    dalifee = dalifee * dazhe / 100;
+                                //}
+                                //if (dazhe1 != 0)
+                                //{
+                                //    dalifee = dalifee * dazhe1 / 100;
+                                //}
                                 #endregion
                                 string totalmoney = (dalifee + i.TrademarkLateFee.Value + i.TrademarkMoney.Value).ToString("0.00");
                                 paybizhong = "CNY";
