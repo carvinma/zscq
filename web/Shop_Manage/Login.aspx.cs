@@ -38,11 +38,11 @@ public partial class Shop_Manage_index : System.Web.UI.Page
             Response.Write("<script>history.go(-1);</script>");
             Response.End();
         }
-        if (!DALSS.CheckSystem())
-        {
-            div_a.InnerHtml = "<script>alert('您使用的系统已过期，请联系软件商更新系统！');location.href='http://www.yghdnet.com/';</script>";
-            return;
-        }
+        //if (!DALSS.CheckSystem())
+        //{
+        //    div_a.InnerHtml = "<script>alert('您使用的系统已过期，请联系软件商更新系统！');location.href='http://www.yghdnet.com/';</script>";
+        //    return;
+        //}
         if (UserName.Text == string.Empty)
         {
             div_a.InnerHtml = "<script>alert('请填写用户名！')</script>";
