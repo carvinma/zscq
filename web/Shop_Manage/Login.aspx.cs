@@ -15,11 +15,11 @@ public partial class Shop_Manage_index : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         div_a.InnerHtml = "";
-        if (!DALSS.CheckSystem())
-        {
-            div_a.InnerHtml = "<script>alert('您使用的系统已过期，请联系软件商更新系统！');location.href='http://www.yghdnet.com/';</script>";
-            return;
-        }
+        //if (!DALSS.CheckSystem())
+        //{
+        //    div_a.InnerHtml = "<script>alert('您使用的系统已过期，请联系软件商更新系统！');location.href='http://www.yghdnet.com/';</script>";
+        //    return;
+        //}
     }
 
     public bool check_wq(string sid)
