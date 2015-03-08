@@ -80,11 +80,7 @@
                         <td width="23">&nbsp; </td>
                         <td width="178" height="18" align="left" valign="top">
                           <table width="170" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=1" <%= ptype==1?"class=\"ac5\"":"" %>>积分兑换</a> </td>
-                            </tr>
-                            <tr>
+                              <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen5.gif" width="20" height="19" /> </td>
                               <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=2" <%= ptype==2?"class=\"ac5\"":"" %>>优惠券兑换</a> </td>
                             </tr>
@@ -92,6 +88,11 @@
                               <td width="27" height="26" align="left"><img src="images/jifen6.gif" width="20" height="19" /> </td>
                               <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=3" <%= ptype==3?"class=\"ac5\"":"" %>>会员等级兑换</a> </td>
                             </tr>
+                            <tr>
+                              <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
+                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=1" <%= ptype==1?"class=\"ac5\"":"" %>>积分兑换</a> </td>
+                            </tr>
+                            
                           </table>
                         </td>
                         <td width="20">&nbsp; </td>
@@ -118,6 +119,25 @@
                           <%else
                             { %>
                           <a href="ShopLogin.aspx" class="ac2">进入积分系统</a>
+                          <%} %>
+                        </td>
+                         
+                      </tr>
+                    </table>
+                  </td>
+                  <td width="29">&nbsp; </td>
+                </tr>
+                  <tr>
+                  <td width="10">&nbsp; </td>
+                  <td height="22" bgcolor="#949293">
+                    <table width="221" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="25" height="22">&nbsp; </td>
+                        <td width="13">&nbsp; </td>                      
+                          <td width="240" align="left">
+                          <%if (!isLogin)
+                            { %>
+                          <span>还不是环球汇通用户？</span><a href="ShopReg.aspx" class="ac2">马上注册</a>
                           <%} %>
                         </td>
                       </tr>
@@ -236,6 +256,10 @@
                                   </tr>
                                   <tr>
                                     <td height="30" align="left">关注度：<%= follow %></td>
+                                  </tr>
+                                    <tr>
+                                    <td width="351" height="30" align="left"><span style="color:#d44147">商品提示：<%= ctip %></span>
+                                    </td>
                                   </tr>
                                   <tr>
                                     <td height="30" align="left">&nbsp; </td>

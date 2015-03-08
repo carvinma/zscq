@@ -122,6 +122,7 @@ public partial class Shop_Manage_Shop_A_IntegralProduct : System.Web.UI.Page
             {
                 model.nvc_Pic = ifrimg.Value;
             }
+            model.i_ProductType = int.Parse(ddl_ProductType.SelectedValue);
             if (Hi_Id.Value == "0")
             {
                 DALIP.IntegralProduct_Add(model);
@@ -156,5 +157,20 @@ public partial class Shop_Manage_Shop_A_IntegralProduct : System.Web.UI.Page
         ddl_MGrade.DataBind();
         ddl_MGrade.Items.Insert(0, new ListItem("请选择", ""));
         ddl_Coupontype.Items.Insert(0, new ListItem("请选择", ""));
+
+        DataZscqDataContext dpdc = new DataZscqDataContext();
+        var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null select i;
+        foreach (var i in iquery)
+        {
+            ddl_ProductType.Items.Add(new ListItem(i.i_Name, i.i_Id.ToString()));
+            var iquery2 = from i2 in dpdc.t_IntegralProductType where i2.i_ParentId == i.i_Id select i2;
+            foreach (var i2 in iquery2)
+            {
+                ddl_ProductType.Items.Add(new ListItem("|----" + i2.i_Name, i2.i_Id.ToString()));
+                
+            }
+
+        }
+        ddl_ProductType.Items.Insert(0, new ListItem("请选择", ""));
     }
 }

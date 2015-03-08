@@ -1,9 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ShopLogin.aspx.cs" Inherits="ShopLogin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ShopReg.aspx.cs" Inherits="ShopReg" %>
+
 
 <%@ Register Src="ascx/zscqfoot.ascx" TagName="zscqfoot" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
   <%= TitleOrKeyword %>
   <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -69,16 +70,14 @@
                   <td width="396" align="left" valign="top">
                     <table width="372" height="121" border="0" cellpadding="0" cellspacing="0">
                       <tr>
-                        <td width="72" height="32" class="font14" align="right">用户类型：</td>
+                        <td width="72" height="32" class="font14" align="right">&nbsp;</td>
                         <td colspan="2">
-                          <table border="0" cellspacing="0" cellpadding="0" style="width: 300px">
+                          <table width="199" border="0" cellspacing="0" cellpadding="0">
                             <tr>
-                              <td width="80" height="30" align="left">
-                                <input type="radio" runat="server" name="type" id="rad_type_zl"  />专利用户 </td>
-                              <td width="80" align="left">
-                                <input type="radio" runat="server" name="type" id="rad_type_sb" />商标用户 </td>
-                                 <td width="140" align="left" >
-                                <input type="radio" runat="server" name="type" id="rad_type_normal" checked="true"/>非专利/商标系统 </td>
+                              <td width="97" height="30" align="left">
+                                  &nbsp;</td>
+                              <td width="102" align="left">
+                                  &nbsp;</td>
                             </tr>
                           </table>
                         </td>
@@ -88,8 +87,8 @@
                         <td width="200" align="left">
                           <input type="text" runat="server" id="txt_username" style="width: 187px; line-height: 20px; height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="50" value="" /></td>
                         <td width="100" align="left">
-                          <asp:RequiredFieldValidator runat="server" ControlToValidate="txt_username" ErrorMessage="请输入手机号" Display="Dynamic"></asp:RequiredFieldValidator>
-                          <asp:RegularExpressionValidator runat="server" ValidationExpression="^1((3[0-9])|(4[5-7])|(5([0-3]|[5-9]))|(8(0|[2-3]|[5-9])))[0-9]{8}$" ControlToValidate="txt_username" ErrorMessage="手机号码格式不正确" Display="Dynamic"></asp:RegularExpressionValidator>
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txt_username" ErrorMessage="请输入手机号" Display="Dynamic"></asp:RequiredFieldValidator>
+                          <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="^1((3[0-9])|(4[5-7])|(5([0-3]|[5-9]))|(8(0|[2-3]|[5-9])))[0-9]{8}$" ControlToValidate="txt_username" ErrorMessage="手机号码格式不正确" Display="Dynamic"></asp:RegularExpressionValidator>
                         </td>
                       </tr>
                       <tr>
@@ -97,7 +96,15 @@
                         <td align="left">
                           <input type="password" runat="server" id="txt_userpassword" style="width: 187px; line-height: 20px; height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="30" /></td>
                         <td align="left">
-                          <asp:RequiredFieldValidator runat="server" ControlToValidate="txt_userpassword" ErrorMessage="请输入密码" Display="Dynamic"></asp:RequiredFieldValidator>
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txt_userpassword" ErrorMessage="请输入密码" Display="Dynamic"></asp:RequiredFieldValidator>
+                        </td>
+                      </tr>
+                         <tr>
+                        <td height="32" class="font14" align="right">确认密码：</td>
+                        <td align="left">
+                          <input type="password" runat="server" id="txt_userpassword2" style="width: 187px; line-height: 20px; height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="30" /></td>
+                        <td align="left">
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txt_userpassword2" ErrorMessage="请输入确认密码" Display="Dynamic"></asp:RequiredFieldValidator>
                         </td>
                       </tr>
                       <tr>
@@ -113,20 +120,12 @@
                           </table>
                         </td>
                         <td align="left">
-                          <asp:RequiredFieldValidator runat="server" ControlToValidate="txt_code" ErrorMessage="请输入验证码"></asp:RequiredFieldValidator></td>
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txt_code" ErrorMessage="请输入验证码"></asp:RequiredFieldValidator></td>
                       </tr>
                       <tr>
                         <td height="32">&nbsp;</td>
                         <td align="left">
-                          <asp:ImageButton ID="Ibtn_Login" runat="server" ImageUrl="images/login.gif" Width="147" Height="22" BorderWidth="0" OnClick="Ibtn_Login_Click" />
-                        </td>
-                        <td align="left"></td>
-                      </tr>
-                        <tr></tr>
-                        <tr>
-                        <td height="32">&nbsp;</td>
-                        <td align="left">
-                          <span>还不是商城会员？</span><a href="ShopReg.aspx" >立即注册</a>
+                          <asp:Button ID="Ibtn_Reg" runat="server" Text="注册" Width="147"   Height="22" BorderWidth="0" OnClick="Ibtn_Reg_Click" />
                         </td>
                         <td align="left"></td>
                       </tr>
@@ -177,3 +176,4 @@
   </form>
 </body>
 </html>
+

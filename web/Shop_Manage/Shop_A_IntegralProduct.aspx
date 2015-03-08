@@ -63,6 +63,14 @@
         </td>
         <td>&nbsp;</td>
       </tr>
+        <tr id="tr_ProductType">
+        <td align="right">商品分类： </td>
+        <td>
+          <asp:DropDownList ID="ddl_ProductType" runat="server" onblur="checknull('ddl_ProductType','fddl_ProductType')">
+          </asp:DropDownList>
+          &nbsp;<font color="#FF0000">*</font>&nbsp;<font id="fddl_ProductType" class="alertfont" style="display: none;"><img alt="警告" src="images/caozuo_3.jpg" width="15" />请选择商品分类</font> </td>
+        <td>&nbsp;</td>
+      </tr>
       <tr id="tr_MGrade">
         <td align="right">会员等级： </td>
         <td>
@@ -86,6 +94,15 @@
         <td rowspan="7" valign="top">
           <input runat="server" type="hidden" id="ifrimg" />
           <iframe src="Shop_A_IntegralProduct_Img.aspx" height="180" width="240" frameborder="0" scrolling="no"></iframe>
+        </td>
+      </tr>
+        <tr>
+        <td align="right">商品类型： </td>
+        <td>
+          <input type="text" runat="server" maxlength="50" id="text1" class="inputs200text" onblur="checknull('text_head0','ftext_head0')" />&nbsp;<font color="#FF0000">*</font>&nbsp;<font id="Font1" class="alertfont" style="display: none;"><img alt="警告" src="images/caozuo_3.jpg" width="15" />请选择商品类型</font> </td>
+        <td rowspan="7" valign="top">
+           <asp:DropDownList ID="DropDownList1" runat="server">
+          </asp:DropDownList>
         </td>
       </tr>
       <tr>
@@ -130,6 +147,18 @@
             是否推荐：</label></td>
         <td>
           <input type="checkbox" id="cb_tj" name="cb_tj" value="" runat="server" /></td>
+      </tr>
+         <tr>
+        <td align="right" valign="top">商品提示： </td>
+        <td colspan="2" style="width:88%;">
+          <script id="uetip" type="text/plain" name="myTip">
+          <%=content%>
+          </script>
+          <script type="text/javascript">
+              var editor = new baidu.editor.ui.Editor();
+              editor.render('uetip');
+          </script>
+        </td>
       </tr>
       <tr>
         <td align="right" valign="top">商品简介： </td>
@@ -189,6 +218,15 @@
     $("#fddl_MGrade").attr("style", "display: none;");
     $("#fddl_Coupontype").attr("style", "display: none;");
 
+    if ($("#ddl_type").val() == "1") {
+        if ($("#ddl_ProductType").val() == "") {
+            $("#fddl_ProductType").attr("style", "display: ;");
+            flag = false;
+        }
+        else {
+            $("#ddl_ProductType").attr("style", "display: none;");
+        }
+    }
     if ($("#ddl_type").val() == "2") {
       if ($("#ddl_Coupontype").val() == "") {
         $("#fddl_Coupontype").attr("style", "display: ;");
@@ -254,14 +292,18 @@
     if (type == "1") {
       $("#tr_MGrade").hide();
       $("#tr_Coupont").hide();
+      $("#tr_ProductType").show();
     }
     if (type == "2") {
-      $("#tr_MGrade").hide();
-      $("#tr_Coupont").show();
+        $("#tr_MGrade").hide();
+        $("#tr_Coupont").show();
+        $("#tr_ProductType").hide();
     }
     if (type == "3") {
       $("#tr_MGrade").show();
       $("#tr_Coupont").hide();
+      $("#tr_ProductType").hide();
+
     }
   }
   changetrshow();

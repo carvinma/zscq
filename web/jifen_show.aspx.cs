@@ -15,7 +15,7 @@ public partial class jifen_show : System.Web.UI.Page
     CookiesShopCart shopcart = new CookiesShopCart();
     public int id = 0, isshow = 1, ptype = 1;
     public bool isLogin = false;
-    public string cname, snnumber, jifen, follow, contents, cpic = "";
+    public string cname, snnumber, jifen, follow, contents, cpic = "",ctip;
     public string key, sel, ye = "";
     public string name = "积分兑换";
     public string _Name = "";
@@ -100,6 +100,7 @@ public partial class jifen_show : System.Web.UI.Page
                         break;
                 }
                 cname = model.nvc_Name;
+                ctip=model.nvc_Name1;
                 snnumber = model.nvc_Number;
                 //string p = shopcart.Get_Info(model.i_Id.ToString());
                 //if (p != "")

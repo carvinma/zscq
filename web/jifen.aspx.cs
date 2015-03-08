@@ -21,8 +21,10 @@ public partial class jifen : System.Web.UI.Page
     string language = "cn";
     public int SortId = 0;
     public string key, sel = "";
+    public int producttypeid = 0;
     public string ptype = "1", name = "积分兑换";
     public bool isLogin = false;
+    public Dictionary<int, string> producttypes = new Dictionary<int, string>();
     dal_SystemKey DALSK = new dal_SystemKey();
     dal_NewsType DALNTP = new dal_NewsType();
     dal_News DALN = new dal_News();
@@ -58,9 +60,14 @@ public partial class jifen : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
+        GetProductTypes();
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
         {
             isLogin = true;
+        }
+        if (!string.IsNullOrWhiteSpace(Request.QueryString["producttype"]) && int.Parse(Request.QueryString["producttype"].ToString()) > 0)
+        {
+            producttype.Value = Request.QueryString["producttype"].ToString();
         }
         if (!string.IsNullOrWhiteSpace(Request.QueryString["ptype"]))
         {
@@ -103,6 +110,8 @@ public partial class jifen : System.Web.UI.Page
         int pageindex = AspNetPager1.CurrentPageIndex;
         var iquery = from i in dpdc.t_IntegralProduct where i.i_Type == int.Parse(ptype) && i.nvc_Language == language select i;
 
+        
+
         if (!string.IsNullOrWhiteSpace(Request.QueryString["sel"]) && Request.QueryString["sel"].IndexOf(',') > 0)
         {
             sel = Request.QueryString["sel"];
@@ -124,8 +133,28 @@ public partial class jifen : System.Web.UI.Page
         {
             iquery = from i in iquery where i.i_NeedIntegral >= min select i;
         }
+        if (!string.IsNullOrWhiteSpace(Request.QueryString["producttype"]) && int.Parse(Request.QueryString["producttype"].ToString())>0)
+        {
+            producttypeid = int.Parse(Request.QueryString["producttype"].ToString());
+            iquery = from i in iquery where i.i_ProductType == producttypeid select i;
+        }
 
+        if (!string.IsNullOrWhiteSpace(Request.QueryString["myself"]))
+        {
+            if (Request.Cookies["hqhtshop"] != null)
+            {
+                if (Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
+                {
+                    var q = from i in dpdc.t_IntegralMobile where i.i_Id == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
+                    int myseljifen = q.ToList()[0].i_Integral;
+                    iquery = from i in dpdc.t_IntegralProduct where i.i_NeedIntegral < myseljifen select i;
+                }
+            }
+
+        }
         iquery = from i in iquery where i.i_Show == 1 orderby i.i_Id descending select i;
+
+
 
         count = iquery.Count();
         iquery = iquery.Skip((pageindex - 1) * pagesize).Take(pagesize);
@@ -137,5 +166,26 @@ public partial class jifen : System.Web.UI.Page
     protected void AspNetPager1_PageChanged(object sender, EventArgs e)
     {
         Bind_Rpt_List();
+    }
+
+    private void GetProductTypes()
+    {
+        StringBuilder sb = new StringBuilder();
+        producttype.Items.Add(new ListItem("  请选择商品分类", "0"));
+        var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null select i;
+        foreach (var i in iquery)
+        {
+            producttype.Items.Add(new ListItem(i.i_Name, i.i_Id.ToString()));
+            sb.Append("<ul><a class='ac5' runat='server' href='jifen.aspx?producttype=").Append(i.i_Id).Append("'>").Append(i.i_Name).Append("</a></ul>");
+            var iquery2 = from i2 in dpdc.t_IntegralProductType where i2.i_ParentId == i.i_Id select i2;
+            foreach (var i2 in iquery2)
+            {
+                producttype.Items.Add(new ListItem("|----" + i2.i_Name, i2.i_Id.ToString()));
+                sb.Append("<li><a runat='server' href='jifen.aspx?producttype=").Append(i2.i_Id).Append("'>").Append(i2.i_Name).Append("</a></li>|");
+            }
+
+        }
+
+        producttypelist.InnerHtml = sb.ToString() ;
     }
 }
