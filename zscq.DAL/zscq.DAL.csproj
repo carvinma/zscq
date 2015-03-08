@@ -154,6 +154,7 @@
     <Compile Include="dal_NewTrademark.cs" />
     <Compile Include="QueryableExtensions.cs" />
     <Compile Include="WhereIfExtension.cs" />
+    <Compile Include="dal_IntegralProductType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
