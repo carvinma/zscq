@@ -100,6 +100,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataProc.dbml</DependentUpon>
     </Compile>
+    <Compile Include="DataProduct.cs">
+      <DependentUpon>DataProduct.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DataProduct.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
