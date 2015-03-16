@@ -13,6 +13,16 @@
   <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
   <link href="css/pager.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+       ul {
+           padding:3px;
+           margin:5px;
+       }
+       li{
+           display:inline;
+           padding-left:3px;
+       }
+   </style>
 </head>
 <body id="youhui">
   <form id="form1" runat="server">
@@ -74,16 +84,25 @@
                         <td width="178" height="18" align="left" valign="top">
                           <table width="170" border="0" cellspacing="0" cellpadding="0">
                             <tr>
-                              <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=1" <%= ptype=="1"?"class=\"ac5\"":"" %>>Gift Exchange</a> </td>
-                            </tr>
-                            <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen5.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=2" <%= ptype=="2"?"class=\"ac5\"":"" %>>Coupon Exchange</a> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=2" <%= ptype=="2"? "class=\"ac5\"":"" %>>Coupon Exchange</a> </td>
                             </tr>
                             <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen6.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=3" <%= ptype=="3"?"class=\"ac5\"":"" %>>User Level Exchange</a> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=3" <%= ptype=="3"?"class=\"ac5\"":"" %>>User Level Exchange</a> </td>
+                            </tr>
+                              <tr>
+                              <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=1" <%= ptype=="1"?"class=\"ac5\"":"" %>>Reward points exchange</a> </td>
+                            </tr>
+                               <tr>
+                                <td width="27" height="26" align="left"></td>
+                                <td>
+                                    <div runat="server" id="producttypelist">
+                                        
+                                    </div>
+
+                                </td>
                             </tr>
                           </table>
                         </td>
@@ -154,10 +173,10 @@
                   <td width="678" align="right">
                     <table width="650" border="0" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td width="247" height="30" align="right"><strong>Search by Reward Points Scope：</strong> </td>
+                        
                         <td width="140" align="left">
                           <select runat="server" id="Jifen" onchange="s();" name="Jifen" style="border-right: #d7d7d7 1px solid; border-top: #d7d7d7 1px solid; font-size: 12px; border-left: #d7d7d7 1px solid; width: 129px; border-bottom: #d7d7d7 1px solid; height: 24px;">
-                            <option value="-1,-1">&nbsp;&nbsp;Please select</option>
+                            <option value="-1,-1">&nbsp;&nbsp;Please select Reward Points Scope</option>
                             <option value="0,50">&nbsp;&nbsp;0 to 50 reward points</option>
                             <option value="51,100">&nbsp;&nbsp;51 to 100 reward points</option>
                             <option value="101,300">&nbsp;&nbsp;101 to 300 reward points</option>
@@ -165,7 +184,12 @@
                             <option value="500,0">&nbsp;&nbsp;More than 500 points</option>
                           </select>
                         </td>
-                        <td width="61" align="right">Search： </td>
+                           <td width="138" align="left">
+                          <select runat="server" id="producttype" onchange="s();" name="producttype" style="padding-top: 3px; padding-bottom: 2px; font-size: 12px; width: 129px; height: 24px; line-height: 24px; overflow: hidden; vertical-align: text-bottom; border: #d7d7d7 1px solid;">                           
+                 
+                          </select>
+                        </td> 
+                        
                         <td width="185" align="left">
                           <table width="172" border="0" cellpadding="0" cellspacing="0">
                             <tr>
@@ -181,7 +205,8 @@
                             </tr>
                           </table>
                         </td>
-                        <td width="17">&nbsp; </td>
+                       <td><a class="ac5"  style="float:left" href="jifen.aspx?myself=1">The exchangable commodity</a></td>
+                        <td width="1">&nbsp; </td>
                       </tr>
                     </table>
                   </td>
@@ -248,8 +273,8 @@
 </body>
 </html>
 <script type="text/javascript">
-  function s() {
-    window.location = "jifen.aspx?ptype=" + $("#hi_type").val() + "&sel=" + $('#Jifen option:selected').val() + "&keyword=" + escape($('#pagekey').val());
-  }
-  $("#pagekey").val($("#hi_key").val());
+    function s() {
+        window.location = "jifen.aspx?ptype=" + $("#hi_type").val() + "&sel=" + $('#Jifen option:selected').val() + "&producttype=" + $('#producttype option:selected').val() + "&keyword=" + escape($('#pagekey').val());
+    }
+    $("#pagekey").val($("#hi_key").val());
 </script>

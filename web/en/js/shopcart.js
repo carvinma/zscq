@@ -92,6 +92,9 @@ function duihuan() {
         case "12":
           alert('You have not yet opened integral mobile phone！');
           break;
+       case "13":
+          alert('We are sorry that you cannot exchange the commodity of this clasification since you have not bound your reward point account with ！');
+              break;
         default:
           alert('Unknown error, please contact the administrator！');
           // window.location.href = "jifen.aspx";
