@@ -111,7 +111,7 @@ public class CookiesShopCart
     /// <returns>
     /// 0.发生错误    1.成功    2.保留    3.没有登录  4.参数错误  5.积分不足 
     /// 6.数量至少一 7.没有上架  8.没有找到商品    9.等级超过  10.等级商品只能购买一件 
-    /// 11.跨等级    12.没有开通积分手机
+    /// 11.跨等级    12.没有开通积分手机 13:没有绑定专利或商标用户
     /// </returns>
     public int Add_ShopCart(int pid, int number, ref int count, ref int price, ref int allcount, ref int allprice)
     {
@@ -119,9 +119,21 @@ public class CookiesShopCart
         {
             if (pid > 0 && number > 0)
             {
+                
                 var m_product = DALIP.IntegralProduct_vw_Select_Id(pid);
-                var m_member = DALM.Member_Select_Id(Get_UerId());
+                
                 var m_mobile = DALIM.IntegralMobile_SelectByMemberId(Get_UerId());
+                int m_id = 0;
+                if (m_mobile.i_sbuid > 0)
+                {
+                    m_id = m_mobile.i_sbuid;
+                }
+                else if (m_mobile.i_zluid > 0)
+                {
+                    m_id = m_mobile.i_zluid;
+                }
+                var m_member = DALM.Member_Select_Id(m_id);
+  
                 int ret = duihuan(m_member, m_mobile, m_product, number, ref count, ref price, ref allcount, ref allprice);
                 if (ret != 1)
                 {
@@ -133,7 +145,7 @@ public class CookiesShopCart
                 return 4;
             }
         }
-        catch
+        catch(Exception ex)
         { return 0; }
         return 1;
     }
@@ -154,8 +166,18 @@ public class CookiesShopCart
             if (pid > 0 && number > 0)
             {
                 var m_product = DALIP.IntegralProduct_vw_Select_Id(pid);
-                var m_member = DALM.Member_Select_Id(Get_UerId());
+
                 var m_mobile = DALIM.IntegralMobile_SelectByMemberId(Get_UerId());
+                int m_id = 0;
+                if (m_mobile.i_sbuid > 0)
+                {
+                    m_id = m_mobile.i_sbuid;
+                }
+                else if (m_mobile.i_zluid > 0)
+                {
+                    m_id = m_mobile.i_zluid;
+                }
+                var m_member = DALM.Member_Select_Id(m_id);
                 int ret = duihuan(m_member, m_mobile, m_product, -number, ref count, ref price, ref allcount, ref allprice);
                 if (ret != 1)
                 {
@@ -313,9 +335,15 @@ public class CookiesShopCart
         {
             if (m_product == null) { return 8; }
             if (m_product.i_Show == 0) { return 7; }
-            if (m_member == null) { return 3; }
-            if (m_mobile == null) { return 12; }
+            //if (m_member == null) { return 3; }
+            //if (m_mobile == null) { return 12; }
+            if (m_mobile == null) { return 3; }  //machunhui
             if (m_product.i_Show == 0) { return 7; }
+            int id = Get_UerId();
+            if (id > 0 && (m_product.i_Type == 2 || m_product.i_Type == 3))
+            {
+                return 13;//说明是登录了，但不是商标或专利会员
+            }
 
             count = 0;
             price = 0;
@@ -394,7 +422,7 @@ public class CookiesShopCart
             HttpContext.Current.Response.Cookies.Set(cookie);
 
         }
-        catch
+        catch(Exception ex)
         {
             return 0;
         }
