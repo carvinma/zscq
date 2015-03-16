@@ -92,6 +92,9 @@ function duihuan() {
         case "12":
           alert('あなたはまだ開通積分携帯！');
           break;
+          case "13":
+              alert('お客様のアカウントが特許/商標システムと連携していない為、この商品の両替ができません ！');
+              break;
         default:
           alert('未知のミスで、管理者に連絡してください！');
           // window.location.href = "jifen.aspx";

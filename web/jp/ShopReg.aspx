@@ -1,9 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ShopLogin.aspx.cs" Inherits="ShopLogin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ShopReg.aspx.cs" Inherits="ShopReg" %>
+
 
 <%@ Register Src="ascx/zscqfoot.ascx" TagName="zscqfoot" TagPrefix="uc2" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
   <%= TitleOrKeyword %>
   <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -27,7 +28,7 @@
                         <td height="103">&nbsp;</td>
                       </tr>
                       <tr>
-                        <td align="left">&nbsp;<a href="index.aspx">フロントページに戻り&gt;&gt;</a></td>
+                        <td align="left">&nbsp;<a href="index.aspx">返回首页&gt;&gt;</a></td>
                       </tr>
                     </table>
                   </td>
@@ -65,31 +66,17 @@
                   <td colspan="2" height="85"></td>
                 </tr>
                 <tr>
-                  <td width="10" height="33">&nbsp;</td>
-                  <td width="418" align="left" valign="top">
-                    <table width="430" height="121" border="0" cellpadding="0" cellspacing="0">
+                  <td width="68" height="10">&nbsp;</td>
+                  <td width="450" align="left" valign="top">
+                    <table width="448" height="121" border="0" cellpadding="0" cellspacing="0">
+                     
                       <tr>
-                        <td width="120" height="32" class="font14" align="right">ユーザータイプ：</td>
-                        <td colspan="2">
-                          <table width="329" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td width="97" height="30" align="left">
-                                <input type="radio" runat="server" name="type" id="rad_type_zl" />特許ユーザー </td>
-                              <td width="102" align="left">
-                                <input type="radio" runat="server" name="type" id="rad_type_sb" />商標ユーザー</td>
-                                <td width="140" align="left" >
-                                <input type="radio" runat="server" name="type" id="rad_type_normal" checked="true"/> モールのユーザー</td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td width="113" height="32" class="font14" align="right">携帯番号：</td>
-                        <td width="199" align="left">
+                        <td width="172" height="32" class="font14" align="right">携帯番号：</td>
+                        <td width="200" align="left">
                           <input type="text" runat="server" id="txt_username" style="width: 187px; line-height: 20px; height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="50" value="" /></td>
-                        <td width="106" align="left">
-                          <asp:RequiredFieldValidator runat="server" ControlToValidate="txt_username" ErrorMessage="空になることはできない " Display="Dynamic"></asp:RequiredFieldValidator>
-                          
+                        <td width="100" align="left">
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txt_username" ErrorMessage="空になることはできない" Display="Dynamic"></asp:RequiredFieldValidator>
+                          <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="^1((3[0-9])|(4[5-7])|(5([0-3]|[5-9]))|(8(0|[2-3]|[5-9])))[0-9]{8}$" ControlToValidate="txt_username" ErrorMessage="携帯番号格式不正确" Display="Dynamic"></asp:RegularExpressionValidator>
                         </td>
                       </tr>
                       <tr>
@@ -97,7 +84,15 @@
                         <td align="left">
                           <input type="password" runat="server" id="txt_userpassword" style="width: 187px; line-height: 20px; height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="30" /></td>
                         <td align="left">
-                          <asp:RequiredFieldValidator runat="server" ControlToValidate="txt_userpassword" ErrorMessage="パスワードを記入してください" Display="Dynamic"></asp:RequiredFieldValidator>
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txt_userpassword" ErrorMessage="パスワードが空きではいけません" Display="Dynamic"></asp:RequiredFieldValidator>
+                        </td>
+                      </tr>
+                         <tr>
+                        <td height="32" class="font14" align="right">パスワードを確認：</td>
+                        <td align="left">
+                          <input type="password" runat="server" id="txt_userpassword2" style="width: 187px; line-height: 20px; height: 20px; border: 1px solid #cecece; background-color: #cecece;" maxlength="30" /></td>
+                        <td align="left">
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txt_userpassword2" ErrorMessage="パスワードが一致していません" Display="Dynamic"></asp:RequiredFieldValidator>
                         </td>
                       </tr>
                       <tr>
@@ -113,20 +108,12 @@
                           </table>
                         </td>
                         <td align="left">
-                          <asp:RequiredFieldValidator runat="server" ControlToValidate="txt_code" ErrorMessage="検証コードを記入してください"></asp:RequiredFieldValidator></td>
+                          <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txt_code" ErrorMessage="検証コードを記入してください"></asp:RequiredFieldValidator></td>
                       </tr>
                       <tr>
                         <td height="32">&nbsp;</td>
                         <td align="left">
-                          <asp:ImageButton ID="Ibtn_Login" runat="server" ImageUrl="images/login.gif" Width="147" Height="22" BorderWidth="0" OnClick="Ibtn_Login_Click" />
-                        </td>
-                        <td align="left"></td>
-                      </tr>
-                        <tr></tr>
-                        <tr>
-                        <td height="32">&nbsp;</td>
-                        <td align="left">
-                          <span>ショッピングセンターの会員じゃない？</span><a href="ShopReg.aspx" >登録</a>
+                          <asp:Button ID="Ibtn_Reg" ForeColor="White" BackColor="#bf2831" runat="server" Text="登録" Width="147"   Height="22" BorderWidth="0" OnClick="Ibtn_Reg_Click" />
                         </td>
                         <td align="left"></td>
                       </tr>
@@ -144,7 +131,7 @@
             <td height="9" align="left" valign="top"><img src="images/login3.gif" width="449" height="9" /></td>
           </tr>
           <tr>
-            <td height="291" align="left" valign="top" style="background-image: url(../<%=_Adv %>);">
+            <td height="291" align="left" valign="top" style="background-image: url(<%=_Adv %>);">
               <table width="449" height="109" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td colspan="2" height="16"></td>
@@ -177,3 +164,4 @@
   </form>
 </body>
 </html>
+
