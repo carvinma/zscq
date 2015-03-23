@@ -11015,6 +11015,8 @@ namespace zscq.Model
 		
 		private string _nvc_koreanName;
 		
+		private string _nvc_ParentName;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -11031,6 +11033,8 @@ namespace zscq.Model
     partial void Onnvc_JapaneseNameChanged();
     partial void Onnvc_koreanNameChanging(string value);
     partial void Onnvc_koreanNameChanged();
+    partial void Onnvc_ParentNameChanging(string value);
+    partial void Onnvc_ParentNameChanged();
     #endregion
 		
 		public t_IntegralProductType()
@@ -11154,6 +11158,26 @@ namespace zscq.Model
 					this._nvc_koreanName = value;
 					this.SendPropertyChanged("nvc_koreanName");
 					this.Onnvc_koreanNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nvc_ParentName", DbType="NVarChar(50)")]
+		public string nvc_ParentName
+		{
+			get
+			{
+				return this._nvc_ParentName;
+			}
+			set
+			{
+				if ((this._nvc_ParentName != value))
+				{
+					this.Onnvc_ParentNameChanging(value);
+					this.SendPropertyChanging();
+					this._nvc_ParentName = value;
+					this.SendPropertyChanged("nvc_ParentName");
+					this.Onnvc_ParentNameChanged();
 				}
 			}
 		}
