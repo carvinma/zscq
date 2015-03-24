@@ -139,7 +139,9 @@ namespace zscq.DAL
         /// <returns></returns>
         public IQueryable<t_IntegralProductType> MainIntegralProductType_SelectPage(int startIndex, int pageSize, ref int count)
         {
-            var iquery = from m in dsdc.t_IntegralProductType orderby m.i_Id descending select m;
+            var iquery = from m in dsdc.t_IntegralProductType
+                         where m.i_ParentId==null
+                         orderby m.i_Id descending select m;
             count = iquery.Count();
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
         }
@@ -153,7 +155,21 @@ namespace zscq.DAL
         /// <returns></returns>
         public IQueryable<t_IntegralProductType> SubIntegralProductType_SelectPage(int startIndex, int pageSize, ref int count)
         {
-            var iquery = from m in dsdc.t_IntegralProductType orderby m.i_Id descending select m;
+            var iquery = from m in dsdc.t_IntegralProductType
+                         join b in dsdc.t_IntegralProductType on m.i_ParentId equals b.i_Id
+                         where m.i_ParentId != null
+                         orderby m.i_Id descending
+                         select m;
+                         //select new
+                         //{
+                         //    id = m.i_Id,
+                         //    MainName=b.nvc_ChinaName,
+                         //    nvc_ChinaName =m.nvc_ChinaName,
+                         //    nvc_EnglishName = m.nvc_EnglishName,
+                         //    nvc_JapaneseName = m.nvc_JapaneseName,
+                         //    nvc_koreanName = m.nvc_koreanName
+                         //};
+                         
             count = iquery.Count();
             return iquery.Skip((startIndex - 1) * pageSize).Take(pageSize);
         }

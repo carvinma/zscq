@@ -122,7 +122,7 @@ namespace zscq.DAL
         {
             try
             {
-                var iquery = dzdc.t_IntegralMobile.SingleOrDefault(i => i.i_sbuid == mid || i.i_zluid == mid);
+                var iquery = dzdc.t_IntegralMobile.SingleOrDefault(i => i.i_sbuid == mid || i.i_zluid == mid ||i.i_Id==mid);
                 return iquery;
             }
             catch { return null; }
