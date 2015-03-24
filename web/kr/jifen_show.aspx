@@ -14,6 +14,16 @@
   <link href="css/pager.css" rel="stylesheet" type="text/css" />
   <script src="js/js.js" type="text/javascript"></script>
   <script src="js/shopcart.js" type="text/javascript"></script>
+    <style type="text/css">
+       ul {
+           padding:3px;
+           margin:5px;
+       }
+       li{
+           display:inline;
+           padding-left:3px;
+       }
+   </style>
 </head>
 <body id="youhui">
   <form id="form1" runat="server">
@@ -80,17 +90,27 @@
                         <td width="23">&nbsp; </td>
                         <td width="178" height="18" align="left" valign="top">
                           <table width="170" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=1" <%= ptype==1?"class=\"ac5\"":"" %>>태환태환</a> </td>
-                            </tr>
+                            
                             <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen5.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=2" <%= ptype==2?"class=\"ac5\"":"" %>>할인권 바꿈</a> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=2" <%= ptype==2?"class=\"ac5\"":"" %>>할인권 바꿈</a> </td>
                             </tr>
                             <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen6.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=3" <%= ptype==3?"class=\"ac5\"":"" %>>회원등급 바꿈</a> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=3" <%= ptype==3?"class=\"ac5\"":"" %>>회원등급 바꿈</a> </td>
+                            </tr>
+                              <tr>
+                              <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=1" <%= ptype==1?"class=\"ac5\"":"" %>>태환태환</a> </td>
+                            </tr>
+                               <tr>
+                                <td width="27" height="26" align="left"></td>
+                                <td>
+                                    <div runat="server" id="producttypelist">
+                                        
+                                    </div>
+
+                                </td>
                             </tr>
                           </table>
                         </td>
@@ -162,9 +182,8 @@
                 <tr>
                   <td width="61" height="36">&nbsp; </td>
                   <td width="678" align="right">
-                    <table width="600" border="0" cellspacing="0" cellpadding="0">
+                    <table width="678" border="0" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td width="132" height="30" align="right"><strong>적분에 따라 검색：</strong> </td>
                         <td width="143" align="left" valign="middle">
                           <select id="Jifen" name="Jifen" runat="server" onchange="s();" style="padding-top: 3px; padding-bottom: 2px; font-size: 12px; width: 129px; height: 24px; line-height: 24px; overflow: hidden; vertical-align: text-bottom; border: #d7d7d7 1px solid;">
                             <option value="-1,-1">&nbsp;&nbsp;선택</option>
@@ -175,7 +194,11 @@
                             <option value="500,0">&nbsp;&nbsp;이상 500 점</option>
                           </select>
                         </td>
-                        <td width="110" align="right">키워드 검색： </td>
+                           <td width="138" align="left">
+                          <select runat="server" id="producttype" onchange="s();" name="producttype" style="padding-top: 3px; padding-bottom: 2px; font-size: 12px; width: 129px; height: 24px; line-height: 24px; overflow: hidden; vertical-align: text-bottom; border: #d7d7d7 1px solid;">                           
+                 
+                          </select>
+                        </td>     
                         <td width="201" align="left">
                           <table width="172" border="0" cellpadding="0" cellspacing="0">
                             <tr>
@@ -193,6 +216,7 @@
                             </tr>
                           </table>
                         </td>
+                          <td><a class="ac5"  style="float:left" href="jifen.aspx?myself=1">태환할수 있는 상품 </a></td>
                         <td width="14">&nbsp; </td>
                       </tr>
                     </table>
@@ -237,6 +261,11 @@
                                   <tr>
                                     <td height="30" align="left">관주도 ：<%= follow %></td>
                                   </tr>
+                                     <tr>
+                                   <td width="351" height="30" align="left" style="color:#d44147">상품 설명：<%= ctip %>
+                                    </td>
+                                  </tr>
+
                                   <tr>
                                     <td height="30" align="left">&nbsp; </td>
                                   </tr>
@@ -351,7 +380,9 @@
 
 </script>
 <script type="text/javascript">
-  function s() {
-    window.location = "jifen.aspx?ptype=" + $("#hd_ptype").val() + "&sel=" + $('#Jifen option:selected').val() + "&keyword=" + escape($('#pagekey').val());
-  } 
+    function s() {
+        //window.location = "jifen.aspx?ptype=" + $("#hd_ptype").val() + "&sel=" + $('#Jifen option:selected').val() + "&keyword=" + escape($('#pagekey').val());
+        window.location = "jifen.aspx?ptype=" + $("#hi_ptype").val() + "&sel=" + $('#Jifen option:selected').val() + "&producttype=" + $('#producttype option:selected').val() + "&keyword=" + escape($('#pagekey').val());
+
+    }
 </script>

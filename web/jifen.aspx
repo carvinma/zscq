@@ -16,7 +16,7 @@
    <style type="text/css">
        ul {
            padding:3px;
-           
+           margin:5px;
        }
        li{
            display:inline;
@@ -87,15 +87,15 @@
                           <table width="170" border="0" cellspacing="0" cellpadding="0">
                                <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen5.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=2" <%= ptype=="2"?"class=\"ac5\"":"" %>>优惠券兑换</a> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;"  href="jifen.aspx?ptype=2" <%= ptype=="2"?"class=\"ac5\"":"" %>>优惠券兑换</a> </td>
                             </tr>
                             <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen6.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=3" <%= ptype=="3"?"class=\"ac5\"":"" %>>会员等级兑换</a> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=3" <%= ptype=="3"?"class=\"ac5\"":"" %>>会员等级兑换</a> </td>
                             </tr>
                             <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=1" <%= ptype=="1"?"class=\"ac5\"":"" %>>礼品兑换</a> </td>                             
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=1" <%= ptype=="1"?"class=\"ac5\"":"" %>>礼品兑换</a> </td>                             
                             </tr>
                             <tr>
                                 <td width="27" height="26" align="left"></td>
@@ -173,7 +173,7 @@
                 <tr>
                   <td width="61" height="36">&nbsp; </td>
                   <td width="678" align="right">
-                    <table width="600" border="0" cellspacing="0" cellpadding="0">
+                    <table width="678" border="0" cellspacing="0" cellpadding="0">
                       <tr>                                              
                         <td width="138" align="left">
                           <select runat="server" id="Jifen" onchange="s();" name="Jifen" style="padding-top: 3px; padding-bottom: 2px; font-size: 12px; width: 129px; height: 24px; line-height: 24px; overflow: hidden; vertical-align: text-bottom; border: #d7d7d7 1px solid;">
@@ -190,7 +190,7 @@
                  
                           </select>
                         </td>     
-                        <td width="221" align="left">
+                        <td width="200" align="left">
                           <table width="172" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                               <td width="172" height="24" align="left" valign="top" style="background-image: url(images/jifen10.gif);">
@@ -205,7 +205,7 @@
                             </tr>
                           </table>
                         </td>
-                        <td><a class="ac5" href="jifen.aspx?myself=1">我能兑换的商品</a></td>
+                        <td><a class="ac5"  style="float:left" href="jifen.aspx?myself=1">我能兑换的商品</a></td>
                       </tr>
                     </table>
                   </td>

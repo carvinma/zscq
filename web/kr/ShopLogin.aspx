@@ -65,18 +65,20 @@
                   <td colspan="2" height="85"></td>
                 </tr>
                 <tr>
-                  <td width="37" height="33">&nbsp;</td>
-                  <td width="427" align="left" valign="top">
-                    <table width="427" height="121" border="0" cellpadding="0" cellspacing="0">
+                  <td width="13" height="33">&nbsp;</td>
+                  <td width="450" align="left" valign="top">
+                    <table width="450" height="121" border="0" cellpadding="0" cellspacing="0">
                       <tr>
                         <td width="93" height="32" class="font14" align="right">사용자 류형：</td>
                         <td colspan="2">
-                          <table width="199" border="0" cellspacing="0" cellpadding="0">
+                          <table width="299" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td width="97" height="30" align="left">
-                                <input type="radio" runat="server" name="type" id="rad_type_zl" checked="true" />특허 사용자 </td>
+                                <input type="radio" runat="server" name="type" id="rad_type_zl"  />특허 사용자 </td>
                               <td width="102" align="left">
                                 <input type="radio" runat="server" name="type" id="rad_type_sb" />상표 사용자 </td>
+                                <td width="140" align="left" >
+                                <input type="radio" runat="server" name="type" id="rad_type_normal" checked="true"/>상가 사용자 </td>
                             </tr>
                           </table>
                         </td>
@@ -116,6 +118,14 @@
                         <td height="32">&nbsp;</td>
                         <td align="left">
                           <asp:ImageButton ID="Ibtn_Login" runat="server" ImageUrl="images/login.gif" Width="147" Height="22" BorderWidth="0" OnClick="Ibtn_Login_Click" />
+                        </td>
+                        <td align="left"></td>
+                      </tr>
+                        <tr></tr>
+                        <tr>
+                        <td height="32">&nbsp;</td>
+                        <td align="left">
+                          <span>상가 회원이 아닙니다.？</span><a href="ShopReg.aspx" >휴대폰 번호</a>
                         </td>
                         <td align="left"></td>
                       </tr>

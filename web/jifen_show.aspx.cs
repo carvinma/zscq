@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using zscq.DAL;
 using zscq.Model;
+using System.Text;
 
 public partial class jifen_show : System.Web.UI.Page
 {
@@ -24,7 +25,9 @@ public partial class jifen_show : System.Web.UI.Page
     public string ShopKeywords = "";
     public string ShopDescription = "";
     public string TitleOrKeyword = "";
-
+    public int producttypeid = 0;
+     public Dictionary<int, string> producttypes = new Dictionary<int, string>();
+    DataZscqDataContext dpdc = new DataZscqDataContext();
     void Bind_Page_Title()
     {
         dal_SystemSetup DALSS = new dal_SystemSetup();
@@ -46,6 +49,7 @@ public partial class jifen_show : System.Web.UI.Page
     {
         try
         {
+            GetProductTypes();
             if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
             {
                 isLogin = true;
@@ -100,7 +104,10 @@ public partial class jifen_show : System.Web.UI.Page
                         break;
                 }
                 cname = model.nvc_Name;
-                ctip=model.nvc_Name1;
+                if (!string.IsNullOrEmpty(model.nvc_Name1))
+                {
+                    ctip = model.nvc_Name1.Replace("<p>", "").Replace("</p>", "");
+                }
                 snnumber = model.nvc_Number;
                 //string p = shopcart.Get_Info(model.i_Id.ToString());
                 //if (p != "")
@@ -142,5 +149,25 @@ public partial class jifen_show : System.Web.UI.Page
             }
         }
         Hi_Herf.Value = HttpUtility.UrlEncode(Request.Url.ToString());
+    }
+    private void GetProductTypes()
+    {
+        StringBuilder sb = new StringBuilder();
+        producttype.Items.Add(new ListItem("  请选择商品分类", "0"));
+        var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null && i.nvc_ChinaName != "" && i.nvc_ChinaName != null select i;
+        foreach (var i in iquery)
+        {
+            producttype.Items.Add(new ListItem(i.nvc_ChinaName, i.i_Id.ToString()));
+            sb.Append("<ul style='margin:5px;'><a class='ac5'  style='padding-left:10px;background:url(./images/sanjiao.gif) no-repeat 0 2px'; runat='server' href='jifen.aspx?producttype=").Append(i.i_Id).Append("'>").Append(i.nvc_ChinaName).Append("</a></ul>");
+            var iquery2 = from i2 in dpdc.t_IntegralProductType where i2.i_ParentId == i.i_Id && i2.nvc_ChinaName != "" && i2.nvc_ChinaName != null select i2;
+            foreach (var i2 in iquery2)
+            {
+                producttype.Items.Add(new ListItem("|--" + i2.nvc_ChinaName, i2.i_Id.ToString()));
+                sb.Append("<li><a runat='server'   font-size='9pt' href='jifen.aspx?producttype=").Append(i2.i_Id).Append("'>").Append(i2.nvc_ChinaName).Append("</a></li>|");
+            }
+
+        }
+
+        producttypelist.InnerHtml = sb.ToString();
     }
 }

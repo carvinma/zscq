@@ -106,6 +106,10 @@ public partial class jifen_show : System.Web.UI.Page
                 }
                 cname = model.nvc_Name;
                 snnumber = model.nvc_Number;
+                if (!string.IsNullOrEmpty(model.nvc_Name1))
+                {
+                    ctip = model.nvc_Name1.Replace("<p>", "").Replace("</p>", "");
+                }
                 //string p = shopcart.Get_Info(model.i_Id.ToString());
                 //if (p != "")
                 //{

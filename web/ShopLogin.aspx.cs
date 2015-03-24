@@ -65,6 +65,10 @@ public partial class ShopLogin : System.Web.UI.Page
                 {
                     Response.Redirect("user_sbjf.aspx?pageurl2=" + HttpUtility.UrlEncode(Hf_Href2.Value));
                 }
+                if (Request.Cookies["hqhtshop"]["hqht_user_type"] == "normal" && Response.Cookies["hqhtshop"]["hqht_shop_uid"] != "" && Response.Cookies["hqhtshop"]["hqht_shop_uid"]!=null)
+                {
+                    Response.Redirect(Hf_Href.Value);
+                }
             }
         }
     }
@@ -115,9 +119,9 @@ public partial class ShopLogin : System.Web.UI.Page
                 }
                 else if (rad_type_normal.Checked)
                 {
-                    cookie.Values["hqht_shop_uid"] = model.i_zluid.ToString();
+                    cookie.Values["hqht_shop_uid"] = model.i_Id.ToString();
                     cookie.Values["hqht_user_type"] = "normal";
-                    UserLog.AddUserLog(model.i_zluid, "商城系统", "登录商城系统");
+                    UserLog.AddUserLog(model.i_Id, "商城系统", "登录商城系统");
                 }
                 Response.Cookies.Set(cookie);
             }
@@ -139,10 +143,9 @@ public partial class ShopLogin : System.Web.UI.Page
                 }
                 else if (rad_type_normal.Checked)
                 {
-                    //Response.Cookies["hqhtshop"]["hqht_zl_uid"] = model.i_zluid.ToString();
-                    Response.Cookies["hqhtshop"]["hqht_shop_uid"] = model.i_zluid.ToString();
+                    Response.Cookies["hqhtshop"]["hqht_shop_uid"] = model.i_Id.ToString();
                     Response.Cookies["hqhtshop"]["hqht_user_type"] = "normal";
-                    UserLog.AddUserLog(model.i_zluid, "商城系统", "登录商城系统");
+                    UserLog.AddUserLog(model.i_Id, "商城系统", "登录商城系统");
                 }
             }
             Response.Redirect(Hf_Href.Value);

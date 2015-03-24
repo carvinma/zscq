@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,7 +16,7 @@ public partial class jifen_show : System.Web.UI.Page
     CookiesShopCart shopcart = new CookiesShopCart();
     public int id = 0, isshow = 1, ptype = 1;
     public bool isLogin = false;
-    public string cname, snnumber, jifen, follow, contents, cpic = "";
+    public string cname, snnumber, jifen, follow, contents, cpic = "", ctip="";
     public string key, sel, ye = "";
     public string name = "태환태환";
     public string _Name = "";
@@ -24,7 +25,9 @@ public partial class jifen_show : System.Web.UI.Page
     public string ShopKeywords = "";
     public string ShopDescription = "";
     public string TitleOrKeyword = "";
-
+    public int producttypeid = 0;
+    public Dictionary<int, string> producttypes = new Dictionary<int, string>();
+    DataZscqDataContext dpdc = new DataZscqDataContext();
     void Bind_Page_Title()
     {
         dal_SystemSetup DALSS = new dal_SystemSetup();
@@ -46,6 +49,7 @@ public partial class jifen_show : System.Web.UI.Page
     {
         try
         {
+            GetProductTypes();
             if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
             {
                 isLogin = true;
@@ -101,6 +105,10 @@ public partial class jifen_show : System.Web.UI.Page
                 }
                 cname = model.nvc_Name;
                 snnumber = model.nvc_Number;
+                if (!string.IsNullOrEmpty(model.nvc_Name1))
+                {
+                    ctip = model.nvc_Name1.Replace("<p>", "").Replace("</p>", "");
+                }
                 //string p = shopcart.Get_Info(model.i_Id.ToString());
                 //if (p != "")
                 //{
@@ -141,5 +149,24 @@ public partial class jifen_show : System.Web.UI.Page
             }
         }
         Hi_Herf.Value = HttpUtility.UrlEncode(Request.Url.ToString());
+    }
+    private void GetProductTypes()
+    {
+        StringBuilder sb = new StringBuilder();
+        producttype.Items.Add(new ListItem("  상품종류를  선택해주세요 ", "0"));
+        var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null && i.nvc_koreanName != "" && i.nvc_koreanName != null select i;
+        foreach (var i in iquery)
+        {
+            producttype.Items.Add(new ListItem(i.nvc_koreanName, i.i_Id.ToString()));
+            sb.Append("<ul style='margin:5px;'><a class='ac5'  style='padding-left:10px;background:url(./images/sanjiao.gif) no-repeat 0 2px'; runat='server' href='jifen.aspx?producttype=").Append(i.i_Id).Append("'>").Append(i.nvc_koreanName).Append("</a></ul>");
+            var iquery2 = from i2 in dpdc.t_IntegralProductType where i2.i_ParentId == i.i_Id && i2.nvc_koreanName != "" && i2.nvc_koreanName != null select i2;
+            foreach (var i2 in iquery2)
+            {
+                producttype.Items.Add(new ListItem("|--" + i2.nvc_koreanName, i2.i_Id.ToString()));
+                sb.Append("<li><a runat='server'   font-size='9pt' href='jifen.aspx?producttype=").Append(i2.i_Id).Append("'>").Append(i2.nvc_koreanName).Append("</a></li>|");
+            }
+
+        }
+        producttypelist.InnerHtml = sb.ToString();
     }
 }

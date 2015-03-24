@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -22,10 +23,12 @@ public partial class jifen_gz : System.Web.UI.Page
     public int sortId = 64;
     public int index = 1;
     public bool isLogin = false;
-
+    public int producttypeid = 0;
     public string sname, cname, content = "";
-
+    public Dictionary<int, string> producttypes = new Dictionary<int, string>();
     dal_News DALN = new dal_News();
+    dal_IntegralProduct DALIP = new dal_IntegralProduct();
+    DataZscqDataContext dpdc = new DataZscqDataContext();
 
     void Bind_Page_Title()
     {
@@ -70,6 +73,7 @@ public partial class jifen_gz : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        GetProductTypes();
         if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
         {
             isLogin = true;
@@ -84,5 +88,23 @@ public partial class jifen_gz : System.Web.UI.Page
             Response.Write("<script>history.go(-1);</Script>");
         }
     }
+    private void GetProductTypes()
+    {
+        StringBuilder sb = new StringBuilder();
+        producttype.Items.Add(new ListItem("  상품종류를  선택해주세요 ", "0"));
+        var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null && i.nvc_koreanName != "" && i.nvc_koreanName != null select i;
+        foreach (var i in iquery)
+        {
+            producttype.Items.Add(new ListItem(i.nvc_koreanName, i.i_Id.ToString()));
+            sb.Append("<ul style='margin:5px;'><a class='ac5'  style='padding-left:10px;background:url(./images/sanjiao.gif) no-repeat 0 2px'; runat='server' href='jifen.aspx?producttype=").Append(i.i_Id).Append("'>").Append(i.nvc_koreanName).Append("</a></ul>");
+            var iquery2 = from i2 in dpdc.t_IntegralProductType where i2.i_ParentId == i.i_Id && i2.nvc_koreanName != "" && i2.nvc_koreanName != null select i2;
+            foreach (var i2 in iquery2)
+            {
+                producttype.Items.Add(new ListItem("|--" + i2.nvc_koreanName, i2.i_Id.ToString()));
+                sb.Append("<li><a runat='server'   font-size='9pt' href='jifen.aspx?producttype=").Append(i2.i_Id).Append("'>").Append(i2.nvc_koreanName).Append("</a></li>|");
+            }
 
+        }
+        producttypelist.InnerHtml = sb.ToString();
+    }
 }

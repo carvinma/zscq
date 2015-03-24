@@ -105,6 +105,10 @@ public partial class jifen_show : System.Web.UI.Page
                 }
                 cname = model.nvc_Name;
                 snnumber = model.nvc_Number;
+                if (!string.IsNullOrEmpty(model.nvc_Name1))
+                {
+                    ctip = model.nvc_Name1.Replace("<p>", "").Replace("</p>", "");
+                }
                 //string p = shopcart.Get_Info(model.i_Id.ToString());
                 //if (p != "")
                 //{
@@ -150,7 +154,7 @@ public partial class jifen_show : System.Web.UI.Page
     private void GetProductTypes()
     {
         StringBuilder sb = new StringBuilder();
-        producttype.Items.Add(new ListItem("  请选择商品分类", "0"));
+        producttype.Items.Add(new ListItem("  商品種類を選択してください", "0"));
         var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null && i.nvc_JapaneseName != "" && i.nvc_JapaneseName != null select i;
         foreach (var i in iquery)
         {

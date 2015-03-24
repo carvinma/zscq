@@ -17,6 +17,16 @@
     .style2 { height: 11px; }
     .style3 { height: 439px; }
   </style>
+   <style type="text/css">
+       ul {
+           padding:3px;
+           margin:5px;
+       }
+       li{
+           display:inline;
+           padding-left:3px;
+       }
+   </style>
 </head>
 <body id="youhui">
   <form id="form1" runat="server">
@@ -77,17 +87,27 @@
                         <td width="23">&nbsp; </td>
                         <td width="178" height="18" align="left" valign="top">
                           <table width="170" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=1">积分兑换</a> </td>
-                            </tr>
+                            
                             <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen5.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=2">优惠券兑换</a> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=2">优惠券兑换</a> </td>
                             </tr>
                             <tr>
                               <td width="27" height="26" align="left"><img src="images/jifen6.gif" width="20" height="19" /> </td>
-                              <td width="143" height="18" align="left"><a href="jifen.aspx?ptype=3">会员等级兑换</a> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=3">会员等级兑换</a> </td>
+                            </tr>
+                              <tr>
+                              <td width="27" height="26" align="left"><img src="images/jifen4.gif" width="20" height="19" /> </td>
+                              <td width="143" height="18" align="left"><a style="font-weight:bold;" href="jifen.aspx?ptype=1">积分兑换</a> </td>
+                            </tr>
+                               <tr>
+                                <td width="27" height="26" align="left"></td>
+                                <td>
+                                    <div runat="server" id="producttypelist">
+                                        
+                                    </div>
+
+                                </td>
                             </tr>
                           </table>
                         </td>
@@ -156,12 +176,11 @@
                 <tr>
                   <td width="61" height="36">&nbsp; </td>
                   <td width="678" align="right">
-                    <table width="600" border="0" cellspacing="0" cellpadding="0">
+                    <table width="678" border="0" cellspacing="0" cellpadding="0">
                       <tr>
-                        <td width="115" height="30" align="right"><strong>按积分范围搜索：</strong> </td>
                         <td width="138" align="left">
                           <select runat="server" id="Jifen" onchange="s();" name="Jifen" style="border-right: #d7d7d7 1px solid; border-top: #d7d7d7 1px solid; font-size: 12px; border-left: #d7d7d7 1px solid; width: 129px; border-bottom: #d7d7d7 1px solid; height: 24px;">
-                            <option value="-1,-1">&nbsp;&nbsp;请选择</option>
+                            <option value="-1,-1">&nbsp;&nbsp;按积分范围搜索</option>
                             <option value="0,50">&nbsp;&nbsp;0-50积分</option>
                             <option value="51,100">&nbsp;&nbsp;51-100积分</option>
                             <option value="101,300">&nbsp;&nbsp;101-300积分</option>
@@ -169,23 +188,27 @@
                             <option value="500,0">&nbsp;&nbsp;500积分以上</option>
                           </select>
                         </td>
-                        <td width="112" align="right">按积分礼品关键词： </td>
-                        <td width="221" align="left">
+                        <td width="138" align="left">
+                          <select runat="server" id="producttype" onchange="s();" name="producttype" style="padding-top: 3px; padding-bottom: 2px; font-size: 12px; width: 129px; height: 24px; line-height: 24px; overflow: hidden; vertical-align: text-bottom; border: #d7d7d7 1px solid;">                           
+                 
+                          </select>
+                        </td>     
+                        <td width="200" align="left">
                           <table width="172" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                               <td width="172" height="24" align="left" valign="top" style="background-image: url(images/jifen10.gif);">
                                 <table width="172" border="0" align="right" cellpadding="0" cellspacing="0" height="24">
                                   <tr>
                                     <td width="146" height="24" align="right">
-                                      <input runat="server" type="text" name="pagekey" id="pagekey" style="height: 18px; width: 141px; font-size: 12px; border: 1px solid #fff;" maxlength="30" /></td>
-                                    <td width="26" align="left"><a href="javascript:void(0);" onclick="s();"><img src="images/jifen11.gif" width="25" height="22" /></a></td>
+                                      <input type="text" name="pagekey" id="pagekey" runat="server" style="outline-width: 0px; line-height: 18px; height: 18px; width: 141px; font-size: 12px; border: 1px solid #fff;" maxlength="30" /></td>
+                                    <td width="26" align="left"><a href="javascript:void(0);" onclick="s();"><img src="images/jifen11.gif" width="25" height="22" /></a></td>                                   
                                   </tr>
                                 </table>
                               </td>
                             </tr>
                           </table>
                         </td>
-                        <td width="14">&nbsp; </td>
+                        <td><a class="ac5"  style="float:left" href="jifen.aspx?myself=1">我能兑换的商品</a></td>
                       </tr>
                     </table>
                   </td>
@@ -259,6 +282,9 @@
 </html>
 <script type="text/javascript">
   function s() {
-    window.location = "jifen.aspx?sel=" + $('#Jifen option:selected').val() + "&keyword=" + escape($('#pagekey').val());
+      //window.location = "jifen.aspx?sel=" + $('#Jifen option:selected').val() + "&keyword=" + escape($('#pagekey').val());
+
+      window.location = "jifen.aspx?sel=" + $('#Jifen option:selected').val() + "&producttype=" + $('#producttype option:selected').val() + "&keyword=" + escape($('#pagekey').val());
+
   } 
 </script>

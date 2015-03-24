@@ -48,6 +48,9 @@
         <th width="10%">
           积分手机号
         </th>
+          <th width="10%">
+          账户类型
+        </th>
         <th width="10%">
           账户积分
         </th>
@@ -66,6 +69,9 @@
             </td>
             <td height="25" align="center"><a href="Shop_U_ShopUser.aspx?id=<%#Eval("i_Id") %>">
               <%#Eval("nvc_Mobile")%></a> </td>
+              <td height="25" align="center">
+              <%# HandleUserType(int.Parse(Eval("i_sbuid").ToString()),int.Parse(Eval("i_zluid").ToString())) %>
+            </td>
             <td height="25" align="center">
               <%# Eval("i_Integral") %>
             </td>

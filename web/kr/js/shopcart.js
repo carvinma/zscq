@@ -92,6 +92,9 @@ function duihuan() {
         case "12":
           alert('당신 아직 개통 포인트 핸드폰！');
           break;
+          case "13":
+              alert('고객님이  사용하신  적분계좌는 특허시스템/상표시스템아이디과 련결하지않았으므로   상품태환을  진행할수없습니다 ！');
+              break;
         default:
           alert('알 수 없는 오류 문의 관리자！');
           // window.location.href = "jifen.aspx";

@@ -69,19 +69,7 @@
                   <td width="68" height="33">&nbsp;</td>
                   <td width="396" align="left" valign="top">
                     <table width="372" height="121" border="0" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td width="72" height="32" class="font14" align="right">&nbsp;</td>
-                        <td colspan="2">
-                          <table width="199" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td width="97" height="30" align="left">
-                                  &nbsp;</td>
-                              <td width="102" align="left">
-                                  &nbsp;</td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
+                     
                       <tr>
                         <td width="72" height="32" class="font14" align="right">手机号码：</td>
                         <td width="200" align="left">
@@ -125,7 +113,7 @@
                       <tr>
                         <td height="32">&nbsp;</td>
                         <td align="left">
-                          <asp:Button ID="Ibtn_Reg" runat="server" Text="注册" Width="147"   Height="22" BorderWidth="0" OnClick="Ibtn_Reg_Click" />
+                          <asp:Button ID="Ibtn_Reg" ForeColor="White" BackColor="#bf2831" runat="server" Text="注册" Width="147"   Height="22" BorderWidth="0" OnClick="Ibtn_Reg_Click" />
                         </td>
                         <td align="left"></td>
                       </tr>

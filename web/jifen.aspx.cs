@@ -60,45 +60,52 @@ public partial class jifen : System.Web.UI.Page
     }
     protected void Page_Load(object sender, EventArgs e)
     {
-        GetProductTypes();
-        if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
+        if (!Page.IsPostBack)
         {
-            isLogin = true;
-        }
-        if (!string.IsNullOrWhiteSpace(Request.QueryString["producttype"]) && int.Parse(Request.QueryString["producttype"].ToString()) > 0)
-        {
-            producttype.Value = Request.QueryString["producttype"].ToString();
-        }
-        if (!string.IsNullOrWhiteSpace(Request.QueryString["ptype"]))
-        {
-            ptype = Request.QueryString["ptype"];
-        }
-        switch (ptype)
-        {
-            case "1":
-                name = "积分兑换";
-                break;
-            case "2":
-                name = "优惠券兑换";
-                break;
-            case "3":
-                name = "会员等级兑换";
-                break;
-            default:
-                ptype = "1";
-                name = "积分兑换";
-                break;
-        }
-        hi_type.Value = ptype;
-        try
-        {
-            Bind_Page_Title();
-            Bind_Page_Value();
-            Bind_Rpt_List();
-        }
-        catch
-        {
-            //Response.Write("<script>history.go(-1);</Script>");
+            GetProductTypes();
+            if (Request.Cookies["hqhtshop"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
+            {
+                isLogin = true;
+            }
+            else
+            {
+                //Response.Redirect("ShopLogin.aspx");
+            }
+            if (!string.IsNullOrEmpty(Request.QueryString["producttype"]) && int.Parse(Request.QueryString["producttype"].ToString()) > 0)
+            {
+                producttype.Value = Request.QueryString["producttype"].ToString();
+            }
+            if (!string.IsNullOrEmpty(Request.QueryString["ptype"]))
+            {
+                ptype = Request.QueryString["ptype"];
+            }
+            switch (ptype)
+            {
+                case "1":
+                    name = "积分兑换";
+                    break;
+                case "2":
+                    name = "优惠券兑换";
+                    break;
+                case "3":
+                    name = "会员等级兑换";
+                    break;
+                default:
+                    ptype = "1";
+                    name = "积分兑换";
+                    break;
+            }
+            hi_type.Value = ptype;
+            try
+            {
+                Bind_Page_Title();
+                Bind_Page_Value();
+                Bind_Rpt_List();
+            }
+            catch(Exception ex)
+            {
+                //Response.Write("<script>history.go(-1);</Script>");
+            }
         }
     }
     void Bind_Rpt_List()
@@ -110,16 +117,16 @@ public partial class jifen : System.Web.UI.Page
         int pageindex = AspNetPager1.CurrentPageIndex;
         var iquery = from i in dpdc.t_IntegralProduct where i.i_Type == int.Parse(ptype) && i.nvc_Language == language select i;
 
-        
 
-        if (!string.IsNullOrWhiteSpace(Request.QueryString["sel"]) && Request.QueryString["sel"].IndexOf(',') > 0)
+
+        if (!string.IsNullOrEmpty(Request.QueryString["sel"]) && Request.QueryString["sel"].IndexOf(',') > 0)
         {
             sel = Request.QueryString["sel"];
             Jifen.Value = sel;
             int.TryParse(sel.Split(',')[0], out min);
             int.TryParse(sel.Split(',')[1], out max);
         }
-        if (!string.IsNullOrWhiteSpace(Request.QueryString["keyword"]))
+        if (!string.IsNullOrEmpty(Request.QueryString["keyword"]))
         {
             key = Server.UrlDecode(Request.QueryString["keyword"]).RemoveUnSafe();
             hi_key.Value = key;
@@ -133,26 +140,46 @@ public partial class jifen : System.Web.UI.Page
         {
             iquery = from i in iquery where i.i_NeedIntegral >= min select i;
         }
-        if (!string.IsNullOrWhiteSpace(Request.QueryString["producttype"]) && int.Parse(Request.QueryString["producttype"].ToString())>0)
+        if (!string.IsNullOrEmpty(Request.QueryString["producttype"]) && int.Parse(Request.QueryString["producttype"].ToString()) > 0)
         {
             producttypeid = int.Parse(Request.QueryString["producttype"].ToString());
-            iquery = from i in iquery where i.i_ProductType == producttypeid select i;
+            var s = from i in dpdc.t_IntegralProductType where i.i_ParentId==producttypeid select( i.i_Id);
+            iquery = from i in iquery where i.i_ProductType == producttypeid || s.Contains(i.i_ProductType??0)  select i;
         }
 
-        if (!string.IsNullOrWhiteSpace(Request.QueryString["myself"]))
+        if (!string.IsNullOrEmpty(Request.QueryString["myself"]))
         {
+            if(!isLogin)
+            {
+                Response.Redirect("ShopLogin.aspx");//如果没登陆，直接退出
+            }
             if (Request.Cookies["hqhtshop"] != null)
             {
                 if (Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
                 {
-                    var q = from i in dpdc.t_IntegralMobile where i.i_Id == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
-                    int myseljifen = q.ToList()[0].i_Integral;
-                    iquery = from i in dpdc.t_IntegralProduct where i.i_NeedIntegral < myseljifen select i;
+                    int myselfjifen = 0;
+                    if (Request.Cookies["hqhtshop"]["hqht_user_type"] != null && Request.Cookies["hqhtshop"]["hqht_user_type"].ToString() == "sb")
+                    {
+                        var q = from i in dpdc.t_IntegralMobile where i.i_sbuid == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
+                        myselfjifen = q.ToList()[0].i_Integral;
+                    }
+                    if (Request.Cookies["hqhtshop"]["hqht_user_type"] != null && Request.Cookies["hqhtshop"]["hqht_user_type"].ToString() == "zl")
+                    {
+                        var q = from i in dpdc.t_IntegralMobile where i.i_zluid == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
+                        myselfjifen = q.ToList()[0].i_Integral;
+                    }
+                    else if (Request.Cookies["hqhtshop"]["hqht_user_type"] != null && Request.Cookies["hqhtshop"]["hqht_user_type"].ToString() == "normal")
+                    {
+                        var q = from i in dpdc.t_IntegralMobile where i.i_Id == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
+                        myselfjifen = q.ToList()[0].i_Integral;
+                    }
+
+                    iquery = from i in iquery where i.i_NeedIntegral <= myselfjifen select i;
                 }
             }
 
         }
-        iquery = from i in iquery where i.i_Show == 1 orderby i.i_Id descending select i;
+        iquery = from i in iquery where i.i_Show == 1 orderby i.i_Orderby descending select i;
 
 
 
@@ -171,21 +198,24 @@ public partial class jifen : System.Web.UI.Page
     private void GetProductTypes()
     {
         StringBuilder sb = new StringBuilder();
-        producttype.Items.Add(new ListItem("  请选择商品分类", "0"));
-        var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null select i;
-        foreach (var i in iquery)
+        if (producttype.Items.Count == 0)
         {
-            producttype.Items.Add(new ListItem(i.i_Name, i.i_Id.ToString()));
-            sb.Append("<ul><a class='ac5' runat='server' href='jifen.aspx?producttype=").Append(i.i_Id).Append("'>").Append(i.i_Name).Append("</a></ul>");
-            var iquery2 = from i2 in dpdc.t_IntegralProductType where i2.i_ParentId == i.i_Id select i2;
-            foreach (var i2 in iquery2)
+            producttype.Items.Add(new ListItem("  请选择商品分类", "0"));
+            var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null && i.nvc_ChinaName != "" && i.nvc_ChinaName != null select i;
+            foreach (var i in iquery)
             {
-                producttype.Items.Add(new ListItem("|----" + i2.i_Name, i2.i_Id.ToString()));
-                sb.Append("<li><a runat='server' href='jifen.aspx?producttype=").Append(i2.i_Id).Append("'>").Append(i2.i_Name).Append("</a></li>|");
+                producttype.Items.Add(new ListItem(i.nvc_ChinaName, i.i_Id.ToString()));
+                sb.Append("<ul style='margin:5px;'><a class='ac5'  style='padding-left:10px;background:url(./images/sanjiao.gif) no-repeat 0 2px'; runat='server' href='jifen.aspx?producttype=").Append(i.i_Id).Append("'>").Append(i.nvc_ChinaName).Append("</a></ul>");
+                var iquery2 = from i2 in dpdc.t_IntegralProductType where i2.i_ParentId == i.i_Id && i2.nvc_ChinaName != "" && i2.nvc_ChinaName != null select i2;
+                foreach (var i2 in iquery2)
+                {
+                    producttype.Items.Add(new ListItem("|--" + i2.nvc_ChinaName, i2.i_Id.ToString()));
+                    sb.Append("<li><a runat='server'   font-size='9pt' href='jifen.aspx?producttype=").Append(i2.i_Id).Append("'>").Append(i2.nvc_ChinaName).Append("</a></li>|");
+                }
+
             }
 
+            producttypelist.InnerHtml = sb.ToString();
         }
-
-        producttypelist.InnerHtml = sb.ToString() ;
     }
 }

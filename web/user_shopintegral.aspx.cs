@@ -57,6 +57,7 @@ public partial class user_shopintegral : System.Web.UI.Page
             if (Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
             {
                 Hi_MemberId.Value = Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString();
+                Hi_MemberType.Value = Request.Cookies["hqhtshop"]["hqht_user_type"].ToString();
                 return;
             }
         }
@@ -64,14 +65,35 @@ public partial class user_shopintegral : System.Web.UI.Page
     }
     public void Bind_Rpt_IntegraNote(int PageIndex)
     {
-        var member = DALM.Member_Select_Id(int.Parse(Hi_MemberId.Value));
-        if (member != null)
+        try
         {
-            int wcount = 0;
-            Repeater1.DataSource = DALUIN.vwIntegralNote_Select_MobileId(PageIndex, AspNetPager1.PageSize, member.i_IntegralMobileId, ref wcount);
-            Repeater1.DataBind();
-            AspNetPager1.RecordCount = wcount;
-            AspNetPager1.CurrentPageIndex = PageIndex;
+            if (Request.Cookies["hqhtshop"] != null)
+            {
+                
+                if (Hi_MemberType.Value != null && Hi_MemberType.Value == "normal")
+                {
+                    int wcount = 0;
+                    Repeater1.DataSource = DALUIN.vwIntegralNote_Select_MobileId(PageIndex, AspNetPager1.PageSize, int.Parse(Hi_MemberId.Value), ref wcount);
+                    Repeater1.DataBind();
+                    AspNetPager1.RecordCount = wcount;
+                    AspNetPager1.CurrentPageIndex = PageIndex;
+                }
+                else
+                {
+                    var member = DALM.Member_Select_Id(int.Parse(Hi_MemberId.Value));
+                    if (member != null)
+                    {
+                        int wcount = 0;
+                        Repeater1.DataSource = DALUIN.vwIntegralNote_Select_MobileId(PageIndex, AspNetPager1.PageSize, member.i_IntegralMobileId, ref wcount);
+                        Repeater1.DataBind();
+                        AspNetPager1.RecordCount = wcount;
+                        AspNetPager1.CurrentPageIndex = PageIndex;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
         }
     }
     protected void AspNetPager1_PageChanged(object sender, EventArgs e)

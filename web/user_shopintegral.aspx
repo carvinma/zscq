@@ -19,6 +19,7 @@
 <body id="index">
   <form id="form1" runat="server">
   <input type="hidden" runat="server" id="Hi_MemberId" value="0" />
+  <input type="hidden" runat="server" id="Hi_MemberType" value="0" />
   <input type="hidden" runat="server" id="Hi_Integral" value="0" />
   <uc4:zscqtop2 ID="zscqtop21" runat="server" />
   <uc3:zscqadv ID="zscqadv1" TypeId="56" runat="server" />

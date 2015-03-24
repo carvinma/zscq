@@ -179,7 +179,7 @@
                 <tr>
                   <td width="41" height="36">&nbsp; </td>
                   <td width="678" align="left">
-                    <table width="600" border="0" cellspacing="0" cellpadding="0">
+                    <table width="678" border="0" cellspacing="0" cellpadding="0">
                       <tr>                        
                         <td width="141" align="left">
                           <select runat="server" id="Jifen" onchange="s();" name="Jifen" style="border-right: #d7d7d7 1px solid; border-top: #d7d7d7 1px solid; font-size: 12px; border-left: #d7d7d7 1px solid; width: 129px; border-bottom: #d7d7d7 1px solid; height: 24px;">
@@ -259,7 +259,7 @@
                                     <td height="30" align="left">Attention Degree：<%= follow %></td>
                                   </tr>
                                     <tr>
-                                    <td width="351" height="30" align="left"><span style="color:#d44147">Commodity tips：<%= ctip %></span>
+                                    <td width="351" height="30" align="left" style="color:#d44147">Commodity tips：<%= ctip %>
                                     </td>
                                   </tr>
                                   <tr>

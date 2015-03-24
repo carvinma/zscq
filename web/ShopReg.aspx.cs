@@ -57,12 +57,12 @@ public partial class ShopReg : System.Web.UI.Page
         string l_codes = Session["Validate"].ToString();
         if (l_code.Trim() != l_codes.Trim())
         {
-            div_a.InnerHtml = "<script>alert('验证码错误！');</script>";
+            div_a.InnerHtml = "<script>alert('Verification Code error！');</script>";
             return;
         }
         if (txt_userpassword.Value != txt_userpassword2.Value)
         {
-            div_a.InnerHtml = "<script>alert('密码与确认密码不一致！');</script>";
+            div_a.InnerHtml = "<script>alert('Entered password differs from each other!！');</script>";
             return;
         }
         var model = DALIM.IntegralMobile_SelectByMobile(txt_username.Value.Trim());
@@ -73,11 +73,11 @@ public partial class ShopReg : System.Web.UI.Page
             model.nvc_Password = txt_userpassword.Value.Trim().Md5Encrypt();
             model.dt_AddTime = DateTime.Now;
             DALIM.IntegralMobile_Add(model);
-            div_a.InnerHtml = "<script>alert('注册成功！');</script>";
+            div_a.InnerHtml = "<script>alert('Register successfully!！');window.location='ShopLogin.aspx';</script>";
         }
         else
         {
-            div_a.InnerHtml = "<script>alert('该手机号已经被注册！');</script>";
+            div_a.InnerHtml = "<script>alert('This phone number was registered！');</script>";
             return;
         }
     }

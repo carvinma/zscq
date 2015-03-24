@@ -173,7 +173,7 @@
                 <tr>
                   <td width="61" height="36">&nbsp; </td>
                   <td width="678" align="right">
-                    <table width="650" border="0" cellspacing="0" cellpadding="0">
+                    <table width="678" border="0" cellspacing="0" cellpadding="0">
                       <tr>                       
                         <td width="146" align="left">
                           <select runat="server" id="Jifen" onchange="s();" name="Jifen" style="padding-top: 3px; padding-bottom: 2px; font-size: 12px; width: 129px; height: 24px; line-height: 24px; overflow: hidden; vertical-align: text-bottom; border: #d7d7d7 1px solid;">

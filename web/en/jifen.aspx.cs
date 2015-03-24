@@ -135,10 +135,10 @@ public partial class jifen : System.Web.UI.Page
         {
             producttypeid = int.Parse(Request.QueryString["producttype"].ToString());
             var s = from i in dpdc.t_IntegralProductType where i.i_ParentId == producttypeid select (i.i_Id);
-            iquery = from i in iquery where i.i_ProductType == producttypeid && s.Contains(i.i_ProductType ?? 0) select i;
+            iquery = from i in iquery where i.i_ProductType == producttypeid || s.Contains(i.i_ProductType ?? 0) select i;
         }
 
-        if (!string.IsNullOrWhiteSpace(Request.QueryString["myself"]))
+        if (!string.IsNullOrEmpty(Request.QueryString["myself"]))
         {
             if (!isLogin)
             {
@@ -148,14 +148,29 @@ public partial class jifen : System.Web.UI.Page
             {
                 if (Request.Cookies["hqhtshop"]["hqht_shop_uid"] != null && Request.Cookies["hqhtshop"]["hqht_shop_uid"] != "")
                 {
-                    var q = from i in dpdc.t_IntegralMobile where i.i_Id == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
-                    int myseljifen = q.ToList()[0].i_Integral;
-                    iquery = from i in dpdc.t_IntegralProduct where i.i_NeedIntegral < myseljifen select i;
+                    int myselfjifen = 0;
+                    if (Request.Cookies["hqhtshop"]["hqht_user_type"] != null && Request.Cookies["hqhtshop"]["hqht_user_type"].ToString() == "sb")
+                    {
+                        var q = from i in dpdc.t_IntegralMobile where i.i_sbuid == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
+                        myselfjifen = q.ToList()[0].i_Integral;
+                    }
+                    if (Request.Cookies["hqhtshop"]["hqht_user_type"] != null && Request.Cookies["hqhtshop"]["hqht_user_type"].ToString() == "zl")
+                    {
+                        var q = from i in dpdc.t_IntegralMobile where i.i_zluid == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
+                        myselfjifen = q.ToList()[0].i_Integral;
+                    }
+                    else if (Request.Cookies["hqhtshop"]["hqht_user_type"] != null && Request.Cookies["hqhtshop"]["hqht_user_type"].ToString() == "normal")
+                    {
+                        var q = from i in dpdc.t_IntegralMobile where i.i_Id == int.Parse(Request.Cookies["hqhtshop"]["hqht_shop_uid"].ToString()) select i;
+                        myselfjifen = q.ToList()[0].i_Integral;
+                    }
+
+                    iquery = from i in iquery where i.i_NeedIntegral <= myselfjifen select i;
                 }
             }
 
         }
-        iquery = from i in iquery where i.i_Show == 1 orderby i.i_Id descending select i;
+        iquery = from i in iquery where i.i_Show == 1 orderby i.i_Orderby descending select i;
 
         count = iquery.Count();
         iquery = iquery.Skip((pageindex - 1) * pagesize).Take(pagesize);

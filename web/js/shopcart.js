@@ -92,6 +92,9 @@ function duihuan() {
         case "12":
           alert('您尚未开通积分手机！');
           break;
+       case "13":
+          alert('您的积分账户未绑定专利/商标系统，不能进行此类商品的兑换！');
+          break;
         default:
           alert('未知的错误,请联系管理员！');
           // window.location.href = "jifen.aspx";

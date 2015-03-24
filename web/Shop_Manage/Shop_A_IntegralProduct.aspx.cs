@@ -25,6 +25,7 @@ public partial class Shop_Manage_Shop_A_IntegralProduct : System.Web.UI.Page
     dal_IntegralProduct DALIP = new dal_IntegralProduct();
 
     public string content = "";
+    public string tip = "";
     public string returnurl = "";
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -73,9 +74,11 @@ public partial class Shop_Manage_Shop_A_IntegralProduct : System.Web.UI.Page
                 cb_tj.Checked = (model.i_Recommend == 1);
                 is_shangjia.Checked = (model.i_Show == 1);
                 content = model.nt_ProductDetails;
+                tip = model.nvc_Name1;
                 ifrimg.Value = model.nvc_Pic;//图片
                 ddl_Coupontype.SelectedValue = model.i_CouponTypeId.ToString();
                 ddl_MGrade.SelectedValue = model.i_MemberGradeId.ToString();
+                ddl_ProductType.SelectedValue = model.i_ProductType.ToString();
             }
         }
         else
@@ -100,8 +103,7 @@ public partial class Shop_Manage_Shop_A_IntegralProduct : System.Web.UI.Page
             model.i_NeedIntegral = Convert.ToInt32(hw_price2.Value);
             model.i_Orderby = int.Parse(hw_xu.Value);
             model.i_Buys = int.Parse(hw_buys.Value);
-            model.i_Stock = int.Parse(hw_views.Value);
-
+            model.i_Stock = int.Parse(hw_views.Value);            
             model.nvc_Name = text_head0.Value;//新的
             //model.nvc_Name1 = text_head1.Value;//新的
             //model.nvc_Name2 = text_head2.Value;//新的
@@ -110,6 +112,7 @@ public partial class Shop_Manage_Shop_A_IntegralProduct : System.Web.UI.Page
             model.i_Recommend = cb_tj.Checked ? 1 : 0;
             model.i_Show = is_shangjia.Checked ? 1 : 0;
             model.nt_ProductDetails = Request.Form["myContent"];
+            model.nvc_Name1 = Request.Form["myTip"];
             if (ddl_type.SelectedValue == "2")
             {
                 model.i_CouponTypeId = int.Parse(ddl_Coupontype.SelectedValue);
@@ -162,11 +165,11 @@ public partial class Shop_Manage_Shop_A_IntegralProduct : System.Web.UI.Page
         var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null select i;
         foreach (var i in iquery)
         {
-            ddl_ProductType.Items.Add(new ListItem(i.i_Name, i.i_Id.ToString()));
+            ddl_ProductType.Items.Add(new ListItem(i.nvc_ChinaName, i.i_Id.ToString()));
             var iquery2 = from i2 in dpdc.t_IntegralProductType where i2.i_ParentId == i.i_Id select i2;
             foreach (var i2 in iquery2)
             {
-                ddl_ProductType.Items.Add(new ListItem("|----" + i2.i_Name, i2.i_Id.ToString()));
+                ddl_ProductType.Items.Add(new ListItem("|--" + i2.nvc_ChinaName, i2.i_Id.ToString()));
                 
             }
 

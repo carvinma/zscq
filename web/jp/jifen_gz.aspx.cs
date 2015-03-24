@@ -91,7 +91,7 @@ public partial class jifen_gz : System.Web.UI.Page
     private void GetProductTypes()
     {
         StringBuilder sb = new StringBuilder();
-        producttype.Items.Add(new ListItem("  请选择商品分类", "0"));
+        producttype.Items.Add(new ListItem("  商品種類を選択してください", "0"));
         var iquery = from i in dpdc.t_IntegralProductType where i.i_ParentId == null && i.nvc_JapaneseName != "" && i.nvc_JapaneseName != null select i;
         foreach (var i in iquery)
         {

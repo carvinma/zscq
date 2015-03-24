@@ -212,7 +212,10 @@
             <li class="explode menu-item1" key="zl_3_1" name="menu1">&nbsp;积分会员管理
               <ul>
                 <%if (flag[33][0].ToString() == "1")
-                  { %><li class="menu-item">&nbsp;<a href="Shop_M_IntegralUser.aspx" target="main">会员列表</a></li><%} %>
+                  { %>
+                 
+                  <li class="menu-item">&nbsp;<a href="Shop_M_IntegralUser.aspx" target="main">会员列表</a></li>
+                  <%} %>
                 <%if (flag[79][0].ToString() == "1")
                   { %><li class="menu-item">&nbsp;<a href="Shop_M_IntegralNote.aspx" target="main">积分流水统计</a></li><%} %>
               </ul>
@@ -221,7 +224,12 @@
             <%if (flag[30][0].ToString() == "1" || flag[30][1].ToString() == "1")
               {%>
             <li class="explode menu-item1" key="zl_3_1" name="menu1">&nbsp;礼品管理
-              <ul>
+              <ul> 
+                  <li class="menu-item">&nbsp;<a href="Shop_M_MainIntegralProductType.aspx" target="main">商品大分类列表</a></li>
+                  <li class="menu-item">&nbsp;<a href="Shop_A_MainIntegralProductType.aspx" target="main">新增商品大分类</a></li>
+                  <li class="menu-item">&nbsp;<a href="Shop_M_SubIntegralProductType.aspx" target="main">商品小分类列表</a></li>
+                  <li class="menu-item">&nbsp;<a href="Shop_A_SubIntegralProductType.aspx" target="main">新增商品小分类</a></li>
+
                 <%if (flag[30][0].ToString() == "1")
                   { %><li class="menu-item">&nbsp;<a href="Shop_M_IntegralProduct.aspx" target="main">礼品列表</a></li><%} %>
                 <%if (flag[30][1].ToString() == "1")

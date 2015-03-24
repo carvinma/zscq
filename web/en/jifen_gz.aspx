@@ -163,7 +163,7 @@
                 <tr>
                   <td width="61" height="36">&nbsp; </td>
                   <td width="678" align="left">
-                    <table width="600" border="0" cellspacing="0" cellpadding="0">
+                    <table width="678" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                         
                         <td width="131" align="left">

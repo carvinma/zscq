@@ -96,15 +96,7 @@
           <iframe src="Shop_A_IntegralProduct_Img.aspx" height="180" width="240" frameborder="0" scrolling="no"></iframe>
         </td>
       </tr>
-        <tr>
-        <td align="right">商品类型： </td>
-        <td>
-          <input type="text" runat="server" maxlength="50" id="text1" class="inputs200text" onblur="checknull('text_head0','ftext_head0')" />&nbsp;<font color="#FF0000">*</font>&nbsp;<font id="Font1" class="alertfont" style="display: none;"><img alt="警告" src="images/caozuo_3.jpg" width="15" />请选择商品类型</font> </td>
-        <td rowspan="7" valign="top">
-           <asp:DropDownList ID="DropDownList1" runat="server">
-          </asp:DropDownList>
-        </td>
-      </tr>
+        
       <tr>
         <td align="right">排序编号： </td>
         <td>
@@ -152,7 +144,7 @@
         <td align="right" valign="top">商品提示： </td>
         <td colspan="2" style="width:88%;">
           <script id="uetip" type="text/plain" name="myTip">
-          <%=content%>
+          <%=tip%>
           </script>
           <script type="text/javascript">
               var editor = new baidu.editor.ui.Editor();

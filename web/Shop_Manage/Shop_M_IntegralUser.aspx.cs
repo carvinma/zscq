@@ -123,4 +123,22 @@ public partial class Shop_Manage_Shop_M_IntegralUser : System.Web.UI.Page
     {
         Response.Redirect("Shop_Apl_ItregralMobile.aspx?PageType=Phone&keyword=" + user_namee.Value.Trim() + "&BeginTime=" + hot_start_date.Value + "&EndTime=" + hot_end_date.Value);
     }
+
+    public string HandleUserType(int i_sbuid,int i_zluid)
+    {
+        string result = "商城用户";
+        if (i_sbuid >0 && i_zluid == 0)
+        {
+            result = "商标用户";
+        }
+        else if (i_sbuid == 0 && i_zluid>0)
+        {
+            result = "专利用户";
+        }
+        if (i_sbuid >0 && i_zluid >0)
+        {
+            result = "商标用户/专利用户";
+        }
+        return result;
+    }
 }
