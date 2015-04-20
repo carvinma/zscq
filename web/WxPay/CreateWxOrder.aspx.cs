@@ -14,6 +14,8 @@ public partial class WxPay_CreateWxOrder : System.Web.UI.Page
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Random r = new Random();
-        Response.Redirect("jsapi.aspx?order_no="+r.Next(1000,10000000));
+        string reurl = "jsapi.aspx?order_no=" + r.Next(1000, 10000000);
+        Response.Redirect(wxpayApp.TenpayUtil.CreateOauthUrlForCode("snsapi_base"));
+        //Response.Write(wxpayApp.TenpayUtil.CreateOauthUrlForCode("snsapi_base"));
     }
 }

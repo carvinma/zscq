@@ -98,7 +98,7 @@
                                                                                                    "timeStamp" : "<%= timeStamp %>", //时间戳
                                                                                                    "nonceStr" : "<%= nonceStr %>", //随机串
                                                                                                    "package" : "<%= packageValue %>",//扩展包
-                                                                                                   "signType" : "SHA1", //微信签名方式:1.sha1
+                                                                                                   "signType" : "MD5", //微信签名方式:1.sha1
                                                                                                    "paySign" : "<%= paySign %>" //微信签名
                                                                                                    },function(res){
                                                                                                     

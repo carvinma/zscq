@@ -11,11 +11,14 @@ namespace wxpayApp
 	{
         public static string tenpay = "1";
         public static string partner = "1231596002";                   //商户号
-        public static string key = "";  //密钥
+        public static string key = "dfgf5676uy2415hj6y4yhy64paw56y54";  //密钥------在邮件里，需要陆艳辉提供
         public static string appid = "wx6b07c623fd540e16";//appid
-        public static string appkey = "";//paysignkey(非appkey) 
-        public static string tenpay_notify = "http://localhost/payNotifyUrl.aspx"; //支付完成后的回调处理页面,*替换成notify_url.asp所在路径
-
+        public static string appsecret = "3c07f8cd593425516c8d8a260b40570a";//appid
+        public static string appkey = "dfgf5676uy2415hj6y4yhy64paw56y54";//paysignkey(非appkey) 
+        public static string tenpay_notify = "http://www.hqht-online.com/wxpay/payNotifyUrl.aspx"; //支付完成后的回调处理页面,*替换成notify_url.aspx所在路径
+        public static string tenpay_call="http://www.hqht-online.com/wxpay/jsapi.aspx";
+        public static string tenpay_process = "http://www.hqht-online.com/wxpay/process.aspx";
+        public static string tenpay_process2 = "http://www.hqht-online.com/wxpay/process2.aspx"; 
         public TenpayUtil()
 		{
           
@@ -116,6 +119,24 @@ namespace wxpayApp
 			
 			return str;
 		}
+
+
+
+        //scope 有2个snsapi_base，snsapi_userinfo
+        public static string CreateOauthUrlForCode(string scope)
+        {
+            StringBuilder sb=new StringBuilder();
+            sb.Append("https://open.weixin.qq.com/connect/oauth2/authorize?");
+            sb.Append("appid=").Append(appid).Append("&");
+            sb.Append("redirect_uri=").Append(tenpay_process2).Append("&");            
+            sb.Append("response_type=code&");
+            sb.Append("scope=").Append(scope).Append("&");
+            sb.Append("state=STATE#wechat_redirect");
+            
+            return sb.ToString();
+        }
+
        
+	
 	}
 }

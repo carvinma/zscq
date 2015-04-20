@@ -15,8 +15,8 @@ public partial class index : System.Web.UI.Page
     {
         Response.Write("页面跳转调用:</br>");
         Response.Write("<a target=\"_blank\" href=\"" + "jsapi.aspx" + "\">" + "jsapi支付" + "</a></br>");
-        Response.Write("<a target=\"_blank\" href=\"" + "native.aspx" + "\">" + "native支付" + "</a></br>");
-        Response.Write("<a target=\"_blank\" href=\"" + "nativecall.aspx" + "\">" + "nativecall支付" + "</a></br>");
+        //Response.Write("<a target=\"_blank\" href=\"" + "native.aspx" + "\">" + "native支付" + "</a></br>");
+        //Response.Write("<a target=\"_blank\" href=\"" + "nativecall.aspx" + "\">" + "nativecall支付" + "</a></br>");
 
     }
 }

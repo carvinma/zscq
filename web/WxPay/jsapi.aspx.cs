@@ -22,7 +22,13 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        string sp_billno = Request["order_no"];
+        if (Request.QueryString["openid"] == null)
+        {
+            Response.Redirect("http://wwww.baidu.com");
+        }
+
+        string openid = Request.QueryString["openid"];
+        string sp_billno = Request.QueryString["order_no"];
         //当前时间 yyyyMMdd
         string date = DateTime.Now.ToString("yyyyMMdd");
 
@@ -47,6 +53,11 @@ public partial class _Default : System.Web.UI.Page
 
 
         //设置package订单参数
+        
+
+        packageReqHandler.setParameter("openid",openid );
+        packageReqHandler.setParameter("trade_type", "JSAPI");
+
         packageReqHandler.setParameter("partner", TenpayUtil.partner);		  //商户号
         packageReqHandler.setParameter("fee_type", "1");                    //币种，1人民币
         packageReqHandler.setParameter("input_charset", "GBK");
@@ -66,11 +77,11 @@ public partial class _Default : System.Web.UI.Page
         //设置支付参数
         RequestHandler paySignReqHandler = new RequestHandler(Context);
         paySignReqHandler.setParameter("appid", appId);
-        paySignReqHandler.setParameter("appkey", TenpayUtil.appkey);
+        //paySignReqHandler.setParameter("appkey", TenpayUtil.appkey);
         paySignReqHandler.setParameter("noncestr", nonceStr);
         paySignReqHandler.setParameter("timestamp", timeStamp);
         paySignReqHandler.setParameter("package", packageValue);
-        paySign = paySignReqHandler.createSHA1Sign();
+        paySign = paySignReqHandler.createMd5Sign();
 
 
 
